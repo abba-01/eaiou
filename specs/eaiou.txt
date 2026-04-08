@@ -1,0 +1,484 @@
+EAIOU.org — com_eaiou (Joomla 5.3)
+
+Observer‑preserving journal component + modules + plugins
+
+0) Naming & Brand (canonical)
+
+Brand: EAIOU.org (EA IOU ORG)
+
+Component element: com_eaiou (namespace Eaiou)
+
+DB prefix: #__eaiou_
+
+Media root: /media/com_eaiou/{paper_id}/...
+
+REST base: /api/index.php/v1/eaiou/...
+
+Menu/route base: /eaiou/...
+
+Scope guard: EAIOU stores journal‑specific, full‑context artifacts (papers, versions, AI logs, unused artifacts, review logs, etc.). “Core‑first” modules (reviewer queue, editor KPIs) intentionally read from core Articles + Custom Fields—no extra schema.
+
+1) Mission & Non‑negotiables
+
+Observer‑preserving archive: keep all context (unused data, AI logs, triage, review lineage).
+
+Annotate, don’t delete: reviewer/editor actions add labels and states; artifacts are tombstoned, never hard‑deleted.
+
+REST‑first: every entity CRUD‑able via Joomla Web Services.
+
+ACL‑clean: explicit role gates; no “hidden” powers.
+
+Deterministic storage layout under /media/com_eaiou/{paper_id}.
+
+Layer‑5 endpoints (discovery/collab) map to REST/controllers (submit, review, search, entropy traces, gap map).
+
+2) Data Model (SQL entities, types, constraints)
+
+All tables include Joomla standard columns:
+id INT PK AI, state TINYINT, access TINYINT, ordering INT, created DATETIME, created_by INT, modified DATETIME, modified_by INT, checked_out INT, checked_out_time DATETIME.
+
+2.1 #__eaiou_papers (hub)
+
+Fields:
+title VARCHAR(255) NOT NULL, slug VARCHAR(255) UNIQUE, abstract MEDIUMTEXT, doi VARCHAR(191) NULL, keywords TEXT,
+authors_json JSON, authorship_mode ENUM('human','ai','hybrid') DEFAULT 'human',
+status ENUM('draft','submitted','review','revisions','accepted','published','retired') DEFAULT 'draft',
+submission_version VARCHAR(50), submission_date DATETIME, acceptance_date DATETIME, publication_date DATETIME,
+bundle_path VARCHAR(512), thumbnail VARCHAR(512).
+
+Indexes: (status), (publication_date), (doi unique nullable), FULLTEXT (title,abstract,keywords) where supported.
+
+2.2 #__eaiou_versions
+
+FK: paper_id INT NOT NULL (→ eaiou_papers.id ON DELETE CASCADE)
+
+Fields: label VARCHAR(50), file_path VARCHAR(512), ai_flag TINYINT(1), ai_model_name VARCHAR(128), generated_at DATETIME, notes TEXT.
+Indexes: (paper_id,label).
+
+2.3 #__eaiou_ai_sessions
+
+FK: paper_id INT NOT NULL
+
+Fields: session_label VARCHAR(100), ai_model_name VARCHAR(128), start_time DATETIME, end_time DATETIME,
+tokens_in INT, tokens_out INT, redaction_status ENUM('none','partial','full') DEFAULT 'none',
+session_notes MEDIUMTEXT, session_hash CHAR(64).
+Indexes: (paper_id,ai_model_name), (start_time).
+
+Aligns to the AI Usage log disclosure rendered/enforced at article level via plugin; EAIOU stores per‑paper session details for immutable audit.
+
+2.4 #__eaiou_didntmakeit
+
+FK: session_id INT NOT NULL (→ ai_sessions.id ON DELETE CASCADE)
+
+Fields: prompt_text MEDIUMTEXT, response_text MEDIUMTEXT, redacted TINYINT(1), redaction_hash CHAR(64).
+Index: (session_id).
+(Use when authors elect to preserve excluded AI interactions—paired with content plugin redaction policy.)
+
+2.5 #__eaiou_remsearch (lit triage)
+
+FK: paper_id INT NOT NULL
+
+Fields: citation_title VARCHAR(512), citation_source VARCHAR(255), citation_link VARCHAR(512),
+source_type ENUM('journal','preprint','book','web','dataset','code','other'),
+used TINYINT(1), reason_unused ENUM('scope','methods','time','dup','quality','other').
+Index: (paper_id,used).
+(Feeds Transparency Block’s “sources consulted/omitted”.)
+
+2.6 #__eaiou_review_logs
+
+FK: paper_id INT NOT NULL, reviewer_user_id INT NOT NULL
+
+Fields: review_date DATETIME, version_reviewed VARCHAR(50),
+rubric_overall TINYINT, rubric_originality TINYINT, rubric_methodology TINYINT, rubric_transparency TINYINT, rubric_ai_disclosure TINYINT,
+labels_json JSON, review_notes MEDIUMTEXT.
+Indexes: (paper_id,review_date), (reviewer_user_id).
+(Base lineage log; “Open Reports” plugin controls public rendering/consent.)
+
+2.7 #__eaiou_attribution_log
+
+FK: paper_id INT NOT NULL
+
+Fields: contributor_name VARCHAR(255), role_description VARCHAR(255),
+contribution_type ENUM('author','editor','analyst','ai'), ai_tool_used VARCHAR(128), timestamp DATETIME.
+Index: (paper_id,contribution_type).
+
+2.8 #__eaiou_plugins_used
+
+FK: paper_id INT NOT NULL
+
+Fields: plugin_name VARCHAR(191), plugin_type VARCHAR(64), execution_context VARCHAR(128), exec_log_path VARCHAR(512).
+Index: (paper_id,plugin_name).
+
+2.9 #__eaiou_api_keys
+
+FK: user_id INT NOT NULL
+
+Fields: api_key_hash CHAR(64), description VARCHAR(255), access_level ENUM('read','write','admin'), status ENUM('active','revoked').
+Indexes: (user_id,status), (api_key_hash unique).
+
+2.10 #__eaiou_api_logs (immutable)
+
+FK: api_key_id INT NOT NULL
+
+Fields: endpoint VARCHAR(255), request_data MEDIUMTEXT, response_code SMALLINT, timestamp DATETIME.
+Index: (api_key_id,timestamp).
+
+Optional discovery (add later when needed):
+#__eaiou_research_open (paper_id, interest_level, collab_type, notes),
+#__eaiou_ideas (idea_text, entropy_score),
+#__eaiou_collab_matches (match_json, score).
+(Supports Layer‑5 discovery/collab endpoints + GitGap mapping.)
+
+3) Relationships
+
+Paper 1—N Versions, AI Sessions, Review Logs, RemSearch, Attribution, Plugins.
+
+AI Session 1—N Didn’t‑Make‑It.
+
+User 1—N Review Logs, 1—N API Keys.
+
+4) Workflows (state machine)
+
+draft → submitted → under_review → revisions → accepted → published → retired
+
+Tombstones for deletes (no hard delete for archival artifacts).
+
+Guard checks on transitions (plugins):
+
+Transparency complete before publish.
+
+AI Usage disclosure enforced if ai_used=Yes.
+
+Un Scientific unresolved can block publish unless editorial override.
+
+Open Reports publish timing/consent rules.
+
+Deadline Nudger operates out‑of‑band via Scheduler to prompt deadlines/escalations.
+
+5) ACL (roles → actions)
+
+Author: create/edit own paper, upload bundles, view own logs.
+
+Reviewer: create review logs (own), view assigned manuscripts.
+
+Editor: edit any paper; manage versions/triage/attribution; publish/unpublish.
+
+Admin: settings, API keys/logs, maintenance.
+
+API Client: access via key with read|write|admin.
+
+Map to core: core.create, core.edit, core.edit.own, core.edit.state, core.delete, core.manage.
+
+6) Admin (backend) UI
+
+Dashboard: KPIs (submissions, review queue, time‑to‑publish, AI usage).
+
+Lists/Forms: Papers, Versions, Review Logs, AI Sessions, Didn’t‑Make‑It, RemSearch, Attribution, Plugins Used, API Keys, API Logs.
+
+Settings: labels/rubrics, storage roots, AI models allow‑list, API throttles.
+
+Editor Dashboard Module: KPI panel sourced from core Articles + Custom Fields + Workflows + Action Logs—no extra schema. Tabs for Overview, Overdue, Reviewers, Trends, Flags; CSV export optional.
+
+7) Site (frontend) UI
+
+Submit Wizard: meta → bundle upload → AI usage → triage → declarations → reviewer suggest/avoid → submit.
+
+Paper Detail (tabs): Article | Versions | Unused Data | AI Logs | Reviews | Attribution.
+
+Review Console: rubric sliders (1–5), label chips, notes, attachment, recommendation.
+
+Discovery: Ideas (entropy‑ranked), Open‑to‑Collaborate board, Gap Map (GitGap embed/proxy).
+
+Reviewer Queue Module: ACL‑aware list/cards of assigned manuscripts; due/date coloring; optional Accept/Decline quick actions. Reads com_content + Custom Fields only (no new tables).
+
+8) Storage Layout
+/media/com_eaiou/{paper_id}/
+  /versions/{label}/
+  /unused/
+  /ai_sessions/{session_id}/
+  /triage/
+
+
+Store content hashes in DB; keep originals + derived.
+
+9) REST (Joomla Web Services) & Layer‑5 endpoints
+
+CRUD (auto‑generated by MVC + Services):
+
+/api/index.php/v1/eaiou/papers
+
+/api/index.php/v1/eaiou/versions
+
+/api/index.php/v1/eaiou/ai_sessions
+
+/api/index.php/v1/eaiou/didntmakeit
+
+/api/index.php/v1/eaiou/review_logs
+
+/api/index.php/v1/eaiou/remsearch
+
+/api/index.php/v1/eaiou/attribution
+
+/api/index.php/v1/eaiou/plugins_used
+
+/api/index.php/v1/eaiou/api_keys (admin)
+
+/api/index.php/v1/eaiou/api_logs (GET admin)
+
+Functional endpoints (controllers or proxy plugins) mapped to Layer‑5:
+
+/eaiou/submit → POST paper + bundle import (full‑context).
+
+/eaiou/review → POST review log (structured rubric + labels).
+
+/eaiou/search → Query across papers + joins (triage/AI/logs).
+
+/eaiou/trace/entropy → Compute/return Entropy Trace Map (ETM).
+
+/eaiou/dataset/link → POST paper↔dataset links (from triage).
+
+/eaiou/ai/log → GET ai_sessions (filters).
+
+/eaiou/export/context → Archive ZIP of preserved context (paper).
+
+/eaiou/register/observer → Record observer identity in attribution log.
+
+Discovery/Collab:
+/eaiou/research/open, /eaiou/research/seek, /eaiou/ideas/discover, /eaiou/ideas/subscribe, /eaiou/collaboration/match, /eaiou/trend/insight, /eaiou/gap/map (GitGap proxy).
+
+10) Extension Suite (modules & plugins)
+10.1 Modules (no schema)
+
+mod_reviewer_queue — reviewer’s assigned manuscripts; due badges, quick Accept/Decline (optional), respects ACL; read‑only mode supported. Core Articles + Fields only.
+
+mod_editor_dashboard — admin KPI panel (states, TTFD, overdue, acceptance rate, reviewer throughput, flags), with filters and CSV export; core‑only sources.
+
+10.2 Content/System Plugins (core‑first)
+
+plg_content_transparency — renders “Transparency Block” (Sources/Datasets/Methods/Limits); blocks publish if required fields missing; all via Custom Fields + Workflows.
+
+plg_content_aiusage — “AI Usage Log” disclosure and enforcement; hashes prompts, supports display levels (full/summary/hidden); gated on publish.
+
+plg_content_unscientific — “Un Scientific” flag for contested/accuracy‑pending sections; annotates scope/reasons; can block publish until resolved.
+
+plg_system_deadline_nudger — Scheduler‑driven email nudges + escalations for invites, reviews, author revisions; no schema; uses fields and Mail Templates.
+
+plg_content_openreports — publish peer‑review reports + author responses (open identities / anonymized / summary‑only) with consent/redaction controls.
+
+plg_system_orcid_link — OAuth link ORCID iD to Joomla profile via User Fields; no tokens by default; Action Logs for link/unlink.
+
+11) File/Folder Scaffolds
+11.1 Component
+/administrator/components/com_eaiou/
+  access.xml
+  config.xml
+  eaiou.php
+  src/
+    Controller/
+    Model/
+    View/
+    Table/
+    Service/Provider.php     // register Web Services
+    Helper/Files.php
+/components/com_eaiou/
+  eaiou.php
+  src/...
+/media/com_eaiou/           // runtime storage (per paper)
+/language/en-GB/en-GB.com_eaiou.ini
+/language/en-GB/en-GB.com_eaiou.sys.ini
+
+11.2 Modules (examples)
+/modules/mod_reviewer_queue/...      // per spec
+/modules/mod_editor_dashboard/...    // per spec
+
+
+11.3 Plugins (examples)
+/plugins/content/transparency/...    // per spec
+/plugins/content/aiusage/...
+/plugins/content/unscientific/...
+/plugins/content/openreports/...
+/plugins/system/deadline_nudger/...
+/plugins/system/orcid_link/...
+
+
+12) Minimal install.sql (excerpt)
+CREATE TABLE IF NOT EXISTS `#__eaiou_papers` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `state` TINYINT DEFAULT 0, `access` TINYINT DEFAULT 1, `ordering` INT DEFAULT 0,
+  `created` DATETIME NULL, `created_by` INT DEFAULT 0, `modified` DATETIME NULL, `modified_by` INT DEFAULT 0,
+  `checked_out` INT DEFAULT 0, `checked_out_time` DATETIME NULL,
+  `title` VARCHAR(255) NOT NULL, `slug` VARCHAR(255) UNIQUE,
+  `abstract` MEDIUMTEXT, `doi` VARCHAR(191) NULL, `keywords` TEXT,
+  `authors_json` JSON, `authorship_mode` ENUM('human','ai','hybrid') DEFAULT 'human',
+  `status` ENUM('draft','submitted','review','revisions','accepted','published','retired') DEFAULT 'draft',
+  `submission_version` VARCHAR(50), `submission_date` DATETIME, `acceptance_date` DATETIME, `publication_date` DATETIME,
+  `bundle_path` VARCHAR(512), `thumbnail` VARCHAR(512),
+  INDEX (`status`), INDEX (`publication_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Repeat similarly for versions, ai_sessions, didntmakeit, remsearch, review_logs, attribution_log, plugins_used, api_keys, api_logs...
+
+13) Services Registration (Web Services)
+
+Add a Services Provider (Service/Provider.php) that registers Web Services routers for each entity and binds Models to the API endpoints (Joomla 5 style).
+
+14) REST Payload Examples
+
+Create Paper (POST /eaiou/papers)
+
+{
+  "title": "Observer-Preserving Methods in Behavioral Research",
+  "slug": "observer-preserving-behavioral",
+  "abstract": "We present an EAIOU archival approach...",
+  "doi": null,
+  "keywords": "oMMP, transparency, reproducibility",
+  "authors_json": [{"name":"E. Martin","orcid":"0000-0002-1825-0097"}],
+  "authorship_mode": "hybrid",
+  "status": "submitted",
+  "submission_version": "v1",
+  "bundle_path": "/media/com_eaiou/42/versions/v1/",
+  "thumbnail": "/media/com_eaiou/42/thumb.png"
+}
+
+
+Log AI Session (POST /eaiou/ai_sessions)
+
+{
+  "paper_id": 42,
+  "session_label": "Lit Review Summarization",
+  "ai_model_name": "Claude-3.5",
+  "start_time": "2025-08-10T12:00:00Z",
+  "end_time": "2025-08-10T12:05:00Z",
+  "tokens_in": 5200, "tokens_out": 1800,
+  "redaction_status": "partial",
+  "session_notes": "Summarized 10 papers; verified claims manually.",
+  "session_hash": "8b9a...f1e0"
+}
+
+
+(Public rendering and enforcement courtesy of AI Usage plugin.)
+
+Add Review Log (POST /eaiou/review_logs)
+
+{
+  "paper_id": 42,
+  "reviewer_user_id": 317,
+  "review_date": "2025-08-12T00:00:00Z",
+  "version_reviewed": "v1",
+  "rubric_overall": 4,
+  "rubric_originality": 5,
+  "rubric_methodology": 4,
+  "rubric_transparency": 5,
+  "rubric_ai_disclosure": 5,
+  "labels_json": ["directly_relevant","methodologically_sound"],
+  "review_notes": "Strong novelty; transparency complete."
+}
+
+
+(Public “Open Reports” rendering controlled by policy & consent.)
+
+15) Modules & Plugins — Install Order & Checklist
+
+Component com_eaiou (creates tables).
+
+Plugins
+
+plg_content_transparency → create Transparency Field Group & fields; enable, set enforcement.
+
+plg_content_aiusage → create AI Usage Field Group; enable, set enforcement/display.
+
+plg_content_unscientific → create Un Scientific Field Group; enable; set block/override.
+
+plg_content_openreports → create Peer Review (Open Reports) Field Group; enable; choose mode/timing.
+
+plg_system_deadline_nudger → create Deadlines Field Group; configure scheduler windows & mail templates; start in dry‑run.
+
+plg_system_orcid_link → create User Fields orcid_id, orcid_url; set OAuth creds; enable.
+
+Modules
+
+mod_reviewer_queue (site) → place for Reviewer role; set scope categories & read‑only/quick actions.
+
+mod_editor_dashboard (admin) → place in cpanel; set windows/states; enable CSV.
+
+16) Test Plan (component + suite)
+
+Component (CRUD/API)
+
+Create Paper → Add Version → Add AI Session (+ Didn’t‑Make‑It) → Add RemSearch entries → Add Review Logs → Attribution → Plugins Used → API Keys/Logs.
+
+Validate role permissions for each CRUD via REST and backend forms.
+
+Plugins
+
+Transparency: block publish when missing; badge/panel render; Action Log entries.
+
+AI Usage: ai_used=Yes paths; hash prompts; enforce display level; logs.
+
+Un Scientific: raise flag; block publish if unresolved; resolve flow; tag behavior.
+
+Deadline Nudger: dry‑run → live; invite/review/revision reminders; escalation once; scheduler history.
+
+Open Reports: consent gating; anonymized vs open modes; responses thread.
+
+ORCID Link: connect/disconnect; user field write; no tokens persisted by default.
+
+Modules
+
+Reviewer Queue: filters to logged‑in reviewer; overdue color rules; optional inline accept/decline or read‑only.
+
+Editor Dashboard: KPIs match known data; CSV exports; cache per admin.
+
+17) Performance & Sizing Notes
+
+Start on 8 vCPU / 16 GB RAM Dedicated CPU for predictable latency (PHP‑FPM + MariaDB + Redis).
+
+MySQL: innodb_buffer_pool_size=6G, innodb_log_file_size=1G.
+
+PHP‑FPM: pm.max_children≈16, Opcache 256M.
+
+Redis: maxmemory 512M.
+
+If memory‑heavy search/analytics added (OpenSearch), consider separate node or managed service.
+
+18) Developer To‑Do (first pass)
+
+Generate Models/Tables for all entities.
+
+Implement bundle importer (server‑side) in Helper/Files.php → binds to /eaiou/submit.
+
+Wire Web Services routes to Models; confirm filters/sorts.
+
+Add action logs for critical events (bundle import, publish, archive export).
+
+Provide default language packs, sample Mail Templates, and basic CSS.
+
+19) Golden Rules (to keep you safe)
+
+Never delete research artifacts—tombstone only.
+
+Let plugins enforce policy (don’t duplicate rules inside the component).
+
+Keep modules schema‑free (core‑only reads) to remain portable.
+
+Expose everything via REST; lock via ACL.
+
+Log every automated action (nudges, consent flips, redactions).
+
+20) EAIOU Feature Parity Check
+
+Full‑context archival (papers + versions + AI + unused + triage) ✅
+
+Structured peer review with labels and lineage; open reports rendering ✅
+
+AI usage logging + disclosure enforcement ✅
+
+Transparency block (sources/datasets/methods/limits) ✅
+
+Un Scientific—contention without deletion ✅
+
+Scheduler nudges; no new schema ✅
+
+Reviewer Queue (core‑first), Editor KPIs (core‑first) ✅
+
+ORCID OAuth linkage (user fields only) ✅

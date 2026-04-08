@@ -1,0 +1,302 @@
+com_aieou (Joomla 5.3) — Quick Overview for Component Creator & Wireframing
+1) Purpose
+
+Observer-preserving journal stack for full-context publishing and research discovery. Authors submit papers with unused data, AI logs, review lineage; reviewers label (not delete); readers discover gaps; API logs every action.
+
+2) Component basics (for Component Creator)
+
+Name: aieou
+
+Component: com_aieou
+
+Table prefix: #__eaiou_
+
+Admin + Site MVC: yes (list & item views for each entity)
+
+ACL: Authors, Reviewers, Editors, Admin, API Clients
+
+Web Services: enable REST (Joomla API)
+
+3) Core entities (tables) & key fields
+
+Create these in Component Creator as separate tables with list/form views.
+
+eaiou_papers — the hub
+
+id, state (published), access, ordering, audit fields
+
+title, slug, abstract, doi, keywords
+
+authors_json (array of people with ORCID), authorship_mode (human/ai/hybrid)
+
+status (draft|submitted|review|revisions|accepted|published|retired)
+
+submission_version (string), submission_date, acceptance_date, publication_date
+
+bundle_path (root of full-context files), thumbnail
+
+eaiou_versions — versioned artifacts per paper
+
+id, paper_id FK, audit/state/access
+
+label (v1, v2…), file_path, ai_flag, ai_model_name, generated_at, notes
+
+eaiou_ai_sessions — AI usage logging
+
+id, paper_id FK, audit/state/access
+
+session_label, ai_model_name, start_time, end_time, tokens_in, tokens_out
+
+redaction_status, session_notes, session_hash
+
+eaiou_didntmakeit — excluded prompts/outputs (preserved)
+
+id, session_id FK, audit/state/access
+
+prompt_text, response_text, redacted (0/1), redaction_hash
+
+eaiou_remsearch — literature triage (used/unused)
+
+id, paper_id FK, audit/state/access
+
+citation_title, citation_source, citation_link, source_type
+
+used (0/1), reason_unused (enum: scope|methods|time|other)
+
+eaiou_review_logs — structured peer review lineage
+
+id, paper_id FK, reviewer_user_id FK, audit/state/access
+
+review_date, version_reviewed
+
+rubric_overall, rubric_originality, rubric_methodology, rubric_transparency, rubric_ai_disclosure (ints 1–5)
+
+labels (json: “relevant”, “not relevant”, “fashion science”, etc.)
+
+review_notes
+
+eaiou_attribution_log — who did what, when
+
+id, paper_id FK, audit/state/access
+
+contributor_name, role_description, contribution_type (author|editor|analyst|ai)
+
+ai_tool_used, timestamp
+
+eaiou_plugins_used — tool/plugin audit
+
+id, paper_id FK, audit/state/access
+
+plugin_name, plugin_type, execution_context, exec_log_path
+
+eaiou_api_keys — API access registry
+
+id, user_id FK, audit/state/access
+
+api_key (hashed), description, access_level (read|write|admin), status
+
+eaiou_api_logs — immutable API audit
+
+id, api_key_id FK, audit
+
+endpoint, request_data (json), response_code, timestamp
+
+(optional) discovery/collab tables
+
+eaiou_research_open (paper_id, interest_level, collab_type, notes)
+
+eaiou_ideas (emerging ideas mined from unused artifacts; entropy_score)
+
+eaiou_collab_matches (precomputed suggestions, score)
+
+4) Relationships (high level)
+
+Paper 1—N Versions, AI Sessions, Review Logs, RemSearch, Attribution, Plugins
+
+AI Session 1—N Didn’t-Make-It
+
+User 1—N Review Logs, 1—N API Keys
+
+Paper 1—N Research Open, 1—N Ideas (optional)
+
+5) Admin (backend) screens
+
+Dashboard (KPIs: submissions, review queue, publication time, AI usage)
+
+Papers (list) → Paper (form)
+
+Versions (list/form, filtered by paper)
+
+Reviews (list/form)
+
+AI Sessions (list/form) & Didn’t-Make-It (list/form)
+
+Literature Triage (list/form)
+
+Attribution (list/form), Plugins Used (list/form)
+
+API Keys (list/form), API Logs (list only)
+
+Settings: labels/rubrics, file storage roots, AI models allow-list
+
+6) Site (frontend) screens
+
+Submit Paper (full-context bundle wizard)
+
+Paper Detail (tabs: Article | Versions | Unused Data | AI Logs | Reviews | Attribution)
+
+Review Console (structured rubric + labels; role-gated)
+
+Literature Triage (author/editor view)
+
+Discovery:
+
+Ideas Discover (ranked by entropy/novelty)
+
+Open to Collaborate board
+
+Gap Map (GitGap embed/iframe placeholder)
+
+API Key self-service (for users with permission)
+
+7) Routes (pretty URLs)
+
+/papers → list
+
+/paper/:id/:slug → detail
+
+/submit → wizard
+
+/review/:paper_id → console
+
+/discover/ideas | /discover/open
+
+/map/gaps (GitGap view)
+
+8) ACL (roles → actions)
+
+Author: create own paper, edit own, upload bundles, view own logs
+
+Reviewer: access review console, add review logs/labels
+
+Editor: edit any paper, manage versions/triage/attribution, publish/unpublish
+
+Admin: settings, API keys, purge caches, view API logs
+
+API Client: web-services access per key’s access_level
+
+Map to Joomla core actions: core.create, core.edit, core.edit.state, core.delete, core.manage, plus per-entity permissions.
+
+9) Workflows (state machine)
+
+draft → submitted → under_review → revisions → accepted → published → retired
+
+Deletions become tombstones (no hard delete)
+
+Reviewer labels never remove artifacts; they annotate
+
+10) Key form fields (wireframe cues)
+
+Submit Wizard steps:
+
+Paper meta (title, abstract, authors/ORCID, keywords, doi?)
+
+Upload bundle (main manuscript, datasets, code, calibration, unused artifacts)
+
+AI usage (auto-import sessions; optional manual add)
+
+Literature triage (used/unused + reasons)
+
+Declarations (ethics, AI disclosure)
+
+Reviewers (suggest/avoid) → Submit
+
+Review Console: rubric sliders (1–5), label chips, comment box, attach annotated file, submit decision suggestion
+
+11) File storage & paths
+
+Base: /media/com_aieou/{paper_id}/
+
+Subfolders: /versions/{label}/, /unused/, /ai_sessions/{session_id}/, /triage/
+
+Keep originals + derived; store hashes in DB
+
+12) REST API (Joomla Web Services)
+
+GET /api/index.php/v1/aieou/papers (filters: status, author, keyword)
+
+POST /api/index.php/v1/aieou/papers (create)
+
+GET/POST/PUT for: versions, ai_sessions, didntmakeit, review_logs, remsearch, attribution, plugins_used
+
+Admin only: api_keys (CRUD), api_logs (GET)
+
+Discovery endpoints (optional):
+
+GET /ideas?sort=entropy_score
+
+GET /open?collab_type=coauthor
+
+GET /gaps?domain=psychology (proxy to GitGap service)
+
+13) Menus & modules
+
+Menus: Submit, My Papers, Review Queue, Discover (Ideas/Open), Gap Map, API Keys
+
+Modules: “Latest Submissions”, “Open to Collaborate”, “Recently Reviewed”, “AI Usage Heatmap”
+
+14) Lists/filters to add in CC
+
+Papers: by status, tag/keyword, author, AI-flag, has-unused (yes/no)
+
+Reviews: by decision hint, reviewer, date
+
+AI Sessions: by model, tokens range, redaction status
+
+Triage: used/unused, source type
+
+API Logs: endpoint, code, date
+
+15) Indexes & constraints
+
+Index paper_id on all child tables
+
+Unique slug per paper
+
+Indexes: status, publication_date, doi, entropy_score (ideas)
+
+FK constraints with ON DELETE CASCADE (except tombstoned content—implement at app level)
+
+16) Events/hooks (for plugins)
+
+onAieouPaperBeforeSave/AfterSave
+
+onAieouReviewSubmitted
+
+onAieouAISessionLogged
+
+onAieouBundleImported
+
+Allow content plugins via onContentPrepare on paper body
+
+17) Install/updates (SQL & manifest)
+
+admin/sql/install/mysql/install.sql creates all tables
+
+updates/mysql/*.sql versions schema
+
+Manifest: copy language files, set API services, default ACL
+
+What to enter in Component Creator (minimal pass)
+
+Create component com_aieou (Joomla 5).
+
+Add tables above (start with: papers, versions, review_logs, ai_sessions, didntmakeit).
+
+Generate admin & site list/item views for each.
+
+Enable ACL and map actions per entity.
+
+Turn on Web Services for the entities.
+
+Add menu items for Submit, Papers, Review Queue, Discover, Gap Map.
