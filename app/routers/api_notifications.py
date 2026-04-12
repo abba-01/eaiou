@@ -111,7 +111,7 @@ async def admin_notification_preview(
     current_user: dict = Depends(require_admin),
 ):
     paper = db.execute(text(
-        "SELECT id, title FROM `#__eaiou_papers` WHERE id = :pid"
+        "SELECT id, title FROM `#__eaiou_papers` WHERE id = :pid AND tombstone_state IS NULL"
     ), {"pid": paper_id}).mappings().first()
     if paper is None:
         raise HTTPException(status_code=404, detail="Paper not found.")

@@ -48,26 +48,28 @@ async def system_health(
     db: Session = Depends(get_db),
     current_user=Depends(optional_auth),
 ):
-    base = {"status": "ok", "version": "0.1.0"}
-
-    # Admin callers get extended details
-    groups = current_user.get("groups", []) if current_user else []
-    if "admin" in groups:
+    # DB probe — always run
+    db_status = "connected"
+    try:
+        db.execute(text("SELECT 1")).fetchone()
+    except Exception:
         db_status = "error"
-        try:
-            db.execute(text("SELECT 1")).fetchone()
-            db_status = "connected"
-        except Exception:
-            pass
 
-        base.update({
+    overall_status = "ok" if db_status == "connected" else "degraded"
+
+    response = {"status": overall_status, "version": "0.1.0"}
+
+    # Extended fields for admins only
+    if current_user and "admin" in current_user.get("groups", []):
+        import platform as _platform
+        response.update({
             "db":                db_status,
-            "python":            platform.python_version(),
+            "python":            _platform.python_version(),
             "environment":       os.getenv("ENVIRONMENT", "development"),
             "upload_dir_exists": Path(os.getenv("UPLOAD_DIR", "/var/eaiou/uploads")).exists(),
         })
 
-    return base
+    return response
 
 
 # ── 2. GET /system/metrics — require_admin ────────────────────────────────────
@@ -87,7 +89,8 @@ async def system_metrics(
     )).scalar() or 0
 
     under_review_papers = db.execute(text(
-        "SELECT COUNT(*) FROM `#__eaiou_papers` WHERE status = 'under_review'"
+        "SELECT COUNT(*) FROM `#__eaiou_papers` "
+        "WHERE status = 'under_review' AND tombstone_state IS NULL"
     )).scalar() or 0
 
     total_reviews = db.execute(text(

@@ -18,6 +18,7 @@ Live schema verified 2026-04-12:
 """
 
 import hashlib
+import json
 import os
 import secrets
 from datetime import datetime, timezone
@@ -173,12 +174,14 @@ async def webhook_gitgap(
     x_gitgap_secret: Optional[str] = Header(default=None),
 ):
     expected_secret = os.getenv("GITGAP_WEBHOOK_SECRET", "")
-    if not expected_secret or x_gitgap_secret != expected_secret:
+    if not expected_secret or not secrets.compare_digest(
+        x_gitgap_secret or "", expected_secret
+    ):
         raise HTTPException(status_code=401, detail="Invalid or missing webhook secret.")
 
     log_api_call(
         db, "/api/v1/webhooks/gitgap", "POST",
-        hashlib.sha256(str(payload).encode()).hexdigest(), 200,
+        hashlib.sha256(json.dumps(payload, sort_keys=True, default=str).encode()).hexdigest(), 200,
     )
 
     return {"received": True}

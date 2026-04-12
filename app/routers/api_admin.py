@@ -73,7 +73,8 @@ async def admin_dashboard(
     )).scalar() or 0
 
     under_review = db.execute(text(
-        "SELECT COUNT(*) FROM `#__eaiou_papers` WHERE status = 'under_review'"
+        "SELECT COUNT(*) FROM `#__eaiou_papers` "
+        "WHERE status = 'under_review' AND tombstone_state IS NULL"
     )).scalar() or 0
 
     pending_reviews = db.execute(text(

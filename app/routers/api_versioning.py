@@ -49,7 +49,7 @@ async def list_paper_versions(
 ):
     # Verify paper exists and is not tombstoned
     paper = db.execute(text(
-        "SELECT id FROM `#__eaiou_papers` WHERE id = :pid"
+        "SELECT id FROM `#__eaiou_papers` WHERE id = :pid AND tombstone_state IS NULL"
     ), {"pid": paper_id}).fetchone()
     if paper is None:
         raise HTTPException(status_code=404, detail="Paper not found.")
@@ -183,6 +183,15 @@ async def audit_chain_status(
             "last_verified": last_verified,
             "break_at":      None,
         }
+
+    if rows[0]["prior_hash"] is not None:
+        return JSONResponse({
+            "status":        "broken",
+            "break_at":      rows[0]["id"],
+            "reason":        "First row has non-null prior_hash — chain head may have been deleted",
+            "entries":       entries,
+            "last_verified": last_verified,
+        })
 
     prev_hash = rows[0]["log_hash"]
     for row in rows[1:]:
