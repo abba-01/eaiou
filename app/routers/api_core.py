@@ -71,7 +71,6 @@ class PaperUpdate(BaseModel):
     authorship_mode: Optional[str] = None
     authors_json: Optional[str] = None
     keywords: Optional[str] = None
-    status: Optional[str] = None
 
 
 class WorkflowTransition(BaseModel):
@@ -356,11 +355,21 @@ async def workflow_transition(
     params: dict = {"target_state": body.target_state, "paper_id": paper_id}
 
     if body.target_state == "submitted":
-        set_parts.append("submission_sealed_at = :now")
-        params["now"] = now
+        # Only seal if not already sealed — preserve original seal on re-submission
+        existing = db.execute(text(
+            "SELECT submission_sealed_at FROM `#__eaiou_papers` WHERE id = :id"
+        ), {"id": paper_id}).fetchone()
+        if existing and existing[0] is None:
+            set_parts.append("submission_sealed_at = :now")
+            params["now"] = now
     elif body.target_state == "accepted":
-        set_parts.append("acceptance_sealed_at = :now")
-        params["now"] = now
+        # Only seal if not already sealed — preserve original seal on re-acceptance
+        existing = db.execute(text(
+            "SELECT acceptance_sealed_at FROM `#__eaiou_papers` WHERE id = :id"
+        ), {"id": paper_id}).fetchone()
+        if existing and existing[0] is None:
+            set_parts.append("acceptance_sealed_at = :now")
+            params["now"] = now
 
     set_clause = ", ".join(set_parts)
     db.execute(text(
@@ -759,7 +768,8 @@ async def auth_login(
 
     if row is None or not row["active"] or not row["password_hash"] \
             or not verify_password(body.password, row["password_hash"]):
-        record_login_attempt(ip)
+        record_login_attempt(ip)           # record this failure first
+        check_login_rate_limit(ip)         # now gate on the updated count (raises 429 if over limit)
         return JSONResponse({"error": "invalid_credentials"}, status_code=401)
 
     # Load groups
