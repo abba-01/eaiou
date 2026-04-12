@@ -18,7 +18,7 @@ from contextlib import asynccontextmanager
 
 from .database import Base, get_db
 from .deps import get_current_user, get_user_from_session
-from .routers import papers, auth, author, editor, intelligence, api, intellid, report, admin, oauth, api_core, api_review, api_authorship, api_transparency, api_discover, api_gaps
+from .routers import papers, auth, author, editor, intelligence, api, intellid, report, admin, oauth, api_core, api_review, api_authorship, api_transparency, api_discover, api_gaps, api_versioning, api_admin, api_logging, api_notifications, api_system, api_keys
 from .middleware.temporal_blindness import TemporalBlindnessMiddleware
 
 
@@ -289,6 +289,12 @@ app.include_router(api_authorship.router)
 app.include_router(api_transparency.router)
 app.include_router(api_discover.router)
 app.include_router(api_gaps.router)
+app.include_router(api_versioning.router)
+app.include_router(api_admin.router)
+app.include_router(api_logging.router)
+app.include_router(api_notifications.router)
+app.include_router(api_system.router)
+app.include_router(api_keys.router)
 
 
 # ── Page routes ───────────────────────────────────────────────────────────────
