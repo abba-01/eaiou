@@ -154,6 +154,14 @@ async def contribution_delete(
     db: Session = Depends(get_db),
     current_user: dict = Depends(require_editor),
 ):
+    existing = db.execute(text(
+        "SELECT id, state FROM `#__eaiou_attribution_log` WHERE id = :id"
+    ), {"id": id}).fetchone()
+    if existing is None:
+        raise HTTPException(status_code=404, detail="Attribution not found.")
+    if existing[1] == -2:
+        raise HTTPException(status_code=404, detail="Attribution already deleted.")
+
     result = db.execute(text(
         "UPDATE `#__eaiou_attribution_log` SET state = -2 WHERE id = :id"
     ), {"id": id})
@@ -182,13 +190,14 @@ async def ai_session_get(
         "SELECT id, paper_id, session_label, ai_model_name, start_time, end_time, "
         "tokens_in, tokens_out, redaction_status, session_notes, session_hash, "
         "state, created, created_by "
-        "FROM `#__eaiou_ai_sessions` WHERE id = :id"
+        "FROM `#__eaiou_ai_sessions` "
+        "WHERE id = :id AND (state IS NULL OR state != -2)"
     ), {"id": id}).mappings().first()
 
     if row is None:
         raise HTTPException(status_code=404, detail="AI session not found.")
 
-    return dict(row)
+    return {k: v for k, v in dict(row).items() if k != "session_hash"}
 
 
 # ── 4. GET /ai/sessions/{session_id}/didntmakeit — intellid.get_contributions ─
@@ -229,6 +238,12 @@ async def ai_log_session(
     db: Session = Depends(get_db),
     current_user: dict = Depends(require_auth),
 ):
+    paper = db.execute(text(
+        "SELECT id FROM `#__eaiou_papers` WHERE id = :pid AND tombstone_state IS NULL"
+    ), {"pid": paper_id}).fetchone()
+    if paper is None:
+        raise HTTPException(status_code=404, detail="Paper not found.")
+
     now = datetime.now(timezone.utc)
     session_hash = hashlib.sha256(
         f"{paper_id}|{body.session_label}|{now.isoformat()}".encode()
@@ -300,7 +315,7 @@ async def ai_get_sessions(
         "FROM `#__eaiou_ai_sessions` WHERE paper_id = :pid ORDER BY id"
     ), {"pid": paper_id}).mappings().all()
 
-    return [dict(r) for r in rows]
+    return [{k: v for k, v in dict(r).items() if k != "session_hash"} for r in rows]
 
 
 # ── 7. GET /papers/{paper_id}/ai/disclosure — ai.get_disclosure (PUBLIC) ──────

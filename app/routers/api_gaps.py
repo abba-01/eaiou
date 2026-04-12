@@ -201,8 +201,8 @@ async def gap_get_linked_papers(
 
     rows = db.execute(text(
         "SELECT p.id, p.title, p.status, p.q_signal "
-        "FROM `#__eaiou_papers` p "
-        "JOIN `#__eaiou_gap_papers` gp ON gp.paper_id = p.id "
+        "FROM `#__eaiou_gap_papers` gp "
+        "JOIN `#__eaiou_papers` p ON p.id = gp.paper_id AND p.tombstone_state IS NULL "
         "WHERE gp.gap_id = :gid "
         "ORDER BY p.q_signal IS NULL ASC, p.q_signal DESC"
     ), {"gid": id}).mappings().all()
@@ -229,7 +229,7 @@ async def gap_get_stalled_items(
     rows = db.execute(text(
         "SELECT id AS paper_id, title, status "
         "FROM `#__eaiou_papers` "
-        "WHERE gitgap_gap_id = :gid "
+        "WHERE gitgap_gap_id = :gid AND tombstone_state IS NULL "
         "ORDER BY id"
     ), {"gid": id}).mappings().all()
 
@@ -241,7 +241,7 @@ async def gap_get_stalled_items(
             "SELECT p.id AS paper_id, p.title, p.status "
             "FROM `#__eaiou_papers` p "
             "JOIN `#__eaiou_gap_papers` gp ON gp.paper_id = p.id "
-            "WHERE gp.gap_id = :gid "
+            "WHERE gp.gap_id = :gid AND p.tombstone_state IS NULL "
             "ORDER BY p.id"
         ), {"gid": id}).mappings().all()
         stalled = [dict(r) for r in fallback]

@@ -49,6 +49,11 @@ def _strip_sealed(d: dict) -> dict:
     return {k: v for k, v in d.items() if k not in _SEALED}
 
 
+def _like_escape(s: str) -> str:
+    """Escape LIKE special characters to prevent wildcard injection."""
+    return s.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+
+
 def _check_sort(sort: Optional[str]):
     if sort:
         sort_lower = sort.lower()
@@ -75,10 +80,10 @@ async def search_query(
 ):
     _check_sort(sort)
 
-    q_pattern = f"%{q}%"
+    q_pattern = f"%{_like_escape(q)}%"
     where_clauses = [
         "tombstone_state IS NULL",
-        "(title LIKE :q OR abstract LIKE :q OR keywords LIKE :q)",
+        "(title LIKE :q ESCAPE '\\\\' OR abstract LIKE :q ESCAPE '\\\\' OR keywords LIKE :q ESCAPE '\\\\')",
     ]
     params: dict = {"q": q_pattern, "limit": limit, "offset": offset}
 
@@ -133,8 +138,8 @@ async def search_unspace(
     params: dict = {"limit": limit, "offset": offset}
 
     if q:
-        where_clauses.append("(citation_title LIKE :q OR fulltext_notes LIKE :q)")
-        params["q"] = f"%{q}%"
+        where_clauses.append("(citation_title LIKE :q ESCAPE '\\\\' OR fulltext_notes LIKE :q ESCAPE '\\\\')")
+        params["q"] = f"%{_like_escape(q)}%"
 
     where_sql = " AND ".join(where_clauses)
 
@@ -201,7 +206,7 @@ async def discover_ideas(
         "SELECT r.id, r.paper_id, r.citation_title, r.citation_source, "
         "r.fulltext_notes, p.title AS source_paper_title "
         "FROM `#__eaiou_remsearch` r "
-        "LEFT JOIN `#__eaiou_papers` p ON p.id = r.paper_id "
+        "LEFT JOIN `#__eaiou_papers` p ON p.id = r.paper_id AND p.tombstone_state IS NULL "
         "WHERE r.used = 0 "
         "ORDER BY r.id "
         "LIMIT :limit OFFSET :offset"

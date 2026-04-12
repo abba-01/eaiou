@@ -213,6 +213,22 @@ async def transparency_mark_unused(
     db: Session = Depends(get_db),
     current_user: dict = Depends(require_auth),
 ):
+    # Fetch the remsearch row to get paper_id
+    rem_row = db.execute(text(
+        "SELECT id, paper_id FROM `#__eaiou_remsearch` WHERE id = :rid"
+    ), {"rid": id}).fetchone()
+    if rem_row is None:
+        raise HTTPException(status_code=404, detail="Remsearch record not found.")
+
+    # Check ownership: caller must own the paper or be editor/admin
+    groups = current_user.get("groups", []) if current_user else []
+    if not ({"editor", "admin"} & set(groups)):
+        paper_row = db.execute(text(
+            "SELECT author_name FROM `#__eaiou_papers` WHERE id = :pid"
+        ), {"pid": rem_row[1]}).fetchone()
+        if not paper_row or paper_row[0] != current_user.get("name"):
+            raise HTTPException(status_code=403, detail="Not authorized to modify this record.")
+
     now = datetime.now(timezone.utc)
 
     result = db.execute(text(
