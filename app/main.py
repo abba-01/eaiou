@@ -18,7 +18,7 @@ from contextlib import asynccontextmanager
 
 from .database import Base, get_db
 from .deps import get_current_user, get_user_from_session
-from .routers import papers, auth, author, editor, intelligence, api, intellid, report, admin, oauth, api_core, api_review
+from .routers import papers, auth, author, editor, intelligence, api, intellid, report, admin, oauth, api_core, api_review, api_authorship, api_transparency, api_discover, api_gaps
 from .middleware.temporal_blindness import TemporalBlindnessMiddleware
 
 
@@ -177,6 +177,28 @@ async def lifespan(app: FastAPI):
                     conn.execute(text(_stmt))
                 except Exception as _e:
                     pass  # Idempotent — column/table already exists
+        # Tier 6: Gap tables
+        conn.execute(text("""
+            CREATE TABLE IF NOT EXISTS `#__eaiou_gaps` (
+                id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                domain      VARCHAR(128) NOT NULL,
+                description TEXT,
+                stall_type  VARCHAR(64) DEFAULT NULL,
+                status      VARCHAR(32) NOT NULL DEFAULT 'open',
+                created_at  DATETIME NOT NULL,
+                updated_at  DATETIME DEFAULT NULL,
+                created_by  INT UNSIGNED DEFAULT NULL,
+                INDEX idx_gaps_domain (domain)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        """))
+        conn.execute(text("""
+            CREATE TABLE IF NOT EXISTS `#__eaiou_gap_papers` (
+                gap_id      INT UNSIGNED NOT NULL,
+                paper_id    INT UNSIGNED NOT NULL,
+                linked_at   DATETIME NOT NULL,
+                PRIMARY KEY (gap_id, paper_id)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        """))
     yield
 
 
@@ -263,6 +285,10 @@ app.include_router(admin.router)
 app.include_router(oauth.router)
 app.include_router(api_core.router)
 app.include_router(api_review.router)
+app.include_router(api_authorship.router)
+app.include_router(api_transparency.router)
+app.include_router(api_discover.router)
+app.include_router(api_gaps.router)
 
 
 # ── Page routes ───────────────────────────────────────────────────────────────
