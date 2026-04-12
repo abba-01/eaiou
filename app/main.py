@@ -19,6 +19,7 @@ from contextlib import asynccontextmanager
 from .database import Base, get_db
 from .deps import get_current_user, get_user_from_session
 from .routers import papers, auth, author, editor, intelligence, api, intellid, report, admin, oauth
+from .middleware.temporal_blindness import TemporalBlindnessMiddleware
 
 
 @asynccontextmanager
@@ -206,6 +207,7 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         return response
 
 app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(TemporalBlindnessMiddleware)
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 templates = Jinja2Templates(directory="app/templates")
