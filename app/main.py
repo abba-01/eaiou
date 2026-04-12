@@ -18,7 +18,7 @@ from contextlib import asynccontextmanager
 
 from .database import Base, get_db
 from .deps import get_current_user, get_user_from_session
-from .routers import papers, auth, author, editor, intelligence, api, intellid, report, admin, oauth, api_core
+from .routers import papers, auth, author, editor, intelligence, api, intellid, report, admin, oauth, api_core, api_review
 from .middleware.temporal_blindness import TemporalBlindnessMiddleware
 
 
@@ -262,6 +262,7 @@ app.include_router(report.router)
 app.include_router(admin.router)
 app.include_router(oauth.router)
 app.include_router(api_core.router)
+app.include_router(api_review.router)
 
 
 # ── Page routes ───────────────────────────────────────────────────────────────
