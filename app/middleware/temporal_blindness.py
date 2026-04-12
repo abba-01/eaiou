@@ -82,9 +82,14 @@ class TemporalBlindnessMiddleware(BaseHTTPMiddleware):
         except (json.JSONDecodeError, ValueError):
             cleaned_body = body
 
+        # Drop Content-Length so Response recomputes it from cleaned_body
+        clean_headers = {
+            k: v for k, v in response.headers.items()
+            if k.lower() != "content-length"
+        }
         return Response(
             content=cleaned_body,
             status_code=response.status_code,
-            headers=dict(response.headers),
+            headers=clean_headers,
             media_type="application/json",
         )

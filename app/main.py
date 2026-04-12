@@ -18,7 +18,7 @@ from contextlib import asynccontextmanager
 
 from .database import Base, get_db
 from .deps import get_current_user, get_user_from_session
-from .routers import papers, auth, author, editor, intelligence, api, intellid, report, admin, oauth
+from .routers import papers, auth, author, editor, intelligence, api, intellid, report, admin, oauth, api_core
 from .middleware.temporal_blindness import TemporalBlindnessMiddleware
 
 
@@ -218,6 +218,13 @@ templates = Jinja2Templates(directory="app/templates")
 @app.exception_handler(403)
 async def forbidden(request: Request, exc: HTTPException):
     from fastapi.responses import RedirectResponse
+    # JSON API paths get a JSON 403, not an HTML redirect
+    if request.url.path.startswith("/api/"):
+        from fastapi.responses import JSONResponse
+        return JSONResponse(
+            {"error": "forbidden", "detail": getattr(exc, "detail", "Forbidden.")},
+            status_code=403,
+        )
     if get_user_from_session(request):
         return RedirectResponse(url="/", status_code=302)
     next_path = request.url.path
@@ -254,6 +261,7 @@ app.include_router(intellid.router)
 app.include_router(report.router)
 app.include_router(admin.router)
 app.include_router(oauth.router)
+app.include_router(api_core.router)
 
 
 # ── Page routes ───────────────────────────────────────────────────────────────
