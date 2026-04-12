@@ -1,0 +1,2413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eaiou — Wireframe Atlas · Batch 1 (Views 1–10)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --ink: #0e0d0b;
+  --ink2: #3a3832;
+  --ink3: #7a7670;
+  --paper: #f7f4ef;
+  --paper2: #ede9e1;
+  --paper3: #e0dbd0;
+  --river: #1a4a6b;
+  --river-l: #2d6e9e;
+  --river-ll: #e8f1f7;
+  --amber: #c47c0a;
+  --amber-l: #fdf0d0;
+  --sage: #3a6b4a;
+  --sage-l: #e8f2ec;
+  --coral: #b84832;
+  --coral-l: #faeae6;
+  --violet: #4a3278;
+  --violet-l: #ede8f7;
+  --mono: 'JetBrains Mono', monospace;
+  --serif: 'Spectral', Georgia, serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--serif);
+  background: #d5d0c8;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* === ATLAS SHELL === */
+.atlas-header {
+  background: var(--ink);
+  color: #fff;
+  padding: 24px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 2px solid var(--river-l);
+}
+.atlas-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+.atlas-title em { color: #8ab4d4; font-style: italic; }
+.atlas-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.atlas-nav {
+  display: flex;
+  gap: 4px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.atlas-nav a {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  padding: 3px 8px;
+  border: 0.5px solid rgba(255,255,255,0.15);
+  border-radius: 2px;
+  transition: all 0.15s;
+  text-transform: uppercase;
+}
+.atlas-nav a:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+
+/* === VIEW FRAME === */
+.view-frame {
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #fff;
+  border: 1px solid var(--paper3);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+}
+.view-label {
+  background: var(--ink);
+  color: #fff;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.view-label-title {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.view-label-route {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: #8ab4d4;
+  letter-spacing: 0.06em;
+}
+.view-label-acl {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 2px 6px;
+  border: 0.5px solid rgba(255,255,255,0.2);
+  border-radius: 2px;
+  color: rgba(255,255,255,0.6);
+}
+.view-body {
+  background: var(--paper);
+}
+
+/* === SHARED ELEMENTS === */
+.nav {
+  background: var(--ink);
+  color: #fff;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  gap: 24px;
+  font-size: 14px;
+}
+.nav-brand {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: #fff;
+  flex-shrink: 0;
+}
+.nav-brand span { color: #8ab4d4; }
+.nav-links {
+  display: flex;
+  gap: 18px;
+  flex: 1;
+}
+.nav-link {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  cursor: default;
+}
+.nav-link.active { color: #fff; }
+.nav-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.nav-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 3px 7px;
+  border: 0.5px solid rgba(255,255,255,0.2);
+  border-radius: 2px;
+  color: rgba(255,255,255,0.6);
+}
+.nav-badge.primary {
+  background: var(--river-l);
+  border-color: var(--river-l);
+  color: #fff;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  padding: 0 0 6px;
+  border-bottom: 0.5px solid var(--paper3);
+  margin-bottom: 14px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.badge-transparency { background: var(--river-ll); color: var(--river); }
+.badge-ai { background: var(--violet-l); color: var(--violet); }
+.badge-unsci { background: var(--coral-l); color: var(--coral); }
+.badge-collab { background: var(--sage-l); color: var(--sage); }
+.badge-sealed { background: var(--paper3); color: var(--ink3); }
+.badge-tag { background: transparent; border: 0.5px solid var(--paper3); color: var(--ink3); }
+
+.btn {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  padding: 7px 14px;
+  border-radius: 2px;
+  cursor: default;
+  border: 0.5px solid;
+  text-transform: uppercase;
+}
+.btn-primary { background: var(--river-l); border-color: var(--river-l); color: #fff; }
+.btn-secondary { background: transparent; border-color: var(--paper3); color: var(--ink2); }
+.btn-danger { background: var(--coral); border-color: var(--coral); color: #fff; }
+
+.module-panel {
+  background: #fff;
+  border: 0.5px solid var(--paper3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.module-header {
+  padding: 10px 14px;
+  border-bottom: 0.5px solid var(--paper3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--paper);
+}
+.module-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  font-weight: 500;
+}
+.module-body { padding: 14px; }
+
+.paper-card {
+  background: #fff;
+  border: 0.5px solid var(--paper3);
+  border-radius: 3px;
+  padding: 16px 18px;
+}
+.paper-card-title {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.paper-card-meta {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink3);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.paper-card-abstract {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink2);
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.paper-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.paper-card-tags { display: flex; gap: 3px; flex-wrap: wrap; }
+
+.qsig-score {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--river);
+}
+.qsig-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.queue-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px;
+  padding: 10px 0;
+  border-bottom: 0.5px solid var(--paper3);
+  align-items: start;
+}
+.queue-item:last-child { border-bottom: none; }
+.queue-item-title {
+  font-family: var(--serif);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.queue-item-meta {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink3);
+  letter-spacing: 0.04em;
+}
+
+.due-pill {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.due-ok { background: var(--sage-l); color: var(--sage); }
+.due-warn { background: var(--amber-l); color: var(--amber); }
+.due-late { background: var(--coral-l); color: var(--coral); }
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.kpi-card {
+  padding: 10px 12px;
+  background: var(--paper);
+  border-radius: 2px;
+  border: 0.5px solid var(--paper3);
+}
+.kpi-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 2px;
+}
+.kpi-value {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1;
+}
+.kpi-trend {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--sage);
+  margin-top: 2px;
+}
+
+.transp-block {
+  border: 0.5px solid var(--river);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+.transp-header {
+  background: var(--river);
+  color: #fff;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.transp-header-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex: 1;
+}
+.transp-body { padding: 10px 14px; background: var(--river-ll); }
+.transp-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 2px 0;
+  color: var(--ink2);
+}
+.transp-row-label { color: var(--ink3); }
+
+.field-group { margin-bottom: 12px; }
+.field-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 4px;
+  display: block;
+}
+.field-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 0.5px solid var(--paper3);
+  border-radius: 2px;
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--paper);
+  outline: none;
+}
+.field-textarea { height: 60px; resize: none; }
+
+.search-bar {
+  display: flex;
+  gap: 0;
+  border: 0.5px solid var(--paper3);
+  border-radius: 3px;
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: 10px;
+}
+.search-input {
+  flex: 1;
+  border: none;
+  padding: 8px 12px;
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--ink);
+  background: transparent;
+  outline: none;
+}
+.search-filters {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.filter-chip {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 3px 8px;
+  border: 0.5px solid var(--paper3);
+  border-radius: 2px;
+  color: var(--ink3);
+  background: #fff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.filter-chip.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+.workflow {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  margin: 8px 0;
+}
+.wf-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 4px;
+}
+.wf-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--paper3);
+  border: 0.5px solid var(--ink3);
+}
+.wf-dot.active { background: var(--river-l); border-color: var(--river-l); }
+.wf-dot.done { background: var(--sage); border-color: var(--sage); }
+.wf-line { flex: 1; height: 0.5px; background: var(--paper3); margin-top: -16px; }
+.wf-line.done { background: var(--sage); }
+.wf-name {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  text-align: center;
+}
+.wf-name.active { color: var(--river); }
+.wf-name.done { color: var(--sage); }
+
+.gap-map-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 4px;
+  background: var(--paper2);
+  border-radius: 2px;
+  border: 0.5px solid var(--paper3);
+}
+.gap-bar {
+  width: 20px;
+  border-radius: 2px 2px 0 0;
+  background: var(--coral);
+  opacity: 0.7;
+}
+.gap-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.hash-chain { font-family: var(--mono); font-size: 9px; color: var(--ink3); }
+.hash-entry {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 3px 0;
+  border-bottom: 0.5px solid var(--paper3);
+}
+.hash-id { color: var(--river-l); width: 52px; flex-shrink: 0; font-size: 9px; }
+.hash-val { flex: 1; color: var(--ink3); font-size: 8px; }
+.hash-status { color: var(--sage); font-size: 9px; }
+
+.orcid-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: #a6ce39;
+  background: rgba(166,206,57,0.1);
+  border: 0.5px solid rgba(166,206,57,0.3);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+.orcid-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #a6ce39;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.rs-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  letter-spacing: 0.03em;
+}
+.rs-collab { background: var(--sage-l); color: var(--sage); }
+.rs-stalled { background: var(--amber-l); color: var(--amber); }
+.rs-nottopic { background: var(--violet-l); color: var(--violet); }
+
+/* === LAYOUT UTILITIES === */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.layout { display: grid; grid-template-columns: 1fr 260px; gap: 0; }
+.layout-sidebar { border-left: 0.5px solid var(--paper3); background: var(--paper); }
+.layout-3col { display: grid; grid-template-columns: 220px 1fr 260px; gap: 0; }
+
+.content-pad { padding: 20px 24px; }
+.sidebar-pad { padding: 16px 14px; }
+
+/* Placeholder blocks */
+.placeholder {
+  background: var(--paper2);
+  border: 0.5px dashed var(--paper3);
+  border-radius: 2px;
+  padding: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink3);
+  text-align: center;
+  letter-spacing: 0.06em;
+}
+
+.footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.4);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 300;
+  color: #fff;
+}
+.footer-meta {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-align: right;
+  color: rgba(255,255,255,0.3);
+}
+
+/* Table styles */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 10px;
+}
+.data-table th {
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--paper3);
+  color: var(--ink3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 9px;
+  font-weight: 500;
+}
+.data-table td {
+  padding: 8px;
+  border-bottom: 0.5px solid var(--paper3);
+  color: var(--ink2);
+  font-size: 11px;
+}
+.data-table tr:hover td { background: var(--paper); }
+
+/* Tabs */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  border-bottom: 0.5px solid var(--paper3);
+}
+.tab {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  color: var(--ink3);
+  border-bottom: 2px solid transparent;
+  cursor: default;
+}
+.tab.active { color: var(--river); border-bottom-color: var(--river); }
+
+/* Step wizard */
+.wizard-steps {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 14px 24px;
+  background: var(--paper2);
+}
+.wizard-step {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.wizard-num {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.wizard-num.done { background: var(--sage); color: #fff; }
+.wizard-num.active { background: var(--river); color: #fff; }
+.wizard-num.pending { background: var(--paper3); color: var(--ink3); }
+.wizard-step-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.wizard-step-label.done { color: var(--sage); }
+.wizard-step-label.active { color: var(--river); font-weight: 500; }
+.wizard-step-label.pending { color: var(--ink3); }
+.wizard-connector { flex: 1; height: 0.5px; background: var(--paper3); margin: 0 2px; }
+.wizard-connector.done { background: var(--sage); }
+
+/* Notification item */
+.notif-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 0.5px solid var(--paper3);
+  align-items: start;
+}
+.notif-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.notif-text {
+  font-family: var(--serif);
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.5;
+}
+.notif-meta {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink3);
+  margin-top: 2px;
+}
+</style>
+</head>
+<body>
+
+<!-- ATLAS HEADER -->
+<div class="atlas-header">
+  <div class="atlas-title">eaiou <em>Wireframe Atlas</em></div>
+  <div class="atlas-sub">Batch 1 · Views 1–10 · All elements, modules, columns populated · SSOT v2.0</div>
+  <div class="atlas-nav">
+    <a href="#v1">1 · Home</a>
+    <a href="#v2">2 · Papers List</a>
+    <a href="#v3">3 · Paper Detail</a>
+    <a href="#v4">4 · Submit Wizard</a>
+    <a href="#v5">5 · My Papers</a>
+    <a href="#v6">6 · Reviewer Queue</a>
+    <a href="#v7">7 · Review Console</a>
+    <a href="#v8">8 · Editorial Papers</a>
+    <a href="#v9">9 · Editorial Decide</a>
+    <a href="#v10">10 · Discover Ideas</a>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- VIEW 1: HOME / LANDING                                        -->
+<!-- ============================================================ -->
+<div class="view-frame" id="v1">
+  <div class="view-label">
+    <div>
+      <div class="view-label-title">View 1 — Site Home / Landing</div>
+      <div class="view-label-route">Route: / &nbsp;·&nbsp; Component: site home</div>
+    </div>
+    <div class="view-label-acl">ACL: PUBLIC</div>
+  </div>
+  <div class="view-body">
+    <!-- Nav -->
+    <nav class="nav">
+      <div class="nav-brand">e<span>a</span>iou</div>
+      <div class="nav-links">
+        <span class="nav-link active">Discover</span>
+        <span class="nav-link">Submit</span>
+        <span class="nav-link">Review</span>
+        <span class="nav-link">Ideas</span>
+        <span class="nav-link">Gaps</span>
+      </div>
+      <div class="nav-right">
+        <span class="nav-badge">Log in</span>
+        <span class="nav-badge primary">Submit Paper</span>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <div style="background:var(--ink);color:#fff;padding:48px 24px 40px;position:relative;overflow:hidden">
+      <div style="position:relative;max-width:560px">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:#8ab4d4;margin-bottom:14px;text-transform:uppercase">observer-preserving peer review · ommp layer 5</div>
+        <h1 style="font-family:var(--serif);font-size:38px;font-weight:300;line-height:1.08;letter-spacing:-0.03em;margin-bottom:18px">Science sorted by<br>quality. <em style="color:#8ab4d4;font-style:italic">Not time.</em></h1>
+        <p style="font-family:var(--serif);font-size:15px;font-weight:300;line-height:1.7;color:rgba(255,255,255,0.55);max-width:460px;margin-bottom:24px">eaiou is a full-context peer-review journal. Submission dates are <strong style="color:rgba(255,255,255,0.85);font-weight:400">sealed</strong>. Papers surface by <strong style="color:rgba(255,255,255,0.85);font-weight:400">quality signal</strong> alone.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="btn btn-primary">Submit a paper</span>
+          <span class="btn btn-secondary" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.25)">Browse corpus</span>
+          <span class="btn btn-secondary" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.25)">Explore gaps →</span>
+        </div>
+        <div style="margin-top:28px;padding:14px;border:0.5px solid rgba(255,255,255,0.08);border-left:2px solid #8ab4d4;background:rgba(255,255,255,0.03);border-radius:0 3px 3px 0">
+          <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:rgba(255,255,255,0.45);line-height:1.7">"You do not read science by time."</p>
+          <cite style="display:block;margin-top:4px;font-style:normal;font-family:var(--mono);font-size:9px;color:#8ab4d4;letter-spacing:0.05em">— Temporal Blindness Doctrine</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main layout: paper feed + sidebar -->
+    <div class="layout">
+      <!-- Left: mod_latest_papers -->
+      <div class="content-pad">
+        <div class="section-label">Latest Papers · q_signal order · mod_latest_papers</div>
+        <div class="search-bar">
+          <input class="search-input" placeholder="Search by quality, content, methodology…" readonly>
+          <span class="btn btn-primary" style="border-radius:0;border:none;padding:8px 14px">Search</span>
+        </div>
+        <div class="search-filters">
+          <span class="filter-chip active">All papers</span>
+          <span class="filter-chip">AI-Logged</span>
+          <span class="filter-chip">Open Collab</span>
+          <span class="filter-chip">Null Result</span>
+          <span class="filter-chip">Cross-Domain</span>
+          <span class="filter-chip">rs:Stalled</span>
+          <span class="filter-chip">include un-space</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="paper-card">
+            <div class="paper-card-meta">ORCID 0009-0006-5944-1742 · Cosmology · Physics</div>
+            <div class="paper-card-title">Hubble Tension as Measurement Artifact: Evidence from Spatial Encoding Constraints</div>
+            <div class="paper-card-abstract">We present a framework in which the observed Hubble tension arises not from new physics but from systematic bias introduced by spatial encoding assumptions.</div>
+            <div class="paper-card-footer">
+              <div class="paper-card-tags">
+                <span class="badge badge-transparency">◈ Transparency</span>
+                <span class="badge badge-ai">⬡ AI-Logged</span>
+                <span class="badge badge-tag">rs:NullResult</span>
+              </div>
+              <div><div class="qsig-label">q_signal</div><div class="qsig-score">9.24</div></div>
+            </div>
+          </div>
+          <div class="paper-card">
+            <div class="paper-card-meta">ORCID 0000-0002-1825-0097 · Cosmology · Cross-Domain</div>
+            <div class="paper-card-title">Partition of Cosmological Tensions: Unified Framework for Measurement Disagreement</div>
+            <div class="paper-card-abstract">We introduce a partition framework separating statistical, systematic, and model-dependent contributions to tension metrics.</div>
+            <div class="paper-card-footer">
+              <div class="paper-card-tags">
+                <span class="badge badge-transparency">◈ Transparency</span>
+                <span class="badge badge-tag">rs:CrossDomain</span>
+              </div>
+              <div><div class="qsig-label">q_signal</div><div class="qsig-score">8.61</div></div>
+            </div>
+          </div>
+          <div class="paper-card">
+            <div class="paper-card-meta">ORCID 0000-0003-4567-8901 · Mathematics · Computing</div>
+            <div class="paper-card-title">UHA Spatial Encoding Framework: Observer-Relative Coordinate Systems</div>
+            <div class="paper-card-abstract">This paper formalizes the Unified Holographic Alignment approach, providing rigorous basis for observer-relative coordinate systems.</div>
+            <div class="paper-card-footer">
+              <div class="paper-card-tags">
+                <span class="badge badge-ai">⬡ AI-Logged</span>
+                <span class="badge badge-collab">⊕ Open Collab</span>
+              </div>
+              <div><div class="qsig-label">q_signal</div><div class="qsig-score">7.93</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right sidebar -->
+      <div class="layout-sidebar sidebar-pad" style="display:flex;flex-direction:column;gap:14px">
+        <!-- Gap Map -->
+        <div class="module-panel">
+          <div class="module-header">
+            <span class="module-title">Gap Map</span>
+            <span class="badge badge-tag">/discover/gaps</span>
+          </div>
+          <div class="module-body">
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:8px">Stall density · unresolved rs:Stalled</div>
+            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;align-items:end">
+              <div class="gap-map-cell"><div class="gap-bar" style="height:40px"></div><div class="gap-label">Cosmo</div></div>
+              <div class="gap-map-cell"><div class="gap-bar" style="height:28px;opacity:0.5"></div><div class="gap-label">CS</div></div>
+              <div class="gap-map-cell"><div class="gap-bar" style="height:18px;opacity:0.35"></div><div class="gap-label">Math</div></div>
+              <div class="gap-map-cell"><div class="gap-bar" style="height:34px;opacity:0.6"></div><div class="gap-label">Bio</div></div>
+              <div class="gap-map-cell"><div class="gap-bar" style="height:14px;opacity:0.25"></div><div class="gap-label">Stats</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Open Collaborate -->
+        <div class="module-panel">
+          <div class="module-header">
+            <span class="module-title">Open to Collaborate</span>
+            <span class="badge badge-tag">mod_open_collaborate</span>
+          </div>
+          <div class="module-body">
+            <div class="queue-item">
+              <div>
+                <div class="queue-item-title">UHA Spatial Encoding…</div>
+                <div class="queue-item-meta"><span class="rs-tag rs-collab">rs:LookCollab:Coder</span></div>
+              </div>
+              <span class="badge badge-tag">High</span>
+            </div>
+            <div class="queue-item">
+              <div>
+                <div class="queue-item-title">Cross-domain signal…</div>
+                <div class="queue-item-meta"><span class="rs-tag rs-stalled">rs:Stalled:Data</span></div>
+              </div>
+              <span class="badge badge-tag">Med</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Usage Heatmap -->
+        <div class="module-panel">
+          <div class="module-header">
+            <span class="module-title">AI Usage Heatmap</span>
+            <span class="badge badge-tag">mod_ai_usage_heatmap</span>
+          </div>
+          <div class="module-body">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="display:flex;align-items:center;gap:6px">
+                <span style="font-family:var(--mono);font-size:9px;color:var(--ink3);width:80px;text-align:right">Claude Sonnet</span>
+                <div style="flex:1;height:10px;background:var(--paper2);border-radius:2px;overflow:hidden"><div style="width:72%;height:100%;background:var(--violet);opacity:0.6;border-radius:2px"></div></div>
+                <span style="font-family:var(--mono);font-size:9px;color:var(--violet)">72%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span style="font-family:var(--mono);font-size:9px;color:var(--ink3);width:80px;text-align:right">GPT-4.1</span>
+                <div style="flex:1;height:10px;background:var(--paper2);border-radius:2px;overflow:hidden"><div style="width:45%;height:100%;background:var(--violet);opacity:0.4;border-radius:2px"></div></div>
+                <span style="font-family:var(--mono);font-size:9px;color:var(--violet)">45%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span style="font-family:var(--mono);font-size:9px;color:var(--ink3);width:80px;text-align:right">Gemini Pro</span>
+                <div style="flex:1;height:10px;background:var(--paper2);border-radius:2px;overflow:hidden"><div style="width:18%;height:100%;background:var(--violet);opacity:0.25;border-radius:2px"></div></div>
+                <span style="font-family:var(--mono);font-size:9px;color:var(--violet)">18%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span style="font-family:var(--mono);font-size:9px;color:var(--ink3);width:80px;text-align:right">No AI</span>
+                <div style="flex:1;height:10px;background:var(--paper2);border-radius:2px;overflow:hidden"><div style="width:30%;height:100%;background:var(--ink3);opacity:0.2;border-radius:2px"></div></div>
+                <span style="font-family:var(--mono);font-size:9px;color:var(--ink3)">30%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trending Ideas mini -->
+        <div class="module-panel">
+          <div class="module-header">
+            <span class="module-title">Trending Ideas</span>
+            <span class="badge badge-tag">/discover/trends</span>
+          </div>
+          <div class="module-body">
+            <div class="queue-item">
+              <div>
+                <div class="queue-item-title">Observer-relative cosmology</div>
+                <div class="queue-item-meta">3 papers · 2 stalled · high entropy</div>
+              </div>
+            </div>
+            <div class="queue-item">
+              <div>
+                <div class="queue-item-title">Null result replication gaps</div>
+                <div class="queue-item-meta">5 papers · 4 un-space artifacts</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-brand">eaiou.org</div>
+      <div class="footer-meta">OMMP LAYER 5 · ORCID 0009-0006-5944-1742 · SSOT v2.0</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- VIEW 2: PAPERS LIST                                            -->
+<!-- ============================================================ -->
+<div class="view-frame" id="v2">
+  <div class="view-label">
+    <div>
+      <div class="view-label-title">View 2 — Papers List / Browse Corpus</div>
+      <div class="view-label-route">Route: /papers &nbsp;·&nbsp; Component: com_content list</div>
+    </div>
+    <div class="view-label-acl">ACL: PUBLIC</div>
+  </div>
+  <div class="view-body">
+    <nav class="nav">
+      <div class="nav-brand">e<span>a</span>iou</div>
+      <div class="nav-links">
+        <span class="nav-link active">Discover</span>
+        <span class="nav-link">Submit</span>
+        <span class="nav-link">Review</span>
+        <span class="nav-link">Ideas</span>
+        <span class="nav-link">Gaps</span>
+      </div>
+      <div class="nav-right">
+        <span class="nav-badge">E. Martin</span>
+        <span class="nav-badge primary">Submit Paper</span>
+      </div>
+    </nav>
+
+    <div class="layout">
+      <div class="content-pad">
+        <div class="section-label">All Published Papers · q_signal DESC · no dates</div>
+
+        <!-- Search + filters -->
+        <div class="search-bar">
+          <input class="search-input" placeholder="Search papers by content, methodology, domain…" readonly>
+          <span class="btn btn-primary" style="border-radius:0;border:none;padding:8px 14px">Search</span>
+        </div>
+        <div class="search-filters">
+          <span class="filter-chip active">All papers</span>
+          <span class="filter-chip">Physics</span>
+          <span class="filter-chip">Mathematics</span>
+          <span class="filter-chip">Computing</span>
+          <span class="filter-chip">Cross-Domain</span>
+          <span class="filter-chip">AI-Logged</span>
+          <span class="filter-chip">Open Collab</span>
+          <span class="filter-chip">Null Result</span>
+          <span class="filter-chip">include un-space</span>
+        </div>
+
+        <!-- Results count -->
+        <div style="font-family:var(--mono);font-size:10px;color:var(--ink3);margin-bottom:12px;letter-spacing:0.05em">SHOWING 47 PAPERS · SORTED BY Q_SIGNAL</div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="paper-card">
+            <div class="paper-card-meta">ORCID 0009-0006-5944-1742 · Cosmology · Physics</div>
+            <div class="paper-card-title">Hubble Tension as Measurement Artifact: Evidence from Spatial Encoding Constraints</div>
+            <div class="paper-card-abstract">We present a framework in which the observed Hubble tension arises not from new physics but from systematic bias.</div>
+            <div class="paper-card-footer">
+              <div class="paper-card-tags">
+                <span class="badge badge-transparency">◈ Transparency</span>
+                <span class="badge badge-ai">⬡ AI-Logged</span>
+                <span class="badge badge-tag">rs:NullResult</span>
+              </div>
+              <div><div class="qsig-label">q_signal</div><div class="qsig-score">9.24</div></div>
+            </div>
+          </div>
+          <div class="paper-card">
+            <div class="paper-card-meta">ORCID 0000-0002-1825-0097 · Cosmology</div>
+            <div class="paper-card-title">Partition of Cosmological Tensions: Unified Framework</div>
+            <div class="paper-card-abstract">A partition framework separating statistical, systematic, and model-dependent contributions.</div>
+            <div class="paper-card-footer">
+              <div class="paper-card-tags">
+                <span class="badge badge-transparency">◈ Transparency</span>
+                <span class="badge badge-tag">rs:Replication</span>
+              </div>
+              <div><div class="qsig-label">q_signal</div><div class="qsig-score">8.61</div></div>
+            </div>
+          </div>
+          <div class="paper-card">
+            <div class="paper-card-meta">ORCID 0000-0003-4567-8901 · Mathematics</div>
+            <div class="paper-card-title">UHA Spatial Encoding Framework: Observer-Relative Coordinate Systems</div>
+            <div class="paper-card-abstract">Formalizes the UHA spatial encoding, providing rigorous basis for observer-relative systems.</div>
+            <div class="paper-card-footer">
+              <div class="paper-card-tags">
+                <span class="badge badge-ai">⬡ AI-Logged</span>
+                <span class="badge badge-collab">⊕ Open Collab</span>
+              </div>
+              <div><div class="qsig-label">q_signal</div><div class="qsig-score">7.93</div></div>
+            </div>
+          </div>
+          <div class="paper-card" style="opacity:0.7">
+            <div class="paper-card-meta">ORCID 0000-0001-2345-6789 · Computing</div>
+            <div class="paper-card-title">Entropy-Preserving Data Pipelines for Cross-Domain Analysis</div>
+            <div class="paper-card-abstract">Methods for preserving information entropy across heterogeneous data transformations.</div>
+            <div class="paper-card-footer">
+              <div class="paper-card-tags">
+                <span class="badge badge-tag">rs:Exploratory</span>
+              </div>
+              <div><div class="qsig-label">q_signal</div><div class="qsig-score">7.41</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:center;gap:6px;margin-top:20px">
+          <span class="btn btn-secondary" style="opacity:0.4">← Prev</span>
+          <span class="btn btn-primary">1</span>
+          <span class="btn btn-secondary">2</span>
+          <span class="btn btn-secondary">3</span>
+          <span class="btn btn-secondary">Next →</span>
+        </div>
+      </div>
+
+      <!-- Sidebar: category nav + gap map + collab -->
+      <div class="layout-sidebar sidebar-pad" style="display:flex;flex-direction:column;gap:14px">
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Categories</span></div>
+          <div class="module-body">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="font-family:var(--mono);font-size:10px;color:var(--ink);display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid var(--paper3)"><span>Physics</span><span style="color:var(--ink3)">18</span></div>
+              <div style="font-family:var(--mono);font-size:10px;color:var(--ink);display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid var(--paper3)"><span>Mathematics</span><span style="color:var(--ink3)">12</span></div>
+              <div style="font-family:var(--mono);font-size:10px;color:var(--ink);display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid var(--paper3)"><span>Computing</span><span style="color:var(--ink3)">9</span></div>
+              <div style="font-family:var(--mono);font-size:10px;color:var(--ink);display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid var(--paper3)"><span>Cross-Domain</span><span style="color:var(--ink3)">6</span></div>
+              <div style="font-family:var(--mono);font-size:10px;color:var(--ink);display:flex;justify-content:space-between;padding:3px 0"><span>Other</span><span style="color:var(--ink3)">2</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Gap Map</span></div>
+          <div class="module-body">
+            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;align-items:end">
+              <div class="gap-map-cell"><div class="gap-bar" style="height:40px"></div><div class="gap-label">Cosmo</div></div>
+              <div class="gap-map-cell"><div class="gap-bar" style="height:28px;opacity:0.5"></div><div class="gap-label">CS</div></div>
+              <div class="gap-map-cell"><div class="gap-bar" style="height:18px;opacity:0.35"></div><div class="gap-label">Math</div></div>
+              <div class="gap-map-cell"><div class="gap-bar" style="height:34px;opacity:0.6"></div><div class="gap-label">Bio</div></div>
+              <div class="gap-map-cell"><div class="gap-bar" style="height:14px;opacity:0.25"></div><div class="gap-label">Stats</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Open to Collaborate</span></div>
+          <div class="module-body">
+            <div class="queue-item">
+              <div>
+                <div class="queue-item-title">UHA Spatial Encoding…</div>
+                <div class="queue-item-meta"><span class="rs-tag rs-collab">rs:LookCollab:Coder</span></div>
+              </div>
+              <span class="badge badge-tag">High</span>
+            </div>
+            <div class="queue-item">
+              <div>
+                <div class="queue-item-title">Cross-domain signal…</div>
+                <div class="queue-item-meta"><span class="rs-tag rs-stalled">rs:Stalled:Data</span></div>
+              </div>
+              <span class="badge badge-tag">Med</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">AI Usage Heatmap</span></div>
+          <div class="module-body">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="display:flex;align-items:center;gap:6px">
+                <span style="font-family:var(--mono);font-size:9px;color:var(--ink3);width:70px;text-align:right">Claude</span>
+                <div style="flex:1;height:8px;background:var(--paper2);border-radius:2px;overflow:hidden"><div style="width:72%;height:100%;background:var(--violet);opacity:0.5;border-radius:2px"></div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span style="font-family:var(--mono);font-size:9px;color:var(--ink3);width:70px;text-align:right">GPT-4</span>
+                <div style="flex:1;height:8px;background:var(--paper2);border-radius:2px;overflow:hidden"><div style="width:45%;height:100%;background:var(--violet);opacity:0.35;border-radius:2px"></div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span style="font-family:var(--mono);font-size:9px;color:var(--ink3);width:70px;text-align:right">No AI</span>
+                <div style="flex:1;height:8px;background:var(--paper2);border-radius:2px;overflow:hidden"><div style="width:30%;height:100%;background:var(--ink3);opacity:0.15;border-radius:2px"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><div class="footer-brand">eaiou.org</div><div class="footer-meta">SSOT v2.0</div></div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- VIEW 3: PAPER DETAIL / ARTICLE READER                         -->
+<!-- ============================================================ -->
+<div class="view-frame" id="v3">
+  <div class="view-label">
+    <div>
+      <div class="view-label-title">View 3 — Paper Detail / Article Reader</div>
+      <div class="view-label-route">Route: /paper/{id}/{slug} &nbsp;·&nbsp; Component: com_content article</div>
+    </div>
+    <div class="view-label-acl">ACL: PUBLIC</div>
+  </div>
+  <div class="view-body">
+    <nav class="nav">
+      <div class="nav-brand">e<span>a</span>iou</div>
+      <div class="nav-links">
+        <span class="nav-link active">Discover</span>
+        <span class="nav-link">Submit</span>
+        <span class="nav-link">Review</span>
+        <span class="nav-link">Ideas</span>
+        <span class="nav-link">Gaps</span>
+      </div>
+      <div class="nav-right">
+        <span class="nav-badge">E. Martin</span>
+        <span class="nav-badge primary">Submit Paper</span>
+      </div>
+    </nav>
+
+    <!-- Article header -->
+    <div style="padding:24px 24px 16px;border-bottom:0.5px solid var(--paper3);background:#fff">
+      <div class="workflow">
+        <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Draft</div></div>
+        <div class="wf-line done"></div>
+        <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Submitted</div></div>
+        <div class="wf-line done"></div>
+        <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Review</div></div>
+        <div class="wf-line done"></div>
+        <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Accepted</div></div>
+        <div class="wf-line done"></div>
+        <div class="wf-state"><div class="wf-dot active"></div><div class="wf-name active">Published</div></div>
+      </div>
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.07em;color:var(--ink3);text-transform:uppercase;margin:12px 0 8px">
+        ORCID 0009-0006-5944-1742 — Eric D. Martin — Cosmology · Physics
+      </div>
+      <h1 style="font-family:var(--serif);font-size:26px;font-weight:300;line-height:1.15;letter-spacing:-0.02em;margin-bottom:12px">Hubble Tension as Measurement Artifact: Evidence from Spatial Encoding Constraints in CMB Pipelines</h1>
+      <div style="display:flex;gap:4px;flex-wrap:wrap;align-items:center">
+        <span class="badge badge-transparency">◈ Transparency: 6 Sources · 2 Datasets</span>
+        <span class="badge badge-ai">⬡ AI-Logged: Claude, GPT-4.1</span>
+        <span class="badge badge-tag">rs:NullResult</span>
+        <span class="badge badge-tag">rs:CrossDomain</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;background:var(--ink);color:#fff;padding:3px 8px;border-radius:2px;font-family:var(--mono);font-size:10px"><span style="width:6px;height:6px;border-radius:50%;background:#8ab4d4;flex-shrink:0"></span>q_signal 9.24</span>
+      </div>
+    </div>
+
+    <!-- Content area: article body + right sidebar -->
+    <div style="display:grid;grid-template-columns:1fr 240px;gap:0">
+      <!-- Article body -->
+      <div style="padding:24px;max-width:100%">
+        <p style="font-family:var(--serif);font-size:14px;line-height:1.75;color:var(--ink2);margin-bottom:16px">We present a framework in which the observed Hubble tension — the disagreement between early-universe and late-universe measurements of H₀ — arises not from new physics but from systematic bias introduced by the spatial encoding assumptions embedded in CMB-based measurement pipelines.</p>
+        <p style="font-family:var(--serif);font-size:14px;line-height:1.75;color:var(--ink2);margin-bottom:16px">The key insight is that standard CMB analysis assumes a fixed spatial encoding geometry inherited from ΛCDM. When this geometry is relaxed and observer-relative coordinate frames are permitted, the tension dissolves within statistical uncertainties.</p>
+
+        <!-- Transparency Block -->
+        <div class="transp-block">
+          <div class="transp-header">
+            <span class="transp-header-title">Transparency Block</span>
+            <span class="badge" style="background:rgba(255,255,255,0.15);color:#fff;font-size:8px">plg_content_transparency</span>
+          </div>
+          <div class="transp-body">
+            <div class="transp-row"><span class="transp-row-label">Sources used</span><span>4</span></div>
+            <div class="transp-row"><span class="transp-row-label">Sources excluded</span><span>2 — preserved in un-space</span></div>
+            <div class="transp-row"><span class="transp-row-label">Datasets</span><span>Planck 2018 PR3 · BOSS DR14</span></div>
+            <div class="transp-row"><span class="transp-row-label">Methods disclosed</span><span>Bayesian evidence</span></div>
+            <div class="transp-row"><span class="transp-row-label">Completeness</span><span style="color:var(--sage)">✓ Verified</span></div>
+          </div>
+        </div>
+
+        <!-- AI Usage Block -->
+        <div class="transp-block" style="border-color:var(--violet)">
+          <div class="transp-header" style="background:var(--violet)">
+            <span class="transp-header-title">AI Usage Log</span>
+            <span class="badge" style="background:rgba(255,255,255,0.15);color:#fff;font-size:8px">plg_content_aiusage</span>
+          </div>
+          <div class="transp-body" style="background:var(--violet-l)">
+            <div class="transp-row"><span class="transp-row-label">Tools</span><span>Claude Sonnet 4.6 · GPT-4.1</span></div>
+            <div class="transp-row"><span class="transp-row-label">Usage mode</span><span>Analysis · Drafting · Editing</span></div>
+            <div class="transp-row"><span class="transp-row-label">Sessions</span><span>12 · 4 excluded (didntmakeit)</span></div>
+            <div class="transp-row"><span class="transp-row-label">Oversight</span><span>All verified by author</span></div>
+            <div class="transp-row"><span class="transp-row-label">Disclosure</span><span>Full</span></div>
+          </div>
+        </div>
+
+        <!-- Open Reports -->
+        <div class="transp-block" style="border-color:var(--sage)">
+          <div class="transp-header" style="background:var(--sage)">
+            <span class="transp-header-title">Peer Review — Open Reports</span>
+            <span class="badge" style="background:rgba(255,255,255,0.15);color:#fff;font-size:8px">plg_content_openreports</span>
+          </div>
+          <div class="transp-body" style="background:var(--sage-l)">
+            <div style="margin-bottom:10px;padding-bottom:10px;border-bottom:0.5px solid rgba(58,107,74,0.2)">
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+                <span style="font-family:var(--mono);font-size:10px;color:var(--sage);font-weight:500">REVIEWER 1 — Dr. J. Rivera</span>
+                <span class="badge badge-collab" style="font-size:8px">Accept</span>
+              </div>
+              <div style="font-family:var(--serif);font-size:12px;color:var(--ink2);line-height:1.6">Rigorous methodology. The spatial encoding correction is well-motivated and the Bayesian evidence strongly favors the reformulated model.</div>
+              <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:4px">Overall: 9 · Methodology: 9 · Transparency: 10</div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+                <span style="font-family:var(--mono);font-size:10px;color:var(--sage);font-weight:500">REVIEWER 2 — Anonymous</span>
+                <span class="badge badge-collab" style="font-size:8px">Minor Revisions</span>
+              </div>
+              <div style="font-family:var(--serif);font-size:12px;color:var(--ink2);line-height:1.6">Interesting contribution. Would benefit from extended discussion of alternative encoding geometries. Minor notation inconsistencies.</div>
+              <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:4px">Overall: 8 · Methodology: 9 · Transparency: 9</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right sidebar -->
+      <div style="border-left:0.5px solid var(--paper3);padding:16px 14px;background:var(--paper);display:flex;flex-direction:column;gap:14px">
+        <!-- Integrity chain -->
+        <div>
+          <div class="section-label">Integrity Chain</div>
+          <div class="hash-chain">
+            <div class="hash-entry"><span class="hash-id">SEALED</span><span class="hash-val">a3f8c2d9e1b4…</span><span class="hash-status">✓</span></div>
+            <div class="hash-entry"><span class="hash-id">CAPSTONE</span><span class="hash-val">10.5281/zenodo.7891234</span><span class="hash-status">✓</span></div>
+            <div class="hash-entry"><span class="hash-id">HASH</span><span class="hash-val">SHA256: b9f2…4a1c</span><span class="hash-status">✓</span></div>
+          </div>
+        </div>
+
+        <!-- q_signal breakdown -->
+        <div>
+          <div class="section-label">q_signal Breakdown</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:1px;text-transform:uppercase;letter-spacing:0.04em"><span>Transparency ×1.5</span><span style="color:var(--river)">9.6</span></div>
+              <div style="height:3px;background:var(--paper3);border-radius:2px"><div style="height:3px;width:96%;background:var(--river-l);border-radius:2px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:1px;text-transform:uppercase;letter-spacing:0.04em"><span>AI Disclosure</span><span style="color:var(--river)">9.1</span></div>
+              <div style="height:3px;background:var(--paper3);border-radius:2px"><div style="height:3px;width:91%;background:var(--river-l);border-radius:2px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:1px;text-transform:uppercase;letter-spacing:0.04em"><span>Originality</span><span style="color:var(--river)">9.4</span></div>
+              <div style="height:3px;background:var(--paper3);border-radius:2px"><div style="height:3px;width:94%;background:var(--river-l);border-radius:2px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:1px;text-transform:uppercase;letter-spacing:0.04em"><span>Methodology</span><span style="color:var(--river)">8.8</span></div>
+              <div style="height:3px;background:var(--paper3);border-radius:2px"><div style="height:3px;width:88%;background:var(--river-l);border-radius:2px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:1px;text-transform:uppercase;letter-spacing:0.04em"><span>Cross-Domain</span><span style="color:var(--river)">9.0</span></div>
+              <div style="height:3px;background:var(--paper3);border-radius:2px"><div style="height:3px;width:90%;background:var(--river-l);border-radius:2px"></div></div>
+            </div>
+          </div>
+          <div style="margin-top:10px;padding:8px;background:var(--ink);border-radius:2px;text-align:center">
+            <div style="font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase">composite q_signal</div>
+            <div style="font-family:var(--mono);font-size:22px;color:#8ab4d4;font-weight:500">9.24</div>
+          </div>
+        </div>
+
+        <!-- Research State Tags -->
+        <div>
+          <div class="section-label">Research State Tags</div>
+          <div style="display:flex;flex-direction:column;gap:3px">
+            <span class="rs-tag rs-collab">rs:NullResult</span>
+            <span class="rs-tag rs-nottopic">rs:CrossDomain — CS/Stats</span>
+            <span class="rs-tag rs-stalled" style="font-size:8px">rs:Stalled:Data — resolved ✓</span>
+          </div>
+        </div>
+
+        <!-- Version History -->
+        <div>
+          <div class="section-label">Version History</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--ink);display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid var(--paper3)"><span>v2 (current)</span><span class="badge badge-ai" style="font-size:8px">AI</span></div>
+            <div style="font-family:var(--mono);font-size:10px;color:var(--ink3);display:flex;justify-content:space-between;padding:3px 0"><span>v1 (original)</span><span style="font-size:8px">human</span></div>
+          </div>
+        </div>
+
+        <!-- Attribution -->
+        <div>
+          <div class="section-label">Attribution</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--ink)">Eric D. Martin <span style="color:var(--ink3)">— Conceptualization, Writing</span></div>
+            <div style="font-family:var(--mono);font-size:10px;color:var(--violet)">Claude Sonnet <span style="color:var(--ink3)">— Analysis, AI assistance</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><div class="footer-brand">eaiou.org</div><div class="footer-meta">SSOT v2.0</div></div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- VIEW 4: SUBMISSION WIZARD                                      -->
+<!-- ============================================================ -->
+<div class="view-frame" id="v4">
+  <div class="view-label">
+    <div>
+      <div class="view-label-title">View 4 — Submission Wizard (Step 1: Metadata)</div>
+      <div class="view-label-route">Route: /submit/step/metadata &nbsp;·&nbsp; Component: com_eaiou site view</div>
+    </div>
+    <div class="view-label-acl">ACL: eaiou_Author</div>
+  </div>
+  <div class="view-body">
+    <nav class="nav">
+      <div class="nav-brand">e<span>a</span>iou</div>
+      <div class="nav-links">
+        <span class="nav-link">Discover</span>
+        <span class="nav-link active">Submit</span>
+        <span class="nav-link">Review</span>
+        <span class="nav-link">Ideas</span>
+        <span class="nav-link">Gaps</span>
+      </div>
+      <div class="nav-right">
+        <span class="nav-badge">E. Martin</span>
+      </div>
+    </nav>
+
+    <!-- Wizard steps -->
+    <div class="wizard-steps">
+      <div class="wizard-step"><div class="wizard-num active">1</div><span class="wizard-step-label active">Metadata</span></div>
+      <div class="wizard-connector"></div>
+      <div class="wizard-step"><div class="wizard-num pending">2</div><span class="wizard-step-label pending">Bundle</span></div>
+      <div class="wizard-connector"></div>
+      <div class="wizard-step"><div class="wizard-num pending">3</div><span class="wizard-step-label pending">AI Usage</span></div>
+      <div class="wizard-connector"></div>
+      <div class="wizard-step"><div class="wizard-num pending">4</div><span class="wizard-step-label pending">Triage</span></div>
+      <div class="wizard-connector"></div>
+      <div class="wizard-step"><div class="wizard-num pending">5</div><span class="wizard-step-label pending">Declarations</span></div>
+      <div class="wizard-connector"></div>
+      <div class="wizard-step"><div class="wizard-num pending">6</div><span class="wizard-step-label pending">Confirm</span></div>
+    </div>
+
+    <div class="layout">
+      <div class="content-pad">
+        <div style="padding:16px;border:0.5px solid var(--paper3);border-radius:3px;background:#fff">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:10px;border-bottom:0.5px solid var(--paper3)">
+            <div style="width:20px;height:20px;border-radius:50%;background:var(--river);color:#fff;font-family:var(--mono);font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:500">1</div>
+            <span style="font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2)">Paper Metadata</span>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <div class="field-group">
+                <label class="field-label">Paper Title *</label>
+                <input class="field-input" placeholder="Enter your paper title" readonly>
+              </div>
+              <div class="field-group">
+                <label class="field-label">ORCID *</label>
+                <div style="display:flex;gap:6px;align-items:center">
+                  <input class="field-input" value="0009-0006-5944-1742" readonly style="flex:1">
+                  <div class="orcid-badge"><span class="orcid-dot">iD</span>Verified</div>
+                </div>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Discipline / Category *</label>
+                <input class="field-input" placeholder="e.g. Physics, Cosmology" readonly>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Keywords</label>
+                <input class="field-input" placeholder="Comma-separated keywords" readonly>
+              </div>
+            </div>
+            <div>
+              <div class="field-group">
+                <label class="field-label">Abstract *</label>
+                <textarea class="field-input field-textarea" style="height:100px" placeholder="Enter your abstract…" readonly></textarea>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Authorship Mode *</label>
+                <div style="display:flex;gap:8px">
+                  <label style="display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:11px;cursor:default"><input type="radio" name="auth_mode" checked style="accent-color:var(--river)"> Human</label>
+                  <label style="display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:11px;cursor:default"><input type="radio" name="auth_mode" style="accent-color:var(--river)"> AI</label>
+                  <label style="display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:11px;cursor:default"><input type="radio" name="auth_mode" style="accent-color:var(--river)"> Hybrid</label>
+                </div>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Research State Tags (optional)</label>
+                <div style="display:flex;gap:4px;flex-wrap:wrap">
+                  <span class="filter-chip">rs:LookCollab</span>
+                  <span class="filter-chip">rs:NullResult</span>
+                  <span class="filter-chip">rs:Exploratory</span>
+                  <span class="filter-chip">rs:CrossDomain</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:12px;padding-top:12px;border-top:0.5px solid var(--paper3)">
+            <span class="btn btn-primary">Continue to Bundle →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar: submission guide -->
+      <div class="layout-sidebar sidebar-pad" style="display:flex;flex-direction:column;gap:14px">
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Submission Guide</span></div>
+          <div class="module-body">
+            <div style="font-family:var(--serif);font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:8px">eaiou captures your complete research context — not just the final paper. Every source considered, every AI interaction, every excluded output is preserved.</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);line-height:1.8">
+              <div>✓ ORCID required</div>
+              <div>✓ Full transparency block</div>
+              <div>✓ AI usage disclosure</div>
+              <div>✓ Literature triage</div>
+              <div>✓ Authorship declarations</div>
+            </div>
+          </div>
+        </div>
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Temporal Blindness</span></div>
+          <div class="module-body">
+            <div style="font-family:var(--serif);font-size:12px;color:var(--ink2);line-height:1.6">Your submission date will be <strong>sealed</strong> at the moment of submission. It is never displayed publicly. Science is evaluated on content, not time.</div>
+            <div style="margin-top:8px">
+              <span class="badge badge-sealed">⬛ Date will be sealed</span>
+            </div>
+          </div>
+        </div>
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Integrity</span></div>
+          <div class="module-body">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--ink3);line-height:1.8">
+              <div>SHA256 hash computed at submission</div>
+              <div>Zenodo capstone on acceptance</div>
+              <div>Hash chain verifiable</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><div class="footer-brand">eaiou.org</div><div class="footer-meta">SSOT v2.0</div></div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- VIEW 5: MY PAPERS (Author Dashboard)                           -->
+<!-- ============================================================ -->
+<div class="view-frame" id="v5">
+  <div class="view-label">
+    <div>
+      <div class="view-label-title">View 5 — My Papers (Author Dashboard)</div>
+      <div class="view-label-route">Route: /mypapers &nbsp;·&nbsp; Component: com_eaiou author view</div>
+    </div>
+    <div class="view-label-acl">ACL: eaiou_Author</div>
+  </div>
+  <div class="view-body">
+    <nav class="nav">
+      <div class="nav-brand">e<span>a</span>iou</div>
+      <div class="nav-links">
+        <span class="nav-link">Discover</span>
+        <span class="nav-link">Submit</span>
+        <span class="nav-link">Review</span>
+        <span class="nav-link active">My Papers</span>
+        <span class="nav-link">Gaps</span>
+      </div>
+      <div class="nav-right"><span class="nav-badge">E. Martin</span><span class="nav-badge primary">Submit Paper</span></div>
+    </nav>
+
+    <div class="layout">
+      <div class="content-pad">
+        <div class="section-label">Your Submissions · workflow state view</div>
+
+        <div class="tab-bar">
+          <div class="tab active">All (4)</div>
+          <div class="tab">Draft (1)</div>
+          <div class="tab">Under Review (1)</div>
+          <div class="tab">Published (2)</div>
+        </div>
+
+        <div style="padding-top:14px;display:flex;flex-direction:column;gap:10px">
+          <div class="paper-card">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:6px">
+              <div class="paper-card-meta">Cosmology · Physics</div>
+              <span class="badge badge-collab">Published</span>
+            </div>
+            <div class="paper-card-title">Hubble Tension as Measurement Artifact</div>
+            <div class="workflow" style="margin:8px 0">
+              <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Draft</div></div>
+              <div class="wf-line done"></div>
+              <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Submitted</div></div>
+              <div class="wf-line done"></div>
+              <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Review</div></div>
+              <div class="wf-line done"></div>
+              <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Published</div></div>
+            </div>
+            <div class="paper-card-footer">
+              <div class="paper-card-tags">
+                <span class="badge badge-transparency">◈ Transparency</span>
+                <span class="badge badge-ai">⬡ AI-Logged</span>
+              </div>
+              <div><div class="qsig-label">q_signal</div><div class="qsig-score">9.24</div></div>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:6px">
+              <div class="paper-card-meta">Cosmology · Cross-Domain</div>
+              <span class="badge" style="background:var(--amber-l);color:var(--amber)">Under Review</span>
+            </div>
+            <div class="paper-card-title">Partition of Cosmological Tensions: Unified Framework</div>
+            <div class="workflow" style="margin:8px 0">
+              <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Draft</div></div>
+              <div class="wf-line done"></div>
+              <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Submitted</div></div>
+              <div class="wf-line done"></div>
+              <div class="wf-state"><div class="wf-dot active"></div><div class="wf-name active">Review</div></div>
+              <div class="wf-line"></div>
+              <div class="wf-state"><div class="wf-dot"></div><div class="wf-name">Decision</div></div>
+            </div>
+            <div class="paper-card-footer">
+              <div class="paper-card-tags"><span class="badge badge-transparency">◈ Transparency</span></div>
+              <span class="btn btn-secondary" style="font-size:9px;padding:4px 8px">View Status</span>
+            </div>
+          </div>
+
+          <div class="paper-card" style="border-left:2px solid var(--coral)">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:6px">
+              <div class="paper-card-meta">Mathematics</div>
+              <span class="badge" style="background:var(--coral-l);color:var(--coral)">Revisions Requested</span>
+            </div>
+            <div class="paper-card-title">N/U Algebra: Conservative Uncertainty Propagation</div>
+            <div style="font-family:var(--mono);font-size:10px;color:var(--coral);margin-top:6px">⚠ Editor requests revisions — upload revised manuscript</div>
+            <div class="paper-card-footer" style="margin-top:8px">
+              <div class="paper-card-tags"><span class="badge badge-unsci">⚑ Un Scientific</span></div>
+              <span class="btn btn-primary" style="font-size:9px;padding:4px 8px">Upload Revision</span>
+            </div>
+          </div>
+
+          <div class="paper-card" style="opacity:0.6">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:6px">
+              <div class="paper-card-meta">Computing</div>
+              <span class="badge badge-sealed">Draft</span>
+            </div>
+            <div class="paper-card-title">Observer MetaModal Platform: Layer 5 Architecture</div>
+            <div class="paper-card-footer" style="margin-top:8px">
+              <div></div>
+              <span class="btn btn-secondary" style="font-size:9px;padding:4px 8px">Continue Editing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="layout-sidebar sidebar-pad" style="display:flex;flex-direction:column;gap:14px">
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Author Profile</span></div>
+          <div class="module-body">
+            <div style="margin-bottom:8px"><div class="orcid-badge"><span class="orcid-dot">iD</span>0009-0006-5944-1742</div></div>
+            <div style="font-family:var(--serif);font-size:14px;color:var(--ink);margin-bottom:4px">Eric D. Martin</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3)">4 submissions · 2 published</div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Notifications</span></div>
+          <div class="module-body">
+            <div class="notif-item">
+              <div class="notif-dot" style="background:var(--coral)"></div>
+              <div>
+                <div class="notif-text">Revisions requested for N/U Algebra paper</div>
+                <div class="notif-meta">Editor decision · Action required</div>
+              </div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-dot" style="background:var(--river-l)"></div>
+              <div>
+                <div class="notif-text">New review submitted for Partition paper</div>
+                <div class="notif-meta">Review 2 of 2 complete</div>
+              </div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-dot" style="background:var(--sage)"></div>
+              <div>
+                <div class="notif-text">Hubble Tension paper published</div>
+                <div class="notif-meta">q_signal: 9.24</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Your q_signal Avg</span></div>
+          <div class="module-body" style="text-align:center">
+            <div style="font-family:var(--mono);font-size:28px;font-weight:500;color:var(--river)">8.93</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);text-transform:uppercase;letter-spacing:0.08em">across 2 published papers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><div class="footer-brand">eaiou.org</div><div class="footer-meta">SSOT v2.0</div></div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- VIEW 6: REVIEWER QUEUE                                         -->
+<!-- ============================================================ -->
+<div class="view-frame" id="v6">
+  <div class="view-label">
+    <div>
+      <div class="view-label-title">View 6 — Reviewer Queue</div>
+      <div class="view-label-route">Route: /reviewer/queue &nbsp;·&nbsp; Component: mod_reviewer_queue</div>
+    </div>
+    <div class="view-label-acl">ACL: eaiou_Reviewer</div>
+  </div>
+  <div class="view-body">
+    <nav class="nav">
+      <div class="nav-brand">e<span>a</span>iou</div>
+      <div class="nav-links">
+        <span class="nav-link">Discover</span>
+        <span class="nav-link">Submit</span>
+        <span class="nav-link active">Review</span>
+        <span class="nav-link">Ideas</span>
+        <span class="nav-link">Gaps</span>
+      </div>
+      <div class="nav-right"><span class="nav-badge">Dr. J. Rivera</span></div>
+    </nav>
+
+    <div class="layout">
+      <div class="content-pad">
+        <div class="section-label">Your Review Assignments · mod_reviewer_queue</div>
+
+        <div class="tab-bar">
+          <div class="tab active">Active (3)</div>
+          <div class="tab">Pending Invite (1)</div>
+          <div class="tab">Completed (5)</div>
+        </div>
+
+        <div style="padding-top:14px;display:flex;flex-direction:column;gap:10px">
+          <!-- Assignment 1 -->
+          <div class="paper-card" style="border-left:2px solid var(--amber)">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px">
+              <div class="paper-card-meta">Cosmology · Physics · <span class="badge badge-ai" style="font-size:8px">AI-Logged</span></div>
+              <span class="due-pill due-warn">5 days left</span>
+            </div>
+            <div class="paper-card-title">Hubble Tension as Measurement Artifact: Evidence from Spatial Encoding</div>
+            <div class="paper-card-abstract">Framework in which the observed Hubble tension arises from systematic bias in spatial encoding assumptions.</div>
+            <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px">
+              <span class="badge badge-transparency">◈ Transparency</span>
+              <span class="badge badge-ai">⬡ AI-Logged</span>
+              <span class="badge badge-tag">v2</span>
+            </div>
+            <div style="display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--paper3)">
+              <span class="btn btn-primary" style="font-size:9px;padding:5px 10px">Open Review Console</span>
+              <span class="btn btn-secondary" style="font-size:9px;padding:5px 10px">Read Full Paper</span>
+              <span class="btn btn-secondary" style="font-size:9px;padding:5px 10px">Contact Editor</span>
+            </div>
+          </div>
+
+          <!-- Assignment 2 -->
+          <div class="paper-card" style="border-left:2px solid var(--coral)">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px">
+              <div class="paper-card-meta">Mathematics · Computing · <span class="badge badge-unsci" style="font-size:8px">⚑ Un Sci.</span></div>
+              <span class="due-pill due-late">2 days late</span>
+            </div>
+            <div class="paper-card-title">UHA Spatial Encoding Framework: Observer-Relative Coordinate Systems</div>
+            <div class="paper-card-abstract">Formalizes the UHA approach, providing rigorous basis for observer-relative coordinate systems.</div>
+            <div style="display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--paper3)">
+              <span class="btn btn-primary" style="font-size:9px;padding:5px 10px">Open Review Console</span>
+              <span class="btn btn-secondary" style="font-size:9px;padding:5px 10px">Read Full Paper</span>
+            </div>
+          </div>
+
+          <!-- Assignment 3 (completed) -->
+          <div class="paper-card" style="opacity:0.6">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px">
+              <div class="paper-card-meta">Cosmology · Cross-Domain</div>
+              <span class="due-pill due-ok">Done</span>
+            </div>
+            <div class="paper-card-title">Partition of Cosmological Tensions: Unified Framework</div>
+            <div style="font-family:var(--mono);font-size:10px;color:var(--sage);margin-top:4px">✓ Review submitted · Recommendation: Accept</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="layout-sidebar sidebar-pad" style="display:flex;flex-direction:column;gap:14px">
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Reviewer Stats</span></div>
+          <div class="module-body">
+            <div class="kpi-grid" style="grid-template-columns:1fr 1fr">
+              <div class="kpi-card"><div class="kpi-label">Reviews Done</div><div class="kpi-value">5</div></div>
+              <div class="kpi-card"><div class="kpi-label">Active</div><div class="kpi-value" style="color:var(--amber)">3</div></div>
+              <div class="kpi-card"><div class="kpi-label">Overdue</div><div class="kpi-value" style="color:var(--coral)">1</div></div>
+              <div class="kpi-card"><div class="kpi-label">Avg Score</div><div class="kpi-value">8.4</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Pending Invite</span></div>
+          <div class="module-body">
+            <div class="queue-item">
+              <div>
+                <div class="queue-item-title">Cross-domain signal recovery in high-z surveys</div>
+                <div class="queue-item-meta">Biophysics · Cross-Domain</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:4px;margin-top:8px">
+              <span class="btn btn-primary" style="font-size:9px;padding:4px 8px">Accept</span>
+              <span class="btn btn-secondary" style="font-size:9px;padding:4px 8px">Decline</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Review Rubric Guide</span></div>
+          <div class="module-body">
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);line-height:1.8">
+              <div>Overall quality (0–10)</div>
+              <div>Originality (0–10)</div>
+              <div>Methodology (0–10)</div>
+              <div>Transparency (0–10) <span style="color:var(--river)">×1.5</span></div>
+              <div>AI Disclosure (0–10)</div>
+              <div>Cross-domain (0–10)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><div class="footer-brand">eaiou.org</div><div class="footer-meta">SSOT v2.0</div></div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- VIEW 7: REVIEW CONSOLE                                         -->
+<!-- ============================================================ -->
+<div class="view-frame" id="v7">
+  <div class="view-label">
+    <div>
+      <div class="view-label-title">View 7 — Review Console (Rubric + Notes)</div>
+      <div class="view-label-route">Route: /reviewer/paper/{id}/review &nbsp;·&nbsp; Component: com_eaiou review form</div>
+    </div>
+    <div class="view-label-acl">ACL: eaiou_Reviewer</div>
+  </div>
+  <div class="view-body">
+    <nav class="nav">
+      <div class="nav-brand">e<span>a</span>iou</div>
+      <div class="nav-links">
+        <span class="nav-link">Discover</span>
+        <span class="nav-link">Submit</span>
+        <span class="nav-link active">Review</span>
+        <span class="nav-link">Ideas</span>
+        <span class="nav-link">Gaps</span>
+      </div>
+      <div class="nav-right"><span class="nav-badge">Dr. J. Rivera</span></div>
+    </nav>
+
+    <div style="padding:14px 24px;background:var(--paper2);border-bottom:0.5px solid var(--paper3);font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:0.06em;text-transform:uppercase">
+      Reviewing: Hubble Tension as Measurement Artifact · <span style="color:var(--ink)">v2</span>
+    </div>
+
+    <div class="layout">
+      <div class="content-pad">
+        <!-- Rubric scores -->
+        <div style="padding:16px;border:0.5px solid var(--paper3);border-radius:3px;background:#fff;margin-bottom:14px">
+          <div class="section-label">Review Rubric — Six Dimensions (0–10)</div>
+          <div class="grid-2">
+            <div class="field-group">
+              <label class="field-label">Overall Quality</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <input class="field-input" type="range" min="0" max="10" value="9" style="flex:1;padding:0">
+                <span style="font-family:var(--mono);font-size:16px;font-weight:500;color:var(--river);width:24px;text-align:center">9</span>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Originality</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <input class="field-input" type="range" min="0" max="10" value="9" style="flex:1;padding:0">
+                <span style="font-family:var(--mono);font-size:16px;font-weight:500;color:var(--river);width:24px;text-align:center">9</span>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Methodology</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <input class="field-input" type="range" min="0" max="10" value="9" style="flex:1;padding:0">
+                <span style="font-family:var(--mono);font-size:16px;font-weight:500;color:var(--river);width:24px;text-align:center">9</span>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Transparency <span style="color:var(--river)">×1.5 weight</span></label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <input class="field-input" type="range" min="0" max="10" value="10" style="flex:1;padding:0">
+                <span style="font-family:var(--mono);font-size:16px;font-weight:500;color:var(--river);width:24px;text-align:center">10</span>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">AI Disclosure</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <input class="field-input" type="range" min="0" max="10" value="9" style="flex:1;padding:0">
+                <span style="font-family:var(--mono);font-size:16px;font-weight:500;color:var(--river);width:24px;text-align:center">9</span>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Cross-Domain Applicability</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <input class="field-input" type="range" min="0" max="10" value="8" style="flex:1;padding:0">
+                <span style="font-family:var(--mono);font-size:16px;font-weight:500;color:var(--river);width:24px;text-align:center">8</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review notes + recommendation -->
+        <div style="padding:16px;border:0.5px solid var(--paper3);border-radius:3px;background:#fff">
+          <div class="field-group">
+            <label class="field-label">Recommendation</label>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span class="filter-chip active" style="background:var(--sage);color:#fff;border-color:var(--sage)">Accept</span>
+              <span class="filter-chip">Minor Revisions</span>
+              <span class="filter-chip">Major Revisions</span>
+              <span class="filter-chip">Reject</span>
+              <span class="filter-chip">Refer</span>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Review Notes (detailed feedback)</label>
+            <textarea class="field-input field-textarea" style="height:100px" readonly>Rigorous methodology. The spatial encoding correction is well-motivated and the Bayesian evidence strongly favors the reformulated model. Minor notation inconsistencies in Section 3.2.</textarea>
+          </div>
+          <div class="grid-2">
+            <div class="field-group">
+              <label class="field-label">Un Scientific Flag?</label>
+              <div style="display:flex;gap:8px">
+                <label style="font-family:var(--mono);font-size:11px;display:flex;align-items:center;gap:4px"><input type="radio" name="unsci" style="accent-color:var(--river)"> No</label>
+                <label style="font-family:var(--mono);font-size:11px;display:flex;align-items:center;gap:4px"><input type="radio" name="unsci" style="accent-color:var(--coral)"> Yes — flag issue</label>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Consent to Open Review?</label>
+              <div style="display:flex;gap:8px">
+                <label style="font-family:var(--mono);font-size:11px;display:flex;align-items:center;gap:4px"><input type="radio" name="consent" checked style="accent-color:var(--river)"> Open identity</label>
+                <label style="font-family:var(--mono);font-size:11px;display:flex;align-items:center;gap:4px"><input type="radio" name="consent" style="accent-color:var(--river)"> Anonymous</label>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:0.5px solid var(--paper3)">
+            <span class="btn btn-secondary">Save Draft</span>
+            <span class="btn btn-primary">Submit Review</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar: paper summary + AI info -->
+      <div class="layout-sidebar sidebar-pad" style="display:flex;flex-direction:column;gap:14px">
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Paper Summary</span></div>
+          <div class="module-body">
+            <div style="font-family:var(--serif);font-size:13px;color:var(--ink);line-height:1.4;margin-bottom:6px">Hubble Tension as Measurement Artifact</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3)">ORCID 0009-0006-5944-1742</div>
+            <div style="display:flex;gap:3px;flex-wrap:wrap;margin-top:6px">
+              <span class="badge badge-transparency">◈ Transparency</span>
+              <span class="badge badge-ai">⬡ AI-Logged</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">AI Usage (read-only)</span></div>
+          <div class="module-body">
+            <div class="transp-row"><span class="transp-row-label">Tools</span><span>Claude, GPT-4.1</span></div>
+            <div class="transp-row"><span class="transp-row-label">Sessions</span><span>12</span></div>
+            <div class="transp-row"><span class="transp-row-label">Excluded</span><span>4 didntmakeit</span></div>
+            <div class="transp-row"><span class="transp-row-label">Disclosure</span><span>Full</span></div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Transparency (read-only)</span></div>
+          <div class="module-body">
+            <div class="transp-row"><span class="transp-row-label">Sources</span><span>4 used, 2 excluded</span></div>
+            <div class="transp-row"><span class="transp-row-label">Datasets</span><span>Planck PR3, BOSS DR14</span></div>
+            <div class="transp-row"><span class="transp-row-label">Complete</span><span style="color:var(--sage)">✓</span></div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Version</span></div>
+          <div class="module-body">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--ink)">Reviewing: v2 (revised)</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:4px">Previous: v1 (original)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><div class="footer-brand">eaiou.org</div><div class="footer-meta">SSOT v2.0</div></div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- VIEW 8: EDITORIAL PAPERS LIST                                  -->
+<!-- ============================================================ -->
+<div class="view-frame" id="v8">
+  <div class="view-label">
+    <div>
+      <div class="view-label-title">View 8 — Editorial Papers (All Workflow States)</div>
+      <div class="view-label-route">Route: /editorial/papers &nbsp;·&nbsp; Component: com_eaiou editorial view</div>
+    </div>
+    <div class="view-label-acl">ACL: eaiou_Editor</div>
+  </div>
+  <div class="view-body">
+    <nav class="nav">
+      <div class="nav-brand">e<span>a</span>iou</div>
+      <div class="nav-links">
+        <span class="nav-link">Discover</span>
+        <span class="nav-link">Submit</span>
+        <span class="nav-link">Review</span>
+        <span class="nav-link active">Editorial</span>
+        <span class="nav-link">Gaps</span>
+      </div>
+      <div class="nav-right"><span class="nav-badge" style="border-color:var(--amber);color:var(--amber)">Editor</span></div>
+    </nav>
+
+    <div class="layout">
+      <div class="content-pad">
+        <!-- KPI row -->
+        <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">
+          <div class="kpi-card"><div class="kpi-label">Submitted</div><div class="kpi-value">6</div><div class="kpi-trend">↑ 2 this week</div></div>
+          <div class="kpi-card"><div class="kpi-label">Under Review</div><div class="kpi-value">14</div></div>
+          <div class="kpi-card"><div class="kpi-label">Decision Pending</div><div class="kpi-value" style="color:var(--amber)">4</div></div>
+          <div class="kpi-card"><div class="kpi-label">Overdue Reviews</div><div class="kpi-value" style="color:var(--coral)">3</div></div>
+        </div>
+
+        <!-- Tab filters -->
+        <div class="tab-bar">
+          <div class="tab active">All (28)</div>
+          <div class="tab">Submitted (6)</div>
+          <div class="tab">Under Review (14)</div>
+          <div class="tab">Decision (4)</div>
+          <div class="tab">Revisions (2)</div>
+          <div class="tab">Accepted (1)</div>
+          <div class="tab">Published (1)</div>
+        </div>
+
+        <!-- Papers table -->
+        <table class="data-table" style="margin-top:10px">
+          <thead>
+            <tr>
+              <th>Paper</th>
+              <th>Status</th>
+              <th>Reviewers</th>
+              <th>Flags</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div style="font-family:var(--serif);font-size:12px;color:var(--ink)">Hubble Tension as Measurement Artifact</div>
+                <div style="font-size:9px;color:var(--ink3)">ORCID …1742 · Cosmology</div>
+              </td>
+              <td><span class="badge" style="background:var(--amber-l);color:var(--amber)">Decision</span></td>
+              <td><span style="font-size:10px">2/2 ✓</span></td>
+              <td><span class="badge badge-ai" style="font-size:8px">AI</span></td>
+              <td><span class="btn btn-primary" style="font-size:8px;padding:3px 6px">Decide</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-family:var(--serif);font-size:12px;color:var(--ink)">Partition of Cosmological Tensions</div>
+                <div style="font-size:9px;color:var(--ink3)">ORCID …0097 · Cross-Domain</div>
+              </td>
+              <td><span class="badge" style="background:var(--river-ll);color:var(--river)">Under Review</span></td>
+              <td><span style="font-size:10px">1/2</span></td>
+              <td></td>
+              <td><span class="btn btn-secondary" style="font-size:8px;padding:3px 6px">Manage</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-family:var(--serif);font-size:12px;color:var(--ink)">UHA Spatial Encoding Framework</div>
+                <div style="font-size:9px;color:var(--ink3)">ORCID …8901 · Mathematics</div>
+              </td>
+              <td><span class="badge" style="background:var(--river-ll);color:var(--river)">Under Review</span></td>
+              <td><span style="font-size:10px;color:var(--coral)">0/2 — 1 overdue</span></td>
+              <td><span class="badge badge-unsci" style="font-size:8px">⚑</span> <span class="badge badge-collab" style="font-size:8px">⊕</span></td>
+              <td><span class="btn btn-secondary" style="font-size:8px;padding:3px 6px">Manage</span></td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-family:var(--serif);font-size:12px;color:var(--ink)">N/U Algebra: Conservative Uncertainty</div>
+                <div style="font-size:9px;color:var(--ink3)">ORCID …1742 · Mathematics</div>
+              </td>
+              <td><span class="badge" style="background:var(--coral-l);color:var(--coral)">Revisions</span></td>
+              <td><span style="font-size:10px">2/2 ✓</span></td>
+              <td><span class="badge badge-unsci" style="font-size:8px">⚑</span></td>
+              <td><span class="btn btn-secondary" style="font-size:8px;padding:3px 6px">View</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Sidebar: editor dashboard -->
+      <div class="layout-sidebar sidebar-pad" style="display:flex;flex-direction:column;gap:14px">
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Editor Dashboard</span></div>
+          <div class="module-body">
+            <div class="kpi-grid" style="grid-template-columns:1fr 1fr">
+              <div class="kpi-card"><div class="kpi-label">TTFD Median</div><div class="kpi-value">18d</div></div>
+              <div class="kpi-card"><div class="kpi-label">Accept Rate</div><div class="kpi-value">34%</div></div>
+            </div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:4px">Submissions · 30d trend</div>
+            <svg width="100%" height="32" viewBox="0 0 220 32">
+              <polyline points="0,24 35,18 70,26 105,14 140,8 175,16 210,6" fill="none" stroke="var(--river-l)" stroke-width="1.5"/>
+              <polyline points="0,24 35,18 70,26 105,14 140,8 175,16 210,6 210,32 0,32" fill="var(--river-l)" fill-opacity="0.08"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Overdue Actions</span></div>
+          <div class="module-body">
+            <div class="queue-item">
+              <div>
+                <div class="queue-item-title">UHA Framework — reviewer overdue</div>
+                <div class="queue-item-meta">Dr. K. Tanaka · <span style="color:var(--coral)">2d late</span></div>
+              </div>
+              <span class="btn btn-secondary" style="font-size:8px;padding:3px 6px">Nudge</span>
+            </div>
+            <div class="queue-item">
+              <div>
+                <div class="queue-item-title">N/U Algebra — author revision overdue</div>
+                <div class="queue-item-meta">E. Martin · <span style="color:var(--amber)">due today</span></div>
+              </div>
+              <span class="btn btn-secondary" style="font-size:8px;padding:3px 6px">Nudge</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Flags Summary</span></div>
+          <div class="module-body">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="font-family:var(--mono);font-size:10px;display:flex;justify-content:space-between"><span class="badge badge-ai" style="font-size:8px">AI-Logged</span><span>12</span></div>
+              <div style="font-family:var(--mono);font-size:10px;display:flex;justify-content:space-between"><span class="badge badge-unsci" style="font-size:8px">⚑ Un Sci.</span><span style="color:var(--coral)">2</span></div>
+              <div style="font-family:var(--mono);font-size:10px;display:flex;justify-content:space-between"><span class="badge badge-collab" style="font-size:8px">⊕ Collab</span><span>4</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><div class="footer-brand">eaiou.org</div><div class="footer-meta">SSOT v2.0</div></div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- VIEW 9: EDITORIAL DECIDE                                       -->
+<!-- ============================================================ -->
+<div class="view-frame" id="v9">
+  <div class="view-label">
+    <div>
+      <div class="view-label-title">View 9 — Editorial Decision Panel</div>
+      <div class="view-label-route">Route: /editorial/decide/{id} &nbsp;·&nbsp; Component: com_eaiou editorial decision</div>
+    </div>
+    <div class="view-label-acl">ACL: eaiou_Editor</div>
+  </div>
+  <div class="view-body">
+    <nav class="nav">
+      <div class="nav-brand">e<span>a</span>iou</div>
+      <div class="nav-links">
+        <span class="nav-link">Discover</span>
+        <span class="nav-link">Submit</span>
+        <span class="nav-link">Review</span>
+        <span class="nav-link active">Editorial</span>
+        <span class="nav-link">Gaps</span>
+      </div>
+      <div class="nav-right"><span class="nav-badge" style="border-color:var(--amber);color:var(--amber)">Editor</span></div>
+    </nav>
+
+    <div style="padding:14px 24px;background:var(--paper2);border-bottom:0.5px solid var(--paper3)">
+      <div style="font-family:var(--mono);font-size:10px;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px">Editorial Decision For:</div>
+      <div style="font-family:var(--serif);font-size:18px;color:var(--ink);font-weight:300">Hubble Tension as Measurement Artifact: Evidence from Spatial Encoding</div>
+      <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap">
+        <span class="badge badge-transparency">◈ Transparency</span>
+        <span class="badge badge-ai">⬡ AI-Logged</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;background:var(--ink);color:#fff;padding:2px 6px;border-radius:2px;font-family:var(--mono);font-size:9px"><span style="width:5px;height:5px;border-radius:50%;background:#8ab4d4"></span>q 9.24</span>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="content-pad">
+        <!-- Review summaries -->
+        <div class="section-label">Review Summaries · 2 of 2 complete</div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">
+          <div style="padding:14px;border:0.5px solid var(--paper3);border-radius:3px;background:#fff">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+              <span style="font-family:var(--mono);font-size:10px;font-weight:500;color:var(--ink)">REVIEWER 1 — Dr. J. Rivera (open)</span>
+              <span class="badge badge-collab">Accept</span>
+            </div>
+            <div style="font-family:var(--serif);font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:6px">Rigorous methodology. Spatial encoding correction is well-motivated and Bayesian evidence strongly favors the reformulated model.</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3)">Overall: 9 · Orig: 9 · Meth: 9 · Transp: 10 · AI: 9 · Cross: 8</div>
+          </div>
+          <div style="padding:14px;border:0.5px solid var(--paper3);border-radius:3px;background:#fff">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+              <span style="font-family:var(--mono);font-size:10px;font-weight:500;color:var(--ink)">REVIEWER 2 — Anonymous</span>
+              <span class="badge" style="background:var(--amber-l);color:var(--amber)">Minor Revisions</span>
+            </div>
+            <div style="font-family:var(--serif);font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:6px">Interesting contribution. Extended discussion of alternative encoding geometries needed. Minor notation inconsistencies.</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3)">Overall: 8 · Orig: 9 · Meth: 9 · Transp: 9 · AI: 8 · Cross: 9</div>
+          </div>
+        </div>
+
+        <!-- Decision form -->
+        <div style="padding:16px;border:0.5px solid var(--river);border-radius:3px;background:#fff">
+          <div class="section-label" style="border-bottom-color:var(--river)">Render Decision</div>
+          <div class="field-group">
+            <label class="field-label">Editorial Decision</label>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span class="filter-chip active" style="background:var(--sage);color:#fff;border-color:var(--sage)">Accept</span>
+              <span class="filter-chip">Minor Revisions</span>
+              <span class="filter-chip">Major Revisions</span>
+              <span class="filter-chip">Reject</span>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Editor Notes to Author</label>
+            <textarea class="field-input field-textarea" style="height:70px" readonly>Congratulations. Both reviewers recommend acceptance. Minor notation fixes requested by Reviewer 2 — please address in camera-ready.</textarea>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:0.5px solid var(--paper3)">
+            <span class="btn btn-secondary">Save Draft</span>
+            <div style="display:flex;gap:6px">
+              <span class="btn btn-primary">Accept & Notify Author</span>
+              <span class="btn btn-secondary">Publish Now</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="layout-sidebar sidebar-pad" style="display:flex;flex-direction:column;gap:14px">
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Workflow State</span></div>
+          <div class="module-body">
+            <div class="workflow">
+              <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Draft</div></div>
+              <div class="wf-line done"></div>
+              <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Submit</div></div>
+              <div class="wf-line done"></div>
+              <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Review</div></div>
+              <div class="wf-line"></div>
+              <div class="wf-state"><div class="wf-dot active"></div><div class="wf-name active">Decision</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Paper Metadata</span></div>
+          <div class="module-body">
+            <div class="transp-row"><span class="transp-row-label">Author</span><span>Eric D. Martin</span></div>
+            <div class="transp-row"><span class="transp-row-label">ORCID</span><span>0009-…1742</span></div>
+            <div class="transp-row"><span class="transp-row-label">Category</span><span>Cosmology</span></div>
+            <div class="transp-row"><span class="transp-row-label">Version</span><span>v2</span></div>
+            <div class="transp-row"><span class="transp-row-label">Authorship</span><span>Hybrid</span></div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Integrity</span></div>
+          <div class="module-body">
+            <div class="hash-chain">
+              <div class="hash-entry"><span class="hash-id">SEALED</span><span class="hash-val">a3f8c2d9…</span><span class="hash-status">✓</span></div>
+              <div class="hash-entry"><span class="hash-id">HASH</span><span class="hash-val">SHA256: b9f2…</span><span class="hash-status">✓</span></div>
+            </div>
+            <div style="margin-top:8px">
+              <span class="badge badge-sealed">⬛ Temporal Sealed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Capstone Gate</span></div>
+          <div class="module-body">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--ink3);margin-bottom:6px">On acceptance, Zenodo deposition will fire:</div>
+            <div style="display:flex;gap:4px">
+              <span class="btn btn-secondary" style="font-size:8px;padding:3px 6px">Gate: OPEN</span>
+              <span style="font-family:var(--mono);font-size:9px;color:var(--sage)">✓ Ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><div class="footer-brand">eaiou.org</div><div class="footer-meta">SSOT v2.0</div></div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- VIEW 10: DISCOVER IDEAS                                        -->
+<!-- ============================================================ -->
+<div class="view-frame" id="v10">
+  <div class="view-label">
+    <div>
+      <div class="view-label-title">View 10 — Discover Ideas (Entropy-Novelty Ranked)</div>
+      <div class="view-label-route">Route: /discover/ideas &nbsp;·&nbsp; Component: com_eaiou discovery</div>
+    </div>
+    <div class="view-label-acl">ACL: PUBLIC</div>
+  </div>
+  <div class="view-body">
+    <nav class="nav">
+      <div class="nav-brand">e<span>a</span>iou</div>
+      <div class="nav-links">
+        <span class="nav-link">Discover</span>
+        <span class="nav-link">Submit</span>
+        <span class="nav-link">Review</span>
+        <span class="nav-link active">Ideas</span>
+        <span class="nav-link">Gaps</span>
+      </div>
+      <div class="nav-right"><span class="nav-badge">E. Martin</span><span class="nav-badge primary">Submit Paper</span></div>
+    </nav>
+
+    <div style="background:var(--ink);color:#fff;padding:28px 24px 24px">
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;color:#8ab4d4;text-transform:uppercase;margin-bottom:8px">Discover Ideas · un-space exploration</div>
+      <div style="font-family:var(--serif);font-size:24px;font-weight:300;letter-spacing:-0.02em;margin-bottom:8px">Emerging ideas from <em style="color:#8ab4d4;font-style:italic">unused</em> datasets</div>
+      <div style="font-family:var(--serif);font-size:13px;color:rgba(255,255,255,0.5);max-width:500px">NotTopic artifacts, abandoned hypotheses, null results, and cross-domain leads — ranked by entropy-novelty. What didn't fit one paper may be the foundation for another.</div>
+    </div>
+
+    <div class="layout">
+      <div class="content-pad">
+        <div class="search-bar">
+          <input class="search-input" placeholder="Search un-space: excluded artifacts, null results, tangents…" readonly>
+          <span class="btn btn-primary" style="border-radius:0;border:none;padding:8px 14px">Search</span>
+        </div>
+        <div class="search-filters">
+          <span class="filter-chip active">All ideas</span>
+          <span class="filter-chip">rs:NotTopic</span>
+          <span class="filter-chip">rs:NullResult</span>
+          <span class="filter-chip">rs:AbandonedHypothesis</span>
+          <span class="filter-chip">rs:Contradiction</span>
+          <span class="filter-chip">rs:FutureWork</span>
+          <span class="filter-chip">rs:OpenQuestion</span>
+        </div>
+
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:12px;letter-spacing:0.05em">23 IDEAS · RANKED BY ENTROPY-NOVELTY</div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <!-- Idea card 1 -->
+          <div class="paper-card" style="border-left:2px solid var(--violet)">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px">
+              <div class="paper-card-meta">From: Hubble Tension paper · ORCID …1742</div>
+              <span style="font-family:var(--mono);font-size:10px;color:var(--violet);font-weight:500">Entropy: 0.94</span>
+            </div>
+            <div class="paper-card-title">Non-Euclidean spatial encoding geometries compatible with Planck constraints</div>
+            <div class="paper-card-abstract">3 of 7 AI-suggested alternative encoding geometries were used in the parent paper. The remaining 4 — including a conformal mapping approach — were excluded as tangential but may be relevant to dark energy geometry studies.</div>
+            <div class="paper-card-footer">
+              <div class="paper-card-tags">
+                <span class="rs-tag rs-nottopic">rs:NotTopic:AnotherField</span>
+                <span class="badge badge-ai" style="font-size:8px">AI-origin</span>
+              </div>
+              <span class="btn btn-secondary" style="font-size:9px;padding:4px 8px">Explore →</span>
+            </div>
+          </div>
+
+          <!-- Idea card 2 -->
+          <div class="paper-card" style="border-left:2px solid var(--violet)">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px">
+              <div class="paper-card-meta">From: Partition of Tensions · ORCID …0097</div>
+              <span style="font-family:var(--mono);font-size:10px;color:var(--violet);font-weight:500">Entropy: 0.87</span>
+            </div>
+            <div class="paper-card-title">Null result: Partition framework applied to S8 tension yields no separation</div>
+            <div class="paper-card-abstract">When applied to the S8 tension, the partition framework produces no meaningful decomposition — suggesting S8 disagreement may be fundamentally different from H0 tension.</div>
+            <div class="paper-card-footer">
+              <div class="paper-card-tags">
+                <span class="rs-tag rs-collab">rs:NullResult</span>
+                <span class="rs-tag rs-nottopic">rs:NotTopic:Contradiction</span>
+              </div>
+              <span class="btn btn-secondary" style="font-size:9px;padding:4px 8px">Explore →</span>
+            </div>
+          </div>
+
+          <!-- Idea card 3 -->
+          <div class="paper-card" style="border-left:2px solid var(--violet)">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px">
+              <div class="paper-card-meta">From: UHA Framework · ORCID …8901</div>
+              <span style="font-family:var(--mono);font-size:10px;color:var(--violet);font-weight:500">Entropy: 0.81</span>
+            </div>
+            <div class="paper-card-title">Observer-relative encoding may apply to neural network latent space alignment</div>
+            <div class="paper-card-abstract">During development of UHA framework, author noted structural parallels with transformer attention geometries. Tagged for CS/ML crossover but not pursued.</div>
+            <div class="paper-card-footer">
+              <div class="paper-card-tags">
+                <span class="rs-tag rs-nottopic">rs:NotTopic:AnotherField</span>
+                <span class="badge badge-tag">rs:CrossDomain</span>
+              </div>
+              <span class="btn btn-secondary" style="font-size:9px;padding:4px 8px">Explore →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="layout-sidebar sidebar-pad" style="display:flex;flex-direction:column;gap:14px">
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Entropy-Novelty Score</span></div>
+          <div class="module-body">
+            <div style="font-family:var(--serif);font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:6px">Ideas are ranked by how novel and information-dense they are relative to published papers. High entropy = high potential for new work.</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--ink3)">Score range: 0.0 – 1.0</div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Subscribe to Ideas</span></div>
+          <div class="module-body">
+            <div class="field-group">
+              <label class="field-label">Domains of Interest</label>
+              <div style="display:flex;flex-wrap:wrap;gap:3px">
+                <span class="filter-chip active">Cosmology</span>
+                <span class="filter-chip">Physics</span>
+                <span class="filter-chip active">Cross-Domain</span>
+                <span class="filter-chip">Mathematics</span>
+              </div>
+            </div>
+            <span class="btn btn-primary" style="width:100%;text-align:center;margin-top:6px">Subscribe to Feed</span>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Gap Map (related)</span></div>
+          <div class="module-body">
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;align-items:end">
+              <div class="gap-map-cell"><div class="gap-bar" style="height:36px"></div><div class="gap-label">Cosmo</div></div>
+              <div class="gap-map-cell"><div class="gap-bar" style="height:24px;opacity:0.5"></div><div class="gap-label">CS</div></div>
+              <div class="gap-map-cell"><div class="gap-bar" style="height:14px;opacity:0.3"></div><div class="gap-label">Math</div></div>
+              <div class="gap-map-cell"><div class="gap-bar" style="height:30px;opacity:0.55"></div><div class="gap-label">Bio</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-panel">
+          <div class="module-header"><span class="module-title">Open Questions</span></div>
+          <div class="module-body">
+            <div class="queue-item">
+              <div>
+                <div class="queue-item-title">Can UHA encoding be inverted?</div>
+                <div class="queue-item-meta">rs:OpenQuestion · from 2 papers</div>
+              </div>
+            </div>
+            <div class="queue-item">
+              <div>
+                <div class="queue-item-title">Does H₀ tension correlate with survey footprint?</div>
+                <div class="queue-item-meta">rs:OpenQuestion · from 1 paper</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><div class="footer-brand">eaiou.org</div><div class="footer-meta">SSOT v2.0</div></div>
+  </div>
+</div>
+
+
+<!-- END MARKER -->
+<div style="text-align:center;padding:40px;font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase">
+  END OF BATCH 1 · VIEWS 1–10 · BATCH 2 CONTINUES WITH VIEWS 11–20
+  <div style="margin-top:8px;font-size:9px;color:var(--paper3)">
+    Remaining views: Discover Gaps · Discover Trends · Discover Open · Search · Submission Steps 2–6 · Paper Revise · Editorial Assign · Admin Home · Admin API Logs · Admin Settings
+  </div>
+</div>
+
+</body>
+</html>
