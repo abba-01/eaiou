@@ -41,6 +41,9 @@ _FORBIDDEN_SORT = frozenset({
     "date", "created", "submitted_at", "created_at", "modified", "modified_at",
     "submission_sealed_at", "acceptance_sealed_at", "publication_sealed_at",
 })
+_ALLOWED_PATCH_FIELDS = frozenset({
+    "title", "abstract", "authorship_mode", "authors_json", "keywords",
+})
 
 def _strip_sealed(d: dict) -> dict:
     return {k: v for k, v in d.items() if k not in _SEALED}
@@ -241,7 +244,7 @@ async def paper_update(
     groups = set(current_user.get("groups", []))
     if not ({"editor", "admin"} & groups):
         row_author = db.execute(text(
-            "SELECT author_name FROM `#__eaiou_papers` WHERE id = :id"
+            "SELECT author_name FROM `#__eaiou_papers` WHERE id = :id AND tombstone_state IS NULL"
         ), {"id": paper_id}).fetchone()
         if row_author is None:
             return JSONResponse({"error": "not_found", "detail": "Paper not found."}, status_code=404)
@@ -252,6 +255,13 @@ async def paper_update(
     updates = {k: v for k, v in body.model_dump().items() if v is not None}
     if not updates:
         return JSONResponse({"error": "no_fields", "detail": "No fields to update."}, status_code=400)
+
+    for k in updates:
+        if k not in _ALLOWED_PATCH_FIELDS:
+            return JSONResponse(
+                {"error": "invalid_field", "detail": f"Field '{k}' cannot be patched."},
+                status_code=400,
+            )
 
     set_parts = [f"`{k}` = :{k}" for k in updates]
     set_clause = ", ".join(set_parts)
@@ -287,7 +297,7 @@ async def workflow_get_state(
     current_user=Depends(optional_auth),
 ):
     row = db.execute(text(
-        "SELECT status FROM `#__eaiou_papers` WHERE id = :id"
+        "SELECT status FROM `#__eaiou_papers` WHERE id = :id AND tombstone_state IS NULL"
     ), {"id": paper_id}).fetchone()
 
     if row is None:
@@ -321,7 +331,7 @@ async def workflow_transition(
 
     # Get current state
     row = db.execute(text(
-        "SELECT status, author_name FROM `#__eaiou_papers` WHERE id = :id"
+        "SELECT status, author_name FROM `#__eaiou_papers` WHERE id = :id AND tombstone_state IS NULL"
     ), {"id": paper_id}).fetchone()
 
     if row is None:
@@ -768,8 +778,7 @@ async def auth_login(
 
     if row is None or not row["active"] or not row["password_hash"] \
             or not verify_password(body.password, row["password_hash"]):
-        record_login_attempt(ip)           # record this failure first
-        check_login_rate_limit(ip)         # now gate on the updated count (raises 429 if over limit)
+        record_login_attempt(ip)
         return JSONResponse({"error": "invalid_credentials"}, status_code=401)
 
     # Load groups

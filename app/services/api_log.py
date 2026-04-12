@@ -17,16 +17,23 @@ def log_api_call(db: Session, endpoint: str, method: str,
     raw = f"{endpoint}|{method}|{request_hash}|{response_code}|{ts}"
     log_hash = hashlib.sha256(raw.encode()).hexdigest()
     try:
+        # LOCK TABLE serializes concurrent writers; safe because log writes are rare
+        db.execute(text("LOCK TABLES `#__eaiou_api_logs` WRITE"))
         prior = db.execute(text(
             "SELECT log_hash FROM `#__eaiou_api_logs` ORDER BY id DESC LIMIT 1"
         )).fetchone()
         prior_hash = prior[0] if prior else None
         db.execute(text(
             "INSERT INTO `#__eaiou_api_logs` "
-            "(endpoint, method, request_data, response_code, log_hash, prior_hash, log_timestamp) "
+            "(endpoint, method, request_hash, response_code, log_hash, prior_hash, log_timestamp) "
             "VALUES (:ep, :m, :rh, :rc, :lh, :ph, :ts)"
         ), {"ep": endpoint, "m": method, "rh": request_hash,
             "rc": response_code, "lh": log_hash, "ph": prior_hash, "ts": now})
+        db.execute(text("UNLOCK TABLES"))
         db.commit()
     except Exception:
+        try:
+            db.execute(text("UNLOCK TABLES"))
+        except Exception:
+            pass
         pass  # Never let logging failure break the API
