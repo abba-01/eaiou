@@ -18,7 +18,7 @@ import hashlib
 from datetime import datetime, timezone
 from typing import Optional
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, validator
 from sqlalchemy.orm import Session
@@ -442,23 +442,30 @@ async def workflow_assign_reviewers(
         )
         assigned_count += 1
 
-    # Advance paper status to under_review if currently submitted
-    db.execute(text(
-        "UPDATE `#__eaiou_papers` SET status = 'under_review' "
-        "WHERE id = :pid AND status = 'submitted'"
-    ), {"pid": paper_id})
-    db.commit()
+    # Only advance paper status if at least one reviewer was successfully assigned
+    if assigned_count > 0:
+        db.execute(text(
+            "UPDATE `#__eaiou_papers` SET status = 'under_review' "
+            "WHERE id = :pid AND status = 'submitted' AND tombstone_state IS NULL"
+        ), {"pid": paper_id})
+        db.commit()
+
+    # Get actual current paper status for the response
+    paper_row = db.execute(text(
+        "SELECT status FROM `#__eaiou_papers` WHERE id = :pid"
+    ), {"pid": paper_id}).fetchone()
+    actual_status = paper_row[0] if paper_row else "unknown"
 
     log_api_call(
         db, f"/api/v1/papers/{paper_id}/workflow/assign", "POST",
         hashlib.sha256(str(paper_id).encode()).hexdigest(), 200,
     )
 
-    return {
+    return JSONResponse({
         "paper_id":       paper_id,
         "assigned_count": assigned_count,
-        "new_state":      "under_review",
-    }
+        "new_state":      actual_status,
+    })
 
 
 # ── 7. POST /papers/{paper_id}/workflow/revise — workflow.request_revision ────
@@ -471,6 +478,13 @@ async def workflow_request_revision(
     current_user: dict = Depends(require_editor),
 ):
     now = datetime.now(timezone.utc)
+
+    # Check paper exists and is not tombstoned BEFORE inserting revision row
+    paper_row = db.execute(text(
+        "SELECT id FROM `#__eaiou_papers` WHERE id = :pid AND tombstone_state IS NULL"
+    ), {"pid": paper_id}).fetchone()
+    if not paper_row:
+        raise HTTPException(status_code=404, detail="Paper not found or tombstoned.")
 
     # Record revision request in revisions table for provenance
     db.execute(text(
@@ -509,33 +523,18 @@ async def workflow_accept(
     db: Session = Depends(get_db),
     current_user: dict = Depends(require_editor),
 ):
-    # Check paper exists and get current acceptance_sealed_at
-    row = db.execute(text(
-        "SELECT acceptance_sealed_at FROM `#__eaiou_papers` "
-        "WHERE id = :id AND tombstone_state IS NULL"
-    ), {"id": paper_id}).fetchone()
-
-    if row is None:
-        return JSONResponse(
-            {"error": "not_found", "detail": "Paper not found."},
-            status_code=404,
-        )
-
     now = datetime.now(timezone.utc)
 
-    # Only set acceptance_sealed_at if currently NULL — never overwrite original seal
-    if row[0] is None:
-        db.execute(text(
-            "UPDATE `#__eaiou_papers` "
-            "SET status = 'accepted', acceptance_sealed_at = :now "
-            "WHERE id = :pid"
-        ), {"now": now, "pid": paper_id})
-    else:
-        db.execute(text(
-            "UPDATE `#__eaiou_papers` SET status = 'accepted' WHERE id = :pid"
-        ), {"pid": paper_id})
-
+    # Atomic COALESCE: sets acceptance_sealed_at only if currently NULL (no race condition)
+    result = db.execute(text(
+        "UPDATE `#__eaiou_papers` "
+        "SET status = 'accepted', "
+        "    acceptance_sealed_at = COALESCE(acceptance_sealed_at, :now) "
+        "WHERE id = :pid AND tombstone_state IS NULL"
+    ), {"pid": paper_id, "now": now})
     db.commit()
+    if result.rowcount == 0:
+        raise HTTPException(status_code=404, detail="Paper not found or tombstoned.")
 
     log_api_call(
         db, f"/api/v1/papers/{paper_id}/workflow/accept", "POST",
@@ -557,14 +556,14 @@ async def workflow_reject(
     now = datetime.now(timezone.utc)
 
     # Set status=rejected + tombstone_state=public_unspace — never hard-delete
-    db.execute(text(
+    result = db.execute(text(
         "UPDATE `#__eaiou_papers` "
         "SET status = 'rejected', "
         "    tombstone_state = 'public_unspace', "
         "    rejection_notes = :notes, "
         "    tombstone_at = :now, "
         "    tombstone_by = :uid "
-        "WHERE id = :pid"
+        "WHERE id = :pid AND tombstone_state IS NULL"
     ), {
         "notes": body.rejection_reason,
         "now":   now,
@@ -572,6 +571,8 @@ async def workflow_reject(
         "pid":   paper_id,
     })
     db.commit()
+    if result.rowcount == 0:
+        raise HTTPException(status_code=404, detail="Paper not found, already tombstoned, or already rejected.")
 
     log_api_call(
         db, f"/api/v1/papers/{paper_id}/workflow/reject", "POST",
