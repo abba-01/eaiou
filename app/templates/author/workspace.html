@@ -1,0 +1,1490 @@
+{% extends "author/base_author.html" %}
+{% block title %}Workspace — {{ paper.title or 'Untitled' }} — eaiou{% endblock %}
+{% block page_title %}Workspace{% endblock %}
+
+{# ── Left panel: Defender ─────────────────────────────────────────────────── #}
+{% block author_left_sidebar %}
+<aside class="w-72 bg-white border-r flex flex-col flex-shrink-0 hidden lg:flex" style="border-color: var(--ds-border);">
+    <div class="px-4 py-3 border-b border-gray-200 flex items-center gap-2 bg-primary-700">
+        <i class="fa-solid fa-shield-halved text-white" style="font-size:.85rem;"></i>
+        <span class="text-xs font-semibold tracking-widest uppercase text-white">Defender</span>
+        <button onclick="toggleConfigure('def')" class="ml-auto text-xs text-primary-200 hover:text-white">Configure</button>
+    </div>
+
+    <!-- Configure form -->
+    <div id="def-configure" class="px-3 py-2 border-b hidden" style="border-color: var(--ds-border); background: #F7F6F3;">
+        <input id="def-label-input" type="text" placeholder="Label (UI only — does not leave workspace)"
+               class="w-full border px-2 py-1 text-xs rounded mb-2 focus:outline-none"
+               style="border-color: var(--ds-border);">
+        <div class="flex gap-1.5">
+            <button onclick="saveModuleLabel('def')"
+                    class="flex-1 py-1 text-xs rounded text-white" style="background:#18171A;">Save</button>
+            <button onclick="swapModule('def')"
+                    class="flex-1 py-1 text-xs rounded border" style="border-color: var(--ds-border); color: var(--ds-ink-2);">Swap</button>
+        </div>
+    </div>
+
+    <!-- Module identity -->
+    <div id="def-identity" class="px-4 py-2 border-b" style="border-color: var(--ds-border);">
+        <p id="def-model" class="text-xs font-mono" style="color: var(--ds-ink-1);">—</p>
+        <p id="def-label-display" class="text-xs mt-0.5" style="color: var(--ds-ink-3);">not loaded</p>
+    </div>
+
+    <!-- Actions -->
+    <div class="px-3 py-2 border-b flex gap-1.5" style="border-color: var(--ds-border);">
+        <button id="def-read-btn" onclick="moduleAction('def','read')"
+                class="flex-1 py-1.5 text-xs font-medium rounded border"
+                style="border-color: var(--ds-border); color: var(--ds-ink-2);">Read</button>
+        <button id="def-defend-btn" onclick="moduleAction('def','defend')"
+                class="flex-1 py-1.5 text-xs font-medium rounded border"
+                style="border-color: var(--ds-border); color: var(--ds-ink-2);">Defend</button>
+    </div>
+
+    <!-- Focus input -->
+    <div class="px-3 py-1.5 border-b" style="border-color: var(--ds-border);">
+        <input id="def-focus" type="text" placeholder="Focus (optional)"
+               class="w-full border px-2 py-1.5 text-xs rounded focus:outline-none"
+               style="border-color: var(--ds-border);">
+    </div>
+
+    <!-- Response area -->
+    <div id="def-response" class="flex-1 overflow-y-auto p-3 text-xs leading-relaxed" style="color: var(--ds-ink-2);">
+        <p style="color: var(--ds-ink-3); font-style:italic;">Not yet read.</p>
+    </div>
+
+    <!-- Empty / Add -->
+    <div id="def-empty" class="p-4 border-t text-center hidden" style="border-color: var(--ds-border);">
+        <button onclick="addModule('defender')"
+                class="w-full py-2 text-xs rounded text-white" style="background:#18171A;">
+            <i class="fa-solid fa-plus mr-1"></i>Load Defender
+        </button>
+    </div>
+</aside>
+{% endblock %}
+
+{# ── Center: Paper ────────────────────────────────────────────────────────── #}
+{% block author_content %}
+<div class="max-w-2xl mx-auto space-y-5">
+
+    <!-- F2-A: Revision request banner -->
+    {% if paper.status == 'revision_requested' and latest_revision %}
+    <div class="rounded-lg p-5 border-l-4" style="background: #FFFBEB; border-left-color: #D97706; border: 1px solid #FDE68A; border-left-width: 4px;">
+        <div class="flex items-start gap-3">
+            <i class="fa-solid fa-rotate-right mt-0.5 shrink-0" style="color: #D97706;"></i>
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-4 flex-wrap mb-2">
+                    <p class="text-sm font-semibold" style="color: var(--ds-ink-1);">
+                        Revision Requested — Round {{ latest_revision.round }}
+                    </p>
+                    {% if latest_revision.due_at %}
+                    <span class="text-xs shrink-0 font-medium" style="color: #D97706;">
+                        Due {{ latest_revision.due_at }}
+                    </span>
+                    {% endif %}
+                </div>
+                <p class="text-sm leading-relaxed" style="color: var(--ds-ink-2);">{{ latest_revision.instructions }}</p>
+                <form method="post" action="/author/workspace/{{ paper.id }}/resubmit" class="mt-3">
+                    <button type="submit"
+                            class="px-4 py-1.5 text-xs font-medium rounded text-white"
+                            style="background: #18171A;">
+                        Mark as Resubmitted →
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ── Detailed Manuscript Progress Tracker ──────────────────────── -->
+    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden eaiou-shadow-sm">
+        <div class="px-5 py-3 border-b border-gray-200 bg-gray-50 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square text-primary-500 text-sm"></i>
+                <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Manuscript Progress</span>
+            </div>
+            <span class="eaiou-badge
+                {% if paper.status == 'submitted' %}eaiou-badge-submitted
+                {% elif paper.status == 'under_review' %}eaiou-badge-review
+                {% elif paper.status == 'revision_requested' %}eaiou-badge-revision
+                {% elif paper.status == 'accepted' %}eaiou-badge-accepted
+                {% elif paper.status == 'published' %}eaiou-badge-published
+                {% else %}eaiou-badge-submitted{% endif %}">
+                {{ paper.status.replace('_', ' ').title() if paper.status else 'Draft' }}
+            </span>
+        </div>
+
+        {# Status step indicators #}
+        <div class="px-5 py-4 grid grid-cols-4 gap-3 border-b border-gray-100">
+            {% set steps = [
+                ('draft',              'fa-pen',               'Draft',         'gray'),
+                ('submitted',          'fa-paper-plane',       'Submitted',     'blue'),
+                ('under_review',       'fa-magnifying-glass',  'Under Review',  'yellow'),
+                ('accepted',           'fa-check-circle',      'Accepted',      'green'),
+            ] %}
+            {% set status_order = ['draft', 'submitted', 'under_review', 'revision_requested', 'accepted', 'published', 'archived'] %}
+            {% set current_idx = status_order.index(paper.status) if paper.status in status_order else 0 %}
+            {% for step_status, icon, label, color in steps %}
+            {% set step_idx = status_order.index(step_status) if step_status in status_order else 0 %}
+            {% set is_done    = current_idx > step_idx %}
+            {% set is_current = paper.status == step_status or (step_status == 'under_review' and paper.status == 'revision_requested') %}
+            <div class="flex flex-col items-center text-center">
+                <div class="w-9 h-9 rounded-full flex items-center justify-center mb-1.5
+                    {% if is_done %}bg-green-100{% elif is_current %}bg-primary-100{% else %}bg-gray-100{% endif %}">
+                    <i class="fa-solid {{ icon }} text-sm
+                        {% if is_done %}text-green-600{% elif is_current %}text-primary-600{% else %}text-gray-400{% endif %}"></i>
+                </div>
+                <p class="text-[11px] font-medium
+                    {% if is_done %}text-green-700{% elif is_current %}text-primary-700{% else %}text-gray-400{% endif %}">
+                    {{ label }}
+                </p>
+                {% if is_done %}
+                <p class="text-[10px] text-green-500 mt-0.5"><i class="fa-solid fa-check mr-0.5"></i>Done</p>
+                {% elif is_current %}
+                <p class="text-[10px] text-primary-500 mt-0.5">Current</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+        {# Section completion checklist #}
+        {% if sections %}
+        <div class="px-5 py-3 border-b border-gray-100">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Sections</p>
+            <div class="grid grid-cols-2 gap-1.5">
+                {% for s in sections %}
+                <div class="flex items-center gap-2 text-xs">
+                    {% if s.section_content and s.section_content|length > 20 %}
+                        <i class="fa-solid fa-circle-check text-green-500 flex-shrink-0"></i>
+                        <span class="text-gray-700 truncate">{{ s.section_name }}</span>
+                    {% elif s.section_notes %}
+                        <i class="fa-solid fa-circle-half-stroke text-yellow-500 flex-shrink-0"></i>
+                        <span class="text-gray-500 truncate">{{ s.section_name }}</span>
+                    {% else %}
+                        <i class="fa-regular fa-circle text-gray-300 flex-shrink-0"></i>
+                        <span class="text-gray-400 truncate">{{ s.section_name }}</span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {# Completion bar #}
+            {% set filled = sections | selectattr('section_content') | list | length %}
+            {% set total  = sections | length %}
+            {% set pct    = ((filled / total) * 100) | int if total > 0 else 0 %}
+            <div class="mt-3">
+                <div class="flex items-center justify-between text-[11px] text-gray-400 mb-1">
+                    <span>{{ filled }}/{{ total }} sections written</span>
+                    <span>{{ pct }}%</span>
+                </div>
+                <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary-500 rounded-full transition-all" style="width: {{ pct }}%;"></div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {# Paper metadata row #}
+        <div class="px-5 py-3 flex flex-wrap gap-4 text-xs text-gray-500">
+            {% if paper.cosmoid %}
+            <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-fingerprint text-gray-300"></i>
+                <span class="font-mono">{{ paper.cosmoid[:12] }}…</span>
+            </span>
+            {% endif %}
+            {% if paper.gitgap_gap_id %}
+            <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-link text-gray-300"></i>
+                Gap #{{ paper.gitgap_gap_id }}
+            </span>
+            {% endif %}
+            {% if volley_round > 1 %}
+            <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-arrows-rotate text-gray-300"></i>
+                {{ volley_round - 1 }} audit round{{ 's' if volley_round > 2 else '' }}
+            </span>
+            {% endif %}
+            <a href="/author/" class="ml-auto flex items-center gap-1 text-gray-400 hover:text-primary-600">
+                <i class="fa-solid fa-arrow-left"></i>Dashboard
+            </a>
+        </div>
+    </div>
+
+    <!-- Pipeline stage indicator (compact, below tracker) -->
+    <div id="pipeline-stages" class="rounded-lg border border-gray-200 overflow-hidden">
+        <div class="px-4 py-2 flex items-center justify-between bg-gray-50 border-b border-gray-200">
+            <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">Pipeline</span>
+            <span id="pipeline-current" class="text-xs font-medium text-gray-700"></span>
+        </div>
+        <div class="px-4 py-3 flex items-center gap-0 overflow-x-auto" id="pipeline-steps">
+            <!-- Rendered by JS -->
+        </div>
+    </div>
+
+    <!-- Interrogation panel -->
+    <div class="rounded-lg border overflow-hidden" style="border-color: var(--ds-border);">
+        <button onclick="toggleInterrogation()"
+                class="w-full px-5 py-3 flex items-center text-left"
+                style="background: #18171A;">
+            <i class="fa-solid fa-comments mr-2" style="color:#9A9895;"></i>
+            <span class="text-xs font-semibold uppercase tracking-widest" style="color:#fff;">Investigation</span>
+            <span id="interrog-count-badge" class="ml-2 text-xs font-mono" style="color:#9A9895;">0 exchanges</span>
+            <i id="interrog-chevron" class="fa-solid fa-chevron-down ml-auto" style="color:#9A9895;"></i>
+        </button>
+        <div id="interrog-body" class="border-t" style="border-color: #2E2D30;">
+
+            <!-- Question input -->
+            <div class="p-4 border-b" style="border-color: var(--ds-border);">
+                <p class="text-xs mb-2" style="color: var(--ds-ink-3);">
+                    Ask your team. The question is your intellectual act — direct them to the territory you already sense.
+                </p>
+                <textarea id="interrog-question" rows="2"
+                    class="w-full border rounded px-3 py-2 text-sm focus:outline-none"
+                    style="border-color: var(--ds-border);"
+                    placeholder="What is it you're trying to resolve?"></textarea>
+                <div class="flex items-center gap-2 mt-2">
+                    <button onclick="sendInterrogation()"
+                            id="interrog-ask-btn"
+                            class="px-4 py-1.5 text-xs font-medium rounded text-white"
+                            style="background:#18171A;">Ask</button>
+                    <span id="interrog-expert-label" class="text-xs" style="color: var(--ds-ink-3);">
+                        Expert auto-routed from question content
+                    </span>
+                </div>
+            </div>
+
+            <!-- Last response -->
+            <div id="interrog-last-response" class="p-4 border-b hidden" style="border-color: var(--ds-border);">
+                <div class="flex items-center gap-2 mb-2">
+                    <span id="interrog-last-expert" class="text-xs font-mono px-2 py-0.5 rounded"
+                          style="background:#EDECE9; color:var(--ds-ink-2);"></span>
+                    <span class="text-xs" style="color:var(--ds-ink-3);">responded</span>
+                    <!-- Seed to section -->
+                    <div class="ml-auto relative" id="seed-dropdown-wrap">
+                        <button onclick="toggleSeedDropdown()"
+                                class="text-xs px-2 py-1 rounded border"
+                                style="border-color: var(--ds-border); color: var(--ds-ink-2);">
+                            Seed to section <i class="fa-solid fa-chevron-down ml-1" style="font-size:9px;"></i>
+                        </button>
+                        <div id="seed-dropdown" class="absolute right-0 mt-1 w-48 bg-white border rounded shadow-md z-10 hidden"
+                             style="border-color: var(--ds-border);">
+                            {% for s in sections %}
+                            <button onclick="seedSection({{ s.id }}, '{{ s.section_name | e }}')"
+                                    class="w-full text-left px-3 py-2 text-xs hover:bg-gray-100 truncate"
+                                    style="color: var(--ds-ink-2);">
+                                {{ loop.index }}. {{ s.section_name }}
+                            </button>
+                            {% else %}
+                            <p class="px-3 py-2 text-xs" style="color: var(--ds-ink-3);">No sections yet.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <p id="interrog-last-q" class="text-xs mb-2" style="color:var(--ds-ink-3); font-style:italic;"></p>
+                <div id="interrog-last-a" class="text-sm leading-relaxed" style="color: var(--ds-ink-1); white-space:pre-wrap;"></div>
+            </div>
+
+            <!-- Exchange history (last 5) -->
+            <div id="interrog-history" class="divide-y" style="border-color: var(--ds-border);"></div>
+
+        </div>
+    </div>
+
+    <!-- Compact section nav -->
+    <div class="flex items-center gap-1 flex-wrap">
+        <span class="text-xs mr-1" style="color: var(--ds-ink-3);">Sections:</span>
+        {% for s in sections %}
+        <a href="#section-{{ s.id }}"
+           class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs border"
+           style="border-color: var(--ds-border); color: var(--ds-ink-2);">
+            <span class="w-1.5 h-1.5 rounded-full inline-block"
+                  style="background: {% if s.section_content or s.section_notes %}#18171A{% else %}#CAC8C2{% endif %};"></span>
+            {{ loop.index }}
+        </a>
+        {% else %}
+        <span class="text-xs" style="color: var(--ds-ink-3);">No sections yet.</span>
+        {% endfor %}
+        <a href="/author/" class="ml-auto text-xs" style="color: var(--ds-ink-3);">
+            <i class="fa-solid fa-arrow-left mr-1"></i>Dashboard
+        </a>
+    </div>
+
+    <!-- Gap anchor -->
+    {% if paper.gitgap_gap_id %}
+    <div class="rounded-lg border overflow-hidden" style="border-color: var(--ds-ink-1);">
+        <div class="px-4 py-2 flex items-center gap-3" style="background: var(--ds-ink-1);">
+            <span class="text-xs font-semibold tracking-widest uppercase" style="color:#fff;">Gap Anchor</span>
+            <span class="text-xs" style="color:#aaa;">Gap #{{ paper.gitgap_gap_id }}</span>
+        </div>
+        <div class="px-4 py-3" style="background: #F7F6F3;">
+            <p class="text-xs" style="color: var(--ds-ink-2);">{{ paper.gap_declaration or '(gap text not cached)' }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Title + abstract -->
+    <div class="bg-white rounded-lg border" style="border-color: var(--ds-border);">
+        <div class="px-5 py-3 border-b" style="background: #F7F6F3; border-color: var(--ds-border);">
+            <h2 class="text-sm font-semibold" style="color: var(--ds-ink-1);">{{ paper.title or 'Untitled' }}</h2>
+            <p class="text-xs mt-0.5 font-mono" style="color: var(--ds-ink-3);">{{ paper.cosmoid }}</p>
+        </div>
+        <div class="p-5">
+            <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">Abstract</p>
+            <p class="text-sm leading-relaxed" style="color: var(--ds-ink-2);">{{ paper.abstract or '(not yet written)' }}</p>
+        </div>
+    </div>
+
+    <!-- Sections -->
+    {% for s in sections %}
+    <div class="bg-white rounded-lg border" id="section-{{ s.id }}" style="border-color: var(--ds-border);">
+        <div class="px-5 py-3 border-b flex items-center justify-between" style="background: #F7F6F3; border-color: var(--ds-border);">
+            <h3 class="text-sm font-semibold" style="color: var(--ds-ink-1);">{{ loop.index }}. {{ s.section_name }}</h3>
+            <div class="flex items-center gap-3">
+                {% if s.seeded_from %}<span class="text-xs" style="color: var(--ds-ink-3);">seeded: {{ s.seeded_from }}</span>{% endif %}
+                <button
+                    onclick="openSectionEditor({{ s.id }}, {{ s.section_name | tojson }}, {{ (s.section_content or '') | tojson }})"
+                    title="Open focus editor"
+                    style="width:26px; height:26px; border-radius:50%; border:1.5px solid var(--ds-border);
+                           background:#fff; color:var(--ds-ink-2); font-size:16px; line-height:1;
+                           display:flex; align-items:center; justify-content:center; cursor:pointer;
+                           transition:border-color 0.15s, background 0.15s;"
+                    onmouseenter="this.style.borderColor='#18171A'; this.style.background='#18171A'; this.style.color='#fff';"
+                    onmouseleave="this.style.borderColor='var(--ds-border)'; this.style.background='#fff'; this.style.color='var(--ds-ink-2)';">
+                    +
+                </button>
+            </div>
+        </div>
+        <div class="p-5">
+            {% if s.section_notes %}
+            <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">Notes</p>
+            <p class="text-xs mb-4 p-3 rounded" style="background: #F7F6F3; color: var(--ds-ink-2);">{{ s.section_notes }}</p>
+            {% endif %}
+            {% if s.section_content %}
+            <p class="text-sm leading-relaxed section-content-display" style="color: var(--ds-ink-1);">{{ s.section_content }}</p>
+            {% else %}
+            <p class="text-xs" style="color: var(--ds-ink-3); font-style:italic;">[UNDEFINED — not yet written]</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+    {% if not sections %}
+    <div class="text-center py-12 rounded-lg border border-dashed" style="border-color: var(--ds-border);">
+        <i class="fa-solid fa-file-lines text-3xl mb-3" style="color: var(--ds-ink-3);"></i>
+        <p class="text-sm" style="color: var(--ds-ink-2);">No sections yet.</p>
+    </div>
+    {% endif %}
+
+    <!-- Volley (collapsible) -->
+    <div class="rounded-lg border overflow-hidden" style="border-color: var(--ds-border);">
+        <button onclick="toggleVolley()"
+                class="w-full px-5 py-3 flex items-center text-left border-b"
+                style="background: #F7F6F3; border-color: var(--ds-border);">
+            <i class="fa-solid fa-arrows-rotate mr-2" style="color: var(--ds-ink-2);"></i>
+            <span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-2);">Volley — Cross-Intelligence Audit</span>
+            <span class="ml-2 text-xs" style="color: var(--ds-ink-3);">round {{ volley_round }}</span>
+            <i id="volley-chevron" class="fa-solid fa-chevron-down ml-auto" style="color: var(--ds-ink-3);"></i>
+        </button>
+        <div id="volley-body" class="hidden p-5 space-y-4">
+            <p class="text-xs" style="color: var(--ds-ink-3);">
+                A fresh intelligence audits the whole document cold. No construction context. Findings only.
+            </p>
+            {% if last_volley and not last_volley.author_response %}
+            {% set findings = last_volley.findings_json | tojson | fromjson %}
+            {% if findings.findings %}
+            <div class="space-y-2">
+                {% for f in findings.findings %}
+                <div class="rounded p-3 text-xs" style="background:#F0EFEB; border-left:2px solid {% if f.severity == 'critical' %}#18171A{% elif f.severity == 'major' %}#5A5856{% else %}#9A9895{% endif %};">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="font-mono" style="color:var(--ds-ink-3); font-size:10px;">{{ f.code }}</span>
+                        <span class="ml-auto text-xs font-medium" style="color:var(--ds-ink-1);">{{ f.severity }}</span>
+                    </div>
+                    <p style="color:var(--ds-ink-2); line-height:1.5;">{{ f.observation }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div>
+                <textarea id="volley-response-text" rows="3"
+                    class="w-full border rounded-md px-3 py-2 text-xs focus:outline-none"
+                    style="border-color: var(--ds-border);"
+                    placeholder="Your response: what you addressed, deferred, and why."></textarea>
+                <button onclick="submitVolleyResponse({{ last_volley.round_number }})"
+                    class="mt-2 w-full py-1.5 text-xs font-medium rounded text-white bg-primary-600 hover:bg-primary-700 transition-colors">
+                    Record Response
+                </button>
+            </div>
+            {% elif last_volley and last_volley.is_clean %}
+            <div class="rounded p-4 text-center" style="background:#F0EFEB;">
+                <i class="fa-solid fa-circle-check text-xl mb-2" style="color:#18171A;"></i>
+                <p class="text-sm font-medium" style="color:var(--ds-ink-1);">Audit clean — Round {{ last_volley.round_number }}.</p>
+            </div>
+            {% else %}
+            <button id="volley-request-btn" onclick="requestAudit()"
+                class="w-full py-2 px-3 text-xs font-medium rounded text-white bg-primary-600 hover:bg-primary-700 transition-colors">
+                <i class="fa-solid fa-magnifying-glass mr-1.5"></i>Request Audit — Round {{ volley_round }}
+            </button>
+            {% endif %}
+            {% if volley_history %}
+            <div class="border-t border-gray-200 pt-3 space-y-2">
+                <p class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Audit History</p>
+                {% for v in volley_history %}
+                <div class="bg-gray-50 rounded-md p-3 border border-gray-200">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-medium text-gray-700">Round {{ v.round_number }}</span>
+                            {% if v.author_response %}
+                            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-green-100 text-green-700">
+                                <i class="fa-solid fa-check mr-0.5"></i>Responded
+                            </span>
+                            {% endif %}
+                        </div>
+                        <span class="text-xs {% if v.is_clean %}text-green-600 font-semibold{% else %}text-gray-500{% endif %}">
+                            {% if v.is_clean %}<i class="fa-solid fa-circle-check mr-1"></i>Clean{% else %}{{ v.finding_count }} finding{{ 's' if v.finding_count != 1 else '' }}{% endif %}
+                        </span>
+                    </div>
+                    {% if not v.is_clean and v.finding_count %}
+                    {# Severity distribution mini-bar #}
+                    <div class="flex gap-0.5 h-1 rounded-full overflow-hidden mt-1">
+                        {% set critical_pct = ((v.critical_count or 0) / v.finding_count * 100) | int if v.finding_count else 0 %}
+                        {% set major_pct    = ((v.major_count    or 0) / v.finding_count * 100) | int if v.finding_count else 0 %}
+                        {% set minor_pct    = 100 - critical_pct - major_pct %}
+                        {% if critical_pct %}<div class="bg-red-400 rounded-full" style="width:{{ critical_pct }}%;"></div>{% endif %}
+                        {% if major_pct    %}<div class="bg-orange-400 rounded-full" style="width:{{ major_pct }}%;"></div>{% endif %}
+                        {% if minor_pct    %}<div class="bg-yellow-300 rounded-full" style="width:{{ minor_pct }}%;"></div>{% endif %}
+                    </div>
+                    <div class="flex gap-3 mt-1">
+                        {% if v.critical_count %}<span class="text-[10px] text-red-500">{{ v.critical_count }} critical</span>{% endif %}
+                        {% if v.major_count    %}<span class="text-[10px] text-orange-500">{{ v.major_count }} major</span>{% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Submission Gate -->
+    <div id="gate-panel" class="rounded-lg border border-gray-200 overflow-hidden eaiou-shadow-sm">
+        <div class="px-5 py-3 flex items-center gap-3 bg-primary-700">
+            <i class="fa-solid fa-shield-halved text-white"></i>
+            <span class="text-sm font-semibold tracking-widest uppercase text-white">Submission Gate</span>
+            <span id="gate-status-badge" class="ml-auto text-xs font-mono font-semibold px-2 py-0.5 rounded bg-white text-primary-700">checking…</span>
+        </div>
+        <div id="gate-checks" class="divide-y" style="border-color: var(--ds-border);">
+            <div class="px-5 py-4 text-xs" style="color: var(--ds-ink-3);">Loading…</div>
+        </div>
+        <div class="px-5 py-4 border-t flex items-center gap-4" style="border-color: var(--ds-border);">
+            <button id="seal-btn" onclick="sealPaper()" disabled
+                class="inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-md"
+                style="background:#CAC8C2; color:#fff; cursor:not-allowed;">
+                <i class="fa-solid fa-lock mr-2"></i>Seal and Submit to Review
+            </button>
+            <p id="gate-block-msg" class="text-xs" style="color: var(--ds-ink-3);">Checking…</p>
+        </div>
+    </div>
+
+    <!-- Author Profile (appears post-seal) -->
+    <div id="profile-panel" class="rounded-lg border overflow-hidden hidden" style="border-color: var(--ds-border);">
+        <div class="px-5 py-3 flex items-center gap-3" style="background: #F7F6F3; border-bottom: 1px solid var(--ds-border);">
+            <i class="fa-solid fa-fingerprint" style="color: var(--ds-ink-2);"></i>
+            <span class="text-xs font-semibold tracking-widest uppercase" style="color: var(--ds-ink-2);">Author Profile</span>
+            <span class="ml-auto text-xs font-mono px-2 py-0.5 rounded" style="background:#18171A; color:#fff;">sealed</span>
+        </div>
+        <div class="px-5 py-4">
+            <div id="profile-bins" class="flex flex-wrap gap-1.5 mb-4"></div>
+            <div id="profile-evidence" class="space-y-1"></div>
+        </div>
+    </div>
+
+    <!-- Research Coverage Analysis -->
+    <div id="coverage-panel" class="rounded-lg border overflow-hidden" style="border-color: var(--ds-border);">
+        <div class="px-5 py-3 flex items-center gap-3" style="background: #F7F6F3; border-bottom: 1px solid var(--ds-border);">
+            <i class="fa-solid fa-layer-group" style="color: var(--ds-ink-2);"></i>
+            <span class="text-xs font-semibold tracking-widest uppercase" style="color: var(--ds-ink-2);">Research Coverage</span>
+            <span class="ml-auto text-xs" style="color: var(--ds-ink-3);">appreciated scale</span>
+            <button onclick="runCoverage()" id="coverage-run-btn"
+                    class="ml-2 px-3 py-1 text-xs font-medium rounded border"
+                    style="border-color: var(--ds-ink-2); color: var(--ds-ink-1);">
+                Analyze
+            </button>
+        </div>
+
+        <!-- Summary bar -->
+        <div id="coverage-summary" class="px-5 py-3 border-b hidden" style="border-color: var(--ds-border);">
+            <div class="flex gap-4 text-xs">
+                <span><span id="cov-covered" class="font-bold" style="color:#18171A;">0</span> covered</span>
+                <span><span id="cov-novel" class="font-bold" style="color:#6B7280;">0</span> novel fills</span>
+                <span><span id="cov-needs" class="font-bold" style="color:#B45309;">0</span> needs work</span>
+            </div>
+        </div>
+
+        <!-- Claims list -->
+        <div id="coverage-claims" class="divide-y text-xs" style="border-color: var(--ds-border);">
+            <div class="px-5 py-4 text-xs" style="color: var(--ds-ink-3);">
+                Run analysis to see which claims in this paper are supported by existing literature and which represent novel contributions.
+            </div>
+        </div>
+    </div>
+
+    <!-- Scorch footer strip -->
+    <div id="scorch-strip" class="rounded border px-4 py-2 flex items-center gap-3 text-xs"
+         style="border-color: var(--ds-border); background: #F7F6F3;">
+        <span style="font-size:.85rem;">🐢</span>
+        <span class="font-semibold" style="color: var(--ds-ink-2);">Scorch</span>
+        <span id="scorch-strip-status" class="text-xs" style="color: var(--ds-ink-3);">watching</span>
+        <div id="scorch-strip-flags" class="flex gap-2 ml-2"></div>
+    </div>
+
+    <!-- F4-B: Withdrawal — only for submitted / under_review papers -->
+    {% if paper.status in ('submitted', 'under_review') %}
+    <div class="rounded-lg border px-5 py-4 flex items-center justify-between gap-4"
+         style="border-color: #F3D5CA; background: #FDF4F0;">
+        <div>
+            <p class="text-xs font-semibold" style="color: var(--ds-ink-1);">Withdraw Submission</p>
+            <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">Removes this paper from the review queue. The provenance record is preserved — withdrawal is permanent.</p>
+        </div>
+        <button onclick="document.getElementById('withdraw-modal').classList.remove('hidden')"
+                class="shrink-0 px-3 py-1.5 text-xs font-medium rounded border"
+                style="border-color: #D97B5A; color: #D97B5A; background: #fff;">
+            Withdraw
+        </button>
+    </div>
+
+    <!-- Withdrawal confirmation modal -->
+    <div id="withdraw-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center" style="background: rgba(0,0,0,0.4);">
+        <div class="bg-white rounded-xl shadow-xl max-w-sm w-full mx-4 overflow-hidden" style="border: 1px solid #F3D5CA;">
+            <div class="px-5 py-4 border-b" style="border-color: #F3D5CA; background: #FDF4F0;">
+                <p class="text-sm font-semibold" style="color: var(--ds-ink-1);">Confirm Withdrawal</p>
+            </div>
+            <div class="px-5 py-4 space-y-3">
+                <p class="text-sm" style="color: var(--ds-ink-2);">
+                    You are about to withdraw <strong>{{ paper.title or 'this paper' }}</strong> from editorial review.
+                </p>
+                <ul class="text-xs space-y-1 list-disc list-inside" style="color: var(--ds-ink-3);">
+                    <li>The paper will be tombstoned (private) — no longer visible in the queue.</li>
+                    <li>Its CosmoID and provenance record are permanently preserved.</li>
+                    <li>Withdrawal cannot be undone through the author interface.</li>
+                </ul>
+            </div>
+            <div class="px-5 py-4 border-t flex items-center justify-end gap-3" style="border-color: var(--ds-border);">
+                <button onclick="document.getElementById('withdraw-modal').classList.add('hidden')"
+                        class="px-4 py-1.5 text-xs font-medium rounded border"
+                        style="border-color: var(--ds-border); color: var(--ds-ink-2);">
+                    Cancel
+                </button>
+                <form method="post" action="/author/papers/{{ paper.id }}/withdraw" class="inline">
+                    <button type="submit"
+                            class="px-4 py-1.5 text-xs font-medium rounded text-white"
+                            style="background: #C0392B;">
+                        Confirm Withdrawal
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{# ── Right panel: Pushback ────────────────────────────────────────────────── #}
+{% block author_sidebar %}
+<aside class="w-72 bg-white border-l flex flex-col flex-shrink-0 hidden lg:flex" style="border-color: var(--ds-border);">
+    <div class="px-4 py-3 border-b border-gray-200 flex items-center gap-2 bg-red-700">
+        <i class="fa-solid fa-crosshairs text-white" style="font-size:.85rem;"></i>
+        <span class="text-xs font-semibold tracking-widest uppercase text-white">Pushback</span>
+        <button onclick="toggleConfigure('pb')" class="ml-auto text-xs text-red-200 hover:text-white">Configure</button>
+    </div>
+
+    <!-- Configure form -->
+    <div id="pb-configure" class="px-3 py-2 border-b hidden" style="border-color: var(--ds-border); background: #F7F6F3;">
+        <input id="pb-label-input" type="text" placeholder="Label (UI only — does not leave workspace)"
+               class="w-full border px-2 py-1 text-xs rounded mb-2 focus:outline-none"
+               style="border-color: var(--ds-border);">
+        <div class="flex gap-1.5">
+            <button onclick="saveModuleLabel('pb')"
+                    class="flex-1 py-1 text-xs rounded text-white" style="background:#18171A;">Save</button>
+            <button onclick="swapModule('pb')"
+                    class="flex-1 py-1 text-xs rounded border" style="border-color: var(--ds-border); color: var(--ds-ink-2);">Swap</button>
+        </div>
+    </div>
+
+    <!-- Module identity -->
+    <div id="pb-identity" class="px-4 py-2 border-b" style="border-color: var(--ds-border);">
+        <p id="pb-model" class="text-xs font-mono" style="color: var(--ds-ink-1);">—</p>
+        <p id="pb-label-display" class="text-xs mt-0.5" style="color: var(--ds-ink-3);">not loaded</p>
+    </div>
+
+    <!-- Actions -->
+    <div class="px-3 py-2 border-b flex gap-1.5" style="border-color: var(--ds-border);">
+        <button id="pb-read-btn" onclick="moduleAction('pb','read')"
+                class="flex-1 py-1.5 text-xs font-medium rounded border"
+                style="border-color: var(--ds-border); color: var(--ds-ink-2);">Read</button>
+        <button id="pb-redteam-btn" onclick="moduleAction('pb','redteam')"
+                class="flex-1 py-1.5 text-xs font-medium rounded border"
+                style="border-color: var(--ds-border); color: var(--ds-ink-2);">Red Team</button>
+    </div>
+
+    <!-- Focus input -->
+    <div class="px-3 py-1.5 border-b" style="border-color: var(--ds-border);">
+        <input id="pb-focus" type="text" placeholder="Focus (optional)"
+               class="w-full border px-2 py-1.5 text-xs rounded focus:outline-none"
+               style="border-color: var(--ds-border);">
+    </div>
+
+    <!-- Response area -->
+    <div id="pb-response" class="flex-1 overflow-y-auto p-3 text-xs leading-relaxed" style="color: var(--ds-ink-2);">
+        <p style="color: var(--ds-ink-3); font-style:italic;">Not yet read.</p>
+    </div>
+
+    <!-- Empty / Add -->
+    <div id="pb-empty" class="p-4 border-t text-center hidden" style="border-color: var(--ds-border);">
+        <button onclick="addModule('red_team')"
+                class="w-full py-2 text-xs rounded text-white" style="background:#18171A;">
+            <i class="fa-solid fa-plus mr-1"></i>Load Pushback
+        </button>
+    </div>
+</aside>
+{% endblock %}
+
+{# ── Terminal panel ──────────────────────────────────────────────────────────── #}
+{% block terminal_panel %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.19.0/css/xterm.min.css">
+<script src="https://cdn.jsdelivr.net/npm/xterm@4.19.0/lib/xterm.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.5.0/lib/xterm-addon-fit.min.js"></script>
+
+<!-- Bottom terminal drawer -->
+<div id="terminal-drawer"
+     style="flex-shrink:0; height:0; overflow:hidden; transition:height .18s ease;
+            border-top:1px solid #2d2d2d; background:#1e1e1e; display:flex; flex-direction:column;">
+  <!-- Drawer header bar -->
+  <div style="display:flex; align-items:center; gap:8px; padding:5px 12px;
+              background:#2d2d2d; border-bottom:1px solid #404040; flex-shrink:0; cursor:row-resize;"
+       id="term-drag-handle">
+    <i class="fa-solid fa-terminal" style="color:#9A9895; font-size:11px;"></i>
+    <span style="font-size:10px; font-weight:600; color:#9A9895; text-transform:uppercase; letter-spacing:.08em;">Terminal</span>
+    <span id="term-cwd" style="font-size:10px; color:#5a5a5a; font-family:monospace; margin-left:4px;"></span>
+    <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
+      <span id="term-status" style="font-size:10px; color:#5a5a5a;"></span>
+      <button onclick="closeTerminal()"
+              style="color:#5a5a5a; background:none; border:none; cursor:pointer; font-size:13px; line-height:1; padding:2px 4px;"
+              title="Close terminal">✕</button>
+    </div>
+  </div>
+  <!-- xterm container -->
+  <div id="xterm-mount" style="flex:1; overflow:hidden; padding:4px 8px;"></div>
+</div>
+
+<!-- Floating toggle button -->
+<button id="term-toggle-btn" onclick="openTerminal()"
+        style="position:fixed; bottom:20px; right:20px; z-index:60;
+               background:#18171A; color:#fff; border:none; cursor:pointer;
+               border-radius:8px; padding:7px 13px; font-size:12px; font-weight:500;
+               display:flex; align-items:center; gap:6px;
+               box-shadow:0 3px 10px rgba(0,0,0,.25);">
+  <i class="fa-solid fa-terminal" style="font-size:11px;"></i> Terminal
+</button>
+
+<script>
+(function () {
+  const WS_URL = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/author/workspace/{{ paper.id }}/terminal`;
+  const DRAWER  = document.getElementById('terminal-drawer');
+  const MOUNT   = document.getElementById('xterm-mount');
+  const TOGBTN  = document.getElementById('term-toggle-btn');
+  const STATUS  = document.getElementById('term-status');
+  const OPEN_H  = 300;   // px — default open height
+
+  let term = null, fitAddon = null, ws = null, isOpen = false;
+
+  function initXterm () {
+    if (term) return;
+    term = new Terminal({
+      cursorBlink: true, fontSize: 13,
+      fontFamily: '"JetBrains Mono","Fira Code",monospace',
+      theme: { background:'#1e1e1e', foreground:'#d4d4d4', cursor:'#aeafad',
+               selectionBackground:'#264f78' },
+      scrollback: 5000, convertEol: false,
+    });
+    fitAddon = new FitAddon.FitAddon();
+    term.loadAddon(fitAddon);
+    term.open(MOUNT);
+    fitAddon.fit();
+
+    ws = new WebSocket(WS_URL);
+    ws.binaryType = 'arraybuffer';
+    ws.onopen = () => {
+      STATUS.textContent = 'connected';
+      ws.send(JSON.stringify({ type:'resize', cols:term.cols, rows:term.rows }));
+    };
+    ws.onmessage = e => {
+      if (e.data instanceof ArrayBuffer) term.write(new Uint8Array(e.data));
+      else term.write(e.data);
+    };
+    ws.onclose  = () => { STATUS.textContent = 'closed'; term.write('\r\n\x1b[31m[session ended]\x1b[0m\r\n'); };
+    ws.onerror  = () => { STATUS.textContent = 'error'; };
+
+    term.onData(d => { if (ws && ws.readyState === 1) ws.send(d); });
+    term.onResize(({ cols, rows }) => {
+      if (ws && ws.readyState === 1)
+        ws.send(JSON.stringify({ type:'resize', cols, rows }));
+    });
+  }
+
+  window.openTerminal = function () {
+    DRAWER.style.height = OPEN_H + 'px';
+    TOGBTN.style.display = 'none';
+    isOpen = true;
+    initXterm();
+    setTimeout(() => fitAddon && fitAddon.fit(), 200);
+  };
+  window.closeTerminal = function () {
+    DRAWER.style.height = '0';
+    TOGBTN.style.display = 'flex';
+    isOpen = false;
+  };
+
+  // Drag-to-resize the drawer
+  (function () {
+    const handle = document.getElementById('term-drag-handle');
+    let dragging = false, startY, startH;
+    handle.addEventListener('mousedown', e => {
+      dragging = true; startY = e.clientY;
+      startH = DRAWER.offsetHeight;
+      e.preventDefault();
+    });
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      const newH = Math.max(120, startH - (e.clientY - startY));
+      DRAWER.style.height = newH + 'px';
+      if (fitAddon) fitAddon.fit();
+    });
+    document.addEventListener('mouseup', () => { dragging = false; });
+  })();
+
+  window.addEventListener('resize', () => { if (fitAddon && isOpen) fitAddon.fit(); });
+})();
+</script>
+{% endblock %}
+
+{% block scripts %}
+<!-- ── Section Focus Editor Modal ───────────────────────── -->
+<div id="section-focus-modal"
+     class="hidden fixed inset-0 z-50 flex flex-col"
+     style="background: #fff;"
+     role="dialog" aria-modal="true" aria-labelledby="sfm-title">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between px-6 py-3 border-b flex-shrink-0"
+       style="border-color: var(--ds-border); background: #F7F6F3; min-height:52px;">
+    <div class="flex items-center gap-3">
+      <span class="text-xs font-semibold uppercase tracking-wider" style="color:var(--ds-ink-3);">Focus Editor</span>
+      <span id="sfm-title" class="text-sm font-semibold" style="color:var(--ds-ink-1);"></span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span id="sfm-save-status" class="text-xs" style="color:var(--ds-ink-3);"></span>
+      <button onclick="saveSectionEditor()"
+              class="px-4 py-1.5 text-sm font-medium rounded text-white"
+              style="background:#18171A;">Save</button>
+      <button onclick="closeSectionEditor()"
+              class="px-3 py-1.5 text-sm font-medium rounded border"
+              style="border-color:var(--ds-border); color:var(--ds-ink-2);">&#10005; Close</button>
+    </div>
+  </div>
+
+  <!-- Body: editor + tools -->
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- Left: textarea -->
+    <div class="flex flex-col flex-1 overflow-hidden border-r" style="border-color:var(--ds-border);">
+      <textarea id="sfm-textarea"
+                class="flex-1 w-full p-6 text-sm leading-relaxed resize-none focus:outline-none"
+                style="color:var(--ds-ink-1); font-family:inherit; line-height:1.8;"
+                placeholder="Start writing this section&#8230;"></textarea>
+      <div class="flex items-center justify-between px-6 py-2 border-t flex-shrink-0"
+           style="border-color:var(--ds-border); background:#F7F6F3;">
+        <span id="sfm-wordcount" class="text-xs" style="color:var(--ds-ink-3);">0 words</span>
+        <span class="text-xs" style="color:var(--ds-ink-3);">Auto-saves after 2 s of inactivity</span>
+      </div>
+    </div>
+
+    <!-- Right: mini interrogation panel -->
+    <div class="flex flex-col w-80 flex-shrink-0 overflow-hidden">
+      <div class="px-4 py-3 border-b flex-shrink-0" style="background:#F7F6F3; border-color:var(--ds-border);">
+        <p class="text-xs font-semibold uppercase tracking-wider" style="color:var(--ds-ink-3);">Ask Intelligence</p>
+        <p class="text-xs mt-0.5" style="color:var(--ds-ink-3);">Responses can be seeded into this section.</p>
+      </div>
+      <div class="flex flex-col flex-1 overflow-hidden p-4 gap-3">
+        <textarea id="sfm-question"
+                  rows="3"
+                  class="w-full border rounded px-3 py-2 text-xs focus:outline-none resize-none"
+                  style="border-color:var(--ds-border);"
+                  placeholder="Ask about this section&#8230;"></textarea>
+        <button onclick="sfmAsk()"
+                class="w-full py-1.5 text-xs font-medium rounded text-white"
+                style="background:var(--ep-primary, #0284c7);">Ask &#8594;</button>
+        <div id="sfm-response-wrap" class="hidden flex-col gap-2 overflow-y-auto flex-1">
+          <p class="text-xs font-semibold uppercase tracking-wider" style="color:var(--ds-ink-3);">Response</p>
+          <div id="sfm-response-text"
+               class="text-xs leading-relaxed p-3 rounded"
+               style="background:#F7F6F3; color:var(--ds-ink-2); white-space:pre-wrap; overflow-y:auto; max-height:300px;"></div>
+          <button onclick="sfmSeedResponse()"
+                  class="w-full py-1.5 text-xs font-medium rounded border"
+                  style="border-color:var(--ds-border); color:var(--ds-ink-2);">Seed to section notes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const PAPER_ID = {{ paper.id }};
+
+// ── Module state ──────────────────────────────────────────────────────────────
+let defModule = null;   // { id, model_id, display_label, status, last_event_type, last_response }
+let pbModule  = null;
+
+async function loadModules() {
+    try {
+        const resp = await fetch(`/author/api/modules/${PAPER_ID}`);
+        if (!resp.ok) return;
+        const data = await resp.json();
+        const modules = data.modules || [];
+        defModule = modules.find(m => m.role === 'defender') || null;
+        pbModule  = modules.find(m => m.role === 'red_team')  || null;
+        renderPanel('def', defModule);
+        renderPanel('pb',  pbModule);
+    } catch(e) { /* silently fail — panels show empty state */ }
+}
+
+function renderPanel(side, mod) {
+    const isEmpty  = !mod;
+    const emptyEl  = document.getElementById(`${side}-empty`);
+    const modelEl  = document.getElementById(`${side}-model`);
+    const labelEl  = document.getElementById(`${side}-label-display`);
+    const respEl   = document.getElementById(`${side}-response`);
+
+    if (isEmpty) {
+        if (emptyEl) emptyEl.classList.remove('hidden');
+        if (modelEl) modelEl.textContent = '—';
+        if (labelEl) labelEl.textContent = 'not loaded';
+        return;
+    }
+    if (emptyEl) emptyEl.classList.add('hidden');
+    if (modelEl) modelEl.textContent = mod.model_id || '—';
+    if (labelEl) labelEl.textContent = mod.display_label || (side === 'def' ? 'Defender' : 'Pushback');
+
+    // Populate label input with current value
+    const labelInput = document.getElementById(`${side}-label-input`);
+    if (labelInput && mod.display_label) labelInput.value = mod.display_label;
+
+    // Show last response if any
+    if (mod.last_response && respEl) {
+        const badge = mod.last_event_type
+            ? `<span class="inline-block px-1.5 py-0.5 rounded text-xs font-mono mb-2" style="background:#EDECE9; color:var(--ds-ink-2);">${mod.last_event_type}</span>`
+            : '';
+        respEl.innerHTML = badge + `<div style="white-space: pre-wrap;">${escHtml(mod.last_response)}</div>`;
+    }
+}
+
+// ── Module actions ────────────────────────────────────────────────────────────
+async function moduleAction(side, action) {
+    const mod = side === 'def' ? defModule : pbModule;
+    if (!mod) {
+        alert(`No ${side === 'def' ? 'Defender' : 'Pushback'} module loaded. Click Load.`);
+        return;
+    }
+
+    const btnId = side === 'def'
+        ? (action === 'read' ? 'def-read-btn' : 'def-defend-btn')
+        : (action === 'read' ? 'pb-read-btn'  : 'pb-redteam-btn');
+    const btn = document.getElementById(btnId);
+    const respEl = document.getElementById(`${side}-response`);
+    const focus = document.getElementById(`${side}-focus`)?.value?.trim() || '';
+
+    if (btn) { btn.disabled = true; btn.textContent = '…'; }
+    if (respEl) respEl.innerHTML = '<p style="color:var(--ds-ink-3); font-style:italic;">Running…</p>';
+
+    const url = `/author/api/modules/${PAPER_ID}/${mod.id}/${action}`;
+    try {
+        const resp = await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ focus }),
+        });
+        const data = await resp.json();
+        if (resp.ok) {
+            const badge = `<span class="inline-block px-1.5 py-0.5 rounded text-xs font-mono mb-2" style="background:#EDECE9; color:var(--ds-ink-2);">${data.event_type}</span>`;
+            if (respEl) respEl.innerHTML = badge + `<div style="white-space:pre-wrap;">${escHtml(data.response)}</div>`;
+            // Update local state
+            if (side === 'def') { defModule.status = 'active'; defModule.last_event_type = data.event_type; }
+            else                { pbModule.status  = 'active'; pbModule.last_event_type  = data.event_type; }
+            // Re-check gate after red_team action
+            if (action === 'redteam') loadGate();
+        } else {
+            if (respEl) respEl.innerHTML = `<p style="color:#9A9895;">${escHtml(data.detail || 'Error.')}</p>`;
+        }
+    } catch(e) {
+        if (respEl) respEl.innerHTML = '<p style="color:#9A9895;">Network error.</p>';
+    }
+    if (btn) {
+        btn.disabled = false;
+        btn.textContent = action === 'read' ? 'Read' : action === 'redteam' ? 'Red Team' : 'Defend';
+    }
+}
+
+// ── Add module ────────────────────────────────────────────────────────────────
+async function addModule(role) {
+    const resp = await fetch(`/author/api/modules/${PAPER_ID}`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ role, provider: 'anthropic', model_id: 'claude-sonnet-4-6' }),
+    });
+    if (resp.ok) loadModules();
+    else alert('Failed to load module.');
+}
+
+// ── Configure ─────────────────────────────────────────────────────────────────
+function toggleConfigure(side) {
+    const el = document.getElementById(`${side}-configure`);
+    if (el) el.classList.toggle('hidden');
+}
+
+async function saveModuleLabel(side) {
+    const mod = side === 'def' ? defModule : pbModule;
+    if (!mod) return;
+    const label = document.getElementById(`${side}-label-input`)?.value?.trim() || '';
+    await fetch(`/author/api/modules/${PAPER_ID}/${mod.id}`, {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ display_label: label }),
+    });
+    // Update display (label stays UI-only — just update the display text)
+    const labelEl = document.getElementById(`${side}-label-display`);
+    if (labelEl) labelEl.textContent = label || (side === 'def' ? 'Defender' : 'Pushback');
+    toggleConfigure(side);
+}
+
+async function swapModule(side) {
+    // Swap: add a new module with same role, old history preserved
+    if (!confirm('Swap intelligence in this slot? The current module\'s history is preserved.')) return;
+    const role = side === 'def' ? 'defender' : 'red_team';
+    await addModule(role);
+}
+
+// ── Volley ────────────────────────────────────────────────────────────────────
+function toggleVolley() {
+    const body = document.getElementById('volley-body');
+    const chevron = document.getElementById('volley-chevron');
+    body.classList.toggle('hidden');
+    if (chevron) chevron.style.transform = body.classList.contains('hidden') ? '' : 'rotate(180deg)';
+}
+
+async function requestAudit() {
+    const btn = document.getElementById('volley-request-btn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Auditing…'; }
+    try {
+        const resp = await fetch(`/author/api/audit/${PAPER_ID}`, {method: 'POST'});
+        if (resp.ok) location.reload();
+        else {
+            const err = await resp.json().catch(() => ({}));
+            alert(err.detail || 'Audit failed.');
+            if (btn) { btn.disabled = false; btn.textContent = 'Request Audit'; }
+        }
+    } catch(e) {
+        alert('Network error.');
+        if (btn) { btn.disabled = false; btn.textContent = 'Request Audit'; }
+    }
+}
+
+async function submitVolleyResponse(roundNumber) {
+    const text = document.getElementById('volley-response-text')?.value?.trim();
+    if (!text) { alert('Response cannot be empty.'); return; }
+    const resp = await fetch(`/author/api/audit/${PAPER_ID}/respond`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({round_number: roundNumber, author_response: text}),
+    });
+    if (resp.ok) location.reload();
+    else { const err = await resp.json().catch(() => ({})); alert(err.detail || 'Failed.'); }
+}
+
+// ── Gate ──────────────────────────────────────────────────────────────────────
+async function loadGate() {
+    try {
+        const resp = await fetch(`/author/workspace/${PAPER_ID}/gate`);
+        if (!resp.ok) return null;
+        const data = await resp.json();
+        renderGate(data);
+        renderPipeline(data.checks);
+        return data;
+    } catch(e) {
+        document.getElementById('gate-checks').innerHTML =
+            '<div class="px-5 py-4 text-xs" style="color:var(--ds-ink-3);">Gate check unavailable.</div>';
+        return null;
+    }
+}
+
+function renderGate(data) {
+    const badge    = document.getElementById('gate-status-badge');
+    const checksEl = document.getElementById('gate-checks');
+    const sealBtn  = document.getElementById('seal-btn');
+    const blockMsg = document.getElementById('gate-block-msg');
+    const failed   = data.checks.filter(c => !c.passed).length;
+
+    badge.textContent = data.all_passed ? 'OPEN' : `BLOCKED · ${failed}`;
+    badge.style.background = data.all_passed ? '#18171A' : '#fff';
+    badge.style.color      = data.all_passed ? '#fff'    : '#18171A';
+
+    checksEl.innerHTML = data.checks.map(c => `
+        <div class="px-5 py-2.5 flex items-start gap-3 text-xs">
+            <i class="fa-solid fa-${c.passed ? 'circle-check' : 'circle-xmark'} mt-0.5 flex-shrink-0"
+               style="color:${c.passed ? '#18171A' : '#CAC8C2'};"></i>
+            <span class="flex-1" style="color:var(--ds-ink-${c.passed ? '1' : '2'});">${c.label}</span>
+            <span class="font-mono text-right" style="color:var(--ds-ink-3); font-size:10px; max-width:40%;">${c.detail}</span>
+        </div>`).join('');
+
+    if (data.all_passed) {
+        sealBtn.disabled = false;
+        sealBtn.style.background = '#18171A';
+        sealBtn.style.cursor = 'pointer';
+        blockMsg.textContent = 'All conditions met. Ready to seal.';
+        blockMsg.style.color = 'var(--ds-ink-2)';
+    } else {
+        blockMsg.textContent = `${failed} condition${failed !== 1 ? 's' : ''} blocking.`;
+    }
+}
+
+async function sealPaper() {
+    const btn = document.getElementById('seal-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-lock mr-2"></i>Sealing…';
+    try {
+        const resp = await fetch(`/author/workspace/${PAPER_ID}/seal`, {method: 'POST'});
+        const data = await resp.json();
+        if (data.sealed)   { window.location.href = data.redirect; }
+        else if (data.blocked) {
+            renderGate({all_passed: false, checks: data.checks});
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-lock mr-2"></i>Seal and Submit to Review';
+            btn.style.background = '#CAC8C2';
+            btn.style.cursor = 'not-allowed';
+        } else { alert(data.error || 'Seal failed.'); btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-lock mr-2"></i>Seal and Submit to Review'; }
+    } catch(e) { alert('Network error.'); btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-lock mr-2"></i>Seal and Submit to Review'; }
+}
+
+// ── Scorch footer strip ───────────────────────────────────────────────────────
+function scorchStrip() {
+    const titleText    = {{ paper.title | tojson }};
+    const abstractText = {{ paper.abstract | tojson }};
+    const flags = [];
+    if (titleText && abstractText) {
+        const tw = new Set(titleText.toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(w=>w.length>3));
+        const aw = new Set(abstractText.toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(w=>w.length>3));
+        let shared = 0; tw.forEach(w => { if(aw.has(w)) shared++; });
+        if (tw.size > 0 && shared / tw.size < 0.15) flags.push('SCOPE_DRIFT');
+    }
+    const statusEl = document.getElementById('scorch-strip-status');
+    const flagsEl  = document.getElementById('scorch-strip-flags');
+    if (flags.length === 0) {
+        statusEl.textContent = 'clear';
+    } else {
+        statusEl.textContent = '';
+        flagsEl.innerHTML = flags.map(f =>
+            `<span class="px-1.5 py-0.5 rounded font-mono" style="background:#F0EFEB; color:var(--ds-ink-2); font-size:10px;">${f}</span>`
+        ).join('');
+    }
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── Author Profile ────────────────────────────────────────────────────────────
+async function loadProfile() {
+    try {
+        const resp = await fetch(`/author/workspace/${PAPER_ID}/profile`);
+        if (!resp.ok) return;   // not sealed yet — panel stays hidden
+        const data = await resp.json();
+        renderProfile(data);
+    } catch(e) {}
+}
+
+function renderProfile(data) {
+    const panel = document.getElementById('profile-panel');
+    const binsEl = document.getElementById('profile-bins');
+    const evEl   = document.getElementById('profile-evidence');
+    if (!panel) return;
+    panel.classList.remove('hidden');
+
+    const DIM_COLORS = {
+        origin:        '#18171A',
+        investigation: '#5A5856',
+        challenge:     '#18171A',
+        thoroughness:  '#5A5856',
+        volley:        '#9A9895',
+        ambition:      '#18171A',
+    };
+
+    binsEl.innerHTML = (data.bins || []).map(b => `
+        <span class="px-2.5 py-1 rounded text-xs font-medium" style="background:#F0EFEB; color:${DIM_COLORS[b.dim] || 'var(--ds-ink-1)'};">
+            ${escHtml(b.bin)}
+        </span>`).join('');
+
+    evEl.innerHTML = (data.bins || []).map(b => `
+        <div class="flex items-start gap-2 text-xs">
+            <span class="font-mono flex-shrink-0" style="color:var(--ds-ink-3); font-size:10px; padding-top:1px;">${b.dim}</span>
+            <span style="color:var(--ds-ink-2);">${escHtml(b.reason)}</span>
+        </div>`).join('');
+}
+
+// ── Pipeline stage indicator ──────────────────────────────────────────────────
+const PIPELINE_STAGES = [
+    { key: 'gap',           label: 'Gap',           check: () => {{ 'true' if paper.gitgap_gap_id else 'false' }} },
+    { key: 'intelligences', label: 'Intelligences',  check: () => (defModule || pbModule) !== null },
+    { key: 'interrogation', label: 'Interrogation',  gateCode: 'INTERROGATION' },
+    { key: 'red_team',      label: 'Red Team',       gateCode: 'RED_TEAM_RAN' },
+    { key: 'volley',        label: 'Volley',         gateCode: 'VOLLEY_RAN' },
+    { key: 'resolved',      label: 'Resolved',       gateCode: 'VOLLEY_RESOLVED' },
+    { key: 'seal',          label: 'Seal',           check: () => {{ 'true' if paper.status == "under_review" else 'false' }} },
+];
+
+function renderPipeline(gateChecks) {
+    const stepsEl   = document.getElementById('pipeline-steps');
+    const currentEl = document.getElementById('pipeline-current');
+    if (!stepsEl) return;
+
+    const gateMap = {};
+    (gateChecks || []).forEach(c => { gateMap[c.code] = c.passed; });
+
+    let firstIncomplete = null;
+    const html = PIPELINE_STAGES.map((stage, i) => {
+        let passed = false;
+        if (stage.check) {
+            passed = stage.check();
+        } else if (stage.gateCode) {
+            passed = gateMap[stage.gateCode] === true;
+        }
+        if (!passed && !firstIncomplete) firstIncomplete = stage.label;
+        const icon = passed
+            ? `<i class="fa-solid fa-circle-check" style="color:#18171A;"></i>`
+            : `<i class="fa-regular fa-circle" style="color:#CAC8C2;"></i>`;
+        const sep = i < PIPELINE_STAGES.length - 1
+            ? `<i class="fa-solid fa-chevron-right mx-1.5" style="color:#E2E0DB; font-size:8px;"></i>`
+            : '';
+        return `<div class="flex items-center flex-shrink-0 gap-1 text-xs" style="color:${passed ? 'var(--ds-ink-1)' : 'var(--ds-ink-3)'};">
+            ${icon} <span>${stage.label}</span></div>${sep}`;
+    }).join('');
+
+    stepsEl.innerHTML = html;
+    if (currentEl) currentEl.textContent = firstIncomplete ? `Next: ${firstIncomplete}` : 'Ready to seal';
+}
+
+// ── Interrogation ─────────────────────────────────────────────────────────────
+let lastInterrogResponse = '';
+
+function toggleInterrogation() {
+    const body    = document.getElementById('interrog-body');
+    const chevron = document.getElementById('interrog-chevron');
+    body.classList.toggle('hidden');
+    if (chevron) chevron.style.transform = body.classList.contains('hidden') ? '' : 'rotate(180deg)';
+}
+
+async function loadInterrogationHistory() {
+    try {
+        const resp = await fetch(`/author/api/interrogation/${PAPER_ID}`);
+        if (!resp.ok) return;
+        const data = await resp.json();
+        const badge = document.getElementById('interrog-count-badge');
+        if (badge) badge.textContent = `${data.total} exchange${data.total !== 1 ? 's' : ''}`;
+        renderInterrogHistory(data.exchanges || []);
+    } catch(e) {}
+}
+
+function renderInterrogHistory(exchanges) {
+    const el = document.getElementById('interrog-history');
+    if (!el || exchanges.length === 0) return;
+    el.innerHTML = exchanges.slice(0, 5).map(ex => `
+        <div class="px-4 py-3 text-xs">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="font-mono px-1.5 py-0.5 rounded" style="background:#EDECE9; color:var(--ds-ink-2);">${escHtml(ex.expert_domain || '?')}</span>
+            </div>
+            <p class="mb-1" style="color:var(--ds-ink-3); font-style:italic;">${escHtml((ex.question||'').substring(0,120))}${ex.question && ex.question.length > 120 ? '…' : ''}</p>
+            <p style="color:var(--ds-ink-2);">${escHtml((ex.response||'').substring(0,300))}${ex.response && ex.response.length > 300 ? '…' : ''}</p>
+        </div>`).join('');
+}
+
+async function sendInterrogation() {
+    const question = document.getElementById('interrog-question')?.value?.trim();
+    if (!question) { alert('Ask a question first.'); return; }
+
+    const btn = document.getElementById('interrog-ask-btn');
+    const expertLabel = document.getElementById('interrog-expert-label');
+    if (btn) { btn.disabled = true; btn.textContent = 'Asking…'; }
+    if (expertLabel) expertLabel.textContent = 'Routing to expert…';
+
+    try {
+        const resp = await fetch('/author/api/interrogate', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ paper_id: PAPER_ID, question }),
+        });
+        const data = await resp.json();
+        if (resp.ok) {
+            lastInterrogResponse = data.response || '';
+
+            // Show response panel
+            const panel = document.getElementById('interrog-last-response');
+            if (panel) panel.classList.remove('hidden');
+            document.getElementById('interrog-last-expert').textContent = data.expert_title || data.expert_domain || 'expert';
+            document.getElementById('interrog-last-q').textContent = question;
+            document.getElementById('interrog-last-a').textContent = data.response || '';
+            if (expertLabel) expertLabel.textContent = `Routed to: ${data.expert_title || data.expert_domain}`;
+
+            document.getElementById('interrog-question').value = '';
+            loadInterrogationHistory();
+            loadGate(); // gate may now pass INTERROGATION
+        } else {
+            alert(data.detail || 'Interrogation failed.');
+        }
+    } catch(e) { alert('Network error.'); }
+
+    if (btn) { btn.disabled = false; btn.textContent = 'Ask'; }
+}
+
+function toggleSeedDropdown() {
+    document.getElementById('seed-dropdown')?.classList.toggle('hidden');
+}
+
+async function seedSection(sectionId, sectionName) {
+    if (!lastInterrogResponse) { alert('No response to seed yet.'); return; }
+    toggleSeedDropdown();
+
+    const resp = await fetch(`/author/api/sections/${PAPER_ID}/${sectionId}/seed`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ content: lastInterrogResponse, seeded_from: 'interrogation' }),
+    });
+    if (resp.ok) {
+        const dot = document.querySelector(`a[href="#section-${sectionId}"] span`);
+        if (dot) dot.style.background = '#18171A';
+        alert(`Seeded to: ${sectionName}`);
+        loadGate();
+    } else {
+        alert('Seed failed.');
+    }
+}
+
+// ── Research Coverage Analysis ────────────────────────────────────────────────
+async function runCoverage() {
+    const btn = document.getElementById('coverage-run-btn');
+    const claimsEl = document.getElementById('coverage-claims');
+    const summaryEl = document.getElementById('coverage-summary');
+
+    btn.disabled = true;
+    btn.textContent = 'Analyzing…';
+    claimsEl.innerHTML = '<div class="px-5 py-4 text-xs" style="color: var(--ds-ink-3);">Running claim extraction and appreciated gap scoring…</div>';
+    summaryEl.classList.add('hidden');
+
+    try {
+        const resp = await fetch(`/author/workspace/${PAPER_ID}/coverage`);
+        const data = await resp.json();
+
+        if (data.error) {
+            claimsEl.innerHTML = `<div class="px-5 py-4 text-xs" style="color:#B45309;">${data.error}</div>`;
+            return;
+        }
+
+        if (!data.claims || data.claims.length === 0) {
+            claimsEl.innerHTML = '<div class="px-5 py-4 text-xs" style="color: var(--ds-ink-3);">No significant claims detected. Add more content to your sections first.</div>';
+            return;
+        }
+
+        // Summary
+        document.getElementById('cov-covered').textContent = data.summary.covered;
+        document.getElementById('cov-novel').textContent   = data.summary.novel;
+        document.getElementById('cov-needs').textContent   = data.summary.needs_work;
+        summaryEl.classList.remove('hidden');
+
+        // Claims
+        const STATUS_STYLE = {
+            covered:    { bg: '#F0F9F0', border: '#86EFAC', label: 'covered',    dot: '#22C55E' },
+            novel:      { bg: '#F7F6F3', border: '#D1D5DB', label: 'novel fill', dot: '#6B7280' },
+            needs_work: { bg: '#FFFBEB', border: '#FCD34D', label: 'needs work', dot: '#F59E0B' },
+        };
+
+        claimsEl.innerHTML = data.claims.map(c => {
+            const st = STATUS_STYLE[c.status] || STATUS_STYLE.needs_work;
+            const appreciatedPct = Math.round(c.appreciated * 100);
+            const basePct        = Math.round(c.base_similarity * 100);
+
+            let matchHtml = '';
+            if (c.best_match) {
+                const age = c.gap_age_years != null ? `${c.gap_age_years}yr` : '—';
+                matchHtml = `
+                    <div class="mt-2 pl-2 border-l-2" style="border-color:${st.dot};">
+                        <span class="font-medium" style="color: var(--ds-ink-1);">${escHtml(c.best_match.gateway_term || '—')}</span>
+                        <span class="ml-2 font-mono" style="color: var(--ds-ink-3);">PMC${c.best_match.pmcid} · ${c.best_match.pub_year || '?'} · ${age} old</span>
+                        <p class="mt-0.5" style="color: var(--ds-ink-2);">${escHtml(c.best_match.declaration).substring(0,120)}…</p>
+                    </div>`;
+            }
+
+            return `<div class="px-5 py-3" style="background:${st.bg}; border-left: 3px solid ${st.border};">
+                <div class="flex items-start gap-2 mb-1">
+                    <span class="inline-block w-2 h-2 rounded-full mt-1 flex-shrink-0" style="background:${st.dot};"></span>
+                    <span style="color: var(--ds-ink-1); line-height:1.5;">${escHtml(c.text)}</span>
+                </div>
+                <div class="flex items-center gap-3 mt-1 ml-4">
+                    <span class="font-semibold uppercase tracking-wide" style="font-size:10px; color:${st.dot};">${st.label}</span>
+                    <span style="font-size:10px; color: var(--ds-ink-3);">
+                        appreciated <strong>${appreciatedPct}%</strong>
+                        ${c.gap_age_years != null ? `(base ${basePct}% × ${(c.appreciated / Math.max(c.base_similarity,0.001)).toFixed(2)}× age)` : ''}
+                    </span>
+                </div>
+                ${matchHtml}
+            </div>`;
+        }).join('');
+
+    } catch(e) {
+        claimsEl.innerHTML = `<div class="px-5 py-4 text-xs" style="color:#B45309;">Analysis failed: ${e.message}</div>`;
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Re-analyze';
+    }
+}
+
+function escHtml(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+loadModules();
+loadGate();
+loadProfile();
+loadInterrogationHistory();
+scorchStrip();
+
+// ── Section Focus Editor ──────────────────────────────────
+(function () {
+  var _sfmPaperId   = {{ paper.id }};
+  var _sfmSectionId = null;
+  var _sfmDirty     = false;
+  var _sfmTimer     = null;
+  var _sfmLastResp  = '';
+
+  window.openSectionEditor = function (sectionId, sectionName, sectionContent) {
+    _sfmSectionId = sectionId;
+    _sfmDirty     = false;
+    _sfmLastResp  = '';
+
+    document.getElementById('sfm-title').textContent    = sectionName;
+    document.getElementById('sfm-textarea').value       = sectionContent || '';
+    document.getElementById('sfm-save-status').textContent = '';
+    document.getElementById('sfm-question').value       = '';
+    document.getElementById('sfm-response-wrap').classList.add('hidden');
+    document.getElementById('sfm-response-text').textContent = '';
+    _sfmUpdateWordCount();
+
+    document.getElementById('section-focus-modal').classList.remove('hidden');
+    document.getElementById('sfm-textarea').focus();
+  };
+
+  window.closeSectionEditor = function () {
+    if (_sfmDirty) {
+      if (!confirm('You have unsaved changes. Close without saving?')) return;
+    }
+    document.getElementById('section-focus-modal').classList.add('hidden');
+  };
+
+  window.saveSectionEditor = function () {
+    if (!_sfmSectionId) return;
+    var content = document.getElementById('sfm-textarea').value;
+    var status  = document.getElementById('sfm-save-status');
+    status.textContent = 'Saving\u2026';
+    fetch('/author/api/sections/' + _sfmPaperId + '/' + _sfmSectionId, {
+      method:  'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ section_content: content }),
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d.saved) {
+        status.textContent = 'Saved \u2713';
+        _sfmDirty = false;
+        var card = document.getElementById('section-' + _sfmSectionId);
+        if (card) {
+          var p = card.querySelector('.section-content-display');
+          if (p) p.textContent = content;
+        }
+      } else {
+        status.textContent = 'Error saving';
+      }
+    })
+    .catch(function () { status.textContent = 'Error saving'; });
+  };
+
+  function _sfmUpdateWordCount() {
+    var words = document.getElementById('sfm-textarea').value
+      .trim().split(/\s+/).filter(function (w) { return w.length > 0; }).length;
+    document.getElementById('sfm-wordcount').textContent = words + ' word' + (words === 1 ? '' : 's');
+  }
+
+  function _sfmScheduleAutoSave() {
+    _sfmDirty = true;
+    document.getElementById('sfm-save-status').textContent = 'Unsaved\u2026';
+    clearTimeout(_sfmTimer);
+    _sfmTimer = setTimeout(window.saveSectionEditor, 2000);
+  }
+
+  window.sfmAsk = function () {
+    var q = document.getElementById('sfm-question').value.trim();
+    if (!q) return;
+    var btn = document.querySelector('#section-focus-modal button[onclick="sfmAsk()"]');
+    btn.disabled = true; btn.textContent = '\u2026';
+    fetch('/author/api/interrogate', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ paper_id: _sfmPaperId, question: q }),
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      _sfmLastResp = d.response || d.answer || JSON.stringify(d);
+      document.getElementById('sfm-response-text').textContent = _sfmLastResp;
+      document.getElementById('sfm-response-wrap').classList.remove('hidden');
+    })
+    .catch(function () {
+      document.getElementById('sfm-response-text').textContent = 'Request failed.';
+      document.getElementById('sfm-response-wrap').classList.remove('hidden');
+    })
+    .finally(function () { btn.disabled = false; btn.textContent = 'Ask \u2192'; });
+  };
+
+  window.sfmSeedResponse = function () {
+    if (!_sfmLastResp || !_sfmSectionId) return;
+    fetch('/author/api/sections/' + _sfmPaperId + '/' + _sfmSectionId + '/seed', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ content: _sfmLastResp, seeded_from: 'interrogation-modal' }),
+    })
+    .then(function (r) { return r.json(); })
+    .then(function () {
+      var btn = document.querySelector('#section-focus-modal button[onclick="sfmSeedResponse()"]');
+      btn.textContent = 'Seeded \u2713';
+      btn.disabled = true;
+      setTimeout(function () { btn.textContent = 'Seed to section notes'; btn.disabled = false; }, 2000);
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var ta = document.getElementById('sfm-textarea');
+    ta.addEventListener('input', function () { _sfmUpdateWordCount(); _sfmScheduleAutoSave(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !document.getElementById('section-focus-modal').classList.contains('hidden')) {
+        window.closeSectionEditor();
+      }
+    });
+  });
+})();
+</script>
+{% endblock %}
