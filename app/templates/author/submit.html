@@ -1,0 +1,792 @@
+{% extends "author/base_author.html" %}
+{% block title %}New Submission — eaiou{% endblock %}
+{% block page_title %}New Submission{% endblock %}
+{% block nav_submit %}bg-primary-50 text-primary-700{% endblock %}
+
+{% block author_content %}
+<div class="max-w-3xl mx-auto">
+
+    <div class="mb-6 flex items-center justify-between">
+        <div>
+            <h2 class="text-xl font-bold" style="color: var(--ds-ink-1);">Submit a Paper</h2>
+            <p class="text-sm mt-0.5" style="color: var(--ds-ink-3);">Your submission date is sealed at receipt.</p>
+        </div>
+    </div>
+
+    <!-- ── Populate from document ──────────────────────────── -->
+    <div class="mb-6 rounded-lg border overflow-hidden" style="border-color: var(--ds-border);">
+        <div class="px-5 py-3 border-b flex items-center justify-between" style="background: #F7F6F3; border-color: var(--ds-border);">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-file-arrow-up text-sm" style="color: var(--ds-ink-2);"></i>
+                <h3 class="text-sm font-semibold" style="color: var(--ds-ink-1);">Populate from document</h3>
+            </div>
+            <span class="text-xs" style="color: var(--ds-ink-3);">PDF · DOCX · TXT — 10 MB max</span>
+        </div>
+        <div class="p-5">
+            <label id="upload-dropzone"
+                   class="flex flex-col items-center justify-center border-2 border-dashed rounded-lg cursor-pointer py-6 transition-colors"
+                   style="border-color: var(--ds-border);"
+                   onmouseenter="this.style.borderColor='#18171A';"
+                   onmouseleave="this.style.borderColor='var(--ds-border)';">
+                <i class="fa-solid fa-cloud-arrow-up text-2xl mb-2" style="color: var(--ds-ink-3);"></i>
+                <span class="text-sm font-medium" style="color: var(--ds-ink-2);">Drop file or click to browse</span>
+                <span class="text-xs mt-1" style="color: var(--ds-ink-3);">Title and abstract will be extracted automatically.</span>
+                <input id="doc-upload-input" type="file" accept=".pdf,.docx,.txt" class="hidden">
+            </label>
+
+            {% if drawer_files %}
+            <div class="mt-3">
+                <p class="text-xs font-medium mb-1.5" style="color: var(--ds-ink-3);">Or pick from your file drawer:</p>
+                <div class="flex flex-wrap gap-2">
+                    {% for f in drawer_files[:8] %}
+                    <button type="button"
+                        onclick="populateFromDrawer({{ f.id }})"
+                        class="px-3 py-1 rounded border text-xs truncate"
+                        style="border-color: var(--ds-border); color: var(--ds-ink-2); max-width: 200px;"
+                        title="{{ f.original_name }}">
+                        <i class="fa-solid fa-file mr-1"></i>{{ f.original_name[:28] }}{% if f.original_name|length > 28 %}…{% endif %}
+                    </button>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div id="upload-status" class="hidden mt-4 text-xs p-3 rounded" style="background: #F7F6F3; color: var(--ds-ink-2);"></div>
+        </div>
+    </div>
+
+    {% if error %}
+    <div class="mb-5 border-l-4 p-4 rounded" style="background: #F7F6F3; border-left-color: #18171A;">
+        <p class="text-sm" style="color: var(--ds-ink-1);">{{ error }}</p>
+    </div>
+    {% endif %}
+
+    <form method="post" action="/author/submit" class="space-y-6">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+        {% if gap %}
+        <input type="hidden" name="gitgap_gap_id" value="{{ gap.id }}">
+        <input type="hidden" name="gitgap_source_pmcid" value="{{ gap.pmcid }}">
+        {% endif %}
+
+        <!-- Paper Details -->
+        <div class="bg-white rounded-lg border overflow-hidden" style="border-color: var(--ds-border);">
+            <div class="px-6 py-4 border-b flex items-center justify-between" style="background: #F7F6F3; border-color: var(--ds-border);">
+                <h3 class="text-sm font-semibold" style="color: var(--ds-ink-1);">Paper Details</h3>
+                <span class="text-xs" style="color: var(--ds-ink-3);">Step 1 of 3</span>
+            </div>
+            <div class="p-6 space-y-5">
+
+                <div>
+                    <label class="block text-sm font-medium mb-1" style="color: var(--ds-ink-1);" for="title">
+                        Title <span style="color: var(--ds-ink-1);">*</span>
+                    </label>
+                    <input type="text" id="title" name="title" required
+                        class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
+                        style="border-color: var(--ds-border); --tw-ring-color: #9A9895;"
+                        placeholder="Full paper title"
+                        value="{{ form.title or '' }}">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1" style="color: var(--ds-ink-1);" for="abstract">
+                        Abstract <span style="color: var(--ds-ink-1);">*</span>
+                    </label>
+                    <textarea id="abstract" name="abstract" rows="6" required
+                        class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
+                        style="border-color: var(--ds-border); --tw-ring-color: #9A9895;"
+                        placeholder="Comprehensive summary of your research">{{ form.abstract or '' }}</textarea>
+                    <div class="flex justify-end mt-1">
+                        <span class="text-xs" style="color: var(--ds-ink-3);"><span id="abstract-count">0</span> words</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-sm font-medium mb-1" style="color: var(--ds-ink-1);" for="author_name">
+                            Author Name <span style="color: var(--ds-ink-1);">*</span>
+                        </label>
+                        <input type="text" id="author_name" name="author_name" required
+                            class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
+                            style="border-color: var(--ds-border); --tw-ring-color: #9A9895;"
+                            placeholder="Full legal name"
+                            value="{{ form.author_name or '' }}">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1" style="color: var(--ds-ink-1);" for="orcid">
+                            ORCID
+                        </label>
+                        <input type="text" id="orcid" name="orcid"
+                            class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
+                            style="border-color: var(--ds-border); --tw-ring-color: #9A9895;"
+                            placeholder="0000-0000-0000-0000"
+                            value="{{ form.orcid or '' }}">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1" style="color: var(--ds-ink-1);" for="keywords">
+                        Keywords
+                    </label>
+                    <input type="text" id="keywords" name="keywords"
+                        class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
+                        style="border-color: var(--ds-border); --tw-ring-color: #9A9895;"
+                        placeholder="Comma-separated, e.g. cosmology, Hubble tension, UHA"
+                        value="{{ form.keywords or '' }}">
+                    <p class="text-xs mt-1" style="color: var(--ds-ink-3);">3–6 keywords used for indexing and discovery.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Author Attestation -->
+        <div class="bg-white rounded-lg border overflow-hidden" style="border-color: var(--ds-ink-1);">
+            <div class="px-6 py-4 border-b flex items-center justify-between" style="background: var(--ds-ink-1);">
+                <h3 class="text-sm font-semibold" style="color: #fff;">Author Attestation</h3>
+                <span class="text-xs" style="color: #aaa;">Step 2 of 3 — required</span>
+            </div>
+            <div class="p-6 space-y-4">
+                <p class="text-xs" style="color: var(--ds-ink-3);">
+                    These are the acts that constitute authorship. All must be checked.
+                    They are sealed at submission and cannot be amended.
+                </p>
+
+                {% set attest_items = [
+                    ("attest_conceived",    "I conceived, identified, or accepted this research question as my own intellectual commitment."),
+                    ("attest_methodology",  "I made the methodological decisions and choices in this work."),
+                    ("attest_interpreted",  "I interpreted the results and drew the conclusions."),
+                    ("attest_responsibility","I have read the complete submission and accept full responsibility for its content.")
+                ] %}
+
+                {% for name, label in attest_items %}
+                <label class="flex items-start gap-3 cursor-pointer group">
+                    <input type="checkbox" name="{{ name }}" value="1" required
+                        class="mt-0.5 h-4 w-4 rounded"
+                        style="accent-color: #18171A;">
+                    <span class="text-sm" style="color: var(--ds-ink-2);">{{ label }}</span>
+                </label>
+                {% endfor %}
+
+                {% if gap %}
+                <label class="flex items-start gap-3 cursor-pointer border-t pt-4" style="border-color: var(--ds-border);">
+                    <input type="checkbox" name="attest_gap_anchor" value="1" required
+                        class="mt-0.5 h-4 w-4 rounded"
+                        style="accent-color: #18171A;">
+                    <span class="text-sm" style="color: var(--ds-ink-2);">
+                        I acknowledge <strong>Gap #{{ gap.id }}</strong> as the CAUGHT anchor for this work and accept it as the motivating question I am formally responding to.
+                    </span>
+                </label>
+                {% endif %}
+
+                <!-- CAN acts — optional assistance declaration -->
+                <div class="border-t pt-4" style="border-color: var(--ds-border);">
+                    <p class="text-xs font-medium mb-3" style="color: var(--ds-ink-3); text-transform: uppercase; letter-spacing: 0.05em;">
+                        Production assistance used (optional)
+                    </p>
+                    <div class="grid grid-cols-2 gap-2">
+                        {% set can_items = [
+                            ("can_spellcheck",   "Spelling / grammar / style"),
+                            ("can_lit_search",   "Literature search"),
+                            ("can_data_format",  "Data formatting / visualization"),
+                            ("can_statistical",  "Statistical computation tools"),
+                            ("can_translation",  "Translation"),
+                            ("can_figure_gen",   "Figure generation")
+                        ] %}
+                        {% for name, label in can_items %}
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" name="{{ name }}" value="1"
+                                class="h-3.5 w-3.5 rounded" style="accent-color: #18171A;">
+                            <span class="text-xs" style="color: var(--ds-ink-3);">{{ label }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Disclosure -->
+        <div class="bg-white rounded-lg border overflow-hidden" style="border-color: var(--ds-border);">
+            <div class="px-6 py-4 border-b flex items-center justify-between" style="background: #F7F6F3; border-color: var(--ds-border);">
+                <h3 class="text-sm font-semibold" style="color: var(--ds-ink-1);">AI Involvement Record</h3>
+                <span class="text-xs" style="color: var(--ds-ink-3);">Step 3 of 3</span>
+            </div>
+            <div class="p-6 space-y-5">
+                <p class="text-xs" style="color: var(--ds-ink-3);">Required. AI involvement depth is sealed into the provenance record. Identity of AI systems is tracked by IntelliD and does not appear here. Involvement level does not affect scoring.</p>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1" style="color: var(--ds-ink-1);" for="ai_disclosure_level">
+                        Level of AI Involvement <span style="color: var(--ds-ink-1);">*</span>
+                    </label>
+                    <select id="ai_disclosure_level" name="ai_disclosure_level" required
+                        class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
+                        style="border-color: var(--ds-border); --tw-ring-color: #9A9895;">
+                        <option value="">Select level</option>
+                        <option value="none" {% if form.ai_disclosure_level == 'none' %}selected{% endif %}>No AI tools used — AI Detection Engaged</option>
+                        <option value="editing" {% if form.ai_disclosure_level == 'editing' %}selected{% endif %}>Editing only — grammar, spelling, clarity</option>
+                        <option value="analysis" {% if form.ai_disclosure_level == 'analysis' %}selected{% endif %}>Analysis assistance — data, literature, synthesis</option>
+                        <option value="drafting" {% if form.ai_disclosure_level == 'drafting' %}selected{% endif %}>Co-drafting — AI contributed to written content</option>
+                        <option value="collaborative" {% if form.ai_disclosure_level == 'collaborative' %}selected{% endif %}>Collaborative — AI as named intellectual contributor</option>
+                    </select>
+                </div>
+
+                <!-- AI detection consent — shown only when "none" is selected -->
+                <div id="ai-detection-consent-block" style="display:none;">
+                    <div class="rounded-lg border-l-4 p-4" style="background: #F0EFEB; border-left-color: #18171A;">
+                        <p class="text-sm font-semibold mb-1" style="color: var(--ds-ink-1);">AI Detection Terms</p>
+                        <p class="text-sm mb-3" style="color: var(--ds-ink-2);">
+                            Declaring no AI involvement authorizes eaiou to apply AI detection tools to this submission.
+                            Detection results become a permanent part of this paper's provenance record.
+                            This work may be used to improve eaiou's detection methodologies.
+                        </p>
+                        <label class="flex items-start gap-2 cursor-pointer">
+                            <input type="checkbox" id="attest_ai_detection_consent" name="attest_ai_detection_consent" value="1"
+                                class="mt-0.5 flex-shrink-0"
+                                {% if form.attest_ai_detection_consent %}checked{% endif %}>
+                            <span class="text-sm font-medium" style="color: var(--ds-ink-1);">
+                                I consent to AI detection and authorize use of this work for detection methodology improvement.
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1" style="color: var(--ds-ink-1);" for="ai_disclosure_notes">
+                        AI Involvement Notes
+                    </label>
+                    <textarea id="ai_disclosure_notes" name="ai_disclosure_notes" rows="3"
+                        class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
+                        style="border-color: var(--ds-border); --tw-ring-color: #9A9895;"
+                        placeholder="For which tasks was AI used, and what was retained vs. discarded.">{{ form.ai_disclosure_notes or '' }}</textarea>
+                </div>
+            </div>
+        </div>
+        <script>
+            (function(){
+                var sel = document.getElementById('ai_disclosure_level');
+                var block = document.getElementById('ai-detection-consent-block');
+                function sync(){ block.style.display = sel.value === 'none' ? '' : 'none'; }
+                sel.addEventListener('change', sync);
+                sync();
+            })();
+        </script>
+
+        <!-- Temporal Blindness Notice -->
+        <div class="border-l-4 rounded-lg p-4" style="background: #F0EFEB; border-left-color: #18171A;">
+            <div class="flex items-start space-x-3">
+                <i class="fa-solid fa-lock mt-0.5" style="color: var(--ds-ink-1);"></i>
+                <div>
+                    <p class="text-sm font-medium" style="color: var(--ds-ink-1);">Submission date is sealed at receipt</p>
+                    <p class="text-xs mt-1" style="color: var(--ds-ink-2);">Once submitted, the timestamp is sealed and cannot be altered. Papers are evaluated on quality, not arrival order. This is a core eaiou doctrine.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-end space-x-3">
+            <a href="/author/"
+               class="px-4 py-2 bg-white border text-sm font-medium rounded-md"
+               style="border-color: var(--ds-border); color: var(--ds-ink-1);">
+                Cancel
+            </a>
+            <button type="submit"
+                class="inline-flex items-center px-5 py-2 text-white text-sm font-medium rounded-md"
+                style="background: #18171A;">
+                <i class="fa-solid fa-upload mr-2"></i>Submit Paper
+            </button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}
+
+{% block left_widgets %}
+<!-- Structure Formulator widget -->
+<div class="rounded-lg border overflow-hidden mb-3" style="border-color: var(--ds-border);">
+
+    <div class="px-3 py-2 border-b flex items-center gap-2" style="background: #18171A; border-color: #333;">
+        <i class="fa-solid fa-diagram-project" style="color: #fff; font-size:.8rem;"></i>
+        <span class="text-xs font-semibold" style="color: #fff;">Structure</span>
+        <span class="ml-auto text-xs" style="color: #9A9895;" id="struct-status">reading</span>
+    </div>
+
+    <div class="flex border-b" style="border-color: var(--ds-border);">
+        <button id="tab-reflect" onclick="structTab('reflect')"
+            class="flex-1 py-1.5 text-xs font-medium border-b-2"
+            style="border-color: #18171A; color: #18171A; background: #F7F6F3;">
+            Reflect
+        </button>
+        <button id="tab-build" onclick="structTab('build')"
+            class="flex-1 py-1.5 text-xs font-medium border-b-2"
+            style="border-color: transparent; color: var(--ds-ink-3); background: #fff;">
+            Build
+        </button>
+    </div>
+
+    <div id="struct-reflect" class="p-3 overflow-y-auto" style="max-height: 340px;">
+        <p class="text-xs mb-3" style="color: var(--ds-ink-3);">What the abstract says it is — extracted as written.</p>
+        <div class="space-y-2" id="struct-slots">
+            {% for slot_id, slot_label in [
+                ('struct-problem',    'Problem'),
+                ('struct-hypothesis', 'Hypothesis'),
+                ('struct-method',     'Method'),
+                ('struct-finding',    'Finding'),
+                ('struct-implication','Implication')
+            ] %}
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: var(--ds-ink-3); letter-spacing:.06em; font-size:.6rem;">{{ slot_label }}</p>
+                <div id="{{ slot_id }}" class="rounded p-2 text-xs min-h-6" style="background: #F7F6F3; color: var(--ds-ink-3); font-style: italic;">—</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="struct-build" class="p-3" style="display:none;">
+        <p class="text-xs mb-2" style="color: var(--ds-ink-3);">Build a section scaffold from your hypothesis and gap anchor.</p>
+        <button id="struct-build-btn" onclick="structBuild()"
+            class="w-full py-1.5 px-3 text-xs font-medium rounded text-white mb-3"
+            style="background: #18171A;">
+            <i class="fa-solid fa-wand-magic-sparkles mr-1.5"></i>Build Structure
+        </button>
+        <div id="struct-build-result" class="space-y-2"></div>
+        <p id="struct-build-hint" class="text-xs mt-1" style="color: var(--ds-ink-3);">Reads: title, abstract, gap declaration.</p>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block author_sidebar %}
+
+{% if gap %}
+<div class="eaiou-widget rounded-lg border overflow-hidden mb-3" style="border-color: var(--ds-border);" data-widget-id="gap-anchor">
+    <div class="px-4 py-2.5 border-b flex items-center gap-2" style="background: #18171A; border-color: #333;">
+        <i class="fa-solid fa-anchor text-xs" style="color: #fff;"></i>
+        <span class="text-xs font-semibold" style="color: #fff;">Responding to Gap #{{ gap.id }}</span>
+        {% if gap.pub_year %}
+        <span class="ml-auto text-xs" style="color: #9A9895;">{{ 2026 - gap.pub_year }} yr unresolved</span>
+        {% endif %}
+    </div>
+    <div class="p-4">
+        {% if gap.gateway_term %}
+        <p class="text-xs font-semibold uppercase tracking-wider mb-1.5" style="color: var(--ds-ink-3);">Gateway term</p>
+        <p class="text-sm font-medium mb-3" style="color: var(--ds-ink-1);">{{ gap.gateway_term }}</p>
+        {% endif %}
+        <p class="text-xs font-semibold uppercase tracking-wider mb-1.5" style="color: var(--ds-ink-3);">Declaration</p>
+        <blockquote class="text-xs leading-relaxed border-l-2 pl-3" style="border-color: #18171A; color: var(--ds-ink-2);">
+            {{ gap.declaration_text[:280] }}{% if gap.declaration_text|length > 280 %}…{% endif %}
+        </blockquote>
+        {% if gap.pmcid %}
+        <p class="text-xs mt-2" style="color: var(--ds-ink-3);">PMC{{ gap.pmcid }}{% if gap.pub_year %} · {{ gap.pub_year }}{% endif %}</p>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
+<div class="eaiou-widget rounded-lg border overflow-hidden mb-3" style="border-color: var(--ds-border);" data-widget-id="submit-checklist">
+    <div class="px-4 py-2.5 border-b" style="background: #F7F6F3; border-color: var(--ds-border);">
+        <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Before you submit</p>
+    </div>
+    <div class="p-4 space-y-2.5">
+        {% for icon, label in [
+            ('fa-clock',        'Submission date sealed at receipt — cannot be changed'),
+            ('fa-robot',        'Declare AI involvement honestly — affects provenance record'),
+            ('fa-check-to-slot','All attestation boxes required — submission is blocked otherwise'),
+            ('fa-pencil',       'You will write and expand sections in the Workspace after submitting'),
+            ('fa-lock',         'Paper must pass 8 gate checks before it can be sealed for review'),
+        ] %}
+        <div class="flex items-start gap-2.5">
+            <i class="fa-solid {{ icon }} mt-0.5 flex-shrink-0" style="color: var(--ds-ink-3); font-size:.75rem; width:14px;"></i>
+            <span class="text-xs leading-relaxed" style="color: var(--ds-ink-2);">{{ label }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="eaiou-widget rounded-lg border overflow-hidden" style="border-color: var(--ds-border);" data-widget-id="policy-links-submit">
+    <div class="px-4 py-2.5 border-b" style="background: #F7F6F3; border-color: var(--ds-border);">
+        <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Policies</p>
+    </div>
+    <div class="p-4 space-y-2">
+        {% for href, icon, label in [
+            ('/policy/temporal-blindness',    'fa-lock',      'Temporal Blindness'),
+            ('/policy/intelligence-blindness','fa-eye-slash', 'Intelligence Blindness'),
+            ('/policy/ai-disclosure',         'fa-file-lines','AI Disclosure'),
+        ] %}
+        <a href="{{ href }}" class="flex items-center gap-2 text-xs hover:underline" style="color: var(--ds-ink-3);">
+            <i class="fa-regular {{ icon }} w-3.5"></i>{{ label }}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const abstractEl = document.getElementById('abstract');
+    const countEl = document.getElementById('abstract-count');
+    function updateCount() {
+        const text = abstractEl.value.trim();
+        countEl.textContent = text ? text.split(/\s+/).length : 0;
+    }
+    abstractEl.addEventListener('input', updateCount);
+    updateCount();
+
+    window.runStructReflect = function () {
+        var text = abstractEl.value.trim();
+        if (!text) return;
+        document.querySelectorAll('#struct-slots > div > div').forEach(function(el) {
+            el.textContent = '\u2014';
+            el.style.fontStyle = 'italic';
+        });
+        abstractEl.dispatchEvent(new Event('input'));
+    };
+
+    // ── Structure Formulator — left panel ────────────────────────────
+    // Extracts structural components from the abstract as written.
+    // No suggestions. Shows what is present, leaves blank what is not.
+
+    const STRUCT_PATTERNS = {
+        'struct-problem': [
+            /(?:problem|challenge|gap|unknown|question|remains? unclear|not yet|remains? to be|unresolved|poorly understood|lacks?|absence of|limitation)/i,
+        ],
+        'struct-hypothesis': [
+            /(?:we propose|i propose|we argue|we hypothesize|this work|our approach|this paper presents|this paper argues|we suggest that|our framework|we show that|we demonstrate that)/i,
+        ],
+        'struct-method': [
+            /(?:we use|using|our method|our analysis|we measure|we model|we compute|we apply|dataset|experiment|simulation|we test|we examine|we analyze)/i,
+        ],
+        'struct-finding': [
+            /(?:we find|we show|we demonstrate|results? (?:show|indicate|suggest)|we observe|we confirm|we report|our results?|this (?:shows?|demonstrates?|confirms?))/i,
+        ],
+        'struct-implication': [
+            /(?:suggest|implication|future work|this means|therefore|thus|enable|may explain|has implications|opens? (?:a )?(?:new )?(?:path|avenue|question)|paves? the way)/i,
+        ],
+    };
+
+    function structExtract(text) {
+        if (!text || text.length < 20) return {};
+        const sentences = text.match(/[^.!?]+[.!?]*/g) || [text];
+        const result = {};
+        for (const [slotId, patterns] of Object.entries(STRUCT_PATTERNS)) {
+            for (const sent of sentences) {
+                if (patterns.some(p => p.test(sent))) {
+                    result[slotId] = sent.trim().replace(/\s+/g, ' ');
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    function renderStruct(extracted) {
+        const slots = Object.keys(STRUCT_PATTERNS);
+        let filled = 0;
+        slots.forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            if (extracted[id]) {
+                const truncated = extracted[id].length > 120 ? extracted[id].slice(0, 117) + '…' : extracted[id];
+                el.textContent = truncated;
+                el.style.color = 'var(--ds-ink-2)';
+                el.style.fontStyle = 'normal';
+                el.style.background = '#F0EFEB';
+                filled++;
+            } else {
+                el.textContent = '—';
+                el.style.color = 'var(--ds-ink-3)';
+                el.style.fontStyle = 'italic';
+                el.style.background = '#F7F6F3';
+            }
+        });
+        const status = document.getElementById('struct-status');
+        if (status) status.textContent = filled + '/' + slots.length + ' found';
+    }
+
+    function structAudit() {
+        const abstract = (document.getElementById('abstract')?.value || '').trim();
+        renderStruct(structExtract(abstract));
+    }
+
+    // ── Scorch: persistent self-referential auditor ──────────────────
+    // Checks work against work. No questions. Observations only.
+
+    const SCORCH_DEBOUNCE = 900; // ms after last keystroke
+    let scorchTimer = null;
+
+    function scorchWords(str) {
+        return str.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(w => w.length > 3);
+    }
+
+    function scorchOverlap(a, b) {
+        const sa = new Set(scorchWords(a));
+        const sb = new Set(scorchWords(b));
+        let shared = 0;
+        sa.forEach(w => { if (sb.has(w)) shared++; });
+        return sa.size > 0 ? shared / sa.size : 0;
+    }
+
+    function scorchAudit() {
+        const title    = (document.getElementById('title')?.value || '').trim();
+        const abstract = (document.getElementById('abstract')?.value || '').trim();
+        const keywords = (document.getElementById('keywords')?.value || '').trim();
+        const gapText  = document.querySelector('.declaration-text')?.textContent?.trim() || '';
+
+        const findings = [];
+
+        // 1. Title scope vs abstract scope
+        if (title.length > 0 && abstract.length > 0) {
+            const overlap = scorchOverlap(title, abstract);
+            if (overlap < 0.15) {
+                findings.push({
+                    code: 'SCOPE_DRIFT',
+                    text: 'Title and abstract share few terms. They may be describing different scopes.'
+                });
+            }
+        }
+
+        // 2. Keyword coverage in abstract
+        if (keywords.length > 0 && abstract.length > 0) {
+            const kws = keywords.split(',').map(k => k.trim().toLowerCase()).filter(k => k.length > 2);
+            const absLow = abstract.toLowerCase();
+            const missing = kws.filter(k => !absLow.includes(k));
+            if (missing.length > 0 && missing.length >= kws.length / 2) {
+                findings.push({
+                    code: 'KEYWORD_ABSENT',
+                    text: 'Keywords not appearing in abstract: ' + missing.slice(0, 3).join(', ') + (missing.length > 3 ? '…' : '') + '.'
+                });
+            }
+        }
+
+        // 3. Abstract length relative to claim weight
+        if (abstract.length > 0) {
+            const words = abstract.split(/\s+/).filter(w => w).length;
+            if (words < 80) {
+                findings.push({
+                    code: 'ABSTRACT_THIN',
+                    text: `Abstract is ${words} words. A comprehensive summary typically needs more depth.`
+                });
+            }
+        }
+
+        // 4. Gap anchor coherence — does abstract address the gap?
+        if (gapText.length > 30 && abstract.length > 0) {
+            const overlap = scorchOverlap(gapText, abstract);
+            if (overlap < 0.1) {
+                findings.push({
+                    code: 'GAP_DISCONNECT',
+                    text: 'Abstract shares little with the gap declaration. The response may not be addressing the anchored gap.'
+                });
+            }
+        }
+
+        // 5. Original claim signal — conceived checkbox vs abstract voice
+        const conceived = document.querySelector('input[name="attest_conceived"]')?.checked;
+        if (conceived && abstract.length > 0) {
+            const absLow = abstract.toLowerCase();
+            const originalitySignals = ['we propose', 'i propose', 'this work', 'we show', 'we demonstrate',
+                'we argue', 'this paper', 'our approach', 'we present', 'we introduce',
+                'we find', 'we derive', 'i argue', 'i show'];
+            const hasSignal = originalitySignals.some(s => absLow.includes(s));
+            if (!hasSignal) {
+                findings.push({
+                    code: 'CLAIM_ABSENT',
+                    text: 'Authorship of conception is attested but abstract contains no stated original claim or finding.'
+                });
+            }
+        }
+
+        renderFindings(findings);
+    }
+
+    function renderFindings(findings) {
+        const container = document.getElementById('scorch-findings');
+        const cleanMsg  = document.getElementById('scorch-clean');
+        const status    = document.getElementById('scorch-status');
+
+        container.innerHTML = '';
+
+        if (findings.length === 0) {
+            cleanMsg.style.display = 'block';
+            status.textContent = 'clear';
+        } else {
+            cleanMsg.style.display = 'none';
+            status.textContent = findings.length + ' flag' + (findings.length > 1 ? 's' : '');
+            findings.forEach(f => {
+                const el = document.createElement('div');
+                el.className = 'rounded p-3 text-xs';
+                el.style.cssText = 'background:#F0EFEB; border-left:2px solid #18171A;';
+                el.innerHTML = `<span class="font-mono" style="color:var(--ds-ink-3);font-size:10px;">${f.code}</span>
+                    <p style="color:var(--ds-ink-2);margin-top:2px;line-height:1.5;">${f.text}</p>`;
+                container.appendChild(el);
+            });
+        }
+    }
+
+    function scorchWatch() {
+        clearTimeout(scorchTimer);
+        scorchTimer = setTimeout(() => { scorchAudit(); structAudit(); }, SCORCH_DEBOUNCE);
+    }
+
+    // Attach to all authorship fields
+    ['title', 'abstract', 'keywords'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', scorchWatch);
+    });
+    document.querySelectorAll('input[name^="attest_"]').forEach(el => {
+        el.addEventListener('change', scorchWatch);
+    });
+
+    // Initial pass
+    scorchAudit();
+    structAudit();
+
+    // ── Structure tab switcher ────────────────────────────────────────
+    function structTab(mode) {
+        const reflect = document.getElementById('struct-reflect');
+        const build   = document.getElementById('struct-build');
+        const tR = document.getElementById('tab-reflect');
+        const tB = document.getElementById('tab-build');
+        if (mode === 'reflect') {
+            reflect.style.display = ''; build.style.display = 'none';
+            tR.style.borderColor = '#18171A'; tR.style.color = '#18171A'; tR.style.background = '#F7F6F3';
+            tB.style.borderColor = 'transparent'; tB.style.color = 'var(--ds-ink-3)'; tB.style.background = '#fff';
+        } else {
+            reflect.style.display = 'none'; build.style.display = '';
+            tB.style.borderColor = '#18171A'; tB.style.color = '#18171A'; tB.style.background = '#F7F6F3';
+            tR.style.borderColor = 'transparent'; tR.style.color = 'var(--ds-ink-3)'; tR.style.background = '#fff';
+        }
+    }
+
+    // ── Structure Intelligence — Build mode ───────────────────────────
+    async function structBuild() {
+        const btn = document.getElementById('struct-build-btn');
+        const result = document.getElementById('struct-build-result');
+        const hint = document.getElementById('struct-build-hint');
+        const statusEl = document.getElementById('struct-status');
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5"></i>Building…';
+        result.innerHTML = '';
+        if (statusEl) statusEl.textContent = 'building…';
+
+        const payload = {
+            title:           document.getElementById('title')?.value?.trim() || '',
+            hypothesis:      document.getElementById('abstract')?.value?.trim() || '',
+            gap_declaration: document.querySelector('.declaration-text')?.textContent?.trim() || '',
+            keywords:        document.getElementById('keywords')?.value?.trim() || '',
+        };
+
+        try {
+            const resp = await fetch('/author/api/structure', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload),
+            });
+
+            if (!resp.ok) {
+                const err = await resp.json().catch(() => ({}));
+                result.innerHTML = `<div class="rounded p-3 text-xs" style="background:#F0EFEB;border-left:2px solid #18171A;">
+                    <p style="color:var(--ds-ink-2);">${err.detail || 'Structure Intelligence unavailable.'}</p></div>`;
+                if (statusEl) statusEl.textContent = 'error';
+                return;
+            }
+
+            const data = await resp.json();
+            let html = `<p class="text-xs font-semibold mb-2" style="color:var(--ds-ink-3);">Format: ${data.format || 'Academic'}</p>`;
+            (data.sections || []).forEach((sec, i) => {
+                html += `<div class="rounded p-3 mb-2" style="background:#F0EFEB; border-left:2px solid #18171A;">
+                    <p class="text-xs font-semibold" style="color:var(--ds-ink-1);">${i+1}. ${sec.name}</p>
+                    <p class="text-xs mt-1" style="color:var(--ds-ink-2);line-height:1.5;">${sec.focus}</p>`;
+                if (sec.subsections && sec.subsections.length > 0) {
+                    html += `<ul class="mt-1.5 space-y-0.5">`;
+                    sec.subsections.forEach(s => {
+                        html += `<li class="text-xs" style="color:var(--ds-ink-3);">· ${s}</li>`;
+                    });
+                    html += `</ul>`;
+                }
+                html += `</div>`;
+            });
+            result.innerHTML = html;
+            if (hint) hint.style.display = 'none';
+            if (statusEl) statusEl.textContent = (data.sections?.length || 0) + ' sections';
+
+        } catch (e) {
+            result.innerHTML = `<div class="rounded p-3 text-xs" style="background:#F0EFEB;border-left:2px solid #18171A;">
+                <p style="color:var(--ds-ink-2);">Network error. Check connection.</p></div>`;
+            if (statusEl) statusEl.textContent = 'error';
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles mr-1.5"></i>Rebuild Structure';
+        }
+    }
+
+// ── Populate from document ────────────────────────────────
+(function () {
+    var inputEl  = document.getElementById('doc-upload-input');
+    var statusEl = document.getElementById('upload-status');
+    var dropzone = document.getElementById('upload-dropzone');
+    if (!inputEl) return;
+
+    function setStatus(msg, ok) {
+        statusEl.textContent = msg;
+        statusEl.style.background = ok ? '#F0FDF4' : '#F7F6F3';
+        statusEl.style.color = ok ? '#166534' : 'var(--ds-ink-2)';
+        statusEl.classList.remove('hidden');
+    }
+
+    function populateFields(extractedText, title) {
+        var titleEl = document.getElementById('title');
+        if (titleEl && !titleEl.value.trim() && title) {
+            titleEl.value = title.replace(/\.(pdf|docx|txt)$/i, '');
+        }
+        var absEl = document.getElementById('abstract');
+        if (absEl && !absEl.value.trim() && extractedText) {
+            var words = extractedText.trim().split(/\s+/);
+            absEl.value = words.slice(0, 400).join(' ');
+            absEl.dispatchEvent(new Event('input'));
+        }
+        if (typeof window.runStructReflect === 'function') {
+            setTimeout(window.runStructReflect, 300);
+        }
+    }
+
+    function uploadFile(file) {
+        setStatus('Extracting text\u2026', false);
+        var fd = new FormData();
+        fd.append('file', file);
+        fetch('/report/upload', { method: 'POST', body: fd })
+            .then(function (r) {
+                if (!r.ok) return r.json().then(function (d) { throw new Error(d.detail || r.status); });
+                return r.json();
+            })
+            .then(function (d) {
+                populateFields(d.extracted_text || '', d.title || file.name);
+                var wc = (d.extracted_text || '').trim().split(/\s+/).filter(Boolean).length;
+                setStatus('\u2713 Extracted ' + wc + ' words from \u201c' + (d.title || file.name) + '\u201d', true);
+            })
+            .catch(function (e) { setStatus('Upload failed: ' + e.message, false); });
+    }
+
+    inputEl.addEventListener('change', function () { if (this.files[0]) uploadFile(this.files[0]); });
+
+    dropzone.addEventListener('dragover',  function (e) { e.preventDefault(); this.style.borderColor = '#18171A'; });
+    dropzone.addEventListener('dragleave', function ()  { this.style.borderColor = 'var(--ds-border)'; });
+    dropzone.addEventListener('drop',      function (e) {
+        e.preventDefault();
+        this.style.borderColor = 'var(--ds-border)';
+        var f = e.dataTransfer.files[0];
+        if (f) uploadFile(f);
+    });
+
+    window.populateFromDrawer = function (fileId) {
+        setStatus('Loading from drawer\u2026', false);
+        fetch('/author/api/drawer-text/' + fileId)
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+                populateFields(d.extracted_text || '', d.original_name || '');
+                setStatus('\u2713 Loaded: \u201c' + (d.original_name || '') + '\u201d', true);
+            })
+            .catch(function () { setStatus('Could not load file from drawer.', false); });
+    };
+})();
+</script>
+{% endblock %}

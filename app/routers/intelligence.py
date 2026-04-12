@@ -958,3 +958,25 @@ async def respond_to_audit(
             detail="Round not found or already responded to.")
 
     return JSONResponse(content={"status": "recorded", "round": body.round_number})
+
+
+@router.get("/drawer-text/{file_id}")
+async def drawer_text(
+    file_id: int,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    """Return extracted text for a file in the user's drawer (for submit form populate)."""
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Login required.")
+    row = db.execute(
+        text("SELECT extracted_text, original_name FROM `#__eaiou_user_files` "
+             "WHERE id = :id AND user_id = :u AND deleted_at IS NULL"),
+        {"id": file_id, "u": current_user["id"]},
+    ).mappings().first()
+    if not row:
+        raise HTTPException(status_code=404, detail="File not found.")
+    return JSONResponse(content={
+        "extracted_text": row["extracted_text"] or "",
+        "original_name":  row["original_name"] or "",
+    })
