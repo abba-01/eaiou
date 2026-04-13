@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Papers — eaiou{% endblock %}
+
+{% block content %}
+<!-- Sorted: q_overall DESC, paper_uuid ASC -->
+<div class="max-w-4xl mx-auto px-6 py-10">
+
+    <div class="flex items-center justify-between mb-8">
+        <h1 class="eaiou-title text-3xl font-bold" style="color: var(--ds-ink-1);">Papers</h1>
+        <a href="/author/submit"
+           class="inline-flex items-center px-4 py-2 text-white text-sm font-medium rounded-md"
+           style="background: #18171A;">
+            <i class="fa-solid fa-upload mr-2"></i>Submit
+        </a>
+    </div>
+
+    {% if papers %}
+    <div class="space-y-3">
+        {% for paper in papers %}
+        <div class="bg-white border rounded-lg p-6 hover:shadow-sm transition-shadow" style="border-color: var(--ds-border);">
+            <div class="flex flex-wrap items-center gap-2 mb-3">
+                {% if paper.status == 'under_review' %}
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs border" style="background: #EDECE9; color: var(--ds-ink-2); border-color: #CAC8C2;">Under Review</span>
+                {% elif paper.status in ['accepted', 'published'] %}
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs" style="background: #18171A; color: #fff;">{{ paper.status | capitalize }}</span>
+                {% else %}
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs border" style="background: #F7F6F3; color: var(--ds-ink-3); border-color: var(--ds-border);">{{ paper.status }}</span>
+                {% endif %}
+                {% if paper.ai_disclosure_level and paper.ai_disclosure_level != 'none' %}
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs border" style="background: #F7F6F3; color: var(--ds-ink-3); border-color: var(--ds-border);">
+                        <i class="fa-solid fa-robot mr-1"></i>AI: {{ paper.ai_disclosure_level }}
+                    </span>
+                {% endif %}
+                {% if paper.q_overall %}
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs border" style="background: #F0EFEB; color: var(--ds-ink-1); border-color: #CAC8C2;">Q {{ "%.1f"|format(paper.q_overall) }}</span>
+                {% endif %}
+            </div>
+            <h2 class="eaiou-title text-xl font-bold mb-2 leading-snug">
+                <a href="/papers/{{ paper.id }}" class="hover:underline" style="color: var(--ds-ink-1);">{{ paper.title }}</a>
+            </h2>
+            <p class="text-sm mb-4 line-clamp-3" style="color: var(--ds-ink-2);">{{ paper.abstract }}</p>
+            <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center" style="color: var(--ds-ink-3);">
+                    <i class="fa-regular fa-user mr-1.5"></i>
+                    <span>{{ paper.author_name }}</span>
+                    {% if paper.orcid %}
+                        <span class="ml-2 text-xs font-mono">{{ paper.orcid }}</span>
+                    {% endif %}
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span class="text-xs" style="color: var(--ds-ink-3);"><i class="fa-regular fa-clock mr-1"></i>Received (sealed)</span>
+                    <a href="/papers/{{ paper.id }}" class="text-xs font-medium hover:underline" style="color: var(--ds-ink-1);">Read <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="bg-white border rounded-lg p-16 text-center" style="border-color: var(--ds-border);">
+        <i class="fa-regular fa-file-lines text-5xl mb-4" style="color: var(--ds-border);"></i>
+        <p class="mb-4" style="color: var(--ds-ink-2);">No papers yet.</p>
+        <a href="/author/submit"
+           class="inline-flex items-center px-4 py-2 text-white text-sm font-medium rounded-md"
+           style="background: #18171A;">
+            Submit the first paper
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

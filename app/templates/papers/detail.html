@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+{% block title %}{{ paper.title }} — eaiou{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-6 pt-10 pb-16">
+
+    <!-- Nav row -->
+    <div class="flex items-center justify-between mb-8">
+        <a href="/papers/" class="flex items-center text-sm hover:underline" style="color: var(--ds-ink-3);">
+            <i class="fa-solid fa-arrow-left mr-2"></i>All papers
+        </a>
+        {% if paper.status in ('draft', 'submitted', 'under_review') %}
+        <a href="/author/workspace/{{ paper.id }}" class="flex items-center text-sm font-medium hover:underline" style="color: var(--ds-ink-1);">
+            <i class="fa-solid fa-pen-nib mr-2"></i>Open Workspace
+        </a>
+        {% endif %}
+        <div class="flex items-center gap-2">
+            {% if paper.status == 'submitted' %}
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border" style="background: #F0EFEB; color: var(--ds-ink-2); border-color: #CAC8C2;">Submitted</span>
+            {% elif paper.status == 'under_review' %}
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border" style="background: #EDECE9; color: var(--ds-ink-1); border-color: #9A9895;">Under Review</span>
+            {% elif paper.status == 'accepted' %}
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium" style="background: #18171A; color: #fff;">Accepted</span>
+            {% elif paper.status == 'published' %}
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium" style="background: #18171A; color: #fff;">Published</span>
+            {% elif paper.status == 'rejected' %}
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border" style="background: #F7F6F3; color: var(--ds-ink-3); border-color: var(--ds-border);">Rejected</span>
+            {% endif %}
+            {% if paper.q_overall %}
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border" style="background: #F0EFEB; color: var(--ds-ink-1); border-color: #CAC8C2;">Q {{ "%.1f"|format(paper.q_overall) }}</span>
+            {% endif %}
+            {% if paper.ai_disclosure_level and paper.ai_disclosure_level != 'none' %}
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs border" style="background: #F7F6F3; color: var(--ds-ink-3); border-color: var(--ds-border);">
+                    <i class="fa-solid fa-robot mr-1"></i>AI: {{ paper.ai_disclosure_level }}
+                </span>
+            {% endif %}
+            {% if paper.doi %}
+                <a href="https://doi.org/{{ paper.doi }}" target="_blank" rel="noopener"
+                   class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border hover:underline"
+                   style="background: #F0EFEB; color: var(--ds-ink-1); border-color: #CAC8C2;">
+                    <i class="fa-solid fa-link mr-1"></i>DOI
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Title block -->
+    <div class="mb-8">
+        <h1 class="eaiou-title text-3xl sm:text-4xl font-bold leading-tight mb-5" style="color: var(--ds-ink-1);">{{ paper.title }}</h1>
+
+        {% if paper.keywords %}
+        <div class="flex flex-wrap gap-2 mb-6">
+            {% for kw in paper.keywords.split(',') %}
+                {% set kw = kw.strip() %}
+                {% if kw %}
+                    <span class="px-2 py-0.5 text-xs rounded border" style="background: #F7F6F3; color: var(--ds-ink-2); border-color: var(--ds-border);">{{ kw }}</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Author / Record row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-b py-5" style="border-color: var(--ds-border);">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">Author</p>
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-semibold flex-shrink-0" style="background: #18171A;">
+                        {{ paper.author_name[0].upper() }}
+                    </div>
+                    <div>
+                        <p class="font-medium text-sm" style="color: var(--ds-ink-1);">{{ paper.author_name }}</p>
+                        {% if paper.orcid %}
+                            <a href="https://orcid.org/{{ paper.orcid }}" target="_blank" rel="noopener"
+                               class="text-xs flex items-center mt-0.5 hover:underline" style="color: var(--ds-ink-3);">
+                                <i class="fa-brands fa-orcid mr-1"></i>{{ paper.orcid }}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">Record</p>
+                <div class="space-y-1 text-sm">
+                    {% if paper.doi %}
+                    <p style="color: var(--ds-ink-2);">
+                        <span style="color: var(--ds-ink-3);">DOI</span>
+                        <a href="https://doi.org/{{ paper.doi }}" target="_blank" rel="noopener"
+                           class="font-mono hover:underline" style="color: var(--ds-ink-1);">{{ paper.doi }}</a>
+                    </p>
+                    {% endif %}
+                    {% if paper.submission_capstone %}
+                    <p style="color: var(--ds-ink-2);">
+                        <a href="{{ paper.submission_capstone }}" target="_blank" rel="noopener"
+                           class="flex items-center gap-1 hover:underline text-xs" style="color: var(--ds-ink-3);">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>Zenodo deposit receipt
+                        </a>
+                    </p>
+                    {% endif %}
+                    <p style="color: var(--ds-ink-2);"><span style="color: var(--ds-ink-3);">eaiou ID</span> #{{ paper.id }}</p>
+                    {% if paper.paper_uuid %}
+                    <p style="color: var(--ds-ink-2);">
+                        <span style="color: var(--ds-ink-3);">Submission ID</span>
+                        <span class="font-mono text-xs break-all" style="color: var(--ds-ink-1);">{{ paper.paper_uuid }}</span>
+                    </p>
+                    {% endif %}
+                    {% if paper.cosmoid %}
+                    <p style="color: var(--ds-ink-2);">
+                        <span style="color: var(--ds-ink-3);">Context ID (CosmoID)</span>
+                        <span class="font-mono text-xs break-all" style="color: var(--ds-ink-1);">{{ paper.cosmoid }}</span>
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Abstract -->
+    <div class="mb-10">
+        <h2 class="eaiou-title text-2xl font-bold mb-4" style="color: var(--ds-ink-1);">Abstract</h2>
+        <div class="rounded-lg p-6 border" style="background: #F0EFEB; border-color: var(--ds-border);">
+            <p class="leading-relaxed" style="color: var(--ds-ink-1);">{{ paper.abstract }}</p>
+        </div>
+    </div>
+
+    <!-- AI Disclosure -->
+    {% if paper.ai_disclosure_level %}
+    <div class="mb-10">
+        <h2 class="eaiou-title text-2xl font-bold mb-4" style="color: var(--ds-ink-1);">AI Involvement Disclosure</h2>
+        <div class="rounded-lg border p-5" style="border-color: var(--ds-border); background: #fff;">
+            <div class="flex items-start space-x-3 mb-3">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background: #EDECE9;">
+                    <i class="fa-solid fa-robot text-sm" style="color: var(--ds-ink-2);"></i>
+                </div>
+                <div>
+                    <p class="font-medium text-sm" style="color: var(--ds-ink-1);">
+                        {% if paper.ai_disclosure_level == 'none' %}No AI tools used — AI Detection Tools Engaged
+                        {% elif paper.ai_disclosure_level == 'editing' %}Editing only — grammar, spelling, clarity
+                        {% elif paper.ai_disclosure_level == 'analysis' %}Analysis assistance — data, literature, synthesis
+                        {% elif paper.ai_disclosure_level == 'drafting' %}Co-drafting — AI contributed to written content
+                        {% elif paper.ai_disclosure_level == 'collaborative' %}Collaborative — AI as named intellectual contributor
+                        {% else %}{{ paper.ai_disclosure_level }}
+                        {% endif %}
+                    </p>
+                    {% if paper.ai_disclosure_notes %}
+                        <p class="text-sm mt-2" style="color: var(--ds-ink-2);">{{ paper.ai_disclosure_notes }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <p class="text-xs border-t pt-3 mt-1" style="border-color: var(--ds-border); color: var(--ds-ink-3);">
+                <i class="fa-solid fa-lock mr-1"></i>AI disclosure is a permanent, sealed part of this paper's record.
+            </p>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- CAUGHT Anchor — gap this paper responds to -->
+    {% if caught_gap %}
+    <div class="mb-10">
+        <h2 class="eaiou-title text-2xl font-bold mb-4" style="color: var(--ds-ink-1);">CAUGHT Anchor</h2>
+        <div class="rounded-lg border overflow-hidden" style="border-color: var(--ds-border);">
+            <div class="px-5 py-3 border-b flex items-center justify-between" style="border-color: var(--ds-border); background: #F7F6F3;">
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium" style="background: #18171A; color: #fff;">CAUGHT</span>
+                    {% if caught_gap.gap_class %}
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border" style="background: #F0EFEB; color: var(--ds-ink-2); border-color: #CAC8C2;">{{ caught_gap.gap_class | upper }}</span>
+                    {% endif %}
+                </div>
+                <span class="text-xs" style="color: var(--ds-ink-3);">Gap #{{ caught_gap.id }} · PMC{{ caught_gap.pmcid }}{% if caught_gap.pub_year %} · {{ 2026 - caught_gap.pub_year }} yr unresolved{% endif %}</span>
+            </div>
+            <div class="px-5 py-4">
+                <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">Source Declaration</p>
+                <p class="text-sm leading-relaxed italic" style="color: var(--ds-ink-1);">"{{ caught_gap.declaration_text }}"</p>
+                <div class="flex flex-wrap gap-4 mt-4">
+                    <div>
+                        <span class="text-xs" style="color: var(--ds-ink-3);">Gateway term</span>
+                        <span class="text-xs font-medium ml-1" style="color: var(--ds-ink-1);">{{ caught_gap.gateway_term }}</span>
+                    </div>
+                    <div>
+                        <span class="text-xs" style="color: var(--ds-ink-3);">Section</span>
+                        <span class="text-xs ml-1" style="color: var(--ds-ink-2);">{{ caught_gap.section_source }}</span>
+                    </div>
+                </div>
+                {% if caught_gap.title %}
+                <p class="text-xs mt-3" style="color: var(--ds-ink-3);">From: <span style="color: var(--ds-ink-2);">{{ caught_gap.title }}</span></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- F2-B: Editorial rejection note — public summary from editor -->
+    {% if paper.status == 'rejected' and paper.rejection_public_summary %}
+    <div class="mb-10 border-l-4 rounded-r-lg p-5" style="background: #F0EFEB; border-left-color: #18171A;">
+        <div class="flex items-start space-x-3">
+            <i class="fa-solid fa-circle-info mt-0.5" style="color: var(--ds-ink-1);"></i>
+            <div>
+                <p class="text-sm font-semibold mb-2" style="color: var(--ds-ink-1);">Editorial Review Notes</p>
+                <p class="text-sm leading-relaxed" style="color: var(--ds-ink-2);">{{ paper.rejection_public_summary }}</p>
+                <p class="text-xs mt-3" style="color: var(--ds-ink-3);">Authors may address these points and resubmit for consideration.</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Temporal Blindness notice — while under evaluation -->
+    {% if paper.status in ['submitted', 'under_review'] %}
+    <div class="mb-10 border-l-4 rounded-lg p-5" style="background: #F0EFEB; border-left-color: #18171A;">
+        <div class="flex items-start space-x-3">
+            <i class="fa-solid fa-hourglass-half mt-0.5" style="color: var(--ds-ink-1);"></i>
+            <div>
+                <p class="text-sm font-medium" style="color: var(--ds-ink-1);">Temporal Blindness in effect</p>
+                <p class="text-sm mt-1" style="color: var(--ds-ink-2);">Reviewers evaluate this paper without knowledge of submission date. Papers are sorted by quality, not time of arrival.</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Provenance -->
+    {% if seal or contributions %}
+    <div class="mb-10">
+        <h2 class="eaiou-title text-2xl font-bold mb-4" style="color: var(--ds-ink-1);">Provenance</h2>
+        <div class="rounded-lg border overflow-hidden" style="border-color: var(--ds-border);">
+
+            {% if seal %}
+            <div class="px-5 py-4 border-b" style="border-color: var(--ds-border); background: #F7F6F3;">
+                <div class="flex items-center justify-between gap-3 flex-wrap">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: var(--ds-ink-3);">Certificate of Authenticity</p>
+                        <p class="text-xs font-mono" style="color: var(--ds-ink-3);">{{ seal.seal_hash[:24] }}…</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        {% if seal.audit_status == 'PASS' %}
+                        <span class="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full" style="background: #18171A; color: #fff;">
+                            <i class="fa-solid fa-shield-check"></i> Integrity PASS
+                        </span>
+                        {% else %}
+                        <span class="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full border" style="background: #EDECE9; color: var(--ds-ink-1); border-color: #CAC8C2;">
+                            <i class="fa-solid fa-triangle-exclamation"></i> WARN
+                        </span>
+                        {% endif %}
+                        {% if seal.mbs_score is not none %}
+                        <span class="text-xs" style="color: var(--ds-ink-3);">MBS {{ "%.2f"|format(seal.mbs_score) }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if contributions %}
+            <div class="divide-y" style="border-color: var(--ds-border);">
+                {% for c in contributions %}
+                <div class="px-5 py-3 flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
+                             style="background: {% if c.type == 'ai' %}#EDECE9{% else %}#F0EFEB{% endif %};">
+                            <i class="fa-solid {% if c.type == 'ai' %}fa-robot{% elif c.type == 'human' %}fa-user{% else %}fa-circle-nodes{% endif %} text-xs"
+                               style="color: var(--ds-ink-2);"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium" style="color: var(--ds-ink-1);">
+                                {{ c.type | capitalize }}
+                                {% if c.model_family %}<span class="font-normal" style="color: var(--ds-ink-3);">· {{ c.model_family }}</span>{% endif %}
+                            </p>
+                            <p class="text-xs" style="color: var(--ds-ink-3);">via {{ c.connector }}</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs font-medium" style="color: var(--ds-ink-1);">{{ c.relation }}</p>
+                        <p class="text-xs" style="color: var(--ds-ink-3);">weight {{ c.weight }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="px-5 py-4">
+                <p class="text-sm" style="color: var(--ds-ink-3);">No contribution records. Paper was submitted before IntelliD system was live.</p>
+            </div>
+            {% endif %}
+
+            {% if paper.cosmoid %}
+            <div class="px-5 py-3 border-t" style="border-color: var(--ds-border); background: #F7F6F3;">
+                <p class="text-xs" style="color: var(--ds-ink-3);">
+                    <i class="fa-solid fa-fingerprint mr-1"></i>CosmoID <span class="font-mono">{{ paper.cosmoid }}</span>
+                </p>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Actions bar -->
+    <div class="border-t pt-6 flex flex-wrap items-center justify-between gap-4" style="border-color: var(--ds-border);">
+        <div class="flex items-center space-x-5 text-sm">
+            <a href="/papers/" class="hover:underline" style="color: var(--ds-ink-2);"><i class="fa-solid fa-list mr-1.5"></i>All papers</a>
+            <a href="/papers/status/{{ paper.id }}" class="hover:underline" style="color: var(--ds-ink-2);"><i class="fa-regular fa-clock mr-1.5"></i>Submission status</a>
+            <a href="/author/submit" class="hover:underline" style="color: var(--ds-ink-2);"><i class="fa-solid fa-upload mr-1.5"></i>Submit yours</a>
+        </div>
+        <p class="text-xs" style="color: var(--ds-ink-3);"><i class="fa-solid fa-lock mr-1"></i>Submission date sealed at receipt</p>
+    </div>
+
+</div>
+{% endblock %}

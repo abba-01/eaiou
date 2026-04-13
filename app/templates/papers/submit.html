@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Submit a Paper — eaiou{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-6 py-16 text-center">
+
+    <div class="inline-flex items-center justify-center w-12 h-12 rounded-full mb-6" style="background: #EDECE9;">
+        <i class="fa-solid fa-arrow-right text-lg" style="color: var(--ds-ink-1);"></i>
+    </div>
+
+    <h1 class="eaiou-title text-2xl font-bold mb-3" style="color: var(--ds-ink-1);">Submission has moved</h1>
+    <p class="text-sm mb-8 max-w-md mx-auto" style="color: var(--ds-ink-2);">
+        Paper submissions are handled through the Author portal.
+        Sign in and use <strong>/author/submit</strong> to submit your work.
+    </p>
+
+    <!-- Notice block -->
+    <div class="border-l-4 text-left rounded-r-md p-5 mb-8 max-w-md mx-auto" style="border-left-color: #18171A; background: #F0EFEB;">
+        <p class="text-sm font-semibold mb-1" style="color: var(--ds-ink-1);">This URL is a legacy route</p>
+        <p class="text-sm" style="color: var(--ds-ink-2);">
+            <code class="font-mono text-xs">/papers/submit</code> no longer accepts submissions.
+            The active submission route is <code class="font-mono text-xs">/author/submit</code>,
+            which requires an author session.
+        </p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-3">
+        <a href="/author/submit"
+           class="inline-flex items-center px-5 py-2.5 text-white text-sm font-medium rounded-md"
+           style="background: #18171A;">
+            <i class="fa-solid fa-upload mr-2"></i>Go to submission
+        </a>
+        <a href="/papers/"
+           class="inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-md border"
+           style="border-color: var(--ds-border); color: var(--ds-ink-1); background: var(--ds-surface);">
+            <i class="fa-solid fa-list mr-2"></i>Browse papers
+        </a>
+    </div>
+
+</div>
+{% endblock %}

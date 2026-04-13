@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% block title %}Status: {{ paper.title[:60] }} — eaiou{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-6 py-10">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-start justify-between mb-8 gap-4">
+        <div>
+            <a href="/papers/{{ paper.id }}" class="flex items-center text-sm mb-3 hover:underline" style="color: var(--ds-ink-3);">
+                <i class="fa-solid fa-arrow-left mr-2"></i>Paper
+            </a>
+            <h1 class="eaiou-title text-2xl font-bold mb-1 leading-tight" style="color: var(--ds-ink-1);">{{ paper.title }}</h1>
+            <p class="text-sm" style="color: var(--ds-ink-3);">eaiou #{{ paper.id }} · {{ paper.author_name }}</p>
+        </div>
+        <div class="flex-shrink-0">
+            {% if paper.status == 'submitted' %}
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border" style="background: #F0EFEB; color: var(--ds-ink-2); border-color: #CAC8C2;">
+                    <i class="fa-solid fa-paper-plane mr-1.5"></i>Submitted
+                </span>
+            {% elif paper.status == 'under_review' %}
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border" style="background: #EDECE9; color: var(--ds-ink-1); border-color: #9A9895;">
+                    <i class="fa-solid fa-magnifying-glass mr-1.5"></i>Under Review
+                </span>
+            {% elif paper.status == 'revision_requested' %}
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border" style="background: #F0EFEB; color: var(--ds-ink-1); border-color: #CAC8C2;">
+                    <i class="fa-solid fa-pen-to-square mr-1.5"></i>Revision Requested
+                </span>
+            {% elif paper.status == 'accepted' %}
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium" style="background: #18171A; color: #fff;">
+                    <i class="fa-solid fa-circle-check mr-1.5"></i>Accepted
+                </span>
+            {% elif paper.status == 'published' %}
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium" style="background: #18171A; color: #fff;">
+                    <i class="fa-solid fa-globe mr-1.5"></i>Published
+                </span>
+            {% elif paper.status == 'rejected' %}
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border" style="background: #F7F6F3; color: var(--ds-ink-3); border-color: var(--ds-border);">
+                    <i class="fa-solid fa-xmark mr-1.5"></i>Rejected
+                </span>
+            {% else %}
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border" style="background: #F7F6F3; color: var(--ds-ink-3); border-color: var(--ds-border);">{{ paper.status }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Timeline -->
+        <div class="lg:col-span-2">
+            <div class="bg-white rounded-lg border p-6" style="border-color: var(--ds-border);">
+                <h2 class="text-base font-semibold mb-6" style="color: var(--ds-ink-1);">Submission Timeline</h2>
+
+                {% set active_states = ['submitted', 'under_review', 'revision_requested', 'accepted', 'published', 'rejected'] %}
+                {% set review_states = ['under_review', 'revision_requested', 'accepted', 'published'] %}
+                {% set decision_states = ['revision_requested', 'accepted', 'rejected', 'published'] %}
+
+                <div class="space-y-0">
+
+                    <!-- Step 1: Submitted -->
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center flex-shrink-0">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm flex-shrink-0" style="background: #18171A;">
+                                <i class="fa-solid fa-paper-plane text-xs"></i>
+                            </div>
+                            <div class="w-px flex-1 my-2" style="background: var(--ds-border); min-height: 2rem;"></div>
+                        </div>
+                        <div class="pb-6 flex-1">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-sm font-medium" style="color: var(--ds-ink-1);">Submitted</h3>
+                                <span class="text-xs ml-2" style="color: var(--ds-ink-3);"><i class="fa-solid fa-lock mr-1"></i>Date sealed</span>
+                            </div>
+                            <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">Paper received. Submission timestamp sealed.</p>
+                            <div class="mt-2 p-3 rounded-md text-xs" style="background: #F0EFEB; color: var(--ds-ink-2);">
+                                Temporal Blindness active. Reviewers will not see when this paper arrived.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Under Review -->
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center flex-shrink-0">
+                            {% if paper.status in review_states %}
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm" style="background: #18171A;">
+                                <i class="fa-solid fa-user-check text-xs"></i>
+                            </div>
+                            {% else %}
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm border" style="background: #F7F6F3; border-color: var(--ds-border); color: var(--ds-ink-3);">
+                                <i class="fa-solid fa-user-check text-xs"></i>
+                            </div>
+                            {% endif %}
+                            <div class="w-px flex-1 my-2" style="background: var(--ds-border); min-height: 2rem;"></div>
+                        </div>
+                        <div class="pb-6 flex-1">
+                            <h3 class="text-sm font-medium" style="color: {% if paper.status in review_states %}var(--ds-ink-1){% else %}var(--ds-ink-3){% endif %};">Under Review</h3>
+                            <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">Editor assigns peer reviewers. Full-context review begins.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Editor Decision -->
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center flex-shrink-0">
+                            {% if paper.status in decision_states %}
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm" style="background: #18171A;">
+                                <i class="fa-solid fa-clipboard-check text-xs"></i>
+                            </div>
+                            {% else %}
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm border" style="background: #F7F6F3; border-color: var(--ds-border); color: var(--ds-ink-3);">
+                                <i class="fa-solid fa-clipboard-check text-xs"></i>
+                            </div>
+                            {% endif %}
+                            <div class="w-px flex-1 my-2" style="background: var(--ds-border); min-height: 2rem;"></div>
+                        </div>
+                        <div class="pb-6 flex-1">
+                            <h3 class="text-sm font-medium" style="color: {% if paper.status in decision_states %}var(--ds-ink-1){% else %}var(--ds-ink-3){% endif %};">Editor Decision</h3>
+                            <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">Accept, reject, or request revisions. Reviewer feedback shared.</p>
+                            {% if paper.status == 'revision_requested' %}
+                            <div class="mt-2 p-3 rounded-md text-xs border-l-4" style="background: #F0EFEB; border-left-color: #18171A; color: var(--ds-ink-1);">
+                                <i class="fa-solid fa-pen-to-square mr-1"></i>Revisions requested. Check your email for reviewer feedback.
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Published -->
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center flex-shrink-0">
+                            {% if paper.status == 'published' %}
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm" style="background: #18171A;">
+                                <i class="fa-solid fa-globe text-xs"></i>
+                            </div>
+                            {% else %}
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm border" style="background: #F7F6F3; border-color: var(--ds-border); color: var(--ds-ink-3);">
+                                <i class="fa-solid fa-globe text-xs"></i>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-medium" style="color: {% if paper.status == 'published' %}var(--ds-ink-1){% else %}var(--ds-ink-3){% endif %};">Published</h3>
+                            <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">Q score assigned. Paper enters discovery queue sorted by quality.</p>
+                            {% if paper.q_overall %}
+                            <span class="mt-2 inline-block text-xs font-medium px-2 py-0.5 rounded border" style="background: #F0EFEB; color: var(--ds-ink-1); border-color: #CAC8C2;">
+                                Q {{ "%.1f"|format(paper.q_overall) }}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-4">
+
+            <!-- Paper details -->
+            <div class="bg-white rounded-lg border p-5" style="border-color: var(--ds-border);">
+                <h3 class="text-sm font-semibold mb-3" style="color: var(--ds-ink-1);">Paper Details</h3>
+                <div class="space-y-3 text-sm">
+                    <div>
+                        <p class="text-xs mb-0.5" style="color: var(--ds-ink-3);">eaiou ID</p>
+                        <p class="font-mono font-medium" style="color: var(--ds-ink-1);">#{{ paper.id }}</p>
+                    </div>
+                    {% if paper.keywords %}
+                    <div>
+                        <p class="text-xs mb-1" style="color: var(--ds-ink-3);">Keywords</p>
+                        <div class="flex flex-wrap gap-1">
+                            {% for kw in paper.keywords.split(',') %}
+                                {% set kw = kw.strip() %}
+                                {% if kw %}
+                                    <span class="px-1.5 py-0.5 text-xs rounded border" style="background: #F7F6F3; color: var(--ds-ink-2); border-color: var(--ds-border);">{{ kw }}</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <p class="text-xs mb-0.5" style="color: var(--ds-ink-3);">AI Disclosure</p>
+                        <p class="text-sm" style="color: var(--ds-ink-2);">
+                            {% if paper.ai_disclosure_level == 'none' %}None
+                            {% elif paper.ai_disclosure_level == 'editing' %}Editing only
+                            {% elif paper.ai_disclosure_level == 'analysis' %}Analysis assistance
+                            {% elif paper.ai_disclosure_level == 'drafting' %}Co-drafting
+                            {% elif paper.ai_disclosure_level == 'collaborative' %}Collaborative
+                            {% else %}{{ paper.ai_disclosure_level }}{% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Temporal blindness -->
+            <div class="rounded-lg border-l-4 p-4" style="background: #F0EFEB; border-left-color: #18171A;">
+                <p class="text-xs font-medium mb-1" style="color: var(--ds-ink-1);">
+                    <i class="fa-solid fa-lock mr-1"></i>Temporal Blindness active
+                </p>
+                <p class="text-xs" style="color: var(--ds-ink-2);">Submission date is sealed and will not be shown to reviewers or editors during evaluation.</p>
+            </div>
+
+            <!-- Actions -->
+            <div class="space-y-2">
+                <a href="/papers/{{ paper.id }}"
+                   class="block w-full px-4 py-2 text-white text-sm font-medium rounded-md text-center"
+                   style="background: #18171A;">
+                    <i class="fa-solid fa-eye mr-1.5"></i>View paper
+                </a>
+                <a href="/papers/"
+                   class="block w-full px-4 py-2 bg-white border text-sm font-medium rounded-md text-center"
+                   style="border-color: var(--ds-border); color: var(--ds-ink-1);">
+                    <i class="fa-solid fa-list mr-1.5"></i>All papers
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
