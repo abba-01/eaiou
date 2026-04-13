@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}eaiou{% endblock %}</title>
+
+    {# ── Fonts ─────────────────────────────────────────────────────────────── #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    {# ── Font Awesome ──────────────────────────────────────────────────────── #}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    {# ── Tailwind (config must precede the CDN script) ─────────────────────── #}
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50:  '#f0f6fb',
+                            100: '#d9eaf7',
+                            200: '#8ab4d4',
+                            500: '#2d6e9e',
+                            600: '#1a4a6b',
+                            700: '#14395a'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Spectral', 'Georgia', 'serif'],
+                        mono:  ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --ink: #0e0d0b;
+            --ink2: #3a3832;
+            --ink3: #7a7670;
+            --paper: #f7f4ef;
+            --paper2: #ede9e1;
+            --paper3: #e0dbd0;
+            --river: #1a4a6b;
+            --river-l: #2d6e9e;
+            --river-ll: #e8f1f7;
+            --amber: #c47c0a;
+            --amber-l: #fdf0d0;
+            --sage: #3a6b4a;
+            --sage-l: #e8f2ec;
+            --coral: #b84832;
+            --coral-l: #faeae6;
+            --violet: #4a3278;
+            --violet-l: #ede8f7;
+            --mono: 'JetBrains Mono', monospace;
+            --serif: 'Spectral', Georgia, serif;
+        }
+
+        body {
+            font-family: var(--serif);
+            background: var(--paper);
+            color: var(--ink);
+        }
+
+        /* ── Status badges (paper lifecycle) ──────────────────────────────── */
+        .eaiou-badge {
+            display: inline-flex;
+            align-items: center;
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.06em;
+            padding: 3px 7px;
+            border-radius: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .eaiou-badge-submitted { background: var(--river-ll); color: var(--river); }
+        .eaiou-badge-review    { background: var(--amber-l);  color: var(--amber); }
+        .eaiou-badge-revision  { background: var(--coral-l);  color: var(--coral); }
+        .eaiou-badge-accepted  { background: var(--sage-l);   color: var(--sage); }
+        .eaiou-badge-published { background: var(--paper3);   color: var(--ink); }
+
+        /* ── Widgets & shadows ────────────────────────────────────────────── */
+        .eaiou-widget {
+            background: #fff;
+            border: 0.5px solid var(--paper3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .eaiou-shadow-sm {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+        }
+
+        /* ── Nav ──────────────────────────────────────────────────────────── */
+        .eaiou-nav {
+            background: var(--ink);
+            color: #fff;
+            height: 52px;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .eaiou-nav-brand {
+            font-family: var(--serif);
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            color: #fff;
+            text-decoration: none;
+        }
+        .eaiou-nav-brand span { color: #8ab4d4; }
+        .eaiou-nav-link {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .eaiou-nav-link:hover { color: #fff; }
+        .eaiou-nav-link.active { color: #fff; }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    {# ── Top nav ──────────────────────────────────────────────────────────── #}
+    <nav class="eaiou-nav">
+        <a href="/" class="eaiou-nav-brand">e<span>a</span>iou</a>
+        <div class="flex gap-6 flex-1">
+            <a href="/author/" class="eaiou-nav-link">Dashboard</a>
+            <a href="/author/submit" class="eaiou-nav-link {% block nav_submit %}{% endblock %}">Submit</a>
+            <a href="/author/papers" class="eaiou-nav-link">Papers</a>
+        </div>
+        <div class="text-xs font-mono uppercase tracking-wider text-white/70">
+            {% block page_title %}{% endblock %}
+        </div>
+    </nav>
+
+    {# ── 3-column layout ──────────────────────────────────────────────────── #}
+    <div class="flex" style="min-height: calc(100vh - 52px);">
+        {% block author_left_sidebar %}
+        <aside class="w-72 bg-white border-r flex-shrink-0 hidden lg:block p-4" style="border-color: var(--paper3);">
+            {% block left_widgets %}{% endblock %}
+        </aside>
+        {% endblock %}
+
+        <main class="flex-1 px-6 py-6 overflow-x-auto">
+            {% block author_content %}{% endblock %}
+        </main>
+
+        <aside class="w-80 bg-white border-l flex-shrink-0 hidden xl:block p-4" style="border-color: var(--paper3);">
+            {% block author_sidebar %}{% endblock %}
+        </aside>
+    </div>
+
+    {% block terminal_panel %}{% endblock %}
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
