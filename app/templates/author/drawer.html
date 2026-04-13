@@ -1,0 +1,61 @@
+{% extends "author/base_author.html" %}
+{% block title %}My Files — eaiou{% endblock %}
+{% block page_title %}My Files{% endblock %}
+{% block nav_drawer %}nav-active{% endblock %}
+{% block author_content %}
+<div style="margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+  <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--ds-ink-3);">{{ files|length }} file{{ 's' if files|length != 1 }}</p>
+  <a href="/report"
+     style="padding: 7px 14px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: #fff; background: var(--ds-ink-1); border-radius: 3px; text-decoration: none;">
+    + Analyze New
+  </a>
+</div>
+
+{% if files %}
+<div style="border: 0.5px solid var(--ds-border); border-radius: 3px; overflow: hidden;">
+  <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+    <thead>
+      <tr style="background: var(--primary-50);">
+        <th style="padding: 9px 14px; text-align: left; font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ds-ink-3);">File</th>
+        <th style="padding: 9px 14px; text-align: left; font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ds-ink-3);">Type</th>
+        <th style="padding: 9px 14px; text-align: left; font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ds-ink-3);">Size</th>
+        <th style="padding: 9px 14px; text-align: left; font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ds-ink-3);">Uploaded</th>
+        <th style="padding: 9px 14px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for f in files %}
+      <tr style="border-top: 0.5px solid var(--ds-border);">
+        <td style="padding: 10px 14px; font-family: monospace; font-size: 10px; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ds-ink-1);" title="{{ f.original_name }}">{{ f.original_name }}</td>
+        <td style="padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-3);">
+          {% if 'pdf' in f.mime_type %}PDF
+          {% elif 'word' in f.mime_type %}DOCX
+          {% else %}TXT{% endif %}
+        </td>
+        <td style="padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-3);">{{ (f.file_size / 1024) | round(1) }} KB</td>
+        <td style="padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-3);">
+          {% if f.uploaded_at %}{{ f.uploaded_at.strftime('%Y-%m-%d') }}{% else %}—{% endif %}
+        </td>
+        <td style="padding: 10px 14px;">
+          <div style="display: flex; align-items: center; gap: 14px; justify-content: flex-end;">
+            <a href="/report?file_id={{ f.id }}" style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: var(--ds-ink-1); text-decoration: none;">Analyze</a>
+            <form method="post" action="/author/drawer/{{ f.id }}/delete"
+                  onsubmit="return confirm('Remove {{ f.original_name | replace("'", "\\'") }} from your drawer?')">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+              <button type="submit" style="font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-3); background: none; border: none; cursor: pointer; text-decoration: underline;">Delete</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div style="border: 0.5px solid var(--ds-border); border-radius: 3px; padding: 48px 24px; text-align: center;">
+  <i class="fa-solid fa-folder-open" style="font-size: 28px; color: var(--ds-ink-3); display: block; margin-bottom: 12px;"></i>
+  <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--ds-ink-3);">No files yet.</p>
+  <p style="font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-3); margin-top: 4px;">Upload a PDF, DOCX, or TXT from the <a href="/report" style="color: var(--ds-ink-1);">Coverage Tool</a>.</p>
+</div>
+{% endif %}
+{% endblock %}

@@ -5,10 +5,10 @@
 {# ── Left panel: Defender ─────────────────────────────────────────────────── #}
 {% block author_left_sidebar %}
 <aside class="w-72 bg-white border-r flex flex-col flex-shrink-0 hidden lg:flex" style="border-color: var(--ds-border);">
-    <div class="px-4 py-3 border-b border-gray-200 flex items-center gap-2 bg-primary-700">
-        <i class="fa-solid fa-shield-halved text-white" style="font-size:.85rem;"></i>
-        <span class="text-xs font-semibold tracking-widest uppercase text-white">Defender</span>
-        <button onclick="toggleConfigure('def')" class="ml-auto text-xs text-primary-200 hover:text-white">Configure</button>
+    <div class="px-4 py-3 border-b flex items-center gap-2" style="border-color: var(--ds-border); background: var(--ds-ink-1);">
+        <i class="fa-solid fa-shield-halved" style="color: #fff; font-size:.85rem;"></i>
+        <span class="text-xs font-semibold tracking-widest uppercase" style="color: #fff;">Defender</span>
+        <button onclick="toggleConfigure('def')" class="ml-auto text-xs" style="color: var(--ds-ink-3);">Configure</button>
     </div>
 
     <!-- Configure form -->
@@ -68,25 +68,24 @@
 
     <!-- F2-A: Revision request banner -->
     {% if paper.status == 'revision_requested' and latest_revision %}
-    <div class="rounded-lg p-5 border-l-4" style="background: #FFFBEB; border-left-color: #D97706; border: 1px solid #FDE68A; border-left-width: 4px;">
-        <div class="flex items-start gap-3">
-            <i class="fa-solid fa-rotate-right mt-0.5 shrink-0" style="color: #D97706;"></i>
-            <div class="flex-1 min-w-0">
-                <div class="flex items-center justify-between gap-4 flex-wrap mb-2">
-                    <p class="text-sm font-semibold" style="color: var(--ds-ink-1);">
+    <div style="padding: 16px 18px; border-left: 4px solid var(--ds-ink-1); border: 1px solid var(--ds-border); border-left-width: 4px; border-left-color: var(--ds-ink-1); border-radius: 3px; background: var(--primary-50);">
+        <div style="display: flex; align-items: flex-start; gap: 12px;">
+            <i class="fa-solid fa-rotate-right" style="flex-shrink: 0; margin-top: 2px; color: var(--ds-ink-2);"></i>
+            <div style="flex: 1; min-width: 0;">
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 8px;">
+                    <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--ds-ink-1);">
                         Revision Requested — Round {{ latest_revision.round }}
                     </p>
                     {% if latest_revision.due_at %}
-                    <span class="text-xs shrink-0 font-medium" style="color: #D97706;">
+                    <span style="font-family: 'DM Sans', sans-serif; font-size: 11px; flex-shrink: 0; font-weight: 500; color: var(--ds-ink-2);">
                         Due {{ latest_revision.due_at }}
                     </span>
                     {% endif %}
                 </div>
-                <p class="text-sm leading-relaxed" style="color: var(--ds-ink-2);">{{ latest_revision.instructions }}</p>
-                <form method="post" action="/author/workspace/{{ paper.id }}/resubmit" class="mt-3">
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; line-height: 1.6; color: var(--ds-ink-2);">{{ latest_revision.instructions }}</p>
+                <form method="post" action="/author/workspace/{{ paper.id }}/resubmit" style="margin-top: 10px;">
                     <button type="submit"
-                            class="px-4 py-1.5 text-xs font-medium rounded text-white"
-                            style="background: #18171A;">
+                            style="padding: 5px 14px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; border-radius: 3px; border: none; background: var(--ds-ink-1); color: #fff; cursor: pointer;">
                         Mark as Resubmitted →
                     </button>
                 </form>
@@ -96,11 +95,11 @@
     {% endif %}
 
     <!-- ── Detailed Manuscript Progress Tracker ──────────────────────── -->
-    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden eaiou-shadow-sm">
-        <div class="px-5 py-3 border-b border-gray-200 bg-gray-50 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-pen-to-square text-primary-500 text-sm"></i>
-                <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Manuscript Progress</span>
+    <div style="background: var(--ds-surface); border: 0.5px solid var(--ds-border); border-radius: 3px; overflow: hidden;">
+        <div style="padding: 10px 18px; border-bottom: 0.5px solid var(--ds-border); background: var(--primary-50); display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-pen-to-square" style="font-size: 12px; color: var(--ds-ink-3);"></i>
+                <span style="font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ds-ink-3);">Manuscript Progress</span>
             </div>
             <span class="eaiou-badge
                 {% if paper.status == 'submitted' %}eaiou-badge-submitted
@@ -114,33 +113,29 @@
         </div>
 
         {# Status step indicators #}
-        <div class="px-5 py-4 grid grid-cols-4 gap-3 border-b border-gray-100">
+        <div style="padding: 14px 18px; display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; border-bottom: 0.5px solid var(--ds-border);">
             {% set steps = [
-                ('draft',              'fa-pen',               'Draft',         'gray'),
-                ('submitted',          'fa-paper-plane',       'Submitted',     'blue'),
-                ('under_review',       'fa-magnifying-glass',  'Under Review',  'yellow'),
-                ('accepted',           'fa-check-circle',      'Accepted',      'green'),
+                ('draft',              'fa-pen',               'Draft'),
+                ('submitted',          'fa-paper-plane',       'Submitted'),
+                ('under_review',       'fa-magnifying-glass',  'Under Review'),
+                ('accepted',           'fa-check-circle',      'Accepted'),
             ] %}
             {% set status_order = ['draft', 'submitted', 'under_review', 'revision_requested', 'accepted', 'published', 'archived'] %}
             {% set current_idx = status_order.index(paper.status) if paper.status in status_order else 0 %}
-            {% for step_status, icon, label, color in steps %}
+            {% for step_status, icon, label in steps %}
             {% set step_idx = status_order.index(step_status) if step_status in status_order else 0 %}
             {% set is_done    = current_idx > step_idx %}
             {% set is_current = paper.status == step_status or (step_status == 'under_review' and paper.status == 'revision_requested') %}
-            <div class="flex flex-col items-center text-center">
-                <div class="w-9 h-9 rounded-full flex items-center justify-center mb-1.5
-                    {% if is_done %}bg-green-100{% elif is_current %}bg-primary-100{% else %}bg-gray-100{% endif %}">
-                    <i class="fa-solid {{ icon }} text-sm
-                        {% if is_done %}text-green-600{% elif is_current %}text-primary-600{% else %}text-gray-400{% endif %}"></i>
+            <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div style="width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 6px;
+                    background: {% if is_done %}var(--primary-200){% elif is_current %}var(--primary-100){% else %}var(--primary-50){% endif %};">
+                    <i class="fa-solid {{ icon }}" style="font-size: 12px; color: {% if is_done %}var(--ds-ink-1){% elif is_current %}var(--ds-ink-2){% else %}var(--ds-ink-3){% endif %};"></i>
                 </div>
-                <p class="text-[11px] font-medium
-                    {% if is_done %}text-green-700{% elif is_current %}text-primary-700{% else %}text-gray-400{% endif %}">
-                    {{ label }}
-                </p>
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; color: {% if is_done or is_current %}var(--ds-ink-1){% else %}var(--ds-ink-3){% endif %};">{{ label }}</p>
                 {% if is_done %}
-                <p class="text-[10px] text-green-500 mt-0.5"><i class="fa-solid fa-check mr-0.5"></i>Done</p>
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 9px; color: var(--ds-ink-2); margin-top: 2px;"><i class="fa-solid fa-check" style="margin-right: 2px;"></i>Done</p>
                 {% elif is_current %}
-                <p class="text-[10px] text-primary-500 mt-0.5">Current</p>
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 9px; color: var(--ds-ink-2); margin-top: 2px;">Current</p>
                 {% endif %}
             </div>
             {% endfor %}
@@ -148,20 +143,20 @@
 
         {# Section completion checklist #}
         {% if sections %}
-        <div class="px-5 py-3 border-b border-gray-100">
-            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Sections</p>
-            <div class="grid grid-cols-2 gap-1.5">
+        <div style="padding: 10px 18px; border-bottom: 0.5px solid var(--ds-border);">
+            <p style="font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ds-ink-3); margin-bottom: 8px;">Sections</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
                 {% for s in sections %}
-                <div class="flex items-center gap-2 text-xs">
+                <div style="display: flex; align-items: center; gap: 6px; font-family: 'DM Sans', sans-serif; font-size: 11px;">
                     {% if s.section_content and s.section_content|length > 20 %}
-                        <i class="fa-solid fa-circle-check text-green-500 flex-shrink-0"></i>
-                        <span class="text-gray-700 truncate">{{ s.section_name }}</span>
+                        <i class="fa-solid fa-circle-check" style="flex-shrink: 0; color: var(--ds-ink-1);"></i>
+                        <span style="color: var(--ds-ink-1); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ s.section_name }}</span>
                     {% elif s.section_notes %}
-                        <i class="fa-solid fa-circle-half-stroke text-yellow-500 flex-shrink-0"></i>
-                        <span class="text-gray-500 truncate">{{ s.section_name }}</span>
+                        <i class="fa-solid fa-circle-half-stroke" style="flex-shrink: 0; color: var(--ds-ink-2);"></i>
+                        <span style="color: var(--ds-ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ s.section_name }}</span>
                     {% else %}
-                        <i class="fa-regular fa-circle text-gray-300 flex-shrink-0"></i>
-                        <span class="text-gray-400 truncate">{{ s.section_name }}</span>
+                        <i class="fa-regular fa-circle" style="flex-shrink: 0; color: var(--ds-ink-3);"></i>
+                        <span style="color: var(--ds-ink-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ s.section_name }}</span>
                     {% endif %}
                 </div>
                 {% endfor %}
@@ -170,49 +165,49 @@
             {% set filled = sections | selectattr('section_content') | list | length %}
             {% set total  = sections | length %}
             {% set pct    = ((filled / total) * 100) | int if total > 0 else 0 %}
-            <div class="mt-3">
-                <div class="flex items-center justify-between text-[11px] text-gray-400 mb-1">
+            <div style="margin-top: 10px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; font-family: 'DM Sans', sans-serif; font-size: 10px; color: var(--ds-ink-3); margin-bottom: 4px;">
                     <span>{{ filled }}/{{ total }} sections written</span>
                     <span>{{ pct }}%</span>
                 </div>
-                <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                    <div class="h-full bg-primary-500 rounded-full transition-all" style="width: {{ pct }}%;"></div>
+                <div style="height: 4px; background: var(--primary-100); border-radius: 999px; overflow: hidden;">
+                    <div style="height: 100%; background: var(--ds-ink-1); border-radius: 999px; transition: width 0.2s; width: {{ pct }}%;"></div>
                 </div>
             </div>
         </div>
         {% endif %}
 
         {# Paper metadata row #}
-        <div class="px-5 py-3 flex flex-wrap gap-4 text-xs text-gray-500">
+        <div style="padding: 10px 18px; display: flex; flex-wrap: wrap; gap: 14px; font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-3);">
             {% if paper.cosmoid %}
-            <span class="flex items-center gap-1.5">
-                <i class="fa-solid fa-fingerprint text-gray-300"></i>
-                <span class="font-mono">{{ paper.cosmoid[:12] }}…</span>
+            <span style="display: flex; align-items: center; gap: 5px;">
+                <i class="fa-solid fa-fingerprint" style="color: var(--ds-ink-3);"></i>
+                <span style="font-family: monospace;">{{ paper.cosmoid[:12] }}…</span>
             </span>
             {% endif %}
             {% if paper.gitgap_gap_id %}
-            <span class="flex items-center gap-1.5">
-                <i class="fa-solid fa-link text-gray-300"></i>
+            <span style="display: flex; align-items: center; gap: 5px;">
+                <i class="fa-solid fa-link" style="color: var(--ds-ink-3);"></i>
                 Gap #{{ paper.gitgap_gap_id }}
             </span>
             {% endif %}
             {% if volley_round > 1 %}
-            <span class="flex items-center gap-1.5">
-                <i class="fa-solid fa-arrows-rotate text-gray-300"></i>
+            <span style="display: flex; align-items: center; gap: 5px;">
+                <i class="fa-solid fa-arrows-rotate" style="color: var(--ds-ink-3);"></i>
                 {{ volley_round - 1 }} audit round{{ 's' if volley_round > 2 else '' }}
             </span>
             {% endif %}
-            <a href="/author/" class="ml-auto flex items-center gap-1 text-gray-400 hover:text-primary-600">
+            <a href="/author/" style="margin-left: auto; display: flex; align-items: center; gap: 4px; color: var(--ds-ink-3); text-decoration: none;">
                 <i class="fa-solid fa-arrow-left"></i>Dashboard
             </a>
         </div>
     </div>
 
     <!-- Pipeline stage indicator (compact, below tracker) -->
-    <div id="pipeline-stages" class="rounded-lg border border-gray-200 overflow-hidden">
-        <div class="px-4 py-2 flex items-center justify-between bg-gray-50 border-b border-gray-200">
-            <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">Pipeline</span>
-            <span id="pipeline-current" class="text-xs font-medium text-gray-700"></span>
+    <div id="pipeline-stages" style="border: 0.5px solid var(--ds-border); border-radius: 3px; overflow: hidden;">
+        <div style="padding: 8px 14px; display: flex; align-items: center; justify-content: space-between; background: var(--primary-50); border-bottom: 0.5px solid var(--ds-border);">
+            <span style="font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ds-ink-3);">Pipeline</span>
+            <span id="pipeline-current" style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: var(--ds-ink-1);"></span>
         </div>
         <div class="px-4 py-3 flex items-center gap-0 overflow-x-auto" id="pipeline-steps">
             <!-- Rendered by JS -->
@@ -268,7 +263,9 @@
                              style="border-color: var(--ds-border);">
                             {% for s in sections %}
                             <button onclick="seedSection({{ s.id }}, '{{ s.section_name | e }}')"
-                                    class="w-full text-left px-3 py-2 text-xs hover:bg-gray-100 truncate"
+                                    class="w-full text-left px-3 py-2 text-xs truncate" style="background: none; border: none; cursor: pointer;"
+                        onmouseenter="this.style.background='var(--primary-50)';"
+                        onmouseleave="this.style.background='none';"
                                     style="color: var(--ds-ink-2);">
                                 {{ loop.index }}. {{ s.section_name }}
                             </button>
@@ -408,7 +405,7 @@
                     style="border-color: var(--ds-border);"
                     placeholder="Your response: what you addressed, deferred, and why."></textarea>
                 <button onclick="submitVolleyResponse({{ last_volley.round_number }})"
-                    class="mt-2 w-full py-1.5 text-xs font-medium rounded text-white bg-primary-600 hover:bg-primary-700 transition-colors">
+                    style="margin-top: 8px; width: 100%; padding: 6px 0; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; border-radius: 3px; background: var(--ds-ink-1); color: #fff; border: none; cursor: pointer;"
                     Record Response
                 </button>
             </div>
@@ -419,41 +416,41 @@
             </div>
             {% else %}
             <button id="volley-request-btn" onclick="requestAudit()"
-                class="w-full py-2 px-3 text-xs font-medium rounded text-white bg-primary-600 hover:bg-primary-700 transition-colors">
+                style="width: 100%; padding: 7px 10px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; border-radius: 3px; background: var(--ds-ink-1); color: #fff; border: none; cursor: pointer;"
                 <i class="fa-solid fa-magnifying-glass mr-1.5"></i>Request Audit — Round {{ volley_round }}
             </button>
             {% endif %}
             {% if volley_history %}
-            <div class="border-t border-gray-200 pt-3 space-y-2">
-                <p class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Audit History</p>
+            <div style="border-top: 0.5px solid var(--ds-border); padding-top: 10px; display: flex; flex-direction: column; gap: 6px;">
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ds-ink-3); margin-bottom: 4px;">Audit History</p>
                 {% for v in volley_history %}
-                <div class="bg-gray-50 rounded-md p-3 border border-gray-200">
-                    <div class="flex items-center justify-between mb-1.5">
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs font-medium text-gray-700">Round {{ v.round_number }}</span>
+                <div style="background: var(--primary-50); border-radius: 3px; padding: 10px; border: 0.5px solid var(--ds-border);">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: var(--ds-ink-1);">Round {{ v.round_number }}</span>
                             {% if v.author_response %}
-                            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-green-100 text-green-700">
-                                <i class="fa-solid fa-check mr-0.5"></i>Responded
+                            <span class="badge badge-submitted">
+                                <i class="fa-solid fa-check" style="margin-right: 2px;"></i>Responded
                             </span>
                             {% endif %}
                         </div>
-                        <span class="text-xs {% if v.is_clean %}text-green-600 font-semibold{% else %}text-gray-500{% endif %}">
-                            {% if v.is_clean %}<i class="fa-solid fa-circle-check mr-1"></i>Clean{% else %}{{ v.finding_count }} finding{{ 's' if v.finding_count != 1 else '' }}{% endif %}
+                        <span style="font-family: 'DM Sans', sans-serif; font-size: 10px; color: {% if v.is_clean %}var(--ds-ink-1){% else %}var(--ds-ink-2){% endif %}; {% if v.is_clean %}font-weight: 600;{% endif %}">
+                            {% if v.is_clean %}<i class="fa-solid fa-circle-check" style="margin-right: 3px;"></i>Clean{% else %}{{ v.finding_count }} finding{{ 's' if v.finding_count != 1 else '' }}{% endif %}
                         </span>
                     </div>
                     {% if not v.is_clean and v.finding_count %}
-                    {# Severity distribution mini-bar #}
-                    <div class="flex gap-0.5 h-1 rounded-full overflow-hidden mt-1">
+                    {# Severity distribution mini-bar — monochrome scale #}
+                    <div style="display: flex; gap: 2px; height: 3px; border-radius: 999px; overflow: hidden; margin-top: 4px;">
                         {% set critical_pct = ((v.critical_count or 0) / v.finding_count * 100) | int if v.finding_count else 0 %}
                         {% set major_pct    = ((v.major_count    or 0) / v.finding_count * 100) | int if v.finding_count else 0 %}
                         {% set minor_pct    = 100 - critical_pct - major_pct %}
-                        {% if critical_pct %}<div class="bg-red-400 rounded-full" style="width:{{ critical_pct }}%;"></div>{% endif %}
-                        {% if major_pct    %}<div class="bg-orange-400 rounded-full" style="width:{{ major_pct }}%;"></div>{% endif %}
-                        {% if minor_pct    %}<div class="bg-yellow-300 rounded-full" style="width:{{ minor_pct }}%;"></div>{% endif %}
+                        {% if critical_pct %}<div style="border-radius:999px; width:{{ critical_pct }}%; background: var(--ds-ink-1);"></div>{% endif %}
+                        {% if major_pct    %}<div style="border-radius:999px; width:{{ major_pct }}%; background: var(--primary-500);"></div>{% endif %}
+                        {% if minor_pct    %}<div style="border-radius:999px; width:{{ minor_pct }}%; background: var(--primary-300);"></div>{% endif %}
                     </div>
-                    <div class="flex gap-3 mt-1">
-                        {% if v.critical_count %}<span class="text-[10px] text-red-500">{{ v.critical_count }} critical</span>{% endif %}
-                        {% if v.major_count    %}<span class="text-[10px] text-orange-500">{{ v.major_count }} major</span>{% endif %}
+                    <div style="display: flex; gap: 10px; margin-top: 4px;">
+                        {% if v.critical_count %}<span style="font-family: 'DM Sans', sans-serif; font-size: 9px; color: var(--ds-ink-1);">{{ v.critical_count }} critical</span>{% endif %}
+                        {% if v.major_count    %}<span style="font-family: 'DM Sans', sans-serif; font-size: 9px; color: var(--ds-ink-2);">{{ v.major_count }} major</span>{% endif %}
                     </div>
                     {% endif %}
                 </div>
@@ -464,11 +461,11 @@
     </div>
 
     <!-- Submission Gate -->
-    <div id="gate-panel" class="rounded-lg border border-gray-200 overflow-hidden eaiou-shadow-sm">
-        <div class="px-5 py-3 flex items-center gap-3 bg-primary-700">
-            <i class="fa-solid fa-shield-halved text-white"></i>
-            <span class="text-sm font-semibold tracking-widest uppercase text-white">Submission Gate</span>
-            <span id="gate-status-badge" class="ml-auto text-xs font-mono font-semibold px-2 py-0.5 rounded bg-white text-primary-700">checking…</span>
+    <div id="gate-panel" style="border: 0.5px solid var(--ds-border); border-radius: 3px; overflow: hidden;">
+        <div style="padding: 12px 18px; display: flex; align-items: center; gap: 12px; background: var(--ds-ink-1);">
+            <i class="fa-solid fa-shield-halved" style="color: #fff;"></i>
+            <span style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #fff;">Submission Gate</span>
+            <span id="gate-status-badge" style="margin-left: auto; font-family: monospace; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 2px; background: var(--primary-200); color: var(--ds-ink-1);">checking…</span>
         </div>
         <div id="gate-checks" class="divide-y" style="border-color: var(--ds-border);">
             <div class="px-5 py-4 text-xs" style="color: var(--ds-ink-3);">Loading…</div>
@@ -511,10 +508,10 @@
 
         <!-- Summary bar -->
         <div id="coverage-summary" class="px-5 py-3 border-b hidden" style="border-color: var(--ds-border);">
-            <div class="flex gap-4 text-xs">
-                <span><span id="cov-covered" class="font-bold" style="color:#18171A;">0</span> covered</span>
-                <span><span id="cov-novel" class="font-bold" style="color:#6B7280;">0</span> novel fills</span>
-                <span><span id="cov-needs" class="font-bold" style="color:#B45309;">0</span> needs work</span>
+            <div style="display: flex; gap: 14px; font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-2);">
+                <span><span id="cov-covered" style="font-weight: 700; color: var(--ds-ink-1);">0</span> covered</span>
+                <span><span id="cov-novel" style="font-weight: 700; color: var(--ds-ink-2);">0</span> novel fills</span>
+                <span><span id="cov-needs" style="font-weight: 700; color: var(--ds-ink-3);">0</span> needs work</span>
             </div>
         </div>
 
@@ -537,45 +534,41 @@
 
     <!-- F4-B: Withdrawal — only for submitted / under_review papers -->
     {% if paper.status in ('submitted', 'under_review') %}
-    <div class="rounded-lg border px-5 py-4 flex items-center justify-between gap-4"
-         style="border-color: #F3D5CA; background: #FDF4F0;">
+    <div style="border: 0.5px solid var(--ds-border); border-radius: 3px; padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; background: var(--primary-50);">
         <div>
-            <p class="text-xs font-semibold" style="color: var(--ds-ink-1);">Withdraw Submission</p>
-            <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">Removes this paper from the review queue. The provenance record is preserved — withdrawal is permanent.</p>
+            <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: var(--ds-ink-1);">Withdraw Submission</p>
+            <p style="font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-3); margin-top: 2px;">Removes this paper from the review queue. The provenance record is preserved — withdrawal is permanent.</p>
         </div>
         <button onclick="document.getElementById('withdraw-modal').classList.remove('hidden')"
-                class="shrink-0 px-3 py-1.5 text-xs font-medium rounded border"
-                style="border-color: #D97B5A; color: #D97B5A; background: #fff;">
+                style="flex-shrink: 0; padding: 5px 12px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; border-radius: 3px; border: 0.5px solid var(--ds-border); color: var(--ds-ink-2); background: var(--ds-surface); cursor: pointer;">
             Withdraw
         </button>
     </div>
 
     <!-- Withdrawal confirmation modal -->
-    <div id="withdraw-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center" style="background: rgba(0,0,0,0.4);">
-        <div class="bg-white rounded-xl shadow-xl max-w-sm w-full mx-4 overflow-hidden" style="border: 1px solid #F3D5CA;">
-            <div class="px-5 py-4 border-b" style="border-color: #F3D5CA; background: #FDF4F0;">
-                <p class="text-sm font-semibold" style="color: var(--ds-ink-1);">Confirm Withdrawal</p>
+    <div id="withdraw-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center" style="background: rgba(24,23,26,0.5);">
+        <div style="background: var(--ds-surface); border-radius: 3px; max-width: 380px; width: 100%; margin: 0 16px; overflow: hidden; border: 1px solid var(--ds-border);">
+            <div style="padding: 16px 18px; border-bottom: 0.5px solid var(--ds-border); background: var(--primary-50);">
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--ds-ink-1);">Confirm Withdrawal</p>
             </div>
-            <div class="px-5 py-4 space-y-3">
-                <p class="text-sm" style="color: var(--ds-ink-2);">
+            <div style="padding: 16px 18px; display: flex; flex-direction: column; gap: 10px;">
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--ds-ink-2);">
                     You are about to withdraw <strong>{{ paper.title or 'this paper' }}</strong> from editorial review.
                 </p>
-                <ul class="text-xs space-y-1 list-disc list-inside" style="color: var(--ds-ink-3);">
+                <ul style="font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-3); padding-left: 16px; display: flex; flex-direction: column; gap: 4px;">
                     <li>The paper will be tombstoned (private) — no longer visible in the queue.</li>
                     <li>Its CosmoID and provenance record are permanently preserved.</li>
                     <li>Withdrawal cannot be undone through the author interface.</li>
                 </ul>
             </div>
-            <div class="px-5 py-4 border-t flex items-center justify-end gap-3" style="border-color: var(--ds-border);">
+            <div style="padding: 14px 18px; border-top: 0.5px solid var(--ds-border); display: flex; align-items: center; justify-content: flex-end; gap: 10px;">
                 <button onclick="document.getElementById('withdraw-modal').classList.add('hidden')"
-                        class="px-4 py-1.5 text-xs font-medium rounded border"
-                        style="border-color: var(--ds-border); color: var(--ds-ink-2);">
+                        style="padding: 5px 14px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; border-radius: 3px; border: 0.5px solid var(--ds-border); color: var(--ds-ink-2); background: var(--ds-surface); cursor: pointer;">
                     Cancel
                 </button>
                 <form method="post" action="/author/papers/{{ paper.id }}/withdraw" class="inline">
                     <button type="submit"
-                            class="px-4 py-1.5 text-xs font-medium rounded text-white"
-                            style="background: #C0392B;">
+                            style="padding: 5px 14px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; border-radius: 3px; border: none; background: var(--ds-ink-1); color: #fff; cursor: pointer;">
                         Confirm Withdrawal
                     </button>
                 </form>
@@ -590,10 +583,10 @@
 {# ── Right panel: Pushback ────────────────────────────────────────────────── #}
 {% block author_sidebar %}
 <aside class="w-72 bg-white border-l flex flex-col flex-shrink-0 hidden lg:flex" style="border-color: var(--ds-border);">
-    <div class="px-4 py-3 border-b border-gray-200 flex items-center gap-2 bg-red-700">
-        <i class="fa-solid fa-crosshairs text-white" style="font-size:.85rem;"></i>
-        <span class="text-xs font-semibold tracking-widest uppercase text-white">Pushback</span>
-        <button onclick="toggleConfigure('pb')" class="ml-auto text-xs text-red-200 hover:text-white">Configure</button>
+    <div class="px-4 py-3 border-b flex items-center gap-2" style="border-color: var(--ds-border); background: var(--ds-ink-1);">
+        <i class="fa-solid fa-crosshairs" style="color: #fff; font-size:.85rem;"></i>
+        <span class="text-xs font-semibold tracking-widest uppercase" style="color: #fff;">Pushback</span>
+        <button onclick="toggleConfigure('pb')" class="ml-auto text-xs" style="color: var(--ds-ink-3);">Configure</button>
     </div>
 
     <!-- Configure form -->

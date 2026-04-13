@@ -1,0 +1,401 @@
+{% extends "author/base_author.html" %}
+{% block title %}Submission Hub — eaiou{% endblock %}
+{% block page_title %}Submission Hub{% endblock %}
+
+{% block author_content %}
+<div style="max-width: 860px; margin: 0 auto;">
+
+    <!-- Header -->
+    <div style="margin-bottom: 28px;">
+        <a href="/author/" style="display: inline-flex; align-items: center; font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--ds-ink-3); text-decoration: none; margin-bottom: 16px;">
+            <i class="fa-solid fa-arrow-left" style="margin-right: 7px;"></i>Dashboard
+        </a>
+        <h1 class="eaiou-title" style="font-size: 22px; color: var(--ds-ink-1); margin-bottom: 4px;">Submission Hub</h1>
+        <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ds-ink-3);">Choose how you're entering the research record.</p>
+        <div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="/author/submit"
+               style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: #fff; background: var(--ds-ink-1); border-radius: 3px; text-decoration: none;">
+                <i class="fa-solid fa-plus" style="font-size: 10px;"></i>New Submission Form
+            </a>
+            <a href="/author/workspace"
+               style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: var(--ds-ink-1); background: var(--ds-surface); border: 0.5px solid var(--ds-border); border-radius: 3px; text-decoration: none;">
+                <i class="fa-solid fa-table-columns" style="font-size: 10px;"></i>Workspace
+            </a>
+        </div>
+    </div>
+
+    <!-- 4-card grid -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+
+        <!-- ── Card 1: Browse Globe ── -->
+        <div style="border: 0.5px solid var(--ds-border); border-radius: 3px; overflow: hidden; display: flex; flex-direction: column; background: var(--ds-surface);">
+            <div style="padding: 20px 20px 14px; flex: 1;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 34px; height: 34px; border-radius: 3px; display: flex; align-items: center; justify-content: center; background: #18171A; flex-shrink: 0;">
+                        <i class="fa-solid fa-globe" style="color: #fff; font-size: 13px;"></i>
+                    </div>
+                    <div>
+                        <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--ds-ink-1);">Browse the Gap Map</div>
+                        <div style="font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-3);">Pick a gap manually</div>
+                    </div>
+                </div>
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; line-height: 1.6; color: var(--ds-ink-2); margin-bottom: 12px;">
+                    Navigate the live 3D knowledge gap observatory. Each spike is an unresolved
+                    research gap — height indicates bridge potential. Click any spike to inspect
+                    it, then start your investigation from there.
+                </p>
+                <div style="font-family: 'DM Sans', sans-serif; font-size: 10px; border-radius: 3px; padding: 8px 10px; background: var(--primary-50); border: 0.5px solid var(--ds-border); color: var(--ds-ink-3);">
+                    <i class="fa-solid fa-circle-info" style="margin-right: 5px;"></i>
+                    Selecting a gap pre-fills your submission with its declaration, source paper, and related gaps.
+                </div>
+            </div>
+            <div style="padding: 0 20px 18px;">
+                <a href="{{ gitgap_url }}" target="_blank"
+                   style="display: flex; align-items: center; justify-content: center; gap: 7px; width: 100%; padding: 8px 0; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #fff; background: #18171A; border-radius: 3px; text-decoration: none; box-sizing: border-box;">
+                    <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 10px;"></i>
+                    Open Gap Map
+                </a>
+            </div>
+        </div>
+
+        <!-- ── Card 2: Matched for You ── -->
+        <div style="border: 0.5px solid var(--ds-border); border-radius: 3px; overflow: hidden; display: flex; flex-direction: column; background: var(--ds-surface);">
+            <div style="padding: 20px 20px 14px; flex: 1;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 34px; height: 34px; border-radius: 3px; display: flex; align-items: center; justify-content: center; background: var(--primary-400); flex-shrink: 0;">
+                        <i class="fa-solid fa-crosshairs" style="color: #fff; font-size: 13px;"></i>
+                    </div>
+                    <div>
+                        <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--ds-ink-1);">Matched to Your Profile</div>
+                        <div style="font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-3);">Gaps selected for you</div>
+                    </div>
+                </div>
+
+                {% if not profile_exists %}
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; line-height: 1.6; color: var(--ds-ink-2); margin-bottom: 12px;">
+                    Complete your researcher profile first. eaiou uses your biography and prior papers
+                    to surface the 5 gaps most likely to intersect your work.
+                </p>
+                <div style="font-family: 'DM Sans', sans-serif; font-size: 10px; border-radius: 3px; padding: 8px 10px; background: var(--primary-100); border: 0.5px solid var(--ds-border); color: var(--ds-ink-2); margin-bottom: 8px;">
+                    <i class="fa-solid fa-triangle-exclamation" style="margin-right: 5px;"></i>
+                    Profile not found. Complete intake to unlock matched gaps.
+                </div>
+                {% elif not wheelhouse %}
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; line-height: 1.6; color: var(--ds-ink-2);">
+                    Your profile exists but gap matching hasn't run yet, or all current matches
+                    have been reviewed. Run a Wheelhouse rescore from the workspace.
+                </p>
+                {% else %}
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--ds-ink-2); margin-bottom: 10px;">
+                    Based on your research biography and prior papers:
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px;" id="wheelhouse-list">
+                    {% for m in wheelhouse %}
+                    <a href="/author/submit?gap_id={{ m.gap_id }}"
+                       style="display: block; border: 0.5px solid var(--ds-border); border-radius: 3px; padding: 9px 12px; text-decoration: none; background: var(--primary-50);">
+                        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;">
+                            <div style="flex: 1; min-width: 0;">
+                                <div style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: var(--ds-ink-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ m.gap_term or 'Research Gap' }}</div>
+                                <div style="font-family: 'DM Sans', sans-serif; font-size: 10px; color: var(--ds-ink-3); margin-top: 2px;">{{ (m.gap_declaration or '')[:100] }}{% if m.gap_declaration and m.gap_declaration|length > 100 %}…{% endif %}</div>
+                            </div>
+                            <div style="font-family: monospace; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-left: 8px; color: var(--ds-ink-2);">{{ (m.match_score * 100)|int }}%</div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div style="padding: 0 20px 18px;">
+                {% if not profile_exists %}
+                <a href="/author/intake"
+                   style="display: flex; align-items: center; justify-content: center; gap: 7px; width: 100%; padding: 8px 0; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #fff; background: var(--ds-ink-1); border-radius: 3px; text-decoration: none; box-sizing: border-box;">
+                    Complete Profile →
+                </a>
+                {% else %}
+                <a href="/author/wheelhouse/rescore"
+                   style="display: flex; align-items: center; justify-content: center; gap: 7px; width: 100%; padding: 8px 0; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--ds-ink-2); background: var(--ds-surface); border: 0.5px solid var(--ds-border); border-radius: 3px; text-decoration: none; box-sizing: border-box;">
+                    <i class="fa-solid fa-rotate" style="font-size: 10px;"></i>
+                    Refresh Matches
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- ── Card 3: Upload Paper for Gap Review ── -->
+        <div style="border: 0.5px solid var(--ds-border); border-radius: 3px; overflow: hidden; display: flex; flex-direction: column; background: var(--ds-surface);">
+            <div style="padding: 20px 20px 14px; flex: 1;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 34px; height: 34px; border-radius: 3px; display: flex; align-items: center; justify-content: center; background: var(--primary-500); flex-shrink: 0;">
+                        <i class="fa-solid fa-magnifying-glass-chart" style="color: #fff; font-size: 13px;"></i>
+                    </div>
+                    <div>
+                        <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--ds-ink-1);">Upload for Gap Review</div>
+                        <div style="font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-3);">Find what gaps your paper fills</div>
+                    </div>
+                </div>
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; line-height: 1.6; color: var(--ds-ink-2); margin-bottom: 10px;">
+                    Paste your abstract and key sections. The system extracts your claims,
+                    scores each against the gap index using the <em>appreciated scale</em>
+                    (older unresolved gaps score higher), and tells you exactly what you're filling.
+                </p>
+                <textarea id="gap-review-text"
+                    rows="5"
+                    placeholder="Paste abstract or full paper text…"
+                    style="width: 100%; border: 0.5px solid var(--ds-border); border-radius: 3px; padding: 9px 12px; font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-1); resize: none; outline: none; box-sizing: border-box;"></textarea>
+                <div id="gap-review-result" style="margin-top: 8px; display: none;"></div>
+            </div>
+            <div style="padding: 0 20px 18px; display: flex; gap: 8px;">
+                <button onclick="runGapReview()"
+                        id="gap-review-btn"
+                        style="flex: 1; padding: 8px 0; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #fff; background: var(--ds-ink-1); border: none; border-radius: 3px; cursor: pointer;">
+                    Analyze Claims
+                </button>
+                <button onclick="proceedFromReview()"
+                        id="gap-review-proceed"
+                        style="flex: 1; padding: 8px 0; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #fff; background: var(--ds-ink-1); border: none; border-radius: 3px; cursor: pointer; display: none;">
+                    Proceed to Submit →
+                </button>
+            </div>
+        </div>
+
+        <!-- ── Card 4: Preprint Integrity Check ── -->
+        <div style="border: 0.5px solid var(--ds-border); border-radius: 3px; overflow: hidden; display: flex; flex-direction: column; background: var(--ds-surface);">
+            <div style="padding: 20px 20px 14px; flex: 1;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 34px; height: 34px; border-radius: 3px; display: flex; align-items: center; justify-content: center; background: var(--primary-600); flex-shrink: 0;">
+                        <i class="fa-solid fa-shield-halved" style="color: #fff; font-size: 13px;"></i>
+                    </div>
+                    <div>
+                        <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--ds-ink-1);">Preprint Integrity Check</div>
+                        <div style="font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-3);">Blind AI review before you submit</div>
+                    </div>
+                </div>
+                <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; line-height: 1.6; color: var(--ds-ink-2); margin-bottom: 10px;">
+                    Independent researchers without institutional access benefit most from this.
+                    Paste your preprint — the system runs blind AI disclosure analysis,
+                    leakage detection, claim coverage, and a contamination score.
+                    No submission required. No record created.
+                </p>
+                <div style="font-family: 'DM Sans', sans-serif; font-size: 10px; border-radius: 3px; padding: 8px 10px; background: var(--primary-50); border: 0.5px solid var(--ds-border); color: var(--ds-ink-3); margin-bottom: 10px;">
+                    <i class="fa-solid fa-eye-slash" style="margin-right: 5px;"></i>
+                    Outside-of-influence: the reviewer has no knowledge of author identity or institutional affiliation.
+                </div>
+                <textarea id="preprint-text"
+                    rows="5"
+                    placeholder="Paste your preprint abstract and key sections…"
+                    style="width: 100%; border: 0.5px solid var(--ds-border); border-radius: 3px; padding: 9px 12px; font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ds-ink-1); resize: none; outline: none; box-sizing: border-box;"></textarea>
+                <div id="preprint-result" style="margin-top: 8px; display: none;"></div>
+            </div>
+            <div style="padding: 0 20px 18px; display: flex; gap: 8px;">
+                <button onclick="runPreprintCheck()"
+                        id="preprint-btn"
+                        style="flex: 1; padding: 8px 0; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #fff; background: var(--ds-ink-1); border: none; border-radius: 3px; cursor: pointer;">
+                    Run Integrity Check
+                </button>
+                <button onclick="openFullReport()"
+                        id="preprint-report-btn"
+                        style="flex: 1; padding: 8px 0; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--ds-ink-1); background: var(--ds-surface); border: 0.5px solid var(--ds-border); border-radius: 3px; cursor: pointer; display: none;">
+                    Full Report →
+                </button>
+            </div>
+        </div>
+
+    </div><!-- /grid -->
+
+    <!-- ── Quick links to paper status ────────────────────────────────── -->
+    {% if papers %}
+    <div style="margin-top: 24px; background: var(--ds-surface); border: 0.5px solid var(--ds-border); border-radius: 3px; overflow: hidden;">
+        <div style="padding: 10px 16px; border-bottom: 0.5px solid var(--ds-border); background: var(--primary-50); display: flex; align-items: center; gap: 7px;">
+            <i class="fa-solid fa-layer-group" style="font-size: 10px; color: var(--ds-ink-3);"></i>
+            <span style="font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ds-ink-3);">Your Submissions</span>
+        </div>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            {% for paper in papers %}
+            <li style="padding: 10px 16px; border-bottom: 0.5px solid var(--ds-border); display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                <div style="flex: 1; min-width: 0;">
+                    <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--ds-ink-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ paper.title or 'Untitled' }}</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+                    {% set s = paper.status %}
+                    {% if s == 'submitted' %}<span class="badge badge-submitted">Submitted</span>
+                    {% elif s == 'under_review' %}<span class="badge badge-review">Under Review</span>
+                    {% elif s == 'accepted' %}<span class="badge badge-accepted">Accepted</span>
+                    {% elif s == 'published' %}<span class="badge badge-published">Published</span>
+                    {% elif s == 'rejected' %}<span class="badge badge-rejected">Rejected</span>
+                    {% else %}<span class="badge badge-draft">{{ s or 'Draft' }}</span>
+                    {% endif %}
+                    <a href="/papers/status/{{ paper.id }}"
+                       style="font-family: 'DM Sans', sans-serif; font-size: 10px; color: var(--ds-ink-3); text-decoration: none;">Status →</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+// ── Gap Review (Card 3) ───────────────────────────────────────────────────────
+let reviewSummary = null;
+
+async function runGapReview() {
+    const text = document.getElementById('gap-review-text').value.trim();
+    if (!text) { alert('Paste some paper text first.'); return; }
+
+    const btn = document.getElementById('gap-review-btn');
+    const result = document.getElementById('gap-review-result');
+    btn.disabled = true;
+    btn.textContent = 'Analyzing…';
+    result.style.display = 'none';
+
+    try {
+        const resp = await fetch('/author/quick-coverage', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ text }),
+        });
+        const data = await resp.json();
+
+        if (data.error) {
+            result.innerHTML = `<p style="font-family:'DM Sans',sans-serif;font-size:11px;color:var(--ds-ink-2);">${data.error}</p>`;
+            result.style.display = '';
+            return;
+        }
+
+        reviewSummary = data;
+        const s = data.summary;
+        const rows = (data.claims || []).slice(0, 6).map(c => {
+            const pct = Math.round(c.appreciated * 100);
+            const dotColor = c.status === 'covered' ? '#18171A' : c.status === 'novel' ? '#5A5856' : '#9A9895';
+            return `<div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:0.5px solid #E2E0DB;">
+                <span style="display:inline-block;width:7px;height:7px;border-radius:50%;margin-top:4px;flex-shrink:0;background:${dotColor};"></span>
+                <div style="flex:1;min-width:0;font-family:'DM Sans',sans-serif;font-size:10px;color:#5A5856;">${esc(c.text.substring(0,90))}…</div>
+                <span style="font-family:monospace;font-size:10px;font-weight:700;flex-shrink:0;color:#18171A;">${pct}%</span>
+            </div>`;
+        }).join('');
+
+        result.innerHTML = `
+            <div style="border:0.5px solid #CAC8C2;border-radius:3px;padding:10px;background:#F0EFEB;">
+                <div style="display:flex;gap:14px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;color:#18171A;margin-bottom:8px;">
+                    <span>${s.covered} covered</span>
+                    <span>${s.novel} novel fills</span>
+                    <span>${s.needs_work} needs work</span>
+                </div>
+                <div>${rows}</div>
+            </div>`;
+        result.style.display = '';
+
+        if (s.novel > 0 || s.covered > 0) {
+            document.getElementById('gap-review-proceed').style.display = '';
+        }
+    } catch(e) {
+        result.innerHTML = `<p style="font-family:'DM Sans',sans-serif;font-size:11px;color:var(--ds-ink-2);">Error: ${e.message}</p>`;
+        result.style.display = '';
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Re-analyze';
+    }
+}
+
+function proceedFromReview() {
+    const text = document.getElementById('gap-review-text').value.trim();
+    sessionStorage.setItem('intake_paper_text', text);
+    if (reviewSummary) sessionStorage.setItem('intake_coverage', JSON.stringify(reviewSummary));
+    window.location.href = '/author/submit';
+}
+
+// ── Preprint Integrity Check (Card 4) ─────────────────────────────────────────
+async function runPreprintCheck() {
+    const text = document.getElementById('preprint-text').value.trim();
+    if (!text) { alert('Paste your preprint text first.'); return; }
+
+    const btn = document.getElementById('preprint-btn');
+    const result = document.getElementById('preprint-result');
+    btn.disabled = true;
+    btn.textContent = 'Running check…';
+    result.style.display = 'none';
+
+    try {
+        const resp = await fetch('/author/preprint-check', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ text }),
+        });
+        const data = await resp.json();
+
+        if (data.error) {
+            result.innerHTML = `<p style="font-family:'DM Sans',sans-serif;font-size:11px;color:var(--ds-ink-2);">${data.error}</p>`;
+            result.style.display = '';
+            return;
+        }
+
+        const checks = (data.checks || []).map(c => {
+            const icon = c.passed
+                ? `<i class="fa-solid fa-check" style="color:#18171A;font-size:10px;"></i>`
+                : `<i class="fa-solid fa-triangle-exclamation" style="color:#5A5856;font-size:10px;"></i>`;
+            return `<div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:0.5px solid #E2E0DB;">
+                ${icon}
+                <div>
+                    <div style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;color:#18171A;">${esc(c.label)}</div>
+                    ${c.detail ? `<div style="font-family:'DM Sans',sans-serif;font-size:10px;color:#5A5856;">${esc(c.detail)}</div>` : ''}
+                </div>
+            </div>`;
+        }).join('');
+
+        const passCount = (data.checks || []).filter(c => c.passed).length;
+        const failCount = (data.checks || []).filter(c => !c.passed).length;
+        const headerTxt = failCount === 0 ? 'All checks passed' : `${failCount} issue(s) found`;
+
+        result.innerHTML = `
+            <div style="border:0.5px solid #CAC8C2;border-radius:3px;padding:10px;background:#F0EFEB;">
+                <div style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#18171A;margin-bottom:8px;">${headerTxt}</div>
+                ${data.coverage_summary ? `
+                <div style="font-family:'DM Sans',sans-serif;font-size:10px;color:#5A5856;margin-bottom:8px;">
+                    Claims: <strong>${data.coverage_summary.covered}</strong> covered ·
+                    <strong>${data.coverage_summary.novel}</strong> novel ·
+                    <strong>${data.coverage_summary.needs_work}</strong> needs work
+                </div>` : ''}
+                <div>${checks}</div>
+                ${data.ai_disclosure_detected != null ? `
+                <div style="margin-top:8px;padding-top:8px;border-top:0.5px solid #CAC8C2;font-family:'DM Sans',sans-serif;font-size:10px;color:#5A5856;">
+                    AI signal: <strong>${data.ai_disclosure_detected}</strong>
+                </div>` : ''}
+            </div>`;
+        result.style.display = '';
+        document.getElementById('preprint-report-btn').style.display = '';
+
+    } catch(e) {
+        result.innerHTML = `<p style="font-family:'DM Sans',sans-serif;font-size:11px;color:var(--ds-ink-2);">Error: ${e.message}</p>`;
+        result.style.display = '';
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Re-run Check';
+    }
+}
+
+function openFullReport() {
+    const text = document.getElementById('preprint-text').value.trim();
+    if (!text) { window.open('/report', '_blank'); return; }
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/report';
+    form.target = '_blank';
+    const ta = document.createElement('textarea');
+    ta.name = 'paper_text';
+    ta.value = text;
+    form.appendChild(ta);
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+}
+
+function esc(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+{% endblock %}
