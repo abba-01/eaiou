@@ -1,0 +1,527 @@
+{% extends "base.html" %}
+
+{% block head %}
+<!-- DM Sans body font (SSOT §2.3) — DM Serif Display loaded by base.html -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+    /* ── Design tokens (SSOT §2.1) ─────────────────────────────────── */
+    :root {
+        --ds-bg:      #F7F6F3;
+        --ds-surface: #FFFFFF;
+        --ds-border:  #E2E0DB;
+        --ds-ink-1:   #18171A;
+        --ds-ink-2:   #5A5856;
+        --ds-ink-3:   #9A9895;
+        --ds-accent:  #18171A;
+        /* primary scale mirrors Tailwind config in base.html */
+        --primary-50:  #F0EFEB;
+        --primary-100: #EDECE9;
+        --primary-200: #E2E0DB;
+        --primary-300: #CAC8C2;
+        --primary-400: #9A9895;
+        --primary-500: #5A5856;
+        --primary-600: #18171A;
+        --primary-700: #18171A;
+        --primary-900: #0A090B;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    ::-webkit-scrollbar { display: none; }
+
+    /* Override base.html body for author shell */
+    body {
+        font-family: 'DM Sans', sans-serif;
+        background: var(--ds-bg);
+        color: var(--ds-ink-1);
+        font-size: 15px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Sidebar ────────────────────────────────────────────────────── */
+    .author-sidebar {
+        width: 224px;
+        background: var(--ds-surface);
+        border-right: 0.5px solid var(--ds-border);
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        overflow-y: auto;
+    }
+
+    .sidebar-brand {
+        padding: 16px 20px;
+        border-bottom: 0.5px solid var(--ds-border);
+        flex-shrink: 0;
+    }
+    .sidebar-brand a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+    .sidebar-brand-mark {
+        width: 30px;
+        height: 30px;
+        border-radius: 3px;
+        background: var(--ds-ink-1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .sidebar-brand-mark span {
+        font-family: 'DM Serif Display', Georgia, serif;
+        font-size: 16px;
+        font-style: italic;
+        font-weight: 300;
+        color: var(--ds-ink-3);
+    }
+    .sidebar-brand-name {
+        font-family: 'DM Serif Display', Georgia, serif;
+        font-size: 20px;
+        font-weight: 300;
+        font-style: italic;
+        letter-spacing: -0.02em;
+        color: var(--ds-ink-1);
+    }
+
+    /* Nav */
+    .sidebar-nav { padding: 16px 12px; border-bottom: 0.5px solid var(--ds-border); flex-shrink: 0; }
+    .sidebar-nav-group {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ds-ink-3);
+        padding: 0 8px;
+        margin-bottom: 6px;
+    }
+    .sidebar-nav-group:not(:first-child) { margin-top: 16px; }
+    .sidebar-nav ul { list-style: none; padding: 0; margin: 0; }
+    .sidebar-nav li + li { margin-top: 1px; }
+    .sidebar-nav a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 8px;
+        border-radius: 3px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 12px;
+        letter-spacing: 0.02em;
+        color: var(--ds-ink-2);
+        text-decoration: none;
+        transition: background 0.12s, color 0.12s;
+    }
+    .sidebar-nav a i { color: var(--ds-ink-3); width: 14px; font-size: 11px; }
+    .sidebar-nav a:hover { background: var(--primary-50); color: var(--ds-ink-1); }
+    .sidebar-nav a:hover i { color: var(--ds-ink-2); }
+    /* Active state: SSOT §2.2 — bg-primary-50 text-primary-700 */
+    .sidebar-nav a.nav-active {
+        background: var(--primary-50);
+        color: var(--primary-700);
+    }
+    .sidebar-nav a.nav-active i { color: var(--primary-600); }
+
+    /* ── Top header ─────────────────────────────────────────────────── */
+    .author-header {
+        background: var(--ds-surface);
+        border-bottom: 0.5px solid var(--ds-border);
+        padding: 0 24px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+    }
+    .author-header-title {
+        font-family: 'DM Serif Display', Georgia, serif;
+        font-size: 16px;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--ds-ink-1);
+    }
+    .header-btn {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 5px 10px;
+        border: 0.5px solid var(--ds-border);
+        border-radius: 3px;
+        background: var(--ds-surface);
+        color: var(--ds-ink-3);
+        cursor: pointer;
+        transition: all 0.15s;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        text-decoration: none;
+    }
+    .header-btn:hover { border-color: var(--ds-ink-3); color: var(--ds-ink-1); }
+
+    /* User initials avatar */
+    .avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--ds-ink-1);
+        color: #fff;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    /* SSOT §2.2: user label uses var(--ds-ink-3) */
+    .avatar-label {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 11px;
+        color: var(--ds-ink-3);
+    }
+
+    /* ── Right sidebar ──────────────────────────────────────────────── */
+    .author-right {
+        width: 264px;
+        background: var(--ds-surface);
+        border-left: 0.5px solid var(--ds-border);
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        overflow-y: auto;
+    }
+    .right-sidebar-header {
+        padding: 12px 16px;
+        border-bottom: 0.5px solid var(--ds-border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+        background: var(--primary-100);
+    }
+
+    /* ── Widget cards ───────────────────────────────────────────────── */
+    .eaiou-widget {
+        background: var(--ds-surface);
+        border: 0.5px solid var(--ds-border);
+        border-radius: 3px;
+        padding: 14px;
+        margin-bottom: 8px;
+    }
+    .eaiou-widget:last-child { margin-bottom: 0; }
+    .widget-label {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ds-ink-3);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .widget-label i { color: var(--ds-ink-3); }
+
+    /* ── Status badges (SSOT §2.2 — neutral only, no color words) ─── */
+    .badge {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 2px;
+        border: 0.5px solid;
+    }
+    .badge-submitted  { background: var(--primary-100); color: var(--ds-ink-2); border-color: var(--primary-200); }
+    .badge-review     { background: var(--primary-100); color: var(--ds-ink-2); border-color: var(--primary-300); }
+    .badge-accepted   { background: var(--ds-ink-1);    color: #fff;            border-color: var(--ds-ink-1); }
+    .badge-rejected   { background: var(--primary-100); color: var(--ds-ink-3); border-color: var(--primary-200); }
+    .badge-published  { background: var(--ds-ink-1);    color: #fff;            border-color: var(--ds-ink-1); }
+    .badge-draft      { background: var(--primary-200); color: var(--ds-ink-3); border-color: var(--primary-200); }
+
+    /* ── Footer tagline ─────────────────────────────────────────────── */
+    .sidebar-footer {
+        padding: 12px 16px;
+        border-top: 0.5px solid var(--ds-border);
+        flex-shrink: 0;
+    }
+    .sidebar-footer p {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 9px;
+        letter-spacing: 0.06em;
+        color: var(--ds-ink-3);
+        font-style: italic;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="flex overflow-hidden" style="height: calc(100vh - 80px);"
+     id="eaiou-widget-app"
+     data-left-col="eaiou-left-col"
+     data-right-col="eaiou-right-col"
+     data-toolbar-col="eaiou-widget-toolbar-items">
+
+    <!-- ── Left Sidebar ───────────────────────────────────────────────── -->
+    {% block author_left_sidebar %}
+    <aside class="author-sidebar hidden md:flex flex-col">
+
+        <!-- Brand -->
+        <div class="sidebar-brand">
+            <a href="/">
+                <div class="sidebar-brand-mark"><span>e</span></div>
+                <span class="sidebar-brand-name">eaiou</span>
+            </a>
+        </div>
+
+        <!-- Nav: active state detected via request.url.path (SSOT §4) -->
+        <nav class="sidebar-nav">
+            <p class="sidebar-nav-group">Main</p>
+            <ul>
+                <li>
+                    <a href="/author/"
+                       class="{% if request.url.path == '/author/' %}nav-active{% endif %}">
+                        <i class="fa-solid fa-house"></i>Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="/author/submit"
+                       class="{% if request.url.path == '/author/submit' %}nav-active{% endif %}">
+                        <i class="fa-solid fa-plus"></i>New Submission
+                    </a>
+                </li>
+                <li>
+                    <a href="/author/workspace"
+                       class="{% if request.url.path.startswith('/author/workspace') %}nav-active{% endif %}">
+                        <i class="fa-solid fa-table-columns"></i>Workspace
+                    </a>
+                </li>
+                <li>
+                    <a href="/author/submission_hub"
+                       class="{% if request.url.path.startswith('/author/submission_hub') %}nav-active{% endif %}">
+                        <i class="fa-solid fa-layer-group"></i>Submission Hub
+                    </a>
+                </li>
+            </ul>
+
+            <p class="sidebar-nav-group">Tools</p>
+            <ul>
+                <li>
+                    <a href="/papers/"
+                       class="{% if request.url.path.startswith('/papers/') %}nav-active{% endif %}">
+                        <i class="fa-solid fa-globe"></i>Public Papers
+                    </a>
+                </li>
+                <li>
+                    <a href="/report"
+                       class="{% if request.url.path == '/report' %}nav-active{% endif %}">
+                        <i class="fa-solid fa-magnifying-glass"></i>Coverage Tool
+                    </a>
+                </li>
+                <li>
+                    <a href="/policy/temporal-blindness"
+                       class="{% if request.url.path == '/policy/temporal-blindness' %}nav-active{% endif %}">
+                        <i class="fa-solid fa-lock"></i>Temporal Blindness
+                    </a>
+                </li>
+            </ul>
+
+            <p class="sidebar-nav-group">Account</p>
+            <ul>
+                <li>
+                    <a href="/auth/logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>Sign Out
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Left widget zone -->
+        <div class="flex-1 overflow-y-auto" style="padding:12px;" id="eaiou-left-col">
+            {% block left_widgets %}{% endblock %}
+        </div>
+
+        <!-- Footer tagline -->
+        <div class="sidebar-footer">
+            <p>Bias can see time. Justice cannot.</p>
+        </div>
+    </aside>
+    {% endblock %}
+
+    <!-- ── Center column ──────────────────────────────────────────────── -->
+    <div class="flex-1 flex flex-col overflow-hidden min-w-0">
+
+        <!-- Top header -->
+        <header class="author-header">
+            <div class="flex items-center gap-3">
+                <!-- Mobile menu toggle (inline vanilla JS — SSOT §1) -->
+                <button class="md:hidden header-btn"
+                        onclick="document.querySelector('.author-sidebar').classList.toggle('hidden')">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h1 class="author-header-title">{% block page_title %}Author Dashboard{% endblock %}</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <!-- Layout toggle (inline vanilla JS — SSOT §1) -->
+                <button id="layout-toggle-btn" onclick="eaiouToggleWidth()" class="header-btn">
+                    <i id="layout-icon" class="fa-solid fa-expand" style="font-size:9px;"></i>
+                    <span id="layout-label">Fixed</span>
+                </button>
+                {% if current_user %}
+                <!-- Notification bell -->
+                <a href="/author/" class="relative header-btn" title="Notifications" style="padding:5px 8px;">
+                    <i class="fa-regular fa-bell" style="font-size:13px; color:var(--ds-ink-3);"></i>
+                    {% if unread_count is defined and unread_count > 0 %}
+                    <span style="
+                        position:absolute; top:-3px; right:-3px;
+                        min-width:14px; height:14px;
+                        background: var(--ds-ink-1); color:#fff;
+                        font-family:'DM Sans',sans-serif; font-size:8px; font-weight:500;
+                        border-radius:999px; padding:0 3px;
+                        display:flex; align-items:center; justify-content:center;">
+                        {{ unread_count }}
+                    </span>
+                    {% endif %}
+                </a>
+                <!-- User initials widget — label uses var(--ds-ink-3) per SSOT §2.2 -->
+                <div class="flex items-center gap-2">
+                    <div class="avatar">{{ current_user.initials }}</div>
+                    <span class="avatar-label hidden md:inline">{{ current_user.name }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </header>
+
+        <!-- Widget toolbar -->
+        {% include "partials/widget_toolbar.html" %}
+
+        <!-- Main content -->
+        <main class="flex-1 overflow-y-auto" style="padding:24px; background:var(--ds-bg);" id="eaiou-main">
+            <div id="content-width-wrap" style="margin:0 auto; transition:max-width 0.15s ease;">
+                {% block author_content %}{% endblock %}
+            </div>
+        </main>
+
+        {% block terminal_panel %}{% endblock %}
+    </div>
+
+    <!-- ── Right sidebar ──────────────────────────────────────────────── -->
+    <aside class="author-right hidden lg:flex flex-col">
+
+        <!-- Header -->
+        <div class="right-sidebar-header">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-fingerprint" style="font-size:12px; color:var(--ds-ink-3);"></i>
+                <span style="font-family:'DM Sans',sans-serif; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ds-ink-3);">Context</span>
+            </div>
+        </div>
+
+        <!-- Right widget zone -->
+        <div class="flex-1 overflow-y-auto" style="padding:12px;" id="eaiou-right-col">
+            {% block author_sidebar %}
+
+            <!-- CosmoID info widget -->
+            <div class="eaiou-widget" data-widget-id="cosmoid-info">
+                <div class="widget-label">
+                    <i class="fa-solid fa-fingerprint"></i>CosmoID
+                </div>
+                <p style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ds-ink-2); line-height:1.6;">
+                    A CosmoID is issued to each paper at creation — a permanent context fingerprint that persists through all state changes.
+                </p>
+            </div>
+
+            <!-- Policy links widget -->
+            <div class="eaiou-widget" data-widget-id="policy-links">
+                <div class="widget-label">
+                    <i class="fa-solid fa-scroll"></i>Policies
+                </div>
+                <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px;">
+                    <li>
+                        <a href="/policy/temporal-blindness"
+                           style="display:flex; align-items:center; gap:7px; font-family:'DM Sans',sans-serif; font-size:10px; color:var(--ds-ink-2); text-decoration:none; letter-spacing:0.04em;">
+                            <i class="fa-solid fa-lock" style="font-size:10px; color:var(--ds-ink-3); width:12px;"></i>
+                            Temporal Blindness
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/policy/intelligence-blindness"
+                           style="display:flex; align-items:center; gap:7px; font-family:'DM Sans',sans-serif; font-size:10px; color:var(--ds-ink-2); text-decoration:none; letter-spacing:0.04em;">
+                            <i class="fa-solid fa-eye-slash" style="font-size:10px; color:var(--ds-ink-3); width:12px;"></i>
+                            Intelligence Blindness
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/policy/ai-disclosure"
+                           style="display:flex; align-items:center; gap:7px; font-family:'DM Sans',sans-serif; font-size:10px; color:var(--ds-ink-2); text-decoration:none; letter-spacing:0.04em;">
+                            <i class="fa-solid fa-robot" style="font-size:10px; color:var(--ds-ink-3); width:12px;"></i>
+                            AI Disclosure
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/policy/open-access"
+                           style="display:flex; align-items:center; gap:7px; font-family:'DM Sans',sans-serif; font-size:10px; color:var(--ds-ink-2); text-decoration:none; letter-spacing:0.04em;">
+                            <i class="fa-solid fa-unlock" style="font-size:10px; color:var(--ds-ink-3); width:12px;"></i>
+                            Open Access
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:editor@eaiou.org"
+                           style="display:flex; align-items:center; gap:7px; font-family:'DM Sans',sans-serif; font-size:10px; color:var(--ds-ink-2); text-decoration:none; letter-spacing:0.04em;">
+                            <i class="fa-regular fa-envelope" style="font-size:10px; color:var(--ds-ink-3); width:12px;"></i>
+                            editor@eaiou.org
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            {% endblock %}
+        </div>
+    </aside>
+
+</div><!-- /eaiou-widget-app -->
+
+<!-- Squeeze columns -->
+<div id="eaiou-squeeze-left"  class="eaiou-squeeze fixed left-56 top-0 h-screen z-30"></div>
+<div id="eaiou-squeeze-right" class="eaiou-squeeze eaiou-squeeze-right fixed right-64 top-0 h-screen z-30"></div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/widgets.js"></script>
+<script>
+/* Layout-width toggle — inline vanilla JS, no framework (SSOT §1) */
+(function () {
+    var WRAP  = document.getElementById('content-width-wrap');
+    var ICON  = document.getElementById('layout-icon');
+    var LABEL = document.getElementById('layout-label');
+    var KEY   = 'eaiou_layout';
+    var wide  = localStorage.getItem(KEY) === 'wide';
+
+    function apply() {
+        if (wide) {
+            WRAP.style.maxWidth = 'none';
+            ICON.className = 'fa-solid fa-compress';
+            LABEL.textContent = 'Wide';
+        } else {
+            WRAP.style.maxWidth = '960px';
+            ICON.className = 'fa-solid fa-expand';
+            LABEL.textContent = 'Fixed';
+        }
+    }
+
+    window.eaiouToggleWidth = function () {
+        wide = !wide;
+        localStorage.setItem(KEY, wide ? 'wide' : 'fixed');
+        apply();
+    };
+
+    apply();
+}());
+</script>
+{% endblock %}
