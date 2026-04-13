@@ -1,0 +1,250 @@
+{% extends "editor/base_editor.html" %}
+{% block title %}Editor Dashboard — eaiou{% endblock %}
+{% block page_title %}Editorial Dashboard{% endblock %}
+{% block nav_dashboard %}eaiou-nav-active{% endblock %}
+
+{# ── Right column stats ─────────────────────────────────────────────────── #}
+{% block editor_right_widgets %}
+<div class="eaiou-widget" data-widget-id="editorial-stats">
+    <div class="rounded-lg p-4 mb-3" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <h4 class="text-xs font-semibold mb-3" style="color: var(--ds-ink-2);">At a Glance</h4>
+        <div class="space-y-2">
+            <div class="flex items-center justify-between py-1.5" style="border-bottom: 1px solid var(--ds-border);">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background: var(--ds-ink-1);"></span>
+                    <span class="text-xs" style="color: var(--ds-ink-3);">Total</span>
+                </div>
+                <span class="text-sm font-bold" style="color: var(--ds-ink-1);">{{ stats.total }}</span>
+            </div>
+            <div class="flex items-center justify-between py-1.5" style="border-bottom: 1px solid var(--ds-border);">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background: var(--ds-ink-3);"></span>
+                    <span class="text-xs" style="color: var(--ds-ink-3);">Submitted</span>
+                </div>
+                <span class="text-sm font-bold" style="color: var(--ds-ink-1);">{{ stats.submitted }}</span>
+            </div>
+            <div class="flex items-center justify-between py-1.5" style="border-bottom: 1px solid var(--ds-border);">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background: var(--ds-ink-2);"></span>
+                    <span class="text-xs" style="color: var(--ds-ink-3);">Under Review</span>
+                </div>
+                <span class="text-sm font-bold" style="color: var(--ds-ink-1);">{{ stats.under_review }}</span>
+            </div>
+            <div class="flex items-center justify-between py-1.5" style="border-bottom: 1px solid var(--ds-border);">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background: var(--ds-ink-2);"></span>
+                    <span class="text-xs" style="color: var(--ds-ink-3);">Revision Req.</span>
+                </div>
+                <span class="text-sm font-bold" style="color: var(--ds-ink-1);">{{ stats.revision_requested }}</span>
+            </div>
+            <div class="flex items-center justify-between py-1.5" style="border-bottom: 1px solid var(--ds-border);">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background: var(--ds-ink-1);"></span>
+                    <span class="text-xs" style="color: var(--ds-ink-3);">Accepted</span>
+                </div>
+                <span class="text-sm font-bold" style="color: var(--ds-ink-1);">{{ stats.accepted }}</span>
+            </div>
+            <div class="flex items-center justify-between py-1.5">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background: var(--ds-ink-1);"></span>
+                    <span class="text-xs" style="color: var(--ds-ink-3);">Published</span>
+                </div>
+                <span class="text-sm font-bold" style="color: var(--ds-ink-1);">{{ stats.published }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="eaiou-widget" data-widget-id="queue-action">
+    <div class="rounded-lg p-4" style="background: #F0EFEB; border: 1px solid #CAC8C2;">
+        <div class="flex items-center gap-2 mb-2">
+            <i class="fa-solid fa-inbox text-sm" style="color: var(--ds-ink-2);"></i>
+            <h4 class="text-xs font-semibold" style="color: var(--ds-ink-1);">Submission Queue</h4>
+        </div>
+        {% if queue_count %}
+        <p class="text-2xl font-bold mb-1" style="color: var(--ds-ink-1);">{{ queue_count }}</p>
+        <p class="text-xs mb-3" style="color: var(--ds-ink-2);">Papers awaiting initial review</p>
+        {% endif %}
+        <a href="/editor/queue"
+           class="block w-full text-center text-xs font-medium py-2 rounded-md text-white transition-colors"
+           style="background: #18171A;">
+            Open Queue →
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block editor_content %}
+<div class="px-6 py-6">
+
+    {# Stats strip — monochrome, no color coding #}
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+        {# Total #}
+        <div class="rounded-lg px-4 py-3 eaiou-shadow-sm" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+            <p class="text-xl font-bold" style="color: var(--ds-ink-1);">{{ stats.total }}</p>
+            <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">Total</p>
+        </div>
+        {# Submitted #}
+        <div class="rounded-lg px-4 py-3 eaiou-shadow-sm" style="background: var(--ds-surface); border: 1px solid var(--ds-border); border-left: 4px solid var(--ds-ink-3);">
+            <p class="text-xl font-bold" style="color: var(--ds-ink-1);">{{ stats.submitted }}</p>
+            <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">Submitted</p>
+        </div>
+        {# Under Review #}
+        <div class="rounded-lg px-4 py-3 eaiou-shadow-sm" style="background: var(--ds-surface); border: 1px solid var(--ds-border); border-left: 4px solid var(--ds-ink-2);">
+            <p class="text-xl font-bold" style="color: var(--ds-ink-1);">{{ stats.under_review }}</p>
+            <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">Under Review</p>
+        </div>
+        {# Revision #}
+        <div class="rounded-lg px-4 py-3 eaiou-shadow-sm" style="background: var(--ds-surface); border: 1px solid var(--ds-border); border-left: 4px solid var(--ds-ink-2);">
+            <p class="text-xl font-bold" style="color: var(--ds-ink-1);">{{ stats.revision_requested }}</p>
+            <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">Revision Req.</p>
+        </div>
+        {# Accepted #}
+        <div class="rounded-lg px-4 py-3 eaiou-shadow-sm" style="background: #EDECE9; border: 1px solid #CAC8C2;">
+            <p class="text-xl font-bold" style="color: var(--ds-ink-1);">{{ stats.accepted }}</p>
+            <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">Accepted</p>
+        </div>
+        {# Published #}
+        <div class="rounded-lg px-4 py-3 eaiou-shadow-sm" style="background: #18171A; border: 1px solid #18171A;">
+            <p class="text-xl font-bold" style="color: #FFFFFF;">{{ stats.published }}</p>
+            <p class="text-xs mt-0.5" style="color: #9A9895;">Published</p>
+        </div>
+    </div>
+
+    {# Filter tabs #}
+    {% set active_status = request.query_params.get('status', '') %}
+    <div class="flex items-center gap-1.5 mb-5 flex-wrap">
+        {% for label, val in [('All', ''), ('Submitted', 'submitted'), ('Under Review', 'under_review'),
+                               ('Revision', 'revision_requested'), ('Accepted', 'accepted'),
+                               ('Rejected', 'rejected'), ('Published', 'published'), ('Archived', 'archived')] %}
+        <a href="/editor/{% if val %}?status={{ val }}{% endif %}"
+           class="px-3 py-1.5 rounded-md text-xs font-medium transition-colors"
+           style="{% if active_status == val %}background: #18171A; color: #FFFFFF; border: 1px solid #18171A;{% else %}background: var(--ds-surface); color: var(--ds-ink-2); border: 1px solid var(--ds-border);{% endif %}">
+            {{ label }}
+        </a>
+        {% endfor %}
+    </div>
+
+    {# Paper table #}
+    {% if papers %}
+    <div class="rounded-lg overflow-hidden eaiou-shadow-sm" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <table class="min-w-full text-sm" style="border-collapse: collapse;">
+            <thead>
+                <tr style="background: #F0EFEB; border-bottom: 1px solid var(--ds-border);">
+                    <th class="text-left px-5 py-3 text-xs font-medium uppercase tracking-wider" style="color: var(--ds-ink-3);">Paper</th>
+                    <th class="text-left px-4 py-3 text-xs font-medium uppercase tracking-wider hidden md:table-cell" style="color: var(--ds-ink-3);">Author</th>
+                    <th class="text-left px-4 py-3 text-xs font-medium uppercase tracking-wider hidden lg:table-cell" style="color: var(--ds-ink-3);">AI Level</th>
+                    <th class="text-left px-4 py-3 text-xs font-medium uppercase tracking-wider" style="color: var(--ds-ink-3);">Status</th>
+                    <th class="text-left px-4 py-3 text-xs font-medium uppercase tracking-wider" style="color: var(--ds-ink-3);">Q Score</th>
+                    <th class="text-right px-5 py-3 text-xs font-medium uppercase tracking-wider" style="color: var(--ds-ink-3);">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paper in papers %}
+                <tr class="transition-colors" style="border-bottom: 1px solid var(--ds-border);"
+                    onmouseover="this.style.background='#F0EFEB'" onmouseout="this.style.background=''">
+
+                    {# Title + CosmoID short form #}
+                    <td class="px-5 py-3">
+                        <a href="/editor/papers/{{ paper.paper_uuid }}"
+                           class="font-medium hover:underline line-clamp-2"
+                           style="color: var(--ds-ink-1);">
+                            {{ paper.title }}
+                        </a>
+                        <p class="text-xs font-mono mt-0.5" style="color: var(--ds-ink-3);">
+                            {{ paper.cosmoid[:12] if paper.cosmoid else paper.paper_uuid[:8] }}…
+                        </p>
+                    </td>
+
+                    {# Author #}
+                    <td class="px-4 py-3 hidden md:table-cell">
+                        <div class="flex items-center gap-2">
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                                 style="background: #EDECE9;">
+                                <span class="text-[10px] font-medium" style="color: var(--ds-ink-2);">
+                                    {{ (paper.author_name or '?')[0].upper() }}
+                                </span>
+                            </div>
+                            <span class="text-sm" style="color: var(--ds-ink-2);">{{ paper.author_name }}</span>
+                        </div>
+                    </td>
+
+                    {# AI Level — neutral pill #}
+                    <td class="px-4 py-3 hidden lg:table-cell">
+                        {% if paper.ai_disclosure_level %}
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium"
+                              style="background: #EDECE9; color: var(--ds-ink-2); border: 1px solid #CAC8C2;">
+                            {{ paper.ai_disclosure_level }}
+                        </span>
+                        {% else %}
+                        <span class="text-xs" style="color: var(--ds-ink-3);">—</span>
+                        {% endif %}
+                    </td>
+
+                    {# Status badge — neutral pills only #}
+                    <td class="px-4 py-3">
+                        {% set s = paper.status %}
+                        {% if s == 'accepted' or s == 'published' %}
+                            <span class="eaiou-badge text-xs px-2.5 py-0.5 rounded-full font-medium"
+                                  style="background: #18171A; color: #FFFFFF;">{{ s.replace('_',' ') }}</span>
+                        {% else %}
+                            <span class="eaiou-badge text-xs px-2.5 py-0.5 rounded-full font-medium"
+                                  style="background: #EDECE9; color: var(--ds-ink-1); border: 1px solid #CAC8C2;">{{ s.replace('_',' ') }}</span>
+                        {% endif %}
+                    </td>
+
+                    {# Q score inline editor #}
+                    <td class="px-4 py-3">
+                        <form method="post" action="/editor/papers/{{ paper.paper_uuid }}/score"
+                              class="flex items-center gap-1.5">
+                            <input type="number" name="q_overall" step="0.01" min="0" max="10"
+                                   value="{{ paper.q_overall or '' }}"
+                                   placeholder="—"
+                                   class="w-16 text-xs rounded-md px-2 py-1 text-center"
+                                   style="border: 1px solid var(--ds-border); color: var(--ds-ink-1); background: var(--ds-surface);">
+                            <button type="submit"
+                                    class="text-xs px-1.5 py-1 rounded-md transition-colors"
+                                    style="background: #EDECE9; color: var(--ds-ink-2); border: 1px solid var(--ds-border);"
+                                    title="Save Q score">
+                                <i class="fa-solid fa-check"></i>
+                            </button>
+                        </form>
+                    </td>
+
+                    {# Actions #}
+                    <td class="px-5 py-3 text-right">
+                        <div class="flex items-center justify-end gap-1.5">
+                            <a href="/editor/papers/{{ paper.paper_uuid }}"
+                               class="text-xs px-2.5 py-1 rounded-md transition-colors"
+                               style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-2);">
+                                Review
+                            </a>
+                            <a href="/papers/{{ paper.paper_uuid }}" target="_blank"
+                               class="text-xs px-2 py-1 rounded-md transition-colors"
+                               style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-3);"
+                               title="Public view">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% else %}
+    <div class="rounded-lg px-8 py-14 text-center eaiou-shadow-sm" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="p-4 rounded-full inline-flex mb-4" style="background: #EDECE9;">
+            <i class="fa-solid fa-inbox text-3xl" style="color: var(--ds-ink-3);"></i>
+        </div>
+        <p class="font-medium mb-1" style="color: var(--ds-ink-2);">No papers</p>
+        <p class="text-sm" style="color: var(--ds-ink-3);">
+            {% if active_status %}No papers with status "{{ active_status.replace('_', ' ') }}".{% else %}No submissions yet.{% endif %}
+        </p>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

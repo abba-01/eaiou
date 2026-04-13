@@ -1,0 +1,101 @@
+{% extends "editor/base_editor.html" %}
+{% block title %}Submission Queue — eaiou{% endblock %}
+{% block nav_queue %}bg-primary-50 text-primary-700{% endblock %}
+
+{% block editor_content %}
+<div class="px-8 py-8">
+
+  <div class="mb-8">
+    <h1 class="eaiou-title text-2xl font-bold mb-1" style="color: var(--ds-ink-1);">Submission Queue</h1>
+    <p class="text-sm" style="color: var(--ds-ink-3);">
+      Papers awaiting initial editorial review ·
+      <span class="font-medium" style="color: var(--ds-ink-2);">{{ papers|length }} paper{{ 's' if papers|length != 1 else '' }}</span>
+      {# Sort order: q_overall DESC, paper_uuid ASC (nulls last) — Temporal Blindness enforced: no submitted_at, no id DESC #}
+    </p>
+  </div>
+
+  {% if papers %}
+  <div class="space-y-3">
+    {% for paper in papers %}
+    <div class="border rounded-lg p-5" style="border-color: var(--ds-border); background: var(--ds-surface);">
+      <div class="flex items-start justify-between gap-4">
+
+        <div class="flex-1 min-w-0">
+          <a href="/editor/papers/{{ paper.paper_uuid }}"
+             class="font-semibold hover:underline"
+             style="color: var(--ds-ink-1);">{{ paper.title }}</a>
+          <p class="text-sm mt-0.5" style="color: var(--ds-ink-2);">{{ paper.author_name }}</p>
+
+          <div class="flex items-center gap-2 mt-2 flex-wrap">
+            {# Status badge — neutral pill #}
+            {% set s = paper.status %}
+            {% if s == 'accepted' or s == 'published' %}
+            <span class="text-xs px-2.5 py-0.5 rounded-full font-medium"
+                  style="background: #18171A; color: #FFFFFF;">{{ s.replace('_',' ') }}</span>
+            {% else %}
+            <span class="text-xs px-2.5 py-0.5 rounded-full font-medium"
+                  style="background: #EDECE9; color: var(--ds-ink-1); border: 1px solid #CAC8C2;">{{ s.replace('_',' ') }}</span>
+            {% endif %}
+
+            {# Q score #}
+            <span class="text-xs font-medium" style="color: var(--ds-ink-2);">
+              Q: {% if paper.q_overall %}{{ "%.2f"|format(paper.q_overall) }}{% else %}Unscored{% endif %}
+            </span>
+
+            {# CosmoID short form #}
+            <span class="text-xs font-mono" style="color: var(--ds-ink-3);">
+              CID: {{ paper.cosmoid[:12] if paper.cosmoid else paper.paper_uuid[:8] }}…
+            </span>
+
+            {# AI disclosure #}
+            <span class="text-xs px-2 py-0.5 rounded-full border"
+                  style="background: #F0EFEB; color: var(--ds-ink-2); border-color: var(--ds-border);">
+              {{ paper.ai_disclosure_level or 'no ai disclosure' }}
+            </span>
+
+            {% if paper.orcid %}
+            <span class="text-xs" style="color: var(--ds-ink-3);">ORCID {{ paper.orcid }}</span>
+            {% endif %}
+          </div>
+
+          <p class="text-xs mt-2 line-clamp-2" style="color: var(--ds-ink-3);">{{ paper.abstract }}</p>
+        </div>
+
+        <!-- Quick action: move to under_review -->
+        <div class="flex-shrink-0 flex flex-col gap-2">
+          <form method="post" action="/editor/papers/{{ paper.paper_uuid }}/status">
+            <input type="hidden" name="status" value="under_review">
+            <button type="submit"
+                    class="whitespace-nowrap px-4 py-2 rounded-md text-sm font-medium text-white"
+                    style="background: #18171A;">
+              <i class="fa-solid fa-magnifying-glass mr-1.5"></i>Send to Review
+            </button>
+          </form>
+          <form method="post" action="/editor/papers/{{ paper.paper_uuid }}/status">
+            <input type="hidden" name="status" value="rejected">
+            <button type="submit"
+                    class="w-full px-4 py-2 rounded-md text-sm font-medium border"
+                    style="color: var(--ds-ink-3); border-color: var(--ds-border); background: var(--ds-surface);">
+              Reject
+            </button>
+          </form>
+          <a href="/editor/papers/{{ paper.paper_uuid }}"
+             class="text-center text-xs py-1 hover:underline"
+             style="color: var(--ds-ink-3);">Full review</a>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% else %}
+  <div class="border rounded-lg px-8 py-16 text-center" style="border-color: var(--ds-border); background: var(--ds-surface);">
+    <i class="fa-solid fa-check-circle text-3xl mb-3" style="color: var(--ds-border);"></i>
+    <p class="font-medium mb-1" style="color: var(--ds-ink-1);">Queue clear</p>
+    <p class="text-sm" style="color: var(--ds-ink-3);">No papers waiting for initial review.</p>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

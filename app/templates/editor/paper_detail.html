@@ -1,0 +1,378 @@
+{% extends "editor/base_editor.html" %}
+{% block title %}{{ paper.title[:60] }}… — Editor — eaiou{% endblock %}
+{% block nav_papers %}bg-primary-50 text-primary-700{% endblock %}
+
+{% block editor_content %}
+<div class="px-8 py-8 max-w-5xl">
+
+  <!-- Breadcrumb -->
+  <div class="text-xs mb-6" style="color: var(--ds-ink-3);">
+    <a href="/editor/" class="hover:underline" style="color: var(--ds-ink-3);">Dashboard</a>
+    <span class="mx-1.5">/</span>
+    <a href="/editor/papers" class="hover:underline" style="color: var(--ds-ink-3);">Papers</a>
+    <span class="mx-1.5">/</span>
+    <span style="color: var(--ds-ink-2);">{{ paper.paper_uuid[:8] }}…</span>
+  </div>
+
+  {% if flash %}
+  <div class="mb-5 border-l-4 pl-4 py-2 rounded-r text-sm"
+       style="border-left-color: #18171A; background: #F0EFEB; color: var(--ds-ink-1);">
+    {{ flash }}
+  </div>
+  {% endif %}
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Main: paper content -->
+    <div class="lg:col-span-2 space-y-5">
+
+      <div>
+        <h1 class="eaiou-title text-2xl font-bold mb-1" style="color: var(--ds-ink-1);">{{ paper.title }}</h1>
+        <p class="text-sm" style="color: var(--ds-ink-2);">
+          {{ paper.author_name }}
+          {% if paper.orcid %}
+          <span class="ml-2" style="color: var(--ds-ink-3);">ORCID {{ paper.orcid }}</span>
+          {% endif %}
+        </p>
+      </div>
+
+      <!-- Abstract -->
+      <div class="border rounded-lg p-5" style="border-color: var(--ds-border); background: var(--ds-surface);">
+        <p class="text-xs font-semibold uppercase tracking-wider mb-3" style="color: var(--ds-ink-3);">Abstract</p>
+        <p class="text-sm leading-relaxed" style="color: var(--ds-ink-2);">{{ paper.abstract }}</p>
+      </div>
+
+      <!-- Keywords -->
+      {% if paper.keywords %}
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">Keywords</p>
+        <p class="text-sm" style="color: var(--ds-ink-2);">{{ paper.keywords }}</p>
+      </div>
+      {% endif %}
+
+      <!-- AI Disclosure -->
+      <div class="border rounded-lg p-5" style="border-color: var(--ds-border); background: var(--ds-surface);">
+        <p class="text-xs font-semibold uppercase tracking-wider mb-3" style="color: var(--ds-ink-3);">AI Disclosure</p>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-xs px-2.5 py-0.5 rounded-full border font-medium"
+                style="background: #F0EFEB; color: var(--ds-ink-1); border-color: #CAC8C2;">
+            {{ paper.ai_disclosure_level or 'not specified' }}
+          </span>
+        </div>
+        {% if paper.ai_disclosure_notes %}
+        <p class="text-sm mt-2" style="color: var(--ds-ink-2);">{{ paper.ai_disclosure_notes }}</p>
+        {% else %}
+        <p class="text-sm" style="color: var(--ds-ink-3);">No additional notes provided.</p>
+        {% endif %}
+      </div>
+
+      <!-- CosmoID / UUID provenance -->
+      <div class="border rounded-lg p-4" style="border-color: var(--ds-border); background: #F7F6F3;">
+        <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">Provenance</p>
+        <div class="space-y-1">
+          <div class="flex gap-3 text-xs">
+            <span class="w-20 font-medium" style="color: var(--ds-ink-3);">paper_uuid</span>
+            <code style="color: var(--ds-ink-2);">{{ paper.paper_uuid }}</code>
+          </div>
+          <div class="flex gap-3 text-xs">
+            <span class="w-20 font-medium" style="color: var(--ds-ink-3);">cosmoid</span>
+            <code style="color: var(--ds-ink-2);">{{ paper.cosmoid }}</code>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: editorial controls -->
+    <div class="space-y-5">
+
+      <!-- Status transition -->
+      <div class="border rounded-lg p-5" style="border-color: var(--ds-border); background: var(--ds-surface);">
+        <p class="text-xs font-semibold uppercase tracking-wider mb-3" style="color: var(--ds-ink-3);">Status</p>
+
+        {% set s = paper.status %}
+        <div class="mb-4">
+          {% if s == 'accepted' or s == 'published' %}
+            <span class="text-sm px-3 py-1 rounded-full font-medium"
+                  style="background:#18171A; color:#fff;">{{ s.replace('_',' ') }}</span>
+          {% elif s == 'rejected' or s == 'archived' %}
+            <span class="text-sm px-3 py-1 rounded-full border font-medium"
+                  style="background:var(--ds-surface); color:var(--ds-ink-3); border-color:var(--ds-border);">{{ s }}</span>
+          {% else %}
+            <span class="text-sm px-3 py-1 rounded-full border font-medium"
+                  style="background:#EDECE9; color:var(--ds-ink-1); border-color:#CAC8C2;">{{ s.replace('_',' ') }}</span>
+          {% endif %}
+        </div>
+
+        <form method="post" action="/editor/papers/{{ paper.id }}/status" class="space-y-3">
+          <div>
+            <label class="block text-xs font-medium mb-1.5" style="color: var(--ds-ink-2);">Move to</label>
+            <select id="status-select" name="status" class="w-full rounded-md px-3 py-2 text-sm"
+                    style="border: 1px solid var(--ds-border); color: var(--ds-ink-1); background: var(--ds-surface);">
+              {% for opt_val, opt_label in [
+                ('submitted',           'Submitted'),
+                ('under_review',        'Under Review'),
+                ('revision_requested',  'Revision Requested'),
+                ('accepted',            'Accepted'),
+                ('rejected',            'Rejected'),
+                ('published',           'Published'),
+                ('archived',            'Archived'),
+              ] %}
+              <option value="{{ opt_val }}" {% if opt_val == paper.status %}selected{% endif %}>
+                {{ opt_label }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!-- Revision instruction fields — revealed by JS when status = revision_requested -->
+          <div id="revision-fields"
+               style="display:none; border-left:3px solid #18171A; padding-left:12px; padding-top:2px;"
+               class="space-y-3">
+            <div>
+              <label class="block text-xs font-medium mb-1.5" style="color: var(--ds-ink-2);">
+                Revision Instructions
+                <span style="color: var(--ds-ink-3); font-weight:400;">(shown to author)</span>
+              </label>
+              <textarea name="revision_summary" rows="4"
+                        placeholder="What the author must address in this revision round"
+                        class="w-full rounded-md px-3 py-2 text-sm"
+                        style="border: 1px solid var(--ds-border); color: var(--ds-ink-1); background: var(--ds-surface); resize:vertical;"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-medium mb-1.5" style="color: var(--ds-ink-2);">Due Date <span style="color: var(--ds-ink-3); font-weight:400;">(optional)</span></label>
+              <input type="date" name="revision_deadline"
+                     class="w-full rounded-md px-3 py-2 text-sm"
+                     style="border: 1px solid var(--ds-border); color: var(--ds-ink-1); background: var(--ds-surface);">
+            </div>
+          </div>
+
+          <!-- Publish fields — revealed by JS when status = published -->
+          <div id="publish-fields"
+               style="display:none; border-left:3px solid #18171A; padding-left:12px; padding-top:2px;"
+               class="space-y-3">
+            <div>
+              <label class="block text-xs font-medium mb-1.5" style="color: var(--ds-ink-2);">
+                DOI
+                <span style="color: var(--ds-ink-3); font-weight:400;">(optional)</span>
+              </label>
+              <input type="text" name="doi"
+                     value="{{ paper.doi or '' }}"
+                     placeholder="10.5281/zenodo.XXXXXXX"
+                     class="w-full rounded-md px-3 py-2 text-sm font-mono"
+                     style="border: 1px solid var(--ds-border); color: var(--ds-ink-1); background: var(--ds-surface);">
+            </div>
+            <div>
+              <label class="block text-xs font-medium mb-1.5" style="color: var(--ds-ink-2);">
+                Zenodo Receipt URL
+                <span style="color: var(--ds-ink-3); font-weight:400;">(submission_capstone — optional)</span>
+              </label>
+              <input type="text" name="submission_capstone"
+                     value="{{ paper.submission_capstone or '' }}"
+                     placeholder="https://zenodo.org/deposit/XXXXXXX"
+                     class="w-full rounded-md px-3 py-2 text-sm font-mono"
+                     style="border: 1px solid var(--ds-border); color: var(--ds-ink-1); background: var(--ds-surface);">
+              <p class="text-xs mt-1.5" style="color: var(--ds-ink-3);">
+                Public receipt — proves submission without revealing timing.
+              </p>
+            </div>
+          </div>
+
+          <!-- Rejection reason fields — revealed by JS when status = rejected -->
+          <div id="rejection-fields"
+               style="display:none; border-left:3px solid #18171A; padding-left:12px; padding-top:2px;"
+               class="space-y-3">
+            <div>
+              <label class="block text-xs font-medium mb-1.5" style="color: var(--ds-ink-2);">Failure Mode</label>
+              <select name="rejection_reason_code"
+                      class="w-full rounded-md px-3 py-2 text-sm"
+                      style="border: 1px solid var(--ds-border); color: var(--ds-ink-1); background: var(--ds-surface);">
+                <option value="">— select —</option>
+                <option value="methodology"           {% if paper.rejection_reason_code == 'methodology' %}selected{% endif %}>Methodology</option>
+                <option value="scope"                 {% if paper.rejection_reason_code == 'scope' %}selected{% endif %}>Scope</option>
+                <option value="insufficient_evidence" {% if paper.rejection_reason_code == 'insufficient_evidence' %}selected{% endif %}>Insufficient Evidence</option>
+                <option value="theory_gap"            {% if paper.rejection_reason_code == 'theory_gap' %}selected{% endif %}>Theory Gap</option>
+                <option value="duplicate"             {% if paper.rejection_reason_code == 'duplicate' %}selected{% endif %}>Duplicate</option>
+                <option value="other"                 {% if paper.rejection_reason_code == 'other' %}selected{% endif %}>Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-medium mb-1.5" style="color: var(--ds-ink-2);">
+                Internal Notes
+                <span style="color: var(--ds-ink-3); font-weight:400;">(not shown to author)</span>
+              </label>
+              <textarea name="rejection_notes" rows="3"
+                        placeholder="Editorial record — not shown to author"
+                        class="w-full rounded-md px-3 py-2 text-sm"
+                        style="border: 1px solid var(--ds-border); color: var(--ds-ink-1); background: var(--ds-surface); resize:vertical;">{{ paper.rejection_notes or '' }}</textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-medium mb-1.5" style="color: var(--ds-ink-2);">
+                Public Summary
+                <span style="color: var(--ds-ink-3); font-weight:400;">(sent to gitgap as pickup instructions)</span>
+              </label>
+              <textarea name="rejection_public_summary" rows="4"
+                        placeholder="What the author should address for the next attempt — becomes pickup instructions in gitgap"
+                        class="w-full rounded-md px-3 py-2 text-sm"
+                        style="border: 1px solid var(--ds-border); color: var(--ds-ink-1); background: var(--ds-surface); resize:vertical;">{{ paper.rejection_public_summary or '' }}</textarea>
+            </div>
+          </div>
+
+          <button type="submit"
+                  class="w-full py-2 rounded-md text-sm font-medium text-white"
+                  style="background: #18171A;">
+            Update Status
+          </button>
+        </form>
+      </div>
+
+      <!-- Q Score -->
+      <div class="border rounded-lg p-5 space-y-4" style="border-color: var(--ds-border); background: var(--ds-surface);">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: var(--ds-ink-3);">Q Score</p>
+          <p class="text-xs" style="color: var(--ds-ink-3);">0.00 – 10.00 · quality sort key</p>
+        </div>
+
+        <!-- Scores display -->
+        <div class="flex gap-3">
+          <div class="flex-1 rounded-md p-3 text-center" style="background: #F0EFEB;">
+            <p class="text-xs mb-1" style="color: var(--ds-ink-3);">Computed</p>
+            {% if paper.q_signal %}
+            <p class="text-xl font-bold" style="color: var(--ds-ink-1);">{{ "%.2f"|format(paper.q_signal) }}</p>
+            <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">{{ q_signal_label or '' }}</p>
+            {% else %}
+            <p class="text-sm" style="color: var(--ds-ink-3);">—</p>
+            {% endif %}
+          </div>
+          <div class="flex-1 rounded-md p-3 text-center" style="background: #F0EFEB;">
+            <p class="text-xs mb-1" style="color: var(--ds-ink-3);">Editorial</p>
+            {% if paper.q_overall %}
+            <p class="text-xl font-bold" style="color: var(--ds-ink-1);">{{ "%.2f"|format(paper.q_overall) }}</p>
+            {% else %}
+            <p class="text-sm" style="color: var(--ds-ink-3);">—</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Breakdown (if available) -->
+        {% if q_breakdown %}
+        <div class="space-y-1.5">
+          <p class="text-xs font-medium" style="color: var(--ds-ink-2);">Signal breakdown</p>
+          {% for dim, val in q_breakdown.breakdown.items() %}
+          <div class="flex justify-between items-center text-xs">
+            <span style="color: var(--ds-ink-3);">{{ dim.replace('_',' ') }}</span>
+            <span class="font-medium tabular-nums" style="color: var(--ds-ink-1);">{{ "%.2f"|format(val) }}</span>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Editorial override -->
+        <form method="post" action="/editor/papers/{{ paper.id }}/score" class="space-y-2">
+          <input type="number" name="q_overall" step="0.01" min="0" max="10"
+                 value="{{ paper.q_overall or '' }}"
+                 placeholder="Override score…"
+                 class="w-full rounded-md px-3 py-2 text-sm text-center"
+                 style="border: 1px solid var(--ds-border); color: var(--ds-ink-1); background: var(--ds-surface);">
+          <button type="submit"
+                  class="w-full py-2 rounded-md text-sm font-medium"
+                  style="background: #F0EFEB; color: var(--ds-ink-1); border: 1px solid var(--ds-border);">
+            Save Override
+          </button>
+        </form>
+
+        <!-- Recompute -->
+        <form method="post" action="/editor/papers/{{ paper.id }}/score/recompute">
+          <button type="submit"
+                  class="w-full py-2 rounded-md text-sm font-medium"
+                  style="background: var(--ds-surface); color: var(--ds-ink-3); border: 1px solid var(--ds-border);">
+            Recompute signal
+          </button>
+        </form>
+      </div>
+
+      <!-- Trajectory -->
+      {% if trajectory %}
+      <div class="border rounded-lg p-5" style="border-color: var(--ds-border); background: var(--ds-surface);">
+        <div class="flex justify-between items-center mb-3">
+          <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Trajectory</p>
+          <div class="flex gap-1.5">
+            {% if has_rewrite %}
+            <span class="text-xs px-2 py-0.5 rounded-full font-medium"
+                  style="background: #EDECE9; color: var(--ds-ink-1); border: 1px solid #CAC8C2;">REWRITE</span>
+            {% endif %}
+            {% if has_branch %}
+            <span class="text-xs px-2 py-0.5 rounded-full font-medium"
+                  style="background: #E2E0DB; color: var(--ds-ink-1); border: 1px solid #CAC8C2;">BRANCH</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="space-y-1">
+          {% for node in trajectory %}
+          <div class="flex items-start gap-2 text-xs py-1.5 border-b last:border-0"
+               style="border-color: var(--ds-border);">
+            {% if node.parent_id %}
+            <span class="mt-0.5" style="color: var(--ds-ink-3);">↳</span>
+            {% else %}
+            <span class="mt-0.5" style="color: var(--ds-ink-3);">○</span>
+            {% endif %}
+            <div class="flex-1 min-w-0">
+              <span class="font-medium" style="color: var(--ds-ink-1);">{{ node.method_class.replace('_', ' ') }}</span>
+              {% if node.fork_reason %}
+              <p class="truncate mt-0.5" style="color: var(--ds-ink-3);">{{ node.fork_reason }}</p>
+              {% endif %}
+            </div>
+            {% if node.active %}
+            <span class="shrink-0 px-1.5 py-0.5 rounded text-xs" style="background: #F0EFEB; color: var(--ds-ink-2);">active</span>
+            {% endif %}
+            {% if node.method_class in ('rewrite', 'branch') %}
+            <span class="shrink-0 px-1.5 py-0.5 rounded text-xs font-medium"
+                  style="background: #EDECE9; color: var(--ds-ink-1); border: 1px solid #CAC8C2;">
+              {{ node.method_class.upper() }}
+            </span>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Public links -->
+      <div class="border rounded-lg p-4" style="border-color: var(--ds-border); background: var(--ds-surface);">
+        <p class="text-xs font-semibold uppercase tracking-wider mb-3" style="color: var(--ds-ink-3);">Links</p>
+        <div class="space-y-2">
+          <a href="/papers/{{ paper.id }}" target="_blank"
+             class="flex items-center gap-2 text-sm hover:underline"
+             style="color: var(--ds-ink-2);">
+            <i class="fa-solid fa-eye w-3.5" style="color: var(--ds-ink-3);"></i>
+            Public paper view
+          </a>
+          <a href="/papers/status/{{ paper.id }}" target="_blank"
+             class="flex items-center gap-2 text-sm hover:underline"
+             style="color: var(--ds-ink-2);">
+            <i class="fa-solid fa-timeline w-3.5" style="color: var(--ds-ink-3);"></i>
+            Status timeline
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var sel    = document.getElementById('status-select');
+    var rejF   = document.getElementById('rejection-fields');
+    var revF   = document.getElementById('revision-fields');
+    var pubF   = document.getElementById('publish-fields');
+    if (!sel) return;
+    function toggle() {
+      if (rejF) rejF.style.display = sel.value === 'rejected'            ? 'block' : 'none';
+      if (revF) revF.style.display = sel.value === 'revision_requested'  ? 'block' : 'none';
+      if (pubF) pubF.style.display = sel.value === 'published'           ? 'block' : 'none';
+    }
+    sel.addEventListener('change', toggle);
+    toggle(); // initialize on page load
+  })();
+</script>
+{% endblock editor_content %}
