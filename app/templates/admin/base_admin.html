@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex min-h-screen" style="background: var(--ds-bg);">
+  <!-- Sidebar -->
+  <aside class="w-52 border-r shrink-0 py-6 px-3 flex flex-col gap-1" style="border-color: var(--ds-border); background: var(--ds-bg);">
+    <p class="text-xs font-semibold uppercase tracking-widest px-3 mb-3" style="color: var(--ds-ink-3);">Admin</p>
+    <a href="#"
+       class="flex items-center gap-2 px-3 py-2 rounded-md text-sm {% if request.url.path == '/admin/' %}bg-primary-50 text-primary-700{% endif %}"
+       style="color: var(--ds-ink-1);">
+      <i class="fa fa-gauge w-4 text-center"></i> Dashboard
+    </a>
+    <a href="#"
+       class="flex items-center gap-2 px-3 py-2 rounded-md text-sm {% if request.url.path == '/admin/users' %}bg-primary-50 text-primary-700{% endif %}"
+       style="color: var(--ds-ink-1);">
+      <i class="fa fa-users w-4 text-center"></i> Users
+    </a>
+    <a href="#"
+       class="flex items-center gap-2 px-3 py-2 rounded-md text-sm {% if request.url.path == '/admin/users/new' or request.url.path.startswith('/admin/users/') %}bg-primary-50 text-primary-700{% endif %}"
+       style="color: var(--ds-ink-1);">
+      <i class="fa fa-user-plus w-4 text-center"></i> User Form
+    </a>
+  </aside>
+  <!-- Main -->
+  <main class="flex-1 py-8 px-10">
+    <div class="mb-6">
+      <h1 class="text-xl font-bold" style="color: var(--ds-ink-1);">{% block page_title %}Admin{% endblock %}</h1>
+    </div>
+    {% block admin_content %}{% endblock %}
+  </main>
+</div>
+{% endblock %}
