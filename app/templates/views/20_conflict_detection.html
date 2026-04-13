@@ -1,0 +1,343 @@
+{% extends "editor/base_editor.html" %}
+{% block page_title %}Conflict of Interest Checker{% endblock %}
+
+{% block editor_content %}
+<div class="p-6 max-w-6xl mx-auto">
+
+    <!-- Page header -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+        <div>
+            <div class="flex items-center text-sm mb-2 gap-2" style="color: var(--ds-ink-3);">
+                <a href="/editor/" style="color: var(--ds-ink-3);">Dashboard</a>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span style="color: var(--ds-ink-2);">Conflict of Interest Checker</span>
+            </div>
+            <h1 class="text-2xl font-bold" style="color: var(--ds-ink-1);">Conflict of Interest Checker</h1>
+        </div>
+        <div class="mt-4 md:mt-0 flex gap-3">
+            <button class="px-3 py-2 rounded-md flex items-center text-sm"
+                    style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-1);">
+                <i class="fa-solid fa-history mr-2"></i>History
+            </button>
+            <button class="px-4 py-2 rounded-md flex items-center text-sm text-white"
+                    style="background: #18171A;">
+                <i class="fa-solid fa-plus mr-2"></i>New Check
+            </button>
+        </div>
+    </div>
+
+    <!-- Conflict Checker Tool -->
+    <div class="rounded-lg mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="p-6" style="border-bottom: 1px solid var(--ds-border);">
+            <h2 class="text-lg font-medium mb-3" style="color: var(--ds-ink-1);">Identify Potential Conflicts of Interest</h2>
+            <p class="text-sm mb-4" style="color: var(--ds-ink-2);">This tool helps identify potential conflicts of interest between authors, reviewers, and editors by analyzing relationships, affiliations, and collaboration history.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1" style="color: var(--ds-ink-1);">Select Manuscript</label>
+                    <select class="w-full px-3 py-2 rounded-md text-sm"
+                            style="border: 1px solid var(--ds-border); background: var(--ds-bg); color: var(--ds-ink-1);">
+                        <option value="">-- Select a manuscript --</option>
+                        <option>MS-2023-0042: Novel Approaches to CRISPR Gene Editing</option>
+                        <option>MS-2023-0039: Quantum Computing Applications</option>
+                        <option>MS-2023-0036: Climate Change Impact</option>
+                        <option>MS-2023-0032: Neural Networks in Alzheimer's</option>
+                        <option>MS-2023-0028: Microplastic Contamination</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2" style="color: var(--ds-ink-1);">Check Type</label>
+                    <div class="flex gap-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="check-type" class="h-4 w-4" style="accent-color: #18171A;" checked>
+                            <span class="ml-2 text-sm" style="color: var(--ds-ink-1);">Automatic</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="check-type" class="h-4 w-4" style="accent-color: #18171A;">
+                            <span class="ml-2 text-sm" style="color: var(--ds-ink-1);">Manual</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex items-end">
+                    <button class="w-full px-4 py-2 rounded-md text-sm text-white flex items-center justify-center"
+                            style="background: #18171A;">
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i>Run Conflict Check
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- People panels -->
+        <div class="p-6" style="border-bottom: 1px solid var(--ds-border);">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Authors -->
+                <div>
+                    <h3 class="text-sm font-medium mb-3" style="color: var(--ds-ink-1);">Authors</h3>
+                    <div class="space-y-2">
+                        <div class="p-3 rounded-md" style="background: var(--ds-bg); border: 1px solid var(--ds-border);">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mr-2" style="background: #18171A;">MC</div>
+                                <div>
+                                    <p class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Michael Chen</p>
+                                    <p class="text-xs" style="color: var(--ds-ink-3);">Stanford University</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-md" style="background: var(--ds-bg); border: 1px solid var(--ds-border);">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mr-2" style="background: #5A5856;">SJ</div>
+                                <div>
+                                    <p class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Sarah Johnson</p>
+                                    <p class="text-xs" style="color: var(--ds-ink-3);">MIT</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-md" style="background: var(--ds-bg); border: 1px solid var(--ds-border);">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mr-2" style="background: #9A9895;">JW</div>
+                                <div>
+                                    <p class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. James Wilson</p>
+                                    <p class="text-xs" style="color: var(--ds-ink-3);">Harvard Medical School</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Potential Reviewers -->
+                <div>
+                    <h3 class="text-sm font-medium mb-3" style="color: var(--ds-ink-1);">Potential Reviewers</h3>
+                    <div class="space-y-2">
+                        <div class="p-3 rounded-md" style="background: var(--ds-bg); border: 1px solid var(--ds-border);">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mr-2" style="background: #18171A;">RT</div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Robert Taylor</p>
+                                    <p class="text-xs" style="color: var(--ds-ink-3);">UC Berkeley</p>
+                                </div>
+                                <button style="color: var(--ds-ink-3);"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-md" style="background: var(--ds-bg); border: 1px solid var(--ds-border);">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mr-2" style="background: #5A5856;">ER</div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Emily Rodriguez</p>
+                                    <p class="text-xs" style="color: var(--ds-ink-3);">Johns Hopkins University</p>
+                                </div>
+                                <button style="color: var(--ds-ink-3);"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-md border-dashed flex items-center justify-center"
+                             style="background: var(--ds-bg); border: 1px dashed var(--ds-border);">
+                            <button class="flex items-center text-sm" style="color: var(--ds-ink-2);">
+                                <i class="fa-solid fa-plus mr-1"></i>Add Reviewer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Editors -->
+                <div>
+                    <h3 class="text-sm font-medium mb-3" style="color: var(--ds-ink-1);">Editors</h3>
+                    <div class="space-y-2">
+                        <div class="p-3 rounded-md" style="background: var(--ds-bg); border: 1px solid var(--ds-border);">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mr-2" style="background: #18171A;">DK</div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. David Kim</p>
+                                    <p class="text-xs" style="color: var(--ds-ink-3);">Editor-in-Chief</p>
+                                </div>
+                                <button style="color: var(--ds-ink-3);"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-md" style="background: var(--ds-bg); border: 1px solid var(--ds-border);">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mr-2" style="background: #9A9895;">LW</div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Lisa Wong</p>
+                                    <p class="text-xs" style="color: var(--ds-ink-3);">Associate Editor</p>
+                                </div>
+                                <button style="color: var(--ds-ink-3);"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-md border-dashed flex items-center justify-center"
+                             style="background: var(--ds-bg); border: 1px dashed var(--ds-border);">
+                            <button class="flex items-center text-sm" style="color: var(--ds-ink-2);">
+                                <i class="fa-solid fa-plus mr-1"></i>Add Editor
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conflict Detection Results -->
+    <div class="rounded-lg mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="px-6 py-4 flex justify-between items-center" style="border-bottom: 1px solid var(--ds-border);">
+            <h2 class="text-lg font-medium" style="color: var(--ds-ink-1);">Conflict Detection Results</h2>
+            <div class="flex items-center gap-2">
+                <span class="text-sm" style="color: var(--ds-ink-3);">Last checked: Today at 10:23 AM</span>
+                <button style="color: var(--ds-ink-3);"><i class="fa-solid fa-arrow-rotate-right"></i></button>
+            </div>
+        </div>
+
+        <div class="p-6">
+            <!-- Alert cards using monochrome border-left severity tiers -->
+            <div class="space-y-3 mb-6">
+                <!-- High risk -->
+                <div class="p-4 rounded-md" style="background: var(--ds-bg); border: 1px solid var(--ds-border); border-left: 4px solid var(--ds-ink-1);">
+                    <div class="flex gap-3">
+                        <i class="fa-solid fa-triangle-exclamation flex-shrink-0 mt-0.5" style="color: var(--ds-ink-1);"></i>
+                        <div>
+                            <h3 class="text-sm font-semibold mb-1" style="color: var(--ds-ink-1);">High-Risk Conflict Detected</h3>
+                            <p class="text-sm" style="color: var(--ds-ink-2);">Dr. Emily Rodriguez (potential reviewer) has co-authored 3 papers with Dr. Sarah Johnson (author) in the past 3 years.</p>
+                            <button class="text-sm font-medium mt-2" style="color: var(--ds-ink-2);">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medium risk -->
+                <div class="p-4 rounded-md" style="background: var(--ds-bg); border: 1px solid var(--ds-border); border-left: 4px solid var(--ds-ink-2);">
+                    <div class="flex gap-3">
+                        <i class="fa-solid fa-triangle-exclamation flex-shrink-0 mt-0.5" style="color: var(--ds-ink-2);"></i>
+                        <div>
+                            <h3 class="text-sm font-semibold mb-1" style="color: var(--ds-ink-1);">Medium-Risk Conflict Detected</h3>
+                            <p class="text-sm" style="color: var(--ds-ink-2);">Dr. David Kim (editor) and Dr. Michael Chen (author) were affiliated with the same institution (Stanford University) until 2021.</p>
+                            <button class="text-sm font-medium mt-2" style="color: var(--ds-ink-2);">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Potential / low risk -->
+                <div class="p-4 rounded-md" style="background: var(--ds-bg); border: 1px solid var(--ds-border); border-left: 4px solid #CAC8C2;">
+                    <div class="flex gap-3">
+                        <i class="fa-solid fa-circle-info flex-shrink-0 mt-0.5" style="color: var(--ds-ink-3);"></i>
+                        <div>
+                            <h3 class="text-sm font-semibold mb-1" style="color: var(--ds-ink-1);">Potential Conflict — Needs Review</h3>
+                            <p class="text-sm" style="color: var(--ds-ink-2);">Dr. Robert Taylor (potential reviewer) and Dr. James Wilson (author) have both received funding from the same grant (NSF-BIO-2022-45678).</p>
+                            <button class="text-sm font-medium mt-2" style="color: var(--ds-ink-2);">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Network graph placeholder -->
+            <div class="rounded-md p-4 mb-6" style="border: 1px solid var(--ds-border);">
+                <h3 class="text-sm font-medium mb-3" style="color: var(--ds-ink-1);">Relationship Network Visualization</h3>
+                <div class="h-48 flex items-center justify-center rounded"
+                     style="background: var(--ds-bg); border: 1px dashed var(--ds-border);">
+                    <p class="text-sm" style="color: var(--ds-ink-3);">Network graph — Phase 2 data source</p>
+                </div>
+            </div>
+
+            <!-- Detailed table -->
+            <h3 class="text-sm font-medium mb-3" style="color: var(--ds-ink-1);">Detailed Relationship Analysis</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full" style="border-collapse: collapse;">
+                    <thead style="background: var(--ds-bg);">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Relationship</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Type</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Details</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Time Frame</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Risk Level</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-top: 1px solid var(--ds-border);">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Emily Rodriguez → Dr. Sarah Johnson</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Co-authorship</td>
+                            <td class="px-6 py-4 text-sm" style="color: var(--ds-ink-2);">3 papers in Nature Biotechnology, Science Advances</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">2020–2023</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                      style="background: #18171A; color: #fff;">High</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button style="color: var(--ds-ink-2);">Exclude Reviewer</button>
+                            </td>
+                        </tr>
+                        <tr style="border-top: 1px solid var(--ds-border);">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">Dr. David Kim → Dr. Michael Chen</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Institutional</td>
+                            <td class="px-6 py-4 text-sm" style="color: var(--ds-ink-2);">Same department at Stanford University</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">2018–2021</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                      style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Medium</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button style="color: var(--ds-ink-2);">Reassign Editor</button>
+                            </td>
+                        </tr>
+                        <tr style="border-top: 1px solid var(--ds-border);">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Robert Taylor → Dr. James Wilson</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Funding</td>
+                            <td class="px-6 py-4 text-sm" style="color: var(--ds-ink-2);">Shared NSF grant NSF-BIO-2022-45678</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">2022–Present</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                      style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Potential</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button style="color: var(--ds-ink-2);">Flag for Review</button>
+                            </td>
+                        </tr>
+                        <tr style="border-top: 1px solid var(--ds-border);">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Lisa Wong → Dr. James Wilson</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Conference</td>
+                            <td class="px-6 py-4 text-sm" style="color: var(--ds-ink-2);">Both spoke at BioTech Summit 2022</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">2022</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                      style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-3);">Low</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button style="color: var(--ds-ink-3);">No Action Needed</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="px-6 py-4 flex justify-between" style="border-top: 1px solid var(--ds-border);">
+            <button class="px-4 py-2 rounded-md text-sm"
+                    style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-1);">
+                Export Report
+            </button>
+            <div class="flex gap-2">
+                <button class="px-4 py-2 rounded-md text-sm"
+                        style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-1);">
+                    Ignore Selected
+                </button>
+                <button class="px-4 py-2 rounded-md text-sm text-white"
+                        style="background: #18171A;">
+                    Apply Recommendations
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conflict of Interest Policy -->
+    <div class="rounded-lg p-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <h2 class="text-lg font-medium mb-4" style="color: var(--ds-ink-1);">Conflict of Interest Policy</h2>
+        <p class="text-sm mb-3" style="color: var(--ds-ink-2);">The following relationships between authors, reviewers, and editors are considered potential conflicts of interest:</p>
+        <ul class="list-disc pl-5 space-y-2 mb-4 text-sm" style="color: var(--ds-ink-2);">
+            <li>Co-authorship on papers published within the past 5 years</li>
+            <li>Current colleagues at the same institution or department</li>
+            <li>Advisor-advisee relationships within the past 10 years</li>
+            <li>Collaboration on grants or funded projects within the past 3 years</li>
+            <li>Family relationships or close personal friendships</li>
+            <li>Financial relationships, such as shared patents or commercial interests</li>
+        </ul>
+        <p class="text-sm" style="color: var(--ds-ink-2);">If you believe a conflict has been incorrectly identified or if you need to report an undisclosed conflict, please contact the journal's ethics officer.</p>
+    </div>
+
+</div>
+{% endblock %}

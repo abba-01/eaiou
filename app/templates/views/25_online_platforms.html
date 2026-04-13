@@ -1,0 +1,290 @@
+{% extends "editor/base_editor.html" %}
+{% block page_title %}Workflow Overview{% endblock %}
+
+{% block editor_content %}
+<div class="p-6 max-w-6xl mx-auto">
+
+    <!-- Page header -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+        <div>
+            <div class="flex items-center text-sm mb-2 gap-2" style="color: var(--ds-ink-3);">
+                <a href="/editor/" style="color: var(--ds-ink-3);">Dashboard</a>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span style="color: var(--ds-ink-2);">Workflow Overview</span>
+            </div>
+            <h1 class="text-2xl font-bold" style="color: var(--ds-ink-1);">Workflow Overview</h1>
+        </div>
+        <div class="mt-4 md:mt-0 flex gap-3">
+            <button class="px-3 py-2 rounded-md flex items-center text-sm"
+                    style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-1);">
+                <i class="fa-solid fa-filter mr-2"></i>Filter
+            </button>
+        </div>
+    </div>
+
+    <!-- Overview Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div class="rounded-lg p-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border); border-left: 4px solid var(--ds-ink-1);">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="font-medium" style="color: var(--ds-ink-1);">New Submissions</h3>
+                <span class="text-sm font-medium" style="color: var(--ds-ink-2);">+12% <i class="fa-solid fa-arrow-up"></i></span>
+            </div>
+            <div class="flex items-end gap-2">
+                <span class="text-3xl font-bold" style="color: var(--ds-ink-1);">28</span>
+                <span class="text-sm mb-1" style="color: var(--ds-ink-3);">this month</span>
+            </div>
+            <div class="mt-3">
+                <div class="w-full rounded-full h-2" style="background: var(--ds-border);">
+                    <div class="h-2 rounded-full" style="width: 65%; background: var(--ds-ink-2);"></div>
+                </div>
+                <div class="flex justify-between mt-1 text-xs" style="color: var(--ds-ink-3);">
+                    <span>0</span><span>50</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="rounded-lg p-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border); border-left: 4px solid var(--ds-ink-2);">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="font-medium" style="color: var(--ds-ink-1);">Pending Reviews</h3>
+                <span class="text-sm font-medium" style="color: var(--ds-ink-2);">+3% <i class="fa-solid fa-arrow-up"></i></span>
+            </div>
+            <div class="flex items-end gap-2">
+                <span class="text-3xl font-bold" style="color: var(--ds-ink-1);">42</span>
+                <span class="text-sm mb-1" style="color: var(--ds-ink-3);">active reviews</span>
+            </div>
+            <div class="mt-3">
+                <div class="w-full rounded-full h-2" style="background: var(--ds-border);">
+                    <div class="h-2 rounded-full" style="width: 78%; background: var(--ds-ink-2);"></div>
+                </div>
+                <div class="flex justify-between mt-1 text-xs" style="color: var(--ds-ink-3);">
+                    <span>0</span><span>60</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="rounded-lg p-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border); border-left: 4px solid #CAC8C2;">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="font-medium" style="color: var(--ds-ink-1);">Decisions Made</h3>
+                <span class="text-sm font-medium" style="color: var(--ds-ink-2);">+8% <i class="fa-solid fa-arrow-up"></i></span>
+            </div>
+            <div class="flex items-end gap-2">
+                <span class="text-3xl font-bold" style="color: var(--ds-ink-1);">19</span>
+                <span class="text-sm mb-1" style="color: var(--ds-ink-3);">this month</span>
+            </div>
+            <div class="mt-3">
+                <div class="w-full rounded-full h-2" style="background: var(--ds-border);">
+                    <div class="h-2 rounded-full" style="width: 45%; background: #CAC8C2;"></div>
+                </div>
+                <div class="flex justify-between mt-1 text-xs" style="color: var(--ds-ink-3);">
+                    <span>0</span><span>40</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manuscripts in Review -->
+    <div class="rounded-lg overflow-hidden mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="flex items-center justify-between p-6" style="border-bottom: 1px solid var(--ds-border);">
+            <h2 class="text-lg font-semibold" style="color: var(--ds-ink-1);">Manuscripts in Review</h2>
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <input type="text" placeholder="Search manuscripts..."
+                           class="pl-10 pr-4 py-2 rounded-md text-sm"
+                           style="border: 1px solid var(--ds-border); background: var(--ds-bg); color: var(--ds-ink-1);">
+                    <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-xs"
+                       style="color: var(--ds-ink-3);"></i>
+                </div>
+            </div>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full" style="border-collapse: collapse;">
+                <thead style="background: var(--ds-bg);">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">ID</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Title</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Authors</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Reviewers</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Due Date</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-3);">MS-2023-0142</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium" style="color: var(--ds-ink-1);">Novel Approaches to Quantum Computing</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Chen et al.</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex -space-x-2">
+                                <div class="w-7 h-7 rounded-full border-2 flex items-center justify-center text-white text-xs font-bold" style="background: #18171A; border-color: var(--ds-surface);">RS</div>
+                                <div class="w-7 h-7 rounded-full border-2 flex items-center justify-center text-white text-xs font-bold" style="background: #5A5856; border-color: var(--ds-surface);">SJ</div>
+                                <div class="w-7 h-7 rounded-full border-2 flex items-center justify-center text-white text-xs font-bold" style="background: #9A9895; border-color: var(--ds-surface);">MW</div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                  style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">In Review</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Aug 15, 2023</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex gap-3" style="color: var(--ds-ink-2);">
+                                <button title="View"><i class="fa-solid fa-eye"></i></button>
+                                <button title="More"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-3);">MS-2023-0138</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium" style="color: var(--ds-ink-1);">Climate Change Effects on Marine Ecosystems</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Martinez &amp; Kim</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex -space-x-2">
+                                <div class="w-7 h-7 rounded-full border-2 flex items-center justify-center text-white text-xs font-bold" style="background: #18171A; border-color: var(--ds-surface);">SB</div>
+                                <div class="w-7 h-7 rounded-full border-2 flex items-center justify-center text-white text-xs font-bold" style="background: #5A5856; border-color: var(--ds-surface);">DG</div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                  style="background: #18171A; color: #fff;">Reviews Complete</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Aug 10, 2023</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex gap-3" style="color: var(--ds-ink-2);">
+                                <button title="View"><i class="fa-solid fa-eye"></i></button>
+                                <button title="More"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-3);">MS-2023-0131</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium" style="color: var(--ds-ink-1);">Advancements in CRISPR Gene Editing</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Thompson et al.</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex -space-x-2">
+                                <div class="w-7 h-7 rounded-full border-2 flex items-center justify-center text-white text-xs font-bold" style="background: #18171A; border-color: var(--ds-surface);">JL</div>
+                                <div class="w-7 h-7 rounded-full border-2 flex items-center justify-center text-white text-xs font-bold" style="background: #9A9895; border-color: var(--ds-surface);">+1</div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                  style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-1);">Review Overdue</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">Aug 1, 2023</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex gap-3" style="color: var(--ds-ink-2);">
+                                <button title="View"><i class="fa-solid fa-eye"></i></button>
+                                <button title="More"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="px-6 py-4 flex items-center justify-between" style="border-top: 1px solid var(--ds-border);">
+            <div class="text-sm" style="color: var(--ds-ink-2);">
+                Showing <span class="font-medium">1</span> to <span class="font-medium">3</span> of <span class="font-medium">42</span> results
+            </div>
+            <div class="flex items-center gap-2">
+                <button class="px-3 py-1 rounded-md text-sm opacity-50 cursor-not-allowed"
+                        style="border: 1px solid var(--ds-border); color: var(--ds-ink-2);" disabled>Previous</button>
+                <button class="px-3 py-1 rounded-md text-sm font-medium text-white"
+                        style="background: #18171A;">1</button>
+                <button class="px-3 py-1 rounded-md text-sm"
+                        style="border: 1px solid var(--ds-border); color: var(--ds-ink-2);">2</button>
+                <button class="px-3 py-1 rounded-md text-sm"
+                        style="border: 1px solid var(--ds-border); color: var(--ds-ink-2);">3</button>
+                <button class="px-3 py-1 rounded-md text-sm"
+                        style="border: 1px solid var(--ds-border); color: var(--ds-ink-2);">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviewer Performance -->
+    <div class="rounded-lg overflow-hidden" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="flex items-center justify-between p-6" style="border-bottom: 1px solid var(--ds-border);">
+            <h2 class="text-lg font-semibold" style="color: var(--ds-ink-1);">Reviewer Performance</h2>
+            <button class="text-sm font-medium" style="color: var(--ds-ink-2);">View All</button>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full" style="border-collapse: collapse;">
+                <thead style="background: var(--ds-bg);">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Reviewer</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Expertise</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Reviews Completed</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Avg. Response Time</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Rating</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0" style="background: #18171A;">RS</div>
+                                <div>
+                                    <div class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Robert Smith</div>
+                                    <div class="text-sm" style="color: var(--ds-ink-3);">University of Cambridge</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Quantum Physics</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">28</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">5.2 days</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">4.8 / 5.0</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                  style="background: #18171A; color: #fff;">Available</span>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0" style="background: #5A5856;">SB</div>
+                                <div>
+                                    <div class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Sarah Brown</div>
+                                    <div class="text-sm" style="color: var(--ds-ink-3);">Stanford University</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Marine Biology</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">42</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">3.8 days</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">4.9 / 5.0</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                  style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Busy</span>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0" style="background: #9A9895;">MW</div>
+                                <div>
+                                    <div class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Michael Williams</div>
+                                    <div class="text-sm" style="color: var(--ds-ink-3);">MIT</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Computer Science</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">35</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">4.5 days</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">4.6 / 5.0</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                  style="background: #18171A; color: #fff;">Available</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

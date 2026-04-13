@@ -1,0 +1,235 @@
+{% extends "editor/base_editor.html" %}
+{% block page_title %}Suggested Reviewers{% endblock %}
+
+{% block editor_content %}
+<div class="p-6 max-w-6xl mx-auto">
+
+    <!-- Page header -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+        <div>
+            <div class="flex items-center text-sm mb-2 gap-2" style="color: var(--ds-ink-3);">
+                <a href="/editor/" style="color: var(--ds-ink-3);">Dashboard</a>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span style="color: var(--ds-ink-2);">Reviewer Suggestions</span>
+            </div>
+            <h1 class="text-2xl font-bold" style="color: var(--ds-ink-1);">Suggested Reviewers</h1>
+        </div>
+        <div class="mt-4 md:mt-0 flex gap-3">
+            <button class="px-3 py-2 rounded-md flex items-center text-sm"
+                    style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-1);">
+                <i class="fa-solid fa-arrow-left mr-2"></i>Back
+            </button>
+            <button class="px-4 py-2 rounded-md flex items-center text-sm text-white"
+                    style="background: #18171A;">
+                <i class="fa-solid fa-envelope mr-2"></i>Invite Selected
+            </button>
+        </div>
+    </div>
+
+    <!-- Manuscript Info -->
+    <div class="rounded-lg p-5 mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="flex flex-col md:flex-row">
+            <div class="flex-1">
+                <h2 class="text-lg font-semibold mb-2" style="color: var(--ds-ink-1);">Novel Approaches to CRISPR Gene Editing in Cancer Treatment</h2>
+                <p class="text-sm mb-3" style="color: var(--ds-ink-3);">ID: MS-2023-0042 · Submitted: Jul 12, 2023</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-2 py-0.5 rounded text-xs"
+                          style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">CRISPR</span>
+                    <span class="px-2 py-0.5 rounded text-xs"
+                          style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Gene Editing</span>
+                    <span class="px-2 py-0.5 rounded text-xs"
+                          style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Cancer</span>
+                    <span class="px-2 py-0.5 rounded text-xs"
+                          style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Oncology</span>
+                    <span class="px-2 py-0.5 rounded text-xs"
+                          style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Molecular Biology</span>
+                </div>
+            </div>
+            <div class="mt-4 md:mt-0 md:ml-6 flex flex-col items-start md:items-end gap-2">
+                <span class="px-3 py-1 text-sm font-semibold rounded-full"
+                      style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Under Review</span>
+                <p class="text-sm" style="color: var(--ds-ink-3);">Reviewers Needed: 3</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviewer Matching Settings -->
+    <div class="rounded-lg p-5 mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <h2 class="text-lg font-semibold mb-4" style="color: var(--ds-ink-1);">Reviewer Matching</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <p class="text-sm mb-4" style="color: var(--ds-ink-2);">The system has analyzed manuscript content and keywords to suggest reviewers with relevant expertise.</p>
+                <div class="flex items-center mb-3 gap-2">
+                    <i class="fa-solid fa-check-circle" style="color: var(--ds-ink-1);"></i>
+                    <span class="text-sm" style="color: var(--ds-ink-2);">25 potential reviewers identified</span>
+                </div>
+                <div class="flex items-center mb-3 gap-2">
+                    <i class="fa-solid fa-check-circle" style="color: var(--ds-ink-1);"></i>
+                    <span class="text-sm" style="color: var(--ds-ink-2);">Content analysis complete</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check-circle" style="color: var(--ds-ink-1);"></i>
+                    <span class="text-sm" style="color: var(--ds-ink-2);">Conflict of interest screening applied</span>
+                </div>
+            </div>
+            <div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-1" style="color: var(--ds-ink-1);">Filter by expertise</label>
+                    <select class="w-full px-3 py-2 rounded-md text-sm"
+                            style="border: 1px solid var(--ds-border); background: var(--ds-bg); color: var(--ds-ink-1);">
+                        <option>All Areas of Expertise</option>
+                        <option>CRISPR Technology</option>
+                        <option>Cancer Biology</option>
+                        <option>Gene Therapy</option>
+                        <option>Molecular Biology</option>
+                        <option>Oncology</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-1" style="color: var(--ds-ink-1);">Filter by location</label>
+                    <select class="w-full px-3 py-2 rounded-md text-sm"
+                            style="border: 1px solid var(--ds-border); background: var(--ds-bg); color: var(--ds-ink-1);">
+                        <option>Worldwide</option>
+                        <option>North America</option>
+                        <option>Europe</option>
+                        <option>Asia</option>
+                    </select>
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="exclude-coauthors"
+                           class="h-4 w-4 rounded"
+                           style="accent-color: #18171A;">
+                    <label for="exclude-coauthors" class="text-sm" style="color: var(--ds-ink-2);">Exclude previous co-authors</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Suggested Reviewers Table -->
+    <div class="rounded-lg overflow-hidden mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="px-5 py-4 flex justify-between items-center" style="border-bottom: 1px solid var(--ds-border);">
+            <h2 class="text-lg font-semibold" style="color: var(--ds-ink-1);">Suggested Reviewers</h2>
+            <div class="flex items-center gap-2">
+                <span class="text-sm" style="color: var(--ds-ink-3);">Sort by:</span>
+                <select class="px-3 py-1 rounded-md text-sm"
+                        style="border: 1px solid var(--ds-border); background: var(--ds-bg); color: var(--ds-ink-1);">
+                    <option>Relevance Score</option>
+                    <option>Publication Count</option>
+                    <option>Recent Activity</option>
+                    <option>Response Rate</option>
+                </select>
+            </div>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full" style="border-collapse: collapse;">
+                <thead style="background: var(--ds-bg);">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">
+                            <input type="checkbox" class="h-4 w-4 rounded" style="accent-color: #18171A;">
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Reviewer</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Expertise</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Publications</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Match Score</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Response Rate</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <input type="checkbox" class="h-4 w-4 rounded" style="accent-color: #18171A;">
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="h-10 w-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background: #18171A;">JZ</div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Jennifer Zhang</div>
+                                    <div class="text-sm" style="color: var(--ds-ink-3);">Stanford University</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex flex-wrap gap-1">
+                                <span class="px-2 py-0.5 rounded text-xs"
+                                      style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">CRISPR</span>
+                                <span class="px-2 py-0.5 rounded text-xs"
+                                      style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Oncology</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">78</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center gap-2">
+                                <div class="w-16 rounded-full h-2" style="background: var(--ds-border);">
+                                    <div class="h-2 rounded-full" style="width: 95%; background: var(--ds-ink-2);"></div>
+                                </div>
+                                <span class="text-sm" style="color: var(--ds-ink-1);">95%</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center gap-2">
+                                <div class="w-16 rounded-full h-2" style="background: var(--ds-border);">
+                                    <div class="h-2 rounded-full" style="width: 87%; background: var(--ds-ink-1);"></div>
+                                </div>
+                                <span class="text-sm" style="color: var(--ds-ink-1);">87%</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex gap-3" style="color: var(--ds-ink-2);">
+                                <button title="View"><i class="fa-solid fa-eye"></i></button>
+                                <button title="Add"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <input type="checkbox" class="h-4 w-4 rounded" style="accent-color: #18171A;">
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="h-10 w-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background: #5A5856;">RK</div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium" style="color: var(--ds-ink-1);">Prof. Robert Kim</div>
+                                    <div class="text-sm" style="color: var(--ds-ink-3);">MIT</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex flex-wrap gap-1">
+                                <span class="px-2 py-0.5 rounded text-xs"
+                                      style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Gene Editing</span>
+                                <span class="px-2 py-0.5 rounded text-xs"
+                                      style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Molecular Biology</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">92</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center gap-2">
+                                <div class="w-16 rounded-full h-2" style="background: var(--ds-border);">
+                                    <div class="h-2 rounded-full" style="width: 92%; background: var(--ds-ink-2);"></div>
+                                </div>
+                                <span class="text-sm" style="color: var(--ds-ink-1);">92%</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center gap-2">
+                                <div class="w-16 rounded-full h-2" style="background: var(--ds-border);">
+                                    <div class="h-2 rounded-full" style="width: 79%; background: var(--ds-ink-1);"></div>
+                                </div>
+                                <span class="text-sm" style="color: var(--ds-ink-1);">79%</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex gap-3" style="color: var(--ds-ink-2);">
+                                <button title="View"><i class="fa-solid fa-eye"></i></button>
+                                <button title="Add"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

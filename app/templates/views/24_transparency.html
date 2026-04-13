@@ -1,0 +1,346 @@
+{% extends "author/base_author.html" %}
+{% block page_title %}Review Transparency Options{% endblock %}
+
+{% block author_content %}
+<div class="p-6 max-w-5xl mx-auto">
+
+    <!-- Page header -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+        <div>
+            <div class="flex items-center text-sm mb-2 gap-2" style="color: var(--ds-ink-3);">
+                <a href="/author/" style="color: var(--ds-ink-3);">Dashboard</a>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <a href="/author/manuscripts" style="color: var(--ds-ink-3);">My Manuscripts</a>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span style="color: var(--ds-ink-2);">Climate Change Impact on Marine Ecosystems</span>
+            </div>
+            <h1 class="text-2xl font-bold" style="color: var(--ds-ink-1);">Review Transparency Options</h1>
+        </div>
+        <div class="mt-4 md:mt-0 flex gap-3">
+            <button class="px-3 py-2 rounded-md flex items-center text-sm"
+                    style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-1);">
+                <i class="fa-solid fa-arrow-left mr-2"></i>Back to Manuscript
+            </button>
+            <button class="px-4 py-2 rounded-md flex items-center text-sm text-white"
+                    style="background: #18171A;">
+                <i class="fa-solid fa-save mr-2"></i>Save Preferences
+            </button>
+        </div>
+    </div>
+
+    <!-- Info Banner -->
+    <div class="p-4 rounded-md mb-6" style="background: var(--ds-bg); border: 1px solid var(--ds-border); border-left: 4px solid var(--ds-ink-2);">
+        <div class="flex gap-3">
+            <i class="fa-solid fa-info-circle flex-shrink-0 mt-0.5" style="color: var(--ds-ink-2);"></i>
+            <div>
+                <h3 class="text-sm font-medium mb-1" style="color: var(--ds-ink-1);">About Review Transparency</h3>
+                <p class="text-sm" style="color: var(--ds-ink-2);">Sharing peer review reports and author responses alongside your published article increases transparency and accountability in the scientific process. This can enhance reader trust and provide valuable context for your research.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transparency Options -->
+    <div class="rounded-lg overflow-hidden mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="px-6 py-4" style="background: var(--ds-bg); border-bottom: 1px solid var(--ds-border);">
+            <h2 class="text-lg font-medium" style="color: var(--ds-ink-1);">Transparency Options for "Climate Change Impact on Marine Ecosystems"</h2>
+            <p class="text-sm mt-1" style="color: var(--ds-ink-3);">Choose how you want to display peer review reports and your responses alongside your published article.</p>
+        </div>
+
+        <div class="p-6 space-y-4">
+            <!-- Full Transparency -->
+            <div class="rounded-lg p-4 cursor-pointer" style="border: 1px solid var(--ds-border);">
+                <div class="flex items-start gap-3">
+                    <input id="full-transparency" name="transparency-option" type="radio"
+                           class="h-4 w-4 mt-0.5" style="accent-color: #18171A;">
+                    <div class="flex-1">
+                        <label for="full-transparency" class="font-medium text-sm cursor-pointer" style="color: var(--ds-ink-1);">Full Transparency</label>
+                        <p class="text-sm mt-1" style="color: var(--ds-ink-3);">Publish all review reports and your responses with reviewer identities (if reviewers consent)</p>
+                        <div class="mt-3 p-3 rounded-md" style="background: var(--ds-bg);">
+                            <div class="flex items-start gap-3">
+                                <div class="h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"
+                                     style="background: #EDECE9;">
+                                    <i class="fa-solid fa-eye text-sm" style="color: var(--ds-ink-2);"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium mb-1" style="color: var(--ds-ink-1);">Benefits</h4>
+                                    <ul class="text-sm space-y-1 list-disc list-inside" style="color: var(--ds-ink-3);">
+                                        <li>Highest level of transparency</li>
+                                        <li>Demonstrates confidence in research quality</li>
+                                        <li>Provides full context for readers</li>
+                                        <li>Encourages constructive reviewing</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Anonymous Reviews (selected) -->
+            <div class="rounded-lg p-4 cursor-pointer" style="border: 2px solid var(--ds-ink-1); background: #F0EFEB;">
+                <div class="flex items-start gap-3">
+                    <input id="anonymous-reviews" name="transparency-option" type="radio" checked
+                           class="h-4 w-4 mt-0.5" style="accent-color: #18171A;">
+                    <div class="flex-1">
+                        <label for="anonymous-reviews" class="font-medium text-sm cursor-pointer" style="color: var(--ds-ink-1);">Anonymous Reviews</label>
+                        <p class="text-sm mt-1" style="color: var(--ds-ink-3);">Publish all review reports and your responses, but keep reviewer identities anonymous</p>
+                        <div class="mt-3 p-3 rounded-md" style="background: var(--ds-surface);">
+                            <div class="flex items-start gap-3">
+                                <div class="h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"
+                                     style="background: #EDECE9;">
+                                    <i class="fa-solid fa-user-shield text-sm" style="color: var(--ds-ink-2);"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium mb-1" style="color: var(--ds-ink-1);">Benefits</h4>
+                                    <ul class="text-sm space-y-1 list-disc list-inside" style="color: var(--ds-ink-3);">
+                                        <li>Balances transparency with reviewer privacy</li>
+                                        <li>Most commonly selected option</li>
+                                        <li>Protects reviewers from potential conflicts</li>
+                                        <li>Still provides valuable context for readers</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editor's Summary -->
+            <div class="rounded-lg p-4 cursor-pointer" style="border: 1px solid var(--ds-border);">
+                <div class="flex items-start gap-3">
+                    <input id="editors-summary" name="transparency-option" type="radio"
+                           class="h-4 w-4 mt-0.5" style="accent-color: #18171A;">
+                    <div class="flex-1">
+                        <label for="editors-summary" class="font-medium text-sm cursor-pointer" style="color: var(--ds-ink-1);">Editor's Summary Only</label>
+                        <p class="text-sm mt-1" style="color: var(--ds-ink-3);">Publish only the editor's summary of the review process, not the full reviews</p>
+                        <div class="mt-3 p-3 rounded-md" style="background: var(--ds-bg);">
+                            <div class="flex items-start gap-3">
+                                <div class="h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"
+                                     style="background: #EDECE9;">
+                                    <i class="fa-solid fa-file-lines text-sm" style="color: var(--ds-ink-2);"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium mb-1" style="color: var(--ds-ink-1);">Benefits</h4>
+                                    <ul class="text-sm space-y-1 list-disc list-inside" style="color: var(--ds-ink-3);">
+                                        <li>Provides a concise overview of key points</li>
+                                        <li>Filters out potentially harsh or unnecessary comments</li>
+                                        <li>Editor ensures balanced representation</li>
+                                        <li>Streamlined reading experience</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Public Reviews -->
+            <div class="rounded-lg p-4 cursor-pointer" style="border: 1px solid var(--ds-border);">
+                <div class="flex items-start gap-3">
+                    <input id="no-reviews" name="transparency-option" type="radio"
+                           class="h-4 w-4 mt-0.5" style="accent-color: #18171A;">
+                    <div class="flex-1">
+                        <label for="no-reviews" class="font-medium text-sm cursor-pointer" style="color: var(--ds-ink-1);">No Public Reviews</label>
+                        <p class="text-sm mt-1" style="color: var(--ds-ink-3);">Keep the review process private (traditional approach)</p>
+                        <div class="mt-3 p-3 rounded-md" style="background: var(--ds-bg);">
+                            <div class="flex items-start gap-3">
+                                <div class="h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"
+                                     style="background: #EDECE9;">
+                                    <i class="fa-solid fa-lock text-sm" style="color: var(--ds-ink-3);"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium mb-1" style="color: var(--ds-ink-1);">Benefits</h4>
+                                    <ul class="text-sm space-y-1 list-disc list-inside" style="color: var(--ds-ink-3);">
+                                        <li>Maximum privacy for all participants</li>
+                                        <li>Traditional scientific publishing approach</li>
+                                        <li>Focus solely on the final research output</li>
+                                        <li>Simplifies the publication process</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Section -->
+    <div class="rounded-lg overflow-hidden mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="px-6 py-4 flex justify-between items-center" style="background: var(--ds-bg); border-bottom: 1px solid var(--ds-border);">
+            <h2 class="text-lg font-medium" style="color: var(--ds-ink-1);">Preview of Anonymous Reviews</h2>
+            <button class="text-sm font-medium flex items-center gap-1" style="color: var(--ds-ink-2);">
+                <i class="fa-solid fa-print mr-1"></i>Print Preview
+            </button>
+        </div>
+        <div class="p-6">
+            <div class="rounded-lg" style="border: 1px solid var(--ds-border);">
+                <!-- Journal Header -->
+                <div class="px-6 py-4" style="background: var(--ds-bg); border-bottom: 1px solid var(--ds-border);">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="font-bold" style="color: var(--ds-ink-1);">PLOS ONE</h3>
+                            <p class="text-sm" style="color: var(--ds-ink-3);">Peer Review History</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs px-2 py-0.5 rounded-full"
+                                  style="background: #18171A; color: #fff;">Published</span>
+                            <span class="text-xs px-2 py-0.5 rounded-full"
+                                  style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Open Access</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article Info -->
+                <div class="px-6 py-4" style="border-bottom: 1px solid var(--ds-border);">
+                    <h3 class="text-xl font-bold mb-2" style="color: var(--ds-ink-1);">Climate Change Impact on Marine Ecosystems</h3>
+                    <div class="flex flex-wrap gap-4 text-sm" style="color: var(--ds-ink-3);">
+                        <span><i class="fa-solid fa-user mr-1"></i>Michael Chen et al.</span>
+                        <span><i class="fa-solid fa-calendar mr-1"></i>Published: August 10, 2023</span>
+                        <span><i class="fa-solid fa-clock mr-1"></i>Review Process: 56 days</span>
+                    </div>
+                </div>
+
+                <!-- Process Summary -->
+                <div class="px-6 py-4" style="border-bottom: 1px solid var(--ds-border);">
+                    <h4 class="font-medium mb-2 text-sm" style="color: var(--ds-ink-1);">Review Process Summary</h4>
+                    <p class="text-sm" style="color: var(--ds-ink-2);">This manuscript underwent peer review by 3 reviewers and required 2 rounds of revision before acceptance. The reviewers provided constructive feedback that significantly improved the quality and clarity of the final manuscript.</p>
+                </div>
+
+                <!-- Reviewer 1 -->
+                <div class="px-6 py-4" style="border-bottom: 1px solid var(--ds-border);">
+                    <div class="flex items-start gap-3">
+                        <div class="h-10 w-10 rounded-full flex items-center justify-center flex-shrink-0"
+                             style="background: var(--ds-bg); border: 1px solid var(--ds-border);">
+                            <i class="fa-solid fa-user" style="color: var(--ds-ink-3);"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <h4 class="font-medium text-sm" style="color: var(--ds-ink-1);">Reviewer #1</h4>
+                                <span class="text-xs px-1.5 py-0.5 rounded"
+                                      style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Anonymous</span>
+                            </div>
+                            <div class="p-3 rounded-lg mb-2" style="background: var(--ds-bg);">
+                                <h5 class="text-sm font-medium mb-1" style="color: var(--ds-ink-1);">Summary</h5>
+                                <p class="text-sm mb-3" style="color: var(--ds-ink-2);">The authors present a comprehensive analysis of climate change impacts on marine ecosystems, with particular focus on coral reefs and coastal habitats. The methodology is sound and the conclusions are well-supported by data, though I have some concerns about the statistical analysis in Section 3.</p>
+                                <h5 class="text-sm font-medium mb-1" style="color: var(--ds-ink-1);">Major Comments</h5>
+                                <ul class="list-disc list-inside text-sm space-y-1" style="color: var(--ds-ink-2);">
+                                    <li>The authors should provide more details on the statistical methods used in Section 3</li>
+                                    <li>Figure 4 could be improved to better illustrate temperature variations</li>
+                                    <li>The discussion would benefit from addressing recent findings by Smith et al. (2022)</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 rounded-lg" style="background: #F0EFEB; border: 1px solid var(--ds-border);">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h5 class="text-sm font-medium" style="color: var(--ds-ink-1);">Author Response</h5>
+                                    <span class="text-xs px-1.5 py-0.5 rounded"
+                                          style="background: #18171A; color: #fff;">Michael Chen</span>
+                                </div>
+                                <p class="text-sm" style="color: var(--ds-ink-2);">We thank the reviewer for their constructive feedback. We have added additional details on the statistical methods in Section 3, including confidence intervals and p-values. Figure 4 has been redesigned to more clearly show temperature variations across different regions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviewer 2 collapsed -->
+                <div class="px-6 py-4" style="border-bottom: 1px solid var(--ds-border);">
+                    <button class="w-full flex items-center justify-between text-left">
+                        <div class="flex items-center gap-3">
+                            <div class="h-10 w-10 rounded-full flex items-center justify-center"
+                                 style="background: var(--ds-bg); border: 1px solid var(--ds-border);">
+                                <i class="fa-solid fa-user" style="color: var(--ds-ink-3);"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-sm" style="color: var(--ds-ink-1);">Reviewer #2</h4>
+                                <p class="text-xs" style="color: var(--ds-ink-3);">Click to expand review and response</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down" style="color: var(--ds-ink-3);"></i>
+                    </button>
+                </div>
+
+                <!-- Editor Decision -->
+                <div class="px-6 py-4">
+                    <div class="flex items-start gap-3">
+                        <div class="h-10 w-10 rounded-full flex items-center justify-center flex-shrink-0"
+                             style="background: #18171A;">
+                            <i class="fa-solid fa-user-tie text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <h4 class="font-medium text-sm" style="color: var(--ds-ink-1);">Editor Decision</h4>
+                                <span class="text-xs px-1.5 py-0.5 rounded"
+                                      style="background: #18171A; color: #fff;">Dr. Sarah Johnson</span>
+                            </div>
+                            <div class="p-3 rounded-lg" style="background: #F0EFEB; border: 1px solid var(--ds-border);">
+                                <p class="text-sm" style="color: var(--ds-ink-2);">After careful consideration of the reviewer comments and your responses, I am pleased to inform you that your manuscript has been accepted for publication. The revisions have adequately addressed all the concerns raised during the review process.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Settings -->
+    <div class="rounded-lg overflow-hidden mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="px-6 py-4" style="background: var(--ds-bg); border-bottom: 1px solid var(--ds-border);">
+            <h2 class="text-lg font-medium" style="color: var(--ds-ink-1);">Additional Settings</h2>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="flex items-start gap-3">
+                <input id="include-revision" type="checkbox" checked class="h-4 w-4 mt-0.5" style="accent-color: #18171A;">
+                <div>
+                    <label for="include-revision" class="font-medium text-sm" style="color: var(--ds-ink-1);">Include revision history</label>
+                    <p class="text-sm" style="color: var(--ds-ink-3);">Show all rounds of review and revision, not just the final decision</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <input id="allow-comments" type="checkbox" checked class="h-4 w-4 mt-0.5" style="accent-color: #18171A;">
+                <div>
+                    <label for="allow-comments" class="font-medium text-sm" style="color: var(--ds-ink-1);">Allow post-publication comments on reviews</label>
+                    <p class="text-sm" style="color: var(--ds-ink-3);">Enable readers to comment on the peer review process after publication</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <input id="highlight-changes" type="checkbox" class="h-4 w-4 mt-0.5" style="accent-color: #18171A;">
+                <div>
+                    <label for="highlight-changes" class="font-medium text-sm" style="color: var(--ds-ink-1);">Highlight manuscript changes</label>
+                    <p class="text-sm" style="color: var(--ds-ink-3);">Show how the manuscript evolved in response to reviewer feedback</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <input id="metrics-sharing" type="checkbox" checked class="h-4 w-4 mt-0.5" style="accent-color: #18171A;">
+                <div>
+                    <label for="metrics-sharing" class="font-medium text-sm" style="color: var(--ds-ink-1);">Share review metrics</label>
+                    <p class="text-sm" style="color: var(--ds-ink-3);">Display information about review timeline and process statistics</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Journal Policy Note -->
+    <div class="p-4 rounded-md mb-6" style="background: var(--ds-bg); border: 1px solid var(--ds-border); border-left: 4px solid var(--ds-ink-3);">
+        <div class="flex gap-3">
+            <i class="fa-solid fa-exclamation-triangle flex-shrink-0 mt-0.5" style="color: var(--ds-ink-3);"></i>
+            <div>
+                <h3 class="text-sm font-medium mb-1" style="color: var(--ds-ink-1);">Journal Policy Note</h3>
+                <p class="text-sm" style="color: var(--ds-ink-2);">PLOS ONE has a strong preference for transparent peer review. While you may choose any option, the journal encourages at least the "Anonymous Reviews" option. Your choice will not affect the editorial decision on your manuscript.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex justify-end gap-3 mt-6">
+        <button class="px-4 py-2 rounded-md text-sm"
+                style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-1);">
+            Cancel
+        </button>
+        <button class="px-4 py-2 rounded-md text-sm text-white"
+                style="background: #18171A;">
+            Save Preferences
+        </button>
+    </div>
+
+</div>
+{% endblock %}

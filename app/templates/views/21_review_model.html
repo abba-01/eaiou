@@ -1,0 +1,308 @@
+{% extends "admin/base_admin.html" %}
+{% block page_title %}Review Type Settings{% endblock %}
+
+{% block admin_content %}
+<div class="p-6 max-w-6xl mx-auto">
+
+    <!-- Page header -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+        <div>
+            <div class="flex items-center text-sm mb-2 gap-2" style="color: var(--ds-ink-3);">
+                <a href="/admin/" style="color: var(--ds-ink-3);">Journals</a>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <a href="/admin/journal-settings" style="color: var(--ds-ink-3);">Journal Settings</a>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span style="color: var(--ds-ink-2);">Review Types</span>
+            </div>
+            <h1 class="text-2xl font-bold" style="color: var(--ds-ink-1);">Review Type Settings</h1>
+        </div>
+        <div class="mt-4 md:mt-0 flex gap-3">
+            <button class="px-3 py-2 rounded-md flex items-center text-sm"
+                    style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-1);">
+                <i class="fa-solid fa-question-circle mr-2"></i>Help
+            </button>
+            <button class="px-4 py-2 rounded-md flex items-center text-sm text-white"
+                    style="background: #18171A;">
+                <i class="fa-solid fa-save mr-2"></i>Save Changes
+            </button>
+        </div>
+    </div>
+
+    <!-- Introduction -->
+    <div class="rounded-lg p-6 mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <h2 class="text-lg font-medium mb-3" style="color: var(--ds-ink-1);">Review Type Configuration</h2>
+        <p class="text-sm mb-4" style="color: var(--ds-ink-2);">
+            Select which peer review models your journal will support. Your choice affects how authors, reviewers, and editors interact during the review process.
+        </p>
+        <div class="p-4 rounded-md" style="background: var(--ds-bg); border-left: 4px solid var(--ds-ink-2);">
+            <div class="flex gap-3">
+                <i class="fa-solid fa-info-circle flex-shrink-0 mt-0.5" style="color: var(--ds-ink-2);"></i>
+                <p class="text-sm" style="color: var(--ds-ink-2);">
+                    You can enable multiple review types and let authors or editors choose which model is most appropriate for each submission.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Type Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <!-- Single-blind -->
+        <div class="rounded-lg overflow-hidden" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="h-10 w-10 rounded-full flex items-center justify-center"
+                             style="background: #EDECE9; border: 1px solid var(--ds-border);">
+                            <i class="fa-solid fa-eye-slash" style="color: var(--ds-ink-2);"></i>
+                        </div>
+                        <h3 class="font-semibold" style="color: var(--ds-ink-1);">Single-blind Review</h3>
+                    </div>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="relative w-11 h-6 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
+                             style="background: #CAC8C2;" data-checked-bg="#18171A"></div>
+                    </label>
+                </div>
+                <p class="text-sm mb-4" style="color: var(--ds-ink-2);">
+                    Reviewers know the identity of the authors, but authors do not know the identity of reviewers.
+                </p>
+                <div class="space-y-2 text-sm">
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-check mt-0.5 flex-shrink-0" style="color: var(--ds-ink-2);"></i>
+                        <span style="color: var(--ds-ink-2);">Traditional approach familiar to most researchers</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-check mt-0.5 flex-shrink-0" style="color: var(--ds-ink-2);"></i>
+                        <span style="color: var(--ds-ink-2);">Reviewers can evaluate research in full context</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-xmark mt-0.5 flex-shrink-0" style="color: var(--ds-ink-3);"></i>
+                        <span style="color: var(--ds-ink-3);">Potential for bias based on author identity or affiliation</span>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 py-3" style="background: var(--ds-bg); border-top: 1px solid var(--ds-border);">
+                <button class="text-sm font-medium flex items-center gap-1" style="color: var(--ds-ink-2);">
+                    Configure options <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Double-blind (recommended) -->
+        <div class="rounded-lg overflow-hidden" style="background: var(--ds-surface); border: 2px solid var(--ds-ink-1);">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="h-10 w-10 rounded-full flex items-center justify-center"
+                             style="background: #18171A;">
+                            <i class="fa-solid fa-user-secret text-white"></i>
+                        </div>
+                        <h3 class="font-semibold" style="color: var(--ds-ink-1);">Double-blind Review</h3>
+                    </div>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="relative w-11 h-6 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
+                             style="background: #18171A;"></div>
+                    </label>
+                </div>
+                <span class="inline-block px-2.5 py-0.5 text-xs font-medium rounded-full mb-3"
+                      style="background: #18171A; color: #fff;">Recommended</span>
+                <p class="text-sm mb-4" style="color: var(--ds-ink-2);">
+                    Neither reviewers nor authors know each other's identities throughout the review process.
+                </p>
+                <div class="space-y-2 text-sm">
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-check mt-0.5 flex-shrink-0" style="color: var(--ds-ink-2);"></i>
+                        <span style="color: var(--ds-ink-2);">Minimizes bias based on author identity or affiliation</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-check mt-0.5 flex-shrink-0" style="color: var(--ds-ink-2);"></i>
+                        <span style="color: var(--ds-ink-2);">Promotes evaluation based solely on research quality</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-xmark mt-0.5 flex-shrink-0" style="color: var(--ds-ink-3);"></i>
+                        <span style="color: var(--ds-ink-3);">May remove helpful context for specialized research</span>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 py-3" style="background: #EDECE9; border-top: 1px solid var(--ds-border);">
+                <button class="text-sm font-medium flex items-center gap-1" style="color: var(--ds-ink-2);">
+                    Configure options <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Open Review -->
+        <div class="rounded-lg overflow-hidden" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="h-10 w-10 rounded-full flex items-center justify-center"
+                             style="background: #EDECE9; border: 1px solid var(--ds-border);">
+                            <i class="fa-solid fa-globe" style="color: var(--ds-ink-2);"></i>
+                        </div>
+                        <h3 class="font-semibold" style="color: var(--ds-ink-1);">Open Review</h3>
+                    </div>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer">
+                        <div class="relative w-11 h-6 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
+                             style="background: #CAC8C2;"></div>
+                    </label>
+                </div>
+                <p class="text-sm mb-4" style="color: var(--ds-ink-2);">
+                    Identities of authors and reviewers are known to each other, and review reports may be published alongside the article.
+                </p>
+                <div class="space-y-2 text-sm">
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-check mt-0.5 flex-shrink-0" style="color: var(--ds-ink-2);"></i>
+                        <span style="color: var(--ds-ink-2);">Promotes transparency in the scientific process</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-check mt-0.5 flex-shrink-0" style="color: var(--ds-ink-2);"></i>
+                        <span style="color: var(--ds-ink-2);">Can improve review quality and accountability</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-xmark mt-0.5 flex-shrink-0" style="color: var(--ds-ink-3);"></i>
+                        <span style="color: var(--ds-ink-3);">May discourage critical feedback from reviewers</span>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 py-3" style="background: var(--ds-bg); border-top: 1px solid var(--ds-border);">
+                <button class="text-sm font-medium flex items-center gap-1" style="color: var(--ds-ink-2);">
+                    Configure options <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Options -->
+    <div class="rounded-lg p-6 mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <h2 class="text-lg font-medium mb-4" style="color: var(--ds-ink-1);">Additional Review Options</h2>
+        <div class="space-y-5">
+            <div class="flex items-start gap-3">
+                <input id="publish-reviews" type="checkbox" class="h-4 w-4 mt-0.5" style="accent-color: #18171A;">
+                <div>
+                    <label for="publish-reviews" class="font-medium text-sm" style="color: var(--ds-ink-1);">Publish Review Reports</label>
+                    <p class="text-sm" style="color: var(--ds-ink-3);">Allow review reports to be published alongside accepted articles (only applies to Open Review)</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <input id="author-response" type="checkbox" checked class="h-4 w-4 mt-0.5" style="accent-color: #18171A;">
+                <div>
+                    <label for="author-response" class="font-medium text-sm" style="color: var(--ds-ink-1);">Enable Author Response to Reviews</label>
+                    <p class="text-sm" style="color: var(--ds-ink-3);">Allow authors to respond to reviewer comments before final decision</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <input id="reviewer-recognition" type="checkbox" checked class="h-4 w-4 mt-0.5" style="accent-color: #18171A;">
+                <div>
+                    <label for="reviewer-recognition" class="font-medium text-sm" style="color: var(--ds-ink-1);">Reviewer Recognition</label>
+                    <p class="text-sm mb-2" style="color: var(--ds-ink-3);">Acknowledge reviewers (anonymously or by name) in published articles</p>
+                    <div class="space-y-2 ml-1">
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="recognition-type" checked class="h-4 w-4" style="accent-color: #18171A;">
+                            <span class="text-sm" style="color: var(--ds-ink-2);">Anonymous recognition</span>
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="recognition-type" class="h-4 w-4" style="accent-color: #18171A;">
+                            <span class="text-sm" style="color: var(--ds-ink-2);">Named recognition (with reviewer consent)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--ds-border); padding-top: 20px;">
+                <label class="font-medium text-sm block mb-1" style="color: var(--ds-ink-1);">Default Review Type</label>
+                <p class="text-sm mb-3" style="color: var(--ds-ink-3);">Select the default review type for new submissions</p>
+                <div class="space-y-2">
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="default-type" class="h-4 w-4" style="accent-color: #18171A;">
+                        <span class="text-sm" style="color: var(--ds-ink-2);">Single-blind Review</span>
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="default-type" checked class="h-4 w-4" style="accent-color: #18171A;">
+                        <span class="text-sm" style="color: var(--ds-ink-2);">Double-blind Review</span>
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="default-type" class="h-4 w-4" style="accent-color: #18171A;">
+                        <span class="text-sm" style="color: var(--ds-ink-2);">Open Review</span>
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="default-type" class="h-4 w-4" style="accent-color: #18171A;">
+                        <span class="text-sm" style="color: var(--ds-ink-2);">Let author choose (with editor approval)</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="rounded-lg overflow-hidden mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="px-6 py-4" style="background: var(--ds-bg); border-bottom: 1px solid var(--ds-border);">
+            <h2 class="text-lg font-medium" style="color: var(--ds-ink-1);">Review Type Comparison</h2>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full" style="border-collapse: collapse;">
+                <thead style="background: var(--ds-bg);">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Feature</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Single-blind</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Double-blind</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Open Review</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">Author identity known to reviewers</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);"><i class="fa-solid fa-check"></i></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-3);"><i class="fa-solid fa-xmark"></i></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);"><i class="fa-solid fa-check"></i></td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">Reviewer identity known to authors</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-3);"><i class="fa-solid fa-xmark"></i></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-3);"><i class="fa-solid fa-xmark"></i></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);"><i class="fa-solid fa-check"></i></td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">Review reports can be published</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-3);"><i class="fa-solid fa-xmark"></i></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-3);"><i class="fa-solid fa-xmark"></i></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);"><i class="fa-solid fa-check"></i></td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">Risk of bias based on identity</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">High</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Low</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Medium</td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">Transparency level</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Low</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">Low</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-2);">High</td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" style="color: var(--ds-ink-1);">Common in disciplines</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-3);">Medicine, Physics</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-3);">Social Sciences, Humanities</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-3);">Emerging across disciplines</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex justify-end gap-3 mb-8">
+        <button class="px-6 py-2.5 rounded-md text-sm"
+                style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-1);">
+            Cancel
+        </button>
+        <button class="px-6 py-2.5 rounded-md text-sm text-white"
+                style="background: #18171A;">
+            Save Changes
+        </button>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,197 @@
+{% extends "editor/base_editor.html" %}
+{% block page_title %}Reviewer Management{% endblock %}
+
+{% block editor_content %}
+<div class="p-6 max-w-6xl mx-auto">
+
+    <!-- Page header -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+        <div>
+            <div class="flex items-center text-sm mb-2 gap-2" style="color: var(--ds-ink-3);">
+                <a href="/editor/" style="color: var(--ds-ink-3);">Dashboard</a>
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+                <span style="color: var(--ds-ink-2);">Reviewer Management</span>
+            </div>
+            <h1 class="text-2xl font-bold" style="color: var(--ds-ink-1);">Reviewer Management</h1>
+        </div>
+        <div class="mt-4 md:mt-0 flex gap-3">
+            <button class="px-3 py-2 rounded-md flex items-center text-sm"
+                    style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-1);">
+                <i class="fa-solid fa-file-import mr-2"></i>Import Reviewers
+            </button>
+            <button class="px-4 py-2 rounded-md flex items-center text-sm text-white"
+                    style="background: #18171A;">
+                <i class="fa-solid fa-plus mr-2"></i>Add Reviewer
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="rounded-lg p-4" style="background: var(--ds-surface); border: 1px solid var(--ds-border); border-left: 4px solid var(--ds-ink-1);">
+            <p class="text-sm" style="color: var(--ds-ink-3);">Active Reviewers</p>
+            <p class="text-2xl font-bold" style="color: var(--ds-ink-1);">247</p>
+        </div>
+        <div class="rounded-lg p-4" style="background: var(--ds-surface); border: 1px solid var(--ds-border); border-left: 4px solid var(--ds-ink-2);">
+            <p class="text-sm" style="color: var(--ds-ink-3);">Pending Invitations</p>
+            <p class="text-2xl font-bold" style="color: var(--ds-ink-1);">32</p>
+        </div>
+        <div class="rounded-lg p-4" style="background: var(--ds-surface); border: 1px solid var(--ds-border); border-left: 4px solid #CAC8C2;">
+            <p class="text-sm" style="color: var(--ds-ink-3);">Avg. Response Time</p>
+            <p class="text-2xl font-bold" style="color: var(--ds-ink-1);">3.2 days</p>
+        </div>
+        <div class="rounded-lg p-4" style="background: var(--ds-surface); border: 1px solid var(--ds-border); border-left: 4px solid #9A9895;">
+            <p class="text-sm" style="color: var(--ds-ink-3);">Avg. Completion Rate</p>
+            <p class="text-2xl font-bold" style="color: var(--ds-ink-1);">87%</p>
+        </div>
+    </div>
+
+    <!-- Search and Filter -->
+    <div class="rounded-lg p-4 mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+            <div class="flex-1 relative">
+                <input type="text" placeholder="Search reviewers by name, expertise, or institution..."
+                       class="w-full pl-10 pr-4 py-2 rounded-md text-sm"
+                       style="border: 1px solid var(--ds-border); background: var(--ds-bg); color: var(--ds-ink-1);">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-search" style="color: var(--ds-ink-3);"></i>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <select class="px-3 py-2 rounded-md text-sm"
+                        style="border: 1px solid var(--ds-border); background: var(--ds-bg); color: var(--ds-ink-1);">
+                    <option>All Expertise</option>
+                    <option>Genetics</option>
+                    <option>Immunology</option>
+                    <option>Neuroscience</option>
+                    <option>Oncology</option>
+                </select>
+                <select class="px-3 py-2 rounded-md text-sm"
+                        style="border: 1px solid var(--ds-border); background: var(--ds-bg); color: var(--ds-ink-1);">
+                    <option>All Statuses</option>
+                    <option>Active</option>
+                    <option>Busy</option>
+                    <option>Inactive</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviewers Table -->
+    <div class="rounded-lg overflow-hidden mb-6" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+        <div class="overflow-x-auto">
+            <table class="min-w-full" style="border-collapse: collapse;">
+                <thead style="background: var(--ds-bg);">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Reviewer</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Expertise</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Reviews</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Response Rate</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background: #18171A;">JW</div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. James Wilson</div>
+                                    <div class="text-sm" style="color: var(--ds-ink-3);">Stanford University</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-1);">Genetics, CRISPR, Oncology</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm" style="color: var(--ds-ink-1);">42 completed</div>
+                            <div class="text-xs" style="color: var(--ds-ink-3);">3 in progress</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm" style="color: var(--ds-ink-1);">92%</div>
+                            <div class="text-xs" style="color: var(--ds-ink-3);">Avg. 1.8 days</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                  style="background: #18171A; color: #fff;">Active</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex gap-3" style="color: var(--ds-ink-2);">
+                                <button title="Assign"><i class="fa-solid fa-user-plus"></i></button>
+                                <button title="Message"><i class="fa-solid fa-envelope"></i></button>
+                                <button title="Analytics"><i class="fa-solid fa-chart-line"></i></button>
+                                <button title="Edit"><i class="fa-solid fa-edit"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background: #5A5856;">SJ</div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Sarah Johnson</div>
+                                    <div class="text-sm" style="color: var(--ds-ink-3);">Harvard Medical School</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-1);">Immunology, Virology</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm" style="color: var(--ds-ink-1);">38 completed</div>
+                            <div class="text-xs" style="color: var(--ds-ink-3);">1 in progress</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm" style="color: var(--ds-ink-1);">96%</div>
+                            <div class="text-xs" style="color: var(--ds-ink-3);">Avg. 2.1 days</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                  style="background: #18171A; color: #fff;">Active</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex gap-3" style="color: var(--ds-ink-2);">
+                                <button title="Assign"><i class="fa-solid fa-user-plus"></i></button>
+                                <button title="Message"><i class="fa-solid fa-envelope"></i></button>
+                                <button title="Analytics"><i class="fa-solid fa-chart-line"></i></button>
+                                <button title="Edit"><i class="fa-solid fa-edit"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--ds-border);">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background: #9A9895;">RC</div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium" style="color: var(--ds-ink-1);">Dr. Robert Chen</div>
+                                    <div class="text-sm" style="color: var(--ds-ink-3);">MIT</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm" style="color: var(--ds-ink-1);">Neuroscience, AI in Medicine</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm" style="color: var(--ds-ink-1);">27 completed</div>
+                            <div class="text-xs" style="color: var(--ds-ink-3);">0 in progress</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm" style="color: var(--ds-ink-1);">89%</div>
+                            <div class="text-xs" style="color: var(--ds-ink-3);">Avg. 3.4 days</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 py-0.5 text-xs font-semibold rounded-full"
+                                  style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Busy</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex gap-3" style="color: var(--ds-ink-2);">
+                                <button title="Assign"><i class="fa-solid fa-user-plus"></i></button>
+                                <button title="Message"><i class="fa-solid fa-envelope"></i></button>
+                                <button title="Analytics"><i class="fa-solid fa-chart-line"></i></button>
+                                <button title="Edit"><i class="fa-solid fa-edit"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

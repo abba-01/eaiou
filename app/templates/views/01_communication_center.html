@@ -1,0 +1,333 @@
+{% extends "author/base_author.html" %}
+{% block page_title %}Communication Center{% endblock %}
+
+{% block author_content %}
+<div id="communication-interface" class="flex h-full -mx-6 -mt-6" style="height: calc(100vh - 132px);">
+
+    <!-- Left Panel - Conversation List -->
+    <div id="conversation-list" class="w-80 flex flex-col flex-shrink-0"
+         style="background: var(--ds-surface); border-right: 1px solid var(--ds-border);">
+        <div class="p-4" style="border-bottom: 1px solid var(--ds-border);">
+            <div class="relative">
+                <input type="text" placeholder="Search conversations..."
+                       class="w-full rounded-md py-2 pl-10 pr-4 text-sm"
+                       style="background: var(--ds-bg); border: 1px solid var(--ds-border); color: var(--ds-ink-1);">
+                <div class="absolute left-3 top-2.5" style="color: var(--ds-ink-3);">
+                    <i class="fa-solid fa-search"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex px-4 py-3" style="border-bottom: 1px solid var(--ds-border);">
+            <button class="text-white px-3 py-1.5 rounded-md text-sm font-medium flex-1 mr-2"
+                    style="background: #18171A;">
+                <i class="fa-solid fa-pen-to-square mr-1"></i> New Message
+            </button>
+            <button class="px-3 py-1.5 rounded-md text-sm font-medium"
+                    style="background: var(--ds-surface); border: 1px solid var(--ds-border); color: var(--ds-ink-1);">
+                <i class="fa-solid fa-filter"></i>
+            </button>
+        </div>
+
+        <div class="overflow-y-auto flex-1">
+            <div id="conversation-tabs" class="flex" style="border-bottom: 1px solid var(--ds-border);">
+                <button class="flex-1 py-3 text-sm font-medium"
+                        style="border-bottom: 2px solid var(--ds-ink-1); color: var(--ds-ink-1);">
+                    All Messages
+                </button>
+                <button class="flex-1 py-3 text-sm font-medium"
+                        style="color: var(--ds-ink-3);">
+                    Unread (3)
+                </button>
+            </div>
+
+            <div id="conversation-items" style="divide-color: var(--ds-border);">
+                <!-- Active thread -->
+                <div class="p-3 cursor-pointer" style="background: #F0EFEB; border-bottom: 1px solid var(--ds-border);">
+                    <div class="flex justify-between mb-1">
+                        <h3 class="text-sm font-semibold" style="color: var(--ds-ink-1);">Manuscript ID: JAR-2023-0142</h3>
+                        <span class="text-xs" style="color: var(--ds-ink-3);">2h ago</span>
+                    </div>
+                    <p class="text-xs font-medium mb-1" style="color: var(--ds-ink-1);">Dr. Sarah Chen (Editor)</p>
+                    <p class="text-xs line-clamp-2" style="color: var(--ds-ink-2);">Thank you for your revised manuscript. I've forwarded it to the reviewers who provided feedback on your initial submission...</p>
+                    <div class="flex mt-2 gap-1">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium"
+                              style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Editor</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium"
+                              style="background: #18171A; color: #fff;">Urgent</span>
+                    </div>
+                </div>
+
+                <div class="p-3 cursor-pointer" style="border-bottom: 1px solid var(--ds-border);">
+                    <div class="flex justify-between mb-1">
+                        <h3 class="text-sm font-semibold" style="color: var(--ds-ink-1);">Manuscript ID: JAR-2023-0142</h3>
+                        <span class="text-xs" style="color: var(--ds-ink-3);">Yesterday</span>
+                    </div>
+                    <p class="text-xs font-medium mb-1" style="color: var(--ds-ink-1);">Reviewer #2</p>
+                    <p class="text-xs line-clamp-2" style="color: var(--ds-ink-2);">I've completed my review of your revised manuscript. The changes you've made have addressed most of my concerns...</p>
+                    <div class="flex mt-2">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium"
+                              style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Reviewer</span>
+                    </div>
+                </div>
+
+                <div class="p-3 cursor-pointer" style="border-bottom: 1px solid var(--ds-border);">
+                    <div class="flex justify-between mb-1">
+                        <h3 class="text-sm font-semibold" style="color: var(--ds-ink-1);">Manuscript ID: JAR-2023-0142</h3>
+                        <span class="text-xs" style="color: var(--ds-ink-3);">Aug 2</span>
+                    </div>
+                    <p class="text-xs font-medium mb-1" style="color: var(--ds-ink-1);">Reviewer #1</p>
+                    <p class="text-xs line-clamp-2" style="color: var(--ds-ink-2);">I've reviewed your manuscript and have several suggestions for improvement. The methodology section needs more detail...</p>
+                    <div class="flex mt-2">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium"
+                              style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Reviewer</span>
+                    </div>
+                </div>
+
+                <div class="p-3 cursor-pointer" style="border-bottom: 1px solid var(--ds-border);">
+                    <div class="flex justify-between mb-1">
+                        <h3 class="text-sm font-semibold" style="color: var(--ds-ink-1);">Manuscript ID: JAR-2023-0098</h3>
+                        <span class="text-xs" style="color: var(--ds-ink-3);">Jul 15</span>
+                    </div>
+                    <p class="text-xs font-medium mb-1" style="color: var(--ds-ink-1);">Dr. Mark Johnson (Editor-in-Chief)</p>
+                    <p class="text-xs line-clamp-2" style="color: var(--ds-ink-2);">We're pleased to inform you that your manuscript has been accepted for publication...</p>
+                    <div class="flex mt-2">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium"
+                              style="background: #18171A; color: #fff;">Accepted</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Center Panel - Conversation -->
+    <div id="conversation-content" class="flex-1 flex flex-col overflow-hidden"
+         style="background: var(--ds-bg);">
+        <div class="p-4" style="background: var(--ds-surface); border-bottom: 1px solid var(--ds-border);">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-lg font-semibold" style="color: var(--ds-ink-1);">Manuscript ID: JAR-2023-0142</h2>
+                    <p class="text-sm" style="color: var(--ds-ink-2);">Quantum Computing Applications in Bioinformatics</p>
+                </div>
+                <div class="flex gap-2">
+                    <button class="p-2" style="color: var(--ds-ink-3);"><i class="fa-solid fa-star"></i></button>
+                    <button class="p-2" style="color: var(--ds-ink-3);"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+            </div>
+            <div class="flex mt-3 gap-2">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                      style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Under Review</span>
+                <span class="text-xs" style="color: var(--ds-ink-3);">Thread active</span>
+            </div>
+        </div>
+
+        <div id="message-thread" class="flex-1 overflow-y-auto p-4 space-y-4">
+            <div class="flex justify-center mb-4">
+                <span class="text-xs px-3 py-1 rounded-full"
+                      style="background: var(--ds-bg); border: 1px solid var(--ds-border); color: var(--ds-ink-3);">August 4, 2023</span>
+            </div>
+
+            <!-- Editor Message -->
+            <div class="flex">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white mr-3 flex-shrink-0"
+                     style="background: #18171A;">SC</div>
+                <div class="max-w-3xl">
+                    <div class="flex items-center mb-1 gap-2">
+                        <span class="font-medium text-sm" style="color: var(--ds-ink-1);">Dr. Sarah Chen</span>
+                        <span class="text-xs px-1.5 py-0.5 rounded"
+                              style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Editor</span>
+                        <span class="text-xs" style="color: var(--ds-ink-3);">2 hours ago</span>
+                    </div>
+                    <div class="rounded-lg p-3" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+                        <p class="text-sm mb-3" style="color: var(--ds-ink-1);">Dear Dr. Wilson,</p>
+                        <p class="text-sm mb-3" style="color: var(--ds-ink-1);">Thank you for your revised manuscript. I've forwarded it to the reviewers. I would suggest including a brief comparison with classical algorithms to highlight the quantum advantage more clearly.</p>
+                        <p class="text-sm" style="color: var(--ds-ink-1);">Best regards, Dr. Sarah Chen</p>
+                    </div>
+                    <div class="mt-2">
+                        <button class="text-xs font-medium" style="color: var(--ds-ink-2);">Reply</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center mb-4">
+                <span class="text-xs px-3 py-1 rounded-full"
+                      style="background: var(--ds-bg); border: 1px solid var(--ds-border); color: var(--ds-ink-3);">August 3, 2023</span>
+            </div>
+
+            <!-- Author Message -->
+            <div class="flex justify-end">
+                <div class="max-w-3xl mr-11">
+                    <div class="flex items-center justify-end mb-1 gap-2">
+                        <span class="text-xs" style="color: var(--ds-ink-3);">Yesterday, 9:42 AM</span>
+                        <span class="text-xs px-1.5 py-0.5 rounded"
+                              style="background: #18171A; color: #fff;">You</span>
+                    </div>
+                    <div class="rounded-lg p-3" style="background: #F0EFEB; border: 1px solid #E2E0DB;">
+                        <p class="text-sm mb-3" style="color: var(--ds-ink-1);">Dear Dr. Chen,</p>
+                        <p class="text-sm mb-3" style="color: var(--ds-ink-1);">I'm submitting the revised version of my manuscript. I've carefully addressed all the reviewers' comments and made the following major changes:</p>
+                        <ul class="list-disc pl-5 mb-3 text-sm space-y-1" style="color: var(--ds-ink-1);">
+                            <li>Expanded the methodology section</li>
+                            <li>Added a new section on quantum algorithm optimization</li>
+                            <li>Updated the discussion to better contextualize our findings</li>
+                        </ul>
+                        <p class="text-sm" style="color: var(--ds-ink-1);">Best regards, Dr. James Wilson</p>
+                    </div>
+                </div>
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white ml-3 flex-shrink-0"
+                     style="background: #18171A;">JW</div>
+            </div>
+
+            <!-- Reviewer Message -->
+            <div class="flex">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs mr-3 flex-shrink-0"
+                     style="background: #EDECE9; color: var(--ds-ink-2);">
+                    <i class="fa-solid fa-user-shield text-xs"></i>
+                </div>
+                <div class="max-w-3xl">
+                    <div class="flex items-center mb-1 gap-2">
+                        <span class="font-medium text-sm" style="color: var(--ds-ink-1);">Reviewer #1</span>
+                        <span class="text-xs px-1.5 py-0.5 rounded"
+                              style="background: #EDECE9; border: 0.5px solid #CAC8C2; color: var(--ds-ink-2);">Anonymous</span>
+                        <span class="text-xs" style="color: var(--ds-ink-3);">Aug 2</span>
+                    </div>
+                    <div class="rounded-lg p-3" style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+                        <p class="text-sm mb-3" style="color: var(--ds-ink-1);">I've reviewed your manuscript and have several suggestions for improvement:</p>
+                        <ol class="list-decimal pl-5 mb-3 text-sm space-y-2" style="color: var(--ds-ink-1);">
+                            <li>The methodology section needs more detail, particularly regarding the quantum circuit implementation.</li>
+                            <li>The discussion could be strengthened by comparing your quantum approach with classical algorithms more explicitly.</li>
+                            <li>The conclusion seems rushed — consider expanding to highlight future directions.</li>
+                        </ol>
+                        <p class="text-sm" style="color: var(--ds-ink-1);">Overall, this is a promising study that could make a significant contribution.</p>
+                    </div>
+                    <div class="mt-2">
+                        <button class="text-xs font-medium" style="color: var(--ds-ink-2);">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Composer -->
+        <div id="message-composer" class="p-4" style="background: var(--ds-surface); border-top: 1px solid var(--ds-border);">
+            <div class="mb-3 rounded-lg overflow-hidden" style="border: 1px solid var(--ds-border);">
+                <div class="flex items-center px-3 py-2 gap-1" style="border-bottom: 1px solid var(--ds-border); background: var(--ds-bg);">
+                    <button class="p-1" style="color: var(--ds-ink-3);"><i class="fa-solid fa-bold"></i></button>
+                    <button class="p-1" style="color: var(--ds-ink-3);"><i class="fa-solid fa-italic"></i></button>
+                    <button class="p-1" style="color: var(--ds-ink-3);"><i class="fa-solid fa-list-ul"></i></button>
+                    <button class="p-1" style="color: var(--ds-ink-3);"><i class="fa-solid fa-link"></i></button>
+                    <button class="p-1" style="color: var(--ds-ink-3);"><i class="fa-solid fa-paperclip"></i></button>
+                </div>
+                <textarea placeholder="Type your reply here..."
+                          class="w-full px-3 py-2 text-sm border-0 focus:ring-0"
+                          style="color: var(--ds-ink-1); background: var(--ds-surface);"
+                          rows="4"></textarea>
+            </div>
+            <div class="flex justify-between items-center">
+                <div class="flex gap-2">
+                    <button class="px-3 py-1.5 rounded-md text-sm font-medium"
+                            style="background: var(--ds-surface); border: 1px solid var(--ds-border); color: var(--ds-ink-1);">
+                        <i class="fa-solid fa-paperclip mr-1"></i> Attach
+                    </button>
+                    <button class="px-3 py-1.5 rounded-md text-sm font-medium"
+                            style="background: var(--ds-surface); border: 1px solid var(--ds-border); color: var(--ds-ink-1);">
+                        <i class="fa-regular fa-save mr-1"></i> Save Draft
+                    </button>
+                </div>
+                <button class="px-4 py-2 rounded-md text-sm font-medium text-white"
+                        style="background: #18171A;">Send Reply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Panel - Manuscript Info -->
+    <div id="manuscript-info" class="w-80 overflow-y-auto flex-shrink-0"
+         style="background: var(--ds-surface); border-left: 1px solid var(--ds-border);">
+        <div class="p-4" style="border-bottom: 1px solid var(--ds-border);">
+            <h3 class="font-semibold" style="color: var(--ds-ink-1);">Manuscript Details</h3>
+        </div>
+
+        <div class="p-4">
+            <div class="mb-6">
+                <h4 class="text-sm font-semibold mb-2" style="color: var(--ds-ink-2);">Communication History</h4>
+                <div class="rounded-md p-3" style="background: var(--ds-bg); border: 1px solid var(--ds-border);">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-medium" style="color: var(--ds-ink-2);">Total Messages</span>
+                        <span class="text-xs font-medium" style="color: var(--ds-ink-1);">12</span>
+                    </div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-medium" style="color: var(--ds-ink-2);">Last Activity</span>
+                        <span class="text-xs font-medium" style="color: var(--ds-ink-1);">2 hours ago</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-medium" style="color: var(--ds-ink-2);">Time in Review</span>
+                        <span class="text-xs font-medium" style="color: var(--ds-ink-1);">10 days</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-sm font-semibold mb-2" style="color: var(--ds-ink-2);">Participants</h4>
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <div class="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs mr-2" style="background: #18171A;">JW</div>
+                        <div>
+                            <p class="text-xs font-medium" style="color: var(--ds-ink-1);">Dr. James Wilson (You)</p>
+                            <p class="text-xs" style="color: var(--ds-ink-3);">Author</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs mr-2" style="background: #18171A;">SC</div>
+                        <div>
+                            <p class="text-xs font-medium" style="color: var(--ds-ink-1);">Dr. Sarah Chen</p>
+                            <p class="text-xs" style="color: var(--ds-ink-3);">Editor</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs mr-2"
+                             style="background: #EDECE9; color: var(--ds-ink-2);">
+                            <i class="fa-solid fa-user-shield text-xs"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-medium" style="color: var(--ds-ink-1);">Reviewer #1</p>
+                            <p class="text-xs" style="color: var(--ds-ink-3);">Anonymous Reviewer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-sm font-semibold mb-2" style="color: var(--ds-ink-2);">Files &amp; Attachments</h4>
+                <div class="space-y-2">
+                    <div class="rounded-md p-2 flex items-center justify-between" style="background: var(--ds-bg); border: 1px solid var(--ds-border);">
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-file-pdf mr-2" style="color: var(--ds-ink-2);"></i>
+                            <span class="text-xs" style="color: var(--ds-ink-1);">manuscript_v2.1_revised.pdf</span>
+                        </div>
+                        <button style="color: var(--ds-ink-3);"><i class="fa-solid fa-download"></i></button>
+                    </div>
+                    <div class="rounded-md p-2 flex items-center justify-between" style="background: var(--ds-bg); border: 1px solid var(--ds-border);">
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-file-pdf mr-2" style="color: var(--ds-ink-2);"></i>
+                            <span class="text-xs" style="color: var(--ds-ink-1);">response_to_reviewers.pdf</span>
+                        </div>
+                        <button style="color: var(--ds-ink-3);"><i class="fa-solid fa-download"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-sm font-semibold mb-2" style="color: var(--ds-ink-2);">Actions</h4>
+                <div class="space-y-2">
+                    <button class="w-full px-3 py-2 rounded-md text-sm font-medium flex items-center justify-center"
+                            style="background: var(--ds-surface); border: 1px solid var(--ds-border); color: var(--ds-ink-1);">
+                        <i class="fa-solid fa-eye mr-2"></i> View Manuscript
+                    </button>
+                    <button class="w-full px-3 py-2 rounded-md text-sm font-medium flex items-center justify-center"
+                            style="background: var(--ds-surface); border: 1px solid var(--ds-border); color: var(--ds-ink-1);">
+                        <i class="fa-solid fa-envelope mr-2"></i> Contact Editorial Office
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
