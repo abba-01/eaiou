@@ -12,13 +12,13 @@
     </div>
 
     <!-- Configure form -->
-    <div id="def-configure" class="px-3 py-2 border-b hidden" style="border-color: var(--paper3); background: #F7F6F3;">
+    <div id="def-configure" class="px-3 py-2 border-b hidden" style="border-color: var(--paper3); background: var(--paper);">
         <input id="def-label-input" type="text" placeholder="Label (UI only — does not leave workspace)"
                class="w-full border px-2 py-1 text-xs rounded mb-2 focus:outline-none"
                style="border-color: var(--paper3);">
         <div class="flex gap-1.5">
             <button onclick="saveModuleLabel('def')"
-                    class="flex-1 py-1 text-xs rounded text-white" style="background:#18171A;">Save</button>
+                    class="flex-1 py-1 text-xs rounded text-white" style="background:var(--ink);">Save</button>
             <button onclick="swapModule('def')"
                     class="flex-1 py-1 text-xs rounded border" style="border-color: var(--paper3); color: var(--ink2);">Swap</button>
         </div>
@@ -55,7 +55,7 @@
     <!-- Empty / Add -->
     <div id="def-empty" class="p-4 border-t text-center hidden" style="border-color: var(--paper3);">
         <button onclick="addModule('defender')"
-                class="w-full py-2 text-xs rounded text-white" style="background:#18171A;">
+                class="w-full py-2 text-xs rounded text-white" style="background:var(--ink);">
             <i class="fa-solid fa-plus mr-1"></i>Load Defender
         </button>
     </div>
@@ -65,6 +65,7 @@
 {# ── Center: Paper ────────────────────────────────────────────────────────── #}
 {% block author_content %}
 <div class="max-w-2xl mx-auto space-y-5">
+    <h1 class="sr-only">Workspace — {{ paper.title or 'Untitled' }}</h1>
 
     <!-- F2-A: Revision request banner -->
     {% if paper.status == 'revision_requested' and latest_revision %}
@@ -87,7 +88,7 @@
                     <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
                     <button type="submit"
                             class="px-4 py-1.5 text-xs font-medium rounded text-white"
-                            style="background: #18171A;">
+                            style="background: var(--ink);">
                         Mark as Resubmitted →
                     </button>
                 </form>
@@ -224,19 +225,19 @@
     <div class="rounded-lg border overflow-hidden" style="border-color: var(--paper3);">
         <button onclick="toggleInterrogation()"
                 class="w-full px-5 py-3 flex items-center text-left"
-                style="background: #18171A;">
-            <i class="fa-solid fa-comments mr-2" style="color:#9A9895;"></i>
+                style="background: var(--ink);">
+            <i class="fa-solid fa-comments mr-2" style="color:var(--ink3);"></i>
             <span class="text-xs font-semibold uppercase tracking-widest" style="color:#fff;">Investigation</span>
-            <span id="interrog-count-badge" class="ml-2 text-xs font-mono" style="color:#9A9895;">0 exchanges</span>
-            <i id="interrog-chevron" class="fa-solid fa-chevron-down ml-auto" style="color:#9A9895;"></i>
+            <span id="interrog-count-badge" class="ml-2 text-xs font-mono" style="color:var(--ink3);">0 exchanges</span>
+            <i id="interrog-chevron" class="fa-solid fa-chevron-down ml-auto" style="color:var(--ink3);"></i>
         </button>
         <div id="interrog-body" class="border-t" style="border-color: #2E2D30;">
 
             <!-- Question input -->
             <div class="p-4 border-b" style="border-color: var(--paper3);">
-                <p class="text-xs mb-2" style="color: var(--ink3);">
+                <label for="interrog-question" class="text-xs mb-2 block" style="color: var(--ink3);">
                     Ask your team. The question is your intellectual act — direct them to the territory you already sense.
-                </p>
+                </label>
                 <textarea id="interrog-question" rows="2"
                     class="w-full border rounded px-3 py-2 text-sm focus:outline-none"
                     style="border-color: var(--paper3);"
@@ -245,7 +246,7 @@
                     <button onclick="sendInterrogation()"
                             id="interrog-ask-btn"
                             class="px-4 py-1.5 text-xs font-medium rounded text-white"
-                            style="background:#18171A;">Ask</button>
+                            style="background:var(--ink);">Ask</button>
                     <span id="interrog-expert-label" class="text-xs" style="color: var(--ink3);">
                         Expert auto-routed from question content
                     </span>
@@ -297,7 +298,7 @@
            class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs border"
            style="border-color: var(--paper3); color: var(--ink2);">
             <span class="w-1.5 h-1.5 rounded-full inline-block"
-                  style="background: {% if s.section_content or s.section_notes %}#18171A{% else %}#CAC8C2{% endif %};"></span>
+                  style="background: {% if s.section_content or s.section_notes %}var(--ink){% else %}#CAC8C2{% endif %};"></span>
             {{ loop.index }}
         </a>
         {% else %}
@@ -315,7 +316,7 @@
             <span class="text-xs font-semibold tracking-widest uppercase" style="color:#fff;">Gap Anchor</span>
             <span class="text-xs" style="color:#aaa;">Gap #{{ paper.gitgap_gap_id }}</span>
         </div>
-        <div class="px-4 py-3" style="background: #F7F6F3;">
+        <div class="px-4 py-3" style="background: var(--paper);">
             <p class="text-xs" style="color: var(--ink2);">{{ paper.gap_declaration or '(gap text not cached)' }}</p>
         </div>
     </div>
@@ -323,7 +324,7 @@
 
     <!-- Title + abstract -->
     <div class="bg-white rounded-lg border" style="border-color: var(--paper3);">
-        <div class="px-5 py-3 border-b" style="background: #F7F6F3; border-color: var(--paper3);">
+        <div class="px-5 py-3 border-b" style="background: var(--paper); border-color: var(--paper3);">
             <h2 class="text-sm font-semibold" style="color: var(--ink);">{{ paper.title or 'Untitled' }}</h2>
             <p class="text-xs mt-0.5 font-mono" style="color: var(--ink3);">{{ paper.cosmoid }}</p>
         </div>
@@ -336,7 +337,7 @@
     <!-- Sections -->
     {% for s in sections %}
     <div class="bg-white rounded-lg border" id="section-{{ s.id }}" style="border-color: var(--paper3);">
-        <div class="px-5 py-3 border-b flex items-center justify-between" style="background: #F7F6F3; border-color: var(--paper3);">
+        <div class="px-5 py-3 border-b flex items-center justify-between" style="background: var(--paper); border-color: var(--paper3);">
             <h3 class="text-sm font-semibold" style="color: var(--ink);">{{ loop.index }}. {{ s.section_name }}</h3>
             <div class="flex items-center gap-3">
                 {% if s.seeded_from %}<span class="text-xs" style="color: var(--ink3);">seeded: {{ s.seeded_from }}</span>{% endif %}
@@ -347,7 +348,7 @@
                            background:#fff; color:var(--ink2); font-size:16px; line-height:1;
                            display:flex; align-items:center; justify-content:center; cursor:pointer;
                            transition:border-color 0.15s, background 0.15s;"
-                    onmouseenter="this.style.borderColor='#18171A'; this.style.background='#18171A'; this.style.color='#fff';"
+                    onmouseenter="this.style.borderColor='var(--ink)'; this.style.background='var(--ink)'; this.style.color='#fff';"
                     onmouseleave="this.style.borderColor='var(--paper3)'; this.style.background='#fff'; this.style.color='var(--ink2)';">
                     +
                 </button>
@@ -356,7 +357,7 @@
         <div class="p-5">
             {% if s.section_notes %}
             <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ink3);">Notes</p>
-            <p class="text-xs mb-4 p-3 rounded" style="background: #F7F6F3; color: var(--ink2);">{{ s.section_notes }}</p>
+            <p class="text-xs mb-4 p-3 rounded" style="background: var(--paper); color: var(--ink2);">{{ s.section_notes }}</p>
             {% endif %}
             {% if s.section_content %}
             <p class="text-sm leading-relaxed section-content-display" style="color: var(--ink);">{{ s.section_content }}</p>
@@ -378,7 +379,7 @@
     <div class="rounded-lg border overflow-hidden" style="border-color: var(--paper3);">
         <button onclick="toggleVolley()"
                 class="w-full px-5 py-3 flex items-center text-left border-b"
-                style="background: #F7F6F3; border-color: var(--paper3);">
+                style="background: var(--paper); border-color: var(--paper3);">
             <i class="fa-solid fa-arrows-rotate mr-2" style="color: var(--ink2);"></i>
             <span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--ink2);">Volley — Cross-Intelligence Audit</span>
             <span class="ml-2 text-xs" style="color: var(--ink3);">round {{ volley_round }}</span>
@@ -393,7 +394,7 @@
             {% if findings.findings %}
             <div class="space-y-2">
                 {% for f in findings.findings %}
-                <div class="rounded p-3 text-xs" style="background:#F0EFEB; border-left:2px solid {% if f.severity == 'critical' %}#18171A{% elif f.severity == 'major' %}#5A5856{% else %}#9A9895{% endif %};">
+                <div class="rounded p-3 text-xs" style="background:#F0EFEB; border-left:2px solid {% if f.severity == 'critical' %}var(--ink){% elif f.severity == 'major' %}#5A5856{% else %}var(--ink3){% endif %};">
                     <div class="flex items-center gap-2 mb-1">
                         <span class="font-mono" style="color:var(--ink3); font-size:10px;">{{ f.code }}</span>
                         <span class="ml-auto text-xs font-medium" style="color:var(--ink);">{{ f.severity }}</span>
@@ -404,6 +405,7 @@
             </div>
             {% endif %}
             <div>
+                <label for="volley-response-text" class="sr-only">Volley response</label>
                 <textarea id="volley-response-text" rows="3"
                     class="w-full border rounded-md px-3 py-2 text-xs focus:outline-none"
                     style="border-color: var(--paper3);"
@@ -415,7 +417,7 @@
             </div>
             {% elif last_volley and last_volley.is_clean %}
             <div class="rounded p-4 text-center" style="background:#F0EFEB;">
-                <i class="fa-solid fa-circle-check text-xl mb-2" style="color:#18171A;"></i>
+                <i class="fa-solid fa-circle-check text-xl mb-2" style="color:var(--ink);"></i>
                 <p class="text-sm font-medium" style="color:var(--ink);">Audit clean — Round {{ last_volley.round_number }}.</p>
             </div>
             {% else %}
@@ -486,10 +488,10 @@
 
     <!-- Author Profile (appears post-seal) -->
     <div id="profile-panel" class="rounded-lg border overflow-hidden hidden" style="border-color: var(--paper3);">
-        <div class="px-5 py-3 flex items-center gap-3" style="background: #F7F6F3; border-bottom: 1px solid var(--paper3);">
+        <div class="px-5 py-3 flex items-center gap-3" style="background: var(--paper); border-bottom: 1px solid var(--paper3);">
             <i class="fa-solid fa-fingerprint" style="color: var(--ink2);"></i>
             <span class="text-xs font-semibold tracking-widest uppercase" style="color: var(--ink2);">Author Profile</span>
-            <span class="ml-auto text-xs font-mono px-2 py-0.5 rounded" style="background:#18171A; color:#fff;">sealed</span>
+            <span class="ml-auto text-xs font-mono px-2 py-0.5 rounded" style="background:var(--ink); color:#fff;">sealed</span>
         </div>
         <div class="px-5 py-4">
             <div id="profile-bins" class="flex flex-wrap gap-1.5 mb-4"></div>
@@ -499,7 +501,7 @@
 
     <!-- Research Coverage Analysis -->
     <div id="coverage-panel" class="rounded-lg border overflow-hidden" style="border-color: var(--paper3);">
-        <div class="px-5 py-3 flex items-center gap-3" style="background: #F7F6F3; border-bottom: 1px solid var(--paper3);">
+        <div class="px-5 py-3 flex items-center gap-3" style="background: var(--paper); border-bottom: 1px solid var(--paper3);">
             <i class="fa-solid fa-layer-group" style="color: var(--ink2);"></i>
             <span class="text-xs font-semibold tracking-widest uppercase" style="color: var(--ink2);">Research Coverage</span>
             <span class="ml-auto text-xs" style="color: var(--ink3);">appreciated scale</span>
@@ -513,7 +515,7 @@
         <!-- Summary bar -->
         <div id="coverage-summary" class="px-5 py-3 border-b hidden" style="border-color: var(--paper3);">
             <div class="flex gap-4 text-xs">
-                <span><span id="cov-covered" class="font-bold" style="color:#18171A;">0</span> covered</span>
+                <span><span id="cov-covered" class="font-bold" style="color:var(--ink);">0</span> covered</span>
                 <span><span id="cov-novel" class="font-bold" style="color:#6B7280;">0</span> novel fills</span>
                 <span><span id="cov-needs" class="font-bold" style="color:#B45309;">0</span> needs work</span>
             </div>
@@ -529,7 +531,7 @@
 
     <!-- Scorch footer strip -->
     <div id="scorch-strip" class="rounded border px-4 py-2 flex items-center gap-3 text-xs"
-         style="border-color: var(--paper3); background: #F7F6F3;">
+         style="border-color: var(--paper3); background: var(--paper);">
         <span style="font-size:.85rem;">🐢</span>
         <span class="font-semibold" style="color: var(--ink2);">Scorch</span>
         <span id="scorch-strip-status" class="text-xs" style="color: var(--ink3);">watching</span>
@@ -599,13 +601,13 @@
     </div>
 
     <!-- Configure form -->
-    <div id="pb-configure" class="px-3 py-2 border-b hidden" style="border-color: var(--paper3); background: #F7F6F3;">
+    <div id="pb-configure" class="px-3 py-2 border-b hidden" style="border-color: var(--paper3); background: var(--paper);">
         <input id="pb-label-input" type="text" placeholder="Label (UI only — does not leave workspace)"
                class="w-full border px-2 py-1 text-xs rounded mb-2 focus:outline-none"
                style="border-color: var(--paper3);">
         <div class="flex gap-1.5">
             <button onclick="saveModuleLabel('pb')"
-                    class="flex-1 py-1 text-xs rounded text-white" style="background:#18171A;">Save</button>
+                    class="flex-1 py-1 text-xs rounded text-white" style="background:var(--ink);">Save</button>
             <button onclick="swapModule('pb')"
                     class="flex-1 py-1 text-xs rounded border" style="border-color: var(--paper3); color: var(--ink2);">Swap</button>
         </div>
@@ -642,7 +644,7 @@
     <!-- Empty / Add -->
     <div id="pb-empty" class="p-4 border-t text-center hidden" style="border-color: var(--paper3);">
         <button onclick="addModule('red_team')"
-                class="w-full py-2 text-xs rounded text-white" style="background:#18171A;">
+                class="w-full py-2 text-xs rounded text-white" style="background:var(--ink);">
             <i class="fa-solid fa-plus mr-1"></i>Load Pushback
         </button>
     </div>
@@ -663,8 +665,8 @@
   <div style="display:flex; align-items:center; gap:8px; padding:5px 12px;
               background:#2d2d2d; border-bottom:1px solid #404040; flex-shrink:0; cursor:row-resize;"
        id="term-drag-handle">
-    <i class="fa-solid fa-terminal" style="color:#9A9895; font-size:11px;"></i>
-    <span style="font-size:10px; font-weight:600; color:#9A9895; text-transform:uppercase; letter-spacing:.08em;">Terminal</span>
+    <i class="fa-solid fa-terminal" style="color:var(--ink3); font-size:11px;"></i>
+    <span style="font-size:10px; font-weight:600; color:var(--ink3); text-transform:uppercase; letter-spacing:.08em;">Terminal</span>
     <span id="term-cwd" style="font-size:10px; color:#5a5a5a; font-family:monospace; margin-left:4px;"></span>
     <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
       <span id="term-status" style="font-size:10px; color:#5a5a5a;"></span>
@@ -680,7 +682,7 @@
 <!-- Floating toggle button -->
 <button id="term-toggle-btn" onclick="openTerminal()"
         style="position:fixed; bottom:20px; right:20px; z-index:60;
-               background:#18171A; color:#fff; border:none; cursor:pointer;
+               background:var(--ink); color:#fff; border:none; cursor:pointer;
                border-radius:8px; padding:7px 13px; font-size:12px; font-weight:500;
                display:flex; align-items:center; gap:6px;
                box-shadow:0 3px 10px rgba(0,0,0,.25);">
@@ -777,7 +779,7 @@
 
   <!-- Header -->
   <div class="flex items-center justify-between px-6 py-3 border-b flex-shrink-0"
-       style="border-color: var(--paper3); background: #F7F6F3; min-height:52px;">
+       style="border-color: var(--paper3); background: var(--paper); min-height:52px;">
     <div class="flex items-center gap-3">
       <span class="text-xs font-semibold uppercase tracking-wider" style="color:var(--ink3);">Focus Editor</span>
       <span id="sfm-title" class="text-sm font-semibold" style="color:var(--ink);"></span>
@@ -786,7 +788,7 @@
       <span id="sfm-save-status" class="text-xs" style="color:var(--ink3);"></span>
       <button onclick="saveSectionEditor()"
               class="px-4 py-1.5 text-sm font-medium rounded text-white"
-              style="background:#18171A;">Save</button>
+              style="background:var(--ink);">Save</button>
       <button onclick="closeSectionEditor()"
               class="px-3 py-1.5 text-sm font-medium rounded border"
               style="border-color:var(--paper3); color:var(--ink2);">&#10005; Close</button>
@@ -798,12 +800,13 @@
 
     <!-- Left: textarea -->
     <div class="flex flex-col flex-1 overflow-hidden border-r" style="border-color:var(--paper3);">
+      <label for="sfm-textarea" class="sr-only">Section draft</label>
       <textarea id="sfm-textarea"
                 class="flex-1 w-full p-6 text-sm leading-relaxed resize-none focus:outline-none"
                 style="color:var(--ink); font-family:inherit; line-height:1.8;"
                 placeholder="Start writing this section&#8230;"></textarea>
       <div class="flex items-center justify-between px-6 py-2 border-t flex-shrink-0"
-           style="border-color:var(--paper3); background:#F7F6F3;">
+           style="border-color:var(--paper3); background:var(--paper);">
         <span id="sfm-wordcount" class="text-xs" style="color:var(--ink3);">0 words</span>
         <span class="text-xs" style="color:var(--ink3);">Auto-saves after 2 s of inactivity</span>
       </div>
@@ -811,25 +814,26 @@
 
     <!-- Right: mini interrogation panel -->
     <div class="flex flex-col w-80 flex-shrink-0 overflow-hidden">
-      <div class="px-4 py-3 border-b flex-shrink-0" style="background:#F7F6F3; border-color:var(--paper3);">
+      <div class="px-4 py-3 border-b flex-shrink-0" style="background:var(--paper); border-color:var(--paper3);">
         <p class="text-xs font-semibold uppercase tracking-wider" style="color:var(--ink3);">Ask Intelligence</p>
         <p class="text-xs mt-0.5" style="color:var(--ink3);">Responses can be seeded into this section.</p>
       </div>
       <div class="flex flex-col flex-1 overflow-hidden p-4 gap-3">
+        <label for="sfm-question" class="sr-only">Ask about this section</label>
         <textarea id="sfm-question"
                   rows="3"
                   class="w-full border rounded px-3 py-2 text-xs focus:outline-none resize-none"
                   style="border-color:var(--paper3);"
                   placeholder="Ask about this section&#8230;"></textarea>
-        <button onclick="sfmAsk()"
+        <button id="sfm-ask-btn" onclick="sfmAsk()"
                 class="w-full py-1.5 text-xs font-medium rounded text-white"
                 style="background:var(--ep-primary, #0284c7);">Ask &#8594;</button>
         <div id="sfm-response-wrap" class="hidden flex-col gap-2 overflow-y-auto flex-1">
           <p class="text-xs font-semibold uppercase tracking-wider" style="color:var(--ink3);">Response</p>
           <div id="sfm-response-text"
                class="text-xs leading-relaxed p-3 rounded"
-               style="background:#F7F6F3; color:var(--ink2); white-space:pre-wrap; overflow-y:auto; max-height:300px;"></div>
-          <button onclick="sfmSeedResponse()"
+               style="background:var(--paper); color:var(--ink2); white-space:pre-wrap; overflow-y:auto; max-height:300px;"></div>
+          <button id="sfm-seed-btn" onclick="sfmSeedResponse()"
                   class="w-full py-1.5 text-xs font-medium rounded border"
                   style="border-color:var(--paper3); color:var(--ink2);">Seed to section notes</button>
         </div>
@@ -923,10 +927,10 @@ async function moduleAction(side, action) {
             // Re-check gate after red_team action
             if (action === 'redteam') loadGate();
         } else {
-            if (respEl) respEl.innerHTML = `<p style="color:#9A9895;">${escHtml(data.detail || 'Error.')}</p>`;
+            if (respEl) respEl.innerHTML = `<p style="color:var(--ink3);">${escHtml(data.detail || 'Error.')}</p>`;
         }
     } catch(e) {
-        if (respEl) respEl.innerHTML = '<p style="color:#9A9895;">Network error.</p>';
+        if (respEl) respEl.innerHTML = '<p style="color:var(--ink3);">Network error.</p>';
     }
     if (btn) {
         btn.disabled = false;
@@ -1034,20 +1038,20 @@ function renderGate(data) {
     const failed   = data.checks.filter(c => !c.passed).length;
 
     badge.textContent = data.all_passed ? 'OPEN' : `BLOCKED · ${failed}`;
-    badge.style.background = data.all_passed ? '#18171A' : '#fff';
-    badge.style.color      = data.all_passed ? '#fff'    : '#18171A';
+    badge.style.background = data.all_passed ? 'var(--ink)' : '#fff';
+    badge.style.color      = data.all_passed ? '#fff'    : 'var(--ink)';
 
     checksEl.innerHTML = data.checks.map(c => `
         <div class="px-5 py-2.5 flex items-start gap-3 text-xs">
             <i class="fa-solid fa-${c.passed ? 'circle-check' : 'circle-xmark'} mt-0.5 flex-shrink-0"
-               style="color:${c.passed ? '#18171A' : '#CAC8C2'};"></i>
+               style="color:${c.passed ? 'var(--ink)' : '#CAC8C2'};"></i>
             <span class="flex-1" style="color:var(--ink${c.passed ? '' : '2'});">${c.label}</span>
             <span class="font-mono text-right" style="color:var(--ink3); font-size:10px; max-width:40%;">${c.detail}</span>
         </div>`).join('');
 
     if (data.all_passed) {
         sealBtn.disabled = false;
-        sealBtn.style.background = '#18171A';
+        sealBtn.style.background = 'var(--ink)';
         sealBtn.style.cursor = 'pointer';
         blockMsg.textContent = 'All conditions met. Ready to seal.';
         blockMsg.style.color = 'var(--ink2)';
@@ -1120,12 +1124,12 @@ function renderProfile(data) {
     panel.classList.remove('hidden');
 
     const DIM_COLORS = {
-        origin:        '#18171A',
+        origin:        'var(--ink)',
         investigation: '#5A5856',
-        challenge:     '#18171A',
+        challenge:     'var(--ink)',
         thoroughness:  '#5A5856',
-        volley:        '#9A9895',
-        ambition:      '#18171A',
+        volley:        'var(--ink3)',
+        ambition:      'var(--ink)',
     };
 
     binsEl.innerHTML = (data.bins || []).map(b => `
@@ -1169,7 +1173,7 @@ function renderPipeline(gateChecks) {
         }
         if (!passed && !firstIncomplete) firstIncomplete = stage.label;
         const icon = passed
-            ? `<i class="fa-solid fa-circle-check" style="color:#18171A;"></i>`
+            ? `<i class="fa-solid fa-circle-check" style="color:var(--ink);"></i>`
             : `<i class="fa-regular fa-circle" style="color:#CAC8C2;"></i>`;
         const sep = i < PIPELINE_STAGES.length - 1
             ? `<i class="fa-solid fa-chevron-right mx-1.5" style="color:#E2E0DB; font-size:8px;"></i>`
@@ -1269,7 +1273,7 @@ async function seedSection(sectionId, sectionName) {
     });
     if (resp.ok) {
         const dot = document.querySelector(`a[href="#section-${sectionId}"] span`);
-        if (dot) dot.style.background = '#18171A';
+        if (dot) dot.style.background = 'var(--ink)';
         alert(`Seeded to: ${sectionName}`);
         loadGate();
     } else {
@@ -1311,7 +1315,7 @@ async function runCoverage() {
         // Claims
         const STATUS_STYLE = {
             covered:    { bg: '#F0F9F0', border: '#86EFAC', label: 'covered',    dot: '#22C55E' },
-            novel:      { bg: '#F7F6F3', border: '#D1D5DB', label: 'novel fill', dot: '#6B7280' },
+            novel:      { bg: 'var(--paper)', border: '#D1D5DB', label: 'novel fill', dot: '#6B7280' },
             needs_work: { bg: '#FFFBEB', border: '#FCD34D', label: 'needs work', dot: '#F59E0B' },
         };
 
@@ -1442,7 +1446,7 @@ scorchStrip();
   window.sfmAsk = function () {
     var q = document.getElementById('sfm-question').value.trim();
     if (!q) return;
-    var btn = document.querySelector('#section-focus-modal button[onclick="sfmAsk()"]');
+    var btn = document.getElementById('sfm-ask-btn');
     btn.disabled = true; btn.textContent = '\u2026';
     fetch('/author/api/interrogate', {
       method:  'POST',
@@ -1471,7 +1475,7 @@ scorchStrip();
     })
     .then(function (r) { return r.json(); })
     .then(function () {
-      var btn = document.querySelector('#section-focus-modal button[onclick="sfmSeedResponse()"]');
+      var btn = document.getElementById('sfm-seed-btn');
       btn.textContent = 'Seeded \u2713';
       btn.disabled = true;
       setTimeout(function () { btn.textContent = 'Seed to section notes'; btn.disabled = false; }, 2000);

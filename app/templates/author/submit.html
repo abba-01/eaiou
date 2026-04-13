@@ -8,14 +8,14 @@
 
     <div class="mb-6 flex items-center justify-between">
         <div>
-            <h2 class="text-xl font-bold" style="color: var(--ink);">Submit a Paper</h2>
+            <h1 class="text-xl font-bold" style="color: var(--ink);">Submit a Paper</h1>
             <p class="text-sm mt-0.5" style="color: var(--ink3);">Your submission date is sealed at receipt.</p>
         </div>
     </div>
 
     <!-- ── Populate from document ──────────────────────────── -->
     <div class="mb-6 rounded-lg border overflow-hidden" style="border-color: var(--paper3);">
-        <div class="px-5 py-3 border-b flex items-center justify-between" style="background: #F7F6F3; border-color: var(--paper3);">
+        <div class="px-5 py-3 border-b flex items-center justify-between" style="background: var(--paper); border-color: var(--paper3);">
             <div class="flex items-center gap-2">
                 <i class="fa-solid fa-file-arrow-up text-sm" style="color: var(--ink2);"></i>
                 <h3 class="text-sm font-semibold" style="color: var(--ink);">Populate from document</h3>
@@ -26,7 +26,7 @@
             <label id="upload-dropzone"
                    class="flex flex-col items-center justify-center border-2 border-dashed rounded-lg cursor-pointer py-6 transition-colors"
                    style="border-color: var(--paper3);"
-                   onmouseenter="this.style.borderColor='#18171A';"
+                   onmouseenter="this.style.borderColor='var(--ink)';"
                    onmouseleave="this.style.borderColor='var(--paper3)';">
                 <i class="fa-solid fa-cloud-arrow-up text-2xl mb-2" style="color: var(--ink3);"></i>
                 <span class="text-sm font-medium" style="color: var(--ink2);">Drop file or click to browse</span>
@@ -51,12 +51,12 @@
             </div>
             {% endif %}
 
-            <div id="upload-status" class="hidden mt-4 text-xs p-3 rounded" style="background: #F7F6F3; color: var(--ink2);"></div>
+            <div id="upload-status" class="hidden mt-4 text-xs p-3 rounded" style="background: var(--paper); color: var(--ink2);"></div>
         </div>
     </div>
 
     {% if error %}
-    <div class="mb-5 border-l-4 p-4 rounded" style="background: #F7F6F3; border-left-color: #18171A;">
+    <div class="mb-5 border-l-4 p-4 rounded" style="background: var(--paper); border-left-color: var(--ink);">
         <p class="text-sm" style="color: var(--ink);">{{ error }}</p>
     </div>
     {% endif %}
@@ -71,7 +71,7 @@
 
         <!-- Paper Details -->
         <div class="bg-white rounded-lg border overflow-hidden" style="border-color: var(--paper3);">
-            <div class="px-6 py-4 border-b flex items-center justify-between" style="background: #F7F6F3; border-color: var(--paper3);">
+            <div class="px-6 py-4 border-b flex items-center justify-between" style="background: var(--paper); border-color: var(--paper3);">
                 <h3 class="text-sm font-semibold" style="color: var(--ink);">Paper Details</h3>
                 <span class="text-xs" style="color: var(--ink3);">Step 1 of 3</span>
             </div>
@@ -83,7 +83,7 @@
                     </label>
                     <input type="text" id="title" name="title" required
                         class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
-                        style="border-color: var(--paper3); --tw-ring-color: #9A9895;"
+                        style="border-color: var(--paper3); --tw-ring-color: var(--ink3);"
                         placeholder="Full paper title"
                         value="{{ form.title or '' }}">
                 </div>
@@ -94,7 +94,7 @@
                     </label>
                     <textarea id="abstract" name="abstract" rows="6" required
                         class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
-                        style="border-color: var(--paper3); --tw-ring-color: #9A9895;"
+                        style="border-color: var(--paper3); --tw-ring-color: var(--ink3);"
                         placeholder="Comprehensive summary of your research">{{ form.abstract or '' }}</textarea>
                     <div class="flex justify-end mt-1">
                         <span class="text-xs" style="color: var(--ink3);"><span id="abstract-count">0</span> words</span>
@@ -108,7 +108,7 @@
                         </label>
                         <input type="text" id="author_name" name="author_name" required
                             class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
-                            style="border-color: var(--paper3); --tw-ring-color: #9A9895;"
+                            style="border-color: var(--paper3); --tw-ring-color: var(--ink3);"
                             placeholder="Full legal name"
                             value="{{ form.author_name or '' }}">
                     </div>
@@ -118,7 +118,7 @@
                         </label>
                         <input type="text" id="orcid" name="orcid"
                             class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
-                            style="border-color: var(--paper3); --tw-ring-color: #9A9895;"
+                            style="border-color: var(--paper3); --tw-ring-color: var(--ink3);"
                             placeholder="0000-0000-0000-0000"
                             value="{{ form.orcid or '' }}">
                     </div>
@@ -130,7 +130,7 @@
                     </label>
                     <input type="text" id="keywords" name="keywords"
                         class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
-                        style="border-color: var(--paper3); --tw-ring-color: #9A9895;"
+                        style="border-color: var(--paper3); --tw-ring-color: var(--ink3);"
                         placeholder="Comma-separated, e.g. cosmology, Hubble tension, UHA"
                         value="{{ form.keywords or '' }}">
                     <p class="text-xs mt-1" style="color: var(--ink3);">3–6 keywords used for indexing and discovery.</p>
@@ -162,7 +162,7 @@
                 <label class="flex items-start gap-3 cursor-pointer group">
                     <input type="checkbox" name="{{ name }}" value="1" required
                         class="mt-0.5 h-4 w-4 rounded"
-                        style="accent-color: #18171A;">
+                        style="accent-color: var(--ink);">
                     <span class="text-sm" style="color: var(--ink2);">{{ label }}</span>
                 </label>
                 {% endfor %}
@@ -171,7 +171,7 @@
                 <label class="flex items-start gap-3 cursor-pointer border-t pt-4" style="border-color: var(--paper3);">
                     <input type="checkbox" name="attest_gap_anchor" value="1" required
                         class="mt-0.5 h-4 w-4 rounded"
-                        style="accent-color: #18171A;">
+                        style="accent-color: var(--ink);">
                     <span class="text-sm" style="color: var(--ink2);">
                         I acknowledge <strong>Gap #{{ gap.id }}</strong> as the CAUGHT anchor for this work and accept it as the motivating question I am formally responding to.
                     </span>
@@ -195,7 +195,7 @@
                         {% for name, label in can_items %}
                         <label class="flex items-center gap-2 cursor-pointer">
                             <input type="checkbox" name="{{ name }}" value="1"
-                                class="h-3.5 w-3.5 rounded" style="accent-color: #18171A;">
+                                class="h-3.5 w-3.5 rounded" style="accent-color: var(--ink);">
                             <span class="text-xs" style="color: var(--ink3);">{{ label }}</span>
                         </label>
                         {% endfor %}
@@ -206,7 +206,7 @@
 
         <!-- AI Disclosure -->
         <div class="bg-white rounded-lg border overflow-hidden" style="border-color: var(--paper3);">
-            <div class="px-6 py-4 border-b flex items-center justify-between" style="background: #F7F6F3; border-color: var(--paper3);">
+            <div class="px-6 py-4 border-b flex items-center justify-between" style="background: var(--paper); border-color: var(--paper3);">
                 <h3 class="text-sm font-semibold" style="color: var(--ink);">AI Involvement Record</h3>
                 <span class="text-xs" style="color: var(--ink3);">Step 3 of 3</span>
             </div>
@@ -219,7 +219,7 @@
                     </label>
                     <select id="ai_disclosure_level" name="ai_disclosure_level" required
                         class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
-                        style="border-color: var(--paper3); --tw-ring-color: #9A9895;">
+                        style="border-color: var(--paper3); --tw-ring-color: var(--ink3);">
                         <option value="">Select level</option>
                         <option value="none" {% if form.ai_disclosure_level == 'none' %}selected{% endif %}>No AI tools used — AI Detection Engaged</option>
                         <option value="editing" {% if form.ai_disclosure_level == 'editing' %}selected{% endif %}>Editing only — grammar, spelling, clarity</option>
@@ -231,7 +231,7 @@
 
                 <!-- AI detection consent — shown only when "none" is selected -->
                 <div id="ai-detection-consent-block" style="display:none;">
-                    <div class="rounded-lg border-l-4 p-4" style="background: #F0EFEB; border-left-color: #18171A;">
+                    <div class="rounded-lg border-l-4 p-4" style="background: #F0EFEB; border-left-color: var(--ink);">
                         <p class="text-sm font-semibold mb-1" style="color: var(--ink);">AI Detection Terms</p>
                         <p class="text-sm mb-3" style="color: var(--ink2);">
                             Declaring no AI involvement authorizes eaiou to apply AI detection tools to this submission.
@@ -255,7 +255,7 @@
                     </label>
                     <textarea id="ai_disclosure_notes" name="ai_disclosure_notes" rows="3"
                         class="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2"
-                        style="border-color: var(--paper3); --tw-ring-color: #9A9895;"
+                        style="border-color: var(--paper3); --tw-ring-color: var(--ink3);"
                         placeholder="For which tasks was AI used, and what was retained vs. discarded.">{{ form.ai_disclosure_notes or '' }}</textarea>
                 </div>
             </div>
@@ -271,7 +271,7 @@
         </script>
 
         <!-- Temporal Blindness Notice -->
-        <div class="border-l-4 rounded-lg p-4" style="background: #F0EFEB; border-left-color: #18171A;">
+        <div class="border-l-4 rounded-lg p-4" style="background: #F0EFEB; border-left-color: var(--ink);">
             <div class="flex items-start space-x-3">
                 <i class="fa-solid fa-lock mt-0.5" style="color: var(--ink);"></i>
                 <div>
@@ -289,7 +289,7 @@
             </a>
             <button type="submit"
                 class="inline-flex items-center px-5 py-2 text-white text-sm font-medium rounded-md"
-                style="background: #18171A;">
+                style="background: var(--ink);">
                 <i class="fa-solid fa-upload mr-2"></i>Submit Paper
             </button>
         </div>
@@ -302,16 +302,16 @@
 <!-- Structure Formulator widget -->
 <div class="rounded-lg border overflow-hidden mb-3" style="border-color: var(--paper3);">
 
-    <div class="px-3 py-2 border-b flex items-center gap-2" style="background: #18171A; border-color: #333;">
+    <div class="px-3 py-2 border-b flex items-center gap-2" style="background: var(--ink); border-color: #333;">
         <i class="fa-solid fa-diagram-project" style="color: #fff; font-size:.8rem;"></i>
         <span class="text-xs font-semibold" style="color: #fff;">Structure</span>
-        <span class="ml-auto text-xs" style="color: #9A9895;" id="struct-status">reading</span>
+        <span class="ml-auto text-xs" style="color: var(--ink3);" id="struct-status">reading</span>
     </div>
 
     <div class="flex border-b" style="border-color: var(--paper3);">
         <button id="tab-reflect" onclick="structTab('reflect')"
             class="flex-1 py-1.5 text-xs font-medium border-b-2"
-            style="border-color: #18171A; color: #18171A; background: #F7F6F3;">
+            style="border-color: var(--ink); color: var(--ink); background: var(--paper);">
             Reflect
         </button>
         <button id="tab-build" onclick="structTab('build')"
@@ -333,7 +333,7 @@
             ] %}
             <div>
                 <p class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: var(--ink3); letter-spacing:.06em; font-size:.6rem;">{{ slot_label }}</p>
-                <div id="{{ slot_id }}" class="rounded p-2 text-xs min-h-6" style="background: #F7F6F3; color: var(--ink3); font-style: italic;">—</div>
+                <div id="{{ slot_id }}" class="rounded p-2 text-xs min-h-6" style="background: var(--paper); color: var(--ink3); font-style: italic;">—</div>
             </div>
             {% endfor %}
         </div>
@@ -343,7 +343,7 @@
         <p class="text-xs mb-2" style="color: var(--ink3);">Build a section scaffold from your hypothesis and gap anchor.</p>
         <button id="struct-build-btn" onclick="structBuild()"
             class="w-full py-1.5 px-3 text-xs font-medium rounded text-white mb-3"
-            style="background: #18171A;">
+            style="background: var(--ink);">
             <i class="fa-solid fa-wand-magic-sparkles mr-1.5"></i>Build Structure
         </button>
         <div id="struct-build-result" class="space-y-2"></div>
@@ -357,11 +357,11 @@
 
 {% if gap %}
 <div class="eaiou-widget rounded-lg border overflow-hidden mb-3" style="border-color: var(--paper3);" data-widget-id="gap-anchor">
-    <div class="px-4 py-2.5 border-b flex items-center gap-2" style="background: #18171A; border-color: #333;">
+    <div class="px-4 py-2.5 border-b flex items-center gap-2" style="background: var(--ink); border-color: #333;">
         <i class="fa-solid fa-anchor text-xs" style="color: #fff;"></i>
         <span class="text-xs font-semibold" style="color: #fff;">Responding to Gap #{{ gap.id }}</span>
         {% if gap.pub_year %}
-        <span class="ml-auto text-xs" style="color: #9A9895;">{{ 2026 - gap.pub_year }} yr unresolved</span>
+        <span class="ml-auto text-xs" style="color: var(--ink3);">{{ 2026 - gap.pub_year }} yr unresolved</span>
         {% endif %}
     </div>
     <div class="p-4">
@@ -370,7 +370,7 @@
         <p class="text-sm font-medium mb-3" style="color: var(--ink);">{{ gap.gateway_term }}</p>
         {% endif %}
         <p class="text-xs font-semibold uppercase tracking-wider mb-1.5" style="color: var(--ink3);">Declaration</p>
-        <blockquote class="text-xs leading-relaxed border-l-2 pl-3" style="border-color: #18171A; color: var(--ink2);">
+        <blockquote class="text-xs leading-relaxed border-l-2 pl-3" style="border-color: var(--ink); color: var(--ink2);">
             {{ gap.declaration_text[:280] }}{% if gap.declaration_text|length > 280 %}…{% endif %}
         </blockquote>
         {% if gap.pmcid %}
@@ -381,7 +381,7 @@
 {% endif %}
 
 <div class="eaiou-widget rounded-lg border overflow-hidden mb-3" style="border-color: var(--paper3);" data-widget-id="submit-checklist">
-    <div class="px-4 py-2.5 border-b" style="background: #F7F6F3; border-color: var(--paper3);">
+    <div class="px-4 py-2.5 border-b" style="background: var(--paper); border-color: var(--paper3);">
         <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--ink3);">Before you submit</p>
     </div>
     <div class="p-4 space-y-2.5">
@@ -401,7 +401,7 @@
 </div>
 
 <div class="eaiou-widget rounded-lg border overflow-hidden" style="border-color: var(--paper3);" data-widget-id="policy-links-submit">
-    <div class="px-4 py-2.5 border-b" style="background: #F7F6F3; border-color: var(--paper3);">
+    <div class="px-4 py-2.5 border-b" style="background: var(--paper); border-color: var(--paper3);">
         <p class="text-xs font-semibold uppercase tracking-wider" style="color: var(--ink3);">Policies</p>
     </div>
     <div class="p-4 space-y-2">
@@ -494,7 +494,7 @@
                 el.textContent = '—';
                 el.style.color = 'var(--ink3)';
                 el.style.fontStyle = 'italic';
-                el.style.background = '#F7F6F3';
+                el.style.background = 'var(--paper)';
             }
         });
         const status = document.getElementById('struct-status');
@@ -613,7 +613,7 @@
             findings.forEach(f => {
                 const el = document.createElement('div');
                 el.className = 'rounded p-3 text-xs';
-                el.style.cssText = 'background:#F0EFEB; border-left:2px solid #18171A;';
+                el.style.cssText = 'background:#F0EFEB; border-left:2px solid var(--ink);';
                 el.innerHTML = `<span class="font-mono" style="color:var(--ink3);font-size:10px;">${f.code}</span>
                     <p style="color:var(--ink2);margin-top:2px;line-height:1.5;">${f.text}</p>`;
                 container.appendChild(el);
@@ -647,11 +647,11 @@
         const tB = document.getElementById('tab-build');
         if (mode === 'reflect') {
             reflect.style.display = ''; build.style.display = 'none';
-            tR.style.borderColor = '#18171A'; tR.style.color = '#18171A'; tR.style.background = '#F7F6F3';
+            tR.style.borderColor = 'var(--ink)'; tR.style.color = 'var(--ink)'; tR.style.background = 'var(--paper)';
             tB.style.borderColor = 'transparent'; tB.style.color = 'var(--ink3)'; tB.style.background = '#fff';
         } else {
             reflect.style.display = 'none'; build.style.display = '';
-            tB.style.borderColor = '#18171A'; tB.style.color = '#18171A'; tB.style.background = '#F7F6F3';
+            tB.style.borderColor = 'var(--ink)'; tB.style.color = 'var(--ink)'; tB.style.background = 'var(--paper)';
             tR.style.borderColor = 'transparent'; tR.style.color = 'var(--ink3)'; tR.style.background = '#fff';
         }
     }
@@ -684,7 +684,7 @@
 
             if (!resp.ok) {
                 const err = await resp.json().catch(() => ({}));
-                result.innerHTML = `<div class="rounded p-3 text-xs" style="background:#F0EFEB;border-left:2px solid #18171A;">
+                result.innerHTML = `<div class="rounded p-3 text-xs" style="background:#F0EFEB;border-left:2px solid var(--ink);">
                     <p style="color:var(--ink2);">${err.detail || 'Structure Intelligence unavailable.'}</p></div>`;
                 if (statusEl) statusEl.textContent = 'error';
                 return;
@@ -693,7 +693,7 @@
             const data = await resp.json();
             let html = `<p class="text-xs font-semibold mb-2" style="color:var(--ink3);">Format: ${data.format || 'Academic'}</p>`;
             (data.sections || []).forEach((sec, i) => {
-                html += `<div class="rounded p-3 mb-2" style="background:#F0EFEB; border-left:2px solid #18171A;">
+                html += `<div class="rounded p-3 mb-2" style="background:#F0EFEB; border-left:2px solid var(--ink);">
                     <p class="text-xs font-semibold" style="color:var(--ink);">${i+1}. ${sec.name}</p>
                     <p class="text-xs mt-1" style="color:var(--ink2);line-height:1.5;">${sec.focus}</p>`;
                 if (sec.subsections && sec.subsections.length > 0) {
@@ -710,7 +710,7 @@
             if (statusEl) statusEl.textContent = (data.sections?.length || 0) + ' sections';
 
         } catch (e) {
-            result.innerHTML = `<div class="rounded p-3 text-xs" style="background:#F0EFEB;border-left:2px solid #18171A;">
+            result.innerHTML = `<div class="rounded p-3 text-xs" style="background:#F0EFEB;border-left:2px solid var(--ink);">
                 <p style="color:var(--ink2);">Network error. Check connection.</p></div>`;
             if (statusEl) statusEl.textContent = 'error';
         } finally {
@@ -728,7 +728,7 @@
 
     function setStatus(msg, ok) {
         statusEl.textContent = msg;
-        statusEl.style.background = ok ? '#F0FDF4' : '#F7F6F3';
+        statusEl.style.background = ok ? '#F0FDF4' : 'var(--paper)';
         statusEl.style.color = ok ? '#166534' : 'var(--ink2)';
         statusEl.classList.remove('hidden');
     }
@@ -768,7 +768,7 @@
 
     inputEl.addEventListener('change', function () { if (this.files[0]) uploadFile(this.files[0]); });
 
-    dropzone.addEventListener('dragover',  function (e) { e.preventDefault(); this.style.borderColor = '#18171A'; });
+    dropzone.addEventListener('dragover',  function (e) { e.preventDefault(); this.style.borderColor = 'var(--ink)'; });
     dropzone.addEventListener('dragleave', function ()  { this.style.borderColor = 'var(--paper3)'; });
     dropzone.addEventListener('drop',      function (e) {
         e.preventDefault();

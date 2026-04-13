@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}eaiou{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50:  '#f0f6fb',
+                            100: '#d9eaf7',
+                            200: '#8ab4d4',
+                            500: '#2d6e9e',
+                            600: '#1a4a6b',
+                            700: '#14395a'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Spectral', 'Georgia', 'serif'],
+                        mono:  ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --ink: #0e0d0b;    --ink2: #3a3832;   --ink3: #7a7670;
+            --paper: #f7f4ef;  --paper2: #ede9e1; --paper3: #e0dbd0;
+            --river: #1a4a6b;  --river-l: #2d6e9e; --river-ll: #e8f1f7;
+            --amber: #c47c0a;  --amber-l: #fdf0d0;
+            --sage: #3a6b4a;   --sage-l: #e8f2ec;
+            --coral: #b84832;  --coral-l: #faeae6;
+            --mono: 'JetBrains Mono', monospace;
+            --serif: 'Spectral', Georgia, serif;
+        }
+        body { font-family: var(--serif); background: var(--paper); color: var(--ink); }
+
+        .eaiou-nav {
+            background: var(--ink); color: #fff; height: 52px;
+            padding: 0 32px; display: flex; align-items: center; gap: 32px;
+        }
+        .eaiou-nav-brand {
+            font-family: var(--serif); font-size: 22px; font-weight: 300;
+            letter-spacing: -0.02em; color: #fff; text-decoration: none;
+        }
+        .eaiou-nav-brand span { color: #8ab4d4; }
+        .eaiou-nav-link {
+            font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+            text-transform: uppercase; color: rgba(255,255,255,0.55);
+            text-decoration: none; transition: color 0.15s;
+        }
+        .eaiou-nav-link:hover,
+        .eaiou-nav-link.active { color: #fff; }
+
+        .eaiou-prose h1 { font-size: 1.875rem; font-weight: 400; margin-bottom: 0.75rem; color: var(--ink); }
+        .eaiou-prose h2 { font-size: 1.25rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: var(--ink); }
+        .eaiou-prose p  { color: var(--ink2); line-height: 1.65; margin-bottom: 1rem; }
+        .eaiou-prose a  { color: var(--river); text-decoration: underline; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <nav class="eaiou-nav">
+        <a href="/" class="eaiou-nav-brand">e<span>a</span>iou</a>
+        <div class="flex gap-6 flex-1">
+            <a href="/" class="eaiou-nav-link {% block nav_home %}{% endblock %}">Discover</a>
+            <a href="/author/submit" class="eaiou-nav-link">Submit</a>
+            <a href="/about" class="eaiou-nav-link {% block nav_about %}{% endblock %}">About</a>
+        </div>
+        <div class="flex gap-4">
+            {% if current_user %}
+                <a href="/author/" class="eaiou-nav-link">{{ current_user.display_name or current_user.username }}</a>
+            {% else %}
+                <a href="/auth/login" class="eaiou-nav-link">Log in</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="flex-1 max-w-4xl w-full mx-auto px-6 py-10 eaiou-prose">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="border-t mt-auto" style="border-color: var(--paper3);">
+        <div class="max-w-4xl mx-auto px-6 py-4 text-xs font-mono" style="color: var(--ink3);">
+            <a href="/policy/temporal-blindness" class="mr-4 hover:underline">Temporal Blindness</a>
+            <a href="/policy/ai-disclosure" class="mr-4 hover:underline">AI Disclosure</a>
+            <a href="/policy/open-access" class="mr-4 hover:underline">Open Access</a>
+            <a href="/policy/intelligence-blindness" class="hover:underline">Intelligence Blindness</a>
+        </div>
+    </footer>
+</body>
+</html>

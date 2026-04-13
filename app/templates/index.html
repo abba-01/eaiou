@@ -1,0 +1,34 @@
+{% extends "base_public.html" %}
+{% block title %}eaiou — Observer-preserving peer review{% endblock %}
+{% block nav_home %}active{% endblock %}
+
+{% block content %}
+<h1>eaiou</h1>
+<p class="text-lg" style="color: var(--ink2);">
+    An observer-preserving, full-context peer-review journal.
+</p>
+
+<section class="mt-10">
+    <h2>Recent papers</h2>
+    {% if papers %}
+        <ul class="space-y-6 mt-4">
+            {% for p in papers %}
+            <li class="pb-6 border-b" style="border-color: var(--paper3);">
+                <a href="/papers/{{ p.id }}" class="block">
+                    <h3 class="text-lg font-normal" style="color: var(--ink);">{{ p.title }}</h3>
+                </a>
+                <p class="text-xs font-mono mt-1 uppercase tracking-wider" style="color: var(--ink3);">
+                    {{ p.author_name }}{% if p.orcid %} · ORCID {{ p.orcid }}{% endif %}
+                    {% if p.q_overall is not none %} · q {{ '%.2f'|format(p.q_overall) }}{% endif %}
+                </p>
+                {% if p.abstract %}
+                <p class="text-sm mt-2" style="color: var(--ink2);">{{ p.abstract[:280] }}{% if p.abstract|length > 280 %}…{% endif %}</p>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p style="color: var(--ink3);">No papers published yet.</p>
+    {% endif %}
+</section>
+{% endblock %}
