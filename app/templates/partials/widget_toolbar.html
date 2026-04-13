@@ -1,0 +1,69 @@
+{#
+  Widget toolbar partial — draggable chip sources.
+  Include inside the page layout, just below the header.
+  Requires widgets.js and SortableJS to be loaded.
+
+  Usage:
+    {% include "partials/widget_toolbar.html" %}
+#}
+<div id="eaiou-widget-toolbar" role="toolbar" aria-label="Widget toolbar">
+  <span class="text-xs font-semibold mr-2 flex-shrink-0" style="color: var(--ds-ink-2);">Add widget:</span>
+
+  <div id="eaiou-widget-toolbar-items" class="flex items-center gap-2">
+    {# Each chip is a drag source — dragging to a column clones it #}
+
+    <div class="eaiou-toolbar-chip eaiou-widget" data-widget-id="chip-notifications"
+         style="background: var(--ds-surface); border-color: var(--ds-border); color: var(--ds-ink-1);">
+      <i class="fa-regular fa-bell" style="color: var(--ds-ink-2);"></i>
+      Notifications
+    </div>
+
+    <div class="eaiou-toolbar-chip eaiou-widget" data-widget-id="chip-wheelhouse"
+         style="background: var(--ds-surface); border-color: var(--ds-border); color: var(--ds-ink-1);">
+      <i class="fa-solid fa-compass" style="color: var(--ds-ink-2);"></i>
+      Wheelhouse
+    </div>
+
+    <div class="eaiou-toolbar-chip eaiou-widget" data-widget-id="chip-stats"
+         style="background: var(--ds-surface); border-color: var(--ds-border); color: var(--ds-ink-1);">
+      <i class="fa-solid fa-chart-bar" style="color: var(--ds-ink-2);"></i>
+      Stats
+    </div>
+
+    <div class="eaiou-toolbar-chip eaiou-widget" data-widget-id="chip-recent-papers"
+         style="background: var(--ds-surface); border-color: var(--ds-border); color: var(--ds-ink-1);">
+      <i class="fa-solid fa-file-lines" style="color: var(--ds-ink-2);"></i>
+      Recent Papers
+    </div>
+
+    <div class="eaiou-toolbar-chip eaiou-widget" data-widget-id="chip-integrity-gate"
+         style="background: var(--ds-surface); border-color: var(--ds-border); color: var(--ds-ink-1);">
+      <i class="fa-solid fa-fingerprint" style="color: var(--ds-ink-2);"></i>
+      Integrity Gate
+    </div>
+
+    <div class="eaiou-toolbar-chip eaiou-widget" data-widget-id="chip-manuscript-status"
+         style="background: var(--ds-surface); border-color: var(--ds-border); color: var(--ds-ink-1);">
+      <i class="fa-solid fa-pen-to-square" style="color: var(--ds-ink-2);"></i>
+      Manuscript Status
+    </div>
+
+    <div class="eaiou-toolbar-chip eaiou-widget" data-widget-id="chip-comm-center"
+         style="background: var(--ds-surface); border-color: var(--ds-border); color: var(--ds-ink-1);">
+      <i class="fa-solid fa-comments" style="color: var(--ds-ink-2);"></i>
+      Communications
+    </div>
+  </div>
+
+  <button onclick="eaiouToggleSqueeze('left')"
+          class="eaiou-toolbar-chip flex-shrink-0" title="Toggle left squeeze column"
+          style="background: var(--ds-surface); border-color: var(--ds-border); color: var(--ds-ink-1);">
+    <i class="fa-solid fa-sidebar" style="color: var(--ds-ink-2);"></i> ← Col
+  </button>
+
+  <button onclick="eaiouToggleSqueeze('right')"
+          class="eaiou-toolbar-chip flex-shrink-0" title="Toggle right squeeze column"
+          style="background: var(--ds-surface); border-color: var(--ds-border); color: var(--ds-ink-1);">
+    Col → <i class="fa-solid fa-sidebar" style="color: var(--ds-ink-2);"></i>
+  </button>
+</div>

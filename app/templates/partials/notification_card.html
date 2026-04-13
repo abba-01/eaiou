@@ -1,0 +1,44 @@
+{#
+  Notification card partial.
+  Variables expected in caller scope:
+    n.message    — notification text
+    n.created_at — datetime
+    n.read_at    — None if unread
+    n.paper_id   — for "View →" link
+    n.is_urgent  — boolean (deadline, revision due)
+#}
+<div class="eaiou-widget px-4 py-3 flex items-start gap-3 rounded-lg"
+     style="background: #F0EFEB; border: 1px solid #CAC8C2;"
+     data-widget-id="notif-{{ n.id if n.id is defined else loop.index }}">
+
+  {# Icon cluster: bang + clock for urgent (severity via icon only); dot for normal #}
+  <div class="flex-shrink-0 flex items-center gap-0.5 mt-0.5">
+    {% if n.is_urgent %}
+      <i class="fa-solid fa-circle-exclamation text-sm" style="color: var(--ds-ink-1);"></i>
+      <i class="fa-solid fa-clock text-sm" style="color: var(--ds-ink-2);"></i>
+    {% else %}
+      {% if not n.read_at %}
+        <span class="inline-block w-2 h-2 rounded-full mt-0.5" style="background: var(--ds-ink-2);"></span>
+      {% else %}
+        <span class="inline-block w-2 h-2 rounded-full mt-0.5" style="background: #CAC8C2;"></span>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <div class="flex-1 min-w-0">
+    <p class="text-sm leading-snug {% if not n.read_at %}font-medium{% endif %}" style="color: var(--ds-ink-1);">
+      {{ n.message }}
+    </p>
+    <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">
+      {{ n.created_at.strftime('%b %d, %Y') if n.created_at else '' }}
+    </p>
+  </div>
+
+  {% if n.paper_id is defined and n.paper_id %}
+  <a href="/author/workspace/{{ n.paper_id }}"
+     class="flex-shrink-0 text-xs hover:underline"
+     style="color: var(--ds-ink-2);">
+    View →
+  </a>
+  {% endif %}
+</div>
