@@ -1,0 +1,202 @@
+{% extends 'author/base_author.html' %}
+
+{% block title %}Dashboard — eaiou{% endblock %}
+{% block nav_dashboard %}sidebar-nav-active{% endblock %}
+
+{% block author_content %}
+
+{# ── Intake prompt ───────────────────────────────────────────────────────── #}
+{% if not intake_complete %}
+<div style="
+    background:var(--amber-l);
+    border:0.5px solid #e9c06a;
+    border-radius:4px;
+    padding:12px 16px;
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:12px;">
+    <i class="fa-solid fa-circle-info" style="color:var(--amber);font-size:14px;flex-shrink:0;"></i>
+    <span style="font-family:var(--serif);font-size:13px;color:var(--ink2);">
+        Complete your author profile to unlock gap matching and wheelhouse recommendations.
+    </span>
+    <a href="/author/intake"
+       style="margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;
+              color:var(--amber);text-decoration:none;white-space:nowrap;border:0.5px solid #e9c06a;
+              padding:4px 10px;border-radius:3px;">
+        Start Profile
+    </a>
+</div>
+{% endif %}
+
+{# ── Status summary cards ────────────────────────────────────────────────── #}
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px;">
+
+    <div style="background:#fff;border:0.5px solid var(--paper3);border-radius:4px;padding:16px;">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;">Total</div>
+        <div style="font-family:var(--serif);font-size:28px;font-weight:300;color:var(--ink);">{{ stats.total }}</div>
+    </div>
+
+    <div style="background:#fff;border:0.5px solid var(--paper3);border-radius:4px;padding:16px;border-left:3px solid var(--river-l);">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;">Submitted</div>
+        <div style="font-family:var(--serif);font-size:28px;font-weight:300;color:var(--river);">{{ stats.submitted }}</div>
+    </div>
+
+    <div style="background:#fff;border:0.5px solid var(--paper3);border-radius:4px;padding:16px;border-left:3px solid var(--amber);">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;">Under Review</div>
+        <div style="font-family:var(--serif);font-size:28px;font-weight:300;color:var(--amber);">{{ stats.under_review }}</div>
+    </div>
+
+    <div style="background:#fff;border:0.5px solid var(--paper3);border-radius:4px;padding:16px;border-left:3px solid var(--sage);">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;">Accepted</div>
+        <div style="font-family:var(--serif);font-size:28px;font-weight:300;color:var(--sage);">{{ stats.accepted }}</div>
+    </div>
+
+</div>
+
+{# ── Papers table ────────────────────────────────────────────────────────── #}
+<div style="background:#fff;border:0.5px solid var(--paper3);border-radius:4px;margin-bottom:24px;">
+
+    <div style="padding:14px 18px;border-bottom:0.5px solid var(--paper3);display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);">
+            <i class="fa-solid fa-file-lines" style="margin-right:6px;color:var(--river-l);"></i>My Papers
+        </span>
+        <a href="/author/submit"
+           style="font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;
+                  color:var(--river);text-decoration:none;display:flex;align-items:center;gap:5px;">
+            <i class="fa-solid fa-plus" style="font-size:9px;"></i> New Submission
+        </a>
+    </div>
+
+    {% if papers %}
+    <table style="width:100%;border-collapse:collapse;">
+        <thead>
+            <tr style="border-bottom:0.5px solid var(--paper3);">
+                <th style="font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:10px 18px;font-weight:400;">Title</th>
+                <th style="font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:10px 12px;font-weight:400;">CosmoID</th>
+                <th style="font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:10px 12px;font-weight:400;">Status</th>
+                <th style="font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:10px 12px;font-weight:400;">AI Level</th>
+                <th style="font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);text-align:right;padding:10px 18px;font-weight:400;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for paper in papers %}
+        <tr style="border-bottom:0.5px solid var(--paper3);" onmouseover="this.style.background='var(--paper)'" onmouseout="this.style.background='#fff'">
+            <td style="padding:12px 18px;">
+                <a href="/author/workspace/{{ paper.id }}"
+                   style="font-family:var(--serif);font-size:13px;color:var(--ink);text-decoration:none;display:block;line-height:1.4;">
+                    {{ paper.title or '(untitled)' }}
+                </a>
+                <span style="font-family:var(--mono);font-size:10px;color:var(--ink3);">{{ paper.paper_uuid }}</span>
+            </td>
+            <td style="padding:12px;">
+                <span style="font-family:var(--mono);font-size:10px;color:var(--ink3);">{{ paper.cosmoid or '—' }}</span>
+            </td>
+            <td style="padding:12px;">
+                {% set s = paper.status %}
+                {% if s == 'submitted' %}
+                    <span class="badge badge-submitted">Submitted</span>
+                {% elif s == 'under_review' %}
+                    <span class="badge badge-review">Under Review</span>
+                {% elif s == 'accepted' %}
+                    <span class="badge badge-accepted">Accepted</span>
+                {% elif s == 'rejected' %}
+                    <span class="badge badge-rejected">Rejected</span>
+                {% elif s == 'published' %}
+                    <span class="badge badge-published">Published</span>
+                {% else %}
+                    <span class="badge badge-draft">{{ s or 'Draft' }}</span>
+                {% endif %}
+            </td>
+            <td style="padding:12px;">
+                <span style="font-family:var(--mono);font-size:10px;color:var(--ink3);">
+                    {{ paper.ai_disclosure_level or '—' }}
+                </span>
+            </td>
+            <td style="padding:12px 18px;text-align:right;">
+                <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;">
+                    <a href="/author/workspace/{{ paper.id }}"
+                       title="Open workspace"
+                       style="font-size:12px;color:var(--ink3);text-decoration:none;">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <a href="/papers/{{ paper.paper_uuid }}"
+                       title="View public page"
+                       style="font-size:12px;color:var(--ink3);text-decoration:none;">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div style="padding:48px 24px;text-align:center;">
+        <i class="fa-solid fa-file-circle-plus" style="font-size:28px;color:var(--paper3);margin-bottom:14px;display:block;"></i>
+        <p style="font-family:var(--serif);font-size:15px;color:var(--ink3);margin-bottom:16px;">No papers yet.</p>
+        <a href="/author/submit"
+           style="font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;
+                  color:var(--river);text-decoration:none;border:0.5px solid var(--river-l);
+                  padding:7px 14px;border-radius:3px;">
+            Submit your first paper
+        </a>
+    </div>
+    {% endif %}
+
+</div>
+
+{# ── Recent notifications ─────────────────────────────────────────────────── #}
+{% if notifications %}
+<div style="background:#fff;border:0.5px solid var(--paper3);border-radius:4px;">
+
+    <div style="padding:14px 18px;border-bottom:0.5px solid var(--paper3);display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);">
+            <i class="fa-regular fa-bell" style="margin-right:6px;color:var(--river-l);"></i>Recent Activity
+        </span>
+        <a href="/author/notifications"
+           style="font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;
+                  color:var(--river-l);text-decoration:none;">
+            View all
+        </a>
+    </div>
+
+    <div style="padding:8px 0;">
+    {% for n in notifications %}
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 18px;{% if not n.read_at %}background:var(--river-ll);{% endif %}border-bottom:0.5px solid var(--paper3);">
+        <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+            {% if n.type == 'accepted' %}background:var(--sage-l);
+            {% elif n.type == 'rejected' %}background:var(--coral-l);
+            {% elif n.type == 'comment' %}background:var(--river-ll);
+            {% else %}background:var(--paper2);{% endif %}">
+            <i class="fa-solid
+                {% if n.type == 'accepted' %}fa-check
+                {% elif n.type == 'rejected' %}fa-xmark
+                {% elif n.type == 'comment' %}fa-comment
+                {% else %}fa-circle-info{% endif %}"
+               style="font-size:10px;
+                {% if n.type == 'accepted' %}color:var(--sage);
+                {% elif n.type == 'rejected' %}color:var(--coral);
+                {% elif n.type == 'comment' %}color:var(--river-l);
+                {% else %}color:var(--ink3);{% endif %}">
+            </i>
+        </div>
+        <div style="min-width:0;">
+            <p style="font-family:var(--serif);font-size:13px;color:var(--ink2);line-height:1.5;margin:0 0 2px;">
+                {{ n.message }}
+            </p>
+            <p style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin:0;">
+                {{ n.created_at | string | truncate(16, True, '') }}
+            </p>
+        </div>
+        {% if not n.read_at %}
+        <div style="flex-shrink:0;width:6px;height:6px;border-radius:50%;background:var(--river-l);margin-top:5px;"></div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    </div>
+
+</div>
+{% endif %}
+
+{% endblock %}
