@@ -145,7 +145,7 @@
 
 {# ── Main content ────────────────────────────────────────────────────────── #}
 {% block author_content %}
-<div style="max-width: 900px; margin: 0 auto;">
+<div class="max-w-screen-2xl mx-auto">
 
     {# Intake prompt #}
     {% if author_orcid and not intake_complete %}
@@ -168,7 +168,7 @@
     {% endif %}
 
     {# Stats row — 4-col, neutral tokens only #}
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px;">
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 mb-5">
         <div style="background: var(--ds-surface); border: 0.5px solid var(--ds-border); border-left: 3px solid var(--ds-ink-1); border-radius: 3px; padding: 14px;">
             <p style="font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ds-ink-3); margin-bottom: 4px;">Total Papers</p>
             <p style="font-family: 'DM Sans', sans-serif; font-size: 24px; font-weight: 700; color: var(--ds-ink-1);">{{ stats.total }}</p>
