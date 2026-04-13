@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="flex h-screen overflow-hidden"
+     id="eaiou-widget-app"
+     data-left-col="eaiou-editor-left-col"
+     data-right-col="eaiou-editor-right-col"
+     data-toolbar-col="eaiou-widget-toolbar-items"
+     style="background: var(--ds-bg);">
+
+    <!-- ── Left Sidebar ─────────────────────────────────────────────── -->
+    <aside class="eaiou-col-left w-56 flex flex-col flex-shrink-0 hidden md:flex"
+           style="background: var(--ds-surface); border-right: 1px solid var(--ds-border);">
+
+        <!-- Brand -->
+        <div class="px-4 py-3.5 flex items-center gap-2 flex-shrink-0"
+             style="border-bottom: 1px solid var(--ds-border);">
+            <a href="/" class="eaiou-brand text-xl" style="color: var(--ds-ink-1);">eaiou</a>
+            <span class="text-xs px-1.5 py-0.5 rounded font-semibold text-white"
+                  style="background: #18171A;">Ed</span>
+        </div>
+
+        <!-- Nav -->
+        <nav class="px-3 py-4 flex-shrink-0" style="border-bottom: 1px solid var(--ds-border);">
+            <p class="text-xs font-semibold uppercase tracking-wider px-2 mb-2"
+               style="color: var(--ds-ink-3);">Editorial</p>
+            <ul class="space-y-0.5">
+                <li>
+                    <a href="/editor/"
+                       class="flex items-center gap-2.5 px-2 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-300 {% block nav_dashboard %}text-primary-500 hover:bg-primary-50{% endblock %}">
+                        <i class="fa-solid fa-table-columns w-4" style="color: var(--ds-ink-3);"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="/editor/queue"
+                       class="flex items-center gap-2.5 px-2 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-300 {% block nav_queue %}text-primary-500 hover:bg-primary-50{% endblock %}">
+                        <i class="fa-solid fa-inbox w-4" style="color: var(--ds-ink-3);"></i>
+                        Queue
+                        {% if queue_count %}
+                        <span class="ml-auto text-xs px-1.5 py-0.5 rounded-full font-semibold text-white"
+                              style="background: #18171A;">{{ queue_count }}</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                       class="flex items-center gap-2.5 px-2 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-300 {% block nav_paper_detail %}text-primary-500 hover:bg-primary-50{% endblock %}">
+                        <i class="fa-solid fa-file-magnifying-glass w-4" style="color: var(--ds-ink-3);"></i>
+                        Paper Detail
+                    </a>
+                </li>
+                <li>
+                    <a href="/editor/papers"
+                       class="flex items-center gap-2.5 px-2 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-300 {% block nav_papers %}text-primary-500 hover:bg-primary-50{% endblock %}">
+                        <i class="fa-solid fa-file-lines w-4" style="color: var(--ds-ink-3);"></i>
+                        All Papers
+                    </a>
+                </li>
+            </ul>
+
+            <p class="text-xs font-semibold uppercase tracking-wider px-2 mt-4 mb-1"
+               style="color: var(--ds-ink-3);">Filter by Status</p>
+            <ul class="space-y-0.5">
+                <li><a href="/editor/papers?status=submitted"          class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-300 {% block nav_submitted %}text-primary-500 hover:bg-primary-50{% endblock %}">Submitted</a></li>
+                <li><a href="/editor/papers?status=under_review"       class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-300 {% block nav_review %}text-primary-500 hover:bg-primary-50{% endblock %}">Under Review</a></li>
+                <li><a href="/editor/papers?status=revision_requested" class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-300" style="color: var(--ds-ink-2);">Revision Req.</a></li>
+                <li><a href="/editor/papers?status=accepted"           class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-300" style="color: var(--ds-ink-2);">Accepted</a></li>
+                <li><a href="/editor/papers?status=rejected"           class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-300" style="color: var(--ds-ink-2);">Rejected</a></li>
+                <li><a href="/editor/papers?status=published"          class="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-300" style="color: var(--ds-ink-2);">Published</a></li>
+            </ul>
+        </nav>
+
+        <!-- Left editor widget zone -->
+        <div class="flex-1 overflow-y-auto px-3 py-3" id="eaiou-editor-left-col">
+            {% block editor_left_widgets %}
+            <!-- Left column editor widgets -->
+            {% endblock %}
+        </div>
+
+        <!-- User footer -->
+        <div class="px-4 py-3 flex-shrink-0" style="border-top: 1px solid var(--ds-border);">
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white"
+                     style="background: #18171A;">
+                    {{ current_user.initials if current_user else '?' }}
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-xs font-medium truncate" style="color: var(--ds-ink-1);">
+                        {{ current_user.name if current_user else 'Unknown' }}
+                    </p>
+                    <p class="text-xs" style="color: var(--ds-ink-3);">Editor</p>
+                </div>
+                <a href="/auth/logout"
+                   class="text-xs focus:outline-none focus:ring-2 focus:ring-primary-300 rounded"
+                   style="color: var(--ds-ink-3);">Sign out</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ── Center: header + toolbar + content ───────────────────────── -->
+    <div class="flex-1 flex flex-col overflow-hidden min-w-0">
+
+        <!-- Top header -->
+        <header class="flex-shrink-0" style="background: var(--ds-surface); border-bottom: 1px solid var(--ds-border);">
+            <div class="flex items-center justify-between px-6 py-3">
+                <div class="flex items-center gap-3">
+                    <button class="md:hidden focus:outline-none focus:ring-2 focus:ring-primary-300 rounded"
+                            style="color: var(--ds-ink-2);">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h1 class="text-base font-semibold" style="color: var(--ds-ink-1);">{% block page_title %}Editorial Dashboard{% endblock %}</h1>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="eaiou-widget-btn"
+                            onclick="eaiouToggleToolbar()"
+                            aria-expanded="false"
+                            title="Widget toolbar"
+                            class="flex items-center gap-1.5 text-xs font-medium px-2.5 py-1.5 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-300 transition-colors"
+                            style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-2);">
+                        <i class="fa-solid fa-grip" style="color: var(--ds-ink-3);"></i>
+                        Widgets
+                    </button>
+                    <a href="/"
+                       class="text-xs font-medium px-2.5 py-1.5 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-300 transition-colors"
+                       style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-2);">
+                        <i class="fa-solid fa-arrow-up-right-from-square mr-1" style="color: var(--ds-ink-3);"></i>Public
+                    </a>
+                    {% if current_user %}
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-semibold"
+                             style="background: #18171A;">
+                            {{ current_user.initials }}
+                        </div>
+                        <span class="text-sm font-medium hidden md:inline" style="color: var(--ds-ink-1);">{{ current_user.name }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+
+        <!-- Widget toolbar -->
+        {% include "partials/widget_toolbar.html" %}
+
+        <!-- Main content -->
+        <main class="flex-1 overflow-y-auto" style="background: var(--ds-bg);">
+            {% block editor_content %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- ── Right Sidebar (editor widget zone) ───────────────────────── -->
+    <aside class="w-64 hidden xl:flex flex-col flex-shrink-0 eaiou-col-right"
+           style="background: var(--ds-surface); border-left: 1px solid var(--ds-border);">
+
+        <div class="px-4 py-3 flex items-center justify-between flex-shrink-0"
+             style="border-bottom: 1px solid var(--ds-border); background: var(--ds-bg);">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-chart-bar text-sm" style="color: var(--ds-ink-3);"></i>
+                <h3 class="text-xs font-semibold uppercase tracking-wider" style="color: var(--ds-ink-3);">Quick Stats</h3>
+            </div>
+            <button onclick="eaiouToggleToolbar()"
+                    title="Add widgets"
+                    class="focus:outline-none focus:ring-2 focus:ring-primary-300 rounded"
+                    style="color: var(--ds-ink-3);">
+                <i class="fa-solid fa-plus text-xs"></i>
+            </button>
+        </div>
+
+        <!-- Right editor widget zone -->
+        <div class="flex-1 overflow-y-auto px-3 py-3" id="eaiou-editor-right-col">
+            {% block editor_right_widgets %}
+            <!-- Default: editorial stats summary widget -->
+            <div class="eaiou-widget rounded-lg p-4 mb-3"
+                 data-widget-id="editor-queue-summary"
+                 style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+                <div class="flex items-center justify-between mb-3">
+                    <h4 class="text-xs font-semibold" style="color: var(--ds-ink-2);">Queue</h4>
+                    <a href="/editor/queue"
+                       class="text-xs hover:underline focus:outline-none focus:ring-2 focus:ring-primary-300 rounded"
+                       style="color: var(--ds-ink-1);">View all →</a>
+                </div>
+                {% if queue_count is defined %}
+                <p class="text-2xl font-bold" style="color: var(--ds-ink-1);">{{ queue_count }}</p>
+                <p class="text-xs" style="color: var(--ds-ink-2);">Papers awaiting review</p>
+                {% else %}
+                <p class="text-xs" style="color: var(--ds-ink-3);">Load dashboard for stats</p>
+                {% endif %}
+            </div>
+
+            <div class="eaiou-widget rounded-lg p-4 mb-3"
+                 data-widget-id="editor-links"
+                 style="background: var(--ds-surface); border: 1px solid var(--ds-border);">
+                <h4 class="text-xs font-semibold mb-2.5" style="color: var(--ds-ink-2);">Quick Links</h4>
+                <ul class="space-y-1.5">
+                    <li><a href="/editor/"     class="flex items-center gap-2 text-xs focus:outline-none focus:ring-2 focus:ring-primary-300 rounded hover:underline" style="color: var(--ds-ink-2);"><i class="fa-solid fa-table-columns w-3.5" style="color: var(--ds-ink-3);"></i>Dashboard</a></li>
+                    <li><a href="/editor/queue" class="flex items-center gap-2 text-xs focus:outline-none focus:ring-2 focus:ring-primary-300 rounded hover:underline" style="color: var(--ds-ink-2);"><i class="fa-solid fa-inbox w-3.5" style="color: var(--ds-ink-3);"></i>Submission Queue</a></li>
+                    <li><a href="/papers/"      class="flex items-center gap-2 text-xs focus:outline-none focus:ring-2 focus:ring-primary-300 rounded hover:underline" style="color: var(--ds-ink-2);"><i class="fa-solid fa-globe w-3.5" style="color: var(--ds-ink-3);"></i>Public Journal</a></li>
+                </ul>
+            </div>
+            {% endblock %}
+        </div>
+    </aside>
+
+</div><!-- /eaiou-widget-app -->
+
+<script src="/static/js/widgets.js"></script>
+{% block scripts %}{% endblock %}
+
+{% endblock %}
