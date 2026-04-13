@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %}Sign In — eaiou{% endblock %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center px-5 py-16" style="min-height: 70vh;">
+
+    <!-- Card wrapper -->
+    <div style="width:100%;max-width:400px;">
+
+        <!-- Brand -->
+        <div class="text-center mb-9">
+            <a href="/" style="text-decoration:none;">
+                <span class="eaiou-brand text-5xl" style="color: var(--ds-ink-1);">eaiou</span>
+            </a>
+            <p class="text-xs mt-3 tracking-wider uppercase" style="color: var(--ds-ink-3);">
+                Invite-only access &middot; Phase 1
+            </p>
+        </div>
+
+        <!-- Error message — neutral pill, no red -->
+        {% set _oauth_err = request.query_params.get('error') %}
+        {% set _display_error = error or _oauth_err %}
+        {% if _display_error %}
+        <div class="mb-5 px-4 py-3 rounded"
+             style="background: #F0EFEB; border: 1px solid #CAC8C2; color: var(--ds-ink-2); font-size: 0.8125rem; line-height: 1.5;">
+            {%- if _display_error == 'inactive' -%}
+                Your account is inactive. Contact
+                <a href="mailto:editor@eaiou.org" style="color: var(--ds-ink-1); text-decoration: underline;">editor@eaiou.org</a>.
+            {%- elif _display_error == 'access_denied' -%}
+                Sign-in was cancelled.
+            {%- else -%}
+                {{ _display_error }}
+            {%- endif -%}
+        </div>
+        {% endif %}
+
+        <!-- Login card -->
+        <div class="rounded" style="background: var(--ds-surface); border: 1px solid var(--ds-border); padding: 28px;">
+
+            <h1 class="text-base font-semibold mb-6" style="color: var(--ds-ink-1);">Sign in to eaiou</h1>
+
+            <form method="post" action="/auth/login" class="flex flex-col gap-5">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+                <!-- Username -->
+                <div>
+                    <label for="username"
+                           class="block text-xs font-medium mb-1.5"
+                           style="color: var(--ds-ink-2);">Username</label>
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           required
+                           autocomplete="username"
+                           placeholder="your username"
+                           class="w-full rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-300"
+                           style="background: var(--ds-surface); border: 1px solid var(--ds-border); color: var(--ds-ink-1);">
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label for="password"
+                           class="block text-xs font-medium mb-1.5"
+                           style="color: var(--ds-ink-2);">Password</label>
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           required
+                           autocomplete="current-password"
+                           placeholder="••••••••"
+                           class="w-full rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-300"
+                           style="background: var(--ds-surface); border: 1px solid var(--ds-border); color: var(--ds-ink-1);">
+                </div>
+
+                <!-- Submit -->
+                <button type="submit"
+                        class="w-full rounded px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+                        style="background: #18171A;">
+                    Sign In
+                </button>
+            </form>
+
+            <!-- OAuth divider -->
+            <div class="flex items-center gap-3 my-5">
+                <div class="flex-1" style="height: 1px; background: var(--ds-border);"></div>
+                <span class="text-xs" style="color: var(--ds-ink-3);">or continue with</span>
+                <div class="flex-1" style="height: 1px; background: var(--ds-border);"></div>
+            </div>
+
+            <!-- OAuth buttons -->
+            <div class="flex flex-col gap-2.5">
+
+                <!-- Google — white card, monochrome border; SVG fills are brand marks (exempt) -->
+                <a href="/auth/login/google"
+                   class="flex items-center justify-center gap-2.5 rounded px-4 py-2.5 text-xs font-medium transition-colors hover:opacity-90"
+                   style="background: var(--ds-surface); border: 1px solid var(--ds-border); color: var(--ds-ink-2); text-decoration: none;">
+                    <!-- Google brand SVG — fill colors are brand marks, not design system colors -->
+                    <svg width="16" height="16" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+                        <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
+                        <path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+                        <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+                    </svg>
+                    Sign in with Google
+                </a>
+
+                <!-- ORCID — monochrome style, no green background -->
+                <a href="/auth/login/orcid"
+                   class="flex items-center justify-center gap-2.5 rounded px-4 py-2.5 text-xs font-medium transition-opacity hover:opacity-80"
+                   style="background: var(--ds-surface); border: 1px solid var(--ds-border); color: var(--ds-ink-2); text-decoration: none;">
+                    <!-- ORCID brand SVG — fill colors are brand marks, not design system colors -->
+                    <svg width="16" height="16" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M128 0C57.3 0 0 57.3 0 128s57.3 128 128 128 128-57.3 128-128S198.7 0 128 0z" fill="#A6CE39"/>
+                        <path d="M86.3 186.2H70.9V79.1h15.4v107.1zM108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7C191.7 111.2 178 93 148 93h-23.7v79.4zM88.7 56.8c0 5.5-4.5 10.1-10.1 10.1s-10.1-4.6-10.1-10.1c0-5.6 4.5-10.1 10.1-10.1s10.1 4.6 10.1 10.1z" fill="#fff"/>
+                    </svg>
+                    Sign in with ORCID
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Footer note -->
+        <p class="text-center mt-5 text-xs" style="color: var(--ds-ink-3);">
+            No account? Contact
+            <a href="mailto:editor@eaiou.org" style="color: var(--ds-ink-2);">editor@eaiou.org</a>
+        </p>
+
+    </div>
+</div>
+{% endblock %}
