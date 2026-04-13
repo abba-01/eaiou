@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% block title %}eaiou — observer-preserving journal{% endblock %}
+
+{% block content %}
+
+<!-- ── Hero ──────────────────────────────────────────────────────────── -->
+<div style="background:#18171A;color:#fff;padding:72px 32px 64px;position:relative;overflow:hidden;">
+
+    <!-- Subtle grid texture -->
+    <div style="
+        position:absolute;inset:0;
+        background:
+            repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,.015) 60px,rgba(255,255,255,.015) 61px),
+            repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,.015) 60px,rgba(255,255,255,.015) 61px);
+        pointer-events:none;">
+    </div>
+
+    <div style="position:relative;max-width:680px;">
+        <p class="text-xs font-mono tracking-widest uppercase" style="color:#9A9895;margin-bottom:20px;">
+            Observer-Preserving Full-Context Review · Phase 1
+        </p>
+        <h1 class="eaiou-title" style="
+            font-size:clamp(38px,6vw,58px);
+            font-weight:300;
+            line-height:1.05;
+            letter-spacing:-0.03em;
+            margin-bottom:24px;
+            color:#fff;">
+            eaiou — where papers earn their<br>
+            <em style="font-style:italic;color:#9A9895;">place by quality</em>, not time
+        </h1>
+        <p class="eaiou-title" style="font-size:17px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.6);max-width:540px;margin-bottom:36px;">
+            Submission dates are <strong style="color:rgba(255,255,255,.9);font-weight:400;">sealed</strong>.
+            AI involvement is <strong style="color:rgba(255,255,255,.9);font-weight:400;">disclosed and credited</strong>.
+            Papers rise by merit alone.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="/author/submit"
+               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-white"
+               style="background:#5A5856;border:1px solid #9A9895;">
+                <i class="fa-solid fa-upload" style="font-size:11px;"></i> Submit a Paper
+            </a>
+            <a href="/papers/"
+               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium"
+               style="background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff;">
+                <i class="fa-solid fa-list" style="font-size:11px;"></i> Browse Papers
+            </a>
+        </div>
+
+        <!-- Doctrine -->
+        <div class="border-l-4 pl-5 py-3 mt-10" style="border-left-color:#9A9895;background:rgba(255,255,255,.04);max-width:500px;">
+            <p class="eaiou-title italic" style="color:rgba(255,255,255,.75);">Bias can see time. Justice cannot. Temporal blindness is not a limitation — it is the foundation of fair review.</p>
+            <cite class="text-xs not-italic" style="color:#9A9895;">— eaiou Founding Doctrine, 2026</cite>
+        </div>
+    </div>
+</div>
+
+<!-- ── Doctrine strip ─────────────────────────────────────────────── -->
+<div style="background:#F0EFEB;border-bottom:1px solid #E2E0DB;padding:14px 32px;">
+    <div style="max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;gap:24px;align-items:center;">
+        <div style="display:flex;align-items:center;gap:8px;">
+            <i class="fa-solid fa-lock" style="font-size:12px;color:#9A9895;"></i>
+            <a href="/policy/temporal-blindness" class="text-xs font-mono tracking-wide uppercase" style="color:#5A5856;text-decoration:none;">Temporal Blindness</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+            <i class="fa-solid fa-eye-slash" style="font-size:12px;color:#9A9895;"></i>
+            <a href="/policy/intelligence-blindness" class="text-xs font-mono tracking-wide uppercase" style="color:#5A5856;text-decoration:none;">Intelligence Blindness</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+            <i class="fa-solid fa-fingerprint" style="font-size:12px;color:#9A9895;"></i>
+            <a href="/papers/" class="text-xs font-mono tracking-wide uppercase" style="color:#5A5856;text-decoration:none;">Full-Context Review</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+            <i class="fa-solid fa-unlock" style="font-size:12px;color:#9A9895;"></i>
+            <a href="/policy/open-access" class="text-xs font-mono tracking-wide uppercase" style="color:#5A5856;text-decoration:none;">Open Access</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+            <i class="fa-solid fa-robot" style="font-size:12px;color:#9A9895;"></i>
+            <a href="/policy/ai-disclosure" class="text-xs font-mono tracking-wide uppercase" style="color:#5A5856;text-decoration:none;">AI Disclosure</a>
+        </div>
+    </div>
+</div>
+
+<!-- ── Recent papers ──────────────────────────────────────────────── -->
+<div style="max-width:900px;margin:0 auto;padding:48px 32px;">
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
+        <h2 class="text-xs font-semibold uppercase tracking-widest" style="color:#9A9895;">Recent Papers</h2>
+        <a href="/papers/" class="text-xs font-mono tracking-wide uppercase" style="color:#5A5856;text-decoration:none;">
+            View all <i class="fa-solid fa-arrow-right" style="font-size:9px;"></i>
+        </a>
+    </div>
+
+    {% if papers %}
+    <div style="display:flex;flex-direction:column;gap:12px;">
+        {% for paper in papers %}
+        <div style="
+            background:#FFFFFF;
+            border:1px solid #E2E0DB;
+            border-radius:4px;
+            padding:24px;
+            transition:box-shadow 0.15s;
+            " onmouseover="this.style.boxShadow='0 4px 16px rgba(14,13,11,.07)'"
+               onmouseout="this.style.boxShadow='none'">
+
+            <!-- Badges row -->
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;align-items:center;">
+                {% if paper.status == 'under_review' %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border"
+                          style="background:#F0EFEB;border-color:#CAC8C2;color:#5A5856;">Under Review</span>
+                {% elif paper.status == 'accepted' %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                          style="background:#18171A;color:#fff;">Accepted</span>
+                {% elif paper.status == 'published' %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                          style="background:#18171A;color:#fff;">Published</span>
+                {% elif paper.status == 'rejected' %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border"
+                          style="background:#F0EFEB;border-color:#CAC8C2;color:#5A5856;">Rejected</span>
+                {% elif paper.status == 'draft' %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border"
+                          style="background:#F0EFEB;border-color:#CAC8C2;color:#9A9895;">Draft</span>
+                {% else %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border"
+                          style="background:#F0EFEB;border-color:#CAC8C2;color:#5A5856;">{{ paper.status }}</span>
+                {% endif %}
+
+                {% if paper.ai_disclosure_level and paper.ai_disclosure_level != 'none' %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border"
+                          style="background:#EDECE9;border-color:#CAC8C2;color:#5A5856;">
+                        <i class="fa-solid fa-robot" style="font-size:8px;margin-right:3px;"></i>AI: {{ paper.ai_disclosure_level }}
+                    </span>
+                {% endif %}
+
+                {% if paper.q_overall %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border"
+                          style="background:#F0EFEB;border-color:#CAC8C2;color:#18171A;">
+                        q {{ "%.1f"|format(paper.q_overall) }}
+                    </span>
+                {% endif %}
+            </div>
+
+            <!-- Title -->
+            <h3 class="eaiou-title" style="font-size:19px;font-weight:400;line-height:1.3;margin-bottom:8px;">
+                <a href="/papers/{{ paper.id }}" style="color:#18171A;text-decoration:none;">{{ paper.title }}</a>
+            </h3>
+
+            <!-- Abstract excerpt -->
+            <p class="eaiou-title" style="font-size:14px;color:#5A5856;line-height:1.65;margin-bottom:14px;
+                       display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
+                {{ paper.abstract }}
+            </p>
+
+            <!-- Footer row -->
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <i class="fa-regular fa-user" style="font-size:11px;color:#9A9895;"></i>
+                    <span class="text-xs font-mono" style="color:#9A9895;">{{ paper.author_name }}</span>
+                    {% if paper.orcid %}
+                        <span class="text-xs font-mono" style="color:#9A9895;opacity:0.7;">{{ paper.orcid }}</span>
+                    {% endif %}
+                </div>
+                <a href="/papers/{{ paper.id }}"
+                   class="text-xs font-mono tracking-widest uppercase"
+                   style="color:#5A5856;text-decoration:none;">
+                    Read <i class="fa-solid fa-arrow-right" style="font-size:8px;"></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+
+    <!-- Empty state -->
+    <div style="
+        background:#FFFFFF;
+        border:1px solid #E2E0DB;
+        border-radius:4px;
+        padding:64px 32px;
+        text-align:center;">
+        <div class="text-xs font-mono tracking-widest uppercase" style="color:#9A9895;margin-bottom:16px;">No papers yet</div>
+        <p class="eaiou-title" style="font-size:16px;font-weight:300;color:#5A5856;margin-bottom:24px;">
+            Be the first to submit to an observer-preserving review.
+        </p>
+        <a href="/author/submit"
+           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-white"
+           style="background:#18171A;">
+            <i class="fa-solid fa-upload" style="font-size:11px;"></i> Submit a Paper
+        </a>
+    </div>
+
+    {% endif %}
+</div>
+
+<!-- ── OMMP callout ───────────────────────────────────────────────── -->
+<div style="background:#18171A;border-top:1px solid #0A090B;">
+    <div style="max-width:900px;margin:0 auto;padding:40px 32px;display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+        <div>
+            <div class="text-xs font-mono tracking-widest uppercase" style="color:#9A9895;margin-bottom:12px;">OMMP Framework</div>
+            <h2 class="eaiou-title" style="font-size:26px;font-weight:300;color:#fff;line-height:1.2;margin-bottom:12px;letter-spacing:-0.02em;">
+                Structured transparency, layer by layer
+            </h2>
+            <p class="eaiou-title" style="font-size:14px;color:rgba(255,255,255,.5);line-height:1.7;">
+                The Observer-Method-Measure-Product framework ensures every submission carries its full provenance — from methodology to AI disclosure.
+            </p>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:center;gap:10px;">
+            <a href="/about"
+               class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium w-fit"
+               style="border:1px solid rgba(255,255,255,.25);color:#fff;">Learn About OMMP</a>
+            <a href="/policy/ai-disclosure"
+               class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium w-fit"
+               style="border:1px solid rgba(255,255,255,.25);color:#fff;">AI Disclosure Policy</a>
+            <a href="/report"
+               class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium w-fit"
+               style="border:1px solid rgba(255,255,255,.25);color:#fff;">Coverage Tool</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

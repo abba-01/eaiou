@@ -1,0 +1,638 @@
+{% extends "base.html" %}
+{% block title %}Paper Analysis Report — eaiou{% endblock %}
+
+{% block head %}
+<style>
+/* ── Report document styles ── */
+.report-section {
+    border-top: 1px solid var(--ds-border);
+    padding-top: 2rem;
+    margin-top: 2rem;
+}
+.report-section:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+.tier-badge {
+    display: inline-flex; align-items: center;
+    padding: 0.1rem 0.55rem; border-radius: 9999px;
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; white-space: nowrap;
+}
+.tier-covered    { background: #18171A; color: #fff; }
+.tier-novel      { background: #5A5856; color: #fff; }
+.tier-needs-work { background: #E2E0DB; color: #5A5856; border: 1px solid #CAC8C2; }
+
+.ai-badge-low      { background: #F0EFEB; color: #5A5856; border: 1px solid #CAC8C2; }
+.ai-badge-moderate { background: #EDECE9; color: #18171A; border: 1px solid #CAC8C2; }
+.ai-badge-high     { background: #18171A; color: #fff; }
+
+.rec-row { border-left: 3px solid; padding: 0.75rem 1rem; border-radius: 0 0.375rem 0.375rem 0; margin-bottom: 0.5rem; }
+.rec-high   { border-left-color: #18171A; background: #F7F6F3; }
+.rec-medium { border-left-color: #9A9895; background: #F7F6F3; }
+.rec-low    { border-left-color: #CAC8C2; background: #FAFAF9; }
+
+.disc-tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem; border-radius: 0.25rem;
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.03em;
+    background: #EDECE9; color: var(--ds-ink-2); margin: 0.125rem;
+}
+
+.coverage-bar {
+    display: flex; height: 6px; border-radius: 9999px; overflow: hidden;
+}
+
+/* ── Print ── */
+@media print {
+    header, footer, .no-print { display: none !important; }
+    main { padding-top: 0 !important; }
+    .report-wrapper { max-width: 100% !important; padding: 1.5cm 2cm !important; }
+    .report-section { page-break-inside: avoid; }
+    table { page-break-inside: auto; }
+    tr { page-break-inside: avoid; page-break-after: auto; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-6 pt-10 pb-24 report-wrapper">
+
+{% if not report %}
+{# ══════════════════════════════════════════════════════════════
+   FORM VIEW — paste text, get a report
+═══════════════════════════════════════════════════════════════ #}
+<div class="max-w-2xl mx-auto">
+
+    <!-- Header -->
+    <div class="mb-8 text-center">
+        <h1 class="text-2xl font-bold tracking-tight mb-2" style="color: var(--ds-ink-1);">
+            Paper Analysis Report
+        </h1>
+        <p class="text-sm" style="color: var(--ds-ink-3);">
+            Paste your abstract and key sections. The system deconstructs your claims,
+            scores each against the gap index, and returns a structured Belarc-style report.
+            <br>No account required. No record created.
+        </p>
+    </div>
+
+    <!-- Error banner -->
+    {% if error %}
+    <div class="mb-5 rounded-lg px-4 py-3 text-sm border-l-4"
+         style="background:#F0EFEB; border-left-color:#18171A; color:#18171A;">
+        <i class="fa-solid fa-triangle-exclamation mr-2" style="color:#5A5856;"></i>{{ error }}
+    </div>
+    {% endif %}
+
+    <!-- Form -->
+    <form method="POST" action="/report" class="bg-white rounded-xl border overflow-hidden" style="border-color: var(--ds-border);">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <input type="hidden" name="file_id" id="hidden-file-id" value="">
+
+        <div class="px-6 py-5 border-b" style="border-color: var(--ds-border);">
+            <label class="block text-xs font-semibold uppercase tracking-wide mb-1.5" style="color: var(--ds-ink-3);">
+                Paper Title <span style="color: var(--ds-border);">(optional)</span>
+            </label>
+            <input type="text" name="paper_title"
+                   value="{{ prefill_title }}"
+                   placeholder="Untitled Paper"
+                   class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1"
+                   style="border-color: var(--ds-border); color: var(--ds-ink-1);">
+        </div>
+
+        <div class="px-6 pt-5">
+            <!-- Tab bar -->
+            <div class="flex border-b mb-4" style="border-color: var(--ds-border);" id="input-tabs">
+                <button type="button" onclick="switchTab('paste')"
+                    id="tab-paste"
+                    class="px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors"
+                    style="border-color: #18171A; color: var(--ds-ink-1);">Paste Text</button>
+                <button type="button" onclick="switchTab('upload')"
+                    id="tab-upload"
+                    class="px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors"
+                    style="border-color: transparent; color: var(--ds-ink-3);">Upload File</button>
+                {% if current_user and drawer_files %}
+                <button type="button" onclick="switchTab('drawer')"
+                    id="tab-drawer"
+                    class="px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors"
+                    style="border-color: transparent; color: var(--ds-ink-3);">My Files ({{ drawer_files|length }})</button>
+                {% endif %}
+            </div>
+
+            <!-- Paste panel -->
+            <div id="panel-paste" class="textarea-wrap">
+                <label class="block text-xs font-semibold uppercase tracking-wide mb-1.5" style="color: var(--ds-ink-3);">
+                    Paper Text
+                </label>
+                <textarea name="paper_text" id="paper-textarea"
+                    rows="16"
+                    placeholder="Paste your abstract, introduction, methods, results, and discussion sections here. The more text you provide, the more claims can be extracted and scored.
+
+The appreciated scale amplifies older unresolved gaps: a 5-year-old gap matched at 0.60 scores as 0.80 appreciated confidence."
+                    class="w-full border rounded-lg px-3 py-2.5 text-sm resize-y focus:outline-none focus:ring-1"
+                    style="border-color: var(--ds-border); font-family: inherit; color: var(--ds-ink-1); min-height: 280px;"
+>{{ prefill_text }}</textarea>
+            </div>
+
+            <!-- Upload panel -->
+            <div id="panel-upload" class="hidden pb-2">
+                {% if current_user %}
+                <div id="drop-zone"
+                    class="border-2 border-dashed rounded-lg p-10 text-center cursor-pointer transition-colors"
+                    style="border-color: var(--ds-border);"
+                    ondragover="event.preventDefault(); this.style.borderColor='#18171A';"
+                    ondragleave="this.style.borderColor='var(--ds-border)';"
+                    ondrop="handleDrop(event)">
+                    <i class="fa-solid fa-file-arrow-up text-3xl mb-3 block" style="color: var(--ds-ink-3);"></i>
+                    <p class="text-sm mb-2" style="color: var(--ds-ink-2);">Drop a PDF, DOCX, or TXT here</p>
+                    <p class="text-xs mb-3" style="color: var(--ds-ink-3);">or</p>
+                    <label class="cursor-pointer inline-block px-4 py-2 text-sm font-medium rounded-md text-white" style="background: #18171A;">
+                        Choose file
+                        <input type="file" class="hidden" id="file-input" accept=".pdf,.docx,.txt"
+                               onchange="handleFileSelect(this.files[0])">
+                    </label>
+                    <p class="text-xs mt-3" style="color: var(--ds-ink-3);">PDF, DOCX, or TXT · Max 10 MB</p>
+                </div>
+                <div id="upload-status" class="mt-3 text-sm" style="color: var(--ds-ink-2); display: none;"></div>
+                {% else %}
+                <div class="border rounded-lg p-8 text-center" style="border-color: var(--ds-border);">
+                    <p class="text-sm" style="color: var(--ds-ink-3);">
+                        <a href="/auth/login?next=/report" class="hover:underline" style="color: var(--ds-ink-1);">Log in</a> to upload files.
+                        File text is extracted on the server and stored in your personal drawer.
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Drawer selector panel -->
+            {% if current_user and drawer_files %}
+            <div id="panel-drawer" class="hidden pb-2">
+                <div class="border rounded-lg overflow-hidden" style="border-color: var(--ds-border);">
+                    <table class="w-full text-sm">
+                        <tbody class="divide-y" style="border-color: var(--ds-border);">
+                        {% for f in drawer_files %}
+                            <tr class="cursor-pointer" style="transition:background 0.1s;" onmouseover="this.style.background='#F0EFEB'" onmouseout="this.style.background=''" onclick="selectDrawerFile({{ f.id }}, {{ f.original_name | tojson }})">
+                                <td class="px-4 py-3 font-mono text-xs" style="color: var(--ds-ink-1);">{{ f.original_name }}</td>
+                                <td class="px-4 py-3 text-xs text-right" style="color: var(--ds-ink-3);">
+                                    {% if f.uploaded_at %}{{ f.uploaded_at.strftime('%Y-%m-%d') }}{% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <p id="drawer-selected" class="mt-2 text-xs" style="color: var(--ds-ink-3);"></p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="px-6 py-5 flex items-center justify-between border-t mt-4" style="border-color: var(--ds-border);">
+            <p class="text-xs" style="color: var(--ds-ink-3);">
+                <i class="fa-solid fa-clock mr-1"></i>Analysis takes 5–15 seconds depending on paper length.
+            </p>
+            <button type="submit"
+                    class="px-6 py-2.5 rounded-lg text-sm font-medium text-white"
+                    style="background: #18171A;">
+                Generate Report →
+            </button>
+        </div>
+    </form>
+
+    <!-- What's in a report -->
+    <div class="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3">
+        {% for item in [
+            ("fa-chart-pie",       "Coverage Overview",        "Covered / novel / needs-work ratios with AI signal"),
+            ("fa-table",           "Gap Fills Table",           "Each covered claim → matched gap → appreciated score"),
+            ("fa-pen-to-square",   "Needs Reinforcement",       "Partial matches with citation recommendations"),
+            ("fa-lightbulb",       "Novel Contributions",       "Claims with no prior literature — potential new gaps"),
+            ("fa-diagram-project", "Discipline Profile",        "Inferred field + gap-class distribution"),
+            ("fa-list-check",      "Recommendations",           "Prioritized action items before submission"),
+        ] %}
+        <div class="rounded-lg border px-4 py-3" style="border-color: var(--ds-border); background: #FAFAF9;">
+            <i class="fa-solid {{ item[0] }} text-sm mb-1.5 block" style="color: var(--ds-ink-3);"></i>
+            <div class="text-xs font-semibold mb-0.5" style="color: var(--ds-ink-1);">{{ item[1] }}</div>
+            <div class="text-xs" style="color: var(--ds-ink-3);">{{ item[2] }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% else %}
+{# ══════════════════════════════════════════════════════════════
+   REPORT DOCUMENT
+═══════════════════════════════════════════════════════════════ #}
+
+<!-- Report header bar -->
+<div class="flex items-start justify-between mb-8 no-print">
+    <div>
+        <a href="/report" class="text-xs hover:underline flex items-center gap-1 mb-3" style="color: var(--ds-ink-3);">
+            <i class="fa-solid fa-arrow-left"></i> New analysis
+        </a>
+        <h1 class="text-xl font-bold" style="color: var(--ds-ink-1);">{{ report.title }}</h1>
+        <p class="text-xs mt-1" style="color: var(--ds-ink-3);">
+            {{ report.word_count }} words ·
+            {{ report.summary.total }} claims extracted ·
+            Generated {{ report.generated_at }}
+        </p>
+    </div>
+    <button onclick="window.print()" class="no-print shrink-0 flex items-center gap-1.5 px-3 py-1.5 text-xs rounded border hover:bg-[#F7F6F3] ml-6" style="color: var(--ds-ink-2); border-color: var(--ds-border);">
+        <i class="fa-solid fa-print"></i> Print
+    </button>
+</div>
+
+<!-- Print-only header -->
+<div class="hidden print:block mb-8" style="display: none;" id="print-header">
+    <h1 style="font-size: 1.4rem; font-weight: 700; margin-bottom: .25rem;">{{ report.title }}</h1>
+    <p style="font-size: 0.75rem; color: #5A5856;">
+        eaiou Paper Analysis Report · {{ report.word_count }} words · {{ report.summary.total }} claims · {{ report.generated_at }}
+    </p>
+    <hr style="margin: 1rem 0; border-color: #CAC8C2;">
+</div>
+
+<!-- ─── § 1: Coverage Overview ──────────────────────────────── -->
+<div class="report-section">
+    <h2 class="text-xs font-semibold uppercase tracking-wider mb-4" style="color: var(--ds-ink-3);">
+        §1 — Coverage Overview
+    </h2>
+
+    <!-- Stat grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+        <div class="rounded-lg border px-4 py-3 border-l-4" style="border-color: var(--ds-border); border-left-color: #18171A;">
+            <p class="text-xs uppercase tracking-wide mb-0.5" style="color: var(--ds-ink-3);">Total Claims</p>
+            <p class="text-2xl font-bold" style="color: var(--ds-ink-1);">{{ report.summary.total }}</p>
+        </div>
+        <div class="rounded-lg border px-4 py-3 border-l-4" style="border-color: var(--ds-border); border-left-color: #5A5856;">
+            <p class="text-xs uppercase tracking-wide mb-0.5" style="color: var(--ds-ink-3);">Covered</p>
+            <p class="text-2xl font-bold" style="color: var(--ds-ink-1);">{{ report.summary.covered }}
+                <span class="text-sm font-normal" style="color: var(--ds-ink-3);">{{ report.pct_covered }}%</span>
+            </p>
+        </div>
+        <div class="rounded-lg border px-4 py-3 border-l-4" style="border-color: var(--ds-border); border-left-color: #9A9895;">
+            <p class="text-xs uppercase tracking-wide mb-0.5" style="color: var(--ds-ink-3);">Novel Fills</p>
+            <p class="text-2xl font-bold" style="color: var(--ds-ink-2);">{{ report.summary.novel }}
+                <span class="text-sm font-normal" style="color: var(--ds-ink-3);">{{ report.pct_novel }}%</span>
+            </p>
+        </div>
+        <div class="rounded-lg border px-4 py-3 border-l-4" style="border-color: var(--ds-border); border-left-color: #CAC8C2;">
+            <p class="text-xs uppercase tracking-wide mb-0.5" style="color: var(--ds-ink-3);">Needs Work</p>
+            <p class="text-2xl font-bold" style="color: var(--ds-ink-2);">{{ report.summary.needs_work }}
+                <span class="text-sm font-normal" style="color: var(--ds-ink-3);">{{ report.pct_needs }}%</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Coverage bar -->
+    {% if report.summary.total > 0 %}
+    <div class="mb-4">
+        <div class="coverage-bar mb-1.5">
+            {% if report.pct_covered > 0 %}
+            <div style="width: {{ report.pct_covered }}%; background: #18171A;"></div>
+            {% endif %}
+            {% if report.pct_novel > 0 %}
+            <div style="width: {{ report.pct_novel }}%; background: #9A9895;"></div>
+            {% endif %}
+            {% if report.pct_needs > 0 %}
+            <div style="width: {{ report.pct_needs }}%; background: #E2E0DB;"></div>
+            {% endif %}
+        </div>
+        <div class="flex gap-4 text-xs" style="color: var(--ds-ink-3);">
+            <span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:#18171A;"></span>Covered (≥55%)</span>
+            <span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:#9A9895;"></span>Novel fills (&lt;25%)</span>
+            <span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:#CAC8C2;"></span>Needs work (25–54%)</span>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- AI Signal -->
+    <div class="flex items-center gap-2 mt-3">
+        <span class="text-xs" style="color: var(--ds-ink-3);">AI Signal:</span>
+        <span class="tier-badge ai-badge-{{ report.ai_level }}">
+            <i class="fa-solid fa-robot mr-1" style="font-size:.6rem;"></i>
+            {{ report.ai_level }}{% if report.ai_hits > 0 %} — {{ report.ai_hits }} phrase{{ 's' if report.ai_hits != 1 else '' }}{% endif %}
+        </span>
+        {% if report.ai_level == 'high' %}
+        <span class="text-xs" style="color: var(--ds-ink-3);">Disclose AI use in submission.</span>
+        {% endif %}
+    </div>
+</div>
+
+<!-- ─── § 2: Gap Fills Table ────────────────────────────────── -->
+<div class="report-section">
+    <h2 class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: var(--ds-ink-3);">
+        §2 — Gap Fills
+    </h2>
+    <p class="text-xs mb-4" style="color: var(--ds-ink-3);">
+        Claims with appreciated confidence ≥ 55%. These assertions address known research gaps.
+        Score = base similarity × age amplifier (older gaps score higher on the appreciated scale).
+    </p>
+
+    {% if report.claims_covered %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+            <thead>
+                <tr class="text-left text-xs uppercase tracking-wide" style="background: #F7F6F3;">
+                    <th class="px-4 py-2.5 font-medium border-b" style="color: var(--ds-ink-3); border-color: var(--ds-border);">Claim</th>
+                    <th class="px-4 py-2.5 font-medium border-b hidden md:table-cell" style="color: var(--ds-ink-3); border-color: var(--ds-border);">Matched Gap</th>
+                    <th class="px-4 py-2.5 font-medium border-b" style="color: var(--ds-ink-3); border-color: var(--ds-border); white-space:nowrap;">Score</th>
+                    <th class="px-4 py-2.5 font-medium border-b hidden md:table-cell" style="color: var(--ds-ink-3); border-color: var(--ds-border);">Gap Age</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in report.claims_covered %}
+                <tr class="border-b hover:bg-[#FAFAF9]" style="border-color: var(--ds-border);">
+                    <td class="px-4 py-3 align-top max-w-xs">
+                        <p class="text-xs leading-snug" style="color: var(--ds-ink-1);">
+                            {{ c.text[:120] }}{% if c.text|length > 120 %}…{% endif %}
+                        </p>
+                    </td>
+                    <td class="px-4 py-3 align-top hidden md:table-cell max-w-xs">
+                        {% if c.best_match %}
+                        <p class="text-xs leading-snug" style="color: var(--ds-ink-2);">
+                            {{ (c.best_match.declaration or '')[:100] }}{% if c.best_match.declaration and c.best_match.declaration|length > 100 %}…{% endif %}
+                        </p>
+                        {% if c.best_match.gateway_term %}
+                        <span class="text-xs px-1.5 py-0.5 rounded mt-1 inline-block" style="background: #EDECE9; color: var(--ds-ink-3);">{{ c.best_match.gateway_term }}</span>
+                        {% endif %}
+                        {% else %}
+                        <span class="text-xs" style="color: var(--ds-border);">—</span>
+                        {% endif %}
+                    </td>
+                    <td class="px-4 py-3 align-top whitespace-nowrap">
+                        <span class="tier-badge tier-covered">{{ (c.appreciated * 100)|int }}%</span>
+                        {% if c.base_similarity != c.appreciated %}
+                        <p class="text-xs mt-0.5" style="color: var(--ds-ink-3);">base {{ (c.base_similarity * 100)|int }}%</p>
+                        {% endif %}
+                    </td>
+                    <td class="px-4 py-3 align-top hidden md:table-cell">
+                        {% if c.gap_age_years is not none %}
+                        <span class="text-xs font-mono" style="color: var(--ds-ink-2);">{{ c.gap_age_years }}yr</span>
+                        {% else %}
+                        <span class="text-xs" style="color: var(--ds-border);">—</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="rounded-lg border px-5 py-8 text-center" style="border-color: var(--ds-border); background: #FAFAF9;">
+        <i class="fa-regular fa-circle-xmark text-2xl mb-2 block" style="color: var(--ds-border);"></i>
+        <p class="text-sm" style="color: var(--ds-ink-3);">No claims reached the covered tier (≥ 55% appreciated confidence).</p>
+        <p class="text-xs mt-1" style="color: var(--ds-ink-3);">See Recommendations for how to improve coverage framing.</p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- ─── § 3: Needs Reinforcement ────────────────────────────── -->
+<div class="report-section">
+    <h2 class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: var(--ds-ink-3);">
+        §3 — Needs Reinforcement
+    </h2>
+    <p class="text-xs mb-4" style="color: var(--ds-ink-3);">
+        Claims with appreciated confidence 25–54%. Literature support exists but is weak.
+        These claims will strengthen significantly with direct gap citations.
+    </p>
+
+    {% if report.claims_needs_work %}
+    <div class="space-y-3">
+        {% for c in report.claims_needs_work %}
+        <div class="rounded-lg border overflow-hidden" style="border-color: var(--ds-border);">
+            <div class="px-4 py-3 border-b flex items-start justify-between gap-3" style="border-color: var(--ds-border); background: #F7F6F3;">
+                <p class="text-xs leading-snug flex-1" style="color: var(--ds-ink-1);">
+                    {{ c.text[:150] }}{% if c.text|length > 150 %}…{% endif %}
+                </p>
+                <span class="tier-badge tier-needs-work shrink-0">{{ (c.appreciated * 100)|int }}%</span>
+            </div>
+            {% if c.best_match %}
+            <div class="px-4 py-3">
+                <p class="text-xs font-semibold mb-1" style="color: var(--ds-ink-3);">Closest match:</p>
+                <p class="text-xs leading-snug mb-2" style="color: var(--ds-ink-2);">
+                    {% if c.best_match.gateway_term %}
+                    <span class="font-medium">Gap: {{ c.best_match.gateway_term }}</span> —
+                    {% endif %}
+                    {{ (c.best_match.declaration or '')[:120] }}{% if c.best_match.declaration and c.best_match.declaration|length > 120 %}…{% endif %}
+                </p>
+                <p class="text-xs italic" style="color: var(--ds-ink-3);">
+                    Reinforce: cite Gap #{{ c.best_match.id }} directly in the claim sentence to raise
+                    this to the Covered tier. Base similarity is {{ (c.base_similarity * 100)|int }}%{% if c.gap_age_years %} ({{ c.gap_age_years }}-year-old gap){% endif %}.
+                </p>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="rounded-lg border px-5 py-6 text-center" style="border-color: var(--ds-border); background: #F7F6F3;">
+        <i class="fa-solid fa-check text-lg mb-1.5 block" style="color: var(--ds-border);"></i>
+        <p class="text-sm" style="color: var(--ds-ink-3);">No claims in the needs-work range. Good coverage framing.</p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- ─── § 4: Novel Contributions ────────────────────────────── -->
+<div class="report-section">
+    <h2 class="text-xs font-semibold uppercase tracking-wider mb-1" style="color: var(--ds-ink-3);">
+        §4 — Novel Contributions
+    </h2>
+    <p class="text-xs mb-4" style="color: var(--ds-ink-3);">
+        Claims with appreciated confidence below 25%. No prior literature match was found
+        in the gap index. These may constitute new structural gaps — territory this paper
+        enters for the first time.
+    </p>
+
+    {% if report.claims_novel %}
+    <div class="rounded-lg border overflow-hidden mb-3" style="border-color: var(--ds-border);">
+        <div class="px-4 py-3 border-b" style="border-color: var(--ds-border); background: #F7F6F3;">
+            <span class="text-xs font-semibold" style="color: var(--ds-ink-2);">{{ report.claims_novel|length }} novel claim{{ 's' if report.claims_novel|length != 1 else '' }} identified</span>
+        </div>
+        <div class="divide-y" style="border-color: var(--ds-border);">
+            {% for c in report.claims_novel %}
+            <div class="px-4 py-3 flex items-start gap-3">
+                <span class="tier-badge tier-novel mt-0.5 shrink-0">novel</span>
+                <p class="text-xs leading-snug flex-1" style="color: var(--ds-ink-1);">
+                    {{ c.text[:200] }}{% if c.text|length > 200 %}…{% endif %}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="rounded-lg px-4 py-3 text-xs" style="background: #F0EFEB; color: var(--ds-ink-2);">
+        <i class="fa-solid fa-circle-info mr-1.5" style="color: var(--ds-ink-3);"></i>
+        Novel claims are potential new NAUGHT-state gaps. To establish priority,
+        pin them at <a href="http://localhost:8001" target="_blank" class="underline">gitgap</a>
+        with <code>POST /gaps/pin</code> before submission.
+    </div>
+    {% else %}
+    <div class="rounded-lg border px-5 py-6 text-center" style="border-color: var(--ds-border); background: #F7F6F3;">
+        <p class="text-sm" style="color: var(--ds-ink-3);">All claims matched existing literature. No purely novel contributions detected.</p>
+        <p class="text-xs mt-1" style="color: var(--ds-ink-3);">If you believe you have novel contributions, ensure they are phrased as explicit assertions.</p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- ─── § 5: Discipline Profile ──────────────────────────────── -->
+<div class="report-section">
+    <h2 class="text-xs font-semibold uppercase tracking-wider mb-4" style="color: var(--ds-ink-3);">
+        §5 — Discipline Profile
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+        <!-- Inferred disciplines -->
+        <div class="rounded-lg border px-5 py-4" style="border-color: var(--ds-border);">
+            <p class="text-xs font-semibold mb-2" style="color: var(--ds-ink-2);">Inferred Primary Disciplines</p>
+            {% if report.disciplines %}
+            <div class="flex flex-wrap gap-1">
+                {% for d in report.disciplines %}
+                <span class="disc-tag">{{ d.replace('_', ' ') }}</span>
+                {% endfor %}
+            </div>
+            <p class="text-xs mt-2" style="color: var(--ds-ink-3);">
+                Inferred from keyword density in the paper text. Not a classification — an orientation signal.
+            </p>
+            {% else %}
+            <p class="text-xs" style="color: var(--ds-ink-3);">Discipline not detected. Text may be too short or domain-agnostic.</p>
+            {% endif %}
+        </div>
+
+        <!-- Gap class distribution -->
+        <div class="rounded-lg border px-5 py-4" style="border-color: var(--ds-border);">
+            <p class="text-xs font-semibold mb-2" style="color: var(--ds-ink-2);">Gap Class Distribution</p>
+            {% if report.gap_classes %}
+            {% set max_count = report.gap_classes.values() | max %}
+            {% for cls, cnt in report.gap_classes.items() | sort(attribute='1', reverse=True) %}
+            <div class="mb-1.5">
+                <div class="flex items-center justify-between mb-0.5">
+                    <span class="text-xs capitalize" style="color: var(--ds-ink-2);">{{ cls }}</span>
+                    <span class="text-xs font-mono" style="color: var(--ds-ink-3);">{{ cnt }}</span>
+                </div>
+                <div class="h-1.5 rounded-full" style="background: #E2E0DB; overflow: hidden;">
+                    <div class="h-full rounded-full" style="background: #18171A; width: {{ (cnt / max_count * 100)|int }}%;"></div>
+                </div>
+            </div>
+            {% endfor %}
+            <p class="text-xs mt-2" style="color: var(--ds-ink-3);">Gap classes from matched gaps in the gitgap index.</p>
+            {% else %}
+            <p class="text-xs" style="color: var(--ds-ink-3);">No matched gaps with gap-class metadata available.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- ─── § 6: Recommendations ────────────────────────────────── -->
+<div class="report-section">
+    <h2 class="text-xs font-semibold uppercase tracking-wider mb-4" style="color: var(--ds-ink-3);">
+        §6 — Recommendations
+    </h2>
+
+    {% if report.recs %}
+    {% for priority, label in [('high', 'High Priority'), ('medium', 'Medium Priority'), ('low', 'Low Priority')] %}
+    {% set recs_in_tier = report.recs | selectattr('priority', 'equalto', priority) | list %}
+    {% if recs_in_tier %}
+    <div class="mb-4">
+        <h3 class="text-xs font-semibold mb-2" style="color: var(--ds-ink-3);">{{ label }}</h3>
+        {% for rec in recs_in_tier %}
+        <div class="rec-row rec-{{ priority }} flex items-start gap-3">
+            <i class="fa-solid {{ rec.icon }} text-sm mt-0.5 shrink-0"
+               style="color: {{ '#18171A' if priority == 'high' else ('#9A9895' if priority == 'medium' else '#CAC8C2') }};"></i>
+            <p class="text-sm leading-snug" style="color: var(--ds-ink-1);">{{ rec.text }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <div class="rounded-lg border px-5 py-6 text-center" style="border-color: var(--ds-border);">
+        <i class="fa-solid fa-check-circle text-lg mb-1.5 block" style="color: var(--ds-border);"></i>
+        <p class="text-sm" style="color: var(--ds-ink-3);">No specific recommendations. Analysis returned no actionable findings.</p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- ─── Report footer ────────────────────────────────────────── -->
+<div class="mt-12 pt-6 border-t flex items-center justify-between" style="border-color: var(--ds-border);">
+    <p class="text-xs" style="color: var(--ds-ink-3);">
+        Generated by <strong>eaiou</strong> against the gitgap knowledge gap index ·
+        {{ report.generated_at }}
+    </p>
+    <div class="flex items-center gap-3 no-print">
+        <a href="/report" class="text-xs hover:underline" style="color: var(--ds-ink-3);">New analysis</a>
+        <button onclick="window.print()" class="text-xs hover:underline" style="color: var(--ds-ink-2);">
+            <i class="fa-solid fa-print mr-1"></i>Print
+        </button>
+    </div>
+</div>
+
+{% endif %}{# /report #}
+
+</div>
+
+{% block scripts %}
+<script>
+// ── Report page: tab toggle + file upload ────────────────────────────────────
+function switchTab(name) {
+    ['paste', 'upload', 'drawer'].forEach(function(t) {
+        var btn   = document.getElementById('tab-' + t);
+        var panel = document.getElementById('panel-' + t);
+        if (!btn) return;
+        if (t === name) {
+            btn.style.borderColor = '#18171A';
+            btn.style.color = 'var(--ds-ink-1)';
+            if (panel) panel.classList.remove('hidden');
+        } else {
+            btn.style.borderColor = 'transparent';
+            btn.style.color = 'var(--ds-ink-3)';
+            if (panel) panel.classList.add('hidden');
+        }
+    });
+    // Clear file_id selection when leaving drawer tab
+    if (name !== 'drawer') {
+        document.getElementById('hidden-file-id').value = '';
+        var sel = document.getElementById('drawer-selected');
+        if (sel) sel.textContent = '';
+    }
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    document.getElementById('drop-zone').style.borderColor = 'var(--ds-border)';
+    var file = e.dataTransfer.files[0];
+    if (file) handleFileSelect(file);
+}
+
+async function handleFileSelect(file) {
+    if (!file) return;
+    var status = document.getElementById('upload-status');
+    status.textContent = 'Uploading…';
+    status.style.display = 'block';
+
+    var fd = new FormData();
+    fd.append('file', file);
+
+    try {
+        var resp = await fetch('/report/upload', { method: 'POST', body: fd });
+        if (!resp.ok) {
+            var err = {};
+            try { err = await resp.json(); } catch(x) {}
+            status.textContent = '✗ ' + (err.detail || 'Upload failed.');
+            return;
+        }
+        var data = await resp.json();
+        // Inject extracted text into textarea
+        var ta = document.getElementById('paper-textarea');
+        if (ta) ta.value = data.extracted_text || '';
+        document.getElementById('hidden-file-id').value = data.file_id || '';
+        status.textContent = '✓ ' + data.title + ' loaded.';
+        // Switch to paste tab so user sees the extracted text
+        switchTab('paste');
+    } catch(err) {
+        status.textContent = '✗ Network error. Please try again.';
+    }
+}
+
+function selectDrawerFile(fileId, name) {
+    document.getElementById('hidden-file-id').value = fileId;
+    var sel = document.getElementById('drawer-selected');
+    if (sel) sel.textContent = '✓ Selected: ' + name + ' — click Generate Report to analyze.';
+}
+</script>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}About — eaiou{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-6 py-12">
+    <h1 class="eaiou-title text-4xl font-bold mb-3" style="color: var(--ds-ink-1);">About eaiou</h1>
+    <p class="text-base mb-10" style="color: var(--ds-ink-3);">Observer-preserving full-context peer-review journal.</p>
+
+    <div class="space-y-10">
+
+        <section>
+            <h2 class="eaiou-title text-2xl font-bold mb-3" style="color: var(--ds-ink-1);">What eaiou is</h2>
+            <p class="leading-relaxed" style="color: var(--ds-ink-2);">eaiou is a peer-review journal built around a single principle: <strong style="color: var(--ds-ink-1);">the quality of a paper is independent of when it was submitted.</strong> Papers are sorted by quality signal (Q score), not by arrival date. The submission timestamp is sealed at receipt and never shown during evaluation.</p>
+        </section>
+
+        <section>
+            <h2 class="eaiou-title text-2xl font-bold mb-3" style="color: var(--ds-ink-1);">Temporal Blindness</h2>
+            <p class="leading-relaxed mb-3" style="color: var(--ds-ink-2);">Most journals rank papers by recency. This introduces a structural bias: a paper submitted yesterday is more visible than a paper submitted last year, regardless of quality. eaiou enforces temporal blindness at the infrastructure level. Submission dates are cryptographically sealed. They cannot be displayed, sorted on, or indexed during review.</p>
+            <blockquote class="border-l-4 pl-5 py-2 italic" style="border-left-color: #18171A; background: #F0EFEB; color: var(--ds-ink-2);">Bias can see time. Justice cannot.</blockquote>
+
+            <!-- Temporal Blindness Doctrine Notice -->
+            <div class="border-l-4 pl-5 py-4 mt-5" style="border-left-color: #18171A; background: #F0EFEB;">
+                <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">Doctrine — Sealed Timestamps</p>
+                <p class="text-sm leading-relaxed" style="color: var(--ds-ink-2);">
+                    The submission timestamp (<code class="text-xs font-mono px-1 rounded" style="background: #E2E0DB; color: var(--ds-ink-1);">submitted_at</code>) is captured at receipt and is permanently sealed. It is never displayed to reviewers or editors, never used in a sort key, never indexed for discovery, and accessible only by admins via explicit governance unlock. No template, query, or route may expose <code class="text-xs font-mono px-1 rounded" style="background: #E2E0DB; color: var(--ds-ink-1);">submitted_at</code> to any session that is not an authenticated admin. <code class="text-xs font-mono px-1 rounded" style="background: #E2E0DB; color: var(--ds-ink-1);">ORDER BY id DESC</code> or any recency sort is a Temporal Blindness violation.
+                </p>
+                <p class="text-xs mt-2" style="color: var(--ds-ink-3);">SAID witness: Eric D. Martin — ORCID 0009-0006-5944-1742</p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="eaiou-title text-2xl font-bold mb-3" style="color: var(--ds-ink-1);">Intelligence Blindness</h2>
+            <p class="leading-relaxed mb-3" style="color: var(--ds-ink-2);">Tandem to Temporal Blindness. A paper is evaluated on what it contributes — not on what kind of intelligence produced it. Every intelligence that contributes to a work has a coordinate in the record. None of those coordinates make the work better or worse by their presence alone.</p>
+            <blockquote class="border-l-4 pl-5 py-2 italic" style="border-left-color: #18171A; background: #F0EFEB; color: var(--ds-ink-2);">The work is the argument. Everything else is provenance.</blockquote>
+        </section>
+
+        <section>
+            <h2 class="eaiou-title text-2xl font-bold mb-3" style="color: var(--ds-ink-1);">AI Involvement Disclosure</h2>
+            <p class="leading-relaxed" style="color: var(--ds-ink-2);">AI involvement is a first-class part of the scholarly record. Authors disclose level and nature of AI use at submission. This disclosure is sealed alongside the paper and cannot be altered. eaiou does not penalize AI-assisted work — it requires that it be documented honestly. Intelligence Blindness ensures the disclosure informs the record without biasing the score.</p>
+        </section>
+
+        <section>
+            <h2 class="eaiou-title text-2xl font-bold mb-3" style="color: var(--ds-ink-1);">Full-context review</h2>
+            <p class="leading-relaxed" style="color: var(--ds-ink-2);">Reviewers are given the complete paper record: abstract, full text, AI disclosure, author ORCID, keywords, and version history. Nothing is withheld in the name of "blind review." The reviewer's job is to evaluate the work, not to play information-asymmetry games. Author identity is available; submission date is not.</p>
+        </section>
+
+        <section>
+            <h2 class="eaiou-title text-2xl font-bold mb-3" style="color: var(--ds-ink-1);">Phase 1 — Invite-only</h2>
+            <p class="leading-relaxed" style="color: var(--ds-ink-2);">eaiou is currently in Phase 1: a limited, invite-only launch while the review pipeline and Q-scoring system are finalized. If you have a paper you want to submit, contact <a href="mailto:editor@eaiou.org" class="hover:underline" style="color: var(--ds-ink-1);">editor@eaiou.org</a>.</p>
+        </section>
+
+        <section class="border-t pt-8" style="border-color: var(--ds-border);">
+            <p class="text-sm" style="color: var(--ds-ink-3);">eaiou is maintained by <strong style="color: var(--ds-ink-2);">Eric D. Martin</strong> — ORCID <a href="https://orcid.org/0009-0006-5944-1742" class="hover:underline" style="color: var(--ds-ink-1);" target="_blank" rel="noopener">0009-0006-5944-1742</a>.</p>
+        </section>
+
+    </div>
+</div>
+{% endblock %}

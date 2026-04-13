@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Policy — eaiou{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-6 py-12">
+    <h1 class="eaiou-title text-4xl font-bold mb-3" style="color: var(--ds-ink-1);">Journal Policy</h1>
+    <p class="text-base mb-10" style="color: var(--ds-ink-3);">The core governing doctrines that define how eaiou operates.</p>
+
+    <div class="space-y-10">
+
+        <section>
+            <h2 class="eaiou-title text-2xl font-bold mb-3" style="color: var(--ds-ink-1);">Temporal Blindness</h2>
+            <p class="leading-relaxed mb-4" style="color: var(--ds-ink-2);">Submission timestamps are sealed at receipt and are never displayed to reviewers, editors, or the public during evaluation. Papers are sorted and discovered by quality signal (Q score) only — never by recency.</p>
+            <div class="border-l-4 pl-5 py-4" style="border-left-color: #18171A; background: #F0EFEB;">
+                <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">What is sealed</p>
+                <ul class="space-y-1.5 text-sm" style="color: var(--ds-ink-2);">
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-lock text-xs mt-1" style="color: var(--ds-ink-3);"></i>The exact timestamp of submission receipt (<code class="text-xs font-mono px-1 rounded" style="background: #E2E0DB; color: var(--ds-ink-1);">submitted_at</code>)</li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-lock text-xs mt-1" style="color: var(--ds-ink-3);"></i>The acceptance timestamp</li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-lock text-xs mt-1" style="color: var(--ds-ink-3);"></i>The publication timestamp</li>
+                </ul>
+                <p class="text-xs mt-3" style="color: var(--ds-ink-3);">Sealed fields carry no database index by design. Any <code class="text-xs font-mono px-1 rounded" style="background: #E2E0DB; color: var(--ds-ink-1);">ORDER BY id DESC</code> or recency sort is a Temporal Blindness violation.</p>
+            </div>
+            <p class="text-sm mt-4 leading-relaxed" style="color: var(--ds-ink-2);">Sealed timestamps are accessible only by admins via explicit governance unlock. This is enforced structurally in the schema, not by policy alone.</p>
+            <blockquote class="border-l-4 pl-5 py-2 mt-4 italic" style="border-left-color: #18171A; background: #F0EFEB; color: var(--ds-ink-2);">Bias can see time. Justice cannot.</blockquote>
+            <div class="mt-4">
+                <a href="/policy/temporal-blindness" class="text-sm font-medium hover:underline" style="color: var(--ds-ink-1);">Full Temporal Blindness policy <i class="fa-solid fa-arrow-right text-xs ml-1"></i></a>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="eaiou-title text-2xl font-bold mb-3" style="color: var(--ds-ink-1);">Intelligence Blindness</h2>
+            <p class="leading-relaxed mb-4" style="color: var(--ds-ink-2);">A paper is evaluated on what it contributes — not on what kind of intelligence produced it. AI involvement is a first-class part of the scholarly record, but it has zero effect on Q scoring or sort order.</p>
+            <div class="border-l-4 pl-5 py-4" style="border-left-color: #18171A; background: #F0EFEB;">
+                <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">What this means</p>
+                <ul class="space-y-1.5 text-sm" style="color: var(--ds-ink-2);">
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs mt-1" style="color: var(--ds-ink-3);"></i>AI involvement is disclosed — mandatory on submission</li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs mt-1" style="color: var(--ds-ink-3);"></i>Disclosure is visible to editors and in the public paper view</li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs mt-1" style="color: var(--ds-ink-3);"></i>Disclosure has zero effect on Q scoring or sort order</li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-xs mt-1" style="color: var(--ds-ink-3);"></i>The system never suppresses AI involvement — it structures and preserves it</li>
+                </ul>
+            </div>
+            <blockquote class="border-l-4 pl-5 py-2 mt-4 italic" style="border-left-color: #18171A; background: #F0EFEB; color: var(--ds-ink-2);">The work is the argument. Everything else is provenance.</blockquote>
+            <div class="mt-4">
+                <a href="/policy/intelligence-blindness" class="text-sm font-medium hover:underline" style="color: var(--ds-ink-1);">Full Intelligence Blindness policy <i class="fa-solid fa-arrow-right text-xs ml-1"></i></a>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="eaiou-title text-2xl font-bold mb-3" style="color: var(--ds-ink-1);">AI Disclosure</h2>
+            <p class="leading-relaxed mb-4" style="color: var(--ds-ink-2);">The <code class="text-xs font-mono px-1 rounded" style="background: #EDECE9; color: var(--ds-ink-1);">ai_disclosure_level</code> field is mandatory on every submission. It is sealed alongside the paper and cannot be altered after submission. The disclosure informs the record without biasing the score.</p>
+            <div class="border-l-4 pl-5 py-4" style="border-left-color: #18171A; background: #F0EFEB;">
+                <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">Disclosure levels</p>
+                <ul class="space-y-1.5 text-sm" style="color: var(--ds-ink-2);">
+                    <li><span class="font-medium" style="color: var(--ds-ink-1);">none</span> — No AI tools were used in any part of this work</li>
+                    <li><span class="font-medium" style="color: var(--ds-ink-1);">editing</span> — AI used only for grammar, spelling, or language editing</li>
+                    <li><span class="font-medium" style="color: var(--ds-ink-1);">assisted</span> — AI contributed to drafting, literature review, or analysis</li>
+                    <li><span class="font-medium" style="color: var(--ds-ink-1);">collaborative</span> — AI was a substantive co-contributor to the work</li>
+                </ul>
+            </div>
+            <div class="mt-4">
+                <a href="/policy/ai-disclosure" class="text-sm font-medium hover:underline" style="color: var(--ds-ink-1);">Full AI Disclosure policy <i class="fa-solid fa-arrow-right text-xs ml-1"></i></a>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="eaiou-title text-2xl font-bold mb-3" style="color: var(--ds-ink-1);">Open Access</h2>
+            <p class="leading-relaxed mb-4" style="color: var(--ds-ink-2);">All published papers in eaiou are freely available to read. There are no paywalls, no institutional access requirements, and no embargo periods. Open access is a precondition for observer-preserving review — a paper that cannot be read cannot be properly evaluated.</p>
+            <div class="border-l-4 pl-5 py-4" style="border-left-color: #18171A; background: #F0EFEB;">
+                <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">Notice</p>
+                <p class="text-sm leading-relaxed" style="color: var(--ds-ink-2);">By submitting to eaiou, authors grant eaiou a perpetual, non-exclusive license to publish and archive the submitted work under open access terms. Authors retain copyright. The work is never removed from the archive; rejected submissions are tombstoned, not deleted.</p>
+            </div>
+            <div class="mt-4">
+                <a href="/policy/open-access" class="text-sm font-medium hover:underline" style="color: var(--ds-ink-1);">Full Open Access policy <i class="fa-solid fa-arrow-right text-xs ml-1"></i></a>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="eaiou-title text-2xl font-bold mb-3" style="color: var(--ds-ink-1);">Full-Context Preservation</h2>
+            <p class="leading-relaxed mb-4" style="color: var(--ds-ink-2);">eaiou archives everything. Submissions are annotated, not deleted. Status changes are tombstoned, not purged. Every CosmoID persists through the full lifecycle including rejection. Cross-domain serendipity is real — a source not used in one paper may matter in another.</p>
+            <div class="border-l-4 pl-5 py-4" style="border-left-color: #18171A; background: #F0EFEB;">
+                <p class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--ds-ink-3);">Preservation rule</p>
+                <p class="text-sm" style="color: var(--ds-ink-2);">No hard deletes. The <code class="text-xs font-mono px-1 rounded" style="background: #E2E0DB; color: var(--ds-ink-1);">status</code> field drives lifecycle. A rejected paper is tombstoned with its CosmoID intact. Observer-preserved paths — used and unused sources, accepted and excluded AI outputs — are all part of the record.</p>
+            </div>
+        </section>
+
+        <section class="border-t pt-8" style="border-color: var(--ds-border);">
+            <p class="text-sm" style="color: var(--ds-ink-3);">eaiou is maintained by <strong style="color: var(--ds-ink-2);">Eric D. Martin</strong> — ORCID <a href="https://orcid.org/0009-0006-5944-1742" class="hover:underline" style="color: var(--ds-ink-1);" target="_blank" rel="noopener">0009-0006-5944-1742</a>.</p>
+        </section>
+
+    </div>
+</div>
+{% endblock %}
