@@ -1,0 +1,123 @@
+{% extends "author/base_author.html" %}
+{% block title %}Editor Dashboard — eaiou{% endblock %}
+{% block page_title %}Editorial{% endblock %}
+
+{% block author_left_sidebar %}{% endblock %}
+
+{% block author_content %}
+<h1 class="sr-only">Editor dashboard</h1>
+<div class="section-label">Editorial overview · all workflow states</div>
+
+{# KPI grid #}
+<div class="kpi-grid mb-4" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="kpi-card">
+        <div class="kpi-label">Submitted</div>
+        <div class="kpi-value">{{ stats.submitted or 0 }}</div>
+    </div>
+    <div class="kpi-card">
+        <div class="kpi-label">Under Review</div>
+        <div class="kpi-value">{{ stats.under_review or 0 }}</div>
+    </div>
+    <div class="kpi-card">
+        <div class="kpi-label">Revisions</div>
+        <div class="kpi-value" style="color: var(--amber);">{{ stats.revision_requested or 0 }}</div>
+    </div>
+    <div class="kpi-card">
+        <div class="kpi-label">Published</div>
+        <div class="kpi-value" style="color: var(--sage);">{{ stats.published or 0 }}</div>
+    </div>
+</div>
+
+{# Filter tabs #}
+<div class="tab-bar mb-3">
+    <a href="/editorial/" class="tab {% if not request.query_params.get('status') %}active{% endif %}">All</a>
+    <a href="/editorial/?status=submitted" class="tab {% if request.query_params.get('status') == 'submitted' %}active{% endif %}">Submitted</a>
+    <a href="/editorial/?status=under_review" class="tab {% if request.query_params.get('status') == 'under_review' %}active{% endif %}">Under Review</a>
+    <a href="/editorial/?status=revision_requested" class="tab {% if request.query_params.get('status') == 'revision_requested' %}active{% endif %}">Revisions</a>
+    <a href="/editorial/?status=accepted" class="tab {% if request.query_params.get('status') == 'accepted' %}active{% endif %}">Accepted</a>
+    <a href="/editorial/?status=published" class="tab {% if request.query_params.get('status') == 'published' %}active{% endif %}">Published</a>
+</div>
+
+{# Papers table #}
+{% if papers %}
+<table class="data-table mt-3">
+    <thead>
+        <tr>
+            <th>Paper</th>
+            <th>Status</th>
+            <th>q_signal</th>
+            <th>Flags</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in papers %}
+        <tr>
+            <td>
+                <div style="font-family: var(--serif); font-size: 12px; color: var(--ink);">{{ p.title }}</div>
+                <div style="font-size: 9px; color: var(--ink3);">{{ p.author_name }}</div>
+            </td>
+            <td>
+                {% if p.status == 'submitted' %}
+                    <span class="badge" style="background: var(--river-ll); color: var(--river);">Submitted</span>
+                {% elif p.status == 'under_review' %}
+                    <span class="badge" style="background: var(--amber-l); color: var(--amber);">Under Review</span>
+                {% elif p.status == 'revision_requested' %}
+                    <span class="badge" style="background: var(--coral-l); color: var(--coral);">Revisions</span>
+                {% elif p.status == 'accepted' %}
+                    <span class="badge badge-collab">Accepted</span>
+                {% elif p.status == 'published' %}
+                    <span class="badge badge-sealed">Published</span>
+                {% else %}
+                    <span class="badge badge-tag">{{ p.status }}</span>
+                {% endif %}
+            </td>
+            <td style="font-family: var(--mono); color: var(--river);">
+                {% if p.q_overall is not none %}{{ '%.2f'|format(p.q_overall) }}{% else %}—{% endif %}
+            </td>
+            <td>
+                {% if p.ai_disclosure_level and p.ai_disclosure_level != 'none' %}
+                    <span class="badge badge-ai" style="font-size: 8px;">AI</span>
+                {% endif %}
+            </td>
+            <td>
+                <a href="/editorial/papers/{{ p.id }}" class="btn btn-secondary" style="font-size: 9px; padding: 3px 8px;">Manage</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="mt-4" style="color: var(--ink3);">No papers match the current filter.</p>
+{% endif %}
+{% endblock %}
+
+{% block author_sidebar %}
+<div class="flex flex-col gap-3">
+    <div class="module-panel">
+        <div class="module-header"><span class="module-title">Queue Summary</span></div>
+        <div class="module-body">
+            <div class="kpi-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="kpi-card">
+                    <div class="kpi-label">In Queue</div>
+                    <div class="kpi-value">{{ queue_count }}</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Total</div>
+                    <div class="kpi-value">{{ (stats.submitted or 0) + (stats.under_review or 0) + (stats.revision_requested or 0) + (stats.accepted or 0) + (stats.published or 0) }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="module-panel">
+        <div class="module-header"><span class="module-title">Quick Links</span></div>
+        <div class="module-body">
+            <div class="flex flex-col gap-1 text-xs">
+                <a href="/editorial/queue" style="color: var(--river);">Review queue</a>
+                <a href="/papers/" style="color: var(--river);">Public papers list</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

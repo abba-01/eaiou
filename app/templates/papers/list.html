@@ -1,0 +1,62 @@
+{% extends "author/base_author.html" %}
+{% block title %}Papers — eaiou{% endblock %}
+{% block page_title %}Papers{% endblock %}
+
+{# No left sidebar on this page #}
+{% block author_left_sidebar %}{% endblock %}
+
+{% block author_content %}
+<h1 class="sr-only">Papers</h1>
+<div class="section-label">All Published Papers · q_signal DESC · no dates</div>
+
+{% if papers %}
+    <div class="mb-2" style="font-family: var(--mono); font-size: 10px; color: var(--ink3); letter-spacing: 0.05em;">
+        SHOWING {{ papers|length }} PAPER{% if papers|length != 1 %}S{% endif %} · SORTED BY Q_SIGNAL
+    </div>
+
+    <div class="flex flex-col gap-3">
+        {% for p in papers %}
+        <a href="/papers/{{ p.id }}" class="paper-card block no-underline">
+            <div class="paper-card-meta">
+                {% if p.orcid %}ORCID {{ p.orcid }}{% endif %}
+                {% if p.author_name %}{% if p.orcid %} · {% endif %}{{ p.author_name }}{% endif %}
+            </div>
+            <div class="paper-card-title">{{ p.title }}</div>
+            {% if p.abstract %}
+            <div class="paper-card-abstract">{{ p.abstract[:240] }}{% if p.abstract|length > 240 %}…{% endif %}</div>
+            {% endif %}
+            <div class="paper-card-footer">
+                <div class="paper-card-tags">
+                    {% if p.ai_disclosure_level and p.ai_disclosure_level != 'none' %}
+                        <span class="badge badge-ai">⬡ AI-Logged</span>
+                    {% endif %}
+                    <span class="badge badge-tag">{{ p.status or 'submitted' }}</span>
+                </div>
+                {% if p.q_overall is not none %}
+                <div>
+                    <div class="qsig-label">q_signal</div>
+                    <div class="qsig-score">{{ '%.2f'|format(p.q_overall) }}</div>
+                </div>
+                {% endif %}
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p style="color: var(--ink3);">No papers published yet.</p>
+{% endif %}
+{% endblock %}
+
+{% block author_sidebar %}
+<div class="flex flex-col gap-3">
+    <div class="module-panel">
+        <div class="module-header"><span class="module-title">About</span></div>
+        <div class="module-body">
+            <p class="text-xs" style="color: var(--ink2); line-height: 1.5;">
+                Observer-preserving peer review. Papers sorted by q_signal, a composite
+                quality score. See <a href="/about" style="color: var(--river);">About</a>.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "author/base_author.html" %}
+{% block title %}Submission received — eaiou{% endblock %}
+{% block page_title %}Submitted{% endblock %}
+
+{% block author_left_sidebar %}{% endblock %}
+
+{% block author_content %}
+<div class="max-w-2xl">
+    <div class="workflow mb-5">
+        <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Draft</div></div>
+        <div class="wf-line done"></div>
+        <div class="wf-state"><div class="wf-dot active"></div><div class="wf-name active">Submitted</div></div>
+        <div class="wf-line"></div>
+        <div class="wf-state"><div class="wf-dot"></div><div class="wf-name">Review</div></div>
+        <div class="wf-line"></div>
+        <div class="wf-state"><div class="wf-dot"></div><div class="wf-name">Decision</div></div>
+        <div class="wf-line"></div>
+        <div class="wf-state"><div class="wf-dot"></div><div class="wf-name">Published</div></div>
+    </div>
+
+    <h1 class="text-2xl mb-2" style="font-family: var(--serif); font-weight: 300;">Submission received</h1>
+    <p class="text-sm mb-6" style="color: var(--ink3);">
+        Your submission date has been sealed. The paper is now in the editorial queue.
+    </p>
+
+    <div class="module-panel mb-4">
+        <div class="module-header">
+            <span class="module-title">{{ paper.title }}</span>
+            <span class="badge badge-tag">SUBMITTED</span>
+        </div>
+        <div class="module-body">
+            <div class="paper-card-meta" style="margin-bottom: 12px;">
+                {% if paper.orcid %}ORCID {{ paper.orcid }} · {% endif %}{{ paper.author_name }}
+            </div>
+            {% if paper.abstract %}
+            <p class="text-sm" style="color: var(--ink2); line-height: 1.65;">{{ paper.abstract }}</p>
+            {% endif %}
+
+            <div class="mt-4 pt-3" style="border-top: 0.5px solid var(--paper3);">
+                <div class="transp-row">
+                    <span class="transp-row-label">Paper ID</span>
+                    <span>{{ paper.id }}</span>
+                </div>
+                {% if paper.cosmoid %}
+                <div class="transp-row">
+                    <span class="transp-row-label">Cosmoid</span>
+                    <span>{{ paper.cosmoid }}</span>
+                </div>
+                {% endif %}
+                {% if paper.paper_uuid %}
+                <div class="transp-row">
+                    <span class="transp-row-label">UUID</span>
+                    <span style="font-size: 9px;">{{ paper.paper_uuid }}</span>
+                </div>
+                {% endif %}
+                {% if paper.ai_disclosure_level %}
+                <div class="transp-row">
+                    <span class="transp-row-label">AI disclosure</span>
+                    <span>{{ paper.ai_disclosure_level }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="flex gap-2">
+        <a href="/papers/status/{{ paper.id }}" class="btn btn-primary">Track status →</a>
+        <a href="/papers/" class="btn btn-secondary">Browse papers</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block author_sidebar %}
+<div class="module-panel">
+    <div class="module-header"><span class="module-title">What happens next</span></div>
+    <div class="module-body">
+        <ol class="text-xs space-y-2" style="color: var(--ink2); line-height: 1.5;">
+            <li>1. Editorial review for scope and completeness.</li>
+            <li>2. Assignment to reviewers.</li>
+            <li>3. Open peer review — reviewer names may be public.</li>
+            <li>4. Editorial decision.</li>
+            <li>5. If accepted, Zenodo capstone deposition.</li>
+        </ol>
+    </div>
+</div>
+{% endblock %}

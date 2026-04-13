@@ -1,0 +1,189 @@
+{% extends "author/base_author.html" %}
+{% block title %}{{ paper.title or 'Paper' }} — Editor — eaiou{% endblock %}
+{% block page_title %}Editor{% endblock %}
+
+{% block author_left_sidebar %}{% endblock %}
+
+{% block author_content %}
+<h1 class="sr-only">Editorial view — {{ paper.title }}</h1>
+
+{% if flash %}
+<div class="mb-4 rounded p-3" style="background: var(--sage-l); border: 0.5px solid var(--sage); color: var(--sage);">
+    <p class="text-sm">{{ flash }}</p>
+</div>
+{% endif %}
+
+{# Paper header #}
+<div class="module-panel mb-4">
+    <div class="module-header">
+        <span class="module-title">Paper · {{ paper.cosmoid or paper.id }}</span>
+        {% if paper.status == 'submitted' %}
+            <span class="badge" style="background: var(--river-ll); color: var(--river);">Submitted</span>
+        {% elif paper.status == 'under_review' %}
+            <span class="badge" style="background: var(--amber-l); color: var(--amber);">Under Review</span>
+        {% elif paper.status == 'revision_requested' %}
+            <span class="badge" style="background: var(--coral-l); color: var(--coral);">Revisions</span>
+        {% elif paper.status == 'accepted' %}
+            <span class="badge badge-collab">Accepted</span>
+        {% elif paper.status == 'published' %}
+            <span class="badge badge-sealed">Published</span>
+        {% else %}
+            <span class="badge badge-tag">{{ paper.status }}</span>
+        {% endif %}
+    </div>
+    <div class="module-body">
+        <h2 style="font-family: var(--serif); font-size: 20px; font-weight: 300; line-height: 1.25; color: var(--ink); margin-bottom: 8px;">
+            {{ paper.title }}
+        </h2>
+        <div class="paper-card-meta mb-3">
+            {% if paper.orcid %}ORCID {{ paper.orcid }} · {% endif %}{{ paper.author_name }}
+        </div>
+        {% if paper.abstract %}
+        <p class="text-sm" style="color: var(--ink2); line-height: 1.65; margin-bottom: 12px;">{{ paper.abstract }}</p>
+        {% endif %}
+        <div class="flex gap-1 flex-wrap">
+            {% if paper.ai_disclosure_level and paper.ai_disclosure_level != 'none' %}
+                <span class="badge badge-ai">⬡ AI-Logged: {{ paper.ai_disclosure_level }}</span>
+            {% endif %}
+            {% if paper.q_signal is not none %}
+                <span class="badge" style="background: var(--ink); color: #fff;">q_signal {{ '%.2f'|format(paper.q_signal) }}{% if q_signal_label %} · {{ q_signal_label }}{% endif %}</span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{# Status transition #}
+<div class="module-panel mb-4">
+    <div class="module-header"><span class="module-title">Render Decision</span></div>
+    <div class="module-body">
+        <form method="post" action="/editorial/papers/{{ paper.id }}/status">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+            <div class="field-group">
+                <label for="e-status" class="field-label">Move to status</label>
+                <select id="e-status" name="status" class="field-input">
+                    <option value="under_review" {% if paper.status == 'under_review' %}selected{% endif %}>Under Review</option>
+                    <option value="revision_requested" {% if paper.status == 'revision_requested' %}selected{% endif %}>Revisions Requested</option>
+                    <option value="accepted" {% if paper.status == 'accepted' %}selected{% endif %}>Accept</option>
+                    <option value="published" {% if paper.status == 'published' %}selected{% endif %}>Publish</option>
+                    <option value="rejected" {% if paper.status == 'rejected' %}selected{% endif %}>Reject</option>
+                </select>
+            </div>
+
+            <div class="field-group">
+                <label for="e-notes" class="field-label">Notes to author</label>
+                <textarea id="e-notes" name="notes" rows="4" class="field-input field-textarea"></textarea>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-3" style="border-top: 0.5px solid var(--paper3);">
+                <a href="/editorial/" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Apply decision →</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{# Trajectory (if present) #}
+{% if trajectory %}
+<div class="module-panel mb-4">
+    <div class="module-header">
+        <span class="module-title">Trajectory</span>
+        {% if has_rewrite %}<span class="badge badge-tag">rewrite</span>{% endif %}
+        {% if has_branch %}<span class="badge badge-tag">branch</span>{% endif %}
+    </div>
+    <div class="module-body">
+        <div class="flex flex-col gap-1">
+            {% for node in trajectory %}
+            <div class="transp-row">
+                <span class="transp-row-label">{{ node.method_class or 'step' }}</span>
+                <span>{{ node.note or node.method or '' }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block author_sidebar %}
+<div class="flex flex-col gap-3">
+    {# q_signal breakdown #}
+    {% if q_breakdown %}
+    <div class="module-panel">
+        <div class="module-header"><span class="module-title">q_signal Breakdown</span></div>
+        <div class="module-body">
+            <div class="flex flex-col gap-2">
+                {% for key, val in q_breakdown.items() %}
+                {% if val is number %}
+                <div>
+                    <div class="flex justify-between" style="font-family: var(--mono); font-size: 9px; color: var(--ink3); margin-bottom: 2px;">
+                        <span style="text-transform: uppercase; letter-spacing: 0.04em;">{{ key }}</span>
+                        <span style="color: var(--river);">{{ '%.2f'|format(val) }}</span>
+                    </div>
+                    <div style="height: 3px; background: var(--paper3); border-radius: 2px;">
+                        <div style="height: 3px; width: {{ (val * 10) if val <= 10 else 100 }}%; background: var(--river-l); border-radius: 2px;"></div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {# Metadata #}
+    <div class="module-panel">
+        <div class="module-header"><span class="module-title">Paper Metadata</span></div>
+        <div class="module-body">
+            <div class="transp-row">
+                <span class="transp-row-label">ID</span>
+                <span>{{ paper.id }}</span>
+            </div>
+            {% if paper.cosmoid %}
+            <div class="transp-row">
+                <span class="transp-row-label">Cosmoid</span>
+                <span>{{ paper.cosmoid }}</span>
+            </div>
+            {% endif %}
+            {% if paper.keywords %}
+            <div class="transp-row">
+                <span class="transp-row-label">Keywords</span>
+                <span>{{ paper.keywords }}</span>
+            </div>
+            {% endif %}
+            {% if paper.doi %}
+            <div class="transp-row">
+                <span class="transp-row-label">DOI</span>
+                <span>{{ paper.doi }}</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {# AI disclosure #}
+    {% if paper.ai_disclosure_notes %}
+    <div class="module-panel">
+        <div class="module-header"><span class="module-title">AI Disclosure</span></div>
+        <div class="module-body">
+            <p class="text-xs" style="color: var(--ink2); line-height: 1.5;">{{ paper.ai_disclosure_notes }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    {# Rejection info #}
+    {% if paper.rejection_reason_code %}
+    <div class="module-panel" style="border-color: var(--coral);">
+        <div class="module-header" style="background: var(--coral-l);"><span class="module-title" style="color: var(--coral);">Rejection</span></div>
+        <div class="module-body">
+            <div class="transp-row">
+                <span class="transp-row-label">Reason</span>
+                <span>{{ paper.rejection_reason_code }}</span>
+            </div>
+            {% if paper.rejection_notes %}
+            <p class="text-xs mt-2" style="color: var(--ink2);">{{ paper.rejection_notes }}</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

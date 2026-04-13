@@ -1,0 +1,75 @@
+{% extends "author/base_author.html" %}
+{% block title %}Review Queue — eaiou{% endblock %}
+{% block page_title %}Queue{% endblock %}
+
+{% block author_left_sidebar %}{% endblock %}
+
+{% block author_content %}
+<h1 class="sr-only">Review queue</h1>
+<div class="section-label">Submissions awaiting editorial action</div>
+
+<div class="mb-4" style="font-family: var(--mono); font-size: 10px; color: var(--ink3); letter-spacing: 0.05em;">
+    {{ queue_count }} PAPER{% if queue_count != 1 %}S{% endif %} IN QUEUE · Q_SIGNAL DESC
+</div>
+
+{% if papers %}
+<div class="flex flex-col gap-3">
+    {% for p in papers %}
+    <div class="paper-card">
+        <div class="flex justify-between items-start mb-1">
+            <div class="paper-card-meta">
+                {% if p.orcid %}ORCID {{ p.orcid }} · {% endif %}{{ p.author_name }}
+            </div>
+            <span class="badge" style="background: var(--river-ll); color: var(--river);">Submitted</span>
+        </div>
+        <div class="paper-card-title">{{ p.title }}</div>
+        {% if p.abstract %}
+        <div class="paper-card-abstract">{{ p.abstract[:240] }}{% if p.abstract|length > 240 %}…{% endif %}</div>
+        {% endif %}
+        <div class="paper-card-footer">
+            <div class="paper-card-tags">
+                {% if p.ai_disclosure_level and p.ai_disclosure_level != 'none' %}
+                    <span class="badge badge-ai">⬡ AI-Logged</span>
+                {% endif %}
+            </div>
+            <a href="/editorial/papers/{{ p.id }}" class="btn btn-primary">Review →</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="module-panel">
+    <div class="module-body text-center">
+        <p style="color: var(--ink3);">Queue is empty.</p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block author_sidebar %}
+<div class="module-panel">
+    <div class="module-header"><span class="module-title">Queue Stats</span></div>
+    <div class="module-body">
+        <div class="transp-row">
+            <span class="transp-row-label">Submitted</span>
+            <span>{{ stats.submitted or 0 }}</span>
+        </div>
+        <div class="transp-row">
+            <span class="transp-row-label">Under Review</span>
+            <span>{{ stats.under_review or 0 }}</span>
+        </div>
+        <div class="transp-row">
+            <span class="transp-row-label">Revisions</span>
+            <span>{{ stats.revision_requested or 0 }}</span>
+        </div>
+        <div class="transp-row">
+            <span class="transp-row-label">Accepted</span>
+            <span>{{ stats.accepted or 0 }}</span>
+        </div>
+        <div class="transp-row">
+            <span class="transp-row-label">Published</span>
+            <span>{{ stats.published or 0 }}</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

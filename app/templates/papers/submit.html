@@ -1,0 +1,71 @@
+{% extends "author/base_author.html" %}
+{% block title %}Submit a Paper — eaiou{% endblock %}
+{% block page_title %}Submit{% endblock %}
+
+{% block author_left_sidebar %}{% endblock %}
+
+{% block author_content %}
+<div class="max-w-2xl">
+    <h1 class="text-2xl mb-2" style="font-family: var(--serif); font-weight: 400;">Submit a Paper</h1>
+    <p class="text-sm mb-6" style="color: var(--ink3);">
+        Your submission date is sealed at receipt. Papers are evaluated on quality, not arrival order.
+    </p>
+
+    {% if error %}
+    <div class="mb-4 rounded p-3" style="background: var(--coral-l); border: 0.5px solid var(--coral); color: var(--coral);">
+        <p class="text-sm">{{ error }}</p>
+    </div>
+    {% endif %}
+
+    <form method="post" action="/papers/submit" class="space-y-4">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+        <div class="field-group">
+            <label for="f-title" class="field-label">Title</label>
+            <input id="f-title" name="title" type="text" required class="field-input">
+        </div>
+
+        <div class="field-group">
+            <label for="f-abstract" class="field-label">Abstract</label>
+            <textarea id="f-abstract" name="abstract" rows="6" required class="field-input field-textarea"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label for="f-author" class="field-label">Author name</label>
+            <input id="f-author" name="author_name" type="text" required class="field-input">
+        </div>
+
+        <div class="field-group">
+            <label for="f-orcid" class="field-label">ORCID <span style="text-transform: none; color: var(--ink3);">(optional)</span></label>
+            <input id="f-orcid" name="orcid" type="text" placeholder="0000-0000-0000-0000" class="field-input">
+        </div>
+
+        <div class="field-group">
+            <label for="f-keywords" class="field-label">Keywords</label>
+            <input id="f-keywords" name="keywords" type="text" placeholder="comma, separated" class="field-input">
+        </div>
+
+        <div class="field-group">
+            <label for="f-ai-level" class="field-label">AI disclosure level</label>
+            <select id="f-ai-level" name="ai_disclosure_level" required class="field-input">
+                <option value="none">None — no AI used</option>
+                <option value="minimal">Minimal — tooling only (grammar, search)</option>
+                <option value="assisted">Assisted — AI contributed to drafting</option>
+                <option value="substantial">Substantial — AI contributed to analysis</option>
+                <option value="collaborative">Collaborative — AI is a named contributor</option>
+            </select>
+        </div>
+
+        <div class="field-group">
+            <label for="f-ai-notes" class="field-label">AI disclosure notes</label>
+            <textarea id="f-ai-notes" name="ai_disclosure_notes" rows="3" class="field-input field-textarea"
+                      placeholder="Which tools, how they were used, what was verified by the author."></textarea>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-4" style="border-top: 0.5px solid var(--paper3);">
+            <a href="/papers/" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Submit paper →</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
