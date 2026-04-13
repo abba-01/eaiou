@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}eaiou{% endblock %}</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest' };</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['DM Sans', 'sans-serif'] },
+                    colors: {
+                        primary: {
+                            50:  '#F0EFEB',
+                            100: '#EDECE9',
+                            200: '#E2E0DB',
+                            300: '#CAC8C2',
+                            400: '#9A9895',
+                            500: '#5A5856',
+                            600: '#18171A',
+                            700: '#18171A',
+                            900: '#0A090B',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- eaiou design system -->
+    <link rel="stylesheet" href="/static/css/eaiou.css">
+    <style>
+        /* ── Design System Tokens ─────────────────────────────────────── */
+        :root {
+            --ds-bg:      #F7F6F3;
+            --ds-surface: #FFFFFF;
+            --ds-border:  #E2E0DB;
+            --ds-ink-1:   #18171A;
+            --ds-ink-2:   #5A5856;
+            --ds-ink-3:   #9A9895;
+            --ds-accent:  #18171A;
+        }
+        /* ── Focus rings: monochrome only ────────────────────────────── */
+        *:focus-visible {
+            outline: 2px solid #CAC8C2;
+            outline-offset: 2px;
+        }
+        /* ── Scrollbar ───────────────────────────────────────────────── */
+        ::-webkit-scrollbar { display: none; }
+        /* ── Active nav item ─────────────────────────────────────────── */
+        .nav-active {
+            background-color: #F0EFEB;
+            color: #18171A;
+        }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+<body class="font-sans min-h-screen flex flex-col" style="background: var(--ds-bg); color: var(--ds-ink-1);">
+
+    <!-- ── Fixed top navigation ─────────────────────────────────────── -->
+    <header class="fixed top-0 left-0 w-full z-50" style="background: var(--ds-surface); border-bottom: 1px solid var(--ds-border);">
+        <div class="max-w-6xl mx-auto px-6">
+
+            <!-- Row 1: brand + primary nav + user actions -->
+            <div class="flex items-center justify-between py-2.5" style="border-bottom: 1px solid var(--ds-border);">
+                <div class="flex items-center gap-8">
+                    <a href="/" class="eaiou-brand text-xl" style="color: var(--ds-ink-1);">eaiou</a>
+                    <nav class="hidden md:flex items-center gap-6">
+                        <a href="/papers/" class="text-sm font-medium transition-colors hover:text-primary-600 {% if request.url.path == '/papers/' %}nav-active px-2 py-0.5 rounded{% endif %}" style="color: var(--ds-ink-2);">Papers</a>
+                        <a href="/author/submit" class="text-sm font-medium transition-colors hover:text-primary-600 {% if request.url.path == '/author/submit' %}nav-active px-2 py-0.5 rounded{% endif %}" style="color: var(--ds-ink-2);">Submit</a>
+                        <a href="/report" class="text-sm font-medium transition-colors hover:text-primary-600 {% if request.url.path == '/report' %}nav-active px-2 py-0.5 rounded{% endif %}" style="color: var(--ds-ink-2);">Analyze</a>
+                        <a href="/about" class="text-sm font-medium transition-colors hover:text-primary-600 {% if request.url.path == '/about' %}nav-active px-2 py-0.5 rounded{% endif %}" style="color: var(--ds-ink-2);">About</a>
+                    </nav>
+                </div>
+                <div class="flex items-center gap-3">
+                    {% if current_user %}
+                        <a href="/editor/"
+                           class="hidden md:inline-flex items-center text-xs font-medium px-2.5 py-1.5 rounded-md transition-colors"
+                           style="border: 1px solid var(--ds-border); background: var(--ds-surface); color: var(--ds-ink-2);">
+                           <i class="fa-solid fa-pen-nib mr-1.5" style="color: var(--ds-ink-3);"></i>Editor
+                        </a>
+                        <a href="/author/" class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-semibold bg-primary-600">
+                                {{ current_user.initials }}
+                            </div>
+                            <span class="hidden md:inline text-sm font-medium" style="color: var(--ds-ink-1);">{{ current_user.name }}</span>
+                        </a>
+                    {% else %}
+                        <a href="/auth/login"
+                           class="text-sm font-medium px-4 py-1.5 rounded-md bg-primary-600 text-white hover:bg-primary-700 transition-colors">
+                           Sign In
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Row 2: secondary nav -->
+            <div class="hidden md:flex items-center gap-5 py-1.5">
+                <a href="/policy/temporal-blindness" class="text-xs transition-colors hover:text-primary-600" style="color: var(--ds-ink-2);">Temporal Blindness</a>
+                <a href="/policy/intelligence-blindness" class="text-xs transition-colors hover:text-primary-600" style="color: var(--ds-ink-2);">Intelligence Blindness</a>
+                <a href="/policy/ai-disclosure" class="text-xs transition-colors hover:text-primary-600" style="color: var(--ds-ink-2);">AI Disclosure</a>
+                <a href="/policy/open-access" class="text-xs transition-colors hover:text-primary-600" style="color: var(--ds-ink-2);">Open Access</a>
+                <span style="color: var(--ds-border);">|</span>
+                <a href="/api/v1/intellid" class="text-xs transition-colors hover:text-primary-600" style="color: var(--ds-ink-2);">IntelliD API</a>
+                <a href="/health" class="text-xs transition-colors hover:text-primary-600" style="color: var(--ds-ink-2);">Status</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page content (pt accounts for 2-row header ~80px) -->
+    <main class="flex-1 pt-20">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ── Footer ───────────────────────────────────────────────────── -->
+    <footer class="mt-16" style="background: var(--ds-surface); border-top: 1px solid var(--ds-border);">
+        <div class="max-w-6xl mx-auto px-6 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <span class="eaiou-brand text-lg block mb-2" style="color: var(--ds-ink-1);">eaiou</span>
+                    <p class="text-sm leading-relaxed" style="color: var(--ds-ink-2);">
+                        Observer-preserving full-context peer-review journal.<br>
+                        Sort key: quality. Submission dates: sealed.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-wider mb-3" style="color: var(--ds-ink-3);">Journal</h3>
+                    <ul class="space-y-2 text-sm" style="color: var(--ds-ink-2);">
+                        <li><a href="/papers/" class="hover:text-primary-600 transition-colors">Papers</a></li>
+                        <li><a href="/author/submit" class="hover:text-primary-600 transition-colors">Submit</a></li>
+                        <li><a href="/about" class="hover:text-primary-600 transition-colors">About</a></li>
+                        <li><a href="/report" class="hover:text-primary-600 transition-colors">Coverage Tool</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-wider mb-3" style="color: var(--ds-ink-3);">Policy</h3>
+                    <ul class="space-y-2 text-sm" style="color: var(--ds-ink-2);">
+                        <li><a href="/policy/temporal-blindness" class="hover:text-primary-600 transition-colors">Temporal Blindness</a></li>
+                        <li><a href="/policy/intelligence-blindness" class="hover:text-primary-600 transition-colors">Intelligence Blindness</a></li>
+                        <li><a href="/policy/ai-disclosure" class="hover:text-primary-600 transition-colors">AI Disclosure</a></li>
+                        <li><a href="/policy/open-access" class="hover:text-primary-600 transition-colors">Open Access</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-6 flex flex-col md:flex-row justify-between items-center gap-2" style="border-top: 1px solid var(--ds-border);">
+                <p class="text-xs" style="color: var(--ds-ink-3);">© 2026 eaiou — Eric D. Martin | ORCID 0009-0006-5944-1742</p>
+                <p class="text-xs" style="color: var(--ds-ink-3);">Bias can see time. Justice cannot.</p>
+            </div>
+        </div>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
