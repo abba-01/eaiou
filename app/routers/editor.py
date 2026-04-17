@@ -111,7 +111,8 @@ async def queue(
         return redirect
 
     papers = db.execute(text(
-        "SELECT id, paper_uuid, title, abstract, author_name, orcid, ai_disclosure_level "
+        "SELECT id, paper_uuid, cosmoid, title, abstract, author_name, orcid, "
+        "ai_disclosure_level, status, q_overall "
         "FROM `#__eaiou_papers` WHERE status = 'submitted' "
         "ORDER BY q_overall IS NULL, q_overall DESC, paper_uuid ASC"
     )).mappings().all()

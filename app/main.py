@@ -323,6 +323,13 @@ async def about(request: Request, current_user=Depends(get_current_user)):
     )
 
 
+@app.get("/policy", response_class=HTMLResponse)
+async def policy(request: Request, current_user=Depends(get_current_user)):
+    return templates.TemplateResponse(
+        request, "policy.html", {"current_user": current_user}
+    )
+
+
 @app.get("/policy/temporal-blindness", response_class=HTMLResponse)
 async def policy_temporal(request: Request, current_user=Depends(get_current_user)):
     return templates.TemplateResponse(

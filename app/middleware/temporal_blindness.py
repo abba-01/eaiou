@@ -31,7 +31,12 @@ _FORBIDDEN_SORT_KEYS = frozenset({
 
 def _is_governance(request: Request) -> bool:
     """Return True if the session user belongs to the 'governance' group."""
-    user = request.session.get("user") or {}
+    user = request.session.get("user")
+    if not user:
+        return False
+    # Phase 1: session stores username as string; Phase 2 will store dict
+    if isinstance(user, str):
+        return False
     return "governance" in (user.get("groups") or [])
 
 
