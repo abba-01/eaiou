@@ -321,17 +321,17 @@ Tags feed `/discover/gaps` (gap map by domain + stall type) and `/discover/ideas
 ### Phase 1 (complete — verified 2026-04-17)
 - Single admin, env-based auth (bcrypt, CSRF, rate limiting, session middleware)
 - Submit → confirm → public view pipeline (end-to-end verified)
-- 34 database tables live against MariaDB
-- 183 routes registered, 87 API endpoints across tiers 1-12
+- 35 database tables live against MariaDB
+- 186 routes registered, 90 API endpoints across tiers 1-12
 - Admin router (`routers/admin.py`) — dashboard, user CRUD, group management
 - Editor router (`routers/editor.py`) — dashboard, queue, paper detail, status transitions, Q scoring
 - Q scoring service (`services/qscore.py`) — 4-dimension weighted score, editor override, recompute
 - Author router (`routers/author.py`) — dashboard, drawer, submit, notifications, workspace
 - TemporalBlindnessMiddleware — sealed field stripping, date-sort rejection (400)
 - Design system — monochrome palette, DM Sans/DM Serif Display, verified across all templates
-- MCP server — 32 tools (paper.*, auth.*, user.*)
+- MCP server — 40 tools (paper.*, auth.*, user.*)
 - IntelliD router — CosmoID minting, tombstone lifecycle
-- 2 test papers in database
+- 3 test papers in database
 
 ### Phase 2 (not started)
 - Reviewer assignment and matching
@@ -353,13 +353,16 @@ Tags feed `/discover/gaps` (gap map by domain + stall type) and `/discover/ideas
 - Admin router (`routers/admin.py`) — dashboard, user CRUD, group management: all routes return 200
 - Editor router (`routers/editor.py`) — dashboard, queue, paper detail, status transitions, Q scoring: all routes return 200
 - Q scoring service (`services/qscore.py`) — 4-dimension weighted score, editor override, recompute: verified via `/editor/papers/{id}/score/breakdown`
-- Papers submission pipeline — submit → confirm → public view: end-to-end verified
+- Papers submission pipeline — submit (POST /author/submit) → DB insert (status=submitted) → redirect to /author/workspace/{id}: end-to-end verified; submitted papers appear in /editor/queue
 - Auth — bcrypt login, CSRF protection, rate limiting, session middleware: login/logout flow verified
-- TemporalBlindnessMiddleware — sealed field stripping (13 fields clean), date-sort rejection (400 on date/created/submitted_at)
-- Design system — monochrome palette verified; no color words; all shells extend base; design tokens consistent
-- API tiers 1-12 — 87 endpoints at `/api/v1/` prefix (papers CRUD, workflow, review, authorship, transparency, discovery, gaps, versioning, admin, logging, notifications, system)
-- MCP server — 32 tools (paper.*, auth.*, user.*)
-- The app runs live against MariaDB with 2 test papers
+- TemporalBlindnessMiddleware — sealed field stripping, date-sort rejection (400 on date/created/submitted_at); all paper queries use `ORDER BY q_overall IS NULL, q_overall DESC, paper_uuid ASC`; `id DESC` used only on non-paper tables (api_logs, notifications, quality_signals, review_logs, ai_sessions)
+- Template inheritance — all admin, author, and editor templates extend their base shell; all base shells extend `base.html`; zero orphan templates
+- Template Temporal Blindness — no `submitted_at` exposure, no `id DESC` or `created DESC` on papers in any template; all occurrences are documentation/comments only
+- Design system — monochrome palette verified; no color words; design tokens consistent across all templates
+- API tiers 1-12 — 90 endpoints at `/api/v1/` prefix (papers CRUD, workflow, review, authorship, transparency, discovery, gaps, versioning, admin, logging, notifications, system)
+- MCP server — 40 tools (paper.*, auth.*, user.*)
+- 35 database tables live against MariaDB with 3 test papers (IDs 1-3)
+- 186 total routes registered (OpenAPI spec)
 
 ### Phase 1 — Known Gaps
 - `papers/submit.html` is a legacy placeholder — `/author/submit` is the active route
