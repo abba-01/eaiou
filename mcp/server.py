@@ -652,6 +652,105 @@ async def user_get_activity(user_id: int) -> dict:
     return await _get(f"/api/v1/users/{user_id}/activity")
 
 
+# ── Claude Code integration (Option C, smallest viable cut) ─────────────────
+#
+# Per `/scratch/repos/eaiou-admin/_notes/2026-04-25-claude-code-mcp-integration.md`,
+# the Option C bidirectional integration extends the existing eaiou MCP server
+# with Claude-Code-relevant tools, plus a Claude Code PostToolUse hook that
+# auto-records edits inside eaiou's storage tree. This block is the
+# eaiou-server-side half. The client-side hook lives in the Claude Code
+# settings file (project- or user-level `.claude/settings.json`).
+#
+# Smallest cut here: record_claude_action + gate_status.
+# Both call the eaiou /api/v1/ provenance and gate endpoints; they run under
+# the same bearer-auth as any other tool above.
+
+
+@mcp.tool()
+async def record_claude_action(
+    tool_name: str,
+    action_type: str,
+    file_path: str = "",
+    content_hash: str = "",
+    session_id: str = "",
+    paper_cosmoid: str = "",
+    summary: str = "",
+) -> dict:
+    """
+    Record a Claude Code in-editor action (Edit, Write, Bash, etc.) to the
+    eaiou provenance graph. Called by the Claude Code PostToolUse hook for
+    edits inside eaiou's storage tree, or directly by a Claude Code session
+    for any action that should land on the CAUGHT-layer provenance record.
+
+    Parameters
+    ----------
+    tool_name : str
+        The Claude Code tool name (e.g., "Edit", "Write", "Bash").
+    action_type : str
+        Semantic action class ("file_edit", "file_create", "command_run",
+        "agent_dispatch", etc.).
+    file_path : str, optional
+        Path of the file touched (if applicable).
+    content_hash : str, optional
+        SHA256 of the file content after the action (if applicable).
+    session_id : str, optional
+        Claude Code session identifier for cross-action correlation.
+    paper_cosmoid : str, optional
+        Cosmoid of the paper this action is associated with (if applicable).
+    summary : str, optional
+        One-line human-readable summary of the action.
+
+    Returns
+    -------
+    dict
+        eaiou's recorded provenance entry, including its assigned id and
+        timestamp seal.
+    """
+    resp = await _post(
+        "/api/v1/provenance/claude_action",
+        json={
+            "tool_name": tool_name,
+            "action_type": action_type,
+            "file_path": file_path,
+            "content_hash": content_hash,
+            "session_id": session_id,
+            "paper_cosmoid": paper_cosmoid,
+            "summary": summary,
+        },
+    )
+    await _log_action("CLAUDE_ACTION_RECORDED", resp.get("id"))
+    return resp
+
+
+@mcp.tool()
+async def gate_status(paper_cosmoid: str = "", deposition_id: str = "") -> dict:
+    """
+    Query the gate state for a paper or Zenodo deposition (open / cool / closed).
+    Used by Claude Code sessions before taking a gated action (publish, submit,
+    deposit) to verify the gate is actually open per Eric's discipline
+    (`feedback_zenodo_publish_gate.md`, `feedback_submission_print_gate.md`).
+
+    Either paper_cosmoid or deposition_id must be provided. If both, both
+    gates are checked and a combined status is returned.
+
+    Returns
+    -------
+    dict with keys:
+        state: "open" | "cool" | "closed" | "not_found"
+        cool_window_ends_utc: ISO-8601 timestamp (if state == "cool")
+        gate_open_signal_verbatim: str (if state == "open")
+        last_action_utc: ISO-8601 timestamp of last gate-affecting event
+    """
+    params = {}
+    if paper_cosmoid:
+        params["paper_cosmoid"] = paper_cosmoid
+    if deposition_id:
+        params["deposition_id"] = deposition_id
+    if not params:
+        return {"state": "not_found", "error": "must provide paper_cosmoid or deposition_id"}
+    return await _get("/api/v1/gate/status", params=params)
+
+
 # ── Entry point ───────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":

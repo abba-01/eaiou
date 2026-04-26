@@ -1,0 +1,15 @@
+{
+  "$schema_note": "Project-scoped Claude Code settings for eaiou. PostToolUse hook records Edit/Write/NotebookEdit actions inside the eaiou repo to eaiou's provenance graph (CAUGHT-layer record). Hook is silent on success and silent on eaiou-unreachable; failures log to .claude/hook_errors.log. See /scratch/repos/eaiou-admin/_notes/2026-04-25-claude-code-mcp-integration.md for the Option C bidirectional integration design.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /scratch/repos/eaiou/.claude/hooks/eaiou_record_action.py"
+          }
+        ]
+      }
+    ]
+  }
+}
