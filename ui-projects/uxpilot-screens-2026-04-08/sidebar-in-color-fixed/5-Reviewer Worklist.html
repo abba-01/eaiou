@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Left Sidebar -->
+    <div id="sidebar" class="fixed left-0 top-0 bottom-0 w-16 bg-gray-800 flex flex-col items-center">
+        <div class="mt-6 mb-10">
+            <div class="bg-primary-600 h-7 w-7 transform rotate-45 flex items-center justify-center">
+                <div class="bg-white h-2 w-2 transform rotate-45"></div>
+            </div>
+        </div>
+        <div class="flex flex-col items-center space-y-6">
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-home text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-file-lines text-xl"></i></span>
+            <span class="text-white p-2 bg-primary-600 rounded cursor-pointer"><i class="fa-solid fa-pen-to-square text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-magnifying-glass text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-users text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-chart-bar text-xl"></i></span>
+        </div>
+        <div class="mt-auto mb-6">
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-gear text-xl"></i></span>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="ml-16">
+        <!-- Header -->
+        <div id="header" class="flex justify-between items-center p-4 bg-white border-b border-gray-200">
+            <div class="flex items-center space-x-4">
+                <h1 class="text-xl font-semibold text-gray-800">Review Assignments</h1>
+                <span class="text-sm px-2 py-1 bg-green-100 text-green-800 rounded">Reviewer</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="flex items-center text-gray-600 hover:text-gray-800">
+                    <i class="fa-solid fa-question-circle mr-2"></i>
+                    <span>Help</span>
+                </button>
+                <div class="relative">
+                    <button class="text-gray-600 hover:text-gray-800">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User" class="w-8 h-8 rounded-full">
+                    <span class="text-sm font-medium">Dr. Michael Chen</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="p-6">
+            <div class="max-w-6xl mx-auto">
+                <!-- Stats Cards -->
+                <div id="review-stats" class="grid grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm font-medium text-gray-500">Pending Reviews</h3>
+                            <span class="text-primary-600"><i class="fa-solid fa-clock"></i></span>
+                        </div>
+                        <p class="text-2xl font-bold text-gray-800">5</p>
+                        <p class="text-xs text-gray-500 mt-1">2 due this week</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm font-medium text-gray-500">In Progress</h3>
+                            <span class="text-yellow-500"><i class="fa-solid fa-spinner"></i></span>
+                        </div>
+                        <p class="text-2xl font-bold text-gray-800">2</p>
+                        <p class="text-xs text-gray-500 mt-1">Started but not submitted</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm font-medium text-gray-500">Completed</h3>
+                            <span class="text-green-600"><i class="fa-solid fa-check-circle"></i></span>
+                        </div>
+                        <p class="text-2xl font-bold text-gray-800">12</p>
+                        <p class="text-xs text-gray-500 mt-1">Last submission: 2 days ago</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm font-medium text-gray-500">Average Score</h3>
+                            <span class="text-blue-600"><i class="fa-solid fa-star"></i></span>
+                        </div>
+                        <p class="text-2xl font-bold text-gray-800">7.8/10</p>
+                        <p class="text-xs text-gray-500 mt-1">Based on your last 10 reviews</p>
+                    </div>
+                </div>
+
+                <!-- Filters and Search -->
+                <div id="filters-section" class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-medium text-gray-800">My Review Assignments</h2>
+                        <div class="flex items-center space-x-2">
+                            <div class="relative">
+                                <input type="text" placeholder="Search articles..." class="pl-8 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 w-64">
+                                <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            </div>
+                            <div class="relative">
+                                <select class="border border-gray-300 rounded-md px-3 py-2 appearance-none pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                    <option value="all">All Statuses</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="in-progress">In Progress</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                            </div>
+                            <div class="relative">
+                                <select class="border border-gray-300 rounded-md px-3 py-2 appearance-none pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                    <option value="due-date">Sort by Due Date</option>
+                                    <option value="assigned-date">Sort by Assigned Date</option>
+                                    <option value="title">Sort by Title</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Articles List -->
+                <div id="articles-list" class="space-y-4">
+                    <!-- Urgent Article -->
+                    <div id="article-1" class="bg-white rounded-lg shadow-sm border-l-4 border-red-500 border-t border-r border-b border-gray-200">
+                        <div class="p-4">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <span class="px-2 py-0.5 bg-red-100 text-red-800 rounded-full text-xs font-medium">Due Tomorrow</span>
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded-full text-xs">Neuroscience</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-800 mb-1">Neural Correlates of Cognitive Flexibility in Decision Making Processes</h3>
+                                    <p class="text-sm text-gray-600 mb-2">Assigned: Jul 24, 2023 | Due: Aug 3, 2023</p>
+                                    <p class="text-sm text-gray-500 line-clamp-2">This study investigates the neural mechanisms underlying cognitive flexibility during complex decision-making tasks using fMRI and computational modeling approaches...</p>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-sm font-medium mb-2">In Progress</span>
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <span class="mr-2">Completion: 60%</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full">
+                                            <div class="w-3/5 h-2 bg-primary-500 rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fa-solid fa-user-edit mr-1"></i>
+                                    <span>Author: Anonymous (Double-blind)</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="px-3 py-1.5 border border-gray-300 rounded-md text-sm text-gray-600 hover:bg-gray-50">
+                                        <i class="fa-regular fa-eye mr-1"></i> View Details
+                                    </button>
+                                    <button class="px-3 py-1.5 bg-primary-600 text-white rounded-md text-sm hover:bg-primary-700">
+                                        <i class="fa-solid fa-pen-to-square mr-1"></i> Continue Review
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Almost Due Article -->
+                    <div id="article-2" class="bg-white rounded-lg shadow-sm border-l-4 border-orange-500 border-t border-r border-b border-gray-200">
+                        <div class="p-4">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <span class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded-full text-xs font-medium">Due in 3 days</span>
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded-full text-xs">Psychology</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-800 mb-1">Impact of Social Media Use on Adolescent Mental Health: A Longitudinal Study</h3>
+                                    <p class="text-sm text-gray-600 mb-2">Assigned: Jul 20, 2023 | Due: Aug 5, 2023</p>
+                                    <p class="text-sm text-gray-500 line-clamp-2">This longitudinal study examines the relationship between social media usage patterns and mental health outcomes in adolescents aged 13-18 over a three-year period...</p>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-sm font-medium mb-2">In Progress</span>
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <span class="mr-2">Completion: 25%</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full">
+                                            <div class="w-1/4 h-2 bg-primary-500 rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fa-solid fa-user-edit mr-1"></i>
+                                    <span>Author: Anonymous (Double-blind)</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="px-3 py-1.5 border border-gray-300 rounded-md text-sm text-gray-600 hover:bg-gray-50">
+                                        <i class="fa-regular fa-eye mr-1"></i> View Details
+                                    </button>
+                                    <button class="px-3 py-1.5 bg-primary-600 text-white rounded-md text-sm hover:bg-primary-700">
+                                        <i class="fa-solid fa-pen-to-square mr-1"></i> Continue Review
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pending Article 1 -->
+                    <div id="article-3" class="bg-white rounded-lg shadow-sm border border-gray-200">
+                        <div class="p-4">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded-full text-xs">Computer Science</span>
+                                        <span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded-full text-xs">AI Ethics</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-800 mb-1">Ethical Considerations in Developing Large Language Models: A Framework for Responsible AI</h3>
+                                    <p class="text-sm text-gray-600 mb-2">Assigned: Jul 28, 2023 | Due: Aug 18, 2023</p>
+                                    <p class="text-sm text-gray-500 line-clamp-2">This paper proposes a comprehensive framework for addressing ethical challenges in the development and deployment of large language models, focusing on bias mitigation, transparency, and accountability...</p>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-sm font-medium mb-2">Not Started</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fa-solid fa-user-edit mr-1"></i>
+                                    <span>Author: Anonymous (Double-blind)</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="px-3 py-1.5 border border-gray-300 rounded-md text-sm text-gray-600 hover:bg-gray-50">
+                                        <i class="fa-regular fa-eye mr-1"></i> View Details
+                                    </button>
+                                    <button class="px-3 py-1.5 bg-primary-600 text-white rounded-md text-sm hover:bg-primary-700">
+                                        <i class="fa-solid fa-pen-to-square mr-1"></i> Start Review
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pending Article 2 -->
+                    <div id="article-4" class="bg-white rounded-lg shadow-sm border border-gray-200">
+                        <div class="p-4">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded-full text-xs">Environmental Science</span>
+                                        <span class="px-2 py-0.5 bg-green-100 text-green-800 rounded-full text-xs">Sustainability</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-800 mb-1">Urban Green Infrastructure and Climate Resilience: A Case Study of Metropolitan Areas</h3>
+                                    <p class="text-sm text-gray-600 mb-2">Assigned: Jul 30, 2023 | Due: Aug 20, 2023</p>
+                                    <p class="text-sm text-gray-500 line-clamp-2">This research evaluates the effectiveness of green infrastructure implementations in major metropolitan areas for enhancing climate resilience, with a focus on heat island mitigation and stormwater management...</p>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-sm font-medium mb-2">Not Started</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fa-solid fa-user-edit mr-1"></i>
+                                    <span>Author: Anonymous (Double-blind)</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="px-3 py-1.5 border border-gray-300 rounded-md text-sm text-gray-600 hover:bg-gray-50">
+                                        <i class="fa-regular fa-eye mr-1"></i> View Details
+                                    </button>
+                                    <button class="px-3 py-1.5 bg-primary-600 text-white rounded-md text-sm hover:bg-primary-700">
+                                        <i class="fa-solid fa-pen-to-square mr-1"></i> Start Review
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pending Article 3 -->
+                    <div id="article-5" class="bg-white rounded-lg shadow-sm border border-gray-200">
+                        <div class="p-4">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded-full text-xs">Medicine</span>
+                                        <span class="px-2 py-0.5 bg-red-100 text-red-800 rounded-full text-xs">Immunology</span>
+                                    </div>
+                                    <h3 class="text-lg font-medium text-gray-800 mb-1">Novel Approaches to Vaccine Development: mRNA Platform Technologies and Beyond</h3>
+                                    <p class="text-sm text-gray-600 mb-2">Assigned: Aug 1, 2023 | Due: Aug 22, 2023</p>
+                                    <p class="text-sm text-gray-500 line-clamp-2">This review examines recent advances in vaccine development technologies, with particular emphasis on mRNA platforms and their potential applications beyond infectious diseases...</p>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-sm font-medium mb-2">Not Started</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fa-solid fa-user-edit mr-1"></i>
+                                    <span>Author: Anonymous (Double-blind)</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="px-3 py-1.5 border border-gray-300 rounded-md text-sm text-gray-600 hover:bg-gray-50">
+                                        <i class="fa-regular fa-eye mr-1"></i> View Details
+                                    </button>
+                                    <button class="px-3 py-1.5 bg-primary-600 text-white rounded-md text-sm hover:bg-primary-700">
+                                        <i class="fa-solid fa-pen-to-square mr-1"></i> Start Review
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div id="pagination" class="flex justify-between items-center mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                    <div class="text-sm text-gray-600">
+                        Showing 5 of 7 assignments
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="w-8 h-8 flex items-center justify-center rounded-md border border-gray-300 text-gray-500 hover:bg-gray-50 disabled:opacity-50" disabled>
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-md border border-gray-300 bg-primary-50 text-primary-600 font-medium">1</button>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-md border border-gray-300 text-gray-600 hover:bg-gray-50">2</button>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-md border border-gray-300 text-gray-500 hover:bg-gray-50">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer" class="mt-8 border-t border-gray-200 py-4 px-6 text-center text-sm text-gray-500">
+            <p>© 2023 Academic Journal Management System. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

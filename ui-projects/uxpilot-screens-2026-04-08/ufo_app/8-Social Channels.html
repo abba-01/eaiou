@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C63FF',
+                        secondary: '#2A265F',
+                        accent: '#00F5A0',
+                        dark: '#121212',
+                        darkGray: '#1E1E1E',
+                        lightGray: '#2A2A2A',
+                        success: '#00C853',
+                        warning: '#FFD600',
+                        danger: '#FF3D00',
+                        info: '#00B0FF'
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-white font-sans">
+    <!-- Status Bar -->
+    <div id="status-bar" class="bg-darkGray p-2 flex justify-between items-center text-xs">
+        <div>
+            <span>9:41</span>
+        </div>
+        <div class="flex space-x-2">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-three-quarters"></i>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="bg-darkGray p-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <button id="back-btn" class="h-8 w-8 rounded-full bg-secondary flex items-center justify-center">
+                <i class="fa-solid fa-arrow-left text-white"></i>
+            </button>
+            <h1 class="text-lg font-bold">Community</h1>
+        </div>
+        <div class="flex space-x-4">
+            <button id="search-btn">
+                <i class="fa-solid fa-magnifying-glass text-xl"></i>
+            </button>
+            <button id="profile-btn">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Profile" class="h-8 w-8 rounded-full object-cover border border-primary">
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pb-20">
+        <!-- Location & Status -->
+        <section id="location-status" class="p-4 bg-darkGray mb-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="flex items-center space-x-1 text-sm text-gray-400">
+                        <i class="fa-solid fa-location-dot text-accent"></i>
+                        <span>Portland, OR</span>
+                    </div>
+                    <div class="text-xs text-gray-500">Local groups within 25 miles</div>
+                </div>
+                <div class="bg-secondary px-3 py-1 rounded-full flex items-center space-x-1">
+                    <span class="h-2 w-2 rounded-full bg-success"></span>
+                    <span class="text-xs">12 active groups</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Events -->
+        <section id="upcoming-events" class="px-4 mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold">Upcoming Events</h2>
+                <span class="text-primary text-sm cursor-pointer">View All</span>
+            </div>
+            
+            <div class="bg-darkGray rounded-xl p-3 mb-3">
+                <div class="flex justify-between items-start">
+                    <div class="bg-secondary rounded-lg p-2 text-center mr-3">
+                        <span class="block text-sm font-bold">AUG</span>
+                        <span class="block text-lg font-bold">15</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-medium">Portland Sky Watchers Meetup</h3>
+                        <p class="text-sm text-gray-400 mt-1">Mt. Tabor Park, 7:00 PM - 10:00 PM</p>
+                        <div class="flex items-center mt-2">
+                            <div class="flex -space-x-2">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" class="w-6 h-6 rounded-full border border-dark" alt="Member">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" class="w-6 h-6 rounded-full border border-dark" alt="Member">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" class="w-6 h-6 rounded-full border border-dark" alt="Member">
+                            </div>
+                            <span class="text-xs text-gray-400 ml-2">+17 going</span>
+                        </div>
+                    </div>
+                    <button class="bg-primary text-white text-xs px-3 py-1 rounded-full">Join</button>
+                </div>
+            </div>
+            
+            <div class="bg-darkGray rounded-xl p-3">
+                <div class="flex justify-between items-start">
+                    <div class="bg-secondary rounded-lg p-2 text-center mr-3">
+                        <span class="block text-sm font-bold">AUG</span>
+                        <span class="block text-lg font-bold">22</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-medium">Virtual Witness Training</h3>
+                        <p class="text-sm text-gray-400 mt-1">Online, 6:30 PM - 8:00 PM</p>
+                        <div class="flex items-center mt-2">
+                            <div class="flex -space-x-2">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" class="w-6 h-6 rounded-full border border-dark" alt="Member">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" class="w-6 h-6 rounded-full border border-dark" alt="Member">
+                            </div>
+                            <span class="text-xs text-gray-400 ml-2">+9 going</span>
+                        </div>
+                    </div>
+                    <button class="bg-primary text-white text-xs px-3 py-1 rounded-full">Join</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Local Groups -->
+        <section id="local-groups" class="px-4 mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold">Local Groups</h2>
+                <button class="text-primary text-sm flex items-center">
+                    <span>Filter</span>
+                    <i class="fa-solid fa-sliders ml-1"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-3">
+                <!-- Group 1 -->
+                <div id="group-1" class="bg-darkGray rounded-xl overflow-hidden">
+                    <div class="h-24 relative">
+                        <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/b3f7a4f86a-1f6fa4c91e1da43ca228.png" alt="night sky observation group meeting outdoors with telescopes, dark atmosphere with stars visible" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkGray to-transparent"></div>
+                        <div class="absolute bottom-2 left-2 flex items-center">
+                            <span class="bg-success text-xs px-2 py-0.5 rounded-full mr-2">Active</span>
+                            <span class="text-sm font-medium">Portland Sky Watchers</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <div class="flex justify-between items-center">
+                            <div class="text-xs text-gray-400">
+                                <i class="fa-solid fa-user-group mr-1"></i>
+                                <span>156 members</span>
+                            </div>
+                            <div class="text-xs text-gray-400">
+                                <i class="fa-solid fa-location-dot mr-1"></i>
+                                <span>5.2 miles away</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mt-3">
+                            <div class="flex items-center">
+                                <span class="text-xs bg-secondary px-2 py-0.5 rounded-full mr-1">4.8 ★</span>
+                                <span class="text-xs text-gray-400">Trusted</span>
+                            </div>
+                            <button class="bg-primary text-white text-xs px-3 py-1 rounded-full">Join Group</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Group 2 -->
+                <div id="group-2" class="bg-darkGray rounded-xl overflow-hidden">
+                    <div class="h-24 relative">
+                        <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/a106fe3c5a-0ae63dadbf4bb25349c9.png" alt="indoor meeting room with UFO enthusiasts looking at screens and maps on walls, technical atmosphere" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkGray to-transparent"></div>
+                        <div class="absolute bottom-2 left-2 flex items-center">
+                            <span class="bg-warning text-dark text-xs px-2 py-0.5 rounded-full mr-2">New</span>
+                            <span class="text-sm font-medium">Oregon Research Network</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <div class="flex justify-between items-center">
+                            <div class="text-xs text-gray-400">
+                                <i class="fa-solid fa-user-group mr-1"></i>
+                                <span>42 members</span>
+                            </div>
+                            <div class="text-xs text-gray-400">
+                                <i class="fa-solid fa-location-dot mr-1"></i>
+                                <span>12.7 miles away</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mt-3">
+                            <div class="flex items-center">
+                                <span class="text-xs bg-secondary px-2 py-0.5 rounded-full mr-1">New</span>
+                                <span class="text-xs text-gray-400">Verification pending</span>
+                            </div>
+                            <button class="bg-primary text-white text-xs px-3 py-1 rounded-full">Join Group</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Social Alerts -->
+        <section id="social-alerts" class="px-4 mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold">Recent Social Alerts</h2>
+                <span class="text-primary text-sm cursor-pointer">View All</span>
+            </div>
+            
+            <div class="space-y-3">
+                <!-- Alert 1 -->
+                <div id="social-alert-1" class="bg-darkGray rounded-xl p-3">
+                    <div class="flex items-start">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" class="w-10 h-10 rounded-full mr-3" alt="User">
+                        <div class="flex-1">
+                            <div class="flex justify-between">
+                                <h3 class="font-medium">Mike Johnson</h3>
+                                <span class="text-xs text-gray-400">2h ago</span>
+                            </div>
+                            <p class="text-sm mt-1">Looking for witnesses to confirm strange lights over Forest Park last night around 11:30 PM. Multiple objects in V formation.</p>
+                            <div class="mt-2 flex space-x-2">
+                                <span class="bg-secondary text-xs px-2 py-0.5 rounded-full">V Formation</span>
+                                <span class="bg-secondary text-xs px-2 py-0.5 rounded-full">Forest Park</span>
+                            </div>
+                            <div class="mt-3 flex justify-between items-center">
+                                <div class="flex space-x-4">
+                                    <button class="flex items-center text-xs text-gray-400">
+                                        <i class="fa-regular fa-thumbs-up mr-1"></i>
+                                        <span>12</span>
+                                    </button>
+                                    <button class="flex items-center text-xs text-gray-400">
+                                        <i class="fa-regular fa-comment mr-1"></i>
+                                        <span>8</span>
+                                    </button>
+                                </div>
+                                <button class="bg-primary text-white text-xs px-3 py-1 rounded-full">I Saw It</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Alert 2 -->
+                <div id="social-alert-2" class="bg-darkGray rounded-xl p-3">
+                    <div class="flex items-start">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" class="w-10 h-10 rounded-full mr-3" alt="User">
+                        <div class="flex-1">
+                            <div class="flex justify-between">
+                                <h3 class="font-medium">Sarah Williams</h3>
+                                <span class="text-xs text-gray-400">5h ago</span>
+                            </div>
+                            <p class="text-sm mt-1">Equipment request: Does anyone have a high-speed camera I could borrow for this weekend's sky watch? Will trade for my night vision goggles.</p>
+                            <div class="mt-2 flex space-x-2">
+                                <span class="bg-secondary text-xs px-2 py-0.5 rounded-full">Equipment</span>
+                                <span class="bg-secondary text-xs px-2 py-0.5 rounded-full">Request</span>
+                            </div>
+                            <div class="mt-3 flex justify-between items-center">
+                                <div class="flex space-x-4">
+                                    <button class="flex items-center text-xs text-gray-400">
+                                        <i class="fa-regular fa-thumbs-up mr-1"></i>
+                                        <span>5</span>
+                                    </button>
+                                    <button class="flex items-center text-xs text-gray-400">
+                                        <i class="fa-regular fa-comment mr-1"></i>
+                                        <span>3</span>
+                                    </button>
+                                </div>
+                                <button class="bg-primary text-white text-xs px-3 py-1 rounded-full">Respond</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trusted Reporters -->
+        <section id="trusted-reporters" class="px-4 mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold">Trusted Reporters</h2>
+                <span class="text-primary text-sm cursor-pointer">View All</span>
+            </div>
+            
+            <div class="flex overflow-x-auto pb-3 -mx-1">
+                <div id="reporter-1" class="flex-shrink-0 w-28 mx-1">
+                    <div class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                        <div class="relative">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" class="w-14 h-14 rounded-full mb-2" alt="Reporter">
+                            <span class="absolute bottom-1 right-0 bg-success text-xs rounded-full h-4 w-4 flex items-center justify-center border-2 border-darkGray"></span>
+                        </div>
+                        <h3 class="text-sm font-medium text-center">Dr. Alex Chen</h3>
+                        <div class="text-xs text-gray-400 text-center mt-1">98% Trust</div>
+                        <button class="mt-2 bg-secondary text-xs px-3 py-1 rounded-full w-full">Follow</button>
+                    </div>
+                </div>
+                
+                <div id="reporter-2" class="flex-shrink-0 w-28 mx-1">
+                    <div class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                        <div class="relative">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" class="w-14 h-14 rounded-full mb-2" alt="Reporter">
+                            <span class="absolute bottom-1 right-0 bg-success text-xs rounded-full h-4 w-4 flex items-center justify-center border-2 border-darkGray"></span>
+                        </div>
+                        <h3 class="text-sm font-medium text-center">Lisa Torres</h3>
+                        <div class="text-xs text-gray-400 text-center mt-1">95% Trust</div>
+                        <button class="mt-2 bg-secondary text-xs px-3 py-1 rounded-full w-full">Follow</button>
+                    </div>
+                </div>
+                
+                <div id="reporter-3" class="flex-shrink-0 w-28 mx-1">
+                    <div class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                        <div class="relative">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" class="w-14 h-14 rounded-full mb-2" alt="Reporter">
+                            <span class="absolute bottom-1 right-0 bg-warning text-xs rounded-full h-4 w-4 flex items-center justify-center border-2 border-darkGray"></span>
+                        </div>
+                        <h3 class="text-sm font-medium text-center">James Lee</h3>
+                        <div class="text-xs text-gray-400 text-center mt-1">89% Trust</div>
+                        <button class="mt-2 bg-secondary text-xs px-3 py-1 rounded-full w-full">Follow</button>
+                    </div>
+                </div>
+                
+                <div id="reporter-4" class="flex-shrink-0 w-28 mx-1">
+                    <div class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                        <div class="relative">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" class="w-14 h-14 rounded-full mb-2" alt="Reporter">
+                            <span class="absolute bottom-1 right-0 bg-success text-xs rounded-full h-4 w-4 flex items-center justify-center border-2 border-darkGray"></span>
+                        </div>
+                        <h3 class="text-sm font-medium text-center">Emma Wilson</h3>
+                        <div class="text-xs text-gray-400 text-center mt-1">92% Trust</div>
+                        <button class="mt-2 bg-secondary text-xs px-3 py-1 rounded-full w-full">Follow</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Create New Group -->
+        <section id="create-group" class="px-4 mb-6">
+            <div class="bg-darkGray rounded-xl p-4 border border-dashed border-gray-700">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="font-medium">Start your own group</h3>
+                        <p class="text-sm text-gray-400 mt-1">Connect with local witnesses and share alerts</p>
+                    </div>
+                    <button class="bg-primary text-white text-sm px-4 py-2 rounded-lg">
+                        <i class="fa-solid fa-plus mr-1"></i>
+                        Create
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-darkGray border-t border-gray-800 px-2 py-2">
+        <div class="flex justify-around items-center">
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-house text-lg"></i>
+                <span class="text-xs mt-1">Home</span>
+            </span>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-map-location-dot text-lg"></i>
+                <span class="text-xs mt-1">Map</span>
+            </span>
+            <div class="relative -mt-8">
+                <button class="bg-primary h-16 w-16 rounded-full flex items-center justify-center shadow-lg">
+                    <i class="fa-solid fa-satellite-dish text-2xl"></i>
+                </button>
+            </div>
+            <span class="flex flex-col items-center text-primary cursor-pointer">
+                <i class="fa-solid fa-users text-lg"></i>
+                <span class="text-xs mt-1">Community</span>
+            </span>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-gear text-lg"></i>
+                <span class="text-xs mt-1">Settings</span>
+            </span>
+        </div>
+    </nav>
+</body>
+</html>

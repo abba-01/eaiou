@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-900">
+    <!-- Header -->
+    <header id="header" class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="flex items-center cursor-pointer">
+                        <i class="fa-solid fa-microscope text-primary-600 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-gray-900">SciReview</span>
+                    </span>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Home</span>
+                    <span class="text-primary-700 font-medium cursor-pointer">Articles</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Categories</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Submit</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">About</span>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-primary-700">
+                        <i class="fa-solid fa-search text-lg"></i>
+                    </button>
+                    <button class="hidden md:block text-gray-600 hover:text-primary-700">
+                        <i class="fa-solid fa-bell text-lg"></i>
+                    </button>
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="User profile" class="w-8 h-8 rounded-full object-cover border border-gray-200">
+                    </div>
+                    <button class="md:hidden text-gray-600">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Breadcrumb Navigation -->
+        <div id="breadcrumb" class="flex items-center text-sm text-gray-500 mb-6">
+            <span class="hover:text-primary-600 cursor-pointer">Home</span>
+            <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+            <span class="hover:text-primary-600 cursor-pointer">Articles</span>
+            <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+            <span class="hover:text-primary-600 cursor-pointer">Neuroscience</span>
+            <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+            <span class="text-gray-700">Neural Correlates of Consciousness</span>
+        </div>
+
+        <!-- Article Header Section -->
+        <section id="article-header" class="bg-white rounded-xl shadow-sm overflow-hidden mb-8">
+            <div class="p-8">
+                <div class="flex items-center mb-4">
+                    <span class="text-xs font-medium text-white bg-primary-600 px-3 py-1 rounded-full mr-3">Neuroscience</span>
+                    <span class="text-xs font-medium text-white bg-green-600 px-3 py-1 rounded-full">Open Access</span>
+                    <div class="ml-auto flex items-center space-x-3">
+                        <span class="text-sm text-gray-500">Published: May 12, 2023</span>
+                        <span class="text-sm text-gray-500 flex items-center">
+                            <i class="fa-regular fa-eye mr-1"></i> 3,245
+                        </span>
+                    </div>
+                </div>
+                
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Neural Correlates of Consciousness: New Findings and Theoretical Implications</h1>
+                
+                <div class="flex flex-wrap items-center text-sm text-gray-500 mb-6">
+                    <span class="mr-4">DOI: 10.1234/neuro.2023.05.1234</span>
+                    <span class="mr-4">Volume 42, Issue 3</span>
+                    <span>Pages 218-235</span>
+                </div>
+                
+                <div class="flex flex-wrap items-center mb-6">
+                    <div class="flex items-center mr-6 mb-2">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" class="w-10 h-10 rounded-full mr-3" alt="Author">
+                        <div>
+                            <p class="font-medium text-gray-900">Dr. Sarah Chen</p>
+                            <p class="text-xs text-gray-500">Stanford University</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center mr-6 mb-2">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" class="w-10 h-10 rounded-full mr-3" alt="Author">
+                        <div>
+                            <p class="font-medium text-gray-900">Prof. James Wilson</p>
+                            <p class="text-xs text-gray-500">Harvard Medical School</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" class="w-10 h-10 rounded-full mr-3" alt="Author">
+                        <div>
+                            <p class="font-medium text-gray-900">Dr. Robert Kim</p>
+                            <p class="text-xs text-gray-500">MIT</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap items-center justify-between">
+                    <div class="flex space-x-2 mb-2">
+                        <button class="flex items-center space-x-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-md hover:bg-primary-200 transition">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Download PDF</span>
+                        </button>
+                        <button class="flex items-center space-x-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200 transition">
+                            <i class="fa-solid fa-share-alt"></i>
+                            <span>Share</span>
+                        </button>
+                    </div>
+                    <div class="flex space-x-2 mb-2">
+                        <button class="flex items-center space-x-2 text-gray-500 hover:text-primary-600 transition">
+                            <i class="fa-regular fa-bookmark"></i>
+                            <span>Save</span>
+                        </button>
+                        <button class="flex items-center space-x-2 text-gray-500 hover:text-primary-600 transition">
+                            <i class="fa-solid fa-print"></i>
+                            <span>Print</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article Content -->
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Main Article Content -->
+            <div id="article-content" class="lg:w-2/3">
+                <section id="abstract" class="bg-white rounded-xl shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Abstract</h2>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Recent advances in neuroimaging and electrophysiological techniques have provided unprecedented insights into the neural basis of consciousness. This study investigates the specific brain regions and network dynamics associated with conscious awareness in humans. Using a combination of functional magnetic resonance imaging (fMRI) and high-density electroencephalography (EEG), we identified distinct neural signatures that differentiate conscious from unconscious processing of visual stimuli.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Our results reveal that conscious perception is associated with sustained activity in a distributed network involving the prefrontal cortex, posterior parietal regions, and specific areas within the temporal lobe. Importantly, we found that the strength of recurrent processing between these regions, rather than mere activation, predicts whether a stimulus reaches conscious awareness. These findings provide strong support for higher-order theories of consciousness and challenge purely first-order accounts.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        We discuss the theoretical implications of our results for current models of consciousness, including Global Workspace Theory, Integrated Information Theory, and Higher-Order Thought Theory. Our findings suggest a novel framework that reconciles aspects of these competing theories and provides testable predictions for future research.
+                    </p>
+                </section>
+
+                <section id="introduction" class="bg-white rounded-xl shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Introduction</h2>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Consciousness remains one of the most profound mysteries in neuroscience. Despite significant advances in our understanding of brain function, the neural mechanisms that give rise to subjective experience continue to elude complete explanation. The search for neural correlates of consciousness (NCCs) – defined as the minimal neuronal mechanisms jointly sufficient for a specific conscious percept – has been a central aim of cognitive neuroscience for decades (Crick & Koch, 1990; Tononi & Koch, 2015).
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Previous research has implicated various brain regions and processes in conscious awareness, including recurrent processing in sensory cortices (Lamme, 2006), fronto-parietal networks (Dehaene & Changeux, 2011), and thalamocortical loops (Edelman & Tononi, 2000). However, these studies have often yielded conflicting results, partly due to methodological limitations and differences in experimental paradigms.
+                    </p>
+                    
+                    <div id="figure-1" class="my-8 border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="h-64 bg-gray-100 flex items-center justify-center">
+                            <img class="w-full h-full object-contain" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/2c062d9311-c5a11ecd533c5e883f1f.png" alt="brain imaging scan showing neural activity patterns, functional MRI, scientific visualization with highlighted regions in prefrontal cortex" />
+                        </div>
+                        <div class="p-4 bg-gray-50 text-sm">
+                            <p class="font-medium text-gray-900">Figure 1: Functional MRI showing differential activation patterns during conscious versus unconscious processing of visual stimuli.</p>
+                            <p class="text-gray-600 mt-1">Regions showing significant activation differences (p < 0.001, FDR-corrected) include dorsolateral prefrontal cortex (DLPFC), posterior parietal cortex (PPC), and anterior cingulate cortex (ACC).</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed">
+                        In this study, we sought to overcome these limitations by combining multiple neuroimaging techniques with carefully designed psychophysical paradigms. Specifically, we employed a masking protocol that allowed us to compare neural responses to physically identical stimuli that were either consciously perceived or remained unconscious. This approach enabled us to isolate the neural processes specifically associated with conscious awareness while controlling for confounding factors such as attention, task performance, and stimulus properties.
+                    </p>
+                </section>
+
+                <section id="methods" class="bg-white rounded-xl shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Methods</h2>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Participants</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Forty-two healthy volunteers (24 females; mean age = 27.3 years, SD = 4.8) participated in this study. All participants had normal or corrected-to-normal vision and no history of neurological or psychiatric disorders. The study was approved by the Institutional Review Board of Stanford University, and all participants provided written informed consent.
+                    </p>
+                    
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Experimental Design</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        We employed a backward masking paradigm in which target stimuli (grayscale faces) were presented for 16, 33, 50, or 67 ms, followed by a mask (scrambled face patterns) displayed for 100 ms. This manipulation created a range of perceptual experiences from completely unconscious to clearly conscious perception of the target stimuli. Participants were asked to (1) indicate whether they saw a face or not (detection task) and (2) rate their confidence in their decision on a 4-point scale.
+                    </p>
+                    
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Data Acquisition and Analysis</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Brain activity was recorded using simultaneous fMRI and EEG. Functional MRI data were acquired on a 3T Siemens Prisma scanner (TR = 2s, TE = 30ms, voxel size = 2×2×2 mm). High-density EEG was recorded using a 128-channel system (Electrical Geodesics Inc.) with a sampling rate of 1000 Hz. Data preprocessing and analysis were performed using SPM12 for fMRI data and EEGLAB for EEG data.
+                    </p>
+                    
+                    <div id="chart-container" class="h-[400px] my-8"></div>
+                    
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Statistical Analysis</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        For behavioral data, we calculated detection accuracy and metacognitive sensitivity (meta-d'/d') for each presentation duration. For neuroimaging data, we conducted both univariate and multivariate pattern analyses to identify brain regions and networks differentially activated during conscious versus unconscious perception. All statistical tests were corrected for multiple comparisons using the false discovery rate (FDR) method with q = 0.05.
+                    </p>
+                </section>
+
+                <section id="references" class="bg-white rounded-xl shadow-sm p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">References</h2>
+                    <ul class="space-y-4 text-gray-700">
+                        <li id="ref-1">
+                            <p>Crick, F., & Koch, C. (1990). Towards a neurobiological theory of consciousness. <span class="italic">Seminars in the Neurosciences</span>, 2, 263-275.</p>
+                        </li>
+                        <li id="ref-2">
+                            <p>Dehaene, S., & Changeux, J. P. (2011). Experimental and theoretical approaches to conscious processing. <span class="italic">Neuron</span>, 70(2), 200-227.</p>
+                        </li>
+                        <li id="ref-3">
+                            <p>Edelman, G. M., & Tononi, G. (2000). <span class="italic">A universe of consciousness: How matter becomes imagination</span>. Basic Books.</p>
+                        </li>
+                        <li id="ref-4">
+                            <p>Lamme, V. A. (2006). Towards a true neural stance on consciousness. <span class="italic">Trends in Cognitive Sciences</span>, 10(11), 494-501.</p>
+                        </li>
+                        <li id="ref-5">
+                            <p>Tononi, G., & Koch, C. (2015). Consciousness: here, there and everywhere? <span class="italic">Philosophical Transactions of the Royal Society B: Biological Sciences</span>, 370(1668), 20140167.</p>
+                        </li>
+                        <li id="ref-6">
+                            <p>Baars, B. J. (2005). Global workspace theory of consciousness: toward a cognitive neuroscience of human experience. <span class="italic">Progress in Brain Research</span>, 150, 45-53.</p>
+                        </li>
+                        <li id="ref-7">
+                            <p>Lau, H., & Rosenthal, D. (2011). Empirical support for higher-order theories of conscious awareness. <span class="italic">Trends in Cognitive Sciences</span>, 15(8), 365-373.</p>
+                        </li>
+                        <li id="ref-8">
+                            <p>Mashour, G. A., Roelfsema, P., Changeux, J. P., & Dehaene, S. (2020). Conscious processing and the global neuronal workspace hypothesis. <span class="italic">Neuron</span>, 105(5), 776-798.</p>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Sidebar -->
+            <div id="article-sidebar" class="lg:w-1/3">
+                <div id="article-metrics" class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Article Metrics</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600 flex items-center">
+                                <i class="fa-regular fa-eye mr-2 text-gray-400"></i> Views
+                            </span>
+                            <span class="font-medium">3,245</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600 flex items-center">
+                                <i class="fa-solid fa-download mr-2 text-gray-400"></i> Downloads
+                            </span>
+                            <span class="font-medium">1,873</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600 flex items-center">
+                                <i class="fa-solid fa-quote-right mr-2 text-gray-400"></i> Citations
+                            </span>
+                            <span class="font-medium">27</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600 flex items-center">
+                                <i class="fa-regular fa-comment mr-2 text-gray-400"></i> Comments
+                            </span>
+                            <span class="font-medium">12</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600 flex items-center">
+                                <i class="fa-solid fa-share-alt mr-2 text-gray-400"></i> Shares
+                            </span>
+                            <span class="font-medium">89</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-gray-100">
+                        <span class="text-xs text-gray-500">Altmetric Score</span>
+                        <div class="flex items-center mt-2">
+                            <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold">
+                                87
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium">In the top 5%</p>
+                                <p class="text-xs text-gray-500">of all research outputs tracked by Altmetric</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="related-articles" class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Related Articles</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-gray-100 rounded-md flex-shrink-0"></div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-primary-600 hover:text-primary-800 cursor-pointer">The Role of Thalamocortical Loops in Conscious Perception</p>
+                                <p class="text-xs text-gray-500 mt-1">J. Thompson et al. • Neuroscience • 2022</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-gray-100 rounded-md flex-shrink-0"></div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-primary-600 hover:text-primary-800 cursor-pointer">Integrated Information Theory: A Review and Critical Analysis</p>
+                                <p class="text-xs text-gray-500 mt-1">M. Garcia et al. • Cognitive Science • 2022</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-gray-100 rounded-md flex-shrink-0"></div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-primary-600 hover:text-primary-800 cursor-pointer">Global Workspace Dynamics During Conscious and Unconscious Processing</p>
+                                <p class="text-xs text-gray-500 mt-1">S. Dehaene et al. • Neuroscience • 2021</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-gray-100 rounded-md flex-shrink-0"></div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-primary-600 hover:text-primary-800 cursor-pointer">Metacognition and Consciousness: A Computational Framework</p>
+                                <p class="text-xs text-gray-500 mt-1">H. Lau et al. • Cognitive Psychology • 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 text-primary-600 hover:text-primary-800 text-sm font-medium">
+                        View more related articles
+                    </button>
+                </div>
+
+                <div id="author-info" class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Corresponding Author</h3>
+                    <div class="flex items-start">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" class="w-16 h-16 rounded-full mr-4" alt="Author">
+                        <div>
+                            <p class="font-medium text-gray-900">Dr. Sarah Chen</p>
+                            <p class="text-sm text-gray-600 mb-2">Department of Neuroscience, Stanford University</p>
+                            <p class="text-sm text-gray-600 flex items-center">
+                                <i class="fa-solid fa-envelope mr-2 text-gray-400"></i>
+                                s.chen@stanford.edu
+                            </p>
+                            <div class="flex space-x-2 mt-3">
+                                <span class="text-gray-400 hover:text-primary-600 cursor-pointer">
+                                    <i class="fa-brands fa-orcid"></i>
+                                </span>
+                                <span class="text-gray-400 hover:text-primary-600 cursor-pointer">
+                                    <i class="fa-brands fa-researchgate"></i>
+                                </span>
+                                <span class="text-gray-400 hover:text-primary-600 cursor-pointer">
+                                    <i class="fa-brands fa-google"></i>
+                                </span>
+                                <span class="text-gray-400 hover:text-primary-600 cursor-pointer">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="article-info" class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Article Information</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Journal</p>
+                            <p class="text-sm">Journal of Cognitive Neuroscience</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Volume & Issue</p>
+                            <p class="text-sm">Volume 42, Issue 3, May 2023</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Pages</p>
+                            <p class="text-sm">218-235</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">DOI</p>
+                            <p class="text-sm text-primary-600 hover:text-primary-800 cursor-pointer">10.1234/neuro.2023.05.1234</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Received</p>
+                            <p class="text-sm">January 15, 2023</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Accepted</p>
+                            <p class="text-sm">April 2, 2023</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Published</p>
+                            <p class="text-sm">May 12, 2023</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">License</p>
+                            <p class="text-sm flex items-center">
+                                <i class="fa-brands fa-creative-commons mr-1"></i>
+                                <span>CC BY 4.0</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-gray-900 text-white mt-16">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa-solid fa-microscope text-primary-400 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl">SciReview</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Advancing scientific knowledge through rigorous peer review and open access publishing.</p>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-400 hover:text-white cursor-pointer">
+                            <i class="fa-brands fa-twitter"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white cursor-pointer">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white cursor-pointer">
+                            <i class="fa-brands fa-github"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Home</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Browse Articles</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Submit Research</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Peer Review Process</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Editorial Board</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Ethics Statement</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Open Access Policy</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">FAQs</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-envelope mr-2"></i>
+                            contact@scireview.org
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-phone mr-2"></i>
+                            +1 (555) 123-4567
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-location-dot mr-2"></i>
+                            123 Science Way, Research Park
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">© 2023 SciReview. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <span class="text-gray-400 hover:text-white text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-400 hover:text-white text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-400 hover:text-white text-sm cursor-pointer">Cookie Policy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        Highcharts.chart('chart-container', {
+            chart: {
+                type: 'column',
+                style: {
+                    fontFamily: 'Inter, sans-serif'
+                }
+            },
+            title: {
+                text: 'Detection Performance and Neural Activity by Stimulus Duration',
+                style: {
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    color: '#1f2937'
+                }
+            },
+            xAxis: {
+                categories: ['16ms', '33ms', '50ms', '67ms'],
+                title: {
+                    text: 'Stimulus Duration'
+                }
+            },
+            yAxis: [{
+                title: {
+                    text: 'Detection Accuracy (%)',
+                    style: {
+                        color: '#0284c7'
+                    }
+                },
+                labels: {
+                    format: '{value}%',
+                    style: {
+                        color: '#0284c7'
+                    }
+                },
+                min: 0,
+                max: 100
+            }, {
+                title: {
+                    text: 'Neural Activity (fMRI % Signal Change)',
+                    style: {
+                        color: '#10b981'
+                    }
+                },
+                labels: {
+                    format: '{value}',
+                    style: {
+                        color: '#10b981'
+                    }
+                },
+                opposite: true,
+                min: 0,
+                max: 2
+            }],
+            legend: {
+                align: 'center',
+                verticalAlign: 'bottom',
+                y: 0,
+                floating: false
+            },
+            tooltip: {
+                shared: true
+            },
+            series: [{
+                name: 'Detection Accuracy',
+                type: 'column',
+                yAxis: 0,
+                data: [52, 68, 83, 97],
+                color: '#0284c7',
+                tooltip: {
+                    valueSuffix: '%'
+                }
+            }, {
+                name: 'Prefrontal Activity',
+                type: 'spline',
+                yAxis: 1,
+                data: [0.3, 0.8, 1.4, 1.7],
+                color: '#10b981',
+                marker: {
+                    lineWidth: 2,
+                    lineColor: '#10b981',
+                    fillColor: 'white'
+                }
+            }, {
+                name: 'Parietal Activity',
+                type: 'spline',
+                yAxis: 1,
+                data: [0.4, 0.9, 1.5, 1.8],
+                color: '#f59e0b',
+                marker: {
+                    lineWidth: 2,
+                    lineColor: '#f59e0b',
+                    fillColor: 'white'
+                }
+            }],
+            credits: {
+                enabled: false
+            }
+        });
+    </script>
+</body>
+</html>

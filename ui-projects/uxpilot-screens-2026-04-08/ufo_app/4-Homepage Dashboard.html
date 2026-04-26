@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C63FF',
+                        secondary: '#2A265F',
+                        accent: '#00F5A0',
+                        dark: '#121212',
+                        darkGray: '#1E1E1E',
+                        lightGray: '#2A2A2A',
+                        success: '#00C853',
+                        warning: '#FFD600',
+                        danger: '#FF3D00',
+                        info: '#00B0FF'
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-white font-sans">
+    <!-- Status Bar -->
+    <div id="status-bar" class="bg-darkGray p-2 flex justify-between items-center text-xs">
+        <div>
+            <span>9:41</span>
+        </div>
+        <div class="flex space-x-2">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-three-quarters"></i>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="bg-darkGray p-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <div class="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
+                <i class="fa-solid fa-satellite text-white"></i>
+            </div>
+            <h1 class="text-lg font-bold">SkyWitness</h1>
+        </div>
+        <div class="flex space-x-4">
+            <button id="notifications-btn" class="relative">
+                <i class="fa-solid fa-bell text-xl"></i>
+                <span class="absolute -top-1 -right-1 bg-danger text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+            </button>
+            <button id="profile-btn">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Profile" class="h-8 w-8 rounded-full object-cover border border-primary">
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pb-20">
+        <!-- Location & Status -->
+        <section id="location-status" class="p-4 bg-darkGray mb-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="flex items-center space-x-1 text-sm text-gray-400">
+                        <i class="fa-solid fa-location-dot text-accent"></i>
+                        <span>Portland, OR</span>
+                    </div>
+                    <div class="text-xs text-gray-500">Last updated: 2 min ago</div>
+                </div>
+                <div class="bg-secondary px-3 py-1 rounded-full flex items-center space-x-1">
+                    <span class="h-2 w-2 rounded-full bg-success"></span>
+                    <span class="text-xs">Active</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Capture Button -->
+        <section id="quick-capture" class="px-4 mb-6">
+            <button class="bg-primary hover:bg-opacity-90 transition w-full py-4 rounded-2xl flex items-center justify-center space-x-3 shadow-lg">
+                <i class="fa-solid fa-camera text-2xl"></i>
+                <span class="text-lg font-bold">Start Sighting Capture</span>
+            </button>
+        </section>
+
+        <!-- Recent Alerts -->
+        <section id="recent-alerts" class="px-4 mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold">Recent Alerts</h2>
+                <span class="text-primary text-sm cursor-pointer">View All</span>
+            </div>
+            
+            <div class="space-y-3">
+                <!-- Alert 1 -->
+                <div id="alert-1" class="bg-darkGray rounded-xl p-3 border-l-4 border-danger">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="bg-danger text-xs px-2 py-0.5 rounded-full">Critical</span>
+                                <span class="text-sm text-gray-400">10 min ago</span>
+                            </div>
+                            <h3 class="font-medium mt-1">Multiple sightings 0.8 miles away</h3>
+                            <p class="text-sm text-gray-400 mt-1">Formation of 3 objects moving east</p>
+                        </div>
+                        <button class="bg-darkGray p-2 rounded-full">
+                            <i class="fa-solid fa-arrow-right text-primary"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Alert 2 -->
+                <div id="alert-2" class="bg-darkGray rounded-xl p-3 border-l-4 border-warning">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="bg-warning text-dark text-xs px-2 py-0.5 rounded-full">High</span>
+                                <span class="text-sm text-gray-400">25 min ago</span>
+                            </div>
+                            <h3 class="font-medium mt-1">Stationary object 1.2 miles away</h3>
+                            <p class="text-sm text-gray-400 mt-1">Hovering for 5+ minutes</p>
+                        </div>
+                        <button class="bg-darkGray p-2 rounded-full">
+                            <i class="fa-solid fa-arrow-right text-primary"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity Map -->
+        <section id="activity-map" class="px-4 mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold">Activity Map</h2>
+                <button class="text-primary text-sm flex items-center">
+                    <span>Filter</span>
+                    <i class="fa-solid fa-sliders ml-1"></i>
+                </button>
+            </div>
+            
+            <div class="bg-darkGray rounded-xl overflow-hidden h-48 relative">
+                <img class="w-full h-full object-cover opacity-80" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/6caa2e6131-a97318f155994bcd8cf1.png" alt="dark mode satellite map view of a city at night with glowing pins marking different locations, UFO tracking app interface" />
+                <div class="absolute bottom-3 right-3 bg-darkGray bg-opacity-80 rounded-lg p-2 flex space-x-2">
+                    <button class="bg-secondary p-1.5 rounded-full">
+                        <i class="fa-solid fa-plus text-sm"></i>
+                    </button>
+                    <button class="bg-secondary p-1.5 rounded-full">
+                        <i class="fa-solid fa-minus text-sm"></i>
+                    </button>
+                    <button class="bg-primary p-1.5 rounded-full">
+                        <i class="fa-solid fa-location-crosshairs text-sm"></i>
+                    </button>
+                </div>
+                <div class="absolute top-3 left-3 bg-danger text-white text-xs px-2 py-1 rounded-full flex items-center">
+                    <i class="fa-solid fa-circle text-xs mr-1"></i>
+                    <span>Live</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section id="quick-actions" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3">Quick Actions</h2>
+            <div class="grid grid-cols-3 gap-3">
+                <div id="action-1" class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                    <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-video text-accent"></i>
+                    </div>
+                    <span class="text-xs text-center">Evidence Collection</span>
+                </div>
+                <div id="action-2" class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                    <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-users text-accent"></i>
+                    </div>
+                    <span class="text-xs text-center">Join Sighting</span>
+                </div>
+                <div id="action-3" class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                    <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-compass text-accent"></i>
+                    </div>
+                    <span class="text-xs text-center">AR Mode</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- My Recent Sightings -->
+        <section id="recent-sightings" class="px-4 mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold">My Recent Sightings</h2>
+                <span class="text-primary text-sm cursor-pointer">View All</span>
+            </div>
+            
+            <div class="space-y-3">
+                <div id="sighting-1" class="bg-darkGray rounded-xl overflow-hidden">
+                    <div class="h-24 relative">
+                        <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/b1ce43e2f3-534ada2a18e73bed82b8.png" alt="night sky with strange lights in formation, captured on mobile phone, UFO sighting" />
+                        <div class="absolute bottom-2 left-2 bg-dark bg-opacity-70 text-xs px-2 py-0.5 rounded-full">
+                            Jul 15, 2023
+                        </div>
+                        <div class="absolute top-2 right-2 bg-success text-xs px-2 py-0.5 rounded-full">
+                            Verified
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="font-medium">Triangle Formation</h3>
+                        <div class="flex justify-between items-center mt-1">
+                            <div class="text-xs text-gray-400">
+                                <i class="fa-solid fa-user-group mr-1"></i>
+                                <span>5 other witnesses</span>
+                            </div>
+                            <div class="text-xs text-gray-400">
+                                <i class="fa-solid fa-clock mr-1"></i>
+                                <span>Duration: 3m 42s</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Stats -->
+        <section id="community-stats" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3">Community Stats</h2>
+            <div class="bg-darkGray rounded-xl p-4">
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="text-center">
+                        <div class="text-accent text-xl font-bold">127</div>
+                        <div class="text-xs text-gray-400">Active Users</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-accent text-xl font-bold">42</div>
+                        <div class="text-xs text-gray-400">Today's Sightings</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-accent text-xl font-bold">8</div>
+                        <div class="text-xs text-gray-400">Your Area</div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-700">
+                    <div class="flex justify-between items-center">
+                        <div class="text-sm">Your trust score</div>
+                        <div class="text-sm font-bold text-accent">87%</div>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 87%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-darkGray border-t border-gray-800 px-2 py-2">
+        <div class="flex justify-around items-center">
+            <span class="flex flex-col items-center text-primary cursor-pointer">
+                <i class="fa-solid fa-house text-lg"></i>
+                <span class="text-xs mt-1">Home</span>
+            </span>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-map-location-dot text-lg"></i>
+                <span class="text-xs mt-1">Map</span>
+            </span>
+            <div class="relative -mt-8">
+                <button class="bg-primary h-16 w-16 rounded-full flex items-center justify-center shadow-lg">
+                    <i class="fa-solid fa-satellite-dish text-2xl"></i>
+                </button>
+            </div>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-chart-line text-lg"></i>
+                <span class="text-xs mt-1">Activity</span>
+            </span>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-gear text-lg"></i>
+                <span class="text-xs mt-1">Settings</span>
+            </span>
+        </div>
+    </nav>
+
+    <!-- AR Mode Tooltip -->
+    <div id="ar-tooltip" class="fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-2 rounded-lg shadow-lg flex items-center space-x-2">
+        <i class="fa-solid fa-info-circle"></i>
+        <span class="text-sm">Tap to activate AR capture mode</span>
+        <button class="ml-2">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+</body>
+</html>

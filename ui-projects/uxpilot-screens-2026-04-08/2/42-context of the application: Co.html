@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="w-full bg-white border-b border-neutral-200 shadow-sm">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <i class="fa-brands fa-joomla text-neutral-800 text-2xl mr-3"></i>
+      <h1 class="text-xl text-neutral-800">AcademiAI Manager</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+        <i class="fa-solid fa-bell"></i>
+      </button>
+      <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+        <i class="fa-solid fa-question-circle"></i>
+      </button>
+      <div class="flex items-center">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full mr-2" />
+        <span class="text-sm text-neutral-700">Admin User</span>
+        <i class="fa-solid fa-chevron-down ml-2 text-neutral-500 text-xs"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-container" class="flex h-[800px]">
+  <div id="sidebar" class="w-64 bg-white border-r border-neutral-200 overflow-y-auto">
+    <div class="p-4">
+      <button class="w-full flex items-center justify-center px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+        <i class="fa-solid fa-plus mr-2"></i>
+        <span>New Project</span>
+      </button>
+    </div>
+    <nav class="mt-2">
+      <ul>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-tachometer-alt w-5 text-neutral-500"></i>
+            <span class="ml-2">Dashboard</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-folder w-5 text-neutral-500"></i>
+            <span class="ml-2">Projects</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-file-alt w-5 text-neutral-500"></i>
+            <span class="ml-2">Articles</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-cog w-5 text-neutral-800"></i>
+            <span class="ml-2">Settings</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-chart-bar w-5 text-neutral-500"></i>
+            <span class="ml-2">Analytics</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-users w-5 text-neutral-500"></i>
+            <span class="ml-2">Users</span>
+          </span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="content" class="flex-1 bg-neutral-50 overflow-y-auto">
+    <div class="p-6">
+      <div class="mb-6">
+        <h2 class="text-2xl text-neutral-800">AI Model Management</h2>
+        <p class="text-neutral-600 mt-1">Create and configure AI models for academic content generation</p>
+      </div>
+
+      <div id="settings-tabs" class="mb-6 border-b border-neutral-200">
+        <div class="flex space-x-4">
+          <button class="px-4 py-2 text-neutral-600 border-b-2 border-neutral-600">
+            Model Configurations
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Instructions
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Knowledge Base
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            OMMP Format
+          </button>
+        </div>
+      </div>
+
+      <div id="ai-models-section">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg text-neutral-800">Model Specializations</h3>
+          <button class="flex items-center px-3 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+            <i class="fa-solid fa-plus mr-2"></i>
+            <span>Add New Specialization</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          <!-- Artist Model Card -->
+          <div id="model-card-1" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="p-4 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-md bg-neutral-700 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-paint-brush text-white"></i>
+                </div>
+                <div>
+                  <h4 class="text-neutral-800">Artist Model</h4>
+                  <span class="text-xs text-neutral-500">Creative Content Generation</span>
+                </div>
+              </div>
+              <div class="flex space-x-2">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Active</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="mb-3">
+                <div class="text-sm text-neutral-600 mb-1">Base Model</div>
+                <div class="flex items-center">
+                  <span class="text-sm">UX Pilot Opus</span>
+                  <i class="fa-solid fa-chevron-down ml-2 text-neutral-500 text-xs"></i>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="text-sm text-neutral-600 mb-1">Specialization</div>
+                <p class="text-sm">Trained to generate creative, visually descriptive content with artistic flair while maintaining academic accuracy.</p>
+              </div>
+              <div class="flex justify-end mt-4 space-x-2">
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-code"></i>
+                </button>
+                <button class="p-2 text-neutral-600 hover:bg-neutral-50 rounded">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Editor Model Card -->
+          <div id="model-card-2" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="p-4 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-md bg-neutral-700 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-edit text-white"></i>
+                </div>
+                <div>
+                  <h4 class="text-neutral-800">Editor Model</h4>
+                  <span class="text-xs text-neutral-500">Academic Refinement</span>
+                </div>
+              </div>
+              <div class="flex space-x-2">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Active</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="mb-3">
+                <div class="text-sm text-neutral-600 mb-1">Base Model</div>
+                <div class="flex items-center">
+                  <span class="text-sm">UX Pilot Sonnet</span>
+                  <i class="fa-solid fa-chevron-down ml-2 text-neutral-500 text-xs"></i>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="text-sm text-neutral-600 mb-1">Specialization</div>
+                <p class="text-sm">Optimized for reviewing, correcting, and enhancing academic content with proper citations and scientific methodology.</p>
+              </div>
+              <div class="flex justify-end mt-4 space-x-2">
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-code"></i>
+                </button>
+                <button class="p-2 text-neutral-600 hover:bg-neutral-50 rounded">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Research Model Card -->
+          <div id="model-card-3" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="p-4 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-md bg-neutral-700 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-microscope text-white"></i>
+                </div>
+                <div>
+                  <h4 class="text-neutral-800">Research Model</h4>
+                  <span class="text-xs text-neutral-500">Scientific Analysis</span>
+                </div>
+              </div>
+              <div class="flex space-x-2">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">In Development</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="mb-3">
+                <div class="text-sm text-neutral-600 mb-1">Base Model</div>
+                <div class="flex items-center">
+                  <span class="text-sm">GPT-4o</span>
+                  <i class="fa-solid fa-chevron-down ml-2 text-neutral-500 text-xs"></i>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="text-sm text-neutral-600 mb-1">Specialization</div>
+                <p class="text-sm">Focused on data analysis, methodology development, and research planning with scientific rigor.</p>
+              </div>
+              <div class="flex justify-end mt-4 space-x-2">
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-code"></i>
+                </button>
+                <button class="p-2 text-neutral-600 hover:bg-neutral-50 rounded">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="instruction-section" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden mb-6">
+          <div class="p-4 border-b border-neutral-200 bg-neutral-50">
+            <h3 class="text-neutral-800">Model Instructions</h3>
+            <p class="text-sm text-neutral-600">Configure specialized instructions for each model role</p>
+          </div>
+          <div class="p-4">
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">Select Model</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>Artist Model</option>
+                <option>Editor Model</option>
+                <option>Research Model</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">System Instructions</label>
+              <textarea class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm h-32">You are an artistic academic assistant specialized in creating visually rich, creative content that maintains scientific accuracy. Your role is to help researchers express complex concepts in engaging, descriptive ways while ensuring all content meets academic standards. Always cite sources appropriately and maintain scientific integrity while adding creative flair to descriptions and explanations.</textarea>
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">API Authorization</label>
+              <div class="flex">
+                <input type="text" value="sk-*************************" class="w-full border border-neutral-300 rounded-l-md px-3 py-2 text-sm" />
+                <button class="bg-neutral-200 px-3 py-2 rounded-r-md text-neutral-700 text-sm">
+                  Refresh
+                </button>
+              </div>
+              <p class="text-xs text-neutral-500 mt-1">API key is encrypted and securely stored</p>
+            </div>
+            <div class="flex justify-end mt-4">
+              <button class="px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+                Save Instructions
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="knowledge-base-section" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden mb-6">
+          <div class="p-4 border-b border-neutral-200 bg-neutral-50">
+            <h3 class="text-neutral-800">Knowledge Base Configuration</h3>
+            <p class="text-sm text-neutral-600">Configure internal knowledge storage in OMMP format</p>
+          </div>
+          <div class="p-4">
+            <div class="mb-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="text-neutral-800">Conversation History Indexing</h4>
+                  <p class="text-sm text-neutral-600">Automatically index all project interactions</p>
+                </div>
+                <div class="relative inline-block w-12 h-6">
+                  <input type="checkbox" id="toggle-indexing" class="sr-only" checked />
+                  <div class="block bg-neutral-300 w-12 h-6 rounded-full"></div>
+                  <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform translate-x-6"></div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="text-neutral-800">OMMP Format Conversion</h4>
+                  <p class="text-sm text-neutral-600">Convert all data to machine-readable OMMP format</p>
+                </div>
+                <div class="relative inline-block w-12 h-6">
+                  <input type="checkbox" id="toggle-ommp" class="sr-only" checked />
+                  <div class="block bg-neutral-300 w-12 h-6 rounded-full"></div>
+                  <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform translate-x-6"></div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">Knowledge Base Storage Location</label>
+              <div class="flex">
+                <input type="text" value="/var/www/html/joomla/components/com_academiai/storage/kb" class="w-full border border-neutral-300 rounded-l-md px-3 py-2 text-sm" />
+                <button class="bg-neutral-200 px-3 py-2 rounded-r-md text-neutral-700 text-sm">
+                  Browse
+                </button>
+              </div>
+              <p class="text-xs text-neutral-500 mt-1">Directory must be writable by web server</p>
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">Indexing Frequency</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>Real-time</option>
+                <option>Hourly</option>
+                <option>Daily</option>
+                <option>Weekly</option>
+              </select>
+            </div>
+            <div class="flex justify-end mt-4">
+              <button class="px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+                Save Knowledge Base Settings
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="ommp-section" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+          <div class="p-4 border-b border-neutral-200 bg-neutral-50">
+            <h3 class="text-neutral-800">OMMP Format Configuration</h3>
+            <p class="text-sm text-neutral-600">Configure Open Meta Modal Platform integration</p>
+          </div>
+          <div class="p-4">
+            <div class="mb-4">
+              <p class="text-sm text-neutral-700 mb-3">The Open Meta Modal Platform (OMMP) provides a standardized format for machine-readable knowledge indexing. <span class="text-neutral-600 underline cursor-pointer">Learn more</span></p>
+              
+              <div class="bg-neutral-50 border border-neutral-200 rounded-md p-3 mb-4">
+                <div class="flex items-center mb-2">
+                  <i class="fa-solid fa-info-circle text-neutral-500 mr-2"></i>
+                  <span class="text-sm">OMMP Format Documentation</span>
+                </div>
+                <p class="text-xs text-neutral-600">Visit <span class="text-neutral-600 underline cursor-pointer">metamodalplatform.org</span> for complete documentation on implementing OMMP format for your knowledge base.</p>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">OMMP Schema Version</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>OMMP v2.1 (Latest)</option>
+                <option>OMMP v2.0</option>
+                <option>OMMP v1.5</option>
+              </select>
+            </div>
+            
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">Knowledge Base Structure</label>
+              <div class="border border-neutral-300 rounded-md p-3 bg-neutral-50">
+                <pre class="text-xs text-neutral-700 overflow-x-auto">
+{
+  "ommp_version": "2.1",
+  "knowledge_base": {
+    "name": "AcademiAI",
+    "version": "1.0.3",
+    "nodes": [
+      {
+        "id": "projects",
+        "type": "collection",
+        "index_method": "hierarchical"
+      },
+      {
+        "id": "articles",
+        "type": "collection",
+        "index_method": "vector",
+        "embedding_model": "opus"
+      }
+    ]
+  }
+}
+                </pre>
+              </div>
+            </div>
+            
+            <div class="flex justify-end mt-4">
+              <button class="px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+                Save OMMP Configuration
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="w-full bg-white border-t border-neutral-200 py-4">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center">
+      <div class="text-sm text-neutral-600">
+        AcademiAI Manager v1.0.3 | Joomla 5.3 Component
+      </div>
+      <div class="text-sm text-neutral-600">
+        Last updated: July 6, 2025 at 10:06 AM
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

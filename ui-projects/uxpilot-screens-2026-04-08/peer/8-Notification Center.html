@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#007cba',
+                        emerald: '#00b894',
+                        coral: '#fd79a8',
+                        orange: '#fdcb6e',
+                        purple: '#6c5ce7',
+                        charcoal: '#2d3436',
+                        mediumgray: '#636e72',
+                        success: '#00b894',
+                        warning: '#fdcb6e',
+                        error: '#e17055',
+                        info: '#007cba',
+                        offwhite: '#FAFAF8'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                        'mono': ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-offwhite text-charcoal">
+    <header id="header" class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                        PR
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-lg">PeerTrail</span>
+                        <span class="text-xs text-mediumgray">Transparent Scientific Publishing</span>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Submit Article</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Browse Articles</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Reviews</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Submissions</span>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="search-toggle" class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-highlighter"></i>
+                    </button>
+                    <button id="notifications-toggle" class="text-charcoal hover:text-primary transition relative">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-coral text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                    </button>
+                    <div class="w-8 h-8 rounded-full overflow-hidden">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User profile" class="w-full h-full object-cover">
+                    </div>
+                    <button class="md:hidden text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="global-search" class="hidden bg-white shadow-md py-4 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="relative">
+                <input type="text" placeholder="Search articles, authors, audit trails, annotations..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <button class="absolute right-3 top-3 text-gray-400 hover:text-primary">
+                    <i class="fa-solid fa-search"></i>
+                </button>
+            </div>
+            <div class="mt-3 flex space-x-2 text-sm">
+                <span class="font-medium">Quick filters:</span>
+                <button class="text-primary hover:underline">Recent articles</button>
+                <button class="text-primary hover:underline">Most annotated</button>
+                <button class="text-primary hover:underline">Top audit trails</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notifications-panel" class="fixed right-0 top-[62px] w-full md:w-[400px] bg-white shadow-lg z-40 rounded-bl-lg overflow-hidden max-h-[600px] flex flex-col">
+        <div class="p-4 bg-primary text-white flex justify-between items-center">
+            <h2 class="text-lg font-semibold">Notifications</h2>
+            <div class="flex space-x-2">
+                <button class="hover:bg-white/20 p-1 rounded">
+                    <i class="fa-solid fa-check-double"></i>
+                </button>
+                <button class="hover:bg-white/20 p-1 rounded">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="p-3 bg-gray-100 border-b border-gray-200">
+            <div class="flex justify-between items-center">
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 bg-primary text-white text-sm rounded-full">All</button>
+                    <button class="px-3 py-1 hover:bg-gray-200 text-sm rounded-full">Articles</button>
+                    <button class="px-3 py-1 hover:bg-gray-200 text-sm rounded-full">Reviews</button>
+                    <button class="px-3 py-1 hover:bg-gray-200 text-sm rounded-full">Annotations</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="notification-list" class="overflow-y-auto flex-grow">
+            <div id="notification-1" class="p-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer">
+                <div class="flex">
+                    <div class="w-10 h-10 rounded-full bg-emerald/10 flex items-center justify-center text-emerald mr-3 flex-shrink-0">
+                        <i class="fa-solid fa-file-circle-check"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-medium">Article Submission Accepted</h3>
+                            <span class="text-xs text-mediumgray">2h ago</span>
+                        </div>
+                        <p class="text-sm text-mediumgray mb-2">Your article "Novel Neural Mechanisms in Decision-Making" has been accepted for publication. Congratulations!</p>
+                        <div class="flex items-center">
+                            <span class="bg-emerald/10 text-emerald text-xs px-2 py-1 rounded-full">Publication</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="notification-2" class="p-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer bg-blue-50">
+                <div class="flex">
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-3 flex-shrink-0">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-medium">New Review Assignment</h3>
+                            <span class="text-xs text-mediumgray">5h ago</span>
+                        </div>
+                        <p class="text-sm text-mediumgray mb-2">You've been assigned to review "CRISPR-Cas9 Modifications for Targeted Gene Therapy Applications". Due in 14 days.</p>
+                        <div class="flex items-center">
+                            <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">Review Request</span>
+                            <span class="ml-2 text-xs text-primary font-medium">Accept/Decline</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="notification-3" class="p-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer bg-blue-50">
+                <div class="flex">
+                    <div class="w-10 h-10 rounded-full bg-purple/10 flex items-center justify-center text-purple mr-3 flex-shrink-0">
+                        <i class="fa-solid fa-comment-dots"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-medium">New Annotation Replies</h3>
+                            <span class="text-xs text-mediumgray">Yesterday</span>
+                        </div>
+                        <p class="text-sm text-mediumgray mb-2">Dr. Emily Rodriguez and 2 others replied to your annotations on "Improved Climate Modeling Through Parallel Computation Methods".</p>
+                        <div class="flex items-center">
+                            <span class="bg-purple/10 text-purple text-xs px-2 py-1 rounded-full">Annotation</span>
+                            <span class="ml-2 text-xs text-purple font-medium">View Replies</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="notification-4" class="p-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer">
+                <div class="flex">
+                    <div class="w-10 h-10 rounded-full bg-orange/10 flex items-center justify-center text-orange mr-3 flex-shrink-0">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-medium">Audit Trail Updated</h3>
+                            <span class="text-xs text-mediumgray">2 days ago</span>
+                        </div>
+                        <p class="text-sm text-mediumgray mb-2">Prof. James Wilson has updated the audit trail for "Improved Climate Modeling Through Parallel Computation Methods" with 3 new items.</p>
+                        <div class="flex items-center">
+                            <span class="bg-orange/10 text-orange text-xs px-2 py-1 rounded-full">Audit Trail</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="notification-5" class="p-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer">
+                <div class="flex">
+                    <div class="w-10 h-10 rounded-full bg-coral/10 flex items-center justify-center text-coral mr-3 flex-shrink-0">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-medium">Review Deadline Approaching</h3>
+                            <span class="text-xs text-mediumgray">3 days ago</span>
+                        </div>
+                        <p class="text-sm text-mediumgray mb-2">Your review for "Quantum Computing Applications in Molecular Biology" is due in 3 days. You've completed 2/4 sections.</p>
+                        <div class="flex items-center">
+                            <span class="bg-coral/10 text-coral text-xs px-2 py-1 rounded-full">Deadline</span>
+                            <div class="ml-3 w-24 h-2 bg-gray-200 rounded-full">
+                                <div class="w-1/2 h-full bg-coral rounded-full"></div>
+                            </div>
+                            <span class="ml-2 text-xs text-mediumgray">50%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="notification-6" class="p-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer">
+                <div class="flex">
+                    <div class="w-10 h-10 rounded-full bg-emerald/10 flex items-center justify-center text-emerald mr-3 flex-shrink-0">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-medium">Review Feedback Received</h3>
+                            <span class="text-xs text-mediumgray">5 days ago</span>
+                        </div>
+                        <p class="text-sm text-mediumgray mb-2">Your review of "Neuroplasticity in Adult Learning" was rated as "Excellent" by the editor. Your review quality score has increased.</p>
+                        <div class="flex items-center">
+                            <span class="bg-emerald/10 text-emerald text-xs px-2 py-1 rounded-full">Feedback</span>
+                            <div class="ml-3 flex">
+                                <i class="fa-solid fa-star text-yellow-400 text-xs"></i>
+                                <i class="fa-solid fa-star text-yellow-400 text-xs"></i>
+                                <i class="fa-solid fa-star text-yellow-400 text-xs"></i>
+                                <i class="fa-solid fa-star text-yellow-400 text-xs"></i>
+                                <i class="fa-solid fa-star text-yellow-400 text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="notification-7" class="p-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer">
+                <div class="flex">
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-3 flex-shrink-0">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-medium">Co-author Invitation</h3>
+                            <span class="text-xs text-mediumgray">1 week ago</span>
+                        </div>
+                        <p class="text-sm text-mediumgray mb-2">Dr. Sarah Chen has invited you to be a co-author on "Advanced Neural Network Architectures for Medical Imaging Analysis".</p>
+                        <div class="flex items-center">
+                            <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">Invitation</span>
+                            <span class="ml-2 text-xs text-primary font-medium">Accept/Decline</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-3 bg-gray-100 border-t border-gray-200 flex justify-center">
+            <button class="text-primary hover:underline text-sm flex items-center">
+                See all notifications
+                <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
+        </div>
+    </div>
+
+    <section id="empty-state" class="py-16 h-[400px] flex items-center justify-center">
+        <div class="text-center">
+            <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-6">
+                <i class="fa-solid fa-bell text-4xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold mb-2">Your Notification Center</h2>
+            <p class="text-mediumgray max-w-md mx-auto mb-6">Stay updated on article submissions, review assignments, and annotation activities. Click the notification bell to see your latest updates.</p>
+            <button class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition flex items-center mx-auto">
+                <i class="fa-solid fa-bell mr-2"></i>
+                View Notifications
+            </button>
+        </div>
+    </section>
+
+    <section id="notification-preferences" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-6">Notification Preferences</h2>
+                <p class="text-mediumgray mb-8">Customize which notifications you receive and how they're delivered to stay informed about the activities that matter most to you.</p>
+                
+                <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                    <h3 class="text-lg font-semibold mb-4">Email Delivery Frequency</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white border border-gray-200 rounded-lg p-4 flex flex-col items-center hover:border-primary cursor-pointer">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <h4 class="font-medium mb-1">Real-time</h4>
+                            <p class="text-sm text-mediumgray text-center">Receive emails as events happen</p>
+                        </div>
+                        <div class="bg-white border-2 border-primary rounded-lg p-4 flex flex-col items-center relative">
+                            <div class="absolute -top-2 -right-2 bg-primary text-white text-xs px-2 py-1 rounded-full">
+                                Current
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <h4 class="font-medium mb-1">Daily Digest</h4>
+                            <p class="text-sm text-mediumgray text-center">Receive one email per day with all updates</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-lg p-4 flex flex-col items-center hover:border-primary cursor-pointer">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3">
+                                <i class="fa-solid fa-calendar-week"></i>
+                            </div>
+                            <h4 class="font-medium mb-1">Weekly Digest</h4>
+                            <p class="text-sm text-mediumgray text-center">Receive one email per week with all updates</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="notification-categories" class="space-y-4">
+                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="flex items-center justify-between p-4 bg-gray-50 border-b border-gray-200">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-emerald/10 flex items-center justify-center text-emerald mr-3">
+                                    <i class="fa-solid fa-file-lines"></i>
+                                </div>
+                                <h3 class="font-semibold">Article Submissions</h3>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald"></div>
+                            </label>
+                        </div>
+                        <div class="p-4">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Submission status updates</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald"></div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Editor decisions</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald"></div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Publication confirmations</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="flex items-center justify-between p-4 bg-gray-50 border-b border-gray-200">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-3">
+                                    <i class="fa-solid fa-clipboard-check"></i>
+                                </div>
+                                <h3 class="font-semibold">Review Assignments</h3>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                            </label>
+                        </div>
+                        <div class="p-4">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">New review invitations</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Review deadline reminders</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Review feedback from editors</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="flex items-center justify-between p-4 bg-gray-50 border-b border-gray-200">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-purple/10 flex items-center justify-center text-purple mr-3">
+                                    <i class="fa-solid fa-comments"></i>
+                                </div>
+                                <h3 class="font-semibold">Annotations & Comments</h3>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple"></div>
+                            </label>
+                        </div>
+                        <div class="p-4">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Replies to your annotations</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple"></div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">New annotations on your articles</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple"></div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Mentions in annotations (@username)</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="flex items-center justify-between p-4 bg-gray-50 border-b border-gray-200">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-orange/10 flex items-center justify-center text-orange mr-3">
+                                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                                </div>
+                                <h3 class="font-semibold">Audit Trail Updates</h3>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange"></div>
+                            </label>
+                        </div>
+                        <div class="p-4">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Updates to audit trails on your articles</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-orange"></div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Audit trail updates from followed authors</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-orange"></div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Comments on audit trail items</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-orange"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 flex justify-end">
+                    <button class="bg-gray-200 hover:bg-gray-300 text-charcoal font-medium py-2 px-6 rounded-lg transition mr-3">
+                        Reset to Default
+                    </button>
+                    <button class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-lg transition">
+                        Save Preferences
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer" class="bg-charcoal text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                            PR
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-lg">PeerTrail</span>
+                            <span class="text-xs text-gray-400">Transparent Scientific Publishing</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4">The world's first comprehensive audit trail system for transparent scientific publishing.</p>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-twitter"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-github"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-researchgate"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Platform</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Browse Articles</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Submit Research</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Peer Review Process</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Audit Trail System</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Annotation Tools</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">API Documentation</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">FAQs</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Support Center</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">About Us</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Our Mission</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Partners</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Contact Us</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Careers</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 PeerTrail. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Cookie Policy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle global search
+        document.getElementById('search-toggle').addEventListener('click', function() {
+            const searchBar = document.getElementById('global-search');
+            searchBar.classList.toggle('hidden');
+            document.getElementById('notifications-panel').classList.add('hidden');
+        });
+
+        // Toggle notifications panel
+        document.getElementById('notifications-toggle').addEventListener('click', function() {
+            const notificationsPanel = document.getElementById('notifications-panel');
+            notificationsPanel.classList.toggle('hidden');
+            document.getElementById('global-search').classList.add('hidden');
+        });
+
+        // Hide panels when clicking elsewhere
+        document.addEventListener('click', function(event) {
+            const searchToggle = document.getElementById('search-toggle');
+            const notificationsToggle = document.getElementById('notifications-toggle');
+            const searchBar = document.getElementById('global-search');
+            const notificationsPanel = document.getElementById('notifications-panel');
+            
+            if (!searchToggle.contains(event.target) && !searchBar.contains(event.target)) {
+                searchBar.classList.add('hidden');
+            }
+            
+            if (!notificationsToggle.contains(event.target) && !notificationsPanel.contains(event.target)) {
+                notificationsPanel.classList.add('hidden');
+            }
+        });
+
+        // Initialize with panels hidden
+        document.getElementById('notifications-panel').classList.add('hidden');
+    </script>
+</body>
+</html>

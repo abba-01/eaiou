@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <div id="header" class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="text-primary-700 font-bold text-xl">Joomla Academic</div>
+                <div class="hidden md:flex space-x-6 ml-10">
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Dashboard</span>
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">My Articles</span>
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Submit Article</span>
+                    <span class="text-primary-600 font-medium cursor-pointer">Admin</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-500 hover:text-gray-700">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center">
+                        <span class="text-sm font-medium">JD</span>
+                    </div>
+                    <span class="text-gray-700 hidden md:inline-block">John Doe</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content" class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row">
+            <!-- Left sidebar with admin navigation -->
+            <div id="admin-sidebar" class="w-full md:w-64 mb-6 md:mb-0">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sticky top-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Admin Settings</h3>
+                    <div class="space-y-2">
+                        <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                            <i class="fa-solid fa-users-gear w-5 mr-2"></i>
+                            <span>User Management</span>
+                        </span>
+                        <span class="flex items-center px-3 py-2 text-primary-600 bg-primary-50 rounded-md font-medium cursor-pointer">
+                            <i class="fa-solid fa-user-tag w-5 mr-2"></i>
+                            <span>Role Mappings</span>
+                        </span>
+                        <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                            <i class="fa-solid fa-diagram-project w-5 mr-2"></i>
+                            <span>Workflow Parameters</span>
+                        </span>
+                        <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                            <i class="fa-solid fa-envelope-open-text w-5 mr-2"></i>
+                            <span>Notification Templates</span>
+                        </span>
+                        <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                            <i class="fa-solid fa-list-check w-5 mr-2"></i>
+                            <span>Review Rubrics</span>
+                        </span>
+                        <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                            <i class="fa-solid fa-file-circle-check w-5 mr-2"></i>
+                            <span>Article Templates</span>
+                        </span>
+                        <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                            <i class="fa-solid fa-chart-line w-5 mr-2"></i>
+                            <span>System Reports</span>
+                        </span>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                            <i class="fa-solid fa-gear w-5 mr-2"></i>
+                            <span>Global Settings</span>
+                        </span>
+                        <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                            <i class="fa-solid fa-database w-5 mr-2"></i>
+                            <span>System Maintenance</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main admin area -->
+            <div id="admin-config-area" class="flex-1 md:ml-8">
+                <div id="role-mappings-section" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800">Role Mappings</h2>
+                        <button class="py-2 px-4 bg-primary-600 text-white rounded-md font-medium hover:bg-primary-700 flex items-center">
+                            <i class="fa-solid fa-plus mr-2"></i>
+                            Add New Mapping
+                        </button>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <p class="text-gray-600 mb-4">Map Joomla user groups to peer review system roles. Each user can have multiple roles based on their group memberships.</p>
+                        
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fa-solid fa-triangle-exclamation text-yellow-400"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-yellow-700">
+                                        Changes to role mappings will affect user permissions immediately. Users may need to log out and log back in for all changes to take effect.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="role-mapping-table" class="border border-gray-200 rounded-lg overflow-hidden">
+                            <div class="bg-gray-50 px-6 py-3 border-b border-gray-200">
+                                <div class="grid grid-cols-12 gap-4">
+                                    <div class="col-span-4 font-medium text-gray-700">Joomla User Group</div>
+                                    <div class="col-span-4 font-medium text-gray-700">Peer Review Role</div>
+                                    <div class="col-span-3 font-medium text-gray-700">Permissions</div>
+                                    <div class="col-span-1 font-medium text-gray-700"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="divide-y divide-gray-200">
+                                <div class="px-6 py-4 hover:bg-gray-50">
+                                    <div class="grid grid-cols-12 gap-4 items-center">
+                                        <div class="col-span-4">
+                                            <div class="font-medium text-gray-800">Super Users</div>
+                                            <div class="text-xs text-gray-500">Joomla system administrators</div>
+                                        </div>
+                                        <div class="col-span-4">
+                                            <select class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-1 focus:ring-primary-500">
+                                                <option selected>Administrator</option>
+                                                <option>Editor</option>
+                                                <option>Reviewer</option>
+                                                <option>Author</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-span-3">
+                                            <div class="flex flex-wrap gap-2">
+                                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">All Permissions</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-1 text-right">
+                                            <button class="text-gray-400 hover:text-gray-600">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="px-6 py-4 hover:bg-gray-50">
+                                    <div class="grid grid-cols-12 gap-4 items-center">
+                                        <div class="col-span-4">
+                                            <div class="font-medium text-gray-800">Manager</div>
+                                            <div class="text-xs text-gray-500">Content managers</div>
+                                        </div>
+                                        <div class="col-span-4">
+                                            <select class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-1 focus:ring-primary-500">
+                                                <option>Administrator</option>
+                                                <option selected>Editor</option>
+                                                <option>Reviewer</option>
+                                                <option>Author</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-span-3">
+                                            <div class="flex flex-wrap gap-2">
+                                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Assign Reviewers</span>
+                                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Make Decisions</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-1 text-right">
+                                            <button class="text-gray-400 hover:text-gray-600">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="px-6 py-4 hover:bg-gray-50">
+                                    <div class="grid grid-cols-12 gap-4 items-center">
+                                        <div class="col-span-4">
+                                            <div class="font-medium text-gray-800">Academic Reviewers</div>
+                                            <div class="text-xs text-gray-500">External review team</div>
+                                        </div>
+                                        <div class="col-span-4">
+                                            <select class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-1 focus:ring-primary-500">
+                                                <option>Administrator</option>
+                                                <option>Editor</option>
+                                                <option selected>Reviewer</option>
+                                                <option>Author</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-span-3">
+                                            <div class="flex flex-wrap gap-2">
+                                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Submit Reviews</span>
+                                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">View Assignments</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-1 text-right">
+                                            <button class="text-gray-400 hover:text-gray-600">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="px-6 py-4 hover:bg-gray-50">
+                                    <div class="grid grid-cols-12 gap-4 items-center">
+                                        <div class="col-span-4">
+                                            <div class="font-medium text-gray-800">Registered</div>
+                                            <div class="text-xs text-gray-500">Standard site members</div>
+                                        </div>
+                                        <div class="col-span-4">
+                                            <select class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-1 focus:ring-primary-500">
+                                                <option>Administrator</option>
+                                                <option>Editor</option>
+                                                <option>Reviewer</option>
+                                                <option selected>Author</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-span-3">
+                                            <div class="flex flex-wrap gap-2">
+                                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Submit Articles</span>
+                                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Revise Own</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-1 text-right">
+                                            <button class="text-gray-400 hover:text-gray-600">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="custom-role-section" class="border-t border-gray-200 pt-6 mt-6">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Custom Role Configuration</h3>
+                        <p class="text-gray-600 mb-4">Create custom roles with specific permissions for your workflow.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div id="role-form" class="border border-gray-200 rounded-lg p-4">
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Role Name</label>
+                                    <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500" placeholder="e.g., Associate Editor">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Role Key</label>
+                                    <div class="flex">
+                                        <span class="inline-flex items-center px-3 py-2 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                                            peerreview:
+                                        </span>
+                                        <input type="text" class="flex-1 border border-gray-300 rounded-r-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500" placeholder="e.g., assoc_editor">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                                    <textarea class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500" rows="2" placeholder="Describe the role's purpose and responsibilities"></textarea>
+                                </div>
+                                
+                                <div>
+                                    <button class="w-full py-2 px-4 bg-primary-600 text-white rounded-md font-medium hover:bg-primary-700">
+                                        Create Custom Role
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div id="permission-selector" class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-medium text-gray-800 mb-3">Select Permissions</h4>
+                                
+                                <div class="space-y-3 max-h-[300px] overflow-y-auto pr-2">
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3 text-sm">
+                                            <label class="font-medium text-gray-700">Submit Articles</label>
+                                            <p class="text-gray-500">Can create and submit new articles for review</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3 text-sm">
+                                            <label class="font-medium text-gray-700">View All Submissions</label>
+                                            <p class="text-gray-500">Can see all submitted articles in the system</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3 text-sm">
+                                            <label class="font-medium text-gray-700">Assign Reviewers</label>
+                                            <p class="text-gray-500">Can assign reviewers to submitted articles</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3 text-sm">
+                                            <label class="font-medium text-gray-700">Submit Reviews</label>
+                                            <p class="text-gray-500">Can review assigned articles and submit evaluations</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3 text-sm">
+                                            <label class="font-medium text-gray-700">Make Decisions</label>
+                                            <p class="text-gray-500">Can approve, request revisions, or reject articles</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3 text-sm">
+                                            <label class="font-medium text-gray-700">Publish Articles</label>
+                                            <p class="text-gray-500">Can publish approved articles to the site</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3 text-sm">
+                                            <label class="font-medium text-gray-700">Manage Templates</label>
+                                            <p class="text-gray-500">Can edit notification and article templates</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="workflow-parameters-section" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6">Workflow Parameters</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-800 mb-4">Review Process Settings</h3>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Required Reviews</label>
+                                    <input type="number" min="1" max="10" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500" value="2">
+                                    <p class="mt-1 text-xs text-gray-500">Minimum number of reviews required before an editor can make a decision</p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Default Review Period (Days)</label>
+                                    <input type="number" min="1" max="90" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500" value="14">
+                                    <p class="mt-1 text-xs text-gray-500">Default time allowed for reviewers to complete their review</p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Review Score Threshold</label>
+                                    <input type="number" min="1" max="5" step="0.1" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500" value="3.5">
+                                    <p class="mt-1 text-xs text-gray-500">Average score required for automatic approval recommendation</p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Revision Time Limit (Days)</label>
+                                    <input type="number" min="1" max="90" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500" value="30">
+                                    <p class="mt-1 text-xs text-gray-500">Time allowed for authors to submit revisions</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-800 mb-4">Workflow Options</h3>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Default Anonymity Setting</label>
+                                    <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500">
+                                        <option>Double-blind (authors and reviewers anonymous)</option>
+                                        <option selected>Single-blind (only reviewers anonymous)</option>
+                                        <option>Open (no anonymity)</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Auto-assign Editors</label>
+                                    <div class="mt-1">
+                                        <label class="inline-flex items-center">
+                                            <input type="radio" name="auto-assign" class="form-radio h-4 w-4 text-primary-600" checked>
+                                            <span class="ml-2 text-gray-700">Enabled</span>
+                                        </label>
+                                        <label class="inline-flex items-center ml-6">
+                                            <input type="radio" name="auto-assign" class="form-radio h-4 w-4 text-primary-600">
+                                            <span class="ml-2 text-gray-700">Disabled</span>
+                                        </label>
+                                    </div>
+                                    <p class="mt-1 text-xs text-gray-500">Automatically assign editors based on article category</p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Allow Author Suggested Reviewers</label>
+                                    <div class="mt-1">
+                                        <label class="inline-flex items-center">
+                                            <input type="radio" name="author-suggested" class="form-radio h-4 w-4 text-primary-600" checked>
+                                            <span class="ml-2 text-gray-700">Enabled</span>
+                                        </label>
+                                        <label class="inline-flex items-center ml-6">
+                                            <input type="radio" name="author-suggested" class="form-radio h-4 w-4 text-primary-600">
+                                            <span class="ml-2 text-gray-700">Disabled</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Automatic Reminders</label>
+                                    <div class="space-y-2">
+                                        <label class="inline-flex items-center">
+                                            <input type="checkbox" class="form-checkbox h-4 w-4 text-primary-600" checked>
+                                            <span class="ml-2 text-gray-700">Reviewer deadline approaching (3 days before)</span>
+                                        </label>
+                                        <label class="inline-flex items-center">
+                                            <input type="checkbox" class="form-checkbox h-4 w-4 text-primary-600" checked>
+                                            <span class="ml-2 text-gray-700">Reviewer deadline passed</span>
+                                        </label>
+                                        <label class="inline-flex items-center">
+                                            <input type="checkbox" class="form-checkbox h-4 w-4 text-primary-600" checked>
+                                            <span class="ml-2 text-gray-700">Revision deadline approaching</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t border-gray-200 flex justify-end">
+                        <button class="py-2 px-4 bg-primary-600 text-white rounded-md font-medium hover:bg-primary-700">
+                            Save Workflow Parameters
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="notification-templates-section" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6">Notification Templates</h2>
+                    
+                    <div class="mb-6">
+                        <p class="text-gray-600">Configure email notification templates sent during the review process. Use placeholders like {AUTHOR_NAME}, {ARTICLE_TITLE}, etc.</p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex border-b border-gray-200">
+                            <button class="px-4 py-2 border-b-2 border-primary-600 text-primary-600 font-medium">
+                                Author Notifications
+                            </button>
+                            <button class="px-4 py-2 text-gray-600 hover:text-gray-800">
+                                Reviewer Notifications
+                            </button>
+                            <button class="px-4 py-2 text-gray-600 hover:text-gray-800">
+                                Editor Notifications
+                            </button>
+                            <button class="px-4 py-2 text-gray-600 hover:text-gray-800">
+                                Admin Notifications
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-medium text-gray-800">Submission Received</h3>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full mr-2">Active</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                                    <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500" value="Your article submission has been received">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Recipients</label>
+                                    <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500">
+                                        <option selected>Article Authors</option>
+                                        <option>Assigned Editors</option>
+                                        <option>System Administrators</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Template Content</label>
+                                <textarea class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500" rows="5">Dear {AUTHOR_NAME},
+
+Thank you for submitting your article "{ARTICLE_TITLE}" to Joomla Academic. Your submission has been received and assigned the internal reference number {SUBMISSION_ID}.
+
+An editor will review your submission shortly and may assign it to peer reviewers. You can check the status of your submission at any time by logging into your account.
+
+Best regards,
+The Editorial Team</textarea>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <button class="text-primary-600 hover:text-primary-700 text-sm font-medium">
+                                        <i class="fa-solid fa-code mr-1"></i> View Placeholders
+                                    </button>
+                                </div>
+                                <div>
+                                    <button class="py-1.5 px-3 bg-gray-100 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-200 mr-2">
+                                        Preview
+                                    </button>
+                                    <button class="py-1.5 px-3 bg-primary-600 text-white rounded-md text-sm font-medium hover:bg-primary-700">
+                                        Save Template
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-medium text-gray-800">Revision Requested</h3>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full mr-2">Active</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                                    <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500" value="Revision requested for your article submission">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Recipients</label>
+                                    <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500">
+                                        <option selected>Article Authors</option>
+                                        <option>Assigned Editors</option>
+                                        <option>Assigned Reviewers</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Template Content</label>
+                                <textarea class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary-500" rows="5">Dear {AUTHOR_NAME},
+
+We have completed the initial review of your article "{ARTICLE_TITLE}" (Reference: {SUBMISSION_ID}).
+
+Based on the reviewer feedback, we are requesting revisions to your manuscript before making a final decision. Please log into your account to view the detailed reviewer comments and editor recommendations.
+
+Please submit your revised manuscript by {REVISION_DEADLINE}. If you need additional time, please contact us as soon as possible.
+
+Best regards,
+The Editorial Team</textarea>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <button class="text-primary-600 hover:text-primary-700 text-sm font-medium">
+                                        <i class="fa-solid fa-code mr-1"></i> View Placeholders
+                                    </button>
+                                </div>
+                                <div>
+                                    <button class="py-1.5 px-3 bg-gray-100 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-200 mr-2">
+                                        Preview
+                                    </button>
+                                    <button class="py-1.5 px-3 bg-primary-600 text-white rounded-md text-sm font-medium hover:bg-primary-700">
+                                        Save Template
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-4 border-dashed">
+                            <div class="flex justify-center items-center py-6">
+                                <button class="flex items-center justify-center text-primary-600 hover:text-primary-700 font-medium">
+                                    <i class="fa-solid fa-plus mr-2"></i>
+                                    Add New Template
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t border-gray-200 flex justify-end">
+                        <button class="py-2 px-4 bg-primary-600 text-white rounded-md font-medium hover:bg-primary-700">
+                            Save All Templates
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="footer" class="bg-white border-t border-gray-200 mt-8">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 Joomla Academic. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Help</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Contact</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

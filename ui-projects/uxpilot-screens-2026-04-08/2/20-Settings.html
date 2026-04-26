@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="bg-white shadow-sm border-b">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <i class="fa-solid fa-brain text-neutral-800 text-2xl mr-3"></i>
+      <h1 class="text-xl text-neutral-800">AI Research Assistant</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-bell mr-2"></i>
+        <span class="relative">
+          Notifications
+          <span class="absolute -top-1 -right-2 bg-neutral-800 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+        </span>
+      </button>
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-question-circle mr-2"></i>
+        Help
+      </button>
+      <div class="relative">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full cursor-pointer"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="flex h-[800px] bg-neutral-50">
+  <div id="sidebar" class="w-64 bg-white border-r">
+    <div class="p-4">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-sm text-neutral-500">WORKSPACE</h2>
+        <button class="text-neutral-400 hover:text-neutral-600">
+          <i class="fa-solid fa-cog"></i>
+        </button>
+      </div>
+      
+      <nav class="space-y-1">
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tachometer-alt mr-3 text-neutral-400"></i>
+          Dashboard
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-folder mr-3 text-neutral-400"></i>
+          Projects
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-file-alt mr-3 text-neutral-400"></i>
+          Articles
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tasks mr-3 text-neutral-400"></i>
+          Tasks
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm bg-neutral-100 text-neutral-900 rounded-md cursor-pointer">
+          <i class="fa-solid fa-cogs mr-3 text-neutral-700"></i>
+          Settings
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-users mr-3 text-neutral-400"></i>
+          User Management
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-chart-bar mr-3 text-neutral-400"></i>
+          Analytics
+        </span>
+      </nav>
+    </div>
+  </div>
+
+  <div id="content" class="flex-1 overflow-auto p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl text-neutral-800">Settings</h1>
+      <button class="px-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 flex items-center">
+        <i class="fa-solid fa-save mr-2"></i>
+        Save Changes
+      </button>
+    </div>
+
+    <div class="grid grid-cols-12 gap-6">
+      <div class="col-span-12 lg:col-span-3">
+        <div class="bg-white rounded-lg shadow-sm p-4 sticky top-4">
+          <h3 class="text-sm text-neutral-500 mb-4">SETTINGS NAVIGATION</h3>
+          <div class="space-y-1">
+            <button class="w-full text-left px-3 py-2 text-sm rounded-md bg-neutral-800 text-white">
+              <i class="fa-solid fa-robot mr-2"></i>
+              AI Models
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-project-diagram mr-2"></i>
+              Project Settings
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-file-alt mr-2"></i>
+              Article Templates
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-shield-alt mr-2"></i>
+              Security
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-database mr-2"></i>
+              Data Storage
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-key mr-2"></i>
+              API Keys
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-bell mr-2"></i>
+              Notifications
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-user-lock mr-2"></i>
+              Access Control
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 lg:col-span-9 space-y-6">
+        <div id="ai-models-section" class="bg-white rounded-lg shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl text-neutral-800">AI Models Configuration</h2>
+            <button class="px-3 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 flex items-center text-sm">
+              <i class="fa-solid fa-plus mr-2"></i>
+              Add New Model
+            </button>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-robot"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-neutral-800">UX Pilot Opus</h3>
+                    <p class="text-sm text-neutral-500">UX Pilot AI</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">Active</span>
+                  <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-trash-alt"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">API ENDPOINT</h4>
+                  <p class="text-sm text-neutral-800">https://api.UX Pilot AI.com/v1/messages</p>
+                </div>
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">API KEY</h4>
+                  <p class="text-sm text-neutral-800">••••••••••••••••••••••••</p>
+                </div>
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">MAX TOKENS</h4>
+                  <p class="text-sm text-neutral-800">200,000</p>
+                </div>
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">COST PER 1K TOKENS</h4>
+                  <p class="text-sm text-neutral-800">$15.00 / $75.00 (Input/Output)</p>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <h4 class="text-xs text-neutral-500 mb-1">MODEL CAPABILITIES</h4>
+                <div class="flex flex-wrap gap-2 mt-1">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Academic Writing</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Scientific Research</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Literature Review</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Data Analysis</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-robot"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-neutral-800">UX Pilot Sonnet</h3>
+                    <p class="text-sm text-neutral-500">UX Pilot AI</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">Active</span>
+                  <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-trash-alt"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">API ENDPOINT</h4>
+                  <p class="text-sm text-neutral-800">https://api.UX Pilot AI.com/v1/messages</p>
+                </div>
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">API KEY</h4>
+                  <p class="text-sm text-neutral-800">••••••••••••••••••••••••</p>
+                </div>
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">MAX TOKENS</h4>
+                  <p class="text-sm text-neutral-800">180,000</p>
+                </div>
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">COST PER 1K TOKENS</h4>
+                  <p class="text-sm text-neutral-800">$3.00 / $15.00 (Input/Output)</p>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <h4 class="text-xs text-neutral-500 mb-1">MODEL CAPABILITIES</h4>
+                <div class="flex flex-wrap gap-2 mt-1">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Academic Writing</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Scientific Research</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Literature Review</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-robot"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-neutral-800">GPT-4o</h3>
+                    <p class="text-sm text-neutral-500">UX Pilot AI</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">Maintenance</span>
+                  <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-trash-alt"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">API ENDPOINT</h4>
+                  <p class="text-sm text-neutral-800">https://api.UX Pilot AI.com/v1/chat/completions</p>
+                </div>
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">API KEY</h4>
+                  <p class="text-sm text-neutral-800">••••••••••••••••••••••••</p>
+                </div>
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">MAX TOKENS</h4>
+                  <p class="text-sm text-neutral-800">128,000</p>
+                </div>
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">COST PER 1K TOKENS</h4>
+                  <p class="text-sm text-neutral-800">$5.00 / $15.00 (Input/Output)</p>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <h4 class="text-xs text-neutral-500 mb-1">MODEL CAPABILITIES</h4>
+                <div class="flex flex-wrap gap-2 mt-1">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Academic Writing</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Scientific Research</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Data Analysis</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Coding</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="model-parameters-section" class="bg-white rounded-lg shadow-sm p-6">
+          <h2 class="text-xl text-neutral-800 mb-6">Default Model Parameters</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Temperature</label>
+              <div class="flex items-center">
+                <input type="range" min="0" max="1" step="0.1" value="0.7" class="w-full mr-3">
+                <span class="text-sm text-neutral-700 w-10">0.7</span>
+              </div>
+              <p class="mt-1 text-xs text-neutral-500">Controls randomness: Lower values are more deterministic, higher values are more creative.</p>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Top P</label>
+              <div class="flex items-center">
+                <input type="range" min="0" max="1" step="0.1" value="0.9" class="w-full mr-3">
+                <span class="text-sm text-neutral-700 w-10">0.9</span>
+              </div>
+              <p class="mt-1 text-xs text-neutral-500">Controls diversity via nucleus sampling: 0.5 means half of all likelihood-weighted options are considered.</p>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Max Output Tokens</label>
+              <input type="number" value="8000" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+              <p class="mt-1 text-xs text-neutral-500">Maximum length of generated text. Higher values may result in more comprehensive responses.</p>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Academic Style</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>APA 7th Edition</option>
+                <option>MLA 9th Edition</option>
+                <option>Chicago 17th Edition</option>
+                <option>Harvard</option>
+                <option>IEEE</option>
+              </select>
+              <p class="mt-1 text-xs text-neutral-500">Default citation and formatting style for academic outputs.</p>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Citation Requirements</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>Strict (Only peer-reviewed sources)</option>
+                <option>Standard (Peer-reviewed and reputable sources)</option>
+                <option>Relaxed (Include industry sources)</option>
+              </select>
+              <p class="mt-1 text-xs text-neutral-500">Level of rigor for source citations in generated content.</p>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Content Safety Level</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>Standard</option>
+                <option>Strict</option>
+                <option>Academic Freedom (Allow controversial topics)</option>
+              </select>
+              <p class="mt-1 text-xs text-neutral-500">Controls content filtering for academic research purposes.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="data-security-section" class="bg-white rounded-lg shadow-sm p-6">
+          <h2 class="text-xl text-neutral-800 mb-6">Data Security & Privacy</h2>
+          
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="flex items-center h-5">
+                <input id="data-retention" type="checkbox" checked class="h-4 w-4 rounded border-neutral-300">
+              </div>
+              <div class="ml-3">
+                <label for="data-retention" class="text-sm text-neutral-700">Enable Data Retention</label>
+                <p class="text-xs text-neutral-500">Store generated content and research data for future reference and compliance.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="flex items-center h-5">
+                <input id="encryption" type="checkbox" checked class="h-4 w-4 rounded border-neutral-300">
+              </div>
+              <div class="ml-3">
+                <label for="encryption" class="text-sm text-neutral-700">End-to-End Encryption</label>
+                <p class="text-xs text-neutral-500">Encrypt all data in transit and at rest for maximum security.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="flex items-center h-5">
+                <input id="data-anonymization" type="checkbox" checked class="h-4 w-4 rounded border-neutral-300">
+              </div>
+              <div class="ml-3">
+                <label for="data-anonymization" class="text-sm text-neutral-700">Data Anonymization</label>
+                <p class="text-xs text-neutral-500">Remove personally identifiable information from research data.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="flex items-center h-5">
+                <input id="api-logging" type="checkbox" checked class="h-4 w-4 rounded border-neutral-300">
+              </div>
+              <div class="ml-3">
+                <label for="api-logging" class="text-sm text-neutral-700">API Request Logging</label>
+                <p class="text-xs text-neutral-500">Log all API requests for security monitoring and auditing.</p>
+              </div>
+            </div>
+            
+            <div class="mt-6">
+              <label class="block text-sm text-neutral-700 mb-1">Data Retention Period</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>30 days</option>
+                <option>90 days</option>
+                <option>1 year</option>
+                <option>3 years</option>
+                <option>7 years (Research standard)</option>
+                <option>Indefinite</option>
+              </select>
+              <p class="mt-1 text-xs text-neutral-500">How long to retain project data and generated content.</p>
+            </div>
+            
+            <div class="mt-4">
+              <label class="block text-sm text-neutral-700 mb-1">Backup Frequency</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>Daily</option>
+                <option>Weekly</option>
+                <option>Monthly</option>
+                <option>After each project completion</option>
+              </select>
+              <p class="mt-1 text-xs text-neutral-500">How often to back up project data and configurations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-white border-t mt-auto">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="text-sm text-neutral-500">
+        © 2025 AI Research Assistant | Joomla 5.3 Component
+      </div>
+      <div class="flex space-x-4 mt-2 md:mt-0">
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Privacy Policy</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Terms of Service</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Contact Support</span>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

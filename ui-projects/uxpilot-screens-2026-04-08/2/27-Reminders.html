@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="bg-white shadow-sm border-b">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <i class="fa-solid fa-brain text-neutral-800 text-2xl mr-3"></i>
+      <h1 class="text-xl text-neutral-800">AI Research Assistant</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-bell mr-2"></i>
+        <span class="relative">
+          Notifications
+          <span class="absolute -top-1 -right-2 bg-neutral-800 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+        </span>
+      </button>
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-question-circle mr-2"></i>
+        Help
+      </button>
+      <div class="relative">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full cursor-pointer"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="flex h-[800px] bg-neutral-50">
+  <div id="sidebar" class="w-64 bg-white border-r">
+    <div class="p-4">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-sm text-neutral-500">WORKSPACE</h2>
+        <button class="text-neutral-400 hover:text-neutral-600">
+          <i class="fa-solid fa-cog"></i>
+        </button>
+      </div>
+      
+      <nav class="space-y-1">
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tachometer-alt mr-3 text-neutral-400"></i>
+          Dashboard
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-folder mr-3 text-neutral-400"></i>
+          Projects
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-file-alt mr-3 text-neutral-400"></i>
+          Articles
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tasks mr-3 text-neutral-400"></i>
+          Tasks
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm bg-neutral-100 text-neutral-900 rounded-md cursor-pointer">
+          <i class="fa-solid fa-cogs mr-3 text-neutral-700"></i>
+          Settings
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-users mr-3 text-neutral-400"></i>
+          User Management
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-chart-bar mr-3 text-neutral-400"></i>
+          Analytics
+        </span>
+      </nav>
+    </div>
+  </div>
+
+  <div id="content" class="flex-1 overflow-auto p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl text-neutral-800">Reminders</h1>
+      <button class="px-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 flex items-center">
+        <i class="fa-solid fa-save mr-2"></i>
+        Save Changes
+      </button>
+    </div>
+
+    <div class="grid grid-cols-12 gap-6">
+      <div class="col-span-12 lg:col-span-3">
+        <div class="bg-white rounded-lg shadow-sm p-4 sticky top-4">
+          <h3 class="text-sm text-neutral-500 mb-4">SETTINGS NAVIGATION</h3>
+          <div class="space-y-1">
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-robot mr-2"></i>
+              AI Models
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-project-diagram mr-2"></i>
+              Project Settings
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-file-alt mr-2"></i>
+              Article Templates
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-shield-alt mr-2"></i>
+              Security
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-database mr-2"></i>
+              Data Storage
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-key mr-2"></i>
+              API Keys
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm bg-neutral-800 text-white rounded-md">
+              <i class="fa-solid fa-bell mr-2"></i>
+              Notifications
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-user-lock mr-2"></i>
+              Access Control
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="reminders-section" class="col-span-12 lg:col-span-9 space-y-6">
+        <div class="bg-white rounded-lg shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl text-neutral-800">Notification Settings</h2>
+            <button class="px-3 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 flex items-center text-sm">
+              <i class="fa-solid fa-plus mr-2"></i>
+              Add New Reminder
+            </button>
+          </div>
+          
+          <div class="mb-6">
+            <div class="flex items-start mb-4">
+              <div class="flex items-center h-5 mt-1">
+                <input id="enable-reminders" type="checkbox" checked class="h-4 w-4 rounded border-neutral-300">
+              </div>
+              <div class="ml-3">
+                <label for="enable-reminders" class="text-sm text-neutral-700">Enable Reminders</label>
+                <p class="text-xs text-neutral-500">Receive notifications for project deadlines, submissions, and important milestones.</p>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">Default Reminder Time</label>
+                <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>24 hours before deadline</option>
+                  <option>48 hours before deadline</option>
+                  <option>72 hours before deadline</option>
+                  <option>1 week before deadline</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">Notification Channels</label>
+                <div class="flex flex-wrap gap-2 mt-1">
+                  <div class="flex items-center">
+                    <input id="email-notif" type="checkbox" checked class="h-4 w-4 rounded border-neutral-300 mr-1">
+                    <label for="email-notif" class="text-sm text-neutral-700">Email</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="in-app-notif" type="checkbox" checked class="h-4 w-4 rounded border-neutral-300 mr-1">
+                    <label for="in-app-notif" class="text-sm text-neutral-700">In-app</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input id="sms-notif" type="checkbox" class="h-4 w-4 rounded border-neutral-300 mr-1">
+                    <label for="sms-notif" class="text-sm text-neutral-700">SMS</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="border-t border-neutral-200 pt-6">
+            <h3 class="text-lg text-neutral-800 mb-4">Active Reminders</h3>
+            
+            <div class="space-y-4">
+              <!-- Reminder 1 -->
+              <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                      <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-neutral-800">Project Deadline</h3>
+                      <p class="text-sm text-neutral-500">Quantum Computing Literature Review</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">Active</span>
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600">
+                      <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">DEADLINE</h4>
+                    <p class="text-sm text-neutral-800">July 15, 2025 at 11:59 PM</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">REMINDERS</h4>
+                    <p class="text-sm text-neutral-800">1 week, 3 days, 24 hours before</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">NOTIFY</h4>
+                    <div class="flex">
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-6 h-6 rounded-full mr-1"/>
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-6 h-6 rounded-full mr-1"/>
+                      <div class="w-6 h-6 rounded-full bg-neutral-200 flex items-center justify-center text-neutral-600 text-xs">
+                        +2
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Reminder 2 -->
+              <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                      <i class="fa-solid fa-file-signature"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-neutral-800">Article Submission</h3>
+                      <p class="text-sm text-neutral-500">Machine Learning Ethics Framework</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">Active</span>
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600">
+                      <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">DEADLINE</h4>
+                    <p class="text-sm text-neutral-800">August 3, 2025 at 5:00 PM</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">REMINDERS</h4>
+                    <p class="text-sm text-neutral-800">2 weeks, 1 week, 48 hours before</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">NOTIFY</h4>
+                    <div class="flex">
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-6 h-6 rounded-full mr-1"/>
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=567" alt="User avatar" class="w-6 h-6 rounded-full mr-1"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Reminder 3 -->
+              <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                      <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-neutral-800">Peer Review Session</h3>
+                      <p class="text-sm text-neutral-500">Neuromorphic Computing Research</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">Active</span>
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600">
+                      <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">DEADLINE</h4>
+                    <p class="text-sm text-neutral-800">July 28, 2025 at 2:00 PM</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">REMINDERS</h4>
+                    <p class="text-sm text-neutral-800">1 day, 2 hours before</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">NOTIFY</h4>
+                    <div class="flex">
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-6 h-6 rounded-full mr-1"/>
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-6 h-6 rounded-full mr-1"/>
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=567" alt="User avatar" class="w-6 h-6 rounded-full mr-1"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="reminder-templates-section" class="bg-white rounded-lg shadow-sm p-6">
+          <h2 class="text-xl text-neutral-800 mb-6">Reminder Templates</h2>
+          
+          <div class="space-y-4">
+            <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-neutral-800">Standard Project Timeline</h3>
+                    <p class="text-sm text-neutral-500">Default reminders for academic research projects</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-trash-alt"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">REMINDER POINTS</h4>
+                  <ul class="list-disc pl-5 text-sm text-neutral-800">
+                    <li>Project start (Planning phase)</li>
+                    <li>25% completion milestone</li>
+                    <li>50% completion milestone</li>
+                    <li>75% completion milestone</li>
+                    <li>1 week before deadline</li>
+                    <li>48 hours before deadline</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">NOTIFICATION CONTENT</h4>
+                  <p class="text-sm text-neutral-800">Includes project name, milestone description, remaining time, and required actions</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-file-alt"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-neutral-800">Journal Article Submission</h3>
+                    <p class="text-sm text-neutral-500">Reminders for academic publishing workflow</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-trash-alt"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">REMINDER POINTS</h4>
+                  <ul class="list-disc pl-5 text-sm text-neutral-800">
+                    <li>Abstract submission deadline</li>
+                    <li>First draft completion</li>
+                    <li>Peer review distribution</li>
+                    <li>Revision deadline</li>
+                    <li>Final submission deadline</li>
+                    <li>Publication proof review</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="text-xs text-neutral-500 mb-1">NOTIFICATION CONTENT</h4>
+                  <p class="text-sm text-neutral-800">Includes article title, journal name, submission guidelines, and formatting requirements</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button class="mt-6 px-4 py-2 border border-neutral-300 text-neutral-700 rounded-md hover:bg-neutral-50 flex items-center justify-center w-full">
+            <i class="fa-solid fa-plus mr-2"></i>
+            Create New Template
+          </button>
+        </div>
+        
+        <div id="notification-log-section" class="bg-white rounded-lg shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl text-neutral-800">Notification History</h2>
+            <div class="flex items-center">
+              <button class="px-3 py-1 border border-neutral-300 text-neutral-700 rounded-md hover:bg-neutral-50 text-sm mr-2">
+                <i class="fa-solid fa-filter mr-1"></i>
+                Filter
+              </button>
+              <button class="px-3 py-1 border border-neutral-300 text-neutral-700 rounded-md hover:bg-neutral-50 text-sm">
+                <i class="fa-solid fa-download mr-1"></i>
+                Export
+              </button>
+            </div>
+          </div>
+          
+          <div class="overflow-x-auto">
+            <table class="min-w-full">
+              <thead>
+                <tr class="border-b border-neutral-200">
+                  <th class="text-left py-3 px-4 text-xs text-neutral-500">DATE & TIME</th>
+                  <th class="text-left py-3 px-4 text-xs text-neutral-500">PROJECT</th>
+                  <th class="text-left py-3 px-4 text-xs text-neutral-500">TYPE</th>
+                  <th class="text-left py-3 px-4 text-xs text-neutral-500">RECIPIENTS</th>
+                  <th class="text-left py-3 px-4 text-xs text-neutral-500">STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-neutral-200 hover:bg-neutral-50">
+                  <td class="py-3 px-4 text-sm text-neutral-800">July 4, 2025 09:32 AM</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">Quantum Computing Literature Review</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">Deadline (1 week)</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">4 team members</td>
+                  <td class="py-3 px-4">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Sent</span>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-200 hover:bg-neutral-50">
+                  <td class="py-3 px-4 text-sm text-neutral-800">July 3, 2025 02:15 PM</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">Machine Learning Ethics Framework</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">Milestone (50%)</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">2 team members</td>
+                  <td class="py-3 px-4">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Sent</span>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-200 hover:bg-neutral-50">
+                  <td class="py-3 px-4 text-sm text-neutral-800">July 1, 2025 11:00 AM</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">Neuromorphic Computing Research</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">Peer Review</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">3 team members</td>
+                  <td class="py-3 px-4">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Sent</span>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-200 hover:bg-neutral-50">
+                  <td class="py-3 px-4 text-sm text-neutral-800">June 28, 2025 08:45 AM</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">Quantum Computing Literature Review</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">Deadline (2 weeks)</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">4 team members</td>
+                  <td class="py-3 px-4">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Sent</span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-neutral-50">
+                  <td class="py-3 px-4 text-sm text-neutral-800">June 25, 2025 03:30 PM</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">Machine Learning Ethics Framework</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">Milestone (25%)</td>
+                  <td class="py-3 px-4 text-sm text-neutral-800">2 team members</td>
+                  <td class="py-3 px-4">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Partial</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="mt-4 flex justify-between items-center">
+            <div class="text-sm text-neutral-500">
+              Showing 5 of 28 notifications
+            </div>
+            <div class="flex items-center">
+              <button class="w-8 h-8 flex items-center justify-center rounded border border-neutral-300 mr-2">
+                <i class="fa-solid fa-chevron-left text-neutral-400"></i>
+              </button>
+              <button class="w-8 h-8 flex items-center justify-center rounded border border-neutral-300 bg-neutral-800 text-white mr-2">
+                1
+              </button>
+              <button class="w-8 h-8 flex items-center justify-center rounded border border-neutral-300 text-neutral-700 mr-2">
+                2
+              </button>
+              <button class="w-8 h-8 flex items-center justify-center rounded border border-neutral-300 text-neutral-700 mr-2">
+                3
+              </button>
+              <button class="w-8 h-8 flex items-center justify-center rounded border border-neutral-300">
+                <i class="fa-solid fa-chevron-right text-neutral-700"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-white border-t mt-auto">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="text-sm text-neutral-500">
+        © 2025 AI Research Assistant | Joomla 5.3 Component
+      </div>
+      <div class="flex space-x-4 mt-2 md:mt-0">
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Privacy Policy</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Terms of Service</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Contact Support</span>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

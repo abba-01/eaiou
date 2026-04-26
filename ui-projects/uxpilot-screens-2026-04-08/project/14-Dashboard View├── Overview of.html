@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Main Layout -->
+    <div class="flex h-[100vh]">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-gray-900 text-white flex flex-col h-full">
+            <!-- Logo -->
+            <div class="p-4 flex items-center border-b border-gray-700">
+                <div class="h-8 w-8 rounded-md bg-primary-500 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <span class="ml-2 font-bold text-xl">ProjectHub</span>
+            </div>
+            
+            <!-- Admin Menu -->
+            <div class="p-4">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">Admin Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md bg-primary-700 text-white cursor-pointer">
+                            <i class="fa-solid fa-gauge-high w-6"></i>
+                            <span>Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-folder w-6"></i>
+                            <span>Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-flag w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-check-square w-6"></i>
+                            <span>Tasks</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar w-6"></i>
+                            <span>Events</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-file w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Panel -->
+            <div class="p-4 mt-4 border-t border-gray-700">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">User Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-house w-6"></i>
+                            <span>My Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-briefcase w-6"></i>
+                            <span>My Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-tasks w-6"></i>
+                            <span>Task List</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-map-signs w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar-alt w-6"></i>
+                            <span>Calendar</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-paperclip w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Profile -->
+            <div class="mt-auto p-4 border-t border-gray-700 flex items-center">
+                <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium">Admin User</p>
+                    <p class="text-xs text-gray-400">Super Admin</p>
+                </div>
+                <button class="ml-auto text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-cog"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 flex flex-col h-full overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 flex items-center justify-between p-4">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-800">User Dashboard</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                    <button class="relative p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">5</span>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-question-circle"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Dashboard Content -->
+            <div class="flex-1 overflow-auto p-6">
+                <!-- Welcome Section -->
+                <div id="welcome-section" class="mb-6">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-800">Welcome back, Admin User!</h2>
+                                <p class="text-gray-600 mt-1">Here's what's happening across your projects today.</p>
+                            </div>
+                            <div class="flex space-x-3">
+                                <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md text-sm flex items-center">
+                                    <i class="fa-solid fa-plus mr-2"></i> Add Project
+                                </button>
+                                <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm flex items-center">
+                                    <i class="fa-solid fa-tasks mr-2"></i> Add Task
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Row -->
+                <div id="stats-row" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <!-- Active Projects -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                                <i class="fa-solid fa-folder fa-lg"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500 font-medium">Active Projects</p>
+                                <p class="text-2xl font-bold">12</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-sm text-gray-500">5 need attention</span>
+                            <span class="text-primary-500 hover:text-primary-700 text-sm font-medium cursor-pointer">View all</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Upcoming Tasks -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-orange-100 text-orange-600">
+                                <i class="fa-solid fa-check-square fa-lg"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500 font-medium">Upcoming Tasks</p>
+                                <p class="text-2xl font-bold">28</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-sm text-gray-500">7 due today</span>
+                            <span class="text-primary-500 hover:text-primary-700 text-sm font-medium cursor-pointer">View all</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Milestones -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100 text-green-600">
+                                <i class="fa-solid fa-flag fa-lg"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500 font-medium">Milestones</p>
+                                <p class="text-2xl font-bold">15</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-sm text-gray-500">3 this week</span>
+                            <span class="text-primary-500 hover:text-primary-700 text-sm font-medium cursor-pointer">View all</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Upcoming Events -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                                <i class="fa-solid fa-calendar fa-lg"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500 font-medium">Upcoming Events</p>
+                                <p class="text-2xl font-bold">8</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-sm text-gray-500">2 today</span>
+                            <span class="text-primary-500 hover:text-primary-700 text-sm font-medium cursor-pointer">View all</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Current Projects and Upcoming Tasks -->
+                <div id="projects-tasks-row" class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Current Projects -->
+                    <div id="current-projects" class="bg-white rounded-lg shadow lg:col-span-2">
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-lg font-semibold">Project Progress</h2>
+                                <div class="flex space-x-2">
+                                    <button class="px-3 py-1 text-xs bg-gray-100 rounded-md hover:bg-gray-200">All</button>
+                                    <button class="px-3 py-1 text-xs bg-primary-500 text-white rounded-md">Active</button>
+                                    <button class="px-3 py-1 text-xs bg-gray-100 rounded-md hover:bg-gray-200">Completed</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="space-y-6">
+                                <!-- Project 1 -->
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <div>
+                                            <h3 class="font-medium text-gray-800">Website Redesign</h3>
+                                            <p class="text-sm text-gray-500 mt-1">Due in 2 weeks</p>
+                                        </div>
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">In Progress</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span>Progress</span>
+                                            <span>65%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-primary-500 h-2 rounded-full" style="width: 65%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex -space-x-2">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Team Member" class="h-7 w-7 rounded-full border-2 border-white">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Team Member" class="h-7 w-7 rounded-full border-2 border-white">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Team Member" class="h-7 w-7 rounded-full border-2 border-white">
+                                        </div>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <i class="fa-solid fa-check-square mr-1"></i> 18/28 tasks
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Project 2 -->
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <div>
+                                            <h3 class="font-medium text-gray-800">Mobile App Development</h3>
+                                            <p class="text-sm text-gray-500 mt-1">Due in 4 months</p>
+                                        </div>
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Planning</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span>Progress</span>
+                                            <span>15%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-primary-500 h-2 rounded-full" style="width: 15%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex -space-x-2">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Team Member" class="h-7 w-7 rounded-full border-2 border-white">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Team Member" class="h-7 w-7 rounded-full border-2 border-white">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="Team Member" class="h-7 w-7 rounded-full border-2 border-white">
+                                        </div>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <i class="fa-solid fa-check-square mr-1"></i> 5/32 tasks
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Project 3 -->
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <div>
+                                            <h3 class="font-medium text-gray-800">API Integration</h3>
+                                            <p class="text-sm text-gray-500 mt-1">Due in 3 weeks</p>
+                                        </div>
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">Testing</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span>Progress</span>
+                                            <span>80%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-primary-500 h-2 rounded-full" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex -space-x-2">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Team Member" class="h-7 w-7 rounded-full border-2 border-white">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" alt="Team Member" class="h-7 w-7 rounded-full border-2 border-white">
+                                        </div>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <i class="fa-solid fa-check-square mr-1"></i> 16/20 tasks
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">View all projects</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Upcoming Tasks -->
+                    <div id="upcoming-tasks" class="bg-white rounded-lg shadow">
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-lg font-semibold">My Tasks</h2>
+                                <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">View all</button>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="space-y-4">
+                                <!-- Today's Tasks -->
+                                <div>
+                                    <h3 class="text-sm font-medium text-gray-500 mb-3">TODAY</h3>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center">
+                                            <div class="h-4 w-4 rounded-full border border-primary-500 mr-3 flex-shrink-0"></div>
+                                            <div class="flex-1">
+                                                <p class="text-sm font-medium">Finalize design mockups</p>
+                                                <p class="text-xs text-gray-500">Website Redesign</p>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">High</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <div class="h-4 w-4 rounded-full border border-primary-500 mr-3 flex-shrink-0"></div>
+                                            <div class="flex-1">
+                                                <p class="text-sm font-medium">Review API documentation</p>
+                                                <p class="text-xs text-gray-500">API Integration</p>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Medium</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Tomorrow's Tasks -->
+                                <div>
+                                    <h3 class="text-sm font-medium text-gray-500 mb-3">TOMORROW</h3>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center">
+                                            <div class="h-4 w-4 rounded-full border border-primary-500 mr-3 flex-shrink-0"></div>
+                                            <div class="flex-1">
+                                                <p class="text-sm font-medium">Team meeting</p>
+                                                <p class="text-xs text-gray-500">Mobile App Development</p>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Medium</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <div class="h-4 w-4 rounded-full border border-primary-500 mr-3 flex-shrink-0"></div>
+                                            <div class="flex-1">
+                                                <p class="text-sm font-medium">Update client on progress</p>
+                                                <p class="text-xs text-gray-500">Website Redesign</p>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Medium</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- This Week's Tasks -->
+                                <div>
+                                    <h3 class="text-sm font-medium text-gray-500 mb-3">THIS WEEK</h3>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center">
+                                            <div class="h-4 w-4 rounded-full border border-primary-500 mr-3 flex-shrink-0"></div>
+                                            <div class="flex-1">
+                                                <p class="text-sm font-medium">Complete integration tests</p>
+                                                <p class="text-xs text-gray-500">API Integration</p>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Low</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <div class="h-4 w-4 rounded-full border border-primary-500 mr-3 flex-shrink-0"></div>
+                                            <div class="flex-1">
+                                                <p class="text-sm font-medium">Prepare project requirements</p>
+                                                <p class="text-xs text-gray-500">Mobile App Development</p>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">High</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <div class="h-4 w-4 rounded-full border border-primary-500 mr-3 flex-shrink-0"></div>
+                                            <div class="flex-1">
+                                                <p class="text-sm font-medium">Submit content revisions</p>
+                                                <p class="text-xs text-gray-500">Website Redesign</p>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Low</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-200">
+                                <button class="w-full px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-md text-sm font-medium">
+                                    Add New Task
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Calendar and Milestones Row -->
+                <div id="calendar-milestones-row" class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Calendar -->
+                    <div id="upcoming-calendar" class="bg-white rounded-lg shadow lg:col-span-2">
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-lg font-semibold">Upcoming Schedule</h2>
+                                <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">View Calendar</button>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="font-medium">May 2023</h3>
+                                <div class="flex space-x-2">
+                                    <button class="p-1 rounded-md hover:bg-gray-100">
+                                        <i class="fa-solid fa-chevron-left text-gray-500"></i>
+                                    </button>
+                                    <button class="p-1 rounded-md hover:bg-gray-100">
+                                        <i class="fa-solid fa-chevron-right text-gray-500"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Calendar Grid -->
+                            <div class="grid grid-cols-7 gap-1 text-center mb-4">
+                                <div class="text-sm font-medium text-gray-500">Sun</div>
+                                <div class="text-sm font-medium text-gray-500">Mon</div>
+                                <div class="text-sm font-medium text-gray-500">Tue</div>
+                                <div class="text-sm font-medium text-gray-500">Wed</div>
+                                <div class="text-sm font-medium text-gray-500">Thu</div>
+                                <div class="text-sm font-medium text-gray-500">Fri</div>
+                                <div class="text-sm font-medium text-gray-500">Sat</div>
+                                
+                                <!-- Week 1 -->
+                                <div class="p-2 text-gray-400 text-sm">30</div>
+                                <div class="p-2 text-sm">1</div>
+                                <div class="p-2 text-sm">2</div>
+                                <div class="p-2 text-sm">3</div>
+                                <div class="p-2 text-sm">4</div>
+                                <div class="p-2 text-sm">5</div>
+                                <div class="p-2 text-sm">6</div>
+                                
+                                <!-- Week 2 -->
+                                <div class="p-2 text-sm">7</div>
+                                <div class="p-2 text-sm">8</div>
+                                <div class="p-2 text-sm">9</div>
+                                <div class="p-2 text-sm">10</div>
+                                <div class="p-2 text-sm">11</div>
+                                <div class="p-2 text-sm">12</div>
+                                <div class="p-2 text-sm">13</div>
+                                
+                                <!-- Week 3 -->
+                                <div class="p-2 text-sm">14</div>
+                                <div class="p-2 text-sm">15</div>
+                                <div class="p-2 text-sm">16</div>
+                                <div class="p-2 text-sm">17</div>
+                                <div class="p-2 text-sm bg-primary-100 rounded-md">18</div>
+                                <div class="p-2 text-sm bg-primary-500 text-white rounded-md">19</div>
+                                <div class="p-2 text-sm">20</div>
+                                
+                                <!-- Week 4 -->
+                                <div class="p-2 text-sm">21</div>
+                                <div class="p-2 text-sm">22</div>
+                                <div class="p-2 text-sm">23</div>
+                                <div class="p-2 text-sm bg-green-100 rounded-md">24</div>
+                                <div class="p-2 text-sm">25</div>
+                                <div class="p-2 text-sm">26</div>
+                                <div class="p-2 text-sm">27</div>
+                                
+                                <!-- Week 5 -->
+                                <div class="p-2 text-sm">28</div>
+                                <div class="p-2 text-sm">29</div>
+                                <div class="p-2 text-sm">30</div>
+                                <div class="p-2 text-sm">31</div>
+                                <div class="p-2 text-gray-400 text-sm">1</div>
+                                <div class="p-2 text-gray-400 text-sm">2</div>
+                                <div class="p-2 text-gray-400 text-sm">3</div>
+                            </div>
+                            
+                            <!-- Today's Events -->
+                            <div class="mt-6">
+                                <h3 class="text-sm font-medium text-gray-500 mb-3">TODAY - MAY 19</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center p-3 bg-primary-50 rounded-md">
+                                        <div class="w-2 h-10 bg-primary-500 rounded-full mr-3"></div>
+                                        <div>
+                                            <p class="text-sm font-medium">Team Sprint Planning</p>
+                                            <p class="text-xs text-gray-500">10:00 AM - 11:30 AM</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center p-3 bg-orange-50 rounded-md">
+                                        <div class="w-2 h-10 bg-orange-500 rounded-full mr-3"></div>
+                                        <div>
+                                            <p class="text-sm font-medium">Client Meeting - Website Redesign</p>
+                                            <p class="text-xs text-gray-500">2:00 PM - 3:00 PM</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Milestones -->
+                    <div id="milestones" class="bg-white rounded-lg shadow">
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-lg font-semibold">Upcoming Milestones</h2>
+                                <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">View all</button>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="space-y-6">
+                                <!-- Milestone 1 -->
+                                <div class="relative pl-8">
+                                    <div class="absolute left-0 top-0 w-6 h-6 rounded-full bg-primary-500 text-white flex items-center justify-center">
+                                        <i class="fa-solid fa-flag text-xs"></i>
+                                    </div>
+                                    <div class="h-full absolute left-3 top-6 border-l-2 border-dashed border-gray-300"></div>
+                                    <div>
+                                        <h3 class="font-medium">Website Design Approval</h3>
+                                        <p class="text-sm text-gray-500">Website Redesign</p>
+                                        <div class="flex items-center mt-1 text-xs text-red-600">
+                                            <i class="fa-solid fa-calendar-day mr-1"></i> Due in 2 days
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Milestone 2 -->
+                                <div class="relative pl-8">
+                                    <div class="absolute left-0 top-0 w-6 h-6 rounded-full bg-primary-500 text-white flex items-center justify-center">
+                                        <i class="fa-solid fa-flag text-xs"></i>
+                                    </div>
+                                    <div class="h-full absolute left-3 top-6 border-l-2 border-dashed border-gray-300"></div>
+                                    <div>
+                                        <h3 class="font-medium">API Testing Complete</h3>
+                                        <p class="text-sm text-gray-500">API Integration</p>
+                                        <div class="flex items-center mt-1 text-xs text-orange-600">
+                                            <i class="fa-solid fa-calendar-day mr-1"></i> Due in 1 week
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Milestone 3 -->
+                                <div class="relative pl-8">
+                                    <div class="absolute left-0 top-0 w-6 h-6 rounded-full bg-primary-500 text-white flex items-center justify-center">
+                                        <i class="fa-solid fa-flag text-xs"></i>
+                                    </div>
+                                    <div class="h-full absolute left-3 top-6 border-l-2 border-dashed border-gray-300"></div>
+                                    <div>
+                                        <h3 class="font-medium">Requirements Finalization</h3>
+                                        <p class="text-sm text-gray-500">Mobile App Development</p>
+                                        <div class="flex items-center mt-1 text-xs text-green-600">
+                                            <i class="fa-solid fa-calendar-day mr-1"></i> Due in 2 weeks
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Milestone 4 -->
+                                <div class="relative pl-8">
+                                    <div class="absolute left-0 top-0 w-6 h-6 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center">
+                                        <i class="fa-solid fa-flag text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium">Website Launch</h3>
+                                        <p class="text-sm text-gray-500">Website Redesign</p>
+                                        <div class="flex items-center mt-1 text-xs text-gray-600">
+                                            <i class="fa-solid fa-calendar-day mr-1"></i> Due in 1 month
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity -->
+                <div id="recent-activity-row" class="mb-6">
+                    <div class="bg-white rounded-lg shadow">
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <h2 class="text-lg font-semibold">Recent Activity</h2>
+                                <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">View all</button>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="space-y-6">
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User Avatar" class="h-10 w-10 rounded-full">
+                                    </div>
+                                    <div class="ml-4">
+                                        <p class="text-sm font-medium">John Smith <span class="text-gray-500">completed task</span> <span class="text-primary-500 cursor-pointer">Create wireframes</span></p>
+                                        <p class="text-xs text-gray-500 mt-1">Today at 10:30 AM</p>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="User Avatar" class="h-10 w-10 rounded-full">
+                                    </div>
+                                    <div class="ml-4">
+                                        <p class="text-sm font-medium">Sarah Johnson <span class="text-gray-500">commented on</span> <span class="text-primary-500 cursor-pointer">API documentation</span></p>
+                                        <p class="text-xs text-gray-500 mt-1">Today at 9:15 AM</p>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="User Avatar" class="h-10 w-10 rounded-full">
+                                    </div>
+                                    <div class="ml-4">
+                                        <p class="text-sm font-medium">Michael Brown <span class="text-gray-500">added milestone</span> <span class="text-primary-500 cursor-pointer">Requirements Finalization</span></p>
+                                        <p class="text-xs text-gray-500 mt-1">Yesterday at 3:45 PM</p>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="User Avatar" class="h-10 w-10 rounded-full">
+                                    </div>
+                                    <div class="ml-4">
+                                        <p class="text-sm font-medium">Emily Wilson <span class="text-gray-500">uploaded document</span> <span class="text-primary-500 cursor-pointer">API Specification.pdf</span></p>
+                                        <p class="text-xs text-gray-500 mt-1">Yesterday at 1:30 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer id="footer" class="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+                <p>&copy; 2023 ProjectHub User Dashboard. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

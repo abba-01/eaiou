@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="flex items-center p-3 bg-white border-b">
+  <div class="flex items-center space-x-4">
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <span class="flex items-center cursor-pointer">
+      <img alt="AcademiAI Logo" class="h-6" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/default-placeholder.png"/>
+      <span class="ml-1">AcademiAI Manager</span>
+    </span>
+    <div class="flex items-center space-x-4">
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded">
+          Dashboard
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 bg-neutral-100 rounded flex items-center">
+          Projects
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-600 hover:bg-neutral-100 rounded flex items-center">
+          Settings
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded flex items-center">
+          Analytics
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <button class="bg-neutral-600 text-white px-4 py-1.5 rounded">
+        New Project
+      </button>
+    </div>
+  </div>
+  <div class="ml-auto flex items-center space-x-3">
+    <div class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm flex items-center">
+      <i class="fa-solid fa-gem mr-1 text-xs"></i>
+      Academic License
+    </div>
+    <div class="relative">
+      <div class="relative">
+        <i class="fa-solid fa-search text-neutral-400 absolute left-3 top-2.5"></i>
+        <input class="pl-9 pr-4 py-2 bg-neutral-100 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-neutral-500" placeholder="Search projects or articles" type="text"/>
+      </div>
+    </div>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-regular fa-bell"></i>
+    </button>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-regular fa-circle-question"></i>
+    </button>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-solid fa-cog"></i>
+    </button>
+    <button class="w-8 h-8 rounded-full bg-neutral-600 text-white flex items-center justify-center text-sm">
+      AD
+    </button>
+  </div>
+</div>
+
+<div id="main-content" class="flex h-[800px]">
+  <div id="sidebar" class="w-56 bg-white p-4 border-r">
+    <h2 class="text-lg mb-4">
+      Projects
+    </h2>
+    <div class="space-y-1">
+      <span class="flex items-center py-1.5 px-2 rounded bg-neutral-50 text-neutral-700 cursor-pointer">
+        <i class="fa-solid fa-list-check w-5 text-center mr-2"></i>
+        <span class="text-sm">All Projects</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-regular fa-clock w-5 text-center mr-2"></i>
+        <span class="text-sm">Recent</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-star w-5 text-center mr-2"></i>
+        <span class="text-sm">Favorites</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-flask w-5 text-center mr-2"></i>
+        <span class="text-sm">Scientific</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-book w-5 text-center mr-2"></i>
+        <span class="text-sm">Academic</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-archive w-5 text-center mr-2"></i>
+        <span class="text-sm">Archived</span>
+      </span>
+    </div>
+    <div class="mt-6 pt-6 border-t">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm">Tags</span>
+        <button class="text-neutral-500 hover:text-neutral-700 text-xs">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+      <div class="space-y-1">
+        <div class="flex items-center justify-between text-sm py-1 px-2 rounded hover:bg-neutral-50">
+          <span class="flex items-center">
+            <span class="w-2 h-2 bg-neutral-500 rounded-full mr-2"></span>
+            Research
+          </span>
+          <span class="text-neutral-500">12</span>
+        </div>
+        <div class="flex items-center justify-between text-sm py-1 px-2 rounded hover:bg-neutral-50">
+          <span class="flex items-center">
+            <span class="w-2 h-2 bg-neutral-500 rounded-full mr-2"></span>
+            Peer Review
+          </span>
+          <span class="text-neutral-500">8</span>
+        </div>
+        <div class="flex items-center justify-between text-sm py-1 px-2 rounded hover:bg-neutral-50">
+          <span class="flex items-center">
+            <span class="w-2 h-2 bg-neutral-500 rounded-full mr-2"></span>
+            Dissertation
+          </span>
+          <span class="text-neutral-500">3</span>
+        </div>
+        <div class="flex items-center justify-between text-sm py-1 px-2 rounded hover:bg-neutral-50">
+          <span class="flex items-center">
+            <span class="w-2 h-2 bg-neutral-500 rounded-full mr-2"></span>
+            Journal
+          </span>
+          <span class="text-neutral-500">5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="content" class="flex-1 bg-neutral-50 overflow-auto">
+    <div class="p-6">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h1 class="text-2xl">Project Management</h1>
+          <p class="text-neutral-500">Manage your academic and scientific research projects</p>
+        </div>
+        <div class="flex space-x-3">
+          <div class="relative">
+            <select class="appearance-none bg-white border border-neutral-300 rounded-md pl-3 pr-8 py-2 text-neutral-700 leading-tight focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-neutral-500 text-sm">
+              <option>All Projects</option>
+              <option>Active Projects</option>
+              <option>Completed Projects</option>
+              <option>Draft Projects</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral-700">
+              <i class="fa-solid fa-chevron-down text-xs"></i>
+            </div>
+          </div>
+          <button class="px-3 py-2 bg-white border border-neutral-300 rounded-md text-neutral-700 flex items-center text-sm">
+            <i class="fa-solid fa-filter mr-2"></i>
+            Filter
+          </button>
+          <button class="bg-neutral-600 text-white px-4 py-2 rounded shadow-md hover:bg-neutral-700 flex items-center">
+            <i class="fa-solid fa-plus mr-2"></i>
+            New Project
+          </button>
+        </div>
+      </div>
+      
+      <div class="flex items-center space-x-4 mb-6">
+        <button class="px-4 py-2 bg-neutral-600 text-white rounded-md shadow text-sm">
+          Kanban Board
+        </button>
+        <button class="px-4 py-2 bg-white text-neutral-700 rounded-md border border-neutral-300 text-sm">
+          List View
+        </button>
+        <button class="px-4 py-2 bg-white text-neutral-700 rounded-md border border-neutral-300 text-sm">
+          Calendar
+        </button>
+        <button class="px-4 py-2 bg-white text-neutral-700 rounded-md border border-neutral-300 text-sm">
+          Timeline
+        </button>
+      </div>
+      
+      <div class="flex space-x-4 overflow-x-auto pb-4" id="kanban-board">
+        <!-- Draft Column -->
+        <div class="flex-shrink-0 w-72">
+          <div class="bg-white rounded-lg shadow-md">
+            <div class="p-3 border-b flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-3 h-3 rounded-full bg-neutral-400 mr-2"></div>
+                <h3>Draft</h3>
+                <span class="ml-2 text-neutral-500 text-sm">3</span>
+              </div>
+              <button class="text-neutral-400 hover:text-neutral-600">
+                <i class="fa-solid fa-ellipsis"></i>
+              </button>
+            </div>
+            <div class="p-2 space-y-2">
+              <!-- Project Card 1 -->
+              <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-move">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    Research
+                  </span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                </div>
+                <h4 class="mb-1">Quantum Computing Applications</h4>
+                <p class="text-sm text-neutral-600 mb-3">Initial research on quantum computing applications in cryptography</p>
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center text-neutral-500">
+                    <i class="fa-regular fa-file-lines mr-1"></i>
+                    <span>2 articles</span>
+                  </div>
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Project Card 2 -->
+              <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-move">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    Dissertation
+                  </span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                </div>
+                <h4 class="mb-1">AI Ethics Framework</h4>
+                <p class="text-sm text-neutral-600 mb-3">Developing ethical guidelines for AI implementation in healthcare</p>
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center text-neutral-500">
+                    <i class="fa-regular fa-file-lines mr-1"></i>
+                    <span>1 article</span>
+                  </div>
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Project Card 3 -->
+              <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-move">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    Journal
+                  </span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                </div>
+                <h4 class="mb-1">Climate Change Impact Analysis</h4>
+                <p class="text-sm text-neutral-600 mb-3">Analysis of climate change impacts on marine ecosystems</p>
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center text-neutral-500">
+                    <i class="fa-regular fa-file-lines mr-1"></i>
+                    <span>0 articles</span>
+                  </div>
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=101" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=102" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Add New Card Button -->
+              <button class="w-full py-2 border border-dashed border-neutral-300 rounded-md text-neutral-500 hover:bg-neutral-50 flex items-center justify-center">
+                <i class="fa-solid fa-plus mr-2"></i>
+                Add Project
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- In Progress Column -->
+        <div class="flex-shrink-0 w-72">
+          <div class="bg-white rounded-lg shadow-md">
+            <div class="p-3 border-b flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-3 h-3 rounded-full bg-neutral-500 mr-2"></div>
+                <h3>In Progress</h3>
+                <span class="ml-2 text-neutral-500 text-sm">2</span>
+              </div>
+              <button class="text-neutral-400 hover:text-neutral-600">
+                <i class="fa-solid fa-ellipsis"></i>
+              </button>
+            </div>
+            <div class="p-2 space-y-2">
+              <!-- Project Card 1 -->
+              <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-move">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    Peer Review
+                  </span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                </div>
+                <h4 class="mb-1">Neural Network Optimization</h4>
+                <p class="text-sm text-neutral-600 mb-3">Optimizing neural networks for edge computing applications</p>
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center text-neutral-500">
+                    <i class="fa-regular fa-file-lines mr-1"></i>
+                    <span>3 articles</span>
+                  </div>
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=202" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=203" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Project Card 2 -->
+              <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-move">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    Research
+                  </span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                </div>
+                <h4 class="mb-1">Renewable Energy Integration</h4>
+                <p class="text-sm text-neutral-600 mb-3">Research on integrating renewable energy sources into existing power grids</p>
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center text-neutral-500">
+                    <i class="fa-regular fa-file-lines mr-1"></i>
+                    <span>4 articles</span>
+                  </div>
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=304" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Add New Card Button -->
+              <button class="w-full py-2 border border-dashed border-neutral-300 rounded-md text-neutral-500 hover:bg-neutral-50 flex items-center justify-center">
+                <i class="fa-solid fa-plus mr-2"></i>
+                Add Project
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Review Column -->
+        <div class="flex-shrink-0 w-72">
+          <div class="bg-white rounded-lg shadow-md">
+            <div class="p-3 border-b flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-3 h-3 rounded-full bg-neutral-500 mr-2"></div>
+                <h3>Review</h3>
+                <span class="ml-2 text-neutral-500 text-sm">2</span>
+              </div>
+              <button class="text-neutral-400 hover:text-neutral-600">
+                <i class="fa-solid fa-ellipsis"></i>
+              </button>
+            </div>
+            <div class="p-2 space-y-2">
+              <!-- Project Card 1 -->
+              <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-move">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    Peer Review
+                  </span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                </div>
+                <h4 class="mb-1">Genetic Algorithm Applications</h4>
+                <p class="text-sm text-neutral-600 mb-3">Applications of genetic algorithms in solving complex optimization problems</p>
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center text-neutral-500">
+                    <i class="fa-regular fa-file-lines mr-1"></i>
+                    <span>2 articles</span>
+                  </div>
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=405" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=406" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Project Card 2 -->
+              <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-move">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    Dissertation
+                  </span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                </div>
+                <h4 class="mb-1">Cybersecurity Framework</h4>
+                <p class="text-sm text-neutral-600 mb-3">Developing a comprehensive cybersecurity framework for IoT devices</p>
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center text-neutral-500">
+                    <i class="fa-regular fa-file-lines mr-1"></i>
+                    <span>5 articles</span>
+                  </div>
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=507" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Add New Card Button -->
+              <button class="w-full py-2 border border-dashed border-neutral-300 rounded-md text-neutral-500 hover:bg-neutral-50 flex items-center justify-center">
+                <i class="fa-solid fa-plus mr-2"></i>
+                Add Project
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Complete Column -->
+        <div class="flex-shrink-0 w-72">
+          <div class="bg-white rounded-lg shadow-md">
+            <div class="p-3 border-b flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-3 h-3 rounded-full bg-neutral-500 mr-2"></div>
+                <h3>Complete</h3>
+                <span class="ml-2 text-neutral-500 text-sm">3</span>
+              </div>
+              <button class="text-neutral-400 hover:text-neutral-600">
+                <i class="fa-solid fa-ellipsis"></i>
+              </button>
+            </div>
+            <div class="p-2 space-y-2">
+              <!-- Project Card 1 -->
+              <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-move">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    Journal
+                  </span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                </div>
+                <h4 class="mb-1">Machine Learning in Healthcare</h4>
+                <p class="text-sm text-neutral-600 mb-3">Applications of machine learning in early disease detection</p>
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center text-neutral-500">
+                    <i class="fa-regular fa-file-lines mr-1"></i>
+                    <span>7 articles</span>
+                  </div>
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=608" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=609" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Project Card 2 -->
+              <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-move">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    Research
+                  </span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                </div>
+                <h4 class="mb-1">Blockchain in Supply Chain</h4>
+                <p class="text-sm text-neutral-600 mb-3">Implementing blockchain technology for supply chain transparency</p>
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center text-neutral-500">
+                    <i class="fa-regular fa-file-lines mr-1"></i>
+                    <span>4 articles</span>
+                  </div>
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=710" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Project Card 3 -->
+              <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-move">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    Peer Review
+                  </span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                </div>
+                <h4 class="mb-1">Sustainable Urban Planning</h4>
+                <p class="text-sm text-neutral-600 mb-3">Research on sustainable urban planning methodologies</p>
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center text-neutral-500">
+                    <i class="fa-regular fa-file-lines mr-1"></i>
+                    <span>5 articles</span>
+                  </div>
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=811" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=812" alt="User Avatar" class="w-6 h-6 rounded-full border border-white"/>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Add New Card Button -->
+              <button class="w-full py-2 border border-dashed border-neutral-300 rounded-md text-neutral-500 hover:bg-neutral-50 flex items-center justify-center">
+                <i class="fa-solid fa-plus mr-2"></i>
+                Add Project
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Add New Column -->
+        <div class="flex-shrink-0 w-72">
+          <div class="border-2 border-dashed border-neutral-300 rounded-lg h-16 flex items-center justify-center text-neutral-500 hover:border-neutral-500 hover:text-neutral-700 transition-colors duration-200 cursor-pointer">
+            <i class="fa-solid fa-plus mr-2"></i>
+            <span>Add New Column</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="border-t bg-white p-4 text-center text-neutral-500 text-sm">
+  <p>AcademiAI Manager © 2025 | Joomla 5.3 Component | Version 2.1.4</p>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

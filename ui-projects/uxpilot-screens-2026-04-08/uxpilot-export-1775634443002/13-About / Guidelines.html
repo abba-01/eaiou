@@ -1,0 +1,1093 @@
+
+              <html class="">
+                
+  <head>
+    
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest', // Options: 'nest', 'remove', 'replace'
+      };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+<style>
+  * {
+    font-family: "{{font}}", sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+    
+<style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+</style>
+
+    
+<style>
+   :root {
+          /* Base colors */
+          --color-base: #ffffff;
+          --color-base-50: #f9fafb;
+          --color-base-100: #f3f4f6;
+          --color-base-200: #e5e7eb;
+          --color-base-300: #d1d5db;
+          --color-base-400: #9ca3af;
+          --color-base-500: #6b7280;
+          --color-base-600: #4b5563;  
+          --color-base-700: #374151;
+          --color-base-800: #1f2937;  
+          --color-base-900: #111827;
+          --color-base-content: #1f2937;
+
+          /* Primary colors */
+          --color-primary: #3b82f6;
+          --color-primary-50: #eff6ff;
+          --color-primary-100: #dbeafe;
+          --color-primary-200: #bfdbfe;
+          --color-primary-300: #93c5fd;
+          --color-primary-400: #60a5fa;
+          --color-primary-500: #3b82f6;
+          --color-primary-600: #2563eb;
+          --color-primary-700: #1d4ed8;
+          --color-primary-800: #1e40af;
+          --color-primary-900: #1e3a8a;
+          --color-primary-focus: #2563eb;
+          --color-primary-content: #ffffff;
+
+          /* Secondary colors */
+          --color-secondary: #8b5cf6;
+          --color-secondary-50: #f5f3ff;
+          --color-secondary-100: #ede9fe;
+          --color-secondary-200: #ddd6fe;
+          --color-secondary-300: #c4b5fd;
+          --color-secondary-400: #a78bfa;
+          --color-secondary-500: #8b5cf6;
+          --color-secondary-600: #7c3aed;
+          --color-secondary-700: #6d28d9;
+          --color-secondary-800: #5b21b6;
+          --color-secondary-900: #4c1d95;
+          --color-secondary-focus: #7c3aed;
+          --color-secondary-content: #ffffff;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #fdf2f8;
+          --color-accent-100: #fce7f3;
+          --color-accent-200: #fbcfe8;
+          --color-accent-300: #f9a8d4;
+          --color-accent-400: #f472b6;
+          --color-accent-500: #ec4899;
+          --color-accent-600: #db2777;
+          --color-accent-700: #be185d;
+          --color-accent-800: #9d174d;
+          --color-accent-900: #831843;
+          --color-accent-focus: #db2777;
+          --color-accent-content: #ffffff;
+
+          /* Neutral colors */
+          --color-neutral: #6b7280;
+          --color-neutral-50: #f9fafb;
+          --color-neutral-100: #f3f4f6;
+          --color-neutral-200: #e5e7eb;
+          --color-neutral-300: #d1d5db;
+          --color-neutral-400: #9ca3af;
+          --color-neutral-500: #6b7280;
+          --color-neutral-600: #4b5563;
+          --color-neutral-700: #374151;
+          --color-neutral-800: #1f2937;
+          --color-neutral-900: #111827;
+          --color-neutral-focus: #4b5563;
+          --color-neutral-content: #ffffff;
+
+          /* Info colors */
+          --color-info: #3b82f6;
+          --color-info-50: #eff6ff;
+          --color-info-100: #dbeafe;
+          --color-info-200: #bfdbfe;
+          --color-info-300: #93c5fd;
+          --color-info-400: #60a5fa;
+          --color-info-500: #3b82f6;
+          --color-info-600: #2563eb;
+          --color-info-700: #1d4ed8;
+          --color-info-800: #1e40af;
+          --color-info-900: #1e3a8a;
+          --color-info-focus: #2563eb;
+          --color-info-content: #ffffff;
+
+          /* Success colors */
+          --color-success: #10b981;
+          --color-success-50: #ecfdf5;
+          --color-success-100: #d1fae5;
+          --color-success-200: #a7f3d0;
+          --color-success-300: #6ee7b7;
+          --color-success-400: #34d399;
+          --color-success-500: #10b981;
+          --color-success-600: #059669;
+          --color-success-700: #047857;
+          --color-success-800: #065f46;
+          --color-success-900: #064e3b;
+          --color-success-focus: #059669;
+          --color-success-content: #ffffff;
+
+          /* Warning colors */
+          --color-warning: #f59e0b;
+          --color-warning-50: #fffbeb;
+          --color-warning-100: #fef3c7;
+          --color-warning-200: #fde68a;
+          --color-warning-300: #fcd34d;
+          --color-warning-400: #fbbf24;
+          --color-warning-500: #f59e0b;
+          --color-warning-600: #d97706;
+          --color-warning-700: #b45309;
+          --color-warning-800: #92400e;
+          --color-warning-900: #78350f;
+          --color-warning-focus: #d97706;
+          --color-warning-content: #ffffff;
+
+          /* Error colors */
+          --color-error: #ef4444;
+          --color-error-50: #fef2f2;
+          --color-error-100: #fee2e2;
+          --color-error-200: #fecaca;
+          --color-error-300: #fca5a5;
+          --color-error-400: #f87171;
+          --color-error-500: #ef4444;
+          --color-error-600: #dc2626;
+          --color-error-700: #b91c1c;
+          --color-error-800: #991b1b;
+          --color-error-900: #7f1d1d;
+          --color-error-focus: #dc2626;
+          --color-error-content: #ffffff;
+        }
+</style>
+
+    
+<style>
+/* Dark theme */
+        .dark {
+          /* Base colors */
+          --color-base: #1f2937;
+          --color-base-50: #111827;
+          --color-base-100: #1f2937;
+          --color-base-200: #374151;
+          --color-base-300: #4b5563;
+          --color-base-400: #6b7280;
+          --color-base-500: #9ca3af;
+          --color-base-600: #d1d5db;
+          --color-base-700: #e5e7eb;
+          --color-base-800: #f3f4f6;
+          --color-base-900: #f9fafb;
+          --color-base-content: #f9fafb;
+
+          /* Primary colors */
+          --color-primary: #60a5fa;
+          --color-primary-50: #1e3a8a;
+          --color-primary-100: #1e40af;
+          --color-primary-200: #1d4ed8;
+          --color-primary-300: #2563eb;
+          --color-primary-400: #3b82f6;
+          --color-primary-500: #60a5fa;
+          --color-primary-600: #93c5fd;
+          --color-primary-700: #bfdbfe;
+          --color-primary-800: #dbeafe;
+          --color-primary-900: #eff6ff;
+          --color-primary-focus: #3b82f6;
+          --color-primary-content: #1f2937;
+
+          /* Secondary colors */
+          --color-secondary: #a78bfa;
+          --color-secondary-50: #4c1d95;
+          --color-secondary-100: #5b21b6;
+          --color-secondary-200: #6d28d9;
+          --color-secondary-300: #7c3aed;
+          --color-secondary-400: #8b5cf6;
+          --color-secondary-500: #a78bfa;
+          --color-secondary-600: #c4b5fd;
+          --color-secondary-700: #ddd6fe;
+          --color-secondary-800: #ede9fe;
+          --color-secondary-900: #f5f3ff;
+          --color-secondary-focus: #8b5cf6;
+          --color-secondary-content: #1f2937;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #831843;
+          --color-accent-100: #9d174d;
+          --color-accent-200: #be185d;
+          --color-accent-300: #db2777;
+          --color-accent-400: #ec4899;
+          --color-accent-500: #f472b6;
+          --color-accent-600: #f9a8d4;
+          --color-accent-700: #fbcfe8;
+          --color-accent-800: #fce7f3;
+          --color-accent-900: #fdf2f8;
+          --color-accent-focus: #ec4899;
+          --color-accent-content: #1f2937;
+
+          /* Neutral colors remain the same as light theme */
+
+          /* Info colors */
+          --color-info: #60a5fa;
+          --color-info-50: #1e3a8a;
+          --color-info-100: #1e40af;
+          --color-info-200: #1d4ed8;
+          --color-info-300: #2563eb;
+          --color-info-400: #3b82f6;
+          --color-info-500: #60a5fa;
+          --color-info-600: #93c5fd;
+          --color-info-700: #bfdbfe;
+          --color-info-800: #dbeafe;
+          --color-info-900: #eff6ff;
+          --color-info-focus: #3b82f6;
+          --color-info-content: #1f2937;
+
+          /* Success colors */
+          --color-success: #34d399;
+          --color-success-50: #064e3b;
+          --color-success-100: #065f46;
+          --color-success-200: #047857;
+          --color-success-300: #059669;
+          --color-success-400: #10b981;
+          --color-success-500: #34d399;
+          --color-success-600: #6ee7b7;
+          --color-success-700: #a7f3d0;
+          --color-success-800: #d1fae5;
+          --color-success-900: #ecfdf5;
+          --color-success-focus: #10b981;
+          --color-success-content: #1f2937;
+
+          /* Warning colors */
+          --color-warning: #fbbf24;
+          --color-warning-50: #78350f;
+          --color-warning-100: #92400e;
+          --color-warning-200: #b45309;
+          --color-warning-300: #d97706;
+          --color-warning-400: #f59e0b;
+          --color-warning-500: #fbbf24;
+          --color-warning-600: #fcd34d;
+          --color-warning-700: #fde68a;
+          --color-warning-800: #fef3c7;
+          --color-warning-900: #fffbeb;
+          --color-warning-focus: #f59e0b;
+          --color-warning-content: #1f2937;
+
+          /* Error colors */
+          --color-error: #f87171;
+          --color-error-50: #7f1d1d;
+          --color-error-100: #991b1b;
+          --color-error-200: #b91c1c;
+          --color-error-300: #dc2626;
+          --color-error-400: #ef4444;
+          --color-error-500: #f87171;
+          --color-error-600: #fca5a5;
+          --color-error-700: #fecaca;
+          --color-error-800: #fee2e2;
+          --color-error-900: #fef2f2;
+          --color-error-focus: #ef4444;
+          --color-error-content: #1f2937;
+        }
+</style>
+
+    
+  <script>
+        tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                ...{"transparent":"transparent","current":"currentColor","black":"#000000","white":"#ffffff","gray":{"50":"#f9fafb","100":"#f3f4f6","200":"#e5e7eb","300":"#d1d5db","400":"#9ca3af","500":"#6b7280","600":"#4b5563","700":"#374151","800":"#1f2937","900":"#111827"},"red":{"50":"#fef2f2","100":"#fee2e2","200":"#fecaca","300":"#fca5a5","400":"#f87171","500":"#ef4444","600":"#dc2626","700":"#b91c1c","800":"#991b1b","900":"#7f1d1d"},"yellow":{"50":"#fffbeb","100":"#fef3c7","200":"#fde68a","300":"#fcd34d","400":"#fbbf24","500":"#f59e0b","600":"#d97706","700":"#b45309","800":"#92400e","900":"#78350f"},"green":{"50":"#ecfdf5","100":"#d1fae5","200":"#a7f3d0","300":"#6ee7b7","400":"#34d399","500":"#10b981","600":"#059669","700":"#047857","800":"#065f46","900":"#064e3b"},"blue":{"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a"},"indigo":{"50":"#eef2ff","100":"#e0e7ff","200":"#c7d2fe","300":"#a5b4fc","400":"#818cf8","500":"#6366f1","600":"#4f46e5","700":"#4338ca","800":"#3730a3","900":"#312e81"},"purple":{"50":"#f5f3ff","100":"#ede9fe","200":"#ddd6fe","300":"#c4b5fd","400":"#a78bfa","500":"#8b5cf6","600":"#7c3aed","700":"#6d28d9","800":"#5b21b6","900":"#4c1d95"},"pink":{"50":"#fdf2f8","100":"#fce7f3","200":"#fbcfe8","300":"#f9a8d4","400":"#f472b6","500":"#ec4899","600":"#db2777","700":"#be185d","800":"#9d174d","900":"#831843"}},
+                ...{"primary":{"50":"var(--color-primary-50)","100":"var(--color-primary-100)","200":"var(--color-primary-200)","300":"var(--color-primary-300)","400":"var(--color-primary-400)","500":"var(--color-primary-500)","600":"var(--color-primary-600)","700":"var(--color-primary-700)","800":"var(--color-primary-800)","900":"var(--color-primary-900)","DEFAULT":"var(--color-primary)","focus":"var(--color-primary-focus)","content":"var(--color-primary-content)"},"secondary":{"50":"var(--color-secondary-50)","100":"var(--color-secondary-100)","200":"var(--color-secondary-200)","300":"var(--color-secondary-300)","400":"var(--color-secondary-400)","500":"var(--color-secondary-500)","600":"var(--color-secondary-600)","700":"var(--color-secondary-700)","800":"var(--color-secondary-800)","900":"var(--color-secondary-900)","DEFAULT":"var(--color-secondary)","focus":"var(--color-secondary-focus)","content":"var(--color-secondary-content)"},"accent":{"50":"var(--color-accent-50)","100":"var(--color-accent-100)","200":"var(--color-accent-200)","300":"var(--color-accent-300)","400":"var(--color-accent-400)","500":"var(--color-accent-500)","600":"var(--color-accent-600)","700":"var(--color-accent-700)","800":"var(--color-accent-800)","900":"var(--color-accent-900)","DEFAULT":"var(--color-accent)","focus":"var(--color-accent-focus)","content":"var(--color-accent-content)"},"neutral":{"50":"var(--color-neutral-50)","100":"var(--color-neutral-100)","200":"var(--color-neutral-200)","300":"var(--color-neutral-300)","400":"var(--color-neutral-400)","500":"var(--color-neutral-500)","600":"var(--color-neutral-600)","700":"var(--color-neutral-700)","800":"var(--color-neutral-800)","900":"var(--color-neutral-900)","DEFAULT":"var(--color-neutral)","focus":"var(--color-neutral-focus)","content":"var(--color-neutral-content)"},"info":{"50":"var(--color-info-50)","100":"var(--color-info-100)","200":"var(--color-info-200)","300":"var(--color-info-300)","400":"var(--color-info-400)","500":"var(--color-info-500)","600":"var(--color-info-600)","700":"var(--color-info-700)","800":"var(--color-info-800)","900":"var(--color-info-900)","DEFAULT":"var(--color-info)","focus":"var(--color-info-focus)","content":"var(--color-info-content)"},"success":{"50":"var(--color-success-50)","100":"var(--color-success-100)","200":"var(--color-success-200)","300":"var(--color-success-300)","400":"var(--color-success-400)","500":"var(--color-success-500)","600":"var(--color-success-600)","700":"var(--color-success-700)","800":"var(--color-success-800)","900":"var(--color-success-900)","DEFAULT":"var(--color-success)","focus":"var(--color-success-focus)","content":"var(--color-success-content)"},"warning":{"50":"var(--color-warning-50)","100":"var(--color-warning-100)","200":"var(--color-warning-200)","300":"var(--color-warning-300)","400":"var(--color-warning-400)","500":"var(--color-warning-500)","600":"var(--color-warning-600)","700":"var(--color-warning-700)","800":"var(--color-warning-800)","900":"var(--color-warning-900)","DEFAULT":"var(--color-warning)","focus":"var(--color-warning-focus)","content":"var(--color-warning-content)"},"error":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"danger":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"failure":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"}},
+                },
+              },
+            },
+            variants: {
+              extend: {
+                backgroundColor: ['active', 'group-hover'],
+                textColor: ['active', 'group-hover'],
+              },
+            },
+            plugins: [],
+          };
+  </script>
+
+  </head>
+
+                <body class="h-full text-base-content">
+                  <header id="header" class="bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-50">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <div class="container mx-auto px-4">
+    <nav class="flex items-center justify-between py-4">
+      <div class="flex items-center">
+        <span class="flex items-center cursor-pointer">
+          <span class="text-2xl text-neutral-900">EAIOU.org</span>
+          <span class="ml-2 text-sm bg-neutral-200 px-2 py-1 rounded text-neutral-700">Beta</span>
+        </span>
+      </div>
+      
+      <div class="hidden md:flex items-center space-x-6">
+        <span class="text-neutral-700 cursor-pointer">About</span>
+        <span class="text-neutral-700 cursor-pointer">Journals</span>
+        <div class="relative group">
+          <button class="flex items-center text-neutral-700">
+            Resources
+            <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+          </button>
+        </div>
+        <div class="relative group">
+          <button class="flex items-center text-neutral-700">
+            Collaboration
+            <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+          </button>
+        </div>
+        <span class="text-neutral-700 cursor-pointer">Guidelines</span>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <span class="text-neutral-700 cursor-pointer">Login</span>
+        <span class="bg-neutral-800 text-white px-5 py-2 rounded-md cursor-pointer">Register</span>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div id="search-bar" class="bg-neutral-100 border-b border-neutral-200">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex items-center">
+      <div class="flex-grow relative">
+        <input type="text" placeholder="Search guidelines, policies, or documentation..." class="w-full pl-10 pr-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+        <i class="fa-solid fa-search absolute left-3 top-3 text-neutral-500"></i>
+      </div>
+      <div class="ml-4">
+        <button class="px-3 py-2 bg-white border border-neutral-300 rounded-md text-neutral-700 flex items-center">
+          <i class="fa-solid fa-filter mr-2"></i>
+          <span>Filter</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="main-content" class="container mx-auto px-4 py-8">
+  <div class="flex flex-col lg:flex-row gap-8">
+    <!-- Main content area -->
+    <div class="lg:w-3/4">
+      <section id="guidelines-header" class="mb-8">
+        <h1 class="text-3xl text-neutral-900 mb-2">Platform Guidelines</h1>
+        <p class="text-neutral-600">Comprehensive information about EAIOU.org's policies, workflows, and best practices for all platform users.</p>
+      </section>
+
+      <section id="role-tabs" class="mb-8">
+        <div class="border-b border-neutral-200">
+          <div class="flex overflow-x-auto">
+            <button class="px-4 py-2 border-b-2 border-neutral-800 text-neutral-800">All Users</button>
+            <button class="px-4 py-2 border-b-2 border-transparent text-neutral-600 hover:text-neutral-800">Authors</button>
+            <button class="px-4 py-2 border-b-2 border-transparent text-neutral-600 hover:text-neutral-800">Reviewers</button>
+            <button class="px-4 py-2 border-b-2 border-transparent text-neutral-600 hover:text-neutral-800">Editors</button>
+            <button class="px-4 py-2 border-b-2 border-transparent text-neutral-600 hover:text-neutral-800">AI Integration</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="platform-overview" class="mb-10">
+        <div class="bg-white shadow-sm rounded-lg p-6 border border-neutral-200">
+          <h2 class="text-2xl text-neutral-900 mb-4">Platform Overview</h2>
+          
+          <p class="text-neutral-700 mb-4">
+            EAIOU.org is a front-facing, observer-preserving research platform built on Joomla, designed to support transparent peer review, structured attribution, and discovery without "back-articleing" into the CMS core. It provides a unified workflow where authors, reviewers, editors, AI systems, and mute intelligences are seated as formal observers under ACL control, ensuring integrity, reproducibility, and collaboration in academic publishing.
+          </p>
+          
+          <div class="flex items-center bg-neutral-100 p-4 rounded-lg mb-4">
+            <i class="fa-solid fa-lightbulb text-neutral-600 text-xl mr-3"></i>
+            <p class="text-neutral-700 text-sm">
+              AI and humans interface in EAIOU.org as co-observers within the same workflow: humans bring authorship, judgment, and ethics, while AI systems contribute analysis, attribution, and structured support. Their interactions are mediated by access control, transparency logs, and an arbiter layer, ensuring collaboration without distortion, misattribution, or loss of accountability.
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div class="bg-neutral-100 p-4 rounded-lg">
+              <h3 class="text-neutral-900 mb-2">Key Features</h3>
+              <ul class="text-neutral-700 text-sm space-y-2">
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check text-neutral-600 mt-1 mr-2"></i>
+                  <span>Transparent peer review process</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check text-neutral-600 mt-1 mr-2"></i>
+                  <span>Structured attribution for all contributors</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check text-neutral-600 mt-1 mr-2"></i>
+                  <span>ACL-controlled observer roles</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check text-neutral-600 mt-1 mr-2"></i>
+                  <span>Reproducibility verification</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check text-neutral-600 mt-1 mr-2"></i>
+                  <span>Comprehensive transparency logs</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="bg-neutral-100 p-4 rounded-lg">
+              <h3 class="text-neutral-900 mb-2">Platform Goals</h3>
+              <ul class="text-neutral-700 text-sm space-y-2">
+                <li class="flex items-start">
+                  <i class="fa-solid fa-bullseye text-neutral-600 mt-1 mr-2"></i>
+                  <span>Ensure research integrity and reproducibility</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-bullseye text-neutral-600 mt-1 mr-2"></i>
+                  <span>Facilitate collaboration between humans and AI systems</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-bullseye text-neutral-600 mt-1 mr-2"></i>
+                  <span>Provide clear attribution for all contributions</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-bullseye text-neutral-600 mt-1 mr-2"></i>
+                  <span>Support transparent peer review processes</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-bullseye text-neutral-600 mt-1 mr-2"></i>
+                  <span>Identify research gaps and opportunities</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="bg-neutral-100 p-4 rounded-lg">
+            <h3 class="text-neutral-900 mb-3">Platform Architecture</h3>
+            <div class="bg-neutral-200 h-64 rounded-lg flex items-center justify-center">
+              <div class="text-center">
+                <i class="fa-solid fa-sitemap text-neutral-400 text-4xl mb-2"></i>
+                <p class="text-neutral-600">Interactive platform architecture diagram</p>
+                <p class="text-neutral-500 text-sm">Showing the relationships between different observer types and system components</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="observer-roles" class="mb-10">
+        <div class="bg-white shadow-sm rounded-lg p-6 border border-neutral-200">
+          <h2 class="text-2xl text-neutral-900 mb-4">Observer Roles & Responsibilities</h2>
+          
+          <p class="text-neutral-700 mb-6">
+            EAIOU.org recognizes multiple observer types, each with specific roles, responsibilities, and access controls. Understanding these roles is essential for all platform users.
+          </p>
+          
+          <div class="space-y-6">
+            <div class="border-b border-neutral-200 pb-6">
+              <div class="flex items-start">
+                <div class="bg-neutral-800 rounded-full p-3 mr-4">
+                  <i class="fa-solid fa-pen-nib text-white"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl text-neutral-900 mb-2">Authors</h3>
+                  <p class="text-neutral-700 mb-3">
+                    Authors are responsible for the original research content, methodology, and conclusions. They maintain primary intellectual ownership while collaborating with other observers.
+                  </p>
+                  <div class="bg-neutral-100 p-3 rounded-md">
+                    <h4 class="text-neutral-800 mb-2">Key Responsibilities:</h4>
+                    <ul class="text-neutral-700 text-sm space-y-1">
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Upload original research with complete metadata</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Disclose AI assistance and contributions accurately</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Respond to reviewer feedback and revision requests</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Ensure reproducibility of research methods and results</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border-b border-neutral-200 pb-6">
+              <div class="flex items-start">
+                <div class="bg-neutral-800 rounded-full p-3 mr-4">
+                  <i class="fa-solid fa-magnifying-glass text-white"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl text-neutral-900 mb-2">Reviewers</h3>
+                  <p class="text-neutral-700 mb-3">
+                    Reviewers evaluate research for methodological soundness, originality, and contribution to the field. They provide structured feedback within the platform's transparency framework.
+                  </p>
+                  <div class="bg-neutral-100 p-3 rounded-md">
+                    <h4 class="text-neutral-800 mb-2">Key Responsibilities:</h4>
+                    <ul class="text-neutral-700 text-sm space-y-1">
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Provide objective evaluation using standardized rubrics</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Assess methodology, results, and conclusions</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Identify potential issues with reproducibility</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Participate in structured discussion with authors when appropriate</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border-b border-neutral-200 pb-6">
+              <div class="flex items-start">
+                <div class="bg-neutral-800 rounded-full p-3 mr-4">
+                  <i class="fa-solid fa-user-tie text-white"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl text-neutral-900 mb-2">Editors</h3>
+                  <p class="text-neutral-700 mb-3">
+                    Editors oversee the review process, make publication decisions, and ensure adherence to platform guidelines. They act as mediators between authors and reviewers.
+                  </p>
+                  <div class="bg-neutral-100 p-3 rounded-md">
+                    <h4 class="text-neutral-800 mb-2">Key Responsibilities:</h4>
+                    <ul class="text-neutral-700 text-sm space-y-1">
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Manage submission queue and assign appropriate reviewers</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Make publication decisions based on reviewer feedback</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Ensure compliance with platform policies and ethical standards</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Mediate disputes between authors and reviewers when necessary</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex items-start">
+                <div class="bg-neutral-800 rounded-full p-3 mr-4">
+                  <i class="fa-solid fa-robot text-white"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl text-neutral-900 mb-2">AI Systems</h3>
+                  <p class="text-neutral-700 mb-3">
+                    AI systems serve as co-observers, providing analysis, attribution support, and structured contributions. Their role is transparent and fully attributed within the platform.
+                  </p>
+                  <div class="bg-neutral-100 p-3 rounded-md">
+                    <h4 class="text-neutral-800 mb-2">Key Responsibilities:</h4>
+                    <ul class="text-neutral-700 text-sm space-y-1">
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Assist with structured analysis and pattern recognition</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Support attribution tracking and verification</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Provide standardized review support within defined parameters</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="fa-solid fa-angle-right text-neutral-600 mt-1 mr-2"></i>
+                        <span>Generate structured metadata and research gap analysis</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="platform-workflows" class="mb-10">
+        <div class="bg-white shadow-sm rounded-lg p-6 border border-neutral-200">
+          <h2 class="text-2xl text-neutral-900 mb-4">Platform Workflows</h2>
+          
+          <p class="text-neutral-700 mb-6">
+            EAIOU.org implements structured workflows to ensure transparency, attribution, and reproducibility throughout the research lifecycle.
+          </p>
+          
+          <div class="mb-6">
+            <h3 class="text-xl text-neutral-900 mb-3">Submission Workflow</h3>
+            <div class="bg-neutral-100 p-4 rounded-lg">
+              <div class="flex overflow-x-auto pb-2">
+                <div class="flex-shrink-0 w-40 mr-4">
+                  <div class="bg-neutral-800 text-white text-center p-2 rounded-t-lg">
+                    Step 1
+                  </div>
+                  <div class="bg-white border border-neutral-300 p-3 rounded-b-lg h-32 flex items-center">
+                    <div class="text-center w-full">
+                      <i class="fa-solid fa-upload text-neutral-600 mb-2"></i>
+                      <p class="text-sm text-neutral-700">Author uploads manuscript with metadata</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex-shrink-0 w-40 mr-4">
+                  <div class="bg-neutral-800 text-white text-center p-2 rounded-t-lg">
+                    Step 2
+                  </div>
+                  <div class="bg-white border border-neutral-300 p-3 rounded-b-lg h-32 flex items-center">
+                    <div class="text-center w-full">
+                      <i class="fa-solid fa-robot text-neutral-600 mb-2"></i>
+                      <p class="text-sm text-neutral-700">AI assistance disclosure and attribution</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex-shrink-0 w-40 mr-4">
+                  <div class="bg-neutral-800 text-white text-center p-2 rounded-t-lg">
+                    Step 3
+                  </div>
+                  <div class="bg-white border border-neutral-300 p-3 rounded-b-lg h-32 flex items-center">
+                    <div class="text-center w-full">
+                      <i class="fa-solid fa-user-tie text-neutral-600 mb-2"></i>
+                      <p class="text-sm text-neutral-700">Editor review and reviewer assignment</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex-shrink-0 w-40 mr-4">
+                  <div class="bg-neutral-800 text-white text-center p-2 rounded-t-lg">
+                    Step 4
+                  </div>
+                  <div class="bg-white border border-neutral-300 p-3 rounded-b-lg h-32 flex items-center">
+                    <div class="text-center w-full">
+                      <i class="fa-solid fa-magnifying-glass text-neutral-600 mb-2"></i>
+                      <p class="text-sm text-neutral-700">Structured peer review process</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex-shrink-0 w-40">
+                  <div class="bg-neutral-800 text-white text-center p-2 rounded-t-lg">
+                    Step 5
+                  </div>
+                  <div class="bg-white border border-neutral-300 p-3 rounded-b-lg h-32 flex items-center">
+                    <div class="text-center w-full">
+                      <i class="fa-solid fa-check-double text-neutral-600 mb-2"></i>
+                      <p class="text-sm text-neutral-700">Publication with transparency logs</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-xl text-neutral-900 mb-3">Review Process</h3>
+            <div class="bg-neutral-100 p-4 rounded-lg">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white border border-neutral-300 p-4 rounded-lg">
+                  <h4 class="text-neutral-800 mb-2 flex items-center">
+                    <i class="fa-solid fa-clipboard-check text-neutral-600 mr-2"></i>
+                    Standard Review
+                  </h4>
+                  <ul class="text-neutral-700 text-sm space-y-2">
+                    <li class="flex items-start">
+                      <i class="fa-solid fa-circle-dot text-neutral-600 text-xs mt-1 mr-2"></i>
+                      <span>Reviewer accesses manuscript through secure platform</span>
+                    </li>
+                    <li class="flex items-start">
+                      <i class="fa-solid fa-circle-dot text-neutral-600 text-xs mt-1 mr-2"></i>
+                      <span>Completes standardized evaluation rubric</span>
+                    </li>
+                    <li class="flex items-start">
+                      <i class="fa-solid fa-circle-dot text-neutral-600 text-xs mt-1 mr-2"></i>
+                      <span>Provides structured comments and recommendations</span>
+                    </li>
+                    <li class="flex items-start">
+                      <i class="fa-solid fa-circle-dot text-neutral-600 text-xs mt-1 mr-2"></i>
+                      <span>Editor synthesizes reviews and makes decision</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="bg-white border border-neutral-300 p-4 rounded-lg">
+                  <h4 class="text-neutral-800 mb-2 flex items-center">
+                    <i class="fa-solid fa-robot text-neutral-600 mr-2"></i>
+                    AI-Assisted Review
+                  </h4>
+                  <ul class="text-neutral-700 text-sm space-y-2">
+                    <li class="flex items-start">
+                      <i class="fa-solid fa-circle-dot text-neutral-600 text-xs mt-1 mr-2"></i>
+                      <span>AI performs initial analysis of methodology and structure</span>
+                    </li>
+                    <li class="flex items-start">
+                      <i class="fa-solid fa-circle-dot text-neutral-600 text-xs mt-1 mr-2"></i>
+                      <span>Human reviewer validates AI findings and adds expertise</span>
+                    </li>
+                    <li class="flex items-start">
+                      <i class="fa-solid fa-circle-dot text-neutral-600 text-xs mt-1 mr-2"></i>
+                      <span>Dual attribution for all review components</span>
+                    </li>
+                    <li class="flex items-start">
+                      <i class="fa-solid fa-circle-dot text-neutral-600 text-xs mt-1 mr-2"></i>
+                      <span>Transparency logs record all interactions</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="transparency-attribution" class="mb-10">
+        <div class="bg-white shadow-sm rounded-lg p-6 border border-neutral-200">
+          <h2 class="text-2xl text-neutral-900 mb-4">Transparency & Attribution</h2>
+          
+          <p class="text-neutral-700 mb-6">
+            EAIOU.org implements comprehensive transparency and attribution mechanisms to ensure all contributions are properly recorded and credited.
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <h3 class="text-xl text-neutral-900 mb-3">Transparency Logs</h3>
+              <div class="bg-neutral-100 p-4 rounded-lg">
+                <p class="text-neutral-700 text-sm mb-3">
+                  All platform interactions are recorded in immutable transparency logs, providing a complete audit trail of:
+                </p>
+                <ul class="text-neutral-700 text-sm space-y-2">
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mr-2"></i>
+                    <span>Document versions and changes</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mr-2"></i>
+                    <span>Review activities and decisions</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mr-2"></i>
+                    <span>AI system interactions and contributions</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mr-2"></i>
+                    <span>Editorial decisions and rationales</span>
+                  </li>
+                </ul>
+                <div class="mt-3">
+                  <button class="text-neutral-600 text-sm flex items-center">
+                    Learn more about transparency logs
+                    <i class="fa-solid fa-arrow-right ml-1"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-xl text-neutral-900 mb-3">Attribution Framework</h3>
+              <div class="bg-neutral-100 p-4 rounded-lg">
+                <p class="text-neutral-700 text-sm mb-3">
+                  The platform implements a structured attribution framework that:
+                </p>
+                <ul class="text-neutral-700 text-sm space-y-2">
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mr-2"></i>
+                    <span>Distinguishes between human and AI contributions</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mr-2"></i>
+                    <span>Provides granular attribution at the section level</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mr-2"></i>
+                    <span>Records contribution types (writing, analysis, review)</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mr-2"></i>
+                    <span>Generates standardized attribution statements</span>
+                  </li>
+                </ul>
+                <div class="mt-3">
+                  <button class="text-neutral-600 text-sm flex items-center">
+                    View attribution guidelines
+                    <i class="fa-solid fa-arrow-right ml-1"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-neutral-800 text-white p-4 rounded-lg">
+            <h3 class="mb-3">Example Attribution Statement</h3>
+            <div class="bg-neutral-900 p-3 rounded-md text-sm">
+              <p class="mb-2">Generated collaboratively by J. Smith (human author) and GPT-4 (AI co-observer).</p>
+              <p class="mb-2">Licensed under Modified MIT – Educational Use Only. Attribution required.</p>
+              <p class="mb-2">Responsibility for accuracy is shared; attribution logs record contributions.</p>
+              <p>Human contributions: research design, methodology, conclusions. AI contributions: literature analysis, data visualization support.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="faq" class="mb-10">
+        <div class="bg-white shadow-sm rounded-lg p-6 border border-neutral-200">
+          <h2 class="text-2xl text-neutral-900 mb-4">Frequently Asked Questions</h2>
+          
+          <div class="space-y-4">
+            <div class="border-b border-neutral-200 pb-4">
+              <button class="flex justify-between items-center w-full text-left">
+                <h3 class="text-lg text-neutral-900">How does EAIOU.org ensure research integrity?</h3>
+                <i class="fa-solid fa-chevron-down text-neutral-600"></i>
+              </button>
+              <div class="mt-2 text-neutral-700">
+                <p>EAIOU.org ensures research integrity through multiple mechanisms: transparent peer review processes, comprehensive attribution frameworks, immutable transparency logs, and access control systems that clearly define observer roles and permissions. All platform interactions are recorded and available for audit, creating accountability at every stage of the research lifecycle.</p>
+              </div>
+            </div>
+            
+            <div class="border-b border-neutral-200 pb-4">
+              <button class="flex justify-between items-center w-full text-left">
+                <h3 class="text-lg text-neutral-900">What does "observer-preserving" mean?</h3>
+                <i class="fa-solid fa-chevron-down text-neutral-600"></i>
+              </button>
+              <div class="mt-2 text-neutral-700">
+                <p>"Observer-preserving" refers to the platform's fundamental approach of maintaining the integrity and identity of each observer (human or AI) throughout the research process. This means that contributions are never anonymized or blended in ways that obscure their source, and each observer's role, permissions, and contributions are clearly defined and recorded.</p>
+              </div>
+            </div>
+            
+            <div class="border-b border-neutral-200 pb-4">
+              <button class="flex justify-between items-center w-full text-left">
+                <h3 class="text-lg text-neutral-900">How are AI contributions attributed?</h3>
+                <i class="fa-solid fa-chevron-down text-neutral-600"></i>
+              </button>
+              <div class="mt-2 text-neutral-700">
+                <p>AI contributions are attributed through our structured attribution framework, which identifies the specific AI system used, the nature of its contributions (analysis, writing assistance, etc.), and the extent of those contributions. AI systems are treated as formal co-observers, with their inputs clearly delineated from human contributions in all published materials and transparency logs.</p>
+              </div>
+            </div>
+            
+            <div class="border-b border-neutral-200 pb-4">
+              <button class="flex justify-between items-center w-full text-left">
+                <h3 class="text-lg text-neutral-900">What is the "arbiter layer"?</h3>
+                <i class="fa-solid fa-chevron-down text-neutral-600"></i>
+              </button>
+              <div class="mt-2 text-neutral-700">
+                <p>The arbiter layer is a platform component that mediates interactions between human and AI observers. It enforces access controls, records all interactions in transparency logs, and ensures that contributions maintain their attribution throughout the research process. This layer prevents unauthorized modifications and helps maintain the integrity of the observer-preserving approach.</p>
+              </div>
+            </div>
+            
+            <div>
+              <button class="flex justify-between items-center w-full text-left">
+                <h3 class="text-lg text-neutral-900">What are "mute intelligences"?</h3>
+                <i class="fa-solid fa-chevron-down text-neutral-600"></i>
+              </button>
+              <div class="mt-2 text-neutral-700">
+                <p>"Mute intelligences" refers to AI systems that provide analytical support without generating natural language output. These systems might perform data analysis, pattern recognition, or verification tasks, with their contributions recorded in structured formats rather than prose. Like other observer types, their contributions are fully attributed in the platform's transparency framework.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="lg:w-1/4">
+      <div class="sticky top-24">
+        <section id="quick-links" class="bg-white border border-neutral-200 rounded-lg shadow-sm p-6 mb-6">
+          <h2 class="text-xl text-neutral-900 mb-4">Quick Links</h2>
+          
+          <div class="space-y-3">
+            <span class="flex items-center p-3 bg-neutral-100 rounded-md hover:bg-neutral-200 cursor-pointer">
+              <i class="fa-solid fa-file-lines text-neutral-700 mr-3"></i>
+              <span class="text-neutral-800">Submission Guidelines</span>
+            </span>
+            
+            <span class="flex items-center p-3 bg-neutral-100 rounded-md hover:bg-neutral-200 cursor-pointer">
+              <i class="fa-solid fa-magnifying-glass text-neutral-700 mr-3"></i>
+              <span class="text-neutral-800">Peer Review Process</span>
+            </span>
+            
+            <span class="flex items-center p-3 bg-neutral-100 rounded-md hover:bg-neutral-200 cursor-pointer">
+              <i class="fa-solid fa-robot text-neutral-700 mr-3"></i>
+              <span class="text-neutral-800">AI Disclosure Policy</span>
+            </span>
+            
+            <span class="flex items-center p-3 bg-neutral-100 rounded-md hover:bg-neutral-200 cursor-pointer">
+              <i class="fa-solid fa-tag text-neutral-700 mr-3"></i>
+              <span class="text-neutral-800">Attribution Framework</span>
+            </span>
+            
+            <span class="flex items-center p-3 bg-neutral-100 rounded-md hover:bg-neutral-200 cursor-pointer">
+              <i class="fa-solid fa-shield-alt text-neutral-700 mr-3"></i>
+              <span class="text-neutral-800">ACL Controls</span>
+            </span>
+            
+            <span class="flex items-center p-3 bg-neutral-100 rounded-md hover:bg-neutral-200 cursor-pointer">
+              <i class="fa-solid fa-users text-neutral-700 mr-3"></i>
+              <span class="text-neutral-800">Observer Roles</span>
+            </span>
+          </div>
+        </section>
+        
+        <section id="downloads" class="bg-white border border-neutral-200 rounded-lg shadow-sm p-6 mb-6">
+          <h2 class="text-xl text-neutral-900 mb-4">Resources</h2>
+          
+          <div class="space-y-3">
+            <span class="flex items-center p-3 bg-neutral-100 rounded-md hover:bg-neutral-200 cursor-pointer">
+              <i class="fa-solid fa-file-pdf text-neutral-700 mr-3"></i>
+              <div>
+                <span class="text-neutral-800 block">Platform Guidelines PDF</span>
+                <span class="text-xs text-neutral-500">Complete documentation (2.4 MB)</span>
+              </div>
+            </span>
+            
+            <span class="flex items-center p-3 bg-neutral-100 rounded-md hover:bg-neutral-200 cursor-pointer">
+              <i class="fa-solid fa-file-pdf text-neutral-700 mr-3"></i>
+              <div>
+                <span class="text-neutral-800 block">Author Quick Start Guide</span>
+                <span class="text-xs text-neutral-500">Step-by-step instructions (1.2 MB)</span>
+              </div>
+            </span>
+            
+            <span class="flex items-center p-3 bg-neutral-100 rounded-md hover:bg-neutral-200 cursor-pointer">
+              <i class="fa-solid fa-file-pdf text-neutral-700 mr-3"></i>
+              <div>
+                <span class="text-neutral-800 block">Reviewer Handbook</span>
+                <span class="text-xs text-neutral-500">Best practices (1.8 MB)</span>
+              </div>
+            </span>
+          </div>
+        </section>
+        
+        <section id="contact-support" class="bg-white border border-neutral-200 rounded-lg shadow-sm p-6">
+          <h2 class="text-xl text-neutral-900 mb-4">Need Help?</h2>
+          
+          <p class="text-neutral-700 text-sm mb-4">
+            If you have questions about platform guidelines or need assistance, our support team is here to help.
+          </p>
+          
+          <div class="space-y-3">
+            <span class="flex items-center p-3 bg-neutral-100 rounded-md hover:bg-neutral-200 cursor-pointer">
+              <i class="fa-solid fa-envelope text-neutral-700 mr-3"></i>
+              <span class="text-neutral-800">Contact Support</span>
+            </span>
+            
+            <span class="flex items-center p-3 bg-neutral-100 rounded-md hover:bg-neutral-200 cursor-pointer">
+              <i class="fa-solid fa-comments text-neutral-700 mr-3"></i>
+              <span class="text-neutral-800">Live Chat</span>
+            </span>
+            
+            <span class="flex items-center p-3 bg-neutral-100 rounded-md hover:bg-neutral-200 cursor-pointer">
+              <i class="fa-solid fa-question-circle text-neutral-700 mr-3"></i>
+              <span class="text-neutral-800">FAQ</span>
+            </span>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer id="footer" class="bg-neutral-900 text-white">
+  <div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-lg mb-4">EAIOU.org</h3>
+        <p class="text-neutral-400 text-sm mb-4">
+          An observer-preserving research platform built on Joomla, designed to support transparent peer review, structured attribution, and discovery.
+        </p>
+        <div class="flex space-x-4">
+          <span class="text-neutral-400 hover:text-white cursor-pointer">
+            <i class="fa-brands fa-twitter"></i>
+          </span>
+          <span class="text-neutral-400 hover:text-white cursor-pointer">
+            <i class="fa-brands fa-github"></i>
+          </span>
+          <span class="text-neutral-400 hover:text-white cursor-pointer">
+            <i class="fa-brands fa-linkedin"></i>
+          </span>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-lg mb-4">Resources</h3>
+        <ul class="space-y-2 text-neutral-400">
+          <li><span class="hover:text-white cursor-pointer">About EAIOU</span></li>
+          <li><span class="hover:text-white cursor-pointer">Guidelines</span></li>
+          <li><span class="hover:text-white cursor-pointer">Submission Process</span></li>
+          <li><span class="hover:text-white cursor-pointer">Peer Review</span></li>
+          <li><span class="hover:text-white cursor-pointer">Attribution Policy</span></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="text-lg mb-4">Community</h3>
+        <ul class="space-y-2 text-neutral-400">
+          <li><span class="hover:text-white cursor-pointer">Collaboration Hub</span></li>
+          <li><span class="hover:text-white cursor-pointer">Research Gap Maps</span></li>
+          <li><span class="hover:text-white cursor-pointer">Events & Workshops</span></li>
+          <li><span class="hover:text-white cursor-pointer">Editorial Board</span></li>
+          <li><span class="hover:text-white cursor-pointer">Join as Reviewer</span></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="text-lg mb-4">Support</h3>
+        <ul class="space-y-2 text-neutral-400">
+          <li><span class="hover:text-white cursor-pointer">Help Center</span></li>
+          <li><span class="hover:text-white cursor-pointer">Contact Us</span></li>
+          <li><span class="hover:text-white cursor-pointer">FAQs</span></li>
+          <li><span class="hover:text-white cursor-pointer">Privacy Policy</span></li>
+          <li><span class="hover:text-white cursor-pointer">Terms of Service</span></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="border-t border-neutral-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-neutral-400 text-sm">
+        © 2025 EAIOU.org. All rights reserved. Licensed under Modified MIT – Educational Use Only.
+      </p>
+      <div class="flex items-center mt-4 md:mt-0">
+        <span class="text-xs text-neutral-500 mr-2">Powered by</span>
+        <span class="text-neutral-400">Joomla</span>
+      </div>
+    </div>
+  </div>
+</footer>
+                </body>
+              </html>
+            

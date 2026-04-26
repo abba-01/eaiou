@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div class="flex items-center space-x-4">
+    <div class="w-10 h-10 bg-neutral-800 rounded-md flex items-center justify-center text-white">
+      <i class="fa-solid fa-robot"></i>
+    </div>
+    <div>
+      <h1 class="text-xl">AI Research Assistant</h1>
+      <p class="text-sm text-neutral-500">Joomla 5.3 Component</p>
+    </div>
+  </div>
+  <div class="flex items-center space-x-4">
+    <button class="p-2 rounded-full hover:bg-neutral-100">
+      <i class="fa-solid fa-bell text-neutral-600"></i>
+    </button>
+    <button class="p-2 rounded-full hover:bg-neutral-100">
+      <i class="fa-solid fa-gear text-neutral-600"></i>
+    </button>
+    <div class="flex items-center space-x-2">
+      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full">
+      <span class="text-sm">Admin User</span>
+      <i class="fa-solid fa-chevron-down text-neutral-500 text-xs"></i>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div id="main-content" class="container mx-auto px-6 py-8 min-h-[800px] bg-neutral-100">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl">Project Articles</h2>
+    <div class="flex items-center space-x-2">
+      <button class="px-4 py-2 bg-white border border-neutral-300 rounded-md text-sm flex items-center">
+        <i class="fa-solid fa-filter text-neutral-500 mr-2"></i>
+        Filter
+      </button>
+      <button class="px-4 py-2 bg-neutral-800 text-white rounded-md text-sm flex items-center">
+        <i class="fa-solid fa-plus mr-2"></i>
+        New Article
+      </button>
+    </div>
+  </div>
+
+  <!-- Project Navigation -->
+  <div class="bg-white rounded-lg shadow-sm mb-6">
+    <div class="border-b border-neutral-200">
+      <nav class="flex overflow-x-auto">
+        <button class="px-6 py-4 text-neutral-500 hover:text-neutral-700 whitespace-nowrap">
+          AI Models
+        </button>
+        <button class="px-6 py-4 text-neutral-800 border-b-2 border-neutral-800 whitespace-nowrap">
+          Project Management
+        </button>
+        <button class="px-6 py-4 text-neutral-500 hover:text-neutral-700 whitespace-nowrap">
+          Security & Access Control
+        </button>
+        <button class="px-6 py-4 text-neutral-500 hover:text-neutral-700 whitespace-nowrap">
+          API Connections
+        </button>
+        <button class="px-6 py-4 text-neutral-500 hover:text-neutral-700 whitespace-nowrap">
+          Data Storage
+        </button>
+        <button class="px-6 py-4 text-neutral-500 hover:text-neutral-700 whitespace-nowrap">
+          Notifications
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Project Selection -->
+  <div id="project-selection" class="bg-white rounded-lg shadow-sm p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg">Current Project</h3>
+      <button class="px-3 py-1.5 bg-neutral-100 text-neutral-700 rounded-md text-sm flex items-center">
+        <i class="fa-solid fa-exchange-alt mr-2"></i>
+        Switch Project
+      </button>
+    </div>
+    
+    <div class="flex items-center">
+      <div class="w-12 h-12 bg-neutral-700 rounded-md flex items-center justify-center text-white mr-4">
+        <i class="fa-solid fa-flask"></i>
+      </div>
+      <div>
+        <h4>Quantum Computing Applications in Healthcare</h4>
+        <div class="flex items-center text-sm text-neutral-500 mt-1">
+          <span class="flex items-center mr-4">
+            <i class="fa-regular fa-calendar mr-1"></i>
+            Due: August 15, 2025
+          </span>
+          <span class="flex items-center">
+            <i class="fa-solid fa-user-group mr-1"></i>
+            5 Contributors
+          </span>
+        </div>
+      </div>
+      <div class="ml-auto">
+        <span class="px-3 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">In Progress</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kanban Board -->
+  <div id="articles-kanban" class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg">Project Articles</h3>
+      <div class="flex items-center space-x-2">
+        <button class="px-3 py-1.5 bg-white border border-neutral-300 rounded-md text-sm flex items-center">
+          <i class="fa-solid fa-list mr-2 text-neutral-500"></i>
+          List View
+        </button>
+        <button class="px-3 py-1.5 bg-neutral-800 text-white rounded-md text-sm flex items-center">
+          <i class="fa-solid fa-columns mr-2"></i>
+          Kanban View
+        </button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Draft Column -->
+      <div id="draft-column" class="bg-neutral-50 rounded-md p-4">
+        <div class="flex items-center justify-between mb-4">
+          <h4 class="text-neutral-700 flex items-center">
+            <i class="fa-solid fa-pencil mr-2 text-neutral-500"></i>
+            Draft
+            <span class="ml-2 bg-neutral-200 text-neutral-700 px-2 py-0.5 rounded text-xs">3</span>
+          </h4>
+          <button class="text-neutral-400 hover:text-neutral-700">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+        </div>
+
+        <!-- Draft Article Card 1 -->
+        <div class="bg-white rounded-md shadow-sm mb-4 border-l-4 border-neutral-400 hover:shadow-md transition-shadow">
+          <div class="p-4">
+            <h5 class="text-neutral-800 mb-2">Introduction to Quantum Computing in Healthcare</h5>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Overview of quantum computing principles and potential applications in healthcare diagnostics and treatment planning.</p>
+            <div class="flex items-center text-xs text-neutral-500 mb-3">
+              <span class="flex items-center mr-3">
+                <i class="fa-regular fa-calendar mr-1"></i>
+                Created: July 2, 2025
+              </span>
+              <span class="flex items-center">
+                <i class="fa-solid fa-robot mr-1"></i>
+                UX Pilot Opus
+              </span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User avatar" class="w-6 h-6 rounded-full">
+                <span class="text-xs ml-1">John D.</span>
+              </div>
+              <div class="flex space-x-2">
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Draft Article Card 2 -->
+        <div class="bg-white rounded-md shadow-sm mb-4 border-l-4 border-neutral-400 hover:shadow-md transition-shadow">
+          <div class="p-4">
+            <h5 class="text-neutral-800 mb-2">Quantum Algorithms for Medical Imaging</h5>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Analysis of quantum algorithms that can enhance medical imaging resolution and processing speed.</p>
+            <div class="flex items-center text-xs text-neutral-500 mb-3">
+              <span class="flex items-center mr-3">
+                <i class="fa-regular fa-calendar mr-1"></i>
+                Created: July 5, 2025
+              </span>
+              <span class="flex items-center">
+                <i class="fa-solid fa-robot mr-1"></i>
+                GPT-4o
+              </span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-6 h-6 rounded-full">
+                <span class="text-xs ml-1">Sarah L.</span>
+              </div>
+              <div class="flex space-x-2">
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Draft Article Card 3 -->
+        <div class="bg-white rounded-md shadow-sm mb-4 border-l-4 border-neutral-400 hover:shadow-md transition-shadow">
+          <div class="p-4">
+            <h5 class="text-neutral-800 mb-2">Ethical Considerations in Quantum Healthcare</h5>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Examination of ethical implications of applying quantum computing to healthcare data and decision-making.</p>
+            <div class="flex items-center text-xs text-neutral-500 mb-3">
+              <span class="flex items-center mr-3">
+                <i class="fa-regular fa-calendar mr-1"></i>
+                Created: July 6, 2025
+              </span>
+              <span class="flex items-center">
+                <i class="fa-solid fa-robot mr-1"></i>
+                UX Pilot Sonnet
+              </span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-6 h-6 rounded-full">
+                <span class="text-xs ml-1">Mike T.</span>
+              </div>
+              <div class="flex space-x-2">
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="w-full flex items-center justify-center py-2 text-sm text-neutral-600 hover:text-neutral-800 bg-white rounded-md border border-neutral-200">
+          <i class="fa-solid fa-plus mr-1"></i>
+          Add Article
+        </button>
+      </div>
+
+      <!-- Review Column -->
+      <div id="review-column" class="bg-neutral-50 rounded-md p-4">
+        <div class="flex items-center justify-between mb-4">
+          <h4 class="text-neutral-700 flex items-center">
+            <i class="fa-solid fa-magnifying-glass mr-2 text-neutral-500"></i>
+            In Review
+            <span class="ml-2 bg-neutral-200 text-neutral-700 px-2 py-0.5 rounded text-xs">2</span>
+          </h4>
+          <button class="text-neutral-400 hover:text-neutral-700">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+        </div>
+
+        <!-- Review Article Card 1 -->
+        <div class="bg-white rounded-md shadow-sm mb-4 border-l-4 border-neutral-400 hover:shadow-md transition-shadow">
+          <div class="p-4">
+            <h5 class="text-neutral-800 mb-2">Quantum Computing vs. Classical Computing in Medical Research</h5>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Comparative analysis of quantum and classical computing approaches for medical research applications.</p>
+            <div class="flex items-center text-xs text-neutral-500 mb-3">
+              <span class="flex items-center mr-3">
+                <i class="fa-regular fa-calendar mr-1"></i>
+                Updated: July 4, 2025
+              </span>
+              <span class="flex items-center">
+                <i class="fa-solid fa-robot mr-1"></i>
+                UX Pilot Opus
+              </span>
+            </div>
+            <div class="flex items-center mb-3">
+              <span class="text-xs bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded-full">Needs Citations</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=321" alt="User avatar" class="w-6 h-6 rounded-full">
+                <span class="text-xs ml-1">Emily R.</span>
+              </div>
+              <div class="flex space-x-2">
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-comment"></i>
+                </button>
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-arrows-left-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review Article Card 2 -->
+        <div class="bg-white rounded-md shadow-sm mb-4 border-l-4 border-neutral-400 hover:shadow-md transition-shadow">
+          <div class="p-4">
+            <h5 class="text-neutral-800 mb-2">Drug Discovery Acceleration Using Quantum Computing</h5>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Analysis of how quantum computing can accelerate the drug discovery and molecular modeling processes.</p>
+            <div class="flex items-center text-xs text-neutral-500 mb-3">
+              <span class="flex items-center mr-3">
+                <i class="fa-regular fa-calendar mr-1"></i>
+                Updated: July 3, 2025
+              </span>
+              <span class="flex items-center">
+                <i class="fa-solid fa-robot mr-1"></i>
+                GPT-4o
+              </span>
+            </div>
+            <div class="flex items-center mb-3">
+              <span class="text-xs bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded-full">Peer Review</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=654" alt="User avatar" class="w-6 h-6 rounded-full">
+                <span class="text-xs ml-1">David K.</span>
+              </div>
+              <div class="flex space-x-2">
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-comment"></i>
+                </button>
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-arrows-left-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="w-full flex items-center justify-center py-2 text-sm text-neutral-600 hover:text-neutral-800 bg-white rounded-md border border-neutral-200">
+          <i class="fa-solid fa-plus mr-1"></i>
+          Add Article
+        </button>
+      </div>
+
+      <!-- Complete Column -->
+      <div id="complete-column" class="bg-neutral-50 rounded-md p-4">
+        <div class="flex items-center justify-between mb-4">
+          <h4 class="text-neutral-700 flex items-center">
+            <i class="fa-solid fa-check-circle mr-2 text-neutral-500"></i>
+            Complete
+            <span class="ml-2 bg-neutral-200 text-neutral-700 px-2 py-0.5 rounded text-xs">1</span>
+          </h4>
+          <button class="text-neutral-400 hover:text-neutral-700">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+        </div>
+
+        <!-- Complete Article Card -->
+        <div class="bg-white rounded-md shadow-sm mb-4 border-l-4 border-neutral-500 hover:shadow-md transition-shadow">
+          <div class="p-4">
+            <h5 class="text-neutral-800 mb-2">Quantum Computing Hardware Requirements for Medical Applications</h5>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Technical specifications and hardware requirements for implementing quantum computing in medical applications.</p>
+            <div class="flex items-center text-xs text-neutral-500 mb-3">
+              <span class="flex items-center mr-3">
+                <i class="fa-regular fa-calendar mr-1"></i>
+                Completed: July 1, 2025
+              </span>
+              <span class="flex items-center">
+                <i class="fa-solid fa-robot mr-1"></i>
+                UX Pilot Sonnet
+              </span>
+            </div>
+            <div class="flex items-center mb-3">
+              <span class="text-xs bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded-full">Peer Reviewed</span>
+              <span class="text-xs bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded-full ml-2">Citations Verified</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=987" alt="User avatar" class="w-6 h-6 rounded-full">
+                <span class="text-xs ml-1">Alex P.</span>
+              </div>
+              <div class="flex space-x-2">
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-download"></i>
+                </button>
+                <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="w-full flex items-center justify-center py-2 text-sm text-neutral-600 hover:text-neutral-800 bg-white rounded-md border border-neutral-200">
+          <i class="fa-solid fa-plus mr-1"></i>
+          Add Article
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Academic Standards Section -->
+  <div id="academic-standards" class="bg-white rounded-lg shadow-sm p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg">Academic Standards</h3>
+      <button class="px-3 py-1.5 bg-neutral-100 text-neutral-700 rounded-md text-sm flex items-center">
+        <i class="fa-solid fa-edit mr-2"></i>
+        Edit Standards
+      </button>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <h4 class="text-neutral-700 mb-3">Citation Requirements</h4>
+        <div class="space-y-2">
+          <div class="flex items-center">
+            <input type="checkbox" checked class="mr-2 h-4 w-4 rounded border-neutral-300 text-neutral-800 focus:ring-neutral-800">
+            <span class="text-sm">Enforce APA 7th Edition format</span>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" checked class="mr-2 h-4 w-4 rounded border-neutral-300 text-neutral-800 focus:ring-neutral-800">
+            <span class="text-sm">Minimum 10 references per article</span>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" checked class="mr-2 h-4 w-4 rounded border-neutral-300 text-neutral-800 focus:ring-neutral-800">
+            <span class="text-sm">Include DOI when available</span>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" checked class="mr-2 h-4 w-4 rounded border-neutral-300 text-neutral-800 focus:ring-neutral-800">
+            <span class="text-sm">Verify reference accessibility</span>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="text-neutral-700 mb-3">Content Validation</h4>
+        <div class="space-y-2">
+          <div class="flex items-center">
+            <input type="checkbox" checked class="mr-2 h-4 w-4 rounded border-neutral-300 text-neutral-800 focus:ring-neutral-800">
+            <span class="text-sm">Fact-check against peer-reviewed sources</span>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" checked class="mr-2 h-4 w-4 rounded border-neutral-300 text-neutral-800 focus:ring-neutral-800">
+            <span class="text-sm">Plagiarism detection</span>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" checked class="mr-2 h-4 w-4 rounded border-neutral-300 text-neutral-800 focus:ring-neutral-800">
+            <span class="text-sm">AI content disclosure requirements</span>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" checked class="mr-2 h-4 w-4 rounded border-neutral-300 text-neutral-800 focus:ring-neutral-800">
+            <span class="text-sm">Human expert review required</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Article Editor Modal -->
+<div id="article-editor-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-5xl max-h-[90vh] flex flex-col">
+    <div class="p-4 border-b border-neutral-200 flex items-center justify-between">
+      <h3 class="text-lg">Edit Article</h3>
+      <button class="text-neutral-500 hover:text-neutral-700">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="flex-1 overflow-auto p-6">
+      <div class="mb-4">
+        <label class="block text-sm text-neutral-700 mb-1">Article Title</label>
+        <input type="text" value="Quantum Algorithms for Medical Imaging" class="w-full border border-neutral-300 rounded-md px-3 py-2">
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-sm text-neutral-700 mb-1">Abstract</label>
+        <textarea rows="3" class="w-full border border-neutral-300 rounded-md px-3 py-2">This article explores the application of quantum algorithms in enhancing medical imaging techniques, with a focus on improving resolution and processing speed compared to classical computing methods.</textarea>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-sm text-neutral-700 mb-1">Content</label>
+        <div class="border border-neutral-300 rounded-md p-2 bg-white">
+          <div class="flex items-center space-x-2 border-b border-neutral-200 pb-2 mb-2">
+            <button class="p-1.5 hover:bg-neutral-100 rounded">
+              <i class="fa-solid fa-bold"></i>
+            </button>
+            <button class="p-1.5 hover:bg-neutral-100 rounded">
+              <i class="fa-solid fa-italic"></i>
+            </button>
+            <button class="p-1.5 hover:bg-neutral-100 rounded">
+              <i class="fa-solid fa-underline"></i>
+            </button>
+            <span class="border-r border-neutral-300 h-6"></span>
+            <button class="p-1.5 hover:bg-neutral-100 rounded">
+              <i class="fa-solid fa-heading"></i>
+            </button>
+            <button class="p-1.5 hover:bg-neutral-100 rounded">
+              <i class="fa-solid fa-list-ul"></i>
+            </button>
+            <button class="p-1.5 hover:bg-neutral-100 rounded">
+              <i class="fa-solid fa-list-ol"></i>
+            </button>
+            <span class="border-r border-neutral-300 h-6"></span>
+            <button class="p-1.5 hover:bg-neutral-100 rounded">
+              <i class="fa-solid fa-quote-right"></i>
+            </button>
+            <button class="p-1.5 hover:bg-neutral-100 rounded">
+              <i class="fa-solid fa-link"></i>
+            </button>
+            <button class="p-1.5 hover:bg-neutral-100 rounded">
+              <i class="fa-solid fa-image"></i>
+            </button>
+            <button class="p-1.5 hover:bg-neutral-100 rounded">
+              <i class="fa-solid fa-table"></i>
+            </button>
+            <span class="border-r border-neutral-300 h-6"></span>
+            <button class="p-1.5 hover:bg-neutral-100 rounded">
+              <i class="fa-solid fa-quote-left"></i>
+            </button>
+            <button class="p-1.5 hover:bg-neutral-100 rounded">
+              <i class="fa-solid fa-code"></i>
+            </button>
+          </div>
+          <div class="min-h-[300px] p-2">
+            <h4 class="text-lg mb-2">Introduction</h4>
+            <p class="mb-3">Medical imaging plays a crucial role in modern healthcare, enabling physicians to diagnose conditions and plan treatments with precision. However, traditional imaging techniques face limitations in resolution and processing speed. Quantum computing offers promising solutions to these challenges through novel algorithms specifically designed for image processing tasks.</p>
+            
+            <h4 class="text-lg mb-2">Quantum Fourier Transform in Medical Imaging</h4>
+            <p class="mb-3">The Quantum Fourier Transform (QFT) provides a significant advantage over classical Fourier Transform methods when processing complex medical images. By leveraging quantum parallelism, QFT can process multiple image components simultaneously, potentially reducing the computational time from O(n log n) to O(log² n) for certain applications.</p>
+            
+            <h4 class="text-lg mb-2">Quantum Machine Learning for Image Analysis</h4>
+            <p class="mb-3">Quantum machine learning algorithms, such as quantum support vector machines and quantum neural networks, demonstrate potential for improved pattern recognition in medical images. These algorithms can identify subtle patterns that might be missed by classical algorithms, particularly in early disease detection scenarios.</p>
+            
+            <div class="bg-neutral-50 p-3 border-l-4 border-neutral-400 rounded mb-3">
+              <p class="text-sm text-neutral-600">Citation needed: Add references for quantum machine learning performance claims.</p>
+            </div>
+            
+            <h4 class="text-lg mb-2">Current Limitations and Challenges</h4>
+            <p>Despite the theoretical advantages, practical implementation of quantum algorithms in medical imaging faces several challenges, including quantum hardware limitations, decoherence issues, and the need for specialized interfaces between quantum processors and medical imaging equipment.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-sm text-neutral-700 mb-1">References</label>
+        <div class="space-y-2">
+          <div class="flex items-center border border-neutral-300 rounded-md p-2">
+            <span class="mr-2">[1]</span>
+            <input type="text" value="Nielsen, M. A., & Chuang, I. L. (2010). Quantum Computation and Quantum Information. Cambridge University Press." class="flex-1 border-none focus:ring-0">
+            <button class="p-1 text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+          <div class="flex items-center border border-neutral-300 rounded-md p-2">
+            <span class="mr-2">[2]</span>
+            <input type="text" value="Biamonte, J., Wittek, P., Pancotti, N., et al. (2017). Quantum machine learning. Nature, 549(7671), 195-202." class="flex-1 border-none focus:ring-0">
+            <button class="p-1 text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+          <div class="flex items-center border border-neutral-300 rounded-md p-2">
+            <span class="mr-2">[3]</span>
+            <input type="text" value="Schuld, M., & Petruccione, F. (2021). Machine Learning with Quantum Computers. Springer." class="flex-1 border-none focus:ring-0">
+            <button class="p-1 text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+          <button class="flex items-center text-sm text-neutral-600 hover:text-neutral-800">
+            <i class="fa-solid fa-plus mr-1"></i>
+            Add Reference
+          </button>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm text-neutral-700 mb-1">AI Model Used</label>
+          <select class="w-full border border-neutral-300 rounded-md px-3 py-2">
+            <option>GPT-4o</option>
+            <option>UX Pilot Opus</option>
+            <option>UX Pilot Sonnet</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm text-neutral-700 mb-1">Status</label>
+          <select class="w-full border border-neutral-300 rounded-md px-3 py-2">
+            <option>Draft</option>
+            <option selected>In Review</option>
+            <option>Complete</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <div class="p-4 border-t border-neutral-200 flex items-center justify-between">
+      <div class="flex items-center">
+        <span class="text-sm text-neutral-600 mr-2">Last saved: July 5, 2025 14:23</span>
+        <button class="text-sm text-neutral-600 hover:text-neutral-800 flex items-center">
+          <i class="fa-solid fa-history mr-1"></i>
+          View History
+        </button>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button class="px-4 py-2 border border-neutral-300 rounded-md text-sm">Cancel</button>
+        <button class="px-4 py-2 bg-neutral-800 text-white rounded-md text-sm">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer id="footer" class="bg-white border-t border-neutral-200 mt-8 py-6">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="text-center md:text-left mb-4 md:mb-0">
+        <p class="text-sm text-neutral-600">AI Research Assistant v1.0.2 | Joomla 5.3 Component</p>
+        <p class="text-xs text-neutral-500">© 2025 All Rights Reserved</p>
+      </div>
+      <div class="flex space-x-4">
+        <button class="text-sm text-neutral-600 hover:text-neutral-800">Documentation</button>
+        <button class="text-sm text-neutral-600 hover:text-neutral-800">Support</button>
+        <button class="text-sm text-neutral-600 hover:text-neutral-800">Privacy Policy</button>
+      </div>
+    </div>
+  </div>
+</footer>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

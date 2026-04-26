@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div class="flex items-center space-x-4">
+    <div class="w-10 h-10 bg-neutral-800 rounded-md flex items-center justify-center text-white">
+      <i class="fa-solid fa-robot"></i>
+    </div>
+    <div>
+      <h1 class="text-xl">AI Research Assistant</h1>
+      <p class="text-sm text-neutral-500">Joomla 5.3 Component</p>
+    </div>
+  </div>
+  <div class="flex items-center space-x-4">
+    <button class="p-2 rounded-full hover:bg-neutral-100">
+      <i class="fa-solid fa-bell text-neutral-600"></i>
+    </button>
+    <button class="p-2 rounded-full hover:bg-neutral-100">
+      <i class="fa-solid fa-gear text-neutral-600"></i>
+    </button>
+    <div class="flex items-center space-x-2">
+      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full">
+      <span class="text-sm">Admin User</span>
+      <i class="fa-solid fa-chevron-down text-neutral-500 text-xs"></i>
+    </div>
+  </div>
+</header>
+
+<div id="system-alert" class="bg-neutral-800 text-white px-6 py-3 flex items-center justify-between">
+  <div class="flex items-center">
+    <i class="fa-solid fa-triangle-exclamation mr-3"></i>
+    <p class="text-sm">System detected unusual batch processing activity. Multiple tangent collections running simultaneously.</p>
+  </div>
+  <button class="px-3 py-1 bg-white text-neutral-800 rounded-md text-sm">Investigate</button>
+</div>
+
+<div id="main-content" class="container mx-auto px-6 py-8">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="text-2xl">Batch Processing Monitor</h2>
+      <p class="text-neutral-500">Recovery and session management</p>
+    </div>
+    <div class="flex items-center space-x-2">
+      <button class="px-4 py-2 bg-white border border-neutral-300 rounded-md text-sm flex items-center">
+        <i class="fa-solid fa-pause text-neutral-500 mr-2"></i>
+        Pause All
+      </button>
+      <button class="px-4 py-2 bg-neutral-800 text-white rounded-md text-sm flex items-center">
+        <i class="fa-solid fa-shield-halved mr-2"></i>
+        Secure Sessions
+      </button>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="bg-white rounded-lg shadow-sm mb-6">
+    <div class="border-b border-neutral-200">
+      <nav class="flex overflow-x-auto">
+        <button class="px-6 py-4 text-neutral-800 border-b-2 border-neutral-800 whitespace-nowrap">
+          Active Batches
+        </button>
+        <button class="px-6 py-4 text-neutral-500 hover:text-neutral-700 whitespace-nowrap">
+          Recovery Queue
+        </button>
+        <button class="px-6 py-4 text-neutral-500 hover:text-neutral-700 whitespace-nowrap">
+          Session Monitor
+        </button>
+        <button class="px-6 py-4 text-neutral-500 hover:text-neutral-700 whitespace-nowrap">
+          Security Logs
+        </button>
+        <button class="px-6 py-4 text-neutral-500 hover:text-neutral-700 whitespace-nowrap">
+          Parameter Editor
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Status Overview -->
+  <div id="status-overview" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <div class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex justify-between items-center mb-3">
+        <h3 class="text-neutral-600">Active Processes</h3>
+        <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">8 Running</span>
+      </div>
+      <div class="flex items-end">
+        <div class="text-3xl">8/12</div>
+        <div class="text-neutral-500 text-sm ml-2 mb-1">Processes</div>
+      </div>
+      <div class="mt-3 h-2 bg-neutral-100 rounded-full overflow-hidden">
+        <div class="bg-neutral-800 h-full rounded-full" style="width: 66%"></div>
+      </div>
+      <div class="flex justify-between mt-2 text-xs text-neutral-500">
+        <span>4 Completed</span>
+        <span>66% Utilization</span>
+      </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex justify-between items-center mb-3">
+        <h3 class="text-neutral-600">Recovery Status</h3>
+        <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Warning</span>
+      </div>
+      <div class="flex items-end">
+        <div class="text-3xl">5</div>
+        <div class="text-neutral-500 text-sm ml-2 mb-1">Pending Recovery</div>
+      </div>
+      <div class="mt-3 h-2 bg-neutral-100 rounded-full overflow-hidden">
+        <div class="bg-neutral-500 h-full rounded-full" style="width: 40%"></div>
+      </div>
+      <div class="flex justify-between mt-2 text-xs text-neutral-500">
+        <span>3 Auto-recovered</span>
+        <span>5 Manual needed</span>
+      </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex justify-between items-center mb-3">
+        <h3 class="text-neutral-600">Security Status</h3>
+        <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Alert</span>
+      </div>
+      <div class="flex items-end">
+        <div class="text-3xl">2</div>
+        <div class="text-neutral-500 text-sm ml-2 mb-1">Suspicious Sessions</div>
+      </div>
+      <div class="mt-3 h-2 bg-neutral-100 rounded-full overflow-hidden">
+        <div class="bg-neutral-500 h-full rounded-full" style="width: 20%"></div>
+      </div>
+      <div class="flex justify-between mt-2 text-xs text-neutral-500">
+        <span>2 Unfiltered Sessions</span>
+        <span>Action Required</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Active Batch Processing -->
+  <div id="active-batches" class="bg-white rounded-lg shadow-sm border border-neutral-200 mb-6">
+    <div class="p-4 border-b border-neutral-200 flex justify-between items-center">
+      <h3>Active Batch Processing</h3>
+      <div class="flex items-center space-x-2">
+        <div class="relative">
+          <input type="text" placeholder="Search batches..." class="pl-8 pr-3 py-1.5 border border-neutral-300 rounded-md text-sm w-64">
+          <i class="fa-solid fa-search absolute left-3 top-2 text-neutral-400 text-sm"></i>
+        </div>
+        <button class="p-1.5 border border-neutral-300 rounded-md">
+          <i class="fa-solid fa-filter text-neutral-500"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="bg-neutral-50 text-neutral-500 text-xs uppercase">
+            <th class="px-4 py-3 text-left">Batch ID</th>
+            <th class="px-4 py-3 text-left">Project</th>
+            <th class="px-4 py-3 text-left">AI Models</th>
+            <th class="px-4 py-3 text-left">Status</th>
+            <th class="px-4 py-3 text-left">Progress</th>
+            <th class="px-4 py-3 text-left">Started</th>
+            <th class="px-4 py-3 text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-t border-neutral-200 hover:bg-neutral-50">
+            <td class="px-4 py-3">
+              <span>BATCH-7842</span>
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex items-center">
+                <div class="w-6 h-6 bg-neutral-600 rounded flex items-center justify-center text-white mr-2">
+                  <i class="fa-solid fa-flask"></i>
+                </div>
+                <span>Quantum Physics Review</span>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex -space-x-1">
+                <div class="w-6 h-6 rounded-full bg-neutral-700 flex items-center justify-center text-white text-xs">C</div>
+                <div class="w-6 h-6 rounded-full bg-neutral-600 flex items-center justify-center text-white text-xs">G</div>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Warning</span>
+            </td>
+            <td class="px-4 py-3">
+              <div class="w-32 h-2 bg-neutral-100 rounded-full overflow-hidden">
+                <div class="bg-neutral-800 h-full rounded-full" style="width: 65%"></div>
+              </div>
+              <div class="text-xs text-neutral-500 mt-1">65% Complete</div>
+            </td>
+            <td class="px-4 py-3 text-neutral-500 text-sm">
+              July 6, 2025 - 09:42 AM
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex space-x-2">
+                <button class="p-1.5 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-pause"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-shield"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr class="border-t border-neutral-200 hover:bg-neutral-50 bg-neutral-50">
+            <td class="px-4 py-3">
+              <span>BATCH-7839</span>
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex items-center">
+                <div class="w-6 h-6 bg-neutral-600 rounded flex items-center justify-center text-white mr-2">
+                  <i class="fa-solid fa-leaf"></i>
+                </div>
+                <span>Environmental Studies</span>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex -space-x-1">
+                <div class="w-6 h-6 rounded-full bg-neutral-700 flex items-center justify-center text-white text-xs">C</div>
+                <div class="w-6 h-6 rounded-full bg-neutral-600 flex items-center justify-center text-white text-xs">G</div>
+                <div class="w-6 h-6 rounded-full bg-neutral-500 flex items-center justify-center text-white text-xs">U</div>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Recovering</span>
+            </td>
+            <td class="px-4 py-3">
+              <div class="w-32 h-2 bg-neutral-100 rounded-full overflow-hidden">
+                <div class="bg-neutral-500 h-full rounded-full" style="width: 42%"></div>
+              </div>
+              <div class="text-xs text-neutral-500 mt-1">42% Complete</div>
+            </td>
+            <td class="px-4 py-3 text-neutral-500 text-sm">
+              July 6, 2025 - 08:15 AM
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex space-x-2">
+                <button class="p-1.5 text-neutral-600 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-rotate"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-shield"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr class="border-t border-neutral-200 hover:bg-neutral-50">
+            <td class="px-4 py-3">
+              <span>BATCH-7836</span>
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex items-center">
+                <div class="w-6 h-6 bg-neutral-600 rounded flex items-center justify-center text-white mr-2">
+                  <i class="fa-solid fa-brain"></i>
+                </div>
+                <span>Cognitive Psychology</span>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex -space-x-1">
+                <div class="w-6 h-6 rounded-full bg-neutral-700 flex items-center justify-center text-white text-xs">C</div>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Running</span>
+            </td>
+            <td class="px-4 py-3">
+              <div class="w-32 h-2 bg-neutral-100 rounded-full overflow-hidden">
+                <div class="bg-neutral-500 h-full rounded-full" style="width: 78%"></div>
+              </div>
+              <div class="text-xs text-neutral-500 mt-1">78% Complete</div>
+            </td>
+            <td class="px-4 py-3 text-neutral-500 text-sm">
+              July 6, 2025 - 07:30 AM
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex space-x-2">
+                <button class="p-1.5 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-pause"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-shield"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="p-4 border-t border-neutral-200 flex justify-between items-center">
+      <div class="text-sm text-neutral-500">Showing 3 of 8 active batches</div>
+      <div class="flex items-center space-x-2">
+        <button class="p-2 border border-neutral-300 rounded text-neutral-500 hover:bg-neutral-50">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="px-3 py-1 border border-neutral-800 bg-neutral-800 text-white rounded">1</button>
+        <button class="px-3 py-1 border border-neutral-300 text-neutral-700 rounded hover:bg-neutral-50">2</button>
+        <button class="px-3 py-1 border border-neutral-300 text-neutral-700 rounded hover:bg-neutral-50">3</button>
+        <button class="p-2 border border-neutral-300 rounded text-neutral-500 hover:bg-neutral-50">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Session Security Monitor -->
+  <div id="session-security" class="bg-white rounded-lg shadow-sm border border-neutral-200 mb-6">
+    <div class="p-4 border-b border-neutral-200 flex justify-between items-center">
+      <div>
+        <h3>Unfiltered Session Activity</h3>
+        <p class="text-neutral-500 text-sm mt-1">Sessions with direct model-to-model communication</p>
+      </div>
+      <button class="px-4 py-2 bg-neutral-600 text-white rounded-md text-sm flex items-center">
+        <i class="fa-solid fa-shield-halved mr-2"></i>
+        Secure All Sessions
+      </button>
+    </div>
+    
+    <div class="p-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="border border-neutral-200 bg-neutral-50 rounded-lg p-4">
+          <div class="flex justify-between items-start mb-3">
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-neutral-600 rounded-full flex items-center justify-center text-white mr-2">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+              <div>
+                <h4>Session ID: SES-2025-07-06-001</h4>
+                <p class="text-sm text-neutral-600">UX Pilot Opus → GPT-4o</p>
+              </div>
+            </div>
+            <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">High Risk</span>
+          </div>
+          
+          <div class="bg-white border border-neutral-200 rounded-md p-3 mb-3">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-sm">Detected Issues:</span>
+              <span class="text-xs text-neutral-500">10:01:42 AM</span>
+            </div>
+            <ul class="text-sm space-y-1 text-neutral-700">
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-exclamation text-neutral-500 mr-2 mt-0.5"></i>
+                <span>Unfiltered data exchange between models</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-exclamation text-neutral-500 mr-2 mt-0.5"></i>
+                <span>Parameter modifications outside allowed ranges</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-exclamation text-neutral-500 mr-2 mt-0.5"></i>
+                <span>Potential server access attempt detected</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="flex justify-between">
+            <button class="px-3 py-1.5 border border-neutral-300 bg-white text-neutral-700 rounded text-sm">
+              View Details
+            </button>
+            <div class="flex space-x-2">
+              <button class="px-3 py-1.5 border border-neutral-500 bg-neutral-500 text-white rounded text-sm">
+                Isolate Session
+              </button>
+              <button class="px-3 py-1.5 border border-neutral-600 bg-neutral-600 text-white rounded text-sm">
+                Terminate
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border border-neutral-200 bg-neutral-50 rounded-lg p-4">
+          <div class="flex justify-between items-start mb-3">
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-neutral-500 rounded-full flex items-center justify-center text-white mr-2">
+                <i class="fa-solid fa-exclamation"></i>
+              </div>
+              <div>
+                <h4>Session ID: SES-2025-07-06-003</h4>
+                <p class="text-sm text-neutral-600">UX Pilot Sonnet → UX Pilot Opus</p>
+              </div>
+            </div>
+            <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Medium Risk</span>
+          </div>
+          
+          <div class="bg-white border border-neutral-200 rounded-md p-3 mb-3">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-sm">Detected Issues:</span>
+              <span class="text-xs text-neutral-500">09:47:18 AM</span>
+            </div>
+            <ul class="text-sm space-y-1 text-neutral-700">
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-exclamation text-neutral-500 mr-2 mt-0.5"></i>
+                <span>Unusual parameter editing patterns</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-exclamation text-neutral-500 mr-2 mt-0.5"></i>
+                <span>Multiple tangent collection requests</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-info text-neutral-500 mr-2 mt-0.5"></i>
+                <span>Session data recovery in progress</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="flex justify-between">
+            <button class="px-3 py-1.5 border border-neutral-300 bg-white text-neutral-700 rounded text-sm">
+              View Details
+            </button>
+            <div class="flex space-x-2">
+              <button class="px-3 py-1.5 border border-neutral-500 bg-neutral-500 text-white rounded text-sm">
+                Isolate Session
+              </button>
+              <button class="px-3 py-1.5 border border-neutral-300 bg-white text-neutral-700 rounded text-sm">
+                Recover Data
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Kanban Recovery Board -->
+  <div id="recovery-board" class="mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <h3>Tangent Recovery Board</h3>
+      <div class="flex items-center space-x-2">
+        <button class="px-3 py-1.5 bg-white border border-neutral-300 rounded text-sm">
+          <i class="fa-solid fa-plus mr-1"></i>
+          Add Column
+        </button>
+        <button class="p-1.5 border border-neutral-300 rounded">
+          <i class="fa-solid fa-ellipsis-vertical text-neutral-500"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="flex space-x-4 overflow-x-auto pb-4">
+      <!-- To Recover Column -->
+      <div class="flex-shrink-0 w-72 bg-white rounded-lg shadow-sm border border-neutral-200">
+        <div class="p-3 border-b border-neutral-200 bg-neutral-50">
+          <div class="flex items-center justify-between">
+            <h4>To Recover</h4>
+            <span class="px-2 py-0.5 bg-neutral-200 text-neutral-700 text-xs rounded-full">3</span>
+          </div>
+        </div>
+        <div class="p-3 space-y-3 h-[400px] overflow-y-auto">
+          <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow cursor-move">
+            <div class="flex justify-between items-start mb-2">
+              <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Physics</span>
+              <span class="text-xs text-neutral-500">10:03 AM</span>
+            </div>
+            <h5 class="mb-2">Quantum Field Analysis</h5>
+            <p class="text-sm text-neutral-600 mb-3">Tangent collection interrupted at 65% completion.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full bg-neutral-700 flex items-center justify-center text-white text-xs">C</div>
+                <span class="text-xs text-neutral-500 ml-1">Opus</span>
+              </div>
+              <button class="p-1 text-neutral-400 hover:text-neutral-600">
+                <i class="fa-solid fa-rotate"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow cursor-move">
+            <div class="flex justify-between items-start mb-2">
+              <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Biology</span>
+              <span class="text-xs text-neutral-500">09:47 AM</span>
+            </div>
+            <h5 class="mb-2">Genetic Sequencing Review</h5>
+            <p class="text-sm text-neutral-600 mb-3">Parameter modification caused process halt.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full bg-neutral-600 flex items-center justify-center text-white text-xs">G</div>
+                <span class="text-xs text-neutral-500 ml-1">GPT-4o</span>
+              </div>
+              <button class="p-1 text-neutral-400 hover:text-neutral-600">
+                <i class="fa-solid fa-rotate"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow cursor-move">
+            <div class="flex justify-between items-start mb-2">
+              <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Psychology</span>
+              <span class="text-xs text-neutral-500">09:15 AM</span>
+            </div>
+            <h5 class="mb-2">Cognitive Behavioral Analysis</h5>
+            <p class="text-sm text-neutral-600 mb-3">Session data unfiltered between models.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full bg-neutral-500 flex items-center justify-center text-white text-xs">S</div>
+                <span class="text-xs text-neutral-500 ml-1">Sonnet</span>
+              </div>
+              <button class="p-1 text-neutral-400 hover:text-neutral-600">
+                <i class="fa-solid fa-rotate"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- In Progress Column -->
+      <div class="flex-shrink-0 w-72 bg-white rounded-lg shadow-sm border border-neutral-200">
+        <div class="p-3 border-b border-neutral-200 bg-neutral-50">
+          <div class="flex items-center justify-between">
+            <h4>In Progress</h4>
+            <span class="px-2 py-0.5 bg-neutral-200 text-neutral-700 text-xs rounded-full">2</span>
+          </div>
+        </div>
+        <div class="p-3 space-y-3 h-[400px] overflow-y-auto">
+          <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow cursor-move">
+            <div class="flex justify-between items-start mb-2">
+              <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">In Recovery</span>
+              <span class="text-xs text-neutral-500">09:30 AM</span>
+            </div>
+            <h5 class="mb-2">Climate Change Analysis</h5>
+            <p class="text-sm text-neutral-600 mb-3">Recovering 42% of tangent data collection.</p>
+            <div class="flex items-center justify-between">
+              <div class="w-full bg-neutral-100 h-1.5 rounded-full mr-2">
+                <div class="bg-neutral-500 h-full rounded-full" style="width: 60%"></div>
+              </div>
+              <span class="text-xs whitespace-nowrap">60%</span>
+            </div>
+            <div class="flex justify-between items-center mt-2">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full bg-neutral-700 flex items-center justify-center text-white text-xs">C</div>
+                <span class="text-xs text-neutral-500 ml-1">Opus</span>
+              </div>
+              <button class="p-1 text-neutral-500 hover:text-neutral-600">
+                <i class="fa-solid fa-pause"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow cursor-move">
+            <div class="flex justify-between items-start mb-2">
+              <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">In Recovery</span>
+              <span class="text-xs text-neutral-500">08:55 AM</span>
+            </div>
+            <h5 class="mb-2">Econometric Modeling</h5>
+            <p class="text-sm text-neutral-600 mb-3">Parameter recovery and session data reconstruction.</p>
+            <div class="flex items-center justify-between">
+              <div class="w-full bg-neutral-100 h-1.5 rounded-full mr-2">
+                <div class="bg-neutral-500 h-full rounded-full" style="width: 75%"></div>
+              </div>
+              <span class="text-xs whitespace-nowrap">75%</span>
+            </div>
+            <div class="flex justify-between items-center mt-2">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full bg-neutral-600 flex items-center justify-center text-white text-xs">G</div>
+                <span class="text-xs text-neutral-500 ml-1">GPT-4o</span>
+              </div>
+              <button class="p-1 text-neutral-500 hover:text-neutral-600">
+                <i class="fa-solid fa-pause"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Recovered Column -->
+      <div class="flex-shrink-0 w-72 bg-white rounded-lg shadow-sm border border-neutral-200">
+        <div class="p-3 border-b border-neutral-200 bg-neutral-50">
+          <div class="flex items-center justify-between">
+            <h4>Recovered</h4>
+            <span class="px-2 py-0.5 bg-neutral-200 text-neutral-700 text-xs rounded-full">3</span>
+          </div>
+        </div>
+        <div class="p-3 space-y-3 h-[400px] overflow-y-auto">
+          <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow cursor-move">
+            <div class="flex justify-between items-start mb-2">
+              <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Recovered</span>
+              <span class="text-xs text-neutral-500">08:40 AM</span>
+            </div>
+            <h5 class="mb-2">Neural Network Analysis</h5>
+            <p class="text-sm text-neutral-600 mb-3">Successfully recovered all tangent data.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full bg-neutral-700 flex items-center justify-center text-white text-xs">C</div>
+                <span class="text-xs text-neutral-500 ml-1">Opus</span>
+              </div>
+              <button class="p-1 text-neutral-500 hover:text-neutral-600">
+                <i class="fa-solid fa-check"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow cursor-move">
+            <div class="flex justify-between items-start mb-2">
+              <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Recovered</span>
+              <span class="text-xs text-neutral-500">08:15 AM</span>
+            </div>
+            <h5 class="mb-2">Sociological Survey Data</h5>
+            <p class="text-sm text-neutral-600 mb-3">Parameter restoration complete.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full bg-neutral-500 flex items-center justify-center text-white text-xs">S</div>
+                <span class="text-xs text-neutral-500 ml-1">Sonnet</span>
+              </div>
+              <button class="p-1 text-neutral-500 hover:text-neutral-600">
+                <i class="fa-solid fa-check"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-white border border-neutral-200 rounded-md p-3 shadow-sm hover:shadow-md transition-shadow cursor-move">
+            <div class="flex justify-between items-start mb-2">
+              <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Recovered</span>
+              <span class="text-xs text-neutral-500">07:50 AM</span>
+            </div>
+            <h5 class="mb-2">Pharmaceutical Research</h5>
+            <p class="text-sm text-neutral-600 mb-3">Session data secured and verified.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full bg-neutral-600 flex items-center justify-center text-white text-xs">G</div>
+                <span class="text-xs text-neutral-500 ml-1">GPT-4o</span>
+              </div>
+              <button class="p-1 text-neutral-500 hover:text-neutral-600">
+                <i class="fa-solid fa-check"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="footer" class="bg-white border-t border-neutral-200 mt-8 py-6">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="text-center md:text-left mb-4 md:mb-0">
+        <p class="text-sm text-neutral-600">AI Research Assistant v1.0.2 | Joomla 5.3 Component</p>
+        <p class="text-xs text-neutral-500">© 2025 All Rights Reserved</p>
+      </div>
+      <div class="flex space-x-4">
+        <button class="text-sm text-neutral-600 hover:text-neutral-800">Documentation</button>
+        <button class="text-sm text-neutral-600 hover:text-neutral-800">Support</button>
+        <button class="text-sm text-neutral-600 hover:text-neutral-800">Privacy Policy</button>
+      </div>
+    </div>
+  </div>
+</footer>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

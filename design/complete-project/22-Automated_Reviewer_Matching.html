@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header Navigation -->
+    <nav id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 flex items-center justify-between px-4 py-3 z-50">
+        <div class="flex items-center">
+            <span class="flex items-center mr-10 cursor-pointer">
+                <i class="fa-solid fa-flask-vial text-primary-600 text-2xl mr-2"></i>
+                <span class="text-xl font-bold text-gray-800">SciPeerReview</span>
+            </span>
+            <div class="hidden md:flex space-x-6">
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Dashboard</span>
+                <span class="text-gray-600 hover:text-primary-600 font-medium text-primary-600 border-b-2 border-primary-600 cursor-pointer">My Manuscripts</span>
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Reviews</span>
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Journals</span>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span class="hidden md:inline-block text-gray-600 mr-2">
+                <i class="fa-regular fa-bell"></i>
+                <span class="bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center absolute -mt-8 ml-3">2</span>
+            </span>
+            <button class="hidden md:flex items-center text-gray-600 hover:text-gray-800">
+                <i class="fa-regular fa-question-circle mr-1"></i>
+                <span>Help</span>
+            </button>
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-full h-full object-cover" />
+                </div>
+                <span class="hidden md:inline-block text-gray-700 font-medium">Dr. Michael Chen</span>
+                <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="pt-16 flex min-h-screen bg-gray-50">
+        <!-- Sidebar -->
+        <div id="sidebar" class="hidden md:block w-64 bg-white border-r border-gray-200 fixed h-full pt-4">
+            <div class="px-4 py-2">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase">Author Dashboard</h2>
+                </div>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-home w-5 text-gray-500"></i>
+                        <span>Overview</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 bg-primary-50 text-primary-700 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-file-lines w-5"></i>
+                        <span>My Manuscripts</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-plus w-5 text-gray-500"></i>
+                        <span>New Submission</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-clock-rotate-left w-5 text-gray-500"></i>
+                        <span>Submission History</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-comment w-5 text-gray-500"></i>
+                        <span>Messages</span>
+                        <span class="ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="px-4 py-2 mt-6">
+                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-4">Reviewer Tools</h2>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-clipboard-check w-5 text-gray-500"></i>
+                        <span>Review Requests</span>
+                        <span class="ml-auto bg-yellow-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">2</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-star w-5 text-gray-500"></i>
+                        <span>My Reviews</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-medal w-5 text-gray-500"></i>
+                        <span>Review History</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="px-4 py-2 mt-6">
+                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-4">Account</h2>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-user w-5 text-gray-500"></i>
+                        <span>Profile</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-gear w-5 text-gray-500"></i>
+                        <span>Settings</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-right-from-bracket w-5 text-gray-500"></i>
+                        <span>Logout</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 ml-0 md:ml-64 p-6">
+            <!-- Breadcrumb and Actions -->
+            <div id="page-header" class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                <div>
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                        <span class="hover:text-primary-600 cursor-pointer">Dashboard</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="hover:text-primary-600 cursor-pointer">My Manuscripts</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="text-gray-700">Reviewer Suggestions</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900">Suggested Reviewers</h1>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-3">
+                    <button id="btn-back" class="px-3 py-2 border border-gray-300 rounded-md flex items-center text-gray-700 hover:bg-gray-50">
+                        <i class="fa-solid fa-arrow-left mr-2"></i>
+                        <span>Back</span>
+                    </button>
+                    <button id="btn-invite-reviewers" class="px-4 py-2 bg-primary-600 text-white rounded-md flex items-center hover:bg-primary-700">
+                        <i class="fa-solid fa-envelope mr-2"></i>
+                        <span>Invite Selected</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Manuscript Info -->
+            <div id="manuscript-info" class="bg-white rounded-lg shadow p-5 mb-6">
+                <div class="flex flex-col md:flex-row">
+                    <div class="flex-1">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-2">Novel Approaches to CRISPR Gene Editing in Cancer Treatment</h2>
+                        <p class="text-sm text-gray-600 mb-3">ID: MS-2023-0042 • Nature Biotechnology • Submitted: Jul 12, 2023</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">CRISPR</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Gene Editing</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Cancer</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Oncology</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Molecular Biology</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-0 md:ml-6 flex flex-col items-start md:items-end">
+                        <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800 mb-2">Under Review</span>
+                        <p class="text-sm text-gray-600">Current Version: v2.0</p>
+                        <p class="text-sm text-gray-600">Reviewers Needed: 3</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reviewer Suggestion Settings -->
+            <div id="suggestion-settings" class="bg-white rounded-lg shadow p-5 mb-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Reviewer Matching</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-4">Our system has analyzed your manuscript content and keywords to suggest potential reviewers with relevant expertise.</p>
+                        <div class="flex items-center mb-4">
+                            <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                            <span class="text-sm text-gray-700">25 potential reviewers identified</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                            <span class="text-sm text-gray-700">Content analysis complete</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                            <span class="text-sm text-gray-700">Conflict of interest screening applied</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Filter by expertise</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <option>All Areas of Expertise</option>
+                                <option>CRISPR Technology</option>
+                                <option>Cancer Biology</option>
+                                <option>Gene Therapy</option>
+                                <option>Molecular Biology</option>
+                                <option>Oncology</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Filter by location</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <option>Worldwide</option>
+                                <option>North America</option>
+                                <option>Europe</option>
+                                <option>Asia</option>
+                                <option>Australia</option>
+                                <option>Africa</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="exclude-coauthors" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                            <label for="exclude-coauthors" class="ml-2 block text-sm text-gray-700">Exclude previous co-authors</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Suggested Reviewers Table -->
+            <div id="suggested-reviewers" class="bg-white rounded-lg shadow overflow-hidden mb-6">
+                <div class="px-5 py-4 border-b border-gray-200 flex justify-between items-center">
+                    <h2 class="text-lg font-semibold text-gray-900">Suggested Reviewers</h2>
+                    <div class="flex items-center">
+                        <span class="text-sm text-gray-600 mr-3">Sort by:</span>
+                        <select class="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            <option>Relevance Score</option>
+                            <option>Publication Count</option>
+                            <option>Recent Activity</option>
+                            <option>Response Rate</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                    </div>
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reviewer</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Expertise</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Publications</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Match Score</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Response Rate</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Jennifer Zhang" class="h-10 w-10 object-cover">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Dr. Jennifer Zhang</div>
+                                            <div class="text-sm text-gray-500">Stanford University</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">CRISPR</span>
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">Oncology</span>
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">Gene Therapy</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    78
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 95%"></div>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-700">95%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 87%"></div>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-700">87%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-primary-600 hover:text-primary-900 mr-3">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Robert Kim" class="h-10 w-10 object-cover">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Prof. Robert Kim</div>
+                                            <div class="text-sm text-gray-500">MIT</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">Gene Editing</span>
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">Molecular Biology</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    92
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 92%"></div>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-700">92%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 79%"></div>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-700">79%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-primary-600 hover:text-primary-900 mr-3">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Sarah Johnson" class="h-10 w-10 object-cover">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Dr. Sarah Johnson</div>
+                                            <div class="text-sm text-gray-500">University of Cambridge</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">Cancer</span>
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">Oncology</span>
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">CRISPR</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    64
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 89%"></div>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-700">89%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 92%"></div>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-700">92%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-primary-600 hover:text-primary-900 mr-3">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="David Lee" class="h-10 w-10 object-cover">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Prof. David Lee</div>
+                                            <div class="text-sm text-gray-500">Harvard Medical School</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">Gene Editing</span>
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">Cancer</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    103
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 85%"></div>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-700">85%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 65%"></div>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-700">65%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-primary-600 hover:text-primary-900 mr-3">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Emily Chen" class="h-10 w-10 object-cover">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Dr. Emily Chen</div>
+                                            <div class="text-sm text-gray-500">University of Tokyo</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex flex-wrap gap-1">
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">Molecular Biology</span>
+                                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">CRISPR</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    56
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 82%"></div>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-700">82%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 88%"></div>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-700">88%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-primary-600 hover:text-primary-900 mr-3">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex-1 flex justify-between sm:hidden">
+                            <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 cursor-pointer">
+                                Previous
+                            </span>
+                            <span class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 cursor-pointer">
+                                Next
+                            </span>
+                        </div>
+                        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                            <div>
+                                <p class="text-sm text-gray-700">
+                                    Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">25</span> results
+                                </p>
+                            </div>
+                            <div>
+                                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                    <span class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer">
+                                        <i class="fa-solid fa-chevron-left"></i>
+                                    </span>
+                                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-primary-50 text-sm font-medium text-primary-600 hover:bg-primary-100 cursor-pointer">
+                                        1
+                                    </span>
+                                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">
+                                        2
+                                    </span>
+                                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">
+                                        3
+                                    </span>
+                                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">
+                                        4
+                                    </span>
+                                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">
+                                        5
+                                    </span>
+                                    <span class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer">
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Selected Reviewers -->
+            <div id="selected-reviewers" class="bg-white rounded-lg shadow p-5 mb-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Selected Reviewers (0/3)</h2>
+                <div class="bg-gray-50 rounded-lg p-8 flex flex-col items-center justify-center">
+                    <div class="text-gray-400 mb-3">
+                        <i class="fa-solid fa-user-plus text-4xl"></i>
+                    </div>
+                    <p class="text-gray-600 text-center mb-4">No reviewers selected yet. Select reviewers from the list above.</p>
+                    <p class="text-sm text-gray-500 text-center">You need to select at least 3 reviewers before proceeding.</p>
+                </div>
+            </div>
+            
+            <!-- AI-Powered Recommendations -->
+            <div id="ai-recommendations" class="bg-white rounded-lg shadow p-5">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold text-gray-900">AI-Powered Recommendations</h2>
+                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Powered by AI</span>
+                </div>
+                <p class="text-sm text-gray-600 mb-4">Based on your manuscript's content and keywords, our AI system recommends the following actions:</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-start">
+                            <div class="p-2 bg-blue-100 rounded-full mr-3">
+                                <i class="fa-solid fa-lightbulb text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-900 mb-1">Consider additional expertise</h3>
+                                <p class="text-sm text-gray-600">Your manuscript would benefit from a reviewer with expertise in immunotherapy approaches.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-start">
+                            <div class="p-2 bg-green-100 rounded-full mr-3">
+                                <i class="fa-solid fa-chart-line text-green-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-900 mb-1">Diverse perspectives</h3>
+                                <p class="text-sm text-gray-600">Aim for geographical diversity in your reviewer selection for broader impact.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-start">
+                            <div class="p-2 bg-yellow-100 rounded-full mr-3">
+                                <i class="fa-solid fa-flask text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-900 mb-1">Methodology expertise</h3>
+                                <p class="text-sm text-gray-600">Include at least one reviewer with strong background in experimental design.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-start">
+                            <div class="p-2 bg-purple-100 rounded-full mr-3">
+                                <i class="fa-solid fa-clock text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-900 mb-1">Response time optimization</h3>
+                                <p class="text-sm text-gray-600">Dr. Jennifer Zhang has the highest likelihood of prompt review completion.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-white border-t border-gray-200 mt-8 py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-600 text-sm">&copy; 2023 SciPeerReview. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Help Center</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Contact Us</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="w-full bg-white border-b border-neutral-200 shadow-sm">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <i class="fa-brands fa-joomla text-neutral-800 text-2xl mr-3"></i>
+      <h1 class="text-xl text-neutral-800">AcademiAI Manager</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+        <i class="fa-solid fa-bell"></i>
+      </button>
+      <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+        <i class="fa-solid fa-question-circle"></i>
+      </button>
+      <div class="flex items-center">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full mr-2" />
+        <span class="text-sm text-neutral-700">Admin User</span>
+        <i class="fa-solid fa-chevron-down ml-2 text-neutral-500 text-xs"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-container" class="flex h-[800px]">
+  <div id="sidebar" class="w-64 bg-white border-r border-neutral-200 overflow-y-auto">
+    <div class="p-4">
+      <button class="w-full flex items-center justify-center px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+        <i class="fa-solid fa-plus mr-2"></i>
+        <span>New Project</span>
+      </button>
+    </div>
+    <nav class="mt-2">
+      <ul>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-tachometer-alt w-5 text-neutral-500"></i>
+            <span class="ml-2">Dashboard</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-folder w-5 text-neutral-800"></i>
+            <span class="ml-2">Projects</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-file-alt w-5 text-neutral-500"></i>
+            <span class="ml-2">Articles</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-cog w-5 text-neutral-500"></i>
+            <span class="ml-2">Settings</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-chart-bar w-5 text-neutral-500"></i>
+            <span class="ml-2">Analytics</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-users w-5 text-neutral-500"></i>
+            <span class="ml-2">Users</span>
+          </span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="content" class="flex-1 bg-neutral-50 overflow-y-auto">
+    <div class="p-6">
+      <div class="mb-6">
+        <h2 class="text-2xl text-neutral-800">Project: Quantum Computing Research</h2>
+        <p class="text-neutral-600 mt-1">Multi-model AI collaboration for academic paper generation</p>
+      </div>
+
+      <div id="project-tabs" class="mb-6 border-b border-neutral-200">
+        <div class="flex space-x-4">
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Overview
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Articles
+          </button>
+          <button class="px-4 py-2 text-neutral-600 border-b-2 border-neutral-600">
+            AI Collaboration
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Citations
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Timeline
+          </button>
+        </div>
+      </div>
+
+      <div id="ai-collaboration-section">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg text-neutral-800">AI Model Assignment</h3>
+          <button class="flex items-center px-3 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+            <i class="fa-solid fa-plus mr-2"></i>
+            <span>Add Model to Project</span>
+          </button>
+        </div>
+
+        <div id="kanban-board" class="grid grid-cols-3 gap-4 mb-6">
+          <!-- Research Column -->
+          <div id="research-column" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+            <div class="p-3 border-b border-neutral-200 bg-neutral-50">
+              <h4 class="text-neutral-800">Research Phase</h4>
+              <p class="text-xs text-neutral-500">Literature review & data collection</p>
+            </div>
+            <div class="p-3 h-[400px] overflow-y-auto">
+              <!-- Model Card -->
+              <div id="research-model-1" class="mb-3 bg-white rounded-md shadow-sm border border-neutral-200 p-3 hover:shadow-md transition-shadow cursor-move">
+                <div class="flex justify-between items-center mb-2">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-md bg-neutral-100 flex items-center justify-center mr-2">
+                      <i class="fa-solid fa-robot text-neutral-600"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-sm">UX Pilot Opus</h5>
+                      <span class="text-xs text-neutral-500">Primary</span>
+                    </div>
+                  </div>
+                  <div class="flex">
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-ellipsis-v"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="text-xs text-neutral-600 mb-2">
+                  <span>Task:</span> Literature review on quantum computing advancements
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-gear text-neutral-500 mr-1 text-xs"></i>
+                    <span class="text-xs text-neutral-500">Custom parameters</span>
+                  </div>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-full">Active</span>
+                </div>
+              </div>
+
+              <!-- Model Card -->
+              <div id="research-model-2" class="mb-3 bg-white rounded-md shadow-sm border border-neutral-200 p-3 hover:shadow-md transition-shadow cursor-move">
+                <div class="flex justify-between items-center mb-2">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-md bg-neutral-100 flex items-center justify-center mr-2">
+                      <i class="fa-solid fa-robot text-neutral-600"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-sm">GPT-4o</h5>
+                      <span class="text-xs text-neutral-500">Support</span>
+                    </div>
+                  </div>
+                  <div class="flex">
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-ellipsis-v"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="text-xs text-neutral-600 mb-2">
+                  <span>Task:</span> Gather citation data and research papers
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-sync text-neutral-500 mr-1 text-xs"></i>
+                    <span class="text-xs text-neutral-500">Default parameters</span>
+                  </div>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-full">Active</span>
+                </div>
+              </div>
+
+              <div id="add-model-placeholder" class="border border-dashed border-neutral-300 rounded-md p-3 flex items-center justify-center">
+                <button class="text-xs text-neutral-500 flex items-center">
+                  <i class="fa-solid fa-plus mr-1"></i>
+                  <span>Add model to this phase</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drafting Column -->
+          <div id="drafting-column" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+            <div class="p-3 border-b border-neutral-200 bg-neutral-50">
+              <h4 class="text-neutral-800">Drafting Phase</h4>
+              <p class="text-xs text-neutral-500">Content generation & structure</p>
+            </div>
+            <div class="p-3 h-[400px] overflow-y-auto">
+              <!-- Model Card -->
+              <div id="drafting-model-1" class="mb-3 bg-white rounded-md shadow-sm border border-neutral-200 p-3 hover:shadow-md transition-shadow cursor-move">
+                <div class="flex justify-between items-center mb-2">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-md bg-neutral-100 flex items-center justify-center mr-2">
+                      <i class="fa-solid fa-robot text-neutral-600"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-sm">UX Pilot Sonnet</h5>
+                      <span class="text-xs text-neutral-500">Primary</span>
+                    </div>
+                  </div>
+                  <div class="flex">
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-ellipsis-v"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="text-xs text-neutral-600 mb-2">
+                  <span>Task:</span> Draft main paper sections and methodology
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-gear text-neutral-500 mr-1 text-xs"></i>
+                    <span class="text-xs text-neutral-500">Custom parameters</span>
+                  </div>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-full">Active</span>
+                </div>
+              </div>
+
+              <div id="add-model-placeholder" class="border border-dashed border-neutral-300 rounded-md p-3 flex items-center justify-center">
+                <button class="text-xs text-neutral-500 flex items-center">
+                  <i class="fa-solid fa-plus mr-1"></i>
+                  <span>Add model to this phase</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review Column -->
+          <div id="review-column" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+            <div class="p-3 border-b border-neutral-200 bg-neutral-50">
+              <h4 class="text-neutral-800">Review Phase</h4>
+              <p class="text-xs text-neutral-500">Editing, fact-checking & polishing</p>
+            </div>
+            <div class="p-3 h-[400px] overflow-y-auto">
+              <!-- Model Card -->
+              <div id="review-model-1" class="mb-3 bg-white rounded-md shadow-sm border border-neutral-200 p-3 hover:shadow-md transition-shadow cursor-move">
+                <div class="flex justify-between items-center mb-2">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-md bg-neutral-100 flex items-center justify-center mr-2">
+                      <i class="fa-solid fa-robot text-neutral-600"></i>
+                    </div>
+                    <div>
+                      <h5 class="text-sm">UX Pilot Opus</h5>
+                      <span class="text-xs text-neutral-500">Reviewer</span>
+                    </div>
+                  </div>
+                  <div class="flex">
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-ellipsis-v"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="text-xs text-neutral-600 mb-2">
+                  <span>Task:</span> Fact-check and verify scientific accuracy
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-gear text-neutral-500 mr-1 text-xs"></i>
+                    <span class="text-xs text-neutral-500">Custom parameters</span>
+                  </div>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-full">Queued</span>
+                </div>
+              </div>
+
+              <div id="add-model-placeholder" class="border border-dashed border-neutral-300 rounded-md p-3 flex items-center justify-center">
+                <button class="text-xs text-neutral-500 flex items-center">
+                  <i class="fa-solid fa-plus mr-1"></i>
+                  <span>Add model to this phase</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="model-interaction-section" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden mb-6">
+          <div class="p-4 border-b border-neutral-200 bg-neutral-50 flex justify-between items-center">
+            <div>
+              <h3 class="text-neutral-800">Model Interaction Settings</h3>
+              <p class="text-sm text-neutral-600">Configure how AI models collaborate on this project</p>
+            </div>
+            <button class="px-3 py-1 text-sm bg-neutral-600 text-white rounded hover:bg-neutral-700">
+              Save Settings
+            </button>
+          </div>
+          <div class="p-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">Interaction Mode</label>
+                <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>Sequential (Chain of thought)</option>
+                  <option>Parallel (Independent tasks)</option>
+                  <option>Hybrid (Mixed approach)</option>
+                </select>
+                <p class="text-xs text-neutral-500 mt-1">How models will pass information between each other</p>
+              </div>
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">Context Sharing</label>
+                <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>Full Context Sharing</option>
+                  <option>Partial (Summaries Only)</option>
+                  <option>Minimal (Results Only)</option>
+                </select>
+                <p class="text-xs text-neutral-500 mt-1">How much context is shared between models</p>
+              </div>
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">Conflict Resolution</label>
+                <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>Primary Model Decides</option>
+                  <option>Weighted Voting</option>
+                  <option>Human Review Required</option>
+                </select>
+                <p class="text-xs text-neutral-500 mt-1">How to handle conflicting outputs between models</p>
+              </div>
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">Swap Threshold</label>
+                <div class="flex items-center">
+                  <input type="range" min="0" max="100" value="70" class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer" />
+                  <span class="ml-2 text-sm text-neutral-600">70%</span>
+                </div>
+                <p class="text-xs text-neutral-500 mt-1">Confidence threshold for automatic model swapping</p>
+              </div>
+            </div>
+            <div class="mt-4">
+              <label class="block text-sm text-neutral-700 mb-1">Mid-stream Swap Rules</label>
+              <div class="border border-neutral-200 rounded-md p-3">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-sm">Enable automatic model swapping</span>
+                  <div class="relative inline-block w-10 h-5">
+                    <input type="checkbox" id="toggle-swap" class="sr-only" checked />
+                    <div class="block bg-neutral-300 w-10 h-5 rounded-full"></div>
+                    <div class="dot absolute left-1 top-1 bg-white w-3 h-3 rounded-full transition transform translate-x-5"></div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="block text-xs text-neutral-700 mb-1">When to swap models:</label>
+                  <div class="flex items-center mb-1">
+                    <input type="checkbox" id="swap-confidence" class="mr-2" checked />
+                    <label for="swap-confidence" class="text-xs">Low confidence detection</label>
+                  </div>
+                  <div class="flex items-center mb-1">
+                    <input type="checkbox" id="swap-domain" class="mr-2" checked />
+                    <label for="swap-domain" class="text-xs">Domain-specific content detected</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input type="checkbox" id="swap-manual" class="mr-2" checked />
+                    <label for="swap-manual" class="text-xs">Manual trigger points</label>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs text-neutral-700 mb-1">Swap notification:</label>
+                  <select class="w-full border border-neutral-300 rounded-md px-2 py-1 text-xs">
+                    <option>Notify and wait for approval</option>
+                    <option>Notify after swap</option>
+                    <option>No notification</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="model-swap-demonstration" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+          <div class="p-4 border-b border-neutral-200 bg-neutral-50">
+            <h3 class="text-neutral-800">Model Swap Demonstration</h3>
+            <p class="text-sm text-neutral-600">Preview how models can be swapped mid-stream</p>
+          </div>
+          <div class="p-4 border-b border-neutral-200">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded-md bg-neutral-100 flex items-center justify-center mr-2">
+                  <i class="fa-solid fa-robot text-neutral-600"></i>
+                </div>
+                <div>
+                  <h5 class="text-sm">UX Pilot Opus</h5>
+                  <span class="text-xs text-neutral-500">Starting model</span>
+                </div>
+              </div>
+              <div class="flex space-x-2">
+                <button class="px-3 py-1 text-xs bg-neutral-100 text-neutral-700 rounded hover:bg-neutral-200">
+                  Reset Demo
+                </button>
+                <button class="px-3 py-1 text-xs bg-neutral-600 text-white rounded hover:bg-neutral-700">
+                  Run Demo
+                </button>
+              </div>
+            </div>
+            <div class="bg-neutral-50 p-3 rounded-md border border-neutral-200 mb-3">
+              <p class="text-sm text-neutral-700">
+                The quantum computing field has seen significant advancements in the past decade. Key developments include improvements in qubit stability, error correction techniques, and the emergence of various quantum computing architectures. Recent research has focused on...
+              </p>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-neutral-100 rounded-md border border-neutral-200 mb-3">
+              <div class="flex items-center">
+                <i class="fa-solid fa-exchange-alt text-neutral-600 mr-2"></i>
+                <span class="text-sm">Model swap point detected: Technical domain knowledge required</span>
+              </div>
+              <div class="flex space-x-2">
+                <button class="px-2 py-1 text-xs bg-white border border-neutral-300 rounded">Ignore</button>
+                <button class="px-2 py-1 text-xs bg-neutral-600 text-white rounded">Approve Swap</button>
+              </div>
+            </div>
+            <div class="flex items-center mb-3">
+              <div class="w-8 h-8 rounded-md bg-neutral-100 flex items-center justify-center mr-2">
+                <i class="fa-solid fa-robot text-neutral-600"></i>
+              </div>
+              <div>
+                <h5 class="text-sm">GPT-4o</h5>
+                <span class="text-xs text-neutral-500">Swapped model</span>
+              </div>
+            </div>
+            <div class="bg-neutral-50 p-3 rounded-md border border-neutral-200">
+              <p class="text-sm text-neutral-700">
+                ...specifically on topological qubits which offer inherent protection against decoherence. The IBM Quantum System Two architecture represents a significant milestone with its modular design allowing for scalable quantum processors. Recent experimental results from Google's Sycamore processor demonstrated quantum advantage in specific computational tasks, though practical quantum supremacy remains debated among researchers...
+              </p>
+            </div>
+          </div>
+          <div class="p-4">
+            <h4 class="text-sm mb-2">Swap History</h4>
+            <div class="text-xs text-neutral-600">
+              <div class="flex items-center justify-between mb-2 pb-2 border-b border-neutral-100">
+                <div>UX Pilot Opus → GPT-4o</div>
+                <div>Technical domain knowledge, 7/5/2025, 14:23</div>
+              </div>
+              <div class="flex items-center justify-between mb-2 pb-2 border-b border-neutral-100">
+                <div>GPT-4o → UX Pilot Sonnet</div>
+                <div>Writing quality optimization, 7/5/2025, 14:26</div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>UX Pilot Sonnet → UX Pilot Opus</div>
+                <div>Citation verification, 7/5/2025, 14:30</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="w-full bg-white border-t border-neutral-200 py-4">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center">
+      <div class="text-sm text-neutral-600">
+        AcademiAI Manager v1.0.3 | Joomla 5.3 Component
+      </div>
+      <div class="text-sm text-neutral-600">
+        Last updated: July 6, 2025 at 10:06 AM
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

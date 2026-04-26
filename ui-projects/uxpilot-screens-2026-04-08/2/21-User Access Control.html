@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="bg-white shadow-sm border-b">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <i class="fa-solid fa-brain text-neutral-800 text-2xl mr-3"></i>
+      <h1 class="text-xl text-neutral-800">AI Research Assistant</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-bell mr-2"></i>
+        <span class="relative">
+          Notifications
+          <span class="absolute -top-1 -right-2 bg-neutral-800 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+        </span>
+      </button>
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-question-circle mr-2"></i>
+        Help
+      </button>
+      <div class="relative">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full cursor-pointer"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="flex h-[800px] bg-neutral-50">
+  <div id="sidebar" class="w-64 bg-white border-r">
+    <div class="p-4">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-sm text-neutral-500">WORKSPACE</h2>
+        <button class="text-neutral-400 hover:text-neutral-600">
+          <i class="fa-solid fa-cog"></i>
+        </button>
+      </div>
+      
+      <nav class="space-y-1">
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tachometer-alt mr-3 text-neutral-400"></i>
+          Dashboard
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-folder mr-3 text-neutral-400"></i>
+          Projects
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-file-alt mr-3 text-neutral-400"></i>
+          Articles
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tasks mr-3 text-neutral-400"></i>
+          Tasks
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm bg-neutral-100 text-neutral-900 rounded-md cursor-pointer">
+          <i class="fa-solid fa-cogs mr-3 text-neutral-700"></i>
+          Settings
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-users mr-3 text-neutral-400"></i>
+          User Management
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-chart-bar mr-3 text-neutral-400"></i>
+          Analytics
+        </span>
+      </nav>
+    </div>
+  </div>
+
+  <div id="content" class="flex-1 overflow-auto p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl text-neutral-800">Access Control</h1>
+      <button class="px-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 flex items-center">
+        <i class="fa-solid fa-save mr-2"></i>
+        Save Changes
+      </button>
+    </div>
+
+    <div class="grid grid-cols-12 gap-6">
+      <div class="col-span-12 lg:col-span-3">
+        <div class="bg-white rounded-lg shadow-sm p-4 sticky top-4">
+          <h3 class="text-sm text-neutral-500 mb-4">SETTINGS NAVIGATION</h3>
+          <div class="space-y-1">
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-robot mr-2"></i>
+              AI Models
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-project-diagram mr-2"></i>
+              Project Settings
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-file-alt mr-2"></i>
+              Article Templates
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-shield-alt mr-2"></i>
+              Security
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-database mr-2"></i>
+              Data Storage
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-key mr-2"></i>
+              API Keys
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-bell mr-2"></i>
+              Notifications
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm bg-neutral-800 text-white rounded-md">
+              <i class="fa-solid fa-user-lock mr-2"></i>
+              Access Control
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 lg:col-span-9 space-y-6">
+        <div id="role-management" class="bg-white rounded-lg shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl text-neutral-800">Role Management</h2>
+            <button class="px-3 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 flex items-center text-sm">
+              <i class="fa-solid fa-plus mr-2"></i>
+              Create New Role
+            </button>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-user-shield"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-neutral-800">Administrator</h3>
+                    <p class="text-sm text-neutral-500">Full system access</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">System</span>
+                  <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <h4 class="text-xs text-neutral-500 mb-2">PERMISSIONS</h4>
+                <div class="flex flex-wrap gap-2 mt-1">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">All Permissions</span>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <h4 class="text-xs text-neutral-500 mb-2">ASSIGNED USERS</h4>
+                <div class="flex items-center">
+                  <div class="flex -space-x-2 mr-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-7 h-7 rounded-full border-2 border-white"/>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-7 h-7 rounded-full border-2 border-white"/>
+                  </div>
+                  <span class="text-xs text-neutral-500">2 users</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-user-tie"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-neutral-800">Project Manager</h3>
+                    <p class="text-sm text-neutral-500">Manage projects and assignments</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">Custom</span>
+                  <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-trash-alt"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <h4 class="text-xs text-neutral-500 mb-2">PERMISSIONS</h4>
+                <div class="flex flex-wrap gap-2 mt-1">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Create Projects</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Edit Projects</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Delete Projects</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Assign Users</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">View Analytics</span>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <h4 class="text-xs text-neutral-500 mb-2">ASSIGNED USERS</h4>
+                <div class="flex items-center">
+                  <div class="flex -space-x-2 mr-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-7 h-7 rounded-full border-2 border-white"/>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=567" alt="User avatar" class="w-7 h-7 rounded-full border-2 border-white"/>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=678" alt="User avatar" class="w-7 h-7 rounded-full border-2 border-white"/>
+                  </div>
+                  <span class="text-xs text-neutral-500">3 users</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-user-graduate"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-neutral-800">Researcher</h3>
+                    <p class="text-sm text-neutral-500">Create and edit articles</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">Custom</span>
+                  <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-trash-alt"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <h4 class="text-xs text-neutral-500 mb-2">PERMISSIONS</h4>
+                <div class="flex flex-wrap gap-2 mt-1">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Create Articles</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Edit Articles</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">View Projects</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Use AI Models</span>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <h4 class="text-xs text-neutral-500 mb-2">ASSIGNED USERS</h4>
+                <div class="flex items-center">
+                  <div class="flex -space-x-2 mr-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User avatar" class="w-7 h-7 rounded-full border-2 border-white"/>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=234" alt="User avatar" class="w-7 h-7 rounded-full border-2 border-white"/>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=345" alt="User avatar" class="w-7 h-7 rounded-full border-2 border-white"/>
+                    <div class="w-7 h-7 rounded-full bg-neutral-200 border-2 border-white flex items-center justify-center text-neutral-600 text-xs">
+                      <span>+4</span>
+                    </div>
+                  </div>
+                  <span class="text-xs text-neutral-500">7 users</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-neutral-800">Viewer</h3>
+                    <p class="text-sm text-neutral-500">Read-only access</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">System</span>
+                  <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <h4 class="text-xs text-neutral-500 mb-2">PERMISSIONS</h4>
+                <div class="flex flex-wrap gap-2 mt-1">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">View Projects</span>
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">View Articles</span>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <h4 class="text-xs text-neutral-500 mb-2">ASSIGNED USERS</h4>
+                <div class="flex items-center">
+                  <div class="flex -space-x-2 mr-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=901" alt="User avatar" class="w-7 h-7 rounded-full border-2 border-white"/>
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=902" alt="User avatar" class="w-7 h-7 rounded-full border-2 border-white"/>
+                  </div>
+                  <span class="text-xs text-neutral-500">2 users</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="permission-matrix" class="bg-white rounded-lg shadow-sm p-6">
+          <h2 class="text-xl text-neutral-800 mb-6">Permission Matrix</h2>
+          
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-neutral-200">
+              <thead>
+                <tr>
+                  <th class="px-4 py-3 bg-neutral-50 text-left text-xs text-neutral-500 uppercase tracking-wider">Permission</th>
+                  <th class="px-4 py-3 bg-neutral-50 text-center text-xs text-neutral-500 uppercase tracking-wider">Administrator</th>
+                  <th class="px-4 py-3 bg-neutral-50 text-center text-xs text-neutral-500 uppercase tracking-wider">Project Manager</th>
+                  <th class="px-4 py-3 bg-neutral-50 text-center text-xs text-neutral-500 uppercase tracking-wider">Researcher</th>
+                  <th class="px-4 py-3 bg-neutral-50 text-center text-xs text-neutral-500 uppercase tracking-wider">Viewer</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-neutral-200">
+                <tr>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">View Projects</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">Create Projects</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">Edit Projects</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">Delete Projects</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">View Articles</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">Create Articles</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">Edit Articles</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">Delete Articles</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">Use AI Models</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">Configure AI Models</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">Manage Users</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">View Analytics</td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                  <td class="px-4 py-3 whitespace-nowrap text-center"><i class="fa-solid fa-times text-neutral-400"></i></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="resource-access" class="bg-white rounded-lg shadow-sm p-6">
+          <h2 class="text-xl text-neutral-800 mb-6">Resource Access Control</h2>
+          
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm text-neutral-700 mb-2">Default Project Visibility</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>Private (Creator & Assigned Users Only)</option>
+                <option>Internal (All Authenticated Users)</option>
+                <option>Public (Anyone with Link)</option>
+              </select>
+              <p class="mt-1 text-xs text-neutral-500">Controls who can access newly created projects by default.</p>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-2">Article Access Control</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>Inherit from Project</option>
+                <option>Creator & Project Manager Only</option>
+                <option>All Project Members</option>
+              </select>
+              <p class="mt-1 text-xs text-neutral-500">Determines who can access articles within projects.</p>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-2">AI Model Usage Restrictions</label>
+              <div class="space-y-2">
+                <div class="flex items-start">
+                  <div class="flex items-center h-5">
+                    <input id="restrict-opus" type="checkbox" checked class="h-4 w-4 rounded border-neutral-300">
+                  </div>
+                  <div class="ml-3">
+                    <label for="restrict-opus" class="text-sm text-neutral-700">Restrict UX Pilot Opus to Administrators and Project Managers</label>
+                    <p class="text-xs text-neutral-500">Limits usage of the most powerful and expensive model.</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="flex items-center h-5">
+                    <input id="restrict-usage" type="checkbox" checked class="h-4 w-4 rounded border-neutral-300">
+                  </div>
+                  <div class="ml-3">
+                    <label for="restrict-usage" class="text-sm text-neutral-700">Enforce Token Usage Quotas by Role</label>
+                    <p class="text-xs text-neutral-500">Set maximum token usage per role to control costs.</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="flex items-center h-5">
+                    <input id="restrict-export" type="checkbox" class="h-4 w-4 rounded border-neutral-300">
+                  </div>
+                  <div class="ml-3">
+                    <label for="restrict-export" class="text-sm text-neutral-700">Restrict Export of Generated Content</label>
+                    <p class="text-xs text-neutral-500">Only Project Managers and Administrators can export content.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-2">Token Usage Quotas</label>
+              <div class="space-y-3 mt-2">
+                <div class="flex items-center justify-between border-b pb-2">
+                  <span class="text-sm">Administrator</span>
+                  <span class="text-sm">Unlimited</span>
+                </div>
+                <div class="flex items-center justify-between border-b pb-2">
+                  <span class="text-sm">Project Manager</span>
+                  <div class="flex items-center">
+                    <input type="text" value="500,000" class="w-24 border border-neutral-300 rounded-md px-2 py-1 text-sm mr-2">
+                    <span class="text-sm text-neutral-600">tokens/month</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between border-b pb-2">
+                  <span class="text-sm">Researcher</span>
+                  <div class="flex items-center">
+                    <input type="text" value="250,000" class="w-24 border border-neutral-300 rounded-md px-2 py-1 text-sm mr-2">
+                    <span class="text-sm text-neutral-600">tokens/month</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">Viewer</span>
+                  <div class="flex items-center">
+                    <input type="text" value="0" class="w-24 border border-neutral-300 rounded-md px-2 py-1 text-sm mr-2">
+                    <span class="text-sm text-neutral-600">tokens/month</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-white border-t mt-auto">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="text-sm text-neutral-500">
+        © 2025 AI Research Assistant | Joomla 5.3 Component
+      </div>
+      <div class="flex space-x-4 mt-2 md:mt-0">
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Privacy Policy</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Terms of Service</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Contact Support</span>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

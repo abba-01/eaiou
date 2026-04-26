@@ -1,0 +1,970 @@
+
+              <html class="">
+                
+  <head>
+    
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest', // Options: 'nest', 'remove', 'replace'
+      };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+<style>
+  * {
+    font-family: "{{font}}", sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+    
+<style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+</style>
+
+    
+<style>
+   :root {
+          /* Base colors */
+          --color-base: #ffffff;
+          --color-base-50: #f9fafb;
+          --color-base-100: #f3f4f6;
+          --color-base-200: #e5e7eb;
+          --color-base-300: #d1d5db;
+          --color-base-400: #9ca3af;
+          --color-base-500: #6b7280;
+          --color-base-600: #4b5563;  
+          --color-base-700: #374151;
+          --color-base-800: #1f2937;  
+          --color-base-900: #111827;
+          --color-base-content: #1f2937;
+
+          /* Primary colors */
+          --color-primary: #3b82f6;
+          --color-primary-50: #eff6ff;
+          --color-primary-100: #dbeafe;
+          --color-primary-200: #bfdbfe;
+          --color-primary-300: #93c5fd;
+          --color-primary-400: #60a5fa;
+          --color-primary-500: #3b82f6;
+          --color-primary-600: #2563eb;
+          --color-primary-700: #1d4ed8;
+          --color-primary-800: #1e40af;
+          --color-primary-900: #1e3a8a;
+          --color-primary-focus: #2563eb;
+          --color-primary-content: #ffffff;
+
+          /* Secondary colors */
+          --color-secondary: #8b5cf6;
+          --color-secondary-50: #f5f3ff;
+          --color-secondary-100: #ede9fe;
+          --color-secondary-200: #ddd6fe;
+          --color-secondary-300: #c4b5fd;
+          --color-secondary-400: #a78bfa;
+          --color-secondary-500: #8b5cf6;
+          --color-secondary-600: #7c3aed;
+          --color-secondary-700: #6d28d9;
+          --color-secondary-800: #5b21b6;
+          --color-secondary-900: #4c1d95;
+          --color-secondary-focus: #7c3aed;
+          --color-secondary-content: #ffffff;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #fdf2f8;
+          --color-accent-100: #fce7f3;
+          --color-accent-200: #fbcfe8;
+          --color-accent-300: #f9a8d4;
+          --color-accent-400: #f472b6;
+          --color-accent-500: #ec4899;
+          --color-accent-600: #db2777;
+          --color-accent-700: #be185d;
+          --color-accent-800: #9d174d;
+          --color-accent-900: #831843;
+          --color-accent-focus: #db2777;
+          --color-accent-content: #ffffff;
+
+          /* Neutral colors */
+          --color-neutral: #6b7280;
+          --color-neutral-50: #f9fafb;
+          --color-neutral-100: #f3f4f6;
+          --color-neutral-200: #e5e7eb;
+          --color-neutral-300: #d1d5db;
+          --color-neutral-400: #9ca3af;
+          --color-neutral-500: #6b7280;
+          --color-neutral-600: #4b5563;
+          --color-neutral-700: #374151;
+          --color-neutral-800: #1f2937;
+          --color-neutral-900: #111827;
+          --color-neutral-focus: #4b5563;
+          --color-neutral-content: #ffffff;
+
+          /* Info colors */
+          --color-info: #3b82f6;
+          --color-info-50: #eff6ff;
+          --color-info-100: #dbeafe;
+          --color-info-200: #bfdbfe;
+          --color-info-300: #93c5fd;
+          --color-info-400: #60a5fa;
+          --color-info-500: #3b82f6;
+          --color-info-600: #2563eb;
+          --color-info-700: #1d4ed8;
+          --color-info-800: #1e40af;
+          --color-info-900: #1e3a8a;
+          --color-info-focus: #2563eb;
+          --color-info-content: #ffffff;
+
+          /* Success colors */
+          --color-success: #10b981;
+          --color-success-50: #ecfdf5;
+          --color-success-100: #d1fae5;
+          --color-success-200: #a7f3d0;
+          --color-success-300: #6ee7b7;
+          --color-success-400: #34d399;
+          --color-success-500: #10b981;
+          --color-success-600: #059669;
+          --color-success-700: #047857;
+          --color-success-800: #065f46;
+          --color-success-900: #064e3b;
+          --color-success-focus: #059669;
+          --color-success-content: #ffffff;
+
+          /* Warning colors */
+          --color-warning: #f59e0b;
+          --color-warning-50: #fffbeb;
+          --color-warning-100: #fef3c7;
+          --color-warning-200: #fde68a;
+          --color-warning-300: #fcd34d;
+          --color-warning-400: #fbbf24;
+          --color-warning-500: #f59e0b;
+          --color-warning-600: #d97706;
+          --color-warning-700: #b45309;
+          --color-warning-800: #92400e;
+          --color-warning-900: #78350f;
+          --color-warning-focus: #d97706;
+          --color-warning-content: #ffffff;
+
+          /* Error colors */
+          --color-error: #ef4444;
+          --color-error-50: #fef2f2;
+          --color-error-100: #fee2e2;
+          --color-error-200: #fecaca;
+          --color-error-300: #fca5a5;
+          --color-error-400: #f87171;
+          --color-error-500: #ef4444;
+          --color-error-600: #dc2626;
+          --color-error-700: #b91c1c;
+          --color-error-800: #991b1b;
+          --color-error-900: #7f1d1d;
+          --color-error-focus: #dc2626;
+          --color-error-content: #ffffff;
+        }
+</style>
+
+    
+<style>
+/* Dark theme */
+        .dark {
+          /* Base colors */
+          --color-base: #1f2937;
+          --color-base-50: #111827;
+          --color-base-100: #1f2937;
+          --color-base-200: #374151;
+          --color-base-300: #4b5563;
+          --color-base-400: #6b7280;
+          --color-base-500: #9ca3af;
+          --color-base-600: #d1d5db;
+          --color-base-700: #e5e7eb;
+          --color-base-800: #f3f4f6;
+          --color-base-900: #f9fafb;
+          --color-base-content: #f9fafb;
+
+          /* Primary colors */
+          --color-primary: #60a5fa;
+          --color-primary-50: #1e3a8a;
+          --color-primary-100: #1e40af;
+          --color-primary-200: #1d4ed8;
+          --color-primary-300: #2563eb;
+          --color-primary-400: #3b82f6;
+          --color-primary-500: #60a5fa;
+          --color-primary-600: #93c5fd;
+          --color-primary-700: #bfdbfe;
+          --color-primary-800: #dbeafe;
+          --color-primary-900: #eff6ff;
+          --color-primary-focus: #3b82f6;
+          --color-primary-content: #1f2937;
+
+          /* Secondary colors */
+          --color-secondary: #a78bfa;
+          --color-secondary-50: #4c1d95;
+          --color-secondary-100: #5b21b6;
+          --color-secondary-200: #6d28d9;
+          --color-secondary-300: #7c3aed;
+          --color-secondary-400: #8b5cf6;
+          --color-secondary-500: #a78bfa;
+          --color-secondary-600: #c4b5fd;
+          --color-secondary-700: #ddd6fe;
+          --color-secondary-800: #ede9fe;
+          --color-secondary-900: #f5f3ff;
+          --color-secondary-focus: #8b5cf6;
+          --color-secondary-content: #1f2937;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #831843;
+          --color-accent-100: #9d174d;
+          --color-accent-200: #be185d;
+          --color-accent-300: #db2777;
+          --color-accent-400: #ec4899;
+          --color-accent-500: #f472b6;
+          --color-accent-600: #f9a8d4;
+          --color-accent-700: #fbcfe8;
+          --color-accent-800: #fce7f3;
+          --color-accent-900: #fdf2f8;
+          --color-accent-focus: #ec4899;
+          --color-accent-content: #1f2937;
+
+          /* Neutral colors remain the same as light theme */
+
+          /* Info colors */
+          --color-info: #60a5fa;
+          --color-info-50: #1e3a8a;
+          --color-info-100: #1e40af;
+          --color-info-200: #1d4ed8;
+          --color-info-300: #2563eb;
+          --color-info-400: #3b82f6;
+          --color-info-500: #60a5fa;
+          --color-info-600: #93c5fd;
+          --color-info-700: #bfdbfe;
+          --color-info-800: #dbeafe;
+          --color-info-900: #eff6ff;
+          --color-info-focus: #3b82f6;
+          --color-info-content: #1f2937;
+
+          /* Success colors */
+          --color-success: #34d399;
+          --color-success-50: #064e3b;
+          --color-success-100: #065f46;
+          --color-success-200: #047857;
+          --color-success-300: #059669;
+          --color-success-400: #10b981;
+          --color-success-500: #34d399;
+          --color-success-600: #6ee7b7;
+          --color-success-700: #a7f3d0;
+          --color-success-800: #d1fae5;
+          --color-success-900: #ecfdf5;
+          --color-success-focus: #10b981;
+          --color-success-content: #1f2937;
+
+          /* Warning colors */
+          --color-warning: #fbbf24;
+          --color-warning-50: #78350f;
+          --color-warning-100: #92400e;
+          --color-warning-200: #b45309;
+          --color-warning-300: #d97706;
+          --color-warning-400: #f59e0b;
+          --color-warning-500: #fbbf24;
+          --color-warning-600: #fcd34d;
+          --color-warning-700: #fde68a;
+          --color-warning-800: #fef3c7;
+          --color-warning-900: #fffbeb;
+          --color-warning-focus: #f59e0b;
+          --color-warning-content: #1f2937;
+
+          /* Error colors */
+          --color-error: #f87171;
+          --color-error-50: #7f1d1d;
+          --color-error-100: #991b1b;
+          --color-error-200: #b91c1c;
+          --color-error-300: #dc2626;
+          --color-error-400: #ef4444;
+          --color-error-500: #f87171;
+          --color-error-600: #fca5a5;
+          --color-error-700: #fecaca;
+          --color-error-800: #fee2e2;
+          --color-error-900: #fef2f2;
+          --color-error-focus: #ef4444;
+          --color-error-content: #1f2937;
+        }
+</style>
+
+    
+  <script>
+        tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                ...{"transparent":"transparent","current":"currentColor","black":"#000000","white":"#ffffff","gray":{"50":"#f9fafb","100":"#f3f4f6","200":"#e5e7eb","300":"#d1d5db","400":"#9ca3af","500":"#6b7280","600":"#4b5563","700":"#374151","800":"#1f2937","900":"#111827"},"red":{"50":"#fef2f2","100":"#fee2e2","200":"#fecaca","300":"#fca5a5","400":"#f87171","500":"#ef4444","600":"#dc2626","700":"#b91c1c","800":"#991b1b","900":"#7f1d1d"},"yellow":{"50":"#fffbeb","100":"#fef3c7","200":"#fde68a","300":"#fcd34d","400":"#fbbf24","500":"#f59e0b","600":"#d97706","700":"#b45309","800":"#92400e","900":"#78350f"},"green":{"50":"#ecfdf5","100":"#d1fae5","200":"#a7f3d0","300":"#6ee7b7","400":"#34d399","500":"#10b981","600":"#059669","700":"#047857","800":"#065f46","900":"#064e3b"},"blue":{"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a"},"indigo":{"50":"#eef2ff","100":"#e0e7ff","200":"#c7d2fe","300":"#a5b4fc","400":"#818cf8","500":"#6366f1","600":"#4f46e5","700":"#4338ca","800":"#3730a3","900":"#312e81"},"purple":{"50":"#f5f3ff","100":"#ede9fe","200":"#ddd6fe","300":"#c4b5fd","400":"#a78bfa","500":"#8b5cf6","600":"#7c3aed","700":"#6d28d9","800":"#5b21b6","900":"#4c1d95"},"pink":{"50":"#fdf2f8","100":"#fce7f3","200":"#fbcfe8","300":"#f9a8d4","400":"#f472b6","500":"#ec4899","600":"#db2777","700":"#be185d","800":"#9d174d","900":"#831843"}},
+                ...{"primary":{"50":"var(--color-primary-50)","100":"var(--color-primary-100)","200":"var(--color-primary-200)","300":"var(--color-primary-300)","400":"var(--color-primary-400)","500":"var(--color-primary-500)","600":"var(--color-primary-600)","700":"var(--color-primary-700)","800":"var(--color-primary-800)","900":"var(--color-primary-900)","DEFAULT":"var(--color-primary)","focus":"var(--color-primary-focus)","content":"var(--color-primary-content)"},"secondary":{"50":"var(--color-secondary-50)","100":"var(--color-secondary-100)","200":"var(--color-secondary-200)","300":"var(--color-secondary-300)","400":"var(--color-secondary-400)","500":"var(--color-secondary-500)","600":"var(--color-secondary-600)","700":"var(--color-secondary-700)","800":"var(--color-secondary-800)","900":"var(--color-secondary-900)","DEFAULT":"var(--color-secondary)","focus":"var(--color-secondary-focus)","content":"var(--color-secondary-content)"},"accent":{"50":"var(--color-accent-50)","100":"var(--color-accent-100)","200":"var(--color-accent-200)","300":"var(--color-accent-300)","400":"var(--color-accent-400)","500":"var(--color-accent-500)","600":"var(--color-accent-600)","700":"var(--color-accent-700)","800":"var(--color-accent-800)","900":"var(--color-accent-900)","DEFAULT":"var(--color-accent)","focus":"var(--color-accent-focus)","content":"var(--color-accent-content)"},"neutral":{"50":"var(--color-neutral-50)","100":"var(--color-neutral-100)","200":"var(--color-neutral-200)","300":"var(--color-neutral-300)","400":"var(--color-neutral-400)","500":"var(--color-neutral-500)","600":"var(--color-neutral-600)","700":"var(--color-neutral-700)","800":"var(--color-neutral-800)","900":"var(--color-neutral-900)","DEFAULT":"var(--color-neutral)","focus":"var(--color-neutral-focus)","content":"var(--color-neutral-content)"},"info":{"50":"var(--color-info-50)","100":"var(--color-info-100)","200":"var(--color-info-200)","300":"var(--color-info-300)","400":"var(--color-info-400)","500":"var(--color-info-500)","600":"var(--color-info-600)","700":"var(--color-info-700)","800":"var(--color-info-800)","900":"var(--color-info-900)","DEFAULT":"var(--color-info)","focus":"var(--color-info-focus)","content":"var(--color-info-content)"},"success":{"50":"var(--color-success-50)","100":"var(--color-success-100)","200":"var(--color-success-200)","300":"var(--color-success-300)","400":"var(--color-success-400)","500":"var(--color-success-500)","600":"var(--color-success-600)","700":"var(--color-success-700)","800":"var(--color-success-800)","900":"var(--color-success-900)","DEFAULT":"var(--color-success)","focus":"var(--color-success-focus)","content":"var(--color-success-content)"},"warning":{"50":"var(--color-warning-50)","100":"var(--color-warning-100)","200":"var(--color-warning-200)","300":"var(--color-warning-300)","400":"var(--color-warning-400)","500":"var(--color-warning-500)","600":"var(--color-warning-600)","700":"var(--color-warning-700)","800":"var(--color-warning-800)","900":"var(--color-warning-900)","DEFAULT":"var(--color-warning)","focus":"var(--color-warning-focus)","content":"var(--color-warning-content)"},"error":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"danger":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"failure":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"}},
+                },
+              },
+            },
+            variants: {
+              extend: {
+                backgroundColor: ['active', 'group-hover'],
+                textColor: ['active', 'group-hover'],
+              },
+            },
+            plugins: [],
+          };
+  </script>
+
+  </head>
+
+                <body class="h-full text-base-content">
+                  <header id="header" class="bg-white border-b border-neutral-200 shadow-sm">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <h1 class="text-xl">AIEOU</h1>
+      <span class="ml-2 text-neutral-500 text-sm">Research Publication Platform</span>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="text-neutral-600 hover:text-neutral-900">
+        <i class="fa-solid fa-bell"></i>
+      </button>
+      <button class="text-neutral-600 hover:text-neutral-900">
+        <i class="fa-solid fa-gear"></i>
+      </button>
+      <div class="flex items-center">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full border border-neutral-200" />
+        <span class="ml-2">Admin</span>
+        <i class="fa-solid fa-chevron-down ml-1 text-neutral-500 text-xs"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="main-container" class="container mx-auto px-4 py-6 flex">
+  <!-- Sidebar -->
+  <div id="sidebar" class="w-64 pr-6">
+    <nav class="space-y-1">
+      <span class="flex items-center px-3 py-2 text-neutral-700 rounded-md hover:bg-neutral-100 cursor-pointer">
+        <i class="fa-solid fa-tachometer-alt w-5 text-neutral-500"></i>
+        <span class="ml-2">Dashboard</span>
+      </span>
+      <span class="flex items-center px-3 py-2 text-neutral-700 rounded-md hover:bg-neutral-100 cursor-pointer">
+        <i class="fa-solid fa-file-alt w-5 text-neutral-500"></i>
+        <span class="ml-2">Papers</span>
+      </span>
+      <span class="flex items-center px-3 py-2 text-neutral-700 rounded-md hover:bg-neutral-100 cursor-pointer">
+        <i class="fa-solid fa-code-branch w-5 text-neutral-500"></i>
+        <span class="ml-2">Versions</span>
+      </span>
+      <span class="flex items-center px-3 py-2 text-neutral-700 rounded-md hover:bg-neutral-100 cursor-pointer">
+        <i class="fa-solid fa-comments w-5 text-neutral-500"></i>
+        <span class="ml-2">Reviews</span>
+      </span>
+      <span class="flex items-center px-3 py-2 text-neutral-700 rounded-md hover:bg-neutral-100 cursor-pointer">
+        <i class="fa-solid fa-robot w-5 text-neutral-500"></i>
+        <span class="ml-2">AI Sessions</span>
+      </span>
+      <span class="flex items-center px-3 py-2 text-neutral-700 rounded-md hover:bg-neutral-100 cursor-pointer">
+        <i class="fa-solid fa-book w-5 text-neutral-500"></i>
+        <span class="ml-2">Literature</span>
+      </span>
+      <span class="flex items-center px-3 py-2 bg-neutral-100 text-neutral-900 rounded-md cursor-pointer">
+        <i class="fa-solid fa-link w-5 text-neutral-700"></i>
+        <span class="ml-2">API Endpoints</span>
+      </span>
+      <span class="flex items-center px-3 py-2 text-neutral-700 rounded-md hover:bg-neutral-100 cursor-pointer">
+        <i class="fa-solid fa-key w-5 text-neutral-500"></i>
+        <span class="ml-2">API Keys</span>
+      </span>
+      <span class="flex items-center px-3 py-2 text-neutral-700 rounded-md hover:bg-neutral-100 cursor-pointer">
+        <i class="fa-solid fa-chart-line w-5 text-neutral-500"></i>
+        <span class="ml-2">API Logs</span>
+      </span>
+      <span class="flex items-center px-3 py-2 text-neutral-700 rounded-md hover:bg-neutral-100 cursor-pointer">
+        <i class="fa-solid fa-cog w-5 text-neutral-500"></i>
+        <span class="ml-2">Settings</span>
+      </span>
+    </nav>
+  </div>
+
+  <!-- Main content -->
+  <div id="main-content" class="flex-1">
+    <div class="mb-6">
+      <h2 class="text-2xl text-neutral-800">API Endpoints</h2>
+      <p class="text-neutral-600 mt-1">Manage and monitor REST API endpoints for the AIEOU research platform</p>
+    </div>
+
+    <!-- Tab navigation -->
+    <div id="tab-nav" class="border-b border-neutral-200 mb-6">
+      <div class="flex -mb-px">
+        <button class="px-4 py-2 border-b-2 border-neutral-900 text-neutral-900">
+          Endpoints Overview
+        </button>
+        <button class="px-4 py-2 text-neutral-500 hover:text-neutral-700">
+          Documentation
+        </button>
+        <button class="px-4 py-2 text-neutral-500 hover:text-neutral-700">
+          Health Status
+        </button>
+        <button class="px-4 py-2 text-neutral-500 hover:text-neutral-700">
+          Access Control
+        </button>
+      </div>
+    </div>
+
+    <!-- Filters and actions -->
+    <div id="filters" class="flex flex-wrap items-center justify-between mb-6">
+      <div class="flex items-center space-x-4 mb-4 md:mb-0">
+        <div class="relative">
+          <input type="text" placeholder="Search endpoints..." class="pl-10 pr-4 py-2 border border-neutral-300 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-neutral-200" />
+          <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400"></i>
+        </div>
+        <select class="border border-neutral-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-200">
+          <option>All types</option>
+          <option>Standard</option>
+          <option>Research</option>
+          <option>Discovery</option>
+          <option>Orphan</option>
+        </select>
+        <select class="border border-neutral-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-200">
+          <option>All statuses</option>
+          <option>Active</option>
+          <option>Deprecated</option>
+          <option>Experimental</option>
+        </select>
+      </div>
+      <div class="flex space-x-3">
+        <button class="px-3 py-2 bg-white border border-neutral-300 rounded-md text-neutral-700 flex items-center hover:bg-neutral-50">
+          <i class="fa-solid fa-download mr-2"></i>
+          Export
+        </button>
+        <button class="px-3 py-2 bg-neutral-900 text-white rounded-md flex items-center hover:bg-neutral-800">
+          <i class="fa-solid fa-plus mr-2"></i>
+          New Endpoint
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats cards -->
+    <div id="stats" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white p-4 rounded-lg border border-neutral-200 shadow-sm">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-sm text-neutral-500">Total Endpoints</p>
+            <p class="text-2xl mt-1">42</p>
+          </div>
+          <span class="p-2 bg-neutral-100 rounded-md">
+            <i class="fa-solid fa-link text-neutral-600"></i>
+          </span>
+        </div>
+        <div class="mt-2 text-xs text-neutral-500 flex items-center">
+          <i class="fa-solid fa-arrow-up text-neutral-500 mr-1"></i>
+          <span>3 new since last month</span>
+        </div>
+      </div>
+      
+      <div class="bg-white p-4 rounded-lg border border-neutral-200 shadow-sm">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-sm text-neutral-500">Research Endpoints</p>
+            <p class="text-2xl mt-1">18</p>
+          </div>
+          <span class="p-2 bg-neutral-100 rounded-md">
+            <i class="fa-solid fa-flask text-neutral-600"></i>
+          </span>
+        </div>
+        <div class="mt-2 text-xs text-neutral-500 flex items-center">
+          <i class="fa-solid fa-arrow-up text-neutral-500 mr-1"></i>
+          <span>5 new since last month</span>
+        </div>
+      </div>
+      
+      <div class="bg-white p-4 rounded-lg border border-neutral-200 shadow-sm">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-sm text-neutral-500">Orphan Endpoints</p>
+            <p class="text-2xl mt-1">7</p>
+          </div>
+          <span class="p-2 bg-neutral-100 rounded-md">
+            <i class="fa-solid fa-exclamation-triangle text-neutral-600"></i>
+          </span>
+        </div>
+        <div class="mt-2 text-xs text-neutral-500 flex items-center">
+          <i class="fa-solid fa-arrow-down text-neutral-500 mr-1"></i>
+          <span>2 less since last month</span>
+        </div>
+      </div>
+      
+      <div class="bg-white p-4 rounded-lg border border-neutral-200 shadow-sm">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-sm text-neutral-500">Requests (24h)</p>
+            <p class="text-2xl mt-1">12.4k</p>
+          </div>
+          <span class="p-2 bg-neutral-100 rounded-md">
+            <i class="fa-solid fa-chart-line text-neutral-600"></i>
+          </span>
+        </div>
+        <div class="mt-2 text-xs text-neutral-500 flex items-center">
+          <i class="fa-solid fa-arrow-up text-neutral-500 mr-1"></i>
+          <span>8% more than yesterday</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Endpoints table -->
+    <div id="endpoints-table" class="bg-white rounded-lg border border-neutral-200 shadow-sm mb-6 overflow-hidden">
+      <div class="px-6 py-4 border-b border-neutral-200">
+        <h3 class="text-neutral-800">API Endpoints</h3>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-neutral-200">
+          <thead class="bg-neutral-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                Endpoint
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                Type
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                Method
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                Status
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                Access Level
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                Last 24h Calls
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-neutral-200">
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="text-sm text-neutral-900">/api/v1/aieou/papers</div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-neutral-900">Standard</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">GET</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Active</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                Read
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                3,245
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <button class="text-neutral-500 hover:text-neutral-700 mr-3">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="text-sm text-neutral-900">/api/v1/aieou/papers</div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-neutral-900">Standard</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">POST</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Active</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                Write
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                478
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <button class="text-neutral-500 hover:text-neutral-700 mr-3">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </td>
+            </tr>
+            
+            <tr class="bg-neutral-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="text-sm text-neutral-900">/api/v1/aieou/research_open</div>
+                  <span class="ml-2 px-2 py-0.5 text-xs bg-neutral-100 text-neutral-800 rounded-md">New</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-neutral-900">Research</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">GET</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Experimental</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                Read
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                124
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <button class="text-neutral-500 hover:text-neutral-700 mr-3">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="text-sm text-neutral-900">/api/v1/aieou/versions</div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-neutral-900">Standard</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">GET</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Active</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                Read
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                1,890
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <button class="text-neutral-500 hover:text-neutral-700 mr-3">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </td>
+            </tr>
+            
+            <tr class="bg-neutral-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="text-sm text-neutral-900">/api/v1/aieou/ideas</div>
+                  <span class="ml-2 px-2 py-0.5 text-xs bg-neutral-100 text-neutral-800 rounded-md">New</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-neutral-900">Research</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">GET</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Experimental</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                Read
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                356
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <button class="text-neutral-500 hover:text-neutral-700 mr-3">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </td>
+            </tr>
+            
+            <tr class="bg-neutral-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="text-sm text-neutral-900">/api/v1/aieou/old_reviews</div>
+                  <span class="ml-2 px-2 py-0.5 text-xs bg-neutral-100 text-neutral-800 rounded-md">Orphan</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-neutral-900">Standard</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">GET</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Deprecated</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                Read
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                12
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <button class="text-neutral-500 hover:text-neutral-700 mr-3">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="text-sm text-neutral-900">/api/v1/aieou/ai_sessions</div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-neutral-900">Standard</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">GET</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Active</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                Read
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                2,156
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <button class="text-neutral-500 hover:text-neutral-700 mr-3">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </td>
+            </tr>
+            
+            <tr class="bg-neutral-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="text-sm text-neutral-900">/api/v1/aieou/gaps</div>
+                  <span class="ml-2 px-2 py-0.5 text-xs bg-neutral-100 text-neutral-800 rounded-md">New</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-neutral-900">Research</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">GET</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Experimental</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                Read
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                78
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <button class="text-neutral-500 hover:text-neutral-700 mr-3">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="px-6 py-4 flex items-center justify-between border-t border-neutral-200">
+        <div class="flex items-center">
+          <p class="text-sm text-neutral-700">
+            Showing <span>1</span> to <span>8</span> of <span>42</span> endpoints
+          </p>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button class="px-3 py-1 border border-neutral-300 rounded-md text-sm text-neutral-500 hover:bg-neutral-50 disabled:opacity-50" disabled>
+            Previous
+          </button>
+          <button class="px-3 py-1 bg-neutral-900 text-white rounded-md text-sm">
+            1
+          </button>
+          <button class="px-3 py-1 border border-neutral-300 rounded-md text-sm text-neutral-700 hover:bg-neutral-50">
+            2
+          </button>
+          <button class="px-3 py-1 border border-neutral-300 rounded-md text-sm text-neutral-700 hover:bg-neutral-50">
+            3
+          </button>
+          <button class="px-3 py-1 border border-neutral-300 rounded-md text-sm text-neutral-700 hover:bg-neutral-50">
+            4
+          </button>
+          <button class="px-3 py-1 border border-neutral-300 rounded-md text-sm text-neutral-700 hover:bg-neutral-50">
+            5
+          </button>
+          <button class="px-3 py-1 border border-neutral-300 rounded-md text-sm text-neutral-700 hover:bg-neutral-50">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Research Endpoints Section -->
+    <div id="new-research-endpoints" class="bg-white rounded-lg border border-neutral-200 shadow-sm mb-6 overflow-hidden">
+      <div class="px-6 py-4 border-b border-neutral-200 flex justify-between items-center">
+        <h3 class="text-neutral-800">New Research Endpoints</h3>
+        <button class="text-sm text-neutral-600 hover:text-neutral-800">View all</button>
+      </div>
+      <div class="p-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Research</span>
+              <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Experimental</span>
+            </div>
+            <h4 class="mb-2">/api/v1/aieou/research_open</h4>
+            <p class="text-sm text-neutral-600 mb-3">Retrieves open research opportunities and collaboration requests.</p>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-neutral-500">Added: Aug 19, 2025</span>
+              <span class="text-neutral-500">124 calls / 24h</span>
+            </div>
+          </div>
+
+          <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Research</span>
+              <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Experimental</span>
+            </div>
+            <h4 class="mb-2">/api/v1/aieou/ideas</h4>
+            <p class="text-sm text-neutral-600 mb-3">Retrieves emerging research ideas ranked by entropy score and novelty.</p>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-neutral-500">Added: Aug 15, 2025</span>
+              <span class="text-neutral-500">356 calls / 24h</span>
+            </div>
+          </div>
+
+          <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Research</span>
+              <span class="px-2 py-1 text-xs bg-neutral-100 text-neutral-800 rounded-md">Experimental</span>
+            </div>
+            <h4 class="mb-2">/api/v1/aieou/gaps</h4>
+            <p class="text-sm text-neutral-600 mb-3">Retrieves research gaps in specified domains via GitGap integration.</p>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-neutral-500">Added: Aug 12, 2025</span>
+              <span class="text-neutral-500">78 calls / 24h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orphan Endpoints Section -->
+    <div id="orphan-endpoints" class="bg-white rounded-lg border border-neutral-200 shadow-sm mb-6 overflow-hidden">
+      <div class="px-6 py-4 border-b border-neutral-200 flex justify-between items-center">
+        <div class="flex items-center">
+          <h3 class="text-neutral-800">Orphan Endpoints</h3>
+          <span class="ml-2 px-2 py-0.5 text-xs bg-neutral-100 text-neutral-800 rounded-md">Attention Required</span>
+        </div>
+        <button class="text-sm text-neutral-600 hover:text-neutral-800">View all</button>
+      </div>
+      <div class="p-6">
+        <div class="mb-4">
+          <p class="text-sm text-neutral-600">Orphan endpoints are no longer actively used but still receiving requests. Consider deprecating or removing these endpoints.</p>
+        </div>
+        <div class="border border-neutral-200 rounded-lg divide-y divide-neutral-200">
+          <div class="p-4 flex items-center justify-between">
+            <div>
+              <h4>/api/v1/aieou/old_reviews</h4>
+              <p class="text-sm text-neutral-500 mt-1">Deprecated: Use /api/v1/aieou/review_logs instead</p>
+            </div>
+            <div class="flex items-center">
+              <span class="text-sm text-neutral-500 mr-4">12 calls / 24h</span>
+              <button class="px-3 py-1 bg-neutral-100 text-neutral-700 rounded-md text-sm">Decommission</button>
+            </div>
+          </div>
+          
+          <div class="p-4 flex items-center justify-between">
+            <div>
+              <h4>/api/v1/aieou/legacy_papers</h4>
+              <p class="text-sm text-neutral-500 mt-1">Deprecated: Use /api/v1/aieou/papers instead</p>
+            </div>
+            <div class="flex items-center">
+              <span class="text-sm text-neutral-500 mr-4">8 calls / 24h</span>
+              <button class="px-3 py-1 bg-neutral-100 text-neutral-700 rounded-md text-sm">Decommission</button>
+            </div>
+          </div>
+          
+          <div class="p-4 flex items-center justify-between">
+            <div>
+              <h4>/api/v1/aieou/paper_stats</h4>
+              <p class="text-sm text-neutral-500 mt-1">Deprecated: Functionality merged into /api/v1/aieou/papers</p>
+            </div>
+            <div class="flex items-center">
+              <span class="text-sm text-neutral-500 mr-4">24 calls / 24h</span>
+              <button class="px-3 py-1 bg-neutral-100 text-neutral-700 rounded-md text-sm">Decommission</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="footer" class="bg-neutral-50 border-t border-neutral-200 mt-8">
+  <div class="container mx-auto px-4 py-6">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0">
+        <p class="text-sm text-neutral-600">© 2025 AIEOU Research Platform. All rights reserved.</p>
+      </div>
+      <div class="flex space-x-6">
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Documentation</span>
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Support</span>
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Privacy Policy</span>
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Terms of Service</span>
+      </div>
+    </div>
+  </div>
+</footer>
+                </body>
+              </html>
+            

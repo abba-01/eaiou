@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@10.0.0/highcharts.js"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Left Sidebar -->
+    <div id="sidebar" class="fixed left-0 top-0 bottom-0 w-16 bg-gray-800 flex flex-col items-center">
+        <div class="mt-6 mb-10">
+            <div class="bg-primary-600 h-7 w-7 transform rotate-45 flex items-center justify-center">
+                <div class="bg-white h-2 w-2 transform rotate-45"></div>
+            </div>
+        </div>
+        <div class="flex flex-col items-center space-y-6">
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-home text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-file-lines text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-pen-to-square text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-magnifying-glass text-xl"></i></span>
+            <span class="text-white p-2 bg-primary-600 rounded cursor-pointer"><i class="fa-solid fa-users text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-chart-bar text-xl"></i></span>
+        </div>
+        <div class="mt-auto mb-6">
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-gear text-xl"></i></span>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="ml-16">
+        <!-- Header -->
+        <div id="header" class="flex justify-between items-center p-4 bg-white border-b border-gray-200">
+            <div class="flex items-center space-x-4">
+                <h1 class="text-xl font-semibold text-gray-800">Decision Logic Overview</h1>
+                <span class="text-sm px-2 py-1 bg-green-100 text-green-800 rounded">Editor</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="flex items-center text-gray-600 hover:text-gray-800">
+                    <i class="fa-solid fa-question-circle mr-2"></i>
+                    <span>Help</span>
+                </button>
+                <div class="relative">
+                    <button class="text-gray-600 hover:text-gray-800">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">2</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User" class="w-8 h-8 rounded-full">
+                    <span class="text-sm font-medium">Dr. John Smith</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="p-6">
+            <div class="max-w-5xl mx-auto">
+                <!-- Introduction Card -->
+                <div id="intro-card" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-primary-100 p-3 rounded-lg mr-4">
+                            <i class="fa-solid fa-scale-balanced text-primary-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-semibold text-gray-800 mb-2">Editorial Decision Criteria</h2>
+                            <p class="text-gray-600 mb-4">This guide outlines standardized thresholds and criteria for making editorial decisions based on reviewer feedback. The decision matrix helps maintain consistency and transparency in the peer review process.</p>
+                            <div class="flex space-x-2">
+                                <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">For Editors</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Decision Support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decision Matrix Card -->
+                <div id="decision-matrix-card" class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+                    <div class="border-b border-gray-200 p-4">
+                        <h2 class="text-lg font-semibold text-gray-800">Decision Matrix</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/5">Decision Type</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/5">Score Threshold</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/5">Reviewer Alignment</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-2/5">Criteria</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-4">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                                <span class="font-medium text-gray-900">Approve</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-4 text-gray-700">≥ 85%</td>
+                                        <td class="px-4 py-4 text-gray-700">≥ 75% agreement</td>
+                                        <td class="px-4 py-4 text-gray-700">
+                                            <ul class="list-disc list-inside text-sm">
+                                                <li>No major methodological flaws</li>
+                                                <li>Sound theoretical framework</li>
+                                                <li>Significant contribution to field</li>
+                                                <li>No ethical concerns</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-4">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                                                <span class="font-medium text-gray-900">Minor Revision</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-4 text-gray-700">70-84%</td>
+                                        <td class="px-4 py-4 text-gray-700">≥ 60% agreement</td>
+                                        <td class="px-4 py-4 text-gray-700">
+                                            <ul class="list-disc list-inside text-sm">
+                                                <li>Small clarifications needed</li>
+                                                <li>Minor adjustments to analysis</li>
+                                                <li>Formatting or citation issues</li>
+                                                <li>Additional references needed</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-4">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                                <span class="font-medium text-gray-900">Major Revision</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-4 text-gray-700">50-69%</td>
+                                        <td class="px-4 py-4 text-gray-700">< 60% agreement</td>
+                                        <td class="px-4 py-4 text-gray-700">
+                                            <ul class="list-disc list-inside text-sm">
+                                                <li>Significant methodological concerns</li>
+                                                <li>Substantial reanalysis required</li>
+                                                <li>Major restructuring needed</li>
+                                                <li>Unclear conclusions or implications</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-4">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                                                <span class="font-medium text-gray-900">Reject</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-4 text-gray-700">< 50%</td>
+                                        <td class="px-4 py-4 text-gray-700">≥ 75% agreement</td>
+                                        <td class="px-4 py-4 text-gray-700">
+                                            <ul class="list-disc list-inside text-sm">
+                                                <li>Critical methodological flaws</li>
+                                                <li>Insufficient originality/contribution</li>
+                                                <li>Ethical violations</li>
+                                                <li>Outside journal scope</li>
+                                                <li>Unredeemable writing quality</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Score Distribution Card -->
+                <div id="score-distribution-card" class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+                    <div class="border-b border-gray-200 p-4 flex justify-between items-center">
+                        <h2 class="text-lg font-semibold text-gray-800">Reviewer Score Distribution</h2>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm text-gray-600 bg-gray-100 rounded-md">Last 30 Days</button>
+                            <button class="px-3 py-1 text-sm text-gray-600 bg-gray-100 rounded-md">
+                                <i class="fa-solid fa-download mr-1"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div id="score-chart" class="h-80"></div>
+                    </div>
+                </div>
+
+                <!-- Decision Alignment Card -->
+                <div id="decision-alignment-card" class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+                    <div class="border-b border-gray-200 p-4">
+                        <h2 class="text-lg font-semibold text-gray-800">Handling Reviewer Disagreement</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-6">
+                            <h3 class="text-md font-medium text-gray-800 mb-3">When Reviewers Disagree</h3>
+                            <div class="bg-gray-50 p-4 rounded-md border border-gray-200">
+                                <ul class="space-y-3 text-gray-700">
+                                    <li class="flex items-start">
+                                        <i class="fa-solid fa-circle-exclamation text-yellow-500 mt-1 mr-2"></i>
+                                        <span><strong>Minor disagreement (≤ 15% score variance):</strong> Use weighted average of scores with editor discretion.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa-solid fa-circle-exclamation text-yellow-500 mt-1 mr-2"></i>
+                                        <span><strong>Significant disagreement (16-30% score variance):</strong> Carefully evaluate reviewer comments for specific concerns and consider your own assessment of those issues.</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa-solid fa-circle-exclamation text-yellow-500 mt-1 mr-2"></i>
+                                        <span><strong>Major disagreement (> 30% score variance):</strong> Consider seeking an additional reviewer or making a direct assessment yourself.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-md font-medium text-gray-800 mb-3">Criteria Weighting</h3>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead>
+                                        <tr>
+                                            <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Criteria</th>
+                                            <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Weight</th>
+                                            <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-4 py-3 text-gray-700 font-medium">Originality</td>
+                                            <td class="px-4 py-3 text-gray-700">25%</td>
+                                            <td class="px-4 py-3 text-gray-700 text-sm">Novel contribution to the field</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 text-gray-700 font-medium">Methodology</td>
+                                            <td class="px-4 py-3 text-gray-700">25%</td>
+                                            <td class="px-4 py-3 text-gray-700 text-sm">Soundness of research methods</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 text-gray-700 font-medium">Significance</td>
+                                            <td class="px-4 py-3 text-gray-700">20%</td>
+                                            <td class="px-4 py-3 text-gray-700 text-sm">Impact on field and practice</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 text-gray-700 font-medium">Clarity</td>
+                                            <td class="px-4 py-3 text-gray-700">15%</td>
+                                            <td class="px-4 py-3 text-gray-700 text-sm">Quality of writing and organization</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 text-gray-700 font-medium">References</td>
+                                            <td class="px-4 py-3 text-gray-700">15%</td>
+                                            <td class="px-4 py-3 text-gray-700 text-sm">Appropriate citation of relevant literature</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Special Cases Card -->
+                <div id="special-cases-card" class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+                    <div class="border-b border-gray-200 p-4">
+                        <h2 class="text-lg font-semibold text-gray-800">Special Cases</h2>
+                    </div>
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-md p-4">
+                            <div class="flex items-center mb-3">
+                                <i class="fa-solid fa-triangle-exclamation text-yellow-600 mr-2"></i>
+                                <h3 class="font-medium text-yellow-800">AI-Assisted Content</h3>
+                            </div>
+                            <p class="text-yellow-800 text-sm">For articles with AI-assistance declaration, apply additional scrutiny to originality and methodology sections. Consider whether AI tools were properly disclosed and appropriately used.</p>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                            <div class="flex items-center mb-3">
+                                <i class="fa-solid fa-lightbulb text-blue-600 mr-2"></i>
+                                <h3 class="font-medium text-blue-800">Speculative Research</h3>
+                            </div>
+                            <p class="text-blue-800 text-sm">For speculative research, evaluate theoretical soundness and potential impact more heavily than empirical validation. Ensure limitations are clearly acknowledged.</p>
+                        </div>
+                        <div class="bg-red-50 border border-red-200 rounded-md p-4">
+                            <div class="flex items-center mb-3">
+                                <i class="fa-solid fa-ban text-red-600 mr-2"></i>
+                                <h3 class="font-medium text-red-800">Ethical Concerns</h3>
+                            </div>
+                            <p class="text-red-800 text-sm">If any reviewer raises ethical concerns, escalate to the ethics committee regardless of overall score. This supersedes normal decision thresholds.</p>
+                        </div>
+                        <div class="bg-green-50 border border-green-200 rounded-md p-4">
+                            <div class="flex items-center mb-3">
+                                <i class="fa-solid fa-handshake text-green-600 mr-2"></i>
+                                <h3 class="font-medium text-green-800">Conflicts of Interest</h3>
+                            </div>
+                            <p class="text-green-800 text-sm">When conflicts of interest are declared, ensure additional independent review. Exclude conflicted reviewers from decision calculations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex justify-between">
+                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md flex items-center">
+                        <i class="fa-solid fa-print mr-2"></i> Print Guidelines
+                    </button>
+                    <div>
+                        <button class="px-4 py-2 bg-primary-100 text-primary-700 rounded-md mr-2">
+                            <i class="fa-solid fa-sliders mr-2"></i> Customize Thresholds
+                        </button>
+                        <button class="px-4 py-2 bg-primary-600 text-white rounded-md">
+                            Return to Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer" class="mt-8 border-t border-gray-200 py-4 px-6 text-center text-sm text-gray-500">
+            <p>© 2023 Academic Journal Management System. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Highcharts.chart('score-chart', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: null
+                },
+                xAxis: {
+                    categories: ['Approve', 'Minor Revision', 'Major Revision', 'Reject'],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Number of Submissions'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                colors: ['#10B981', '#3B82F6', '#F59E0B', '#EF4444'],
+                series: [{
+                    name: 'Last 30 Days',
+                    data: [12, 28, 16, 8]
+                }, {
+                    name: 'Previous 30 Days',
+                    data: [10, 24, 19, 11]
+                }]
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <i class="fa-brands fa-joomla text-neutral-800 text-2xl mr-3"></i>
+      <h1 class="text-xl text-neutral-800">AcademiAI Manager</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+        <i class="fa-solid fa-bell"></i>
+      </button>
+      <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+        <i class="fa-solid fa-question-circle"></i>
+      </button>
+      <div class="flex items-center">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full mr-2" />
+        <span class="text-sm text-neutral-700">Admin User</span>
+        <i class="fa-solid fa-chevron-down ml-2 text-neutral-500 text-xs"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="main-container" class="flex h-[800px]">
+  <div id="sidebar" class="w-64 bg-white border-r border-neutral-200 overflow-y-auto">
+    <div class="p-4">
+      <button class="w-full flex items-center justify-center px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+        <i class="fa-solid fa-plus mr-2"></i>
+        <span>New Project</span>
+      </button>
+    </div>
+    <nav class="mt-2">
+      <ul>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-tachometer-alt w-5 text-neutral-500"></i>
+            <span class="ml-2">Dashboard</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-folder w-5 text-neutral-500"></i>
+            <span class="ml-2">Projects</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-file-alt w-5 text-neutral-800"></i>
+            <span class="ml-2">Articles</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-cog w-5 text-neutral-500"></i>
+            <span class="ml-2">Settings</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-chart-bar w-5 text-neutral-500"></i>
+            <span class="ml-2">Analytics</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-users w-5 text-neutral-500"></i>
+            <span class="ml-2">Users</span>
+          </span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="content" class="flex-1 bg-neutral-50 overflow-y-auto">
+    <div class="p-6">
+      <div class="mb-6">
+        <h2 class="text-2xl text-neutral-800">Article Management</h2>
+        <p class="text-neutral-600 mt-1">Add, edit, and review academic articles for your projects</p>
+      </div>
+
+      <div id="articles-tabs" class="mb-6 border-b border-neutral-200">
+        <div class="flex space-x-4">
+          <button class="px-4 py-2 text-neutral-600 border-b-2 border-neutral-600">
+            All Articles
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Drafts
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Under Review
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Published
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Archived
+          </button>
+        </div>
+      </div>
+
+      <div id="article-actions" class="flex justify-between items-center mb-6">
+        <div class="flex items-center space-x-3">
+          <div class="relative">
+            <input type="text" placeholder="Search articles..." class="pl-9 pr-4 py-2 border border-neutral-300 rounded-md w-64 focus:outline-none focus:ring-1 focus:ring-neutral-500">
+            <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400"></i>
+          </div>
+          <select class="border border-neutral-300 rounded-md px-3 py-2 text-neutral-700 focus:outline-none focus:ring-1 focus:ring-neutral-500">
+            <option>All Projects</option>
+            <option>Quantum Physics Research</option>
+            <option>Climate Change Analysis</option>
+            <option>Medical Ethics Study</option>
+          </select>
+          <select class="border border-neutral-300 rounded-md px-3 py-2 text-neutral-700 focus:outline-none focus:ring-1 focus:ring-neutral-500">
+            <option>All Categories</option>
+            <option>Research Paper</option>
+            <option>Literature Review</option>
+            <option>Case Study</option>
+            <option>Meta-Analysis</option>
+          </select>
+        </div>
+        <div>
+          <button class="flex items-center px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+            <i class="fa-solid fa-plus mr-2"></i>
+            <span>New Article</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="articles-kanban" class="grid grid-cols-3 gap-6">
+        <!-- In Progress Column -->
+        <div id="in-progress-column" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+          <div class="p-4 border-b border-neutral-200 bg-neutral-50 flex justify-between items-center">
+            <div class="flex items-center">
+              <div class="w-3 h-3 bg-neutral-400 rounded-full mr-2"></div>
+              <h3 class="text-neutral-800">In Progress</h3>
+              <span class="ml-2 text-xs text-neutral-500 bg-neutral-200 px-2 py-0.5 rounded-full">3</span>
+            </div>
+            <button class="text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-ellipsis-v"></i>
+            </button>
+          </div>
+          <div class="p-4 space-y-4">
+            <!-- Article Card 1 -->
+            <div id="article-card-1" class="border border-neutral-200 rounded-md p-4 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+              <div class="flex justify-between items-start mb-3">
+                <div>
+                  <h4 class="text-neutral-800">Quantum Computing Applications in Climate Modeling</h4>
+                  <p class="text-sm text-neutral-500 mt-1">Research Paper • Quantum Physics Research</p>
+                </div>
+                <div class="flex">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-600 text-xs rounded-full">Draft</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <p class="text-sm text-neutral-600 line-clamp-2">An analysis of how quantum computing algorithms can improve climate prediction models with significantly reduced computational overhead...</p>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="Author avatar" class="w-6 h-6 rounded-full mr-1" />
+                  <span class="text-xs text-neutral-500">Dr. Alex Morgan</span>
+                </div>
+                <div class="text-xs text-neutral-500">Updated: July 3, 2025</div>
+              </div>
+              <div class="mt-3 pt-3 border-t border-neutral-100 flex justify-between items-center">
+                <div class="flex space-x-3">
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-comment-dots mr-1"></i> 5
+                  </span>
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-paperclip mr-1"></i> 3
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-copy"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Article Card 2 -->
+            <div id="article-card-2" class="border border-neutral-200 rounded-md p-4 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+              <div class="flex justify-between items-start mb-3">
+                <div>
+                  <h4 class="text-neutral-800">Ethical Implications of AI in Medical Diagnostics</h4>
+                  <p class="text-sm text-neutral-500 mt-1">Literature Review • Medical Ethics Study</p>
+                </div>
+                <div class="flex">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-600 text-xs rounded-full">Draft</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <p class="text-sm text-neutral-600 line-clamp-2">A comprehensive review of current literature examining the ethical considerations when implementing AI systems for medical diagnosis...</p>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="Author avatar" class="w-6 h-6 rounded-full mr-1" />
+                  <span class="text-xs text-neutral-500">Dr. Sarah Chen</span>
+                </div>
+                <div class="text-xs text-neutral-500">Updated: July 1, 2025</div>
+              </div>
+              <div class="mt-3 pt-3 border-t border-neutral-100 flex justify-between items-center">
+                <div class="flex space-x-3">
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-comment-dots mr-1"></i> 2
+                  </span>
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-paperclip mr-1"></i> 1
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-copy"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Article Card 3 -->
+            <div id="article-card-3" class="border border-neutral-200 rounded-md p-4 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+              <div class="flex justify-between items-start mb-3">
+                <div>
+                  <h4 class="text-neutral-800">Sustainable Urban Planning: A Systems Approach</h4>
+                  <p class="text-sm text-neutral-500 mt-1">Case Study • Climate Change Analysis</p>
+                </div>
+                <div class="flex">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-600 text-xs rounded-full">Draft</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <p class="text-sm text-neutral-600 line-clamp-2">Analysis of three major urban centers and their implementation of sustainable planning practices in response to climate change challenges...</p>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="Author avatar" class="w-6 h-6 rounded-full mr-1" />
+                  <span class="text-xs text-neutral-500">Prof. James Wilson</span>
+                </div>
+                <div class="text-xs text-neutral-500">Updated: June 28, 2025</div>
+              </div>
+              <div class="mt-3 pt-3 border-t border-neutral-100 flex justify-between items-center">
+                <div class="flex space-x-3">
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-comment-dots mr-1"></i> 7
+                  </span>
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-paperclip mr-1"></i> 4
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-copy"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review Column -->
+        <div id="review-column" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+          <div class="p-4 border-b border-neutral-200 bg-neutral-50 flex justify-between items-center">
+            <div class="flex items-center">
+              <div class="w-3 h-3 bg-neutral-600 rounded-full mr-2"></div>
+              <h3 class="text-neutral-800">Under Review</h3>
+              <span class="ml-2 text-xs text-neutral-500 bg-neutral-200 px-2 py-0.5 rounded-full">2</span>
+            </div>
+            <button class="text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-ellipsis-v"></i>
+            </button>
+          </div>
+          <div class="p-4 space-y-4">
+            <!-- Article Card 4 -->
+            <div id="article-card-4" class="border border-neutral-200 rounded-md p-4 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+              <div class="flex justify-between items-start mb-3">
+                <div>
+                  <h4 class="text-neutral-800">Neural Networks for Climate Data Pattern Recognition</h4>
+                  <p class="text-sm text-neutral-500 mt-1">Research Paper • Climate Change Analysis</p>
+                </div>
+                <div class="flex">
+                  <span class="px-2 py-1 bg-neutral-400 text-white text-xs rounded-full">Peer Review</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <p class="text-sm text-neutral-600 line-clamp-2">Implementation of deep learning algorithms to identify patterns in historical climate data that may indicate acceleration of climate change effects...</p>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=101" alt="Author avatar" class="w-6 h-6 rounded-full mr-1" />
+                  <span class="text-xs text-neutral-500">Dr. Michael Zhang</span>
+                </div>
+                <div class="text-xs text-neutral-500">Updated: July 5, 2025</div>
+              </div>
+              <div class="mt-3 pt-3 border-t border-neutral-100 flex justify-between items-center">
+                <div class="flex space-x-3">
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-comment-dots mr-1"></i> 12
+                  </span>
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-paperclip mr-1"></i> 6
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Article Card 5 -->
+            <div id="article-card-5" class="border border-neutral-200 rounded-md p-4 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+              <div class="flex justify-between items-start mb-3">
+                <div>
+                  <h4 class="text-neutral-800">Bioethical Frameworks for CRISPR Applications</h4>
+                  <p class="text-sm text-neutral-500 mt-1">Meta-Analysis • Medical Ethics Study</p>
+                </div>
+                <div class="flex">
+                  <span class="px-2 py-1 bg-neutral-400 text-white text-xs rounded-full">Editor Review</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <p class="text-sm text-neutral-600 line-clamp-2">A meta-analysis of current bioethical frameworks as they apply to emerging CRISPR gene editing technologies in medical treatments...</p>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=202" alt="Author avatar" class="w-6 h-6 rounded-full mr-1" />
+                  <span class="text-xs text-neutral-500">Dr. Emily Rodriguez</span>
+                </div>
+                <div class="text-xs text-neutral-500">Updated: July 2, 2025</div>
+              </div>
+              <div class="mt-3 pt-3 border-t border-neutral-100 flex justify-between items-center">
+                <div class="flex space-x-3">
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-comment-dots mr-1"></i> 8
+                  </span>
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-paperclip mr-1"></i> 3
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Completed Column -->
+        <div id="completed-column" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+          <div class="p-4 border-b border-neutral-200 bg-neutral-50 flex justify-between items-center">
+            <div class="flex items-center">
+              <div class="w-3 h-3 bg-neutral-800 rounded-full mr-2"></div>
+              <h3 class="text-neutral-800">Published</h3>
+              <span class="ml-2 text-xs text-neutral-500 bg-neutral-200 px-2 py-0.5 rounded-full">2</span>
+            </div>
+            <button class="text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-ellipsis-v"></i>
+            </button>
+          </div>
+          <div class="p-4 space-y-4">
+            <!-- Article Card 6 -->
+            <div id="article-card-6" class="border border-neutral-200 rounded-md p-4 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+              <div class="flex justify-between items-start mb-3">
+                <div>
+                  <h4 class="text-neutral-800">Quantum Entanglement: Implications for Secure Communications</h4>
+                  <p class="text-sm text-neutral-500 mt-1">Research Paper • Quantum Physics Research</p>
+                </div>
+                <div class="flex">
+                  <span class="px-2 py-1 bg-neutral-800 text-white text-xs rounded-full">Published</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <p class="text-sm text-neutral-600 line-clamp-2">An exploration of quantum entanglement phenomena and their practical applications in developing ultra-secure communication channels...</p>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=303" alt="Author avatar" class="w-6 h-6 rounded-full mr-1" />
+                  <span class="text-xs text-neutral-500">Prof. David Kim</span>
+                </div>
+                <div class="text-xs text-neutral-500">Published: June 15, 2025</div>
+              </div>
+              <div class="mt-3 pt-3 border-t border-neutral-100 flex justify-between items-center">
+                <div class="flex space-x-3">
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-download mr-1"></i> 42
+                  </span>
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-quote-right mr-1"></i> 3
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-share-alt"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-archive"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Article Card 7 -->
+            <div id="article-card-7" class="border border-neutral-200 rounded-md p-4 bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+              <div class="flex justify-between items-start mb-3">
+                <div>
+                  <h4 class="text-neutral-800">Urban Heat Islands: Mitigation Strategies for Sustainable Cities</h4>
+                  <p class="text-sm text-neutral-500 mt-1">Case Study • Climate Change Analysis</p>
+                </div>
+                <div class="flex">
+                  <span class="px-2 py-1 bg-neutral-800 text-white text-xs rounded-full">Published</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <p class="text-sm text-neutral-600 line-clamp-2">Comprehensive analysis of urban heat island effects in major metropolitan areas and effective mitigation strategies implemented globally...</p>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=404" alt="Author avatar" class="w-6 h-6 rounded-full mr-1" />
+                  <span class="text-xs text-neutral-500">Dr. Lisa Johnson</span>
+                </div>
+                <div class="text-xs text-neutral-500">Published: May 28, 2025</div>
+              </div>
+              <div class="mt-3 pt-3 border-t border-neutral-100 flex justify-between items-center">
+                <div class="flex space-x-3">
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-download mr-1"></i> 67
+                  </span>
+                  <span class="text-xs text-neutral-500 flex items-center">
+                    <i class="fa-solid fa-quote-right mr-1"></i> 8
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-share-alt"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-archive"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="academic-standards-section" class="mt-8 bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+        <div class="p-4 border-b border-neutral-200 bg-neutral-50">
+          <h3 class="text-neutral-800">Academic Standards Compliance</h3>
+          <p class="text-sm text-neutral-600">Configure standards for article validation and academic integrity</p>
+        </div>
+        <div class="p-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="text-neutral-700 mb-3">Citation Standards</h4>
+              <div class="space-y-3">
+                <div class="flex items-center">
+                  <input type="checkbox" id="apa-style" class="mr-2" checked />
+                  <label for="apa-style" class="text-sm text-neutral-700">APA Style (7th Edition)</label>
+                </div>
+                <div class="flex items-center">
+                  <input type="checkbox" id="mla-style" class="mr-2" />
+                  <label for="mla-style" class="text-sm text-neutral-700">MLA Style (9th Edition)</label>
+                </div>
+                <div class="flex items-center">
+                  <input type="checkbox" id="chicago-style" class="mr-2" checked />
+                  <label for="chicago-style" class="text-sm text-neutral-700">Chicago Style (17th Edition)</label>
+                </div>
+                <div class="flex items-center">
+                  <input type="checkbox" id="ieee-style" class="mr-2" checked />
+                  <label for="ieee-style" class="text-sm text-neutral-700">IEEE Style</label>
+                </div>
+                <div class="flex items-center">
+                  <input type="checkbox" id="harvard-style" class="mr-2" />
+                  <label for="harvard-style" class="text-sm text-neutral-700">Harvard Style</label>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="text-neutral-700 mb-3">Verification Checks</h4>
+              <div class="space-y-3">
+                <div class="flex items-center">
+                  <input type="checkbox" id="plagiarism-check" class="mr-2" checked />
+                  <label for="plagiarism-check" class="text-sm text-neutral-700">Plagiarism Detection</label>
+                </div>
+                <div class="flex items-center">
+                  <input type="checkbox" id="fact-verification" class="mr-2" checked />
+                  <label for="fact-verification" class="text-sm text-neutral-700">Fact Verification</label>
+                </div>
+                <div class="flex items-center">
+                  <input type="checkbox" id="methodology-validation" class="mr-2" checked />
+                  <label for="methodology-validation" class="text-sm text-neutral-700">Methodology Validation</label>
+                </div>
+                <div class="flex items-center">
+                  <input type="checkbox" id="statistical-review" class="mr-2" checked />
+                  <label for="statistical-review" class="text-sm text-neutral-700">Statistical Analysis Review</label>
+                </div>
+                <div class="flex items-center">
+                  <input type="checkbox" id="reference-validation" class="mr-2" checked />
+                  <label for="reference-validation" class="text-sm text-neutral-700">Reference Validation</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6">
+            <h4 class="text-neutral-700 mb-3">Peer Review Requirements</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">Minimum Reviewers</label>
+                <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>1 Reviewer</option>
+                  <option selected>2 Reviewers</option>
+                  <option>3 Reviewers</option>
+                  <option>4 Reviewers</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">Review Method</label>
+                <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>Single-blind</option>
+                  <option selected>Double-blind</option>
+                  <option>Open review</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6">
+            <h4 class="text-neutral-700 mb-3">AI-Assisted Writing Guidelines</h4>
+            <textarea class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm h-24">When using AI to generate or refine academic content, all AI contributions must be clearly disclosed. AI should be used as a tool to enhance research, not replace critical thinking or original analysis. All AI-generated content must be thoroughly reviewed by human authors for accuracy and appropriateness.</textarea>
+          </div>
+          
+          <div class="flex justify-end mt-6">
+            <button class="px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+              Save Academic Standards
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="w-full bg-white border-t border-neutral-200 py-4">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center">
+      <div class="text-sm text-neutral-600">
+        AcademiAI Manager v1.0.3 | Joomla 5.3 Component
+      </div>
+      <div class="text-sm text-neutral-600">
+        Last updated: July 6, 2025 at 10:06 AM
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

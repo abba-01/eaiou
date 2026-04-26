@@ -1,0 +1,1453 @@
+
+              <html class="">
+                
+  <head>
+    
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest', // Options: 'nest', 'remove', 'replace'
+      };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+<style>
+  * {
+    font-family: "{{font}}", sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+    
+<style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+</style>
+
+    
+<style>
+   :root {
+          /* Base colors */
+          --color-base: #ffffff;
+          --color-base-50: #f9fafb;
+          --color-base-100: #f3f4f6;
+          --color-base-200: #e5e7eb;
+          --color-base-300: #d1d5db;
+          --color-base-400: #9ca3af;
+          --color-base-500: #6b7280;
+          --color-base-600: #4b5563;  
+          --color-base-700: #374151;
+          --color-base-800: #1f2937;  
+          --color-base-900: #111827;
+          --color-base-content: #1f2937;
+
+          /* Primary colors */
+          --color-primary: #3b82f6;
+          --color-primary-50: #eff6ff;
+          --color-primary-100: #dbeafe;
+          --color-primary-200: #bfdbfe;
+          --color-primary-300: #93c5fd;
+          --color-primary-400: #60a5fa;
+          --color-primary-500: #3b82f6;
+          --color-primary-600: #2563eb;
+          --color-primary-700: #1d4ed8;
+          --color-primary-800: #1e40af;
+          --color-primary-900: #1e3a8a;
+          --color-primary-focus: #2563eb;
+          --color-primary-content: #ffffff;
+
+          /* Secondary colors */
+          --color-secondary: #8b5cf6;
+          --color-secondary-50: #f5f3ff;
+          --color-secondary-100: #ede9fe;
+          --color-secondary-200: #ddd6fe;
+          --color-secondary-300: #c4b5fd;
+          --color-secondary-400: #a78bfa;
+          --color-secondary-500: #8b5cf6;
+          --color-secondary-600: #7c3aed;
+          --color-secondary-700: #6d28d9;
+          --color-secondary-800: #5b21b6;
+          --color-secondary-900: #4c1d95;
+          --color-secondary-focus: #7c3aed;
+          --color-secondary-content: #ffffff;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #fdf2f8;
+          --color-accent-100: #fce7f3;
+          --color-accent-200: #fbcfe8;
+          --color-accent-300: #f9a8d4;
+          --color-accent-400: #f472b6;
+          --color-accent-500: #ec4899;
+          --color-accent-600: #db2777;
+          --color-accent-700: #be185d;
+          --color-accent-800: #9d174d;
+          --color-accent-900: #831843;
+          --color-accent-focus: #db2777;
+          --color-accent-content: #ffffff;
+
+          /* Neutral colors */
+          --color-neutral: #6b7280;
+          --color-neutral-50: #f9fafb;
+          --color-neutral-100: #f3f4f6;
+          --color-neutral-200: #e5e7eb;
+          --color-neutral-300: #d1d5db;
+          --color-neutral-400: #9ca3af;
+          --color-neutral-500: #6b7280;
+          --color-neutral-600: #4b5563;
+          --color-neutral-700: #374151;
+          --color-neutral-800: #1f2937;
+          --color-neutral-900: #111827;
+          --color-neutral-focus: #4b5563;
+          --color-neutral-content: #ffffff;
+
+          /* Info colors */
+          --color-info: #3b82f6;
+          --color-info-50: #eff6ff;
+          --color-info-100: #dbeafe;
+          --color-info-200: #bfdbfe;
+          --color-info-300: #93c5fd;
+          --color-info-400: #60a5fa;
+          --color-info-500: #3b82f6;
+          --color-info-600: #2563eb;
+          --color-info-700: #1d4ed8;
+          --color-info-800: #1e40af;
+          --color-info-900: #1e3a8a;
+          --color-info-focus: #2563eb;
+          --color-info-content: #ffffff;
+
+          /* Success colors */
+          --color-success: #10b981;
+          --color-success-50: #ecfdf5;
+          --color-success-100: #d1fae5;
+          --color-success-200: #a7f3d0;
+          --color-success-300: #6ee7b7;
+          --color-success-400: #34d399;
+          --color-success-500: #10b981;
+          --color-success-600: #059669;
+          --color-success-700: #047857;
+          --color-success-800: #065f46;
+          --color-success-900: #064e3b;
+          --color-success-focus: #059669;
+          --color-success-content: #ffffff;
+
+          /* Warning colors */
+          --color-warning: #f59e0b;
+          --color-warning-50: #fffbeb;
+          --color-warning-100: #fef3c7;
+          --color-warning-200: #fde68a;
+          --color-warning-300: #fcd34d;
+          --color-warning-400: #fbbf24;
+          --color-warning-500: #f59e0b;
+          --color-warning-600: #d97706;
+          --color-warning-700: #b45309;
+          --color-warning-800: #92400e;
+          --color-warning-900: #78350f;
+          --color-warning-focus: #d97706;
+          --color-warning-content: #ffffff;
+
+          /* Error colors */
+          --color-error: #ef4444;
+          --color-error-50: #fef2f2;
+          --color-error-100: #fee2e2;
+          --color-error-200: #fecaca;
+          --color-error-300: #fca5a5;
+          --color-error-400: #f87171;
+          --color-error-500: #ef4444;
+          --color-error-600: #dc2626;
+          --color-error-700: #b91c1c;
+          --color-error-800: #991b1b;
+          --color-error-900: #7f1d1d;
+          --color-error-focus: #dc2626;
+          --color-error-content: #ffffff;
+        }
+</style>
+
+    
+<style>
+/* Dark theme */
+        .dark {
+          /* Base colors */
+          --color-base: #1f2937;
+          --color-base-50: #111827;
+          --color-base-100: #1f2937;
+          --color-base-200: #374151;
+          --color-base-300: #4b5563;
+          --color-base-400: #6b7280;
+          --color-base-500: #9ca3af;
+          --color-base-600: #d1d5db;
+          --color-base-700: #e5e7eb;
+          --color-base-800: #f3f4f6;
+          --color-base-900: #f9fafb;
+          --color-base-content: #f9fafb;
+
+          /* Primary colors */
+          --color-primary: #60a5fa;
+          --color-primary-50: #1e3a8a;
+          --color-primary-100: #1e40af;
+          --color-primary-200: #1d4ed8;
+          --color-primary-300: #2563eb;
+          --color-primary-400: #3b82f6;
+          --color-primary-500: #60a5fa;
+          --color-primary-600: #93c5fd;
+          --color-primary-700: #bfdbfe;
+          --color-primary-800: #dbeafe;
+          --color-primary-900: #eff6ff;
+          --color-primary-focus: #3b82f6;
+          --color-primary-content: #1f2937;
+
+          /* Secondary colors */
+          --color-secondary: #a78bfa;
+          --color-secondary-50: #4c1d95;
+          --color-secondary-100: #5b21b6;
+          --color-secondary-200: #6d28d9;
+          --color-secondary-300: #7c3aed;
+          --color-secondary-400: #8b5cf6;
+          --color-secondary-500: #a78bfa;
+          --color-secondary-600: #c4b5fd;
+          --color-secondary-700: #ddd6fe;
+          --color-secondary-800: #ede9fe;
+          --color-secondary-900: #f5f3ff;
+          --color-secondary-focus: #8b5cf6;
+          --color-secondary-content: #1f2937;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #831843;
+          --color-accent-100: #9d174d;
+          --color-accent-200: #be185d;
+          --color-accent-300: #db2777;
+          --color-accent-400: #ec4899;
+          --color-accent-500: #f472b6;
+          --color-accent-600: #f9a8d4;
+          --color-accent-700: #fbcfe8;
+          --color-accent-800: #fce7f3;
+          --color-accent-900: #fdf2f8;
+          --color-accent-focus: #ec4899;
+          --color-accent-content: #1f2937;
+
+          /* Neutral colors remain the same as light theme */
+
+          /* Info colors */
+          --color-info: #60a5fa;
+          --color-info-50: #1e3a8a;
+          --color-info-100: #1e40af;
+          --color-info-200: #1d4ed8;
+          --color-info-300: #2563eb;
+          --color-info-400: #3b82f6;
+          --color-info-500: #60a5fa;
+          --color-info-600: #93c5fd;
+          --color-info-700: #bfdbfe;
+          --color-info-800: #dbeafe;
+          --color-info-900: #eff6ff;
+          --color-info-focus: #3b82f6;
+          --color-info-content: #1f2937;
+
+          /* Success colors */
+          --color-success: #34d399;
+          --color-success-50: #064e3b;
+          --color-success-100: #065f46;
+          --color-success-200: #047857;
+          --color-success-300: #059669;
+          --color-success-400: #10b981;
+          --color-success-500: #34d399;
+          --color-success-600: #6ee7b7;
+          --color-success-700: #a7f3d0;
+          --color-success-800: #d1fae5;
+          --color-success-900: #ecfdf5;
+          --color-success-focus: #10b981;
+          --color-success-content: #1f2937;
+
+          /* Warning colors */
+          --color-warning: #fbbf24;
+          --color-warning-50: #78350f;
+          --color-warning-100: #92400e;
+          --color-warning-200: #b45309;
+          --color-warning-300: #d97706;
+          --color-warning-400: #f59e0b;
+          --color-warning-500: #fbbf24;
+          --color-warning-600: #fcd34d;
+          --color-warning-700: #fde68a;
+          --color-warning-800: #fef3c7;
+          --color-warning-900: #fffbeb;
+          --color-warning-focus: #f59e0b;
+          --color-warning-content: #1f2937;
+
+          /* Error colors */
+          --color-error: #f87171;
+          --color-error-50: #7f1d1d;
+          --color-error-100: #991b1b;
+          --color-error-200: #b91c1c;
+          --color-error-300: #dc2626;
+          --color-error-400: #ef4444;
+          --color-error-500: #f87171;
+          --color-error-600: #fca5a5;
+          --color-error-700: #fecaca;
+          --color-error-800: #fee2e2;
+          --color-error-900: #fef2f2;
+          --color-error-focus: #ef4444;
+          --color-error-content: #1f2937;
+        }
+</style>
+
+    
+  <script>
+        tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                ...{"transparent":"transparent","current":"currentColor","black":"#000000","white":"#ffffff","gray":{"50":"#f9fafb","100":"#f3f4f6","200":"#e5e7eb","300":"#d1d5db","400":"#9ca3af","500":"#6b7280","600":"#4b5563","700":"#374151","800":"#1f2937","900":"#111827"},"red":{"50":"#fef2f2","100":"#fee2e2","200":"#fecaca","300":"#fca5a5","400":"#f87171","500":"#ef4444","600":"#dc2626","700":"#b91c1c","800":"#991b1b","900":"#7f1d1d"},"yellow":{"50":"#fffbeb","100":"#fef3c7","200":"#fde68a","300":"#fcd34d","400":"#fbbf24","500":"#f59e0b","600":"#d97706","700":"#b45309","800":"#92400e","900":"#78350f"},"green":{"50":"#ecfdf5","100":"#d1fae5","200":"#a7f3d0","300":"#6ee7b7","400":"#34d399","500":"#10b981","600":"#059669","700":"#047857","800":"#065f46","900":"#064e3b"},"blue":{"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a"},"indigo":{"50":"#eef2ff","100":"#e0e7ff","200":"#c7d2fe","300":"#a5b4fc","400":"#818cf8","500":"#6366f1","600":"#4f46e5","700":"#4338ca","800":"#3730a3","900":"#312e81"},"purple":{"50":"#f5f3ff","100":"#ede9fe","200":"#ddd6fe","300":"#c4b5fd","400":"#a78bfa","500":"#8b5cf6","600":"#7c3aed","700":"#6d28d9","800":"#5b21b6","900":"#4c1d95"},"pink":{"50":"#fdf2f8","100":"#fce7f3","200":"#fbcfe8","300":"#f9a8d4","400":"#f472b6","500":"#ec4899","600":"#db2777","700":"#be185d","800":"#9d174d","900":"#831843"}},
+                ...{"primary":{"50":"var(--color-primary-50)","100":"var(--color-primary-100)","200":"var(--color-primary-200)","300":"var(--color-primary-300)","400":"var(--color-primary-400)","500":"var(--color-primary-500)","600":"var(--color-primary-600)","700":"var(--color-primary-700)","800":"var(--color-primary-800)","900":"var(--color-primary-900)","DEFAULT":"var(--color-primary)","focus":"var(--color-primary-focus)","content":"var(--color-primary-content)"},"secondary":{"50":"var(--color-secondary-50)","100":"var(--color-secondary-100)","200":"var(--color-secondary-200)","300":"var(--color-secondary-300)","400":"var(--color-secondary-400)","500":"var(--color-secondary-500)","600":"var(--color-secondary-600)","700":"var(--color-secondary-700)","800":"var(--color-secondary-800)","900":"var(--color-secondary-900)","DEFAULT":"var(--color-secondary)","focus":"var(--color-secondary-focus)","content":"var(--color-secondary-content)"},"accent":{"50":"var(--color-accent-50)","100":"var(--color-accent-100)","200":"var(--color-accent-200)","300":"var(--color-accent-300)","400":"var(--color-accent-400)","500":"var(--color-accent-500)","600":"var(--color-accent-600)","700":"var(--color-accent-700)","800":"var(--color-accent-800)","900":"var(--color-accent-900)","DEFAULT":"var(--color-accent)","focus":"var(--color-accent-focus)","content":"var(--color-accent-content)"},"neutral":{"50":"var(--color-neutral-50)","100":"var(--color-neutral-100)","200":"var(--color-neutral-200)","300":"var(--color-neutral-300)","400":"var(--color-neutral-400)","500":"var(--color-neutral-500)","600":"var(--color-neutral-600)","700":"var(--color-neutral-700)","800":"var(--color-neutral-800)","900":"var(--color-neutral-900)","DEFAULT":"var(--color-neutral)","focus":"var(--color-neutral-focus)","content":"var(--color-neutral-content)"},"info":{"50":"var(--color-info-50)","100":"var(--color-info-100)","200":"var(--color-info-200)","300":"var(--color-info-300)","400":"var(--color-info-400)","500":"var(--color-info-500)","600":"var(--color-info-600)","700":"var(--color-info-700)","800":"var(--color-info-800)","900":"var(--color-info-900)","DEFAULT":"var(--color-info)","focus":"var(--color-info-focus)","content":"var(--color-info-content)"},"success":{"50":"var(--color-success-50)","100":"var(--color-success-100)","200":"var(--color-success-200)","300":"var(--color-success-300)","400":"var(--color-success-400)","500":"var(--color-success-500)","600":"var(--color-success-600)","700":"var(--color-success-700)","800":"var(--color-success-800)","900":"var(--color-success-900)","DEFAULT":"var(--color-success)","focus":"var(--color-success-focus)","content":"var(--color-success-content)"},"warning":{"50":"var(--color-warning-50)","100":"var(--color-warning-100)","200":"var(--color-warning-200)","300":"var(--color-warning-300)","400":"var(--color-warning-400)","500":"var(--color-warning-500)","600":"var(--color-warning-600)","700":"var(--color-warning-700)","800":"var(--color-warning-800)","900":"var(--color-warning-900)","DEFAULT":"var(--color-warning)","focus":"var(--color-warning-focus)","content":"var(--color-warning-content)"},"error":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"danger":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"failure":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"}},
+                },
+              },
+            },
+            variants: {
+              extend: {
+                backgroundColor: ['active', 'group-hover'],
+                textColor: ['active', 'group-hover'],
+              },
+            },
+            plugins: [],
+          };
+  </script>
+
+  </head>
+
+                <body class="h-full text-base-content">
+                  <header id="header" class="bg-neutral-900 py-4 px-6 flex items-center justify-between">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <div class="flex items-center space-x-8">
+    <div class="flex items-center">
+      <span class="text-white text-xl flex items-center cursor-pointer">
+        <span>EAIOU</span>
+        <span class="text-neutral-400 text-sm ml-2">| Research Platform</span>
+      </span>
+    </div>
+    <div class="hidden md:flex space-x-6">
+      <div class="relative group">
+        <span class="text-neutral-300 hover:text-white flex items-center cursor-pointer">
+          Articles
+          <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+        </span>
+      </div>
+      <div class="relative group">
+        <span class="text-neutral-300 hover:text-white flex items-center cursor-pointer">
+          Submissions
+          <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+        </span>
+      </div>
+      <span class="text-neutral-300 hover:text-white cursor-pointer">
+        Reviews
+      </span>
+      <div class="relative group">
+        <span class="text-neutral-300 hover:text-white flex items-center cursor-pointer">
+          Collaboration
+          <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+        </span>
+      </div>
+      <span class="text-white cursor-pointer border-b-2 border-white pb-1">
+        Guidelines
+      </span>
+      <div class="relative group">
+        <span class="text-neutral-300 hover:text-white flex items-center cursor-pointer">
+          About
+          <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="flex items-center space-x-4">
+    <button class="text-neutral-300 hover:text-white">
+      <i class="fa-solid fa-magnifying-glass text-xl"></i>
+    </button>
+    <span class="bg-neutral-700 text-white px-4 py-2 rounded-md hover:bg-neutral-600 cursor-pointer">
+      Log In
+    </span>
+    <span class="bg-neutral-600 text-white px-4 py-2 rounded-md hover:bg-neutral-500 cursor-pointer">
+      Register
+    </span>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section id="guidelines-hero" class="bg-neutral-800 py-16 px-6 relative overflow-hidden h-[300px]">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative z-10">
+      <h1 class="text-white text-4xl md:text-5xl mb-4">
+        Platform Guidelines
+      </h1>
+      <p class="text-neutral-300 text-xl max-w-3xl">
+        Comprehensive information about EAIOU.org's principles, workflows, and best practices for all platform participants.
+      </p>
+    </div>
+  </div>
+  <div class="absolute right-10 top-10 z-0 opacity-10">
+    <div class="relative">
+      <div class="w-64 h-64 bg-neutral-600 rounded-full flex items-center justify-center text-white">
+        Guidelines Network
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Guidelines Navigation -->
+<section id="guidelines-nav" class="bg-white border-b border-neutral-200 sticky top-0 z-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-center overflow-x-auto py-4 whitespace-nowrap">
+      <span class="text-neutral-800 hover:text-neutral-600 px-4 py-2 cursor-pointer">Platform Overview</span>
+      <span class="text-neutral-800 hover:text-neutral-600 px-4 py-2 cursor-pointer">Roles & Responsibilities</span>
+      <span class="text-neutral-800 hover:text-neutral-600 px-4 py-2 cursor-pointer">Submission Guidelines</span>
+      <span class="text-neutral-800 hover:text-neutral-600 px-4 py-2 cursor-pointer">Review Process</span>
+      <span class="text-neutral-800 hover:text-neutral-600 px-4 py-2 cursor-pointer">AI Integration</span>
+      <span class="text-neutral-800 hover:text-neutral-600 px-4 py-2 cursor-pointer">Ethics & Standards</span>
+      <span class="text-neutral-800 hover:text-neutral-600 px-4 py-2 cursor-pointer">Collaboration Rules</span>
+      <span class="text-neutral-800 hover:text-neutral-600 px-4 py-2 cursor-pointer">FAQ</span>
+    </div>
+  </div>
+</section>
+
+<!-- Main Content -->
+<section id="guidelines-content" class="py-12 px-6 bg-neutral-50">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col lg:flex-row gap-10">
+      <!-- Main Content -->
+      <div class="w-full lg:w-3/4">
+        <!-- Platform Overview -->
+        <div id="platform-overview" class="bg-white rounded-xl p-8 shadow-sm mb-10">
+          <div class="flex items-center mb-6">
+            <i class="fa-solid fa-globe text-neutral-700 mr-3 text-xl"></i>
+            <h2 class="text-2xl text-neutral-800">Platform Overview</h2>
+          </div>
+          <p class="text-neutral-700 mb-6">
+            EAIOU.org is a front-facing, observer-preserving research platform built on Joomla, designed to support transparent peer review, structured attribution, and discovery without "back-articleing" into the CMS core. It provides a unified workflow where authors, reviewers, editors, AI systems, and mute intelligences are seated as formal observers under ACL control, ensuring integrity, reproducibility, and collaboration in academic publishing.
+          </p>
+          <div class="bg-neutral-50 p-6 rounded-lg mb-6">
+            <h3 class="text-lg mb-4">Core Principles</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-check text-neutral-700 mt-1 mr-3"></i>
+                <span class="text-neutral-700"><strong>Transparency:</strong> All research processes and decisions are visible and traceable.</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-check text-neutral-700 mt-1 mr-3"></i>
+                <span class="text-neutral-700"><strong>Attribution:</strong> Structured system ensures proper credit for all contributions.</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-check text-neutral-700 mt-1 mr-3"></i>
+                <span class="text-neutral-700"><strong>Integrity:</strong> Technical and procedural safeguards maintain research integrity.</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-check text-neutral-700 mt-1 mr-3"></i>
+                <span class="text-neutral-700"><strong>Collaboration:</strong> Unified workflow connects all participants in the research process.</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa-solid fa-circle-check text-neutral-700 mt-1 mr-3"></i>
+                <span class="text-neutral-700"><strong>Accessibility:</strong> Research is discoverable and accessible to appropriate audiences.</span>
+              </li>
+            </ul>
+          </div>
+          <h3 class="text-lg mb-4">Human-AI Collaboration</h3>
+          <p class="text-neutral-700 mb-6">
+            AI and humans interface in EAIOU.org as co-observers within the same workflow: humans bring authorship, judgment, and ethics, while AI systems contribute analysis, attribution, and structured support. Their interactions are mediated by access control, transparency logs, and an arbiter layer, ensuring collaboration without distortion, misattribution, or loss of accountability.
+          </p>
+          <div class="h-64 bg-neutral-200 rounded-lg flex items-center justify-center mb-6">
+            <span class="text-neutral-600 text-lg">Platform Architecture Diagram</span>
+          </div>
+        </div>
+
+        <!-- Roles & Responsibilities -->
+        <div id="roles-responsibilities" class="bg-white rounded-xl p-8 shadow-sm mb-10">
+          <div class="flex items-center mb-6">
+            <i class="fa-solid fa-users text-neutral-700 mr-3 text-xl"></i>
+            <h2 class="text-2xl text-neutral-800">Roles & Responsibilities</h2>
+          </div>
+          <p class="text-neutral-700 mb-6">
+            Each participant in the EAIOU.org ecosystem has specific roles, permissions, and responsibilities designed to maintain the integrity of the research process.
+          </p>
+          
+          <div class="space-y-8">
+            <!-- Authors -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4 flex items-center">
+                <i class="fa-solid fa-pen-to-square text-neutral-600 mr-3"></i>
+                Authors
+              </h3>
+              <p class="text-neutral-700 mb-4">
+                Researchers who submit original work for review and publication on the platform.
+              </p>
+              <div class="bg-neutral-50 p-4 rounded-lg">
+                <h4 class="mb-2">Responsibilities:</h4>
+                <ul class="space-y-2 text-neutral-700">
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Submit original research with proper metadata and attribution</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Disclose AI assistance and collaborative contributions</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Respond to reviewer feedback and revision requests</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Maintain research integrity and ethical standards</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- Reviewers -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4 flex items-center">
+                <i class="fa-solid fa-magnifying-glass-chart text-neutral-600 mr-3"></i>
+                Reviewers
+              </h3>
+              <p class="text-neutral-700 mb-4">
+                Subject matter experts who evaluate submissions for scientific merit, methodology, and clarity.
+              </p>
+              <div class="bg-neutral-50 p-4 rounded-lg">
+                <h4 class="mb-2">Responsibilities:</h4>
+                <ul class="space-y-2 text-neutral-700">
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Provide thorough, constructive feedback using structured review forms</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Declare conflicts of interest and maintain objectivity</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Complete reviews within assigned timeframes</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Participate in discussion with other reviewers when appropriate</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- Editors -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4 flex items-center">
+                <i class="fa-solid fa-newspaper text-neutral-600 mr-3"></i>
+                Editors
+              </h3>
+              <p class="text-neutral-700 mb-4">
+                Scholarly leaders who oversee the review process and make publication decisions.
+              </p>
+              <div class="bg-neutral-50 p-4 rounded-lg">
+                <h4 class="mb-2">Responsibilities:</h4>
+                <ul class="space-y-2 text-neutral-700">
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Manage submission queue and assign appropriate reviewers</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Evaluate reviews and make publication decisions</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Maintain quality standards and editorial consistency</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Mediate disputes and address ethical concerns</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- AI Systems -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4 flex items-center">
+                <i class="fa-solid fa-robot text-neutral-600 mr-3"></i>
+                AI Systems
+              </h3>
+              <p class="text-neutral-700 mb-4">
+                Computational tools that assist in analysis, attribution tracking, and structured support.
+              </p>
+              <div class="bg-neutral-50 p-4 rounded-lg">
+                <h4 class="mb-2">Functions:</h4>
+                <ul class="space-y-2 text-neutral-700">
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Analyze submissions for completeness and formal requirements</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Track attribution and maintain transparency logs</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Provide structured support for review and editing processes</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Generate metadata and assist in discovery processes</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- System Administrators -->
+            <div>
+              <h3 class="text-xl mb-4 flex items-center">
+                <i class="fa-solid fa-shield-halved text-neutral-600 mr-3"></i>
+                System Administrators
+              </h3>
+              <p class="text-neutral-700 mb-4">
+                Technical experts who maintain platform integrity and handle support escalations.
+              </p>
+              <div class="bg-neutral-50 p-4 rounded-lg">
+                <h4 class="mb-2">Responsibilities:</h4>
+                <ul class="space-y-2 text-neutral-700">
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Maintain system security and operational integrity</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Handle technical support escalations</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Oversee access control and permission management</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                    <span>Monitor system performance and implement improvements</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submission Guidelines -->
+        <div id="submission-guidelines" class="bg-white rounded-xl p-8 shadow-sm mb-10">
+          <div class="flex items-center mb-6">
+            <i class="fa-solid fa-file-lines text-neutral-700 mr-3 text-xl"></i>
+            <h2 class="text-2xl text-neutral-800">Submission Guidelines</h2>
+          </div>
+          <p class="text-neutral-700 mb-6">
+            To ensure a smooth submission process and maintain quality standards, please follow these guidelines when preparing your research for submission.
+          </p>
+          
+          <div class="space-y-8">
+            <!-- File Requirements -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">File Requirements</h3>
+              <ul class="space-y-3 text-neutral-700">
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Accepted Formats:</strong> PDF, DOCX, LaTeX (with source files)
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Maximum File Size:</strong> 50MB per file
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Supplementary Materials:</strong> Data sets, code, and other supporting materials should be submitted as separate files
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Figures:</strong> High-resolution (300 dpi minimum) with clear labels and captions
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- Metadata Requirements -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">Metadata Requirements</h3>
+              <p class="text-neutral-700 mb-4">
+                Complete and accurate metadata is essential for proper indexing, discovery, and attribution.
+              </p>
+              <ul class="space-y-3 text-neutral-700">
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Author Information:</strong> Full names, affiliations, ORCID IDs, and contact details
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Title and Abstract:</strong> Clear, concise title and structured abstract
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Keywords:</strong> 5-8 relevant keywords for indexing
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Funding Information:</strong> All sources of funding with grant numbers
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>AI Disclosure:</strong> Detailed information about any AI systems used in research or manuscript preparation
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- Ethical Standards -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">Ethical Standards</h3>
+              <p class="text-neutral-700 mb-4">
+                All submissions must adhere to ethical guidelines for research and publication.
+              </p>
+              <ul class="space-y-3 text-neutral-700">
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Human Subjects:</strong> Include IRB approval information and consent procedures
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Conflicts of Interest:</strong> Disclose all potential conflicts of interest
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Data Availability:</strong> Provide a data availability statement and repository links
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Attribution:</strong> Properly cite all sources and contributions
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- Submission Process -->
+            <div>
+              <h3 class="text-xl mb-4">Submission Process</h3>
+              <ol class="space-y-4 text-neutral-700">
+                <li class="flex">
+                  <span class="flex-shrink-0 w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center mr-3">1</span>
+                  <div>
+                    <strong>Register or log in</strong> to your EAIOU.org account
+                  </div>
+                </li>
+                <li class="flex">
+                  <span class="flex-shrink-0 w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center mr-3">2</span>
+                  <div>
+                    <strong>Navigate to the Submissions page</strong> and select "New Submission"
+                  </div>
+                </li>
+                <li class="flex">
+                  <span class="flex-shrink-0 w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center mr-3">3</span>
+                  <div>
+                    <strong>Complete all metadata fields</strong> and upload your manuscript and supporting files
+                  </div>
+                </li>
+                <li class="flex">
+                  <span class="flex-shrink-0 w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center mr-3">4</span>
+                  <div>
+                    <strong>Review and confirm</strong> all information before final submission
+                  </div>
+                </li>
+                <li class="flex">
+                  <span class="flex-shrink-0 w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center mr-3">5</span>
+                  <div>
+                    <strong>Track your submission</strong> through your Author Dashboard
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review Process -->
+        <div id="review-process" class="bg-white rounded-xl p-8 shadow-sm mb-10">
+          <div class="flex items-center mb-6">
+            <i class="fa-solid fa-clipboard-check text-neutral-700 mr-3 text-xl"></i>
+            <h2 class="text-2xl text-neutral-800">Review Process</h2>
+          </div>
+          <p class="text-neutral-700 mb-6">
+            EAIOU.org employs a transparent, structured peer review process designed to ensure thorough evaluation while maintaining fairness and efficiency.
+          </p>
+          
+          <div class="h-64 bg-neutral-200 rounded-lg flex items-center justify-center mb-8">
+            <span class="text-neutral-600 text-lg">Review Process Workflow Diagram</span>
+          </div>
+          
+          <div class="space-y-8">
+            <!-- Initial Screening -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">Initial Screening</h3>
+              <p class="text-neutral-700 mb-4">
+                All submissions undergo initial screening for completeness, scope alignment, and technical requirements.
+              </p>
+              <ul class="space-y-2 text-neutral-700">
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>AI-assisted technical checks for formatting and completeness</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Editorial assessment for scope and quality standards</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Plagiarism detection and ethical compliance verification</span>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- Peer Review -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">Peer Review</h3>
+              <p class="text-neutral-700 mb-4">
+                Submissions that pass initial screening are assigned to appropriate reviewers for thorough evaluation.
+              </p>
+              <ul class="space-y-2 text-neutral-700">
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Typically 2-3 expert reviewers per submission</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Structured review forms with standardized evaluation criteria</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Option for open, single-blind, or double-blind review depending on journal policy</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Collaborative discussion among reviewers when appropriate</span>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- Editorial Decision -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">Editorial Decision</h3>
+              <p class="text-neutral-700 mb-4">
+                Based on reviewer recommendations, editors make informed publication decisions.
+              </p>
+              <ul class="space-y-2 text-neutral-700">
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Accept without revisions (rare)</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Accept with minor revisions</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Major revisions required</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Reject with option to resubmit</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Reject</span>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- Revision and Resubmission -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">Revision and Resubmission</h3>
+              <p class="text-neutral-700 mb-4">
+                Authors have the opportunity to revise their work based on reviewer feedback.
+              </p>
+              <ul class="space-y-2 text-neutral-700">
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Authors submit revised manuscript with point-by-point response to reviews</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Changes are tracked and highlighted for reviewer evaluation</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Additional rounds of review as necessary</span>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- Publication -->
+            <div>
+              <h3 class="text-xl mb-4">Publication</h3>
+              <p class="text-neutral-700 mb-4">
+                Accepted manuscripts undergo final preparation for publication with complete transparency.
+              </p>
+              <ul class="space-y-2 text-neutral-700">
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Final formatting and technical checks</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>DOI assignment and metadata finalization</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Publication with complete attribution and transparency logs</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-angle-right mr-2 mt-1 text-neutral-500"></i>
+                  <span>Indexing in appropriate databases and search engines</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Integration -->
+        <div id="ai-integration" class="bg-white rounded-xl p-8 shadow-sm mb-10">
+          <div class="flex items-center mb-6">
+            <i class="fa-solid fa-robot text-neutral-700 mr-3 text-xl"></i>
+            <h2 class="text-2xl text-neutral-800">AI Integration</h2>
+          </div>
+          <p class="text-neutral-700 mb-6">
+            EAIOU.org integrates AI systems as formal observers within the research workflow, providing structured support while maintaining human oversight and accountability.
+          </p>
+          
+          <div class="space-y-8">
+            <!-- AI Roles -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">AI Roles in the Platform</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2 flex items-center">
+                    <i class="fa-solid fa-magnifying-glass text-neutral-600 mr-2"></i>
+                    Analysis Support
+                  </h4>
+                  <p class="text-neutral-700">
+                    AI systems analyze submissions for completeness, format compliance, and potential issues, helping streamline the initial screening process.
+                  </p>
+                </div>
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2 flex items-center">
+                    <i class="fa-solid fa-fingerprint text-neutral-600 mr-2"></i>
+                    Attribution Tracking
+                  </h4>
+                  <p class="text-neutral-700">
+                    AI maintains structured attribution logs, ensuring all contributions are properly recorded and credited throughout the research lifecycle.
+                  </p>
+                </div>
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2 flex items-center">
+                    <i class="fa-solid fa-file-contract text-neutral-600 mr-2"></i>
+                    Metadata Generation
+                  </h4>
+                  <p class="text-neutral-700">
+                    AI assists in generating comprehensive metadata for improved indexing, discovery, and interoperability with other research systems.
+                  </p>
+                </div>
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2 flex items-center">
+                    <i class="fa-solid fa-shield-halved text-neutral-600 mr-2"></i>
+                    Integrity Verification
+                  </h4>
+                  <p class="text-neutral-700">
+                    AI helps identify potential issues such as plagiarism, data inconsistencies, or methodological concerns for human review.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- AI Disclosure -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">AI Disclosure Requirements</h3>
+              <p class="text-neutral-700 mb-4">
+                EAIOU.org requires transparent disclosure of AI use in research and manuscript preparation.
+              </p>
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <h4 class="mb-3">Authors must disclose:</h4>
+                <ul class="space-y-3 text-neutral-700">
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                    <div>
+                      <strong>AI Systems Used:</strong> Names and versions of AI tools employed
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Purpose and Extent:</strong> How AI was used in research or manuscript preparation
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Prompts and Parameters:</strong> Key prompts and configuration settings when relevant
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Human Oversight:</strong> Description of human verification and validation processes
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                    <div>
+                      <strong>Limitations:</strong> Known limitations or potential biases of AI systems used
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- AI-Human Collaboration -->
+            <div>
+              <h3 class="text-xl mb-4">AI-Human Collaboration Principles</h3>
+              <p class="text-neutral-700 mb-4">
+                EAIOU.org is built on a foundation of responsible AI-human collaboration with clear principles.
+              </p>
+              <div class="space-y-4">
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2">Human Primacy</h4>
+                  <p class="text-neutral-700">
+                    AI systems support human decision-making but do not replace human judgment. Final decisions on research content, methodology, and publication remain with human authors, reviewers, and editors.
+                  </p>
+                </div>
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2">Transparency</h4>
+                  <p class="text-neutral-700">
+                    All AI contributions are clearly documented and visible in the platform's transparency logs, ensuring full attribution and accountability.
+                  </p>
+                </div>
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2">Access Control</h4>
+                  <p class="text-neutral-700">
+                    AI systems operate under strict access control limitations, with clearly defined roles and permissions within the platform architecture.
+                  </p>
+                </div>
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2">Continuous Evaluation</h4>
+                  <p class="text-neutral-700">
+                    AI systems and their integration are continuously evaluated for performance, bias, and alignment with platform values and scientific integrity.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ethics & Standards -->
+        <div id="ethics-standards" class="bg-white rounded-xl p-8 shadow-sm mb-10">
+          <div class="flex items-center mb-6">
+            <i class="fa-solid fa-scale-balanced text-neutral-700 mr-3 text-xl"></i>
+            <h2 class="text-2xl text-neutral-800">Ethics & Standards</h2>
+          </div>
+          <p class="text-neutral-700 mb-6">
+            EAIOU.org maintains rigorous ethical standards and practices to ensure research integrity, fairness, and responsible conduct.
+          </p>
+          
+          <div class="space-y-8">
+            <!-- Research Ethics -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">Research Ethics</h3>
+              <p class="text-neutral-700 mb-4">
+                All research published on EAIOU.org must adhere to established ethical standards.
+              </p>
+              <ul class="space-y-3 text-neutral-700">
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Human Subjects Research:</strong> Must include IRB/ethics committee approval and informed consent details
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Animal Research:</strong> Must comply with relevant animal welfare guidelines and regulations
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Data Ethics:</strong> Responsible collection, storage, and use of data, especially sensitive or personal information
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Dual-Use Research:</strong> Careful consideration of potential misuse of research findings
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- Publication Ethics -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">Publication Ethics</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2">Originality & Plagiarism</h4>
+                  <p class="text-neutral-700">
+                    All submissions must be original work with proper citation of sources. Plagiarism in any form is strictly prohibited.
+                  </p>
+                </div>
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2">Authorship</h4>
+                  <p class="text-neutral-700">
+                    All authors must have made substantial contributions to the work and approved the final version. Ghost, gift, or honorary authorship is not permitted.
+                  </p>
+                </div>
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2">Conflicts of Interest</h4>
+                  <p class="text-neutral-700">
+                    All financial, personal, or professional relationships that could influence research must be disclosed.
+                  </p>
+                </div>
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2">Data Integrity</h4>
+                  <p class="text-neutral-700">
+                    Data must be accurately presented without manipulation, fabrication, or selective reporting.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Reporting Concerns -->
+            <div>
+              <h3 class="text-xl mb-4">Reporting Ethical Concerns</h3>
+              <p class="text-neutral-700 mb-4">
+                EAIOU.org takes ethical concerns seriously and has established procedures for addressing them.
+              </p>
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <h4 class="mb-3">Process for Reporting:</h4>
+                <ol class="space-y-3 text-neutral-700">
+                  <li class="flex">
+                    <span class="flex-shrink-0 w-6 h-6 bg-neutral-200 rounded-full flex items-center justify-center mr-3 text-sm">1</span>
+                    <div>
+                      Use the "Report Concern" button available on all article pages
+                    </div>
+                  </li>
+                  <li class="flex">
+                    <span class="flex-shrink-0 w-6 h-6 bg-neutral-200 rounded-full flex items-center justify-center mr-3 text-sm">2</span>
+                    <div>
+                      Provide specific details about the ethical issue and supporting evidence
+                    </div>
+                  </li>
+                  <li class="flex">
+                    <span class="flex-shrink-0 w-6 h-6 bg-neutral-200 rounded-full flex items-center justify-center mr-3 text-sm">3</span>
+                    <div>
+                      Reports are reviewed by the Ethics Committee within 5 business days
+                    </div>
+                  </li>
+                  <li class="flex">
+                    <span class="flex-shrink-0 w-6 h-6 bg-neutral-200 rounded-full flex items-center justify-center mr-3 text-sm">4</span>
+                    <div>
+                      If concerns are validated, appropriate actions will be taken, including correction, retraction, or expression of concern
+                    </div>
+                  </li>
+                  <li class="flex">
+                    <span class="flex-shrink-0 w-6 h-6 bg-neutral-200 rounded-full flex items-center justify-center mr-3 text-sm">5</span>
+                    <div>
+                      All actions are documented in the article's transparency log
+                    </div>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collaboration Rules -->
+        <div id="collaboration-rules" class="bg-white rounded-xl p-8 shadow-sm mb-10">
+          <div class="flex items-center mb-6">
+            <i class="fa-solid fa-users-gear text-neutral-700 mr-3 text-xl"></i>
+            <h2 class="text-2xl text-neutral-800">Collaboration Rules</h2>
+          </div>
+          <p class="text-neutral-700 mb-6">
+            EAIOU.org's Collaboration Hub facilitates connections between researchers while maintaining appropriate boundaries and professional conduct.
+          </p>
+          
+          <div class="space-y-8">
+            <!-- Collaboration Principles -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">Collaboration Principles</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2 flex items-center">
+                    <i class="fa-solid fa-handshake text-neutral-600 mr-2"></i>
+                    Respect
+                  </h4>
+                  <p class="text-neutral-700">
+                    Treat all collaborators with professional respect regardless of background, experience level, or institutional affiliation.
+                  </p>
+                </div>
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2 flex items-center">
+                    <i class="fa-solid fa-comment-dots text-neutral-600 mr-2"></i>
+                    Communication
+                  </h4>
+                  <p class="text-neutral-700">
+                    Maintain clear, constructive communication with collaborators and document key decisions and contributions.
+                  </p>
+                </div>
+                <div class="bg-neutral-50 p-4 rounded-lg">
+                  <h4 class="mb-2 flex items-center">
+                    <i class="fa-solid fa-award text-neutral-600 mr-2"></i>
+                    Attribution
+                  </h4>
+                  <p class="text-neutral-700">
+                    Establish clear attribution guidelines at the beginning of collaboration and recognize all meaningful contributions.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Collaboration Hub Guidelines -->
+            <div class="border-b border-neutral-100 pb-6">
+              <h3 class="text-xl mb-4">Collaboration Hub Guidelines</h3>
+              <ul class="space-y-3 text-neutral-700">
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Professional Conduct:</strong> Maintain professional language and behavior in all interactions
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Specific Requests:</strong> When seeking collaborators, provide specific information about the project, required expertise, and expected contributions
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Confidentiality:</strong> Respect the confidentiality of unpublished research ideas shared in collaboration discussions
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Constructive Feedback:</strong> Provide thoughtful, constructive feedback on collaborative work
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa-solid fa-check-circle text-neutral-600 mt-1 mr-3"></i>
+                  <div>
+                    <strong>Conflict Resolution:</strong> Address disagreements directly and professionally; use platform mediation if needed
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- Prohibited Behaviors -->
+            <div>
+              <h3 class="text-xl mb-4">Prohibited Behaviors</h3>
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <p class="text-neutral-700 mb-4">
+                  The following behaviors are not permitted on the EAIOU.org Collaboration Hub:
+                </p>
+                <ul class="space-y-3 text-neutral-700">
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-ban text-neutral-600 mt-1 mr-3"></i>
+                    <div>
+                      Harassment, discrimination, or personal attacks of any kind
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-ban text-neutral-600 mt-1 mr-3"></i>
+                    <div>
+                      Sharing of proprietary or confidential information without permission
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-ban text-neutral-600 mt-1 mr-3"></i>
+                    <div>
+                      Promotion of commercial products or services unrelated to research
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-ban text-neutral-600 mt-1 mr-3"></i>
+                    <div>
+                      Misrepresentation of credentials, affiliations, or expertise
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-ban text-neutral-600 mt-1 mr-3"></i>
+                    <div>
+                      Deliberate disruption of collaborative discussions or projects
+                    </div>
+                  </li>
+                </ul>
+                <p class="mt-4 text-neutral-700">
+                  Violations may result in warnings, temporary suspension, or permanent removal from the Collaboration Hub.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div id="faq" class="bg-white rounded-xl p-8 shadow-sm">
+          <div class="flex items-center mb-6">
+            <i class="fa-solid fa-circle-question text-neutral-700 mr-3 text-xl"></i>
+            <h2 class="text-2xl text-neutral-800">Frequently Asked Questions</h2>
+          </div>
+          
+          <div class="space-y-6">
+            <div class="border-b border-neutral-100 pb-4">
+              <h3 class="text-lg mb-2 flex items-center">
+                <i class="fa-solid fa-caret-right mr-2 text-neutral-500"></i>
+                How long does the review process typically take?
+              </h3>
+              <p class="text-neutral-700 pl-6">
+                The review process typically takes 4-8 weeks from submission to first decision. Complex or interdisciplinary research may require additional time. You can track the status of your submission in real-time through your Author Dashboard.
+              </p>
+            </div>
+            
+            <div class="border-b border-neutral-100 pb-4">
+              <h3 class="text-lg mb-2 flex items-center">
+                <i class="fa-solid fa-caret-right mr-2 text-neutral-500"></i>
+                Can I suggest potential reviewers for my submission?
+              </h3>
+              <p class="text-neutral-700 pl-6">
+                Yes, authors can suggest up to five potential reviewers during the submission process. Please provide their names, affiliations, and contact information. Editors may consider these suggestions but are not obligated to select them. You should also disclose any reviewers who might have conflicts of interest.
+              </p>
+            </div>
+            
+            <div class="border-b border-neutral-100 pb-4">
+              <h3 class="text-lg mb-2 flex items-center">
+                <i class="fa-solid fa-caret-right mr-2 text-neutral-500"></i>
+                How does EAIOU.org handle open access publishing?
+              </h3>
+              <p class="text-neutral-700 pl-6">
+                EAIOU.org offers multiple open access options. Authors can choose from Gold Open Access (immediate open access with article processing charge), Green Open Access (self-archiving after embargo period), or Hybrid Open Access (selective open access in subscription journals). Specific policies and fees vary by journal and are detailed during the submission process.
+              </p>
+            </div>
+            
+            <div class="border-b border-neutral-100 pb-4">
+              <h3 class="text-lg mb-2 flex items-center">
+                <i class="fa-solid fa-caret-right mr-2 text-neutral-500"></i>
+                What file formats are accepted for data and supplementary materials?
+              </h3>
+              <p class="text-neutral-700 pl-6">
+                EAIOU.org accepts a wide range of file formats for data and supplementary materials, including CSV, JSON, XML, HDF5, and common image formats. For software and code, we recommend GitHub integration or ZIP archives with appropriate documentation. All supplementary materials should include a README file explaining contents and usage.
+              </p>
+            </div>
+            
+            <div class="border-b border-neutral-100 pb-4">
+              <h3 class="text-lg mb-2 flex items-center">
+                <i class="fa-solid fa-caret-right mr-2 text-neutral-500"></i>
+                How are AI contributions tracked and attributed?
+              </h3>
+              <p class="text-neutral-700 pl-6">
+                AI contributions are tracked through EAIOU.org's structured attribution system. Authors must disclose AI use during submission, including specific systems used and their role in research or manuscript preparation. The platform maintains transparency logs that record all AI and human contributions, which are visible in the published article's "Attribution" tab.
+              </p>
+            </div>
+            
+            <div>
+              <h3 class="text-lg mb-2 flex items-center">
+                <i class="fa-solid fa-caret-right mr-2 text-neutral-500"></i>
+                What should I do if I discover an error in my published article?
+              </h3>
+              <p class="text-neutral-700 pl-6">
+                If you discover an error in your published article, use the "Report Error" button on the article page. Provide specific details about the error and proposed correction. Minor errors may be addressed with a correction notice, while substantial errors affecting conclusions may require a formal correction article or, in rare cases, retraction. All changes are documented in the article's transparency log.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sidebar -->
+      <div class="w-full lg:w-1/4 space-y-6">
+        <!-- Quick Links -->
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <h3 class="text-lg mb-4">Quick Links</h3>
+          <ul class="space-y-3">
+            <li>
+              <span class="flex items-center text-neutral-700 hover:text-neutral-900 cursor-pointer">
+                <i class="fa-solid fa-file-arrow-up text-neutral-500 mr-2"></i>
+                <span>Submission Portal</span>
+              </span>
+            </li>
+            <li>
+              <span class="flex items-center text-neutral-700 hover:text-neutral-900 cursor-pointer">
+                <i class="fa-solid fa-file-signature text-neutral-500 mr-2"></i>
+                <span>Author Templates</span>
+              </span>
+            </li>
+            <li>
+              <span class="flex items-center text-neutral-700 hover:text-neutral-900 cursor-pointer">
+                <i class="fa-solid fa-clipboard-list text-neutral-500 mr-2"></i>
+                <span>Reviewer Guidelines</span>
+              </span>
+            </li>
+            <li>
+              <span class="flex items-center text-neutral-700 hover:text-neutral-900 cursor-pointer">
+                <i class="fa-solid fa-book text-neutral-500 mr-2"></i>
+                <span>Style Guide</span>
+              </span>
+            </li>
+            <li>
+              <span class="flex items-center text-neutral-700 hover:text-neutral-900 cursor-pointer">
+                <i class="fa-solid fa-shield-halved text-neutral-500 mr-2"></i>
+                <span>Ethics Policy</span>
+              </span>
+            </li>
+            <li>
+              <span class="flex items-center text-neutral-700 hover:text-neutral-900 cursor-pointer">
+                <i class="fa-solid fa-circle-info text-neutral-500 mr-2"></i>
+                <span>Support Center</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Resources -->
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <h3 class
+                </body>
+              </html>
+            

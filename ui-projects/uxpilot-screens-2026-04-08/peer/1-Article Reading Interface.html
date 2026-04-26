@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hypothesis@1.1000.0/build/boot.js" async></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#007cba',
+                        emerald: '#00b894',
+                        coral: '#fd79a8',
+                        orange: '#fdcb6e',
+                        purple: '#6c5ce7',
+                        charcoal: '#2d3436',
+                        mediumgray: '#636e72',
+                        success: '#00b894',
+                        warning: '#fdcb6e',
+                        error: '#e17055',
+                        info: '#007cba',
+                        offwhite: '#FAFAF8'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                        'mono': ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-offwhite text-charcoal">
+    <header id="header" class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                        PR
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-lg">PeerTrail</span>
+                        <span class="text-xs text-mediumgray">Transparent Scientific Publishing</span>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Submit Article</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Browse Articles</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Reviews</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Submissions</span>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="search-toggle" class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button id="annotation-toggle" class="text-primary hover:text-primary/80 transition">
+                        <i class="fa-solid fa-highlighter"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition relative">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-coral text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                    </button>
+                    <div class="w-8 h-8 rounded-full overflow-hidden">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User profile" class="w-full h-full object-cover">
+                    </div>
+                    <button class="md:hidden text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="global-search" class="hidden bg-white shadow-md py-4 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="relative">
+                <input type="text" placeholder="Search articles, authors, audit trails, annotations..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <button class="absolute right-3 top-3 text-gray-400 hover:text-primary">
+                    <i class="fa-solid fa-search"></i>
+                </button>
+            </div>
+            <div class="mt-3 flex space-x-2 text-sm">
+                <span class="font-medium">Quick filters:</span>
+                <button class="text-primary hover:underline">Recent articles</button>
+                <button class="text-primary hover:underline">Most annotated</button>
+                <button class="text-primary hover:underline">Top audit trails</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="article-reader" class="flex h-[calc(100vh-64px)]">
+        <!-- Left Pane - Article Content -->
+        <div id="article-content" class="w-2/3 overflow-y-auto bg-white border-r border-gray-200">
+            <div class="sticky top-0 z-10 bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button class="text-mediumgray hover:text-primary transition">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-emerald text-white text-xs font-medium px-2 py-1 rounded-md">Published</span>
+                            <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded">Neuroscience</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button class="text-mediumgray hover:text-primary transition" title="Download PDF">
+                        <i class="fa-solid fa-download"></i>
+                    </button>
+                    <button class="text-mediumgray hover:text-primary transition" title="Share Article">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                    <button class="text-mediumgray hover:text-primary transition" title="Bookmark">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="px-10 py-8">
+                <div class="mb-6">
+                    <h1 class="text-3xl font-bold text-charcoal mb-4 font-serif">Novel Neural Mechanisms in Decision-Making: A Comprehensive Review</h1>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full overflow-hidden mr-2">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Author" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <div class="font-medium">Dr. Sarah Chen</div>
+                                <div class="text-sm text-mediumgray">Stanford University</div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-mediumgray">
+                            Published: August 15, 2023 | DOI: <span class="font-mono">10.1234/neuro.2023.08.15</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-3 font-serif">Abstract</h2>
+                    <p class="text-mediumgray mb-4 leading-relaxed font-serif">
+                        This comprehensive review explores previously undocumented neural pathways involved in complex decision-making processes under uncertainty. We present a novel framework that integrates findings from neuroimaging studies, computational modeling, and behavioral experiments to elucidate the neural mechanisms underlying decision-making in various contexts. Our analysis reveals distinct activation patterns in the prefrontal cortex and striatum that correlate with different aspects of the decision-making process. These findings have significant implications for understanding both normal decision-making processes and their alterations in neuropsychiatric disorders.
+                    </p>
+                </div>
+                
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-3 font-serif">Introduction</h2>
+                    <p class="text-mediumgray mb-4 leading-relaxed font-serif">
+                        Decision-making is a fundamental cognitive process that involves the evaluation of options, prediction of outcomes, and selection of actions. The neural mechanisms underlying decision-making have been extensively studied using various approaches, including neuroimaging, electrophysiology, and computational modeling. However, there remains a gap in our understanding of how different brain regions interact to support complex decision-making processes, particularly under conditions of uncertainty.
+                    </p>
+                    <p class="text-mediumgray mb-4 leading-relaxed font-serif">
+                        Recent advances in neuroimaging techniques and computational methods have provided new insights into the neural basis of decision-making. In particular, functional magnetic resonance imaging (fMRI) studies have identified a network of brain regions, including the prefrontal cortex (PFC), anterior cingulate cortex (ACC), and striatum, that are consistently activated during decision-making tasks. These regions are thought to play distinct roles in different aspects of the decision-making process, such as value representation, action selection, and outcome evaluation.
+                    </p>
+                </div>
+                
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-3 font-serif">Methods</h2>
+                    <p class="text-mediumgray mb-4 leading-relaxed font-serif">
+                        We conducted a systematic review of the literature on the neural mechanisms of decision-making, focusing on studies published between 2010 and 2023. We included studies that used neuroimaging techniques (fMRI, EEG, MEG), computational modeling, or a combination of these approaches to investigate decision-making processes in healthy adults. We excluded studies that focused exclusively on clinical populations or developmental aspects of decision-making.
+                    </p>
+                    <p class="text-mediumgray mb-4 leading-relaxed font-serif">
+                        Our search strategy included the following databases: PubMed, Web of Science, and PsycINFO. We used the following search terms: "decision-making," "neural mechanisms," "fMRI," "EEG," "MEG," "computational modeling," "prefrontal cortex," "striatum," "uncertainty," and "value-based decision-making." The initial search yielded 1,245 articles, which were screened for relevance based on title and abstract. After screening, 342 articles were selected for full-text review, and 127 articles were included in the final analysis.
+                    </p>
+                </div>
+                
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-3 font-serif">Results</h2>
+                    <p class="text-mediumgray mb-4 leading-relaxed font-serif">
+                        Our analysis revealed several key findings regarding the neural mechanisms of decision-making. First, we identified a consistent pattern of activation in the ventromedial prefrontal cortex (vmPFC) and striatum during value-based decision-making tasks. These regions were found to encode the subjective value of options, with activation in the vmPFC correlating with the value of the chosen option and activation in the striatum correlating with the prediction error signal.
+                    </p>
+                    <p class="text-mediumgray mb-4 leading-relaxed font-serif">
+                        Second, we found evidence for distinct neural mechanisms underlying different types of decisions. For example, decisions under risk (where probabilities are known) were associated with activation in the lateral prefrontal cortex (lPFC) and posterior parietal cortex (PPC), while decisions under ambiguity (where probabilities are unknown) were associated with activation in the dorsolateral prefrontal cortex (dlPFC) and anterior insula.
+                    </p>
+                </div>
+                
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-3 font-serif">Discussion</h2>
+                    <p class="text-mediumgray mb-4 leading-relaxed font-serif">
+                        Our findings provide a comprehensive framework for understanding the neural mechanisms of decision-making under various conditions. The consistent activation of the vmPFC and striatum during value-based decision-making supports the role of these regions in representing the subjective value of options and computing prediction errors, respectively. These processes are fundamental to reinforcement learning models of decision-making, which posit that decisions are guided by the expected value of outcomes and updated based on the discrepancy between expected and actual outcomes.
+                    </p>
+                    <p class="text-mediumgray mb-4 leading-relaxed font-serif">
+                        The distinct neural mechanisms underlying decisions under risk and ambiguity suggest that the brain employs different strategies for dealing with different types of uncertainty. When probabilities are known (risk), the brain may engage computational processes in the lPFC and PPC to calculate expected values and compare options. In contrast, when probabilities are unknown (ambiguity), the brain may rely more on heuristic processes in the dlPFC and anterior insula to guide decisions.
+                    </p>
+                </div>
+                
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-3 font-serif">Conclusion</h2>
+                    <p class="text-mediumgray mb-4 leading-relaxed font-serif">
+                        This review provides a comprehensive analysis of the neural mechanisms underlying decision-making, integrating findings from neuroimaging studies, computational modeling, and behavioral experiments. Our findings highlight the complex and distributed nature of the neural processes involved in decision-making, with different brain regions playing distinct roles in different aspects of the decision-making process. Future research should focus on elucidating the functional connectivity between these regions and how their interactions give rise to complex decision-making behaviors.
+                    </p>
+                </div>
+                
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-3 font-serif">References</h2>
+                    <ul class="list-decimal pl-5 text-mediumgray space-y-2 font-serif">
+                        <li>Smith, J., & Johnson, M. (2018). Neural correlates of value-based decision-making. <em>Neuroscience Review</em>, 45(3), 215-230.</li>
+                        <li>Brown, A., et al. (2020). Computational models of decision-making under uncertainty. <em>Journal of Cognitive Neuroscience</em>, 32(8), 1540-1558.</li>
+                        <li>Williams, R., & Davis, T. (2019). The role of the prefrontal cortex in risky decision-making. <em>Frontiers in Neuroscience</em>, 13, 325.</li>
+                        <li>Chen, S., & Lee, D. (2021). Neural mechanisms of ambiguity resolution in decision-making. <em>Nature Neuroscience</em>, 24(6), 789-799.</li>
+                        <li>Garcia, M., et al. (2022). Reinforcement learning models of human decision-making. <em>Annual Review of Psychology</em>, 73, 339-368.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Pane - Sidebar with Tabs -->
+        <div id="article-sidebar" class="w-1/3 flex flex-col bg-offwhite">
+            <div class="border-b border-gray-200">
+                <div class="flex">
+                    <button id="audit-tab" class="px-4 py-3 font-medium text-primary border-b-2 border-primary flex items-center">
+                        <i class="fa-solid fa-magnifying-glass-chart mr-2"></i>
+                        Audit Trail
+                    </button>
+                    <button id="annotations-tab" class="px-4 py-3 font-medium text-mediumgray hover:text-charcoal transition flex items-center">
+                        <i class="fa-solid fa-highlighter mr-2"></i>
+                        Annotations
+                    </button>
+                    <button id="toc-tab" class="px-4 py-3 font-medium text-mediumgray hover:text-charcoal transition flex items-center">
+                        <i class="fa-solid fa-list mr-2"></i>
+                        Contents
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Audit Trail Panel -->
+            <div id="audit-panel" class="flex-1 overflow-y-auto">
+                <div class="p-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-lg">Research Audit Trail</h3>
+                        <div class="flex items-center space-x-2">
+                            <button class="text-mediumgray hover:text-primary transition">
+                                <i class="fa-solid fa-filter"></i>
+                            </button>
+                            <button class="text-mediumgray hover:text-primary transition">
+                                <i class="fa-solid fa-sort"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="relative pl-6 border-l-2 border-gray-200 mb-6">
+                        <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary"></div>
+                        <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded">Methodology</span>
+                                <span class="text-xs text-mediumgray">June 12, 2023</span>
+                            </div>
+                            <h4 class="font-bold mb-2">Alternative fMRI Analysis Approach</h4>
+                            <p class="text-sm text-mediumgray mb-3">We initially attempted to use independent component analysis (ICA) for the fMRI data processing, but encountered significant noise issues that made interpretation difficult.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-xs">
+                                    <span class="flex items-center text-purple">
+                                        <i class="fa-solid fa-lightbulb mr-1"></i>
+                                        Insight
+                                    </span>
+                                    <span class="flex items-center text-orange">
+                                        <i class="fa-solid fa-triangle-exclamation mr-1"></i>
+                                        Challenge
+                                    </span>
+                                </div>
+                                <button class="text-primary text-sm hover:underline">Expand</button>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute left-[-9px] top-[120px] w-4 h-4 rounded-full bg-emerald"></div>
+                        <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="bg-emerald/10 text-emerald text-xs px-2 py-1 rounded">Analysis</span>
+                                <span class="text-xs text-mediumgray">July 3, 2023</span>
+                            </div>
+                            <h4 class="font-bold mb-2">Bayesian Model Comparison</h4>
+                            <p class="text-sm text-mediumgray mb-3">We explored a hierarchical Bayesian model for decision-making data but found that a simpler reinforcement learning model provided better fit to the behavioral data.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-xs">
+                                    <span class="flex items-center text-primary">
+                                        <i class="fa-solid fa-code-branch mr-1"></i>
+                                        Alternative
+                                    </span>
+                                </div>
+                                <button class="text-primary text-sm hover:underline">Expand</button>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute left-[-9px] top-[240px] w-4 h-4 rounded-full bg-coral"></div>
+                        <div class="bg-white rounded-lg shadow-sm p-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="bg-coral/10 text-coral text-xs px-2 py-1 rounded">Theory</span>
+                                <span class="text-xs text-mediumgray">July 18, 2023</span>
+                            </div>
+                            <h4 class="font-bold mb-2">Dual-Process Framework Revision</h4>
+                            <p class="text-sm text-mediumgray mb-3">Initially proposed a dual-process framework for ambiguity resolution but evidence suggested a more integrated model where these processes interact continuously rather than operating separately.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-xs">
+                                    <span class="flex items-center text-purple">
+                                        <i class="fa-solid fa-lightbulb mr-1"></i>
+                                        Insight
+                                    </span>
+                                    <span class="flex items-center text-emerald">
+                                        <i class="fa-solid fa-check mr-1"></i>
+                                        Improvement
+                                    </span>
+                                </div>
+                                <button class="text-primary text-sm hover:underline">Expand</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-100 rounded-lg p-4">
+                        <h4 class="font-medium mb-2">Audit Trail Summary</h4>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm">Total discarded approaches:</span>
+                            <span class="font-medium">8</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm">Key insights generated:</span>
+                            <span class="font-medium">5</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Time saved for future researchers:</span>
+                            <span class="font-medium">Est. 120 hours</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Annotations Panel (hidden by default) -->
+            <div id="annotations-panel" class="flex-1 overflow-y-auto hidden">
+                <div class="p-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-lg">Article Annotations</h3>
+                        <div class="flex items-center space-x-2">
+                            <button class="text-mediumgray hover:text-primary transition">
+                                <i class="fa-solid fa-filter"></i>
+                            </button>
+                            <button class="text-mediumgray hover:text-primary transition">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-primary">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 rounded-full overflow-hidden mr-2">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Reviewer" class="w-full h-full object-cover">
+                                    </div>
+                                    <span class="font-medium text-sm">Prof. James Wilson</span>
+                                </div>
+                                <span class="text-xs text-mediumgray">2 days ago</span>
+                            </div>
+                            <p class="text-sm text-mediumgray mb-2">The distinction between risk and ambiguity processing is well articulated, but I wonder if there's evidence for a continuum rather than distinct mechanisms?</p>
+                            <div class="bg-gray-100 rounded p-2 text-xs text-mediumgray italic mb-2">
+                                "...decisions under risk (where probabilities are known) were associated with activation in the lateral prefrontal cortex (lPFC)..."
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-xs">
+                                    <span class="flex items-center text-primary">
+                                        <i class="fa-solid fa-tag mr-1"></i>
+                                        Question
+                                    </span>
+                                </div>
+                                <button class="text-primary text-sm hover:underline">Reply</button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-emerald">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 rounded-full overflow-hidden mr-2">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Reviewer" class="w-full h-full object-cover">
+                                    </div>
+                                    <span class="font-medium text-sm">Dr. Emily Rodriguez</span>
+                                </div>
+                                <span class="text-xs text-mediumgray">1 day ago</span>
+                            </div>
+                            <p class="text-sm text-mediumgray mb-2">Excellent integration of computational modeling with neuroimaging data. This approach provides a more comprehensive understanding of the neural mechanisms.</p>
+                            <div class="bg-gray-100 rounded p-2 text-xs text-mediumgray italic mb-2">
+                                "...integrating findings from neuroimaging studies, computational modeling, and behavioral experiments..."
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-xs">
+                                    <span class="flex items-center text-emerald">
+                                        <i class="fa-solid fa-tag mr-1"></i>
+                                        Positive
+                                    </span>
+                                </div>
+                                <button class="text-primary text-sm hover:underline">Reply</button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-orange">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 rounded-full overflow-hidden mr-2">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="Reviewer" class="w-full h-full object-cover">
+                                    </div>
+                                    <span class="font-medium text-sm">Dr. Michael Thompson</span>
+                                </div>
+                                <span class="text-xs text-mediumgray">12 hours ago</span>
+                            </div>
+                            <p class="text-sm text-mediumgray mb-2">Consider discussing the implications of these findings for clinical populations, particularly those with decision-making deficits such as in addiction or OCD.</p>
+                            <div class="bg-gray-100 rounded p-2 text-xs text-mediumgray italic mb-2">
+                                "...significant implications for understanding both normal decision-making processes and their alterations in neuropsychiatric disorders."
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 text-xs">
+                                    <span class="flex items-center text-orange">
+                                        <i class="fa-solid fa-tag mr-1"></i>
+                                        Suggestion
+                                    </span>
+                                </div>
+                                <button class="text-primary text-sm hover:underline">Reply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Table of Contents Panel (hidden by default) -->
+            <div id="toc-panel" class="flex-1 overflow-y-auto hidden">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-4">Table of Contents</h3>
+                    
+                    <ul class="space-y-3">
+                        <li>
+                            <span class="flex items-center text-primary hover:underline cursor-pointer">
+                                <span class="mr-2">1.</span>
+                                <span>Abstract</span>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center text-charcoal hover:text-primary transition cursor-pointer">
+                                <span class="mr-2">2.</span>
+                                <span>Introduction</span>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center text-charcoal hover:text-primary transition cursor-pointer">
+                                <span class="mr-2">3.</span>
+                                <span>Methods</span>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center text-charcoal hover:text-primary transition cursor-pointer">
+                                <span class="mr-2">4.</span>
+                                <span>Results</span>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center text-charcoal hover:text-primary transition cursor-pointer">
+                                <span class="mr-2">5.</span>
+                                <span>Discussion</span>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center text-charcoal hover:text-primary transition cursor-pointer">
+                                <span class="mr-2">6.</span>
+                                <span>Conclusion</span>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center text-charcoal hover:text-primary transition cursor-pointer">
+                                <span class="mr-2">7.</span>
+                                <span>References</span>
+                            </span>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <h4 class="font-medium mb-3">Article Metadata</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-mediumgray">DOI:</span>
+                                <span class="font-mono">10.1234/neuro.2023.08.15</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-mediumgray">Published:</span>
+                                <span>August 15, 2023</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-mediumgray">Citation Count:</span>
+                                <span>24</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-mediumgray">Annotations:</span>
+                                <span>18</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-mediumgray">Audit Trail Items:</span>
+                                <span>8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle global search
+        document.getElementById('search-toggle').addEventListener('click', function() {
+            const searchBar = document.getElementById('global-search');
+            searchBar.classList.toggle('hidden');
+        });
+        
+        // Tab switching
+        document.getElementById('audit-tab').addEventListener('click', function() {
+            // Update tab styles
+            this.classList.add('text-primary', 'border-primary');
+            this.classList.remove('text-mediumgray');
+            document.getElementById('annotations-tab').classList.remove('text-primary', 'border-primary');
+            document.getElementById('annotations-tab').classList.add('text-mediumgray');
+            document.getElementById('toc-tab').classList.remove('text-primary', 'border-primary');
+            document.getElementById('toc-tab').classList.add('text-mediumgray');
+            
+            // Show/hide panels
+            document.getElementById('audit-panel').classList.remove('hidden');
+            document.getElementById('annotations-panel').classList.add('hidden');
+            document.getElementById('toc-panel').classList.add('hidden');
+        });
+        
+        document.getElementById('annotations-tab').addEventListener('click', function() {
+            // Update tab styles
+            this.classList.add('text-primary', 'border-primary');
+            this.classList.remove('text-mediumgray');
+            document.getElementById('audit-tab').classList.remove('text-primary', 'border-primary');
+            document.getElementById('audit-tab').classList.add('text-mediumgray');
+            document.getElementById('toc-tab').classList.remove('text-primary', 'border-primary');
+            document.getElementById('toc-tab').classList.add('text-mediumgray');
+            
+            // Show/hide panels
+            document.getElementById('audit-panel').classList.add('hidden');
+            document.getElementById('annotations-panel').classList.remove('hidden');
+            document.getElementById('toc-panel').classList.add('hidden');
+        });
+        
+        document.getElementById('toc-tab').addEventListener('click', function() {
+            // Update tab styles
+            this.classList.add('text-primary', 'border-primary');
+            this.classList.remove('text-mediumgray');
+            document.getElementById('audit-tab').classList.remove('text-primary', 'border-primary');
+            document.getElementById('audit-tab').classList.add('text-mediumgray');
+            document.getElementById('annotations-tab').classList.remove('text-primary', 'border-primary');
+            document.getElementById('annotations-tab').classList.add('text-mediumgray');
+            
+            // Show/hide panels
+            document.getElementById('audit-panel').classList.add('hidden');
+            document.getElementById('annotations-panel').classList.add('hidden');
+            document.getElementById('toc-panel').classList.remove('hidden');
+        });
+        
+        // Toggle annotation mode
+        document.getElementById('annotation-toggle').addEventListener('click', function() {
+            this.classList.toggle('text-primary');
+            this.classList.toggle('text-emerald');
+            
+            if (this.classList.contains('text-emerald')) {
+                // Enable annotation mode
+                document.getElementById('annotations-tab').click();
+            }
+        });
+    </script>
+</body>
+</html>

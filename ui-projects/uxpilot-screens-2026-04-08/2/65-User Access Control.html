@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="bg-neutral-100 border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+  <div class="flex items-center">
+    <div class="w-10 h-10 rounded-md bg-neutral-800 flex items-center justify-center text-white">
+      <i class="fa-solid fa-brain"></i>
+    </div>
+    <span class="ml-3 text-xl">AI Project Hub</span>
+  </div>
+  <div class="flex items-center space-x-4">
+    <div class="relative">
+      <input type="text" placeholder="Search settings..." class="pl-9 pr-4 py-2 rounded-md border border-neutral-300 w-64 focus:outline-none focus:ring-2 focus:ring-neutral-400 text-sm">
+      <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-neutral-400"></i>
+    </div>
+    <button class="p-2 text-neutral-600 hover:bg-neutral-200 rounded-full">
+      <i class="fa-solid fa-bell"></i>
+    </button>
+    <div class="flex items-center">
+      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full border border-neutral-300">
+      <span class="ml-2 text-sm">Alex Morgan</span>
+      <i class="fa-solid fa-chevron-down ml-2 text-xs text-neutral-500"></i>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="flex min-h-[calc(100vh-72px)]">
+  <div id="sidebar" class="w-64 border-r border-neutral-200 bg-white">
+    <div class="p-4">
+      <h2 class="text-lg mb-4">Settings</h2>
+      <div class="space-y-1">
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-sliders mr-3 text-neutral-500"></i>
+          <span>General</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-microchip mr-3 text-neutral-500"></i>
+          <span>AI Models</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-folder-tree mr-3 text-neutral-500"></i>
+          <span>Projects</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-800 bg-neutral-100 rounded-md">
+          <i class="fa-solid fa-users mr-3 text-neutral-600"></i>
+          <span>Team Members</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-shield-halved mr-3 text-neutral-500"></i>
+          <span>Security</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-credit-card mr-3 text-neutral-500"></i>
+          <span>Billing</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-plug mr-3 text-neutral-500"></i>
+          <span>Integrations</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="p-4 border-t border-neutral-200">
+      <h3 class="text-sm text-neutral-500 mb-3">PROJECTS</h3>
+      <div class="space-y-1">
+        <div class="flex items-center justify-between px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <div class="flex items-center">
+            <i class="fa-solid fa-flask mr-3 text-neutral-500"></i>
+            <span>Scientific Research</span>
+          </div>
+          <span class="text-xs bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded-full">Active</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-book mr-3 text-neutral-500"></i>
+          <span>Academic Papers</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-chart-line mr-3 text-neutral-500"></i>
+          <span>Data Analysis</span>
+        </div>
+      </div>
+      <button class="mt-3 w-full flex items-center justify-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 border border-neutral-300 rounded-md text-sm">
+        <i class="fa-solid fa-plus mr-2"></i>
+        <span>New Project</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="content" class="flex-1 bg-neutral-50 p-6 overflow-auto">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl text-neutral-800">Access Control</h1>
+        <button class="px-4 py-2 bg-neutral-800 text-white rounded-md flex items-center">
+          <i class="fa-solid fa-plus mr-2"></i>
+          <span>Add New Role</span>
+        </button>
+      </div>
+
+      <div id="notification-section" class="mb-6 bg-neutral-50 border border-neutral-200 rounded-lg p-4 flex items-start">
+        <i class="fa-solid fa-circle-info text-neutral-500 mt-0.5 mr-3 text-lg"></i>
+        <div>
+          <h3 class="text-neutral-800 mb-1">Permission System Updated</h3>
+          <p class="text-neutral-600 text-sm">The role-based access control system has been updated. Please review your team's permissions to ensure proper access levels.</p>
+          <button class="mt-2 text-sm text-neutral-600 hover:text-neutral-700">
+            View Documentation
+          </button>
+        </div>
+      </div>
+
+      <div id="role-filters" class="flex items-center space-x-4 mb-6">
+        <div class="relative">
+          <select class="pl-3 pr-8 py-2 border border-neutral-300 rounded-md appearance-none bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+            <option>All Roles</option>
+            <option>Administrator</option>
+            <option>Project Manager</option>
+            <option>Researcher</option>
+            <option>Viewer</option>
+          </select>
+          <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-neutral-400 pointer-events-none"></i>
+        </div>
+        <div class="relative">
+          <select class="pl-3 pr-8 py-2 border border-neutral-300 rounded-md appearance-none bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+            <option>All Projects</option>
+            <option>Scientific Research</option>
+            <option>Academic Papers</option>
+            <option>Data Analysis</option>
+          </select>
+          <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-neutral-400 pointer-events-none"></i>
+        </div>
+        <button class="px-3 py-2 border border-neutral-300 rounded-md bg-white text-neutral-700 flex items-center hover:bg-neutral-50">
+          <i class="fa-solid fa-filter mr-2"></i>
+          <span>More Filters</span>
+        </button>
+      </div>
+
+      <div id="roles-section" class="bg-white rounded-lg border border-neutral-200 shadow-sm p-6 mb-6">
+        <h2 class="text-lg text-neutral-800 mb-4">Role Management</h2>
+        <p class="text-sm text-neutral-600 mb-4">Define access levels and permissions for different user roles in your organization.</p>
+        
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-full">
+            <thead>
+              <tr class="bg-neutral-50 border-b border-neutral-200">
+                <th class="py-3 px-4 text-left text-sm text-neutral-600">Role Name</th>
+                <th class="py-3 px-4 text-left text-sm text-neutral-600">Description</th>
+                <th class="py-3 px-4 text-left text-sm text-neutral-600">Users</th>
+                <th class="py-3 px-4 text-left text-sm text-neutral-600">Projects</th>
+                <th class="py-3 px-4 text-left text-sm text-neutral-600">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200">
+              <tr>
+                <td class="py-4 px-4">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center text-white">
+                      <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <span class="ml-3">Administrator</span>
+                  </div>
+                </td>
+                <td class="py-4 px-4 text-sm text-neutral-600">Full access to all settings and features</td>
+                <td class="py-4 px-4">
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User" class="w-7 h-7 rounded-full border border-white">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=234" alt="User" class="w-7 h-7 rounded-full border border-white">
+                  </div>
+                </td>
+                <td class="py-4 px-4 text-sm">All Projects</td>
+                <td class="py-4 px-4">
+                  <button class="text-neutral-600 hover:text-neutral-800">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="py-4 px-4">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-neutral-700 flex items-center justify-center text-white">
+                      <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <span class="ml-3">Project Manager</span>
+                  </div>
+                </td>
+                <td class="py-4 px-4 text-sm text-neutral-600">Can manage assigned projects and their models</td>
+                <td class="py-4 px-4">
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User" class="w-7 h-7 rounded-full border border-white">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=567" alt="User" class="w-7 h-7 rounded-full border border-white">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=890" alt="User" class="w-7 h-7 rounded-full border border-white">
+                    <div class="w-7 h-7 rounded-full bg-neutral-200 flex items-center justify-center text-xs text-neutral-600 border border-white">
+                      +2
+                    </div>
+                  </div>
+                </td>
+                <td class="py-4 px-4 text-sm">Assigned Projects</td>
+                <td class="py-4 px-4">
+                  <button class="text-neutral-600 hover:text-neutral-800">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="py-4 px-4">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-neutral-600 flex items-center justify-center text-white">
+                      <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <span class="ml-3">Researcher</span>
+                  </div>
+                </td>
+                <td class="py-4 px-4 text-sm text-neutral-600">Can use AI models and view project data</td>
+                <td class="py-4 px-4">
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User" class="w-7 h-7 rounded-full border border-white">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User" class="w-7 h-7 rounded-full border border-white">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User" class="w-7 h-7 rounded-full border border-white">
+                    <div class="w-7 h-7 rounded-full bg-neutral-200 flex items-center justify-center text-xs text-neutral-600 border border-white">
+                      +8
+                    </div>
+                  </div>
+                </td>
+                <td class="py-4 px-4 text-sm">Assigned Projects</td>
+                <td class="py-4 px-4">
+                  <button class="text-neutral-600 hover:text-neutral-800">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="py-4 px-4">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-neutral-500 flex items-center justify-center text-white">
+                      <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <span class="ml-3">Viewer</span>
+                  </div>
+                </td>
+                <td class="py-4 px-4 text-sm text-neutral-600">Read-only access to project results and outputs</td>
+                <td class="py-4 px-4">
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=321" alt="User" class="w-7 h-7 rounded-full border border-white">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=654" alt="User" class="w-7 h-7 rounded-full border border-white">
+                    <div class="w-7 h-7 rounded-full bg-neutral-200 flex items-center justify-center text-xs text-neutral-600 border border-white">
+                      +4
+                    </div>
+                  </div>
+                </td>
+                <td class="py-4 px-4 text-sm">Specific Projects</td>
+                <td class="py-4 px-4">
+                  <button class="text-neutral-600 hover:text-neutral-800">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="py-4 px-4">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-neutral-400 flex items-center justify-center text-white">
+                      <i class="fa-solid fa-code"></i>
+                    </div>
+                    <span class="ml-3">API User</span>
+                  </div>
+                </td>
+                <td class="py-4 px-4 text-sm text-neutral-600">Programmatic access to AI models via API</td>
+                <td class="py-4 px-4">
+                  <div class="flex -space-x-2">
+                    <div class="w-7 h-7 rounded-full bg-neutral-200 flex items-center justify-center text-xs text-neutral-600 border border-white">
+                      3
+                    </div>
+                  </div>
+                </td>
+                <td class="py-4 px-4 text-sm">Limited Models</td>
+                <td class="py-4 px-4">
+                  <button class="text-neutral-600 hover:text-neutral-800">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="permissions-section" class="bg-white rounded-lg border border-neutral-200 shadow-sm p-6 mb-6">
+        <h2 class="text-lg text-neutral-800 mb-4">Permission Matrix</h2>
+        <p class="text-sm text-neutral-600 mb-4">Configure detailed permissions for each role and resource type.</p>
+        
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-full">
+            <thead>
+              <tr class="bg-neutral-50 border-b border-neutral-200">
+                <th class="py-3 px-4 text-left text-sm text-neutral-600">Resource / Action</th>
+                <th class="py-3 px-4 text-center text-sm text-neutral-600">Administrator</th>
+                <th class="py-3 px-4 text-center text-sm text-neutral-600">Project Manager</th>
+                <th class="py-3 px-4 text-center text-sm text-neutral-600">Researcher</th>
+                <th class="py-3 px-4 text-center text-sm text-neutral-600">Viewer</th>
+                <th class="py-3 px-4 text-center text-sm text-neutral-600">API User</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200">
+              <tr>
+                <td class="py-3 px-4">AI Models - Create</td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4">AI Models - Edit</td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4">AI Models - Use</td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4">Projects - Create</td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4">Projects - Edit</td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4">Projects - View</td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4">Users - Manage</td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4">Billing - View</td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4">Billing - Manage</td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4">Security Settings</td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-check text-neutral-800"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+                <td class="py-3 px-4 text-center"><i class="fa-solid fa-xmark text-neutral-400"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="mt-6 flex justify-end">
+          <button class="px-4 py-2 bg-neutral-800 text-white rounded-md">Save Permission Changes</button>
+        </div>
+      </div>
+
+      <div id="model-access-section" class="bg-white rounded-lg border border-neutral-200 shadow-sm p-6">
+        <h2 class="text-lg text-neutral-800 mb-4">Model Access Control</h2>
+        <p class="text-sm text-neutral-600 mb-4">Restrict access to specific AI models based on roles and projects.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="border border-neutral-200 rounded-lg p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center text-white">
+                  <i class="fa-solid fa-robot"></i>
+                </div>
+                <h3 class="ml-2">GPT-Academic</h3>
+              </div>
+              <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Active</span>
+            </div>
+            
+            <div class="mb-3">
+              <label class="block text-sm text-neutral-700 mb-1">Allowed Roles</label>
+              <div class="flex flex-wrap gap-2">
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Administrator
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Project Manager
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Researcher
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <button class="px-2 py-1 border border-dashed border-neutral-300 text-neutral-500 text-xs rounded-md hover:bg-neutral-50">
+                  <i class="fa-solid fa-plus mr-1"></i> Add Role
+                </button>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Allowed Projects</label>
+              <div class="flex flex-wrap gap-2">
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Academic Papers
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Scientific Research
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <button class="px-2 py-1 border border-dashed border-neutral-300 text-neutral-500 text-xs rounded-md hover:bg-neutral-50">
+                  <i class="fa-solid fa-plus mr-1"></i> Add Project
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="border border-neutral-200 rounded-lg p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center text-white">
+                  <i class="fa-solid fa-image"></i>
+                </div>
+                <h3 class="ml-2">SciViz-Generator</h3>
+              </div>
+              <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Active</span>
+            </div>
+            
+            <div class="mb-3">
+              <label class="block text-sm text-neutral-700 mb-1">Allowed Roles</label>
+              <div class="flex flex-wrap gap-2">
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Administrator
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Project Manager
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <button class="px-2 py-1 border border-dashed border-neutral-300 text-neutral-500 text-xs rounded-md hover:bg-neutral-50">
+                  <i class="fa-solid fa-plus mr-1"></i> Add Role
+                </button>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Allowed Projects</label>
+              <div class="flex flex-wrap gap-2">
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Scientific Research
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <button class="px-2 py-1 border border-dashed border-neutral-300 text-neutral-500 text-xs rounded-md hover:bg-neutral-50">
+                  <i class="fa-solid fa-plus mr-1"></i> Add Project
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="border border-neutral-200 rounded-lg p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center text-white">
+                  <i class="fa-solid fa-calculator"></i>
+                </div>
+                <h3 class="ml-2">DataAnalyst-AI</h3>
+              </div>
+              <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Updating</span>
+            </div>
+            
+            <div class="mb-3">
+              <label class="block text-sm text-neutral-700 mb-1">Allowed Roles</label>
+              <div class="flex flex-wrap gap-2">
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Administrator
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Project Manager
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Researcher
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <button class="px-2 py-1 border border-dashed border-neutral-300 text-neutral-500 text-xs rounded-md hover:bg-neutral-50">
+                  <i class="fa-solid fa-plus mr-1"></i> Add Role
+                </button>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Allowed Projects</label>
+              <div class="flex flex-wrap gap-2">
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Data Analysis
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <button class="px-2 py-1 border border-dashed border-neutral-300 text-neutral-500 text-xs rounded-md hover:bg-neutral-50">
+                  <i class="fa-solid fa-plus mr-1"></i> Add Project
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="border border-neutral-200 rounded-lg p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center text-white">
+                  <i class="fa-solid fa-language"></i>
+                </div>
+                <h3 class="ml-2">MultiLingual-Scholar</h3>
+              </div>
+              <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Inactive</span>
+            </div>
+            
+            <div class="mb-3">
+              <label class="block text-sm text-neutral-700 mb-1">Allowed Roles</label>
+              <div class="flex flex-wrap gap-2">
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  Administrator
+                  <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                <button class="px-2 py-1 border border-dashed border-neutral-300 text-neutral-500 text-xs rounded-md hover:bg-neutral-50">
+                  <i class="fa-solid fa-plus mr-1"></i> Add Role
+                </button>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Allowed Projects</label>
+              <div class="flex flex-wrap gap-2">
+                <div class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md flex items-center">
+                  None
+                </div>
+                <button class="px-2 py-1 border border-dashed border-neutral-300 text-neutral-500 text-xs rounded-md hover:bg-neutral-50">
+                  <i class="fa-solid fa-plus mr-1"></i> Add Project
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-6 flex justify-end">
+          <button class="px-4 py-2 bg-neutral-800 text-white rounded-md">Save Access Settings</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-white border-t border-neutral-200 py-4 px-6 text-center text-sm text-neutral-500">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <div>© 2025 AI Project Hub. All rights reserved.</div>
+    <div class="flex space-x-4">
+      <span class="hover:text-neutral-700 cursor-pointer">Terms</span>
+      <span class="hover:text-neutral-700 cursor-pointer">Privacy</span>
+      <span class="hover:text-neutral-700 cursor-pointer">Help</span>
+      <span class="hover:text-neutral-700 cursor-pointer">Contact</span>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

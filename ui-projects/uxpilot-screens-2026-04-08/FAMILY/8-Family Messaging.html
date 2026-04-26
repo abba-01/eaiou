@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style>::-webkit-scrollbar { display: none;}</style>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Nunito', 'sans-serif'],
+                        },
+                        colors: {
+                            primary: {
+                                50: '#f0f9ff',
+                                100: '#e0f2fe',
+                                200: '#bae6fd',
+                                300: '#7dd3fc',
+                                400: '#38bdf8',
+                                500: '#0ea5e9',
+                                600: '#0284c7',
+                                700: '#0369a1',
+                                800: '#075985',
+                                900: '#0c4a6e',
+                            },
+                            family: {
+                                blue: '#4285F4',
+                                green: '#34A853',
+                                yellow: '#FBBC05',
+                                red: '#EA4335',
+                                purple: '#9C27B0',
+                                teal: '#009688',
+                                orange: '#FF9800',
+                                pink: '#E91E63',
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="font-sans bg-gray-100">
+        <!-- Header -->
+        <header id="header" class="bg-white border-b shadow-sm">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-people-roof text-family-blue text-2xl"></i>
+                        <h1 class="text-xl font-bold text-gray-800">FamilyWall</h1>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-bell"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <div class="h-8 w-8 rounded-full bg-family-blue text-white flex items-center justify-center">
+                            <span class="font-semibold">JS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex h-[calc(100vh-64px)]">
+            <!-- Sidebar -->
+            <div id="sidebar" class="w-64 bg-white border-r hidden md:block">
+                <div class="p-4">
+                    <div class="mb-6">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-3">My Family</h2>
+                        <div class="flex -space-x-2 mb-4">
+                            <div class="h-10 w-10 rounded-full bg-family-blue text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">JS</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-green text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">LS</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-purple text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">ES</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-orange text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">MS</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <nav>
+                        <ul class="space-y-2">
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-calendar-days w-6"></i>
+                                    <span>Calendar</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-list-check w-6"></i>
+                                    <span>Tasks</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-cart-shopping w-6"></i>
+                                    <span>Shopping Lists</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-utensils w-6"></i>
+                                    <span>Meal Planner</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-book w-6"></i>
+                                    <span>Recipes</span>
+                                </span>
+                            </li>
+                            <li class="bg-blue-50 rounded-lg text-family-blue">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-message w-6"></i>
+                                    <span>Messages</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-folder w-6"></i>
+                                    <span>Documents</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-address-book w-6"></i>
+                                    <span>Contacts</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div id="main-content" class="flex-1 overflow-auto">
+                <!-- Message Controls -->
+                <div id="message-controls" class="bg-white p-4 border-b flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <h2 class="text-xl font-semibold text-gray-700">Family Messages</h2>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="px-3 py-1 bg-family-blue text-white rounded-md hover:bg-blue-600 flex items-center">
+                            <i class="fa-solid fa-plus mr-1"></i> New Message
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Message Filters -->
+                <div id="message-filters" class="bg-white p-4 border-b flex items-center space-x-4">
+                    <span class="text-gray-700 font-medium">Filter:</span>
+                    <div class="flex items-center space-x-3">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="all-messages" class="h-4 w-4 text-family-blue" checked>
+                            <label for="all-messages" class="ml-2 text-gray-700">All Messages</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="unread" class="h-4 w-4 text-family-blue" checked>
+                            <label for="unread" class="ml-2 text-gray-700">Unread</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="from-me" class="h-4 w-4 text-family-blue">
+                            <label for="from-me" class="ml-2 text-gray-700">From Me</label>
+                        </div>
+                    </div>
+                    <div class="border-l pl-4 flex items-center space-x-3">
+                        <span class="text-gray-700 font-medium">Recipients:</span>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="john" class="h-4 w-4 text-family-blue" checked>
+                            <div class="ml-2 flex items-center">
+                                <div class="h-4 w-4 rounded-full bg-family-blue mr-1"></div>
+                                <label for="john" class="text-gray-700">John</label>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="lisa" class="h-4 w-4 text-family-green" checked>
+                            <div class="ml-2 flex items-center">
+                                <div class="h-4 w-4 rounded-full bg-family-green mr-1"></div>
+                                <label for="lisa" class="text-gray-700">Lisa</label>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="emma" class="h-4 w-4 text-family-purple" checked>
+                            <div class="ml-2 flex items-center">
+                                <div class="h-4 w-4 rounded-full bg-family-purple mr-1"></div>
+                                <label for="emma" class="text-gray-700">Emma</label>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="mike" class="h-4 w-4 text-family-orange" checked>
+                            <div class="ml-2 flex items-center">
+                                <div class="h-4 w-4 rounded-full bg-family-orange mr-1"></div>
+                                <label for="mike" class="text-gray-700">Mike</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages List -->
+                <div id="messages-list" class="p-4 bg-white">
+                    <div class="space-y-4">
+                        <!-- Message 1 -->
+                        <div id="message-1" class="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow bg-blue-50">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-family-green text-white flex items-center justify-center mr-3">
+                                        <span class="font-semibold">LS</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Lisa Smith</h3>
+                                        <p class="text-sm text-gray-600">Today, 9:15 AM</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="bg-family-blue text-white text-xs px-2 py-1 rounded-full">New</span>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="text-gray-800">Don't forget we need to pick up Emma from piano lesson at 4:30pm today. I have a meeting that might run late.</p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <div class="flex -space-x-1 mr-2">
+                                        <div class="h-5 w-5 rounded-full bg-family-blue text-white flex items-center justify-center border-2 border-white text-xs">
+                                            JS
+                                        </div>
+                                        <div class="h-5 w-5 rounded-full bg-family-orange text-white flex items-center justify-center border-2 border-white text-xs">
+                                            MS
+                                        </div>
+                                    </div>
+                                    <span>To: John, Mike</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-family-blue hover:text-blue-700">
+                                        <i class="fa-solid fa-reply"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-800">
+                                        <i class="fa-regular fa-bell"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Message 2 -->
+                        <div id="message-2" class="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-family-orange text-white flex items-center justify-center mr-3">
+                                        <span class="font-semibold">MS</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Mike Smith</h3>
+                                        <p class="text-sm text-gray-600">Yesterday, 7:30 PM</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="text-gray-800">I added milk and eggs to the shopping list. Can someone stop by the store on the way home?</p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <div class="flex -space-x-1 mr-2">
+                                        <div class="h-5 w-5 rounded-full bg-family-blue text-white flex items-center justify-center border-2 border-white text-xs">
+                                            JS
+                                        </div>
+                                        <div class="h-5 w-5 rounded-full bg-family-green text-white flex items-center justify-center border-2 border-white text-xs">
+                                            LS
+                                        </div>
+                                        <div class="h-5 w-5 rounded-full bg-family-purple text-white flex items-center justify-center border-2 border-white text-xs">
+                                            ES
+                                        </div>
+                                    </div>
+                                    <span>To: All Family Members</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-family-blue hover:text-blue-700">
+                                        <i class="fa-solid fa-reply"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-800">
+                                        <i class="fa-regular fa-bell-slash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Message 3 -->
+                        <div id="message-3" class="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-family-blue text-white flex items-center justify-center mr-3">
+                                        <span class="font-semibold">JS</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">John Smith</h3>
+                                        <p class="text-sm text-gray-600">Yesterday, 3:45 PM</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="text-gray-800">I scheduled a family dinner for Saturday at 6:30 PM. I've added it to our calendar. Please let me know if that works for everyone.</p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <div class="flex -space-x-1 mr-2">
+                                        <div class="h-5 w-5 rounded-full bg-family-green text-white flex items-center justify-center border-2 border-white text-xs">
+                                            LS
+                                        </div>
+                                        <div class="h-5 w-5 rounded-full bg-family-purple text-white flex items-center justify-center border-2 border-white text-xs">
+                                            ES
+                                        </div>
+                                        <div class="h-5 w-5 rounded-full bg-family-orange text-white flex items-center justify-center border-2 border-white text-xs">
+                                            MS
+                                        </div>
+                                    </div>
+                                    <span>To: All Family Members</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-family-blue hover:text-blue-700">
+                                        <i class="fa-solid fa-reply"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-800">
+                                        <i class="fa-regular fa-bell-slash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Message 4 -->
+                        <div id="message-4" class="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-family-purple text-white flex items-center justify-center mr-3">
+                                        <span class="font-semibold">ES</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Emma Smith</h3>
+                                        <p class="text-sm text-gray-600">Monday, 5:12 PM</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="text-gray-800">I need to bring cookies for the school bake sale on Friday. Can we bake some Thursday evening?</p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <div class="flex -space-x-1 mr-2">
+                                        <div class="h-5 w-5 rounded-full bg-family-green text-white flex items-center justify-center border-2 border-white text-xs">
+                                            LS
+                                        </div>
+                                    </div>
+                                    <span>To: Lisa</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-family-blue hover:text-blue-700">
+                                        <i class="fa-solid fa-reply"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-800">
+                                        <i class="fa-regular fa-bell-slash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Message 5 -->
+                        <div id="message-5" class="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-family-green text-white flex items-center justify-center mr-3">
+                                        <span class="font-semibold">LS</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Lisa Smith</h3>
+                                        <p class="text-sm text-gray-600">Monday, 10:30 AM</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="text-gray-800">I uploaded our insurance documents to the Family Documents section. Please check them when you have a chance.</p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <div class="flex -space-x-1 mr-2">
+                                        <div class="h-5 w-5 rounded-full bg-family-blue text-white flex items-center justify-center border-2 border-white text-xs">
+                                            JS
+                                        </div>
+                                    </div>
+                                    <span>To: John</span>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-family-blue hover:text-blue-700">
+                                        <i class="fa-solid fa-reply"></i>
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-800">
+                                        <i class="fa-regular fa-bell-slash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Details Sidebar -->
+            <div id="message-details" class="w-80 bg-white border-l hidden md:block">
+                <div class="p-4 border-b">
+                    <h2 class="text-lg font-semibold text-gray-700 mb-2">New Message</h2>
+                </div>
+                
+                <div class="p-4">
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-medium mb-2">To:</label>
+                            <div class="relative">
+                                <select class="w-full p-2 border border-gray-300 rounded-md bg-white text-gray-700 appearance-none" multiple>
+                                    <option value="all" selected>All Family Members</option>
+                                    <option value="john">John</option>
+                                    <option value="lisa">Lisa</option>
+                                    <option value="emma">Emma</option>
+                                    <option value="mike">Mike</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                                    <i class="fa-solid fa-chevron-down text-gray-500"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-medium mb-2">Message:</label>
+                            <textarea class="w-full p-2 border border-gray-300 rounded-md resize-none h-32" placeholder="Type your message here..."></textarea>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-medium mb-2">Options:</label>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="notify" class="h-4 w-4 text-family-blue">
+                                    <label for="notify" class="ml-2 text-gray-700 text-sm">Send notifications</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="urgent" class="h-4 w-4 text-family-blue">
+                                    <label for="urgent" class="ml-2 text-gray-700 text-sm">Mark as urgent</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="reminder" class="h-4 w-4 text-family-blue">
+                                    <label for="reminder" class="ml-2 text-gray-700 text-sm">Set reminder</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2">
+                            <button type="button" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">
+                                <i class="fa-solid fa-paperclip mr-1"></i> Attach
+                            </button>
+                            <button type="button" class="px-4 py-2 bg-family-blue text-white rounded-md hover:bg-blue-600 flex-1">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="p-4 border-t">
+                    <h3 class="font-medium text-gray-700 mb-3">Notification Settings</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Email Notifications</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-family-blue"></div>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Push Notifications</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-family-blue"></div>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Sound Alerts</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer">
+                                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-family-blue"></div>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Message Preview</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-family-blue"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation (visible on small screens) -->
+        <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg">
+            <div class="flex justify-around items-center py-2">
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span class="text-xs mt-1">Calendar</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span class="text-xs mt-1">Tasks</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="text-xs mt-1">Shopping</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-family-blue cursor-pointer">
+                    <i class="fa-solid fa-message"></i>
+                    <span class="text-xs mt-1">Messages</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-ellipsis"></i>
+                    <span class="text-xs mt-1">More</span>
+                </span>
+            </div>
+        </div>
+    </body>
+<html>

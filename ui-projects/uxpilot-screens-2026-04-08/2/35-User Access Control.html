@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="w-full bg-white border-b border-neutral-200 shadow-sm">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <i class="fa-brands fa-joomla text-neutral-800 text-2xl mr-3"></i>
+      <h1 class="text-xl text-neutral-800">AcademiAI Manager</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+        <i class="fa-solid fa-bell"></i>
+      </button>
+      <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+        <i class="fa-solid fa-question-circle"></i>
+      </button>
+      <div class="flex items-center">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full mr-2" />
+        <span class="text-sm text-neutral-700">Admin User</span>
+        <i class="fa-solid fa-chevron-down ml-2 text-neutral-500 text-xs"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-container" class="flex h-[800px]">
+  <div id="sidebar" class="w-64 bg-white border-r border-neutral-200 overflow-y-auto">
+    <div class="p-4">
+      <button class="w-full flex items-center justify-center px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+        <i class="fa-solid fa-plus mr-2"></i>
+        <span>New Project</span>
+      </button>
+    </div>
+    <nav class="mt-2">
+      <ul>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-tachometer-alt w-5 text-neutral-500"></i>
+            <span class="ml-2">Dashboard</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-folder w-5 text-neutral-500"></i>
+            <span class="ml-2">Projects</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-file-alt w-5 text-neutral-500"></i>
+            <span class="ml-2">Articles</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-cog w-5 text-neutral-800"></i>
+            <span class="ml-2">Settings</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-chart-bar w-5 text-neutral-500"></i>
+            <span class="ml-2">Analytics</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-users w-5 text-neutral-500"></i>
+            <span class="ml-2">Users</span>
+          </span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="content" class="flex-1 bg-neutral-50 overflow-y-auto">
+    <div class="p-6">
+      <div class="mb-6">
+        <h2 class="text-2xl text-neutral-800">Settings</h2>
+        <p class="text-neutral-600 mt-1">Configure access controls and permissions for different user roles</p>
+      </div>
+
+      <div id="settings-tabs" class="mb-6 border-b border-neutral-200">
+        <div class="flex space-x-4">
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            AI Models
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Project Settings
+          </button>
+          <button class="px-4 py-2 text-neutral-600 border-b-2 border-neutral-600">
+            Security
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Academic Standards
+          </button>
+          <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">
+            Notifications
+          </button>
+        </div>
+      </div>
+
+      <div id="access-control-section">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg text-neutral-800">Role Management</h3>
+          <button class="flex items-center px-3 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+            <i class="fa-solid fa-plus mr-2"></i>
+            <span>Create New Role</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 mb-6">
+          <!-- Admin Role Card -->
+          <div id="role-card-1" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="p-4 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-md bg-neutral-700 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-user-shield text-white"></i>
+                </div>
+                <div>
+                  <h4 class="text-neutral-800">Administrator</h4>
+                  <span class="text-xs text-neutral-500">System-wide access</span>
+                </div>
+              </div>
+              <div class="flex space-x-2">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Default</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="mb-3">
+                <div class="text-sm text-neutral-600 mb-1">Users with this role: 2</div>
+                <div class="flex items-center space-x-1">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-6 h-6 rounded-full" />
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=765" alt="User avatar" class="w-6 h-6 rounded-full" />
+                </div>
+              </div>
+              <div class="flex justify-end mt-4 space-x-2">
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-users"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Editor Role Card -->
+          <div id="role-card-2" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="p-4 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-md bg-neutral-600 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-pen-to-square text-white"></i>
+                </div>
+                <div>
+                  <h4 class="text-neutral-800">Editor</h4>
+                  <span class="text-xs text-neutral-500">Content management access</span>
+                </div>
+              </div>
+              <div class="flex space-x-2">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Custom</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="mb-3">
+                <div class="text-sm text-neutral-600 mb-1">Users with this role: 4</div>
+                <div class="flex items-center space-x-1">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=111" alt="User avatar" class="w-6 h-6 rounded-full" />
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=222" alt="User avatar" class="w-6 h-6 rounded-full" />
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=333" alt="User avatar" class="w-6 h-6 rounded-full" />
+                  <div class="w-6 h-6 rounded-full bg-neutral-200 flex items-center justify-center text-xs">+1</div>
+                </div>
+              </div>
+              <div class="flex justify-end mt-4 space-x-2">
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-users"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Researcher Role Card -->
+          <div id="role-card-3" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="p-4 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-md bg-neutral-500 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-microscope text-white"></i>
+                </div>
+                <div>
+                  <h4 class="text-neutral-800">Researcher</h4>
+                  <span class="text-xs text-neutral-500">Project-specific access</span>
+                </div>
+              </div>
+              <div class="flex space-x-2">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Custom</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="mb-3">
+                <div class="text-sm text-neutral-600 mb-1">Users with this role: 7</div>
+                <div class="flex items-center space-x-1">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=444" alt="User avatar" class="w-6 h-6 rounded-full" />
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=555" alt="User avatar" class="w-6 h-6 rounded-full" />
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=666" alt="User avatar" class="w-6 h-6 rounded-full" />
+                  <div class="w-6 h-6 rounded-full bg-neutral-200 flex items-center justify-center text-xs">+4</div>
+                </div>
+              </div>
+              <div class="flex justify-end mt-4 space-x-2">
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-users"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Viewer Role Card -->
+          <div id="role-card-4" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="p-4 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-md bg-neutral-400 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-eye text-white"></i>
+                </div>
+                <div>
+                  <h4 class="text-neutral-800">Viewer</h4>
+                  <span class="text-xs text-neutral-500">Read-only access</span>
+                </div>
+              </div>
+              <div class="flex space-x-2">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Default</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="mb-3">
+                <div class="text-sm text-neutral-600 mb-1">Users with this role: 12</div>
+                <div class="flex items-center space-x-1">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=777" alt="User avatar" class="w-6 h-6 rounded-full" />
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=888" alt="User avatar" class="w-6 h-6 rounded-full" />
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=999" alt="User avatar" class="w-6 h-6 rounded-full" />
+                  <div class="w-6 h-6 rounded-full bg-neutral-200 flex items-center justify-center text-xs">+9</div>
+                </div>
+              </div>
+              <div class="flex justify-end mt-4 space-x-2">
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-users"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="permissions-matrix" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden mb-6">
+          <div class="p-4 border-b border-neutral-200 bg-neutral-50">
+            <h3 class="text-neutral-800">Permission Matrix</h3>
+            <p class="text-sm text-neutral-600">Configure what each role can access and modify</p>
+          </div>
+          <div class="p-4 overflow-x-auto">
+            <table class="w-full min-w-[800px] border-collapse">
+              <thead>
+                <tr class="border-b border-neutral-200">
+                  <th class="py-3 px-4 text-left text-sm text-neutral-700">Permission</th>
+                  <th class="py-3 px-4 text-center text-sm text-neutral-700">Administrator</th>
+                  <th class="py-3 px-4 text-center text-sm text-neutral-700">Editor</th>
+                  <th class="py-3 px-4 text-center text-sm text-neutral-700">Researcher</th>
+                  <th class="py-3 px-4 text-center text-sm text-neutral-700">Viewer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-neutral-200">
+                  <td class="py-3 px-4 text-sm text-neutral-700">View Projects</td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-200">
+                  <td class="py-3 px-4 text-sm text-neutral-700">Create Projects</td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-200">
+                  <td class="py-3 px-4 text-sm text-neutral-700">Edit Any Project</td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-200">
+                  <td class="py-3 px-4 text-sm text-neutral-700">Edit Assigned Projects</td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-200">
+                  <td class="py-3 px-4 text-sm text-neutral-700">Delete Projects</td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-200">
+                  <td class="py-3 px-4 text-sm text-neutral-700">Manage AI Models</td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-200">
+                  <td class="py-3 px-4 text-sm text-neutral-700">Use AI Generation</td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-200">
+                  <td class="py-3 px-4 text-sm text-neutral-700">Export Content</td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                </tr>
+                <tr class="border-b border-neutral-200">
+                  <td class="py-3 px-4 text-sm text-neutral-700">Manage Users</td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 text-sm text-neutral-700">System Settings</td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-check text-neutral-700"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                  <td class="py-3 px-4 text-center">
+                    <i class="fa-solid fa-minus text-neutral-400"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="p-4 border-t border-neutral-200 bg-neutral-50 flex justify-end">
+            <button class="px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+              Save Permission Changes
+            </button>
+          </div>
+        </div>
+
+        <div id="user-assignment-section" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden mb-6">
+          <div class="p-4 border-b border-neutral-200 bg-neutral-50">
+            <h3 class="text-neutral-800">User Role Assignment</h3>
+            <p class="text-sm text-neutral-600">Assign users to specific roles</p>
+          </div>
+          <div class="p-4">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm text-neutral-700">Search Users</label>
+                <button class="text-sm text-neutral-600 hover:text-neutral-800">
+                  <i class="fa-solid fa-filter mr-1"></i> Filter
+                </button>
+              </div>
+              <div class="relative">
+                <input type="text" class="w-full border border-neutral-300 rounded-md pl-10 pr-4 py-2 text-sm" placeholder="Search by name or email..." />
+                <i class="fa-solid fa-search absolute left-3 top-2.5 text-neutral-400"></i>
+              </div>
+            </div>
+
+            <div class="border border-neutral-200 rounded-md overflow-hidden">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-neutral-50 border-b border-neutral-200">
+                    <th class="py-2 px-4 text-left text-sm text-neutral-700">User</th>
+                    <th class="py-2 px-4 text-left text-sm text-neutral-700">Email</th>
+                    <th class="py-2 px-4 text-left text-sm text-neutral-700">Current Role</th>
+                    <th class="py-2 px-4 text-left text-sm text-neutral-700">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-neutral-200">
+                    <td class="py-3 px-4">
+                      <div class="flex items-center">
+                        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full mr-3" />
+                        <span class="text-sm text-neutral-800">John Smith</span>
+                      </div>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">john.smith@example.com</td>
+                    <td class="py-3 px-4">
+                      <span class="px-2 py-1 bg-neutral-700 text-white text-xs rounded-full">Administrator</span>
+                    </td>
+                    <td class="py-3 px-4">
+                      <button class="text-neutral-600 hover:text-neutral-800 mr-2">
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                      <button class="text-neutral-600 hover:text-neutral-800">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-neutral-200">
+                    <td class="py-3 px-4">
+                      <div class="flex items-center">
+                        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=765" alt="User avatar" class="w-8 h-8 rounded-full mr-3" />
+                        <span class="text-sm text-neutral-800">Emily Johnson</span>
+                      </div>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">emily.johnson@example.com</td>
+                    <td class="py-3 px-4">
+                      <span class="px-2 py-1 bg-neutral-600 text-white text-xs rounded-full">Editor</span>
+                    </td>
+                    <td class="py-3 px-4">
+                      <button class="text-neutral-600 hover:text-neutral-800 mr-2">
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                      <button class="text-neutral-600 hover:text-neutral-800">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-neutral-200">
+                    <td class="py-3 px-4">
+                      <div class="flex items-center">
+                        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=111" alt="User avatar" class="w-8 h-8 rounded-full mr-3" />
+                        <span class="text-sm text-neutral-800">Michael Davis</span>
+                      </div>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">michael.davis@example.com</td>
+                    <td class="py-3 px-4">
+                      <span class="px-2 py-1 bg-neutral-500 text-white text-xs rounded-full">Researcher</span>
+                    </td>
+                    <td class="py-3 px-4">
+                      <button class="text-neutral-600 hover:text-neutral-800 mr-2">
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                      <button class="text-neutral-600 hover:text-neutral-800">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-neutral-200">
+                    <td class="py-3 px-4">
+                      <div class="flex items-center">
+                        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=222" alt="User avatar" class="w-8 h-8 rounded-full mr-3" />
+                        <span class="text-sm text-neutral-800">Sarah Wilson</span>
+                      </div>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">sarah.wilson@example.com</td>
+                    <td class="py-3 px-4">
+                      <span class="px-2 py-1 bg-neutral-400 text-white text-xs rounded-full">Viewer</span>
+                    </td>
+                    <td class="py-3 px-4">
+                      <button class="text-neutral-600 hover:text-neutral-800 mr-2">
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                      <button class="text-neutral-600 hover:text-neutral-800">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4">
+                      <div class="flex items-center">
+                        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=333" alt="User avatar" class="w-8 h-8 rounded-full mr-3" />
+                        <span class="text-sm text-neutral-800">David Lee</span>
+                      </div>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">david.lee@example.com</td>
+                    <td class="py-3 px-4">
+                      <span class="px-2 py-1 bg-neutral-500 text-white text-xs rounded-full">Researcher</span>
+                    </td>
+                    <td class="py-3 px-4">
+                      <button class="text-neutral-600 hover:text-neutral-800 mr-2">
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+                      <button class="text-neutral-600 hover:text-neutral-800">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex justify-between items-center mt-4">
+              <div class="text-sm text-neutral-600">
+                Showing 5 of 25 users
+              </div>
+              <div class="flex items-center space-x-2">
+                <button class="px-3 py-1 border border-neutral-300 rounded text-sm text-neutral-600">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button class="px-3 py-1 border border-neutral-300 rounded text-sm text-neutral-600 bg-neutral-100">1</button>
+                <button class="px-3 py-1 border border-neutral-300 rounded text-sm text-neutral-600">2</button>
+                <button class="px-3 py-1 border border-neutral-300 rounded text-sm text-neutral-600">3</button>
+                <button class="px-3 py-1 border border-neutral-300 rounded text-sm text-neutral-600">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="audit-log-section" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+          <div class="p-4 border-b border-neutral-200 bg-neutral-50">
+            <h3 class="text-neutral-800">Permission Change Audit Log</h3>
+            <p class="text-sm text-neutral-600">Track changes to roles and permissions</p>
+          </div>
+          <div class="p-4">
+            <div class="border border-neutral-200 rounded-md overflow-hidden">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-neutral-50 border-b border-neutral-200">
+                    <th class="py-2 px-4 text-left text-sm text-neutral-700">Date & Time</th>
+                    <th class="py-2 px-4 text-left text-sm text-neutral-700">User</th>
+                    <th class="py-2 px-4 text-left text-sm text-neutral-700">Action</th>
+                    <th class="py-2 px-4 text-left text-sm text-neutral-700">Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-neutral-200">
+                    <td class="py-3 px-4 text-sm text-neutral-600">July 6, 2025 09:42 AM</td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">John Smith</td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">Role Modified</td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">Added "Export Content" permission to Researcher role</td>
+                  </tr>
+                  <tr class="border-b border-neutral-200">
+                    <td class="py-3 px-4 text-sm text-neutral-600">July 5, 2025 03:17 PM</td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">John Smith</td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">User Role Changed</td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">Changed David Lee from Editor to Researcher</td>
+                  </tr>
+                  <tr class="border-b border-neutral-200">
+                    <td class="py-3 px-4 text-sm text-neutral-600">July 3, 2025 11:05 AM</td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">John Smith</td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">New Role Created</td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">Created "Researcher" role</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4 text-sm text-neutral-600">July 1, 2025 02:30 PM</td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">John Smith</td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">User Role Changed</td>
+                    <td class="py-3 px-4 text-sm text-neutral-600">Changed Emily Johnson from Viewer to Editor</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex justify-between items-center mt-4">
+              <div class="text-sm text-neutral-600">
+                Showing recent 4 of 36 log entries
+              </div>
+              <button class="text-sm text-neutral-600 hover:text-neutral-800">
+                View Full Audit Log <i class="fa-solid fa-arrow-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="w-full bg-white border-t border-neutral-200 py-4">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center">
+      <div class="text-sm text-neutral-600">
+        AcademiAI Manager v1.0.3 | Joomla 5.3 Component
+      </div>
+      <div class="text-sm text-neutral-600">
+        Last updated: July 6, 2025 at 10:06 AM
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

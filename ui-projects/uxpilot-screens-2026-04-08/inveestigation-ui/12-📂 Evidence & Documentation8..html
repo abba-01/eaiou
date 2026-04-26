@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <div class="flex h-[100vh]">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-gray-900 text-white flex flex-col h-full">
+            <!-- Logo -->
+            <div class="p-4 flex items-center border-b border-gray-700">
+                <div class="h-8 w-8 rounded-md bg-primary-500 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <span class="ml-2 font-bold text-xl">ProjectHub</span>
+            </div>
+            
+            <!-- Admin Menu -->
+            <div class="p-4">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">Admin Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-gauge-high w-6"></i>
+                            <span>Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-folder w-6"></i>
+                            <span>Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-flag w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-check-square w-6"></i>
+                            <span>Tasks</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar w-6"></i>
+                            <span>Events</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md bg-primary-700 text-white cursor-pointer">
+                            <i class="fa-solid fa-file w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Panel -->
+            <div class="p-4 mt-4 border-t border-gray-700">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">User Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-house w-6"></i>
+                            <span>My Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-briefcase w-6"></i>
+                            <span>My Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-tasks w-6"></i>
+                            <span>Task List</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-map-signs w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar-alt w-6"></i>
+                            <span>Calendar</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-paperclip w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Profile -->
+            <div class="mt-auto p-4 border-t border-gray-700 flex items-center">
+                <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium">Admin User</p>
+                    <p class="text-xs text-gray-400">Super Admin</p>
+                </div>
+                <button class="ml-auto text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-cog"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 flex flex-col h-full overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 flex items-center justify-between p-4">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-800">Document Vault</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search documents..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                    <button class="relative p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">3</span>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-question-circle"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Document Vault Content -->
+            <div id="document-vault" class="flex-1 overflow-auto p-6">
+                <!-- Upload and Actions Row -->
+                <div id="document-actions" class="flex justify-between items-center mb-6">
+                    <div class="flex space-x-2">
+                        <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md text-sm flex items-center">
+                            <i class="fa-solid fa-upload mr-2"></i> Upload Files
+                        </button>
+                        <button class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-md text-sm flex items-center">
+                            <i class="fa-solid fa-folder-plus mr-2"></i> New Folder
+                        </button>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-2 rounded-md text-sm">
+                            <i class="fa-solid fa-download"></i>
+                        </button>
+                        <button class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-2 rounded-md text-sm">
+                            <i class="fa-solid fa-trash-alt"></i>
+                        </button>
+                        <button class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-2 rounded-md text-sm">
+                            <i class="fa-solid fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Filters Section -->
+                <div id="document-filters" class="bg-white rounded-lg shadow p-4 mb-6">
+                    <div class="flex flex-wrap items-center gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Project</label>
+                            <select class="border border-gray-300 rounded-md px-3 py-2 text-sm w-48 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <option value="">All Projects</option>
+                                <option value="1">Website Redesign</option>
+                                <option value="2">Database Migration</option>
+                                <option value="3">Mobile App Development</option>
+                                <option value="4">API Integration</option>
+                                <option value="5">Security Audit</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Contact</label>
+                            <select class="border border-gray-300 rounded-md px-3 py-2 text-sm w-48 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <option value="">All Contacts</option>
+                                <option value="1">John Smith</option>
+                                <option value="2">Sarah Johnson</option>
+                                <option value="3">Robert Davis</option>
+                                <option value="4">Emily Wilson</option>
+                                <option value="5">Michael Brown</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Task</label>
+                            <select class="border border-gray-300 rounded-md px-3 py-2 text-sm w-48 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <option value="">All Tasks</option>
+                                <option value="1">Design Homepage</option>
+                                <option value="2">Migrate User Data</option>
+                                <option value="3">Develop Mobile UI</option>
+                                <option value="4">Test API Endpoints</option>
+                                <option value="5">Security Vulnerability Scan</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">File Type</label>
+                            <select class="border border-gray-300 rounded-md px-3 py-2 text-sm w-48 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <option value="">All Types</option>
+                                <option value="pdf">PDF</option>
+                                <option value="image">Photo/Image</option>
+                                <option value="audio">Audio</option>
+                                <option value="video">Video</option>
+                                <option value="doc">Document</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Uploader</label>
+                            <select class="border border-gray-300 rounded-md px-3 py-2 text-sm w-48 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <option value="">All Uploaders</option>
+                                <option value="1">John Smith</option>
+                                <option value="2">Sarah Johnson</option>
+                                <option value="3">Robert Davis</option>
+                                <option value="4">Emily Wilson</option>
+                                <option value="5">Michael Brown</option>
+                            </select>
+                        </div>
+                        <div class="ml-auto mt-6">
+                            <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md text-sm">
+                                Apply Filters
+                            </button>
+                            <button class="text-gray-500 hover:text-gray-700 ml-2 text-sm">
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- View Switcher -->
+                <div id="view-switcher" class="flex justify-between items-center mb-4">
+                    <div class="flex items-center space-x-2">
+                        <button class="bg-primary-500 text-white px-3 py-1.5 rounded-l-md text-sm">
+                            <i class="fa-solid fa-th-large"></i>
+                        </button>
+                        <button class="bg-gray-200 text-gray-700 px-3 py-1.5 rounded-r-md text-sm">
+                            <i class="fa-solid fa-list"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-sm text-gray-500 mr-2">Sort by:</span>
+                        <select class="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            <option value="date_desc">Date (Newest First)</option>
+                            <option value="date_asc">Date (Oldest First)</option>
+                            <option value="name_asc">Name (A-Z)</option>
+                            <option value="name_desc">Name (Z-A)</option>
+                            <option value="size_desc">Size (Largest First)</option>
+                            <option value="size_asc">Size (Smallest First)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Documents Grid -->
+                <div id="documents-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
+                    <!-- Document Item 1 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center p-4 relative">
+                            <i class="fa-solid fa-file-pdf text-red-500 text-5xl"></i>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="p-1 bg-white rounded-full shadow-sm text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-medium text-gray-800 truncate">Client Statement.pdf</h3>
+                            <p class="text-xs text-gray-500 mt-1">Website Redesign Project</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-xs text-gray-500">2.4 MB</span>
+                                <span class="text-xs text-gray-500">May 15, 2023</span>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Uploader" class="h-5 w-5 rounded-full">
+                                <span class="text-xs text-gray-500 ml-1">John Smith</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Document Item 2 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center p-4 relative">
+                            <i class="fa-solid fa-file-image text-blue-500 text-5xl"></i>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="p-1 bg-white rounded-full shadow-sm text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-medium text-gray-800 truncate">Interview Photo.jpg</h3>
+                            <p class="text-xs text-gray-500 mt-1">API Integration</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-xs text-gray-500">3.8 MB</span>
+                                <span class="text-xs text-gray-500">May 12, 2023</span>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Uploader" class="h-5 w-5 rounded-full">
+                                <span class="text-xs text-gray-500 ml-1">Emily Wilson</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Document Item 3 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center p-4 relative">
+                            <i class="fa-solid fa-file-audio text-purple-500 text-5xl"></i>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="p-1 bg-white rounded-full shadow-sm text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-medium text-gray-800 truncate">Witness Interview.mp3</h3>
+                            <p class="text-xs text-gray-500 mt-1">Security Audit</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-xs text-gray-500">18.5 MB</span>
+                                <span class="text-xs text-gray-500">May 10, 2023</span>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Uploader" class="h-5 w-5 rounded-full">
+                                <span class="text-xs text-gray-500 ml-1">Robert Davis</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Document Item 4 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center p-4 relative">
+                            <i class="fa-solid fa-file-contract text-green-500 text-5xl"></i>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="p-1 bg-white rounded-full shadow-sm text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-medium text-gray-800 truncate">Legal Agreement.docx</h3>
+                            <p class="text-xs text-gray-500 mt-1">Mobile App Development</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-xs text-gray-500">1.2 MB</span>
+                                <span class="text-xs text-gray-500">May 8, 2023</span>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Uploader" class="h-5 w-5 rounded-full">
+                                <span class="text-xs text-gray-500 ml-1">Michael Brown</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Document Item 5 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center p-4 relative">
+                            <i class="fa-solid fa-file-video text-orange-500 text-5xl"></i>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="p-1 bg-white rounded-full shadow-sm text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-medium text-gray-800 truncate">Process Recording.mp4</h3>
+                            <p class="text-xs text-gray-500 mt-1">Database Migration</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-xs text-gray-500">145.8 MB</span>
+                                <span class="text-xs text-gray-500">May 5, 2023</span>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Uploader" class="h-5 w-5 rounded-full">
+                                <span class="text-xs text-gray-500 ml-1">Sarah Johnson</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Document Item 6 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center p-4 relative">
+                            <i class="fa-solid fa-file-excel text-teal-500 text-5xl"></i>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="p-1 bg-white rounded-full shadow-sm text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-medium text-gray-800 truncate">Data Analysis.xlsx</h3>
+                            <p class="text-xs text-gray-500 mt-1">Security Audit</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-xs text-gray-500">4.7 MB</span>
+                                <span class="text-xs text-gray-500">May 3, 2023</span>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Uploader" class="h-5 w-5 rounded-full">
+                                <span class="text-xs text-gray-500 ml-1">Robert Davis</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Document Item 7 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center p-4 relative">
+                            <i class="fa-solid fa-file-pdf text-red-500 text-5xl"></i>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="p-1 bg-white rounded-full shadow-sm text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-medium text-gray-800 truncate">Requirements Doc.pdf</h3>
+                            <p class="text-xs text-gray-500 mt-1">Website Redesign Project</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-xs text-gray-500">3.1 MB</span>
+                                <span class="text-xs text-gray-500">May 1, 2023</span>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Uploader" class="h-5 w-5 rounded-full">
+                                <span class="text-xs text-gray-500 ml-1">John Smith</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Document Item 8 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center p-4 relative">
+                            <i class="fa-solid fa-file-image text-blue-500 text-5xl"></i>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="p-1 bg-white rounded-full shadow-sm text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-medium text-gray-800 truncate">UI Mockup.png</h3>
+                            <p class="text-xs text-gray-500 mt-1">Mobile App Development</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-xs text-gray-500">5.3 MB</span>
+                                <span class="text-xs text-gray-500">Apr 28, 2023</span>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Uploader" class="h-5 w-5 rounded-full">
+                                <span class="text-xs text-gray-500 ml-1">Michael Brown</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div id="pagination" class="flex justify-between items-center mt-6">
+                    <div class="text-sm text-gray-500">
+                        Showing 1-8 of 42 documents
+                    </div>
+                    <div class="flex space-x-1">
+                        <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button class="px-3 py-1 text-sm bg-primary-500 text-white rounded-md">1</button>
+                        <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">2</button>
+                        <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">3</button>
+                        <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">4</button>
+                        <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">5</button>
+                        <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Evidence Timeline Tab -->
+            <div id="evidence-timeline" class="hidden flex-1 overflow-auto p-6">
+                <!-- Timeline Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-lg font-semibold">Evidence Timeline</h2>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <span class="text-sm text-gray-500 mr-2">Date Range:</span>
+                            <input type="date" class="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" value="2023-05-01">
+                            <span class="mx-2 text-gray-500">to</span>
+                            <input type="date" class="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" value="2023-05-17">
+                        </div>
+                        <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md text-sm">
+                            Export Timeline
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Timeline Filters -->
+                <div class="bg-white rounded-lg shadow p-4 mb-6">
+                    <div class="flex flex-wrap items-center gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Project</label>
+                            <select class="border border-gray-300 rounded-md px-3 py-2 text-sm w-48 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <option value="1">Security Audit</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Contact</label>
+                            <select class="border border-gray-300 rounded-md px-3 py-2 text-sm w-48 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <option value="">All Contacts</option>
+                                <option value="3">Robert Davis</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Event Type</label>
+                            <select class="border border-gray-300 rounded-md px-3 py-2 text-sm w-48 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <option value="">All Events</option>
+                                <option value="file_upload">File Uploads</option>
+                                <option value="task_completion">Task Completions</option>
+                                <option value="milestone">Milestones</option>
+                                <option value="note">Notes</option>
+                            </select>
+                        </div>
+                        <div class="ml-auto self-end">
+                            <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md text-sm">
+                                Apply Filters
+                            </button>
+                            <button class="text-gray-500 hover:text-gray-700 ml-2 text-sm">
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Content -->
+                <div class="relative">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                    
+                    <!-- Timeline Date Header -->
+                    <div class="mb-6 relative">
+                        <div class="flex items-center">
+                            <div class="w-16 flex justify-center">
+                                <div class="h-8 w-8 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center z-10">
+                                    <i class="fa-solid fa-calendar-day"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-800">May 17, 2023</h3>
+                                <p class="text-sm text-gray-500">Today</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Event 1 -->
+                    <div class="mb-6 relative">
+                        <div class="flex">
+                            <div class="w-16 flex justify-center">
+                                <div class="h-8 w-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center z-10">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4 bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Task Completed: Security Vulnerability Scan</h4>
+                                        <p class="text-sm text-gray-500 mt-1">Part of Security Audit project</p>
+                                    </div>
+                                    <span class="text-xs text-gray-500">10:45 AM</span>
+                                </div>
+                                <div class="mt-3 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User" class="h-6 w-6 rounded-full">
+                                    <span class="text-sm text-gray-600 ml-2">Completed by Robert Davis</span>
+                                </div>
+                                <div class="mt-3 text-sm text-gray-600">
+                                    <p>All critical vulnerabilities have been identified and documented. Report attached.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Event 2 -->
+                    <div class="mb-6 relative">
+                        <div class="flex">
+                            <div class="w-16 flex justify-center">
+                                <div class="h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center z-10">
+                                    <i class="fa-solid fa-file-upload"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4 bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">File Uploaded: Security Audit Report.pdf</h4>
+                                        <p class="text-sm text-gray-500 mt-1">Security Audit project</p>
+                                    </div>
+                                    <span class="text-xs text-gray-500">10:42 AM</span>
+                                </div>
+                                <div class="mt-3 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User" class="h-6 w-6 rounded-full">
+                                    <span class="text-sm text-gray-600 ml-2">Uploaded by Robert Davis</span>
+                                </div>
+                                <div class="mt-3 p-3 bg-gray-50 rounded-md border border-gray-200 flex items-center">
+                                    <i class="fa-solid fa-file-pdf text-red-500 text-xl mr-3"></i>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium">Security Audit Report.pdf</p>
+                                        <p class="text-xs text-gray-500">4.2 MB</p>
+                                    </div>
+                                    <button class="text-primary-500 hover:text-primary-700">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Date Header -->
+                    <div class="mb-6 relative">
+                        <div class="flex items-center">
+                            <div class="w-16 flex justify-center">
+                                <div class="h-8 w-8 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center z-10">
+                                    <i class="fa-solid fa-calendar-day"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-800">May 16, 2023</h3>
+                                <p class="text-sm text-gray-500">Yesterday</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Event 3 -->
+                    <div class="mb-6 relative">
+                        <div class="flex">
+                            <div class="w-16 flex justify-center">
+                                <div class="h-8 w-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center z-10">
+                                    <i class="fa-solid fa-microphone"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4 bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Audio Recording: Client Interview</h4>
+                                        <p class="text-sm text-gray-500 mt-1">Security Audit project</p>
+                                    </div>
+                                    <span class="text-xs text-gray-500">3:15 PM</span>
+                                </div>
+                                <div class="mt-3 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User" class="h-6 w-6 rounded-full">
+                                    <span class="text-sm text-gray-600 ml-2">Recorded by Robert Davis</span>
+                                </div>
+                                <div class="mt-3 p-3 bg-gray-50 rounded-md border border-gray-200">
+                                    <div class="flex items-center">
+                                        <i class="fa-solid fa-file-audio text-purple-500 text-xl mr-3"></i>
+                                        <div class="flex-1">
+                                            <p class="text-sm font-medium">Client Interview.mp3</p>
+                                            <p class="text-xs text-gray-500">22:45 • 18.5 MB</p>
+                                        </div>
+                                        <button class="text-gray-500 hover:text-gray-700 mr-2">
+                                            <i class="fa-solid fa-play"></i>
+                                        </button>
+                                        <button class="text-primary-500 hover:text-primary-700">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                            <div class="bg-purple-500 h-1.5 rounded-full" style="width: 0%"></div>
+                                        </div>
+                                        <div class="flex justify-between mt-1 text-xs text-gray-500">
+                                            <span>0:00</span>
+                                            <span>22:45</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 text-sm text-gray-600">
+                                    <p>Interview with client about security concerns and past incidents.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Event 4 -->
+                    <div class="mb-6 relative">
+                        <div class="flex">
+                            <div class="w-16 flex justify-center">
+                                <div class="h-8 w-8 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center z-10">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4 bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Note Added</h4>
+                                        <p class="text-sm text-gray-500 mt-1">Security Audit project</p>
+                                    </div>
+                                    <span class="text-xs text-gray-500">11:30 AM</span>
+                                </div>
+                                <div class="mt-3 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User" class="h-6 w-6 rounded-full">
+                                    <span class="text-sm text-gray-600 ml-2">Added by Robert Davis</span>
+                                </div>
+                                <div class="mt-3 text-sm text-gray-600">
+                                    <p>Scheduled final vulnerability scan for tomorrow. Client has provided all necessary access credentials. Will complete report immediately after scan.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Date Header -->
+                    <div class="mb-6 relative">
+                        <div class="flex items-center">
+                            <div class="w-16 flex justify-center">
+                                <div class="h-8 w-8 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center z-10">
+                                    <i class="fa-solid fa-calendar-day"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-800">May 15, 2023</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Event 5 -->
+                    <div class="mb-6 relative">
+                        <div class="flex">
+                            <div class="w-16 flex justify-center">
+                                <div class="h-8 w-8 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center z-10">
+                                    <i class="fa-solid fa-file-excel"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4 bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">File Uploaded: Security Analysis.xlsx</h4>
+                                        <p class="text-sm text-gray-500 mt-1">Security Audit project</p>
+                                    </div>
+                                    <span class="text-xs text-gray-500">2:45 PM</span>
+                                </div>
+                                <div class="mt-3 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User" class="h-6 w-6 rounded-full">
+                                    <span class="text-sm text-gray-600 ml-2">Uploaded by Robert Davis</span>
+                                </div>
+                                <div class="mt-3 p-3 bg-gray-50 rounded-md border border-gray-200 flex items-center">
+                                    <i class="fa-solid fa-file-excel text-teal-500 text-xl mr-3"></i>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium">Security Analysis.xlsx</p>
+                                        <p class="text-xs text-gray-500">4.7 MB</p>
+                                    </div>
+                                    <button class="text-primary-500 hover:text-primary-700">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Load More Button -->
+                    <div class="text-center mt-6">
+                        <button class="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+                            Load More Events
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer id="footer" class="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+                <p>&copy; 2023 ProjectHub Admin Panel. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+    
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const documentVaultTab = document.getElementById('document-vault');
+            const evidenceTimelineTab = document.getElementById('evidence-timeline');
+            
+            // Add tab switching buttons in a real implementation
+            // This is just a placeholder for the concept
+            
+            // Example function to switch tabs
+            function switchToTab(tabName) {
+                if (tabName === 'documents') {
+                    documentVaultTab.classList.remove('hidden');
+                    evidenceTimelineTab.classList.add('hidden');
+                } else if (tabName === 'timeline') {
+                    documentVaultTab.classList.add('hidden');
+                    evidenceTimelineTab.classList.remove('hidden');
+                }
+            }
+            
+            // For demonstration purposes only
+            // switchToTab('timeline');
+        });
+    </script>
+</body>
+</html>

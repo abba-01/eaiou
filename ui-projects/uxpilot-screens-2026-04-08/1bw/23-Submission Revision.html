@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+    <div id="header" class="bg-neutral-900 py-4 px-6 flex items-center justify-between">
+  <div class="flex items-center space-x-8">
+    <div class="flex items-center">
+      <span class="text-white text-xl flex items-center cursor-pointer">
+        <span>EAIOU</span>
+        <span class="text-neutral-400 text-sm ml-2">| Research Platform</span>
+      </span>
+    </div>
+    <div class="hidden md:flex space-x-6">
+      <div class="relative group">
+        <span class="text-neutral-300 hover:text-white flex items-center cursor-pointer">
+          Articles
+          <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+        </span>
+      </div>
+      <div class="relative group">
+        <span class="text-white flex items-center cursor-pointer">
+          Submissions
+          <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+        </span>
+      </div>
+      <span class="text-neutral-300 hover:text-white cursor-pointer">
+        Reviews
+      </span>
+      <div class="relative group">
+        <span class="text-neutral-300 hover:text-white flex items-center cursor-pointer">
+          Collaboration
+          <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+        </span>
+      </div>
+      <span class="text-neutral-300 hover:text-white cursor-pointer">
+        Guidelines
+      </span>
+      <div class="relative group">
+        <span class="text-neutral-300 hover:text-white flex items-center cursor-pointer">
+          About
+          <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="flex items-center space-x-4">
+    <div class="flex items-center">
+      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-8 h-8 rounded-full mr-2">
+      <span class="text-white">Dr. Aisha Johnson</span>
+    </div>
+    <div class="relative">
+      <button class="text-neutral-300 hover:text-white">
+        <i class="fa-solid fa-bell text-xl"></i>
+      </button>
+      <span class="absolute -top-1 -right-1 bg-neutral-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">2</span>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="flex">
+  <!-- Sidebar Navigation -->
+  <div id="sidebar" class="w-64 bg-neutral-800 text-neutral-300 h-[800px] border-r border-neutral-700">
+    <div class="p-4">
+      <div class="mb-8">
+        <h3 class="text-white text-lg mb-2">Author Dashboard</h3>
+        <p class="text-neutral-400 text-sm">Manage your submissions and reviews</p>
+      </div>
+      
+      <nav class="space-y-1">
+        <span class="flex items-center px-4 py-3 text-neutral-300 hover:bg-neutral-700 rounded-md cursor-pointer">
+          <i class="fa-solid fa-home mr-3"></i>
+          <span>Overview</span>
+        </span>
+        <span class="flex items-center px-4 py-3 text-neutral-300 hover:bg-neutral-700 rounded-md cursor-pointer">
+          <i class="fa-solid fa-file-lines mr-3"></i>
+          <span>My Submissions</span>
+        </span>
+        <span class="flex items-center px-4 py-3 bg-neutral-700 text-white rounded-md cursor-pointer">
+          <i class="fa-solid fa-pen-to-square mr-3"></i>
+          <span>Revisions</span>
+        </span>
+        <span class="flex items-center px-4 py-3 text-neutral-300 hover:bg-neutral-700 rounded-md cursor-pointer">
+          <i class="fa-solid fa-comments mr-3"></i>
+          <span>Reviews</span>
+        </span>
+        <span class="flex items-center px-4 py-3 text-neutral-300 hover:bg-neutral-700 rounded-md cursor-pointer">
+          <i class="fa-solid fa-users mr-3"></i>
+          <span>Collaborations</span>
+        </span>
+        <span class="flex items-center px-4 py-3 text-neutral-300 hover:bg-neutral-700 rounded-md cursor-pointer">
+          <i class="fa-solid fa-bell mr-3"></i>
+          <span>Notifications</span>
+        </span>
+        <span class="flex items-center px-4 py-3 text-neutral-300 hover:bg-neutral-700 rounded-md cursor-pointer">
+          <i class="fa-solid fa-gear mr-3"></i>
+          <span>Settings</span>
+        </span>
+      </nav>
+    </div>
+    
+    <div class="px-4 py-6 border-t border-neutral-700">
+      <div class="flex items-center mb-4">
+        <div class="w-2 h-2 bg-neutral-400 rounded-full mr-2"></div>
+        <span class="text-neutral-400 text-sm">Submission Status</span>
+      </div>
+      <div class="flex flex-col space-y-2">
+        <div class="flex justify-between text-sm">
+          <span>New</span>
+          <span>1</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span>In Review</span>
+          <span>2</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span>Revision Requested</span>
+          <span class="text-white">1</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span>Accepted</span>
+          <span>3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div id="content-area" class="flex-1 bg-neutral-100">
+    <!-- Breadcrumb Navigation -->
+    <div class="bg-white px-8 py-4 border-b border-neutral-200">
+      <div class="flex items-center text-sm">
+        <span class="text-neutral-500 hover:text-neutral-700 cursor-pointer">Dashboard</span>
+        <i class="fa-solid fa-chevron-right mx-2 text-neutral-400 text-xs"></i>
+        <span class="text-neutral-500 hover:text-neutral-700 cursor-pointer">My Submissions</span>
+        <i class="fa-solid fa-chevron-right mx-2 text-neutral-400 text-xs"></i>
+        <span class="text-neutral-500 hover:text-neutral-700 cursor-pointer">QNTM-2025-042</span>
+        <i class="fa-solid fa-chevron-right mx-2 text-neutral-400 text-xs"></i>
+        <span class="text-neutral-800">Revision</span>
+      </div>
+    </div>
+
+    <!-- Content Header -->
+    <div class="px-8 py-6">
+      <div class="flex justify-between items-center mb-6">
+        <div>
+          <h1 class="text-2xl text-neutral-800">Submission Revision</h1>
+          <p class="text-neutral-600 mt-1">Upload revisions, respond to reviewer comments, and resubmit your work</p>
+        </div>
+        <div class="flex items-center">
+          <span class="bg-neutral-200 text-neutral-700 px-3 py-1 rounded-full text-sm flex items-center mr-4">
+            <i class="fa-solid fa-clock mr-2"></i>
+            Due: July 15, 2025
+          </span>
+          <button class="bg-neutral-800 text-white px-4 py-2 rounded-md hover:bg-neutral-700">
+            <i class="fa-solid fa-question-circle mr-2"></i>
+            Help
+          </button>
+        </div>
+      </div>
+
+      <!-- Submission Information Card -->
+      <div class="bg-white rounded-lg shadow-sm mb-6 p-6">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <h2 class="text-xl text-neutral-800">Quantum Entanglement in Neural Networks</h2>
+            <p class="text-neutral-600 mt-1">QNTM-2025-042 • Submitted on May 22, 2025</p>
+          </div>
+          <span class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm">
+            Revision Requested
+          </span>
+        </div>
+        
+        <div class="flex flex-wrap gap-3 mb-4">
+          <span class="bg-neutral-100 text-neutral-700 px-3 py-1 rounded-full text-sm flex items-center">
+            <i class="fa-solid fa-tag mr-1 text-neutral-500"></i>
+            Quantum Computing
+          </span>
+          <span class="bg-neutral-100 text-neutral-700 px-3 py-1 rounded-full text-sm flex items-center">
+            <i class="fa-solid fa-tag mr-1 text-neutral-500"></i>
+            Neural Networks
+          </span>
+          <span class="bg-neutral-100 text-neutral-700 px-3 py-1 rounded-full text-sm flex items-center">
+            <i class="fa-solid fa-tag mr-1 text-neutral-500"></i>
+            AI Research
+          </span>
+        </div>
+        
+        <div class="flex items-center mb-4">
+          <div class="mr-6 flex items-center">
+            <i class="fa-solid fa-users mr-2 text-neutral-500"></i>
+            <span class="text-neutral-700">3 Co-authors</span>
+          </div>
+          <div class="mr-6 flex items-center">
+            <i class="fa-solid fa-comments mr-2 text-neutral-500"></i>
+            <span class="text-neutral-700">4 Reviews</span>
+          </div>
+          <div class="flex items-center">
+            <i class="fa-solid fa-clock-rotate-left mr-2 text-neutral-500"></i>
+            <span class="text-neutral-700">2 Revisions</span>
+          </div>
+        </div>
+        
+        <div class="flex items-center text-sm">
+          <span class="text-neutral-500 mr-2">Editor:</span>
+          <div class="flex items-center">
+            <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="Editor avatar" class="w-6 h-6 rounded-full mr-1">
+            <span class="text-neutral-700">Dr. Michael Torres</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Revision Content -->
+    <div class="px-8 pb-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left Column - Reviewer Comments -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-lg shadow-sm p-6">
+            <h3 class="text-lg text-neutral-800 mb-4">Reviewer Comments</h3>
+            
+            <div class="space-y-4">
+              <div class="border-b border-neutral-200 pb-4">
+                <div class="flex items-center mb-2">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="Reviewer avatar" class="w-8 h-8 rounded-full mr-2">
+                  <div>
+                    <span class="text-neutral-800">Reviewer #1</span>
+                    <span class="text-neutral-500 text-sm ml-2">June 5, 2025</span>
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <span class="text-sm bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded">Major Concerns</span>
+                </div>
+                <p class="text-neutral-700 text-sm mb-2">The methodology section lacks detail on the quantum simulation parameters. Please provide more information on how the entanglement was measured and quantified.</p>
+                <p class="text-neutral-700 text-sm">The results section should include error bars on Figure 3 and clarify the statistical significance of the findings.</p>
+              </div>
+              
+              <div class="border-b border-neutral-200 pb-4">
+                <div class="flex items-center mb-2">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="Reviewer avatar" class="w-8 h-8 rounded-full mr-2">
+                  <div>
+                    <span class="text-neutral-800">Reviewer #2</span>
+                    <span class="text-neutral-500 text-sm ml-2">June 8, 2025</span>
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <span class="text-sm bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded">Minor Concerns</span>
+                </div>
+                <p class="text-neutral-700 text-sm">The literature review should include recent work by Chen et al. (2024) on quantum neural networks. Please address how your approach differs from or builds upon their findings.</p>
+              </div>
+              
+              <div>
+                <div class="flex items-center mb-2">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="Reviewer avatar" class="w-8 h-8 rounded-full mr-2">
+                  <div>
+                    <span class="text-neutral-800">Reviewer #3</span>
+                    <span class="text-neutral-500 text-sm ml-2">June 10, 2025</span>
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <span class="text-sm bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded">Editorial Comments</span>
+                </div>
+                <p class="text-neutral-700 text-sm">The conclusion should be strengthened to highlight the practical implications of your findings. Consider adding a paragraph on potential applications in real-world quantum computing systems.</p>
+              </div>
+            </div>
+            
+            <div class="mt-6">
+              <button class="w-full bg-neutral-100 text-neutral-700 px-4 py-2 rounded-md hover:bg-neutral-200 flex items-center justify-center">
+                <i class="fa-solid fa-eye mr-2"></i>
+                View All Comments
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Column - Upload Revision & Rebuttal -->
+        <div class="lg:col-span-2">
+          <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <h3 class="text-lg text-neutral-800 mb-4">Upload Revised Manuscript</h3>
+            
+            <div class="mb-6">
+              <label class="block text-neutral-700 mb-2">Current Version</label>
+              <div class="flex items-center justify-between p-4 border border-neutral-200 rounded-md bg-neutral-50">
+                <div class="flex items-center">
+                  <i class="fa-solid fa-file-pdf text-neutral-700 mr-3 text-xl"></i>
+                  <div>
+                    <p class="text-neutral-800">quantum_entanglement_neural_networks_v1.pdf</p>
+                    <p class="text-neutral-500 text-sm">Uploaded on May 22, 2025 • 4.2 MB</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <button class="text-neutral-600 hover:text-neutral-800 mr-3">
+                    <i class="fa-solid fa-download"></i>
+                  </button>
+                  <button class="text-neutral-600 hover:text-neutral-800">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mb-6">
+              <label class="block text-neutral-700 mb-2">Upload New Version</label>
+              <div class="border-2 border-dashed border-neutral-300 rounded-md p-6 text-center">
+                <div class="mb-4">
+                  <i class="fa-solid fa-cloud-arrow-up text-neutral-400 text-3xl"></i>
+                </div>
+                <p class="text-neutral-600 mb-2">Drag and drop your revised manuscript here</p>
+                <p class="text-neutral-500 text-sm mb-4">Supported formats: PDF, DOCX, LaTeX (ZIP)</p>
+                <button class="bg-neutral-600 text-white px-4 py-2 rounded-md hover:bg-neutral-700">
+                  Browse Files
+                </button>
+              </div>
+            </div>
+            
+            <div class="mb-6">
+              <label class="block text-neutral-700 mb-2">Version Notes (Optional)</label>
+              <textarea class="w-full border border-neutral-300 rounded-md p-3 text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-500" rows="2" placeholder="Describe the changes made in this version"></textarea>
+            </div>
+            
+            <div class="flex items-center text-sm text-neutral-600 mb-4">
+              <i class="fa-solid fa-lock mr-2"></i>
+              <span>Your manuscript will be automatically checked for formatting and plagiarism</span>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <h3 class="text-lg text-neutral-800 mb-4">Author Rebuttal</h3>
+            
+            <div class="mb-6">
+              <label class="block text-neutral-700 mb-2">Response to Reviewer #1</label>
+              <div class="border border-neutral-200 rounded-md overflow-hidden">
+                <div class="bg-neutral-50 px-4 py-2 border-b border-neutral-200 flex items-center">
+                  <span class="text-neutral-700 text-sm">Formatting Tools</span>
+                  <div class="ml-auto flex items-center space-x-3">
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-bold"></i>
+                    </button>
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-italic"></i>
+                    </button>
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-list-ul"></i>
+                    </button>
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-link"></i>
+                    </button>
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-quote-left"></i>
+                    </button>
+                  </div>
+                </div>
+                <textarea class="w-full p-3 text-neutral-700 focus:outline-none" rows="4" placeholder="Respond to the reviewer's comments..."></textarea>
+              </div>
+            </div>
+            
+            <div class="mb-6">
+              <label class="block text-neutral-700 mb-2">Response to Reviewer #2</label>
+              <div class="border border-neutral-200 rounded-md overflow-hidden">
+                <div class="bg-neutral-50 px-4 py-2 border-b border-neutral-200 flex items-center">
+                  <span class="text-neutral-700 text-sm">Formatting Tools</span>
+                  <div class="ml-auto flex items-center space-x-3">
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-bold"></i>
+                    </button>
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-italic"></i>
+                    </button>
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-list-ul"></i>
+                    </button>
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-link"></i>
+                    </button>
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-quote-left"></i>
+                    </button>
+                  </div>
+                </div>
+                <textarea class="w-full p-3 text-neutral-700 focus:outline-none" rows="4" placeholder="Respond to the reviewer's comments..."></textarea>
+              </div>
+            </div>
+            
+            <div class="mb-6">
+              <label class="block text-neutral-700 mb-2">Response to Reviewer #3</label>
+              <div class="border border-neutral-200 rounded-md overflow-hidden">
+                <div class="bg-neutral-50 px-4 py-2 border-b border-neutral-200 flex items-center">
+                  <span class="text-neutral-700 text-sm">Formatting Tools</span>
+                  <div class="ml-auto flex items-center space-x-3">
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-bold"></i>
+                    </button>
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-italic"></i>
+                    </button>
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-list-ul"></i>
+                    </button>
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-link"></i>
+                    </button>
+                    <button class="text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-quote-left"></i>
+                    </button>
+                  </div>
+                </div>
+                <textarea class="w-full p-3 text-neutral-700 focus:outline-none" rows="4" placeholder="Respond to the reviewer's comments..."></textarea>
+              </div>
+            </div>
+            
+            <div class="mb-6">
+              <label class="block text-neutral-700 mb-2">General Comments to Editor (Optional)</label>
+              <textarea class="w-full border border-neutral-300 rounded-md p-3 text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-500" rows="3" placeholder="Add any additional comments for the editor..."></textarea>
+            </div>
+            
+            <div class="mb-6">
+              <label class="block text-neutral-700 mb-2">Upload Supplementary Files (Optional)</label>
+              <div class="border-2 border-dashed border-neutral-300 rounded-md p-4 text-center">
+                <p class="text-neutral-600 mb-2">Drag and drop or browse files</p>
+                <p class="text-neutral-500 text-sm mb-3">Data, code, figures, or other supporting materials</p>
+                <button class="bg-neutral-200 text-neutral-700 px-4 py-1 rounded-md hover:bg-neutral-300 text-sm">
+                  Add Files
+                </button>
+              </div>
+            </div>
+            
+            <div class="flex items-center mb-6">
+              <input type="checkbox" id="confirm-changes" class="mr-2">
+              <label for="confirm-changes" class="text-neutral-700 text-sm">I confirm that all reviewer comments have been addressed in this revision</label>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <button class="border border-neutral-300 text-neutral-700 px-4 py-2 rounded-md hover:bg-neutral-50">
+                Save as Draft
+              </button>
+              <div class="flex items-center space-x-3">
+                <button class="border border-neutral-300 text-neutral-700 px-4 py-2 rounded-md hover:bg-neutral-50">
+                  Preview
+                </button>
+                <button class="bg-neutral-800 text-white px-6 py-2 rounded-md hover:bg-neutral-700">
+                  Submit Revision
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-neutral-50 rounded-lg p-4 flex items-start">
+            <i class="fa-solid fa-circle-info text-neutral-500 mt-1 mr-3"></i>
+            <div>
+              <p class="text-neutral-800 mb-1">Revision Guidelines</p>
+              <ul class="text-neutral-700 text-sm space-y-1">
+                <li>• Address all reviewer comments in your rebuttal</li>
+                <li>• Highlight changes in your revised manuscript</li>
+                <li>• Include any new references in the proper format</li>
+                <li>• Ensure all figures and tables are properly labeled</li>
+              </ul>
+              <span class="text-neutral-600 hover:underline text-sm flex items-center mt-2 cursor-pointer">
+                View complete revision guidelines
+                <i class="fa-solid fa-arrow-right ml-1"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="footer" class="bg-neutral-900 text-neutral-300 py-8 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <p class="text-neutral-500 mb-4 md:mb-0">
+        © 2025 EAIOU.org. All rights reserved.
+      </p>
+      <div class="flex items-center space-x-6">
+        <span class="text-neutral-400 hover:text-white cursor-pointer">Privacy Policy</span>
+        <span class="text-neutral-400 hover:text-white cursor-pointer">Terms of Service</span>
+        <span class="text-neutral-400 hover:text-white cursor-pointer">Support</span>
+        <div class="flex items-center">
+          <span class="text-neutral-400 mr-1">Human-AI Collaboration</span>
+          <i class="fa-solid fa-robot text-neutral-500"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1a56db',
+                        'primary-dark': '#1245b5',
+                        'secondary': '#6b7280',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="sidebar" class="fixed left-0 top-0 h-[800px] w-60 bg-white border-r border-gray-200 flex flex-col">
+        <div class="flex items-center px-4 py-4 border-b border-gray-200">
+            <i class="fa-solid fa-book-open-reader text-primary text-2xl"></i>
+            <span class="ml-2 text-lg font-semibold text-gray-800">Peer Review</span>
+        </div>
+        <div class="mt-2 flex-1 overflow-y-auto">
+            <div class="px-4 mb-2">
+                <div class="flex items-center px-2 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                    <i class="fa-solid fa-gauge mr-3 text-gray-600"></i>
+                    Dashboard
+                </div>
+                <div class="flex items-center px-2 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                    <i class="fa-regular fa-file-lines mr-3 text-gray-600"></i>
+                    Articles
+                </div>
+                <div class="flex items-center px-2 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                    <i class="fa-solid fa-magnifying-glass-chart mr-3 text-gray-600"></i>
+                    Reviews
+                </div>
+                <div class="flex items-center px-2 py-2 text-primary font-medium bg-blue-50 rounded-md">
+                    <i class="fa-solid fa-sliders mr-3 text-primary"></i>
+                    Configuration
+                </div>
+            </div>
+            <div class="px-4 mb-2">
+                <h3 class="px-2 mb-1 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    ADMIN TOOLS
+                </h3>
+                <div class="flex items-center px-2 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                    <i class="fa-solid fa-users-gear mr-3 text-gray-600"></i>
+                    User Management
+                </div>
+                <div class="flex items-center px-2 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                    <i class="fa-solid fa-diagram-project mr-3 text-gray-600"></i>
+                    Workflow Settings
+                </div>
+                <div class="flex items-center px-2 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                    <i class="fa-regular fa-envelope mr-3 text-gray-600"></i>
+                    Notification Templates
+                </div>
+                <div class="flex items-center px-2 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                    <i class="fa-solid fa-list-check mr-3 text-gray-600"></i>
+                    Review Rubrics
+                </div>
+            </div>
+            <div class="px-4 mb-2">
+                <h3 class="px-2 mb-1 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    REPORTS
+                </h3>
+                <div class="flex items-center px-2 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                    <i class="fa-solid fa-chart-line mr-3 text-gray-600"></i>
+                    Analytics
+                </div>
+                <div class="flex items-center px-2 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                    <i class="fa-solid fa-clock-rotate-left mr-3 text-gray-600"></i>
+                    Audit Logs
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-semibold">
+                    JD
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium text-gray-700">
+                        John Doe
+                    </p>
+                    <p class="text-xs text-gray-500">
+                        Administrator
+                    </p>
+                </div>
+                <button class="ml-auto text-gray-500 hover:text-gray-700">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="header" class="fixed top-0 left-60 right-0 bg-white border-b border-gray-200 z-50 flex items-center justify-between px-6 py-3">
+        <div class="flex items-center">
+            <h1 class="text-xl font-semibold text-gray-800">Configuration</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button class="text-gray-500 hover:text-gray-700 relative">
+                <i class="fa-regular fa-bell text-xl"></i>
+                <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+            </button>
+            <button class="text-gray-500 hover:text-gray-700">
+                <i class="fa-solid fa-gear text-xl"></i>
+            </button>
+            <button class="text-gray-500 hover:text-gray-700">
+                <i class="fa-regular fa-circle-question text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="main-content" class="ml-60 pt-16 pb-8 px-6">
+        <div id="config-tabs" class="mb-6">
+            <div class="border-b border-gray-200">
+                <nav class="flex -mb-px">
+                    <span class="py-4 px-6 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 cursor-pointer">
+                        Role Mappings
+                    </span>
+                    <span class="py-4 px-6 border-b-2 border-primary text-primary font-medium cursor-pointer">
+                        Workflow Parameters
+                    </span>
+                    <span class="py-4 px-6 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 cursor-pointer">
+                        Notification Templates
+                    </span>
+                    <span class="py-4 px-6 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 cursor-pointer">
+                        Form Fields
+                    </span>
+                </nav>
+            </div>
+        </div>
+
+        <div id="workflow-parameters" class="max-w-5xl">
+            <div id="section-header" class="mb-6">
+                <h2 class="text-lg font-medium text-gray-800">Workflow Parameters</h2>
+                <p class="text-gray-600 mt-1">Configure the parameters that control the peer review workflow process.</p>
+            </div>
+
+            <div id="parameters-form" class="space-y-6">
+                <div id="general-parameters" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-md font-medium text-gray-800 mb-4">General Parameters</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="min-reviewers" class="block text-sm font-medium text-gray-700 mb-1">Minimum Reviewers Required</label>
+                            <div class="flex">
+                                <input type="number" id="min-reviewers" name="min_reviewers" min="1" max="10" value="2" class="w-20 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <div class="ml-2 text-sm text-gray-500 flex items-center">
+                                    <i class="fa-solid fa-circle-info mr-1"></i>
+                                    Minimum reviewers per submission
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="review-deadline" class="block text-sm font-medium text-gray-700 mb-1">Review Deadline (Days)</label>
+                            <div class="flex">
+                                <input type="number" id="review-deadline" name="review_deadline" min="1" max="90" value="14" class="w-20 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <div class="ml-2 text-sm text-gray-500 flex items-center">
+                                    <i class="fa-solid fa-circle-info mr-1"></i>
+                                    Days allowed for review completion
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="revision-deadline" class="block text-sm font-medium text-gray-700 mb-1">Revision Deadline (Days)</label>
+                            <div class="flex">
+                                <input type="number" id="revision-deadline" name="revision_deadline" min="1" max="90" value="21" class="w-20 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <div class="ml-2 text-sm text-gray-500 flex items-center">
+                                    <i class="fa-solid fa-circle-info mr-1"></i>
+                                    Days allowed for revision submission
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="max-revisions" class="block text-sm font-medium text-gray-700 mb-1">Maximum Revision Cycles</label>
+                            <div class="flex">
+                                <input type="number" id="max-revisions" name="max_revisions" min="1" max="5" value="3" class="w-20 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <div class="ml-2 text-sm text-gray-500 flex items-center">
+                                    <i class="fa-solid fa-circle-info mr-1"></i>
+                                    Maximum revision rounds allowed
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="decision-thresholds" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-md font-medium text-gray-800 mb-4">Decision Thresholds</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label for="approval-threshold" class="block text-sm font-medium text-gray-700 mb-1">Approval Threshold Score</label>
+                            <div class="flex items-center">
+                                <input type="number" id="approval-threshold" name="approval_threshold" min="1" max="5" step="0.1" value="4.0" class="w-20 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <div class="ml-2 text-sm text-gray-500">
+                                    Minimum average score for automatic approval (out of 5)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="minor-revision-threshold" class="block text-sm font-medium text-gray-700 mb-1">Minor Revision Threshold Score</label>
+                            <div class="flex items-center">
+                                <input type="number" id="minor-revision-threshold" name="minor_revision_threshold" min="1" max="5" step="0.1" value="3.0" class="w-20 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <div class="ml-2 text-sm text-gray-500">
+                                    Minimum average score for minor revision (out of 5)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="major-revision-threshold" class="block text-sm font-medium text-gray-700 mb-1">Major Revision Threshold Score</label>
+                            <div class="flex items-center">
+                                <input type="number" id="major-revision-threshold" name="major_revision_threshold" min="1" max="5" step="0.1" value="2.0" class="w-20 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <div class="ml-2 text-sm text-gray-500">
+                                    Minimum average score for major revision (out of 5)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Score Conflict Resolution</label>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input type="radio" id="conflict-editor" name="conflict_resolution" value="editor" checked class="mr-2">
+                                    <label for="conflict-editor" class="text-sm text-gray-700">Editor decides on conflicts</label>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <input type="radio" id="conflict-average" name="conflict_resolution" value="average" class="mr-2">
+                                    <label for="conflict-average" class="text-sm text-gray-700">Use average score regardless of disparity</label>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <input type="radio" id="conflict-additional" name="conflict_resolution" value="additional" class="mr-2">
+                                    <label for="conflict-additional" class="text-sm text-gray-700">Request additional reviewer when scores differ by more than:</label>
+                                    <input type="number" id="conflict-threshold" name="conflict_threshold" min="0.5" max="3" step="0.5" value="2" class="ml-2 w-16 border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="anonymity-settings" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-md font-medium text-gray-800 mb-4">Anonymity Settings</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Default Review Type</label>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input type="radio" id="double-blind" name="default_review_type" value="double-blind" checked class="mr-2">
+                                    <label for="double-blind" class="text-sm text-gray-700">Double-blind (Authors and reviewers are anonymous)</label>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <input type="radio" id="single-blind" name="default_review_type" value="single-blind" class="mr-2">
+                                    <label for="single-blind" class="text-sm text-gray-700">Single-blind (Reviewers are anonymous)</label>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <input type="radio" id="open-review" name="default_review_type" value="open" class="mr-2">
+                                    <label for="open-review" class="text-sm text-gray-700">Open review (No anonymity)</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="allow-author-preference" name="allow_author_preference" checked class="mr-2">
+                                <label for="allow-author-preference" class="text-sm text-gray-700">Allow authors to select their anonymity preference</label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="editor-override" name="editor_override" checked class="mr-2">
+                                <label for="editor-override" class="text-sm text-gray-700">Allow editors to override anonymity settings</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="acl-mapping" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-md font-medium text-gray-800 mb-4">ACL Permission Mapping</h3>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joomla ACL Permission</th>
+                                    <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Default User Groups</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-4 py-3 text-sm text-gray-700">Submit Article</td>
+                                    <td class="px-4 py-3 text-sm">
+                                        <input type="text" value="peerreview.submit" class="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        <select class="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            <option>Author, Editor, Administrator</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm text-gray-700">Assign Reviewers</td>
+                                    <td class="px-4 py-3 text-sm">
+                                        <input type="text" value="peerreview.assign" class="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        <select class="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            <option>Editor, Administrator</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm text-gray-700">Submit Review</td>
+                                    <td class="px-4 py-3 text-sm">
+                                        <input type="text" value="peerreview.review" class="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        <select class="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            <option>Reviewer, Editor, Administrator</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm text-gray-700">Make Decision</td>
+                                    <td class="px-4 py-3 text-sm">
+                                        <input type="text" value="peerreview.decide" class="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        <select class="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            <option>Editor, Administrator</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm text-gray-700">Configure System</td>
+                                    <td class="px-4 py-3 text-sm">
+                                        <input type="text" value="peerreview.admin" class="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        <select class="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            <option>Administrator</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 text-right">
+                        <button class="text-primary hover:text-primary-dark text-sm font-medium flex items-center ml-auto">
+                            <i class="fa-solid fa-plus mr-1"></i>
+                            Add New Permission
+                        </button>
+                    </div>
+                </div>
+
+                <div id="form-actions" class="flex justify-end space-x-3 pt-4">
+                    <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button class="px-6 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // This would handle the conditional visibility of the conflict threshold input
+        document.getElementById('conflict-additional').addEventListener('change', function() {
+            document.getElementById('conflict-threshold').disabled = false;
+        });
+        
+        document.getElementById('conflict-editor').addEventListener('change', function() {
+            document.getElementById('conflict-threshold').disabled = true;
+        });
+        
+        document.getElementById('conflict-average').addEventListener('change', function() {
+            document.getElementById('conflict-threshold').disabled = true;
+        });
+    </script>
+</body>
+</html>

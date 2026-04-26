@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header Navigation -->
+    <nav id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 flex items-center justify-between px-4 py-3 z-50">
+        <div class="flex items-center">
+            <span class="flex items-center mr-10 cursor-pointer">
+                <i class="fa-solid fa-flask-vial text-primary-600 text-2xl mr-2"></i>
+                <span class="text-xl font-bold text-gray-800">SciPeerReview</span>
+            </span>
+            <div class="hidden md:flex space-x-6">
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Dashboard</span>
+                <span class="text-gray-600 hover:text-primary-600 font-medium text-primary-600 border-b-2 border-primary-600 cursor-pointer">My Manuscripts</span>
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Reviews</span>
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Journals</span>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span class="hidden md:inline-block text-gray-600 mr-2">
+                <i class="fa-regular fa-bell"></i>
+                <span class="bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center absolute -mt-8 ml-3">2</span>
+            </span>
+            <button class="hidden md:flex items-center text-gray-600 hover:text-gray-800">
+                <i class="fa-regular fa-question-circle mr-1"></i>
+                <span>Help</span>
+            </button>
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-full h-full object-cover" />
+                </div>
+                <span class="hidden md:inline-block text-gray-700 font-medium">Dr. Michael Chen</span>
+                <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="pt-16 flex min-h-screen bg-gray-50">
+        <!-- Sidebar -->
+        <div id="sidebar" class="hidden md:block w-64 bg-white border-r border-gray-200 fixed h-full pt-4">
+            <div class="px-4 py-2">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase">Author Dashboard</h2>
+                </div>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-home w-5 text-gray-500"></i>
+                        <span>Overview</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-file-lines w-5 text-gray-500"></i>
+                        <span>My Manuscripts</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 bg-primary-50 text-primary-700 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-plus w-5"></i>
+                        <span>New Submission</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-clock-rotate-left w-5 text-gray-500"></i>
+                        <span>Submission History</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-comment w-5 text-gray-500"></i>
+                        <span>Messages</span>
+                        <span class="ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="px-4 py-2 mt-6">
+                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-4">Reviewer Tools</h2>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-clipboard-check w-5 text-gray-500"></i>
+                        <span>Review Requests</span>
+                        <span class="ml-auto bg-yellow-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">2</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-star w-5 text-gray-500"></i>
+                        <span>My Reviews</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-medal w-5 text-gray-500"></i>
+                        <span>Review History</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="px-4 py-2 mt-6">
+                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-4">Account</h2>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-user w-5 text-gray-500"></i>
+                        <span>Profile</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-gear w-5 text-gray-500"></i>
+                        <span>Settings</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-right-from-bracket w-5 text-gray-500"></i>
+                        <span>Logout</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 ml-0 md:ml-64 p-6">
+            <!-- Breadcrumb and Actions -->
+            <div id="page-header" class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                <div>
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                        <span class="hover:text-primary-600 cursor-pointer">Dashboard</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="hover:text-primary-600 cursor-pointer">My Manuscripts</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="text-gray-700">New Submission</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900">Manuscript Submission Form</h1>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-3">
+                    <button id="btn-save-draft" class="px-3 py-2 border border-gray-300 rounded-md flex items-center text-gray-700 hover:bg-gray-50">
+                        <i class="fa-regular fa-save mr-2"></i>
+                        <span>Save Draft</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Submission Progress -->
+            <div id="submission-progress" class="bg-white rounded-lg shadow p-4 mb-6">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-lg font-medium text-gray-900">Submission Progress</h2>
+                    <span class="text-sm text-gray-500">Step 1 of 4</span>
+                </div>
+                <div class="mt-4 mb-2">
+                    <div class="overflow-hidden h-2 text-xs flex rounded bg-gray-200">
+                        <div class="w-1/4 shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary-500"></div>
+                    </div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-600 px-1">
+                    <span class="font-medium text-primary-600">Manuscript Details</span>
+                    <span>Authors & Affiliations</span>
+                    <span>Files Upload</span>
+                    <span>Review & Submit</span>
+                </div>
+            </div>
+            
+            <!-- Submission Form -->
+            <div id="submission-form" class="bg-white rounded-lg shadow overflow-hidden mb-6">
+                <div class="border-b border-gray-200 bg-gray-50 px-6 py-4">
+                    <h3 class="text-lg font-medium text-gray-900">Manuscript Information</h3>
+                    <p class="mt-1 text-sm text-gray-500">Please provide detailed information about your manuscript.</p>
+                </div>
+                
+                <div class="p-6">
+                    <!-- Journal Selection -->
+                    <div class="mb-6">
+                        <label for="journal" class="block text-sm font-medium text-gray-700 mb-1">Target Journal <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <select id="journal" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md">
+                                <option value="">Select a journal</option>
+                                <option value="nature">Nature</option>
+                                <option value="science">Science</option>
+                                <option value="cell">Cell</option>
+                                <option value="plos">PLOS ONE</option>
+                                <option value="nejm">New England Journal of Medicine</option>
+                                <option value="lancet">The Lancet</option>
+                                <option value="environmental">Environmental Science & Technology</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                                <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                            </div>
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500">Choose the journal where you would like to submit your manuscript.</p>
+                    </div>
+                    
+                    <!-- Article Type -->
+                    <div class="mb-6">
+                        <label for="article-type" class="block text-sm font-medium text-gray-700 mb-1">Article Type <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <select id="article-type" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md">
+                                <option value="">Select article type</option>
+                                <option value="research">Research Article</option>
+                                <option value="review">Review Article</option>
+                                <option value="methods">Methods Paper</option>
+                                <option value="case">Case Report</option>
+                                <option value="perspective">Perspective</option>
+                                <option value="letter">Letter to Editor</option>
+                                <option value="brief">Brief Communication</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                                <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                            </div>
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500">Select the type of article you are submitting.</p>
+                    </div>
+                    
+                    <!-- Title -->
+                    <div class="mb-6">
+                        <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Manuscript Title <span class="text-red-500">*</span></label>
+                        <input type="text" id="title" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Enter the full title of your manuscript">
+                        <p class="mt-1 text-xs text-gray-500">Maximum 250 characters. Be concise and specific.</p>
+                    </div>
+                    
+                    <!-- Abstract -->
+                    <div class="mb-6">
+                        <label for="abstract" class="block text-sm font-medium text-gray-700 mb-1">Abstract <span class="text-red-500">*</span></label>
+                        <textarea id="abstract" rows="5" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Provide a comprehensive summary of your research"></textarea>
+                        <div class="flex justify-between mt-1">
+                            <p class="text-xs text-gray-500">Maximum 300 words. Include background, methods, results, and conclusions.</p>
+                            <p class="text-xs text-gray-500"><span id="abstract-count">0</span>/300 words</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Keywords -->
+                    <div class="mb-6">
+                        <label for="keywords" class="block text-sm font-medium text-gray-700 mb-1">Keywords <span class="text-red-500">*</span></label>
+                        <input type="text" id="keywords" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="e.g., CRISPR, gene editing, cancer, therapy">
+                        <p class="mt-1 text-xs text-gray-500">Provide 3-6 keywords separated by commas. These will be used for indexing and search purposes.</p>
+                    </div>
+                    
+                    <!-- Research Areas -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Research Areas <span class="text-red-500">*</span></label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-center">
+                                <input id="area-molecular" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                <label for="area-molecular" class="ml-2 block text-sm text-gray-700">Molecular Biology</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="area-genetics" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                <label for="area-genetics" class="ml-2 block text-sm text-gray-700">Genetics</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="area-biochemistry" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                <label for="area-biochemistry" class="ml-2 block text-sm text-gray-700">Biochemistry</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="area-immunology" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                <label for="area-immunology" class="ml-2 block text-sm text-gray-700">Immunology</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="area-neuroscience" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                <label for="area-neuroscience" class="ml-2 block text-sm text-gray-700">Neuroscience</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="area-ecology" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                <label for="area-ecology" class="ml-2 block text-sm text-gray-700">Ecology</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="area-computational" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                <label for="area-computational" class="ml-2 block text-sm text-gray-700">Computational Biology</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="area-other" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                <label for="area-other" class="ml-2 block text-sm text-gray-700">Other</label>
+                            </div>
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500">Select all research areas that apply to your manuscript.</p>
+                    </div>
+                    
+                    <!-- Funding Information -->
+                    <div class="mb-6">
+                        <label for="funding" class="block text-sm font-medium text-gray-700 mb-1">Funding Information</label>
+                        <textarea id="funding" rows="2" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="List all funding sources for this research"></textarea>
+                        <p class="mt-1 text-xs text-gray-500">Include grant numbers and funding agencies. If no funding was received, please state "No funding was received for this research."</p>
+                    </div>
+                    
+                    <!-- Competing Interests -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Competing Interests <span class="text-red-500">*</span></label>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input id="interest-yes" name="competing-interest" type="radio" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300">
+                                <label for="interest-yes" class="ml-2 block text-sm text-gray-700">Yes, I/we have competing interests</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="interest-no" name="competing-interest" type="radio" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300">
+                                <label for="interest-no" class="ml-2 block text-sm text-gray-700">No competing interests exist</label>
+                            </div>
+                        </div>
+                        <div id="interest-details" class="mt-3">
+                            <textarea rows="2" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Please describe any competing interests"></textarea>
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500">Declare any financial, professional, or personal relationships that might influence your work.</p>
+                    </div>
+                    
+                    <!-- Ethical Approval -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Ethical Approval <span class="text-red-500">*</span></label>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input id="ethics-yes" name="ethics" type="radio" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300">
+                                <label for="ethics-yes" class="ml-2 block text-sm text-gray-700">This research involved human subjects or animals and received ethical approval</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="ethics-no" name="ethics" type="radio" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300">
+                                <label for="ethics-no" class="ml-2 block text-sm text-gray-700">This research did not require ethical approval</label>
+                            </div>
+                        </div>
+                        <div id="ethics-details" class="mt-3">
+                            <input type="text" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Ethics committee name and approval number">
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500">If your research involved human subjects or animals, provide details of ethical approval.</p>
+                    </div>
+                    
+                    <!-- Cover Letter -->
+                    <div class="mb-6">
+                        <label for="cover-letter" class="block text-sm font-medium text-gray-700 mb-1">Cover Letter <span class="text-red-500">*</span></label>
+                        <textarea id="cover-letter" rows="6" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Address your letter to the editor explaining why your manuscript is suitable for this journal"></textarea>
+                        <p class="mt-1 text-xs text-gray-500">Highlight the significance and novelty of your work. Maximum 500 words.</p>
+                    </div>
+                    
+                    <!-- Suggested Reviewers -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Suggested Reviewers</label>
+                        <p class="text-xs text-gray-500 mb-2">You may suggest up to 3 potential reviewers for your manuscript.</p>
+                        
+                        <div id="suggested-reviewers">
+                            <div class="border border-gray-200 rounded-md p-4 mb-3">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-medium text-gray-700 mb-1">Reviewer 1 Name</label>
+                                        <input type="text" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-gray-700 mb-1">Email</label>
+                                        <input type="email" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Institution</label>
+                                    <input type="text" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                                </div>
+                            </div>
+                            
+                            <button id="add-reviewer" class="flex items-center text-primary-600 hover:text-primary-800 text-sm font-medium">
+                                <i class="fa-solid fa-plus mr-2"></i>
+                                <span>Add Another Reviewer</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Opposed Reviewers -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Opposed Reviewers</label>
+                        <p class="text-xs text-gray-500 mb-2">You may list researchers who should not review your manuscript due to potential conflicts of interest.</p>
+                        
+                        <div id="opposed-reviewers">
+                            <div class="border border-gray-200 rounded-md p-4 mb-3">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-medium text-gray-700 mb-1">Reviewer Name</label>
+                                        <input type="text" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-gray-700 mb-1">Institution</label>
+                                        <input type="text" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Reason</label>
+                                    <input type="text" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Explain why this reviewer should not review your manuscript">
+                                </div>
+                            </div>
+                            
+                            <button id="add-opposed" class="flex items-center text-primary-600 hover:text-primary-800 text-sm font-medium">
+                                <i class="fa-solid fa-plus mr-2"></i>
+                                <span>Add Another Opposed Reviewer</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Comments -->
+                    <div class="mb-6">
+                        <label for="comments" class="block text-sm font-medium text-gray-700 mb-1">Additional Comments</label>
+                        <textarea id="comments" rows="3" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Any additional information you would like to provide to the editors"></textarea>
+                        <p class="mt-1 text-xs text-gray-500">Optional comments for the editorial office.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 px-6 py-4 flex items-center justify-between">
+                    <div class="text-xs text-gray-500">
+                        <span class="text-red-500">*</span> Required fields
+                    </div>
+                    <div class="flex space-x-3">
+                        <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                            Save as Draft
+                        </button>
+                        <button class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                            Continue to Authors & Affiliations
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Submission Guidelines -->
+            <div id="submission-guidelines" class="bg-white rounded-lg shadow overflow-hidden mb-6">
+                <div class="border-b border-gray-200 bg-gray-50 px-6 py-4">
+                    <h3 class="text-lg font-medium text-gray-900">Submission Guidelines</h3>
+                </div>
+                <div class="p-6">
+                    <div class="prose prose-sm max-w-none text-gray-700">
+                        <p class="mb-3">Please ensure your submission adheres to the following guidelines:</p>
+                        <ul class="list-disc pl-5 space-y-1 mb-4">
+                            <li>All manuscripts must be original and not under consideration by any other publication.</li>
+                            <li>Follow the journal's formatting requirements for text, figures, and references.</li>
+                            <li>Ensure all authors have approved the manuscript before submission.</li>
+                            <li>Disclose any conflicts of interest or funding sources.</li>
+                            <li>Obtain appropriate permissions for any copyrighted material.</li>
+                            <li>Include all necessary ethical approvals for research involving humans or animals.</li>
+                        </ul>
+                        <p class="mb-3">For detailed submission requirements, please refer to the <span class="text-primary-600 hover:text-primary-800 cursor-pointer">Author Guidelines</span>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-white border-t border-gray-200 mt-8 py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-600 text-sm">&copy; 2023 SciPeerReview. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Help Center</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Contact Us</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Word counter for abstract
+        document.getElementById('abstract').addEventListener('input', function() {
+            const text = this.value;
+            const wordCount = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById('abstract-count').textContent = wordCount;
+            
+            // Highlight if over limit
+            if (wordCount > 300) {
+                document.getElementById('abstract-count').classList.add('text-red-500');
+            } else {
+                document.getElementById('abstract-count').classList.remove('text-red-500');
+            }
+        });
+        
+        // Toggle competing interests details
+        document.getElementById('interest-yes').addEventListener('change', function() {
+            document.getElementById('interest-details').classList.remove('hidden');
+        });
+        
+        document.getElementById('interest-no').addEventListener('change', function() {
+            document.getElementById('interest-details').classList.add('hidden');
+        });
+        
+        // Toggle ethics details
+        document.getElementById('ethics-yes').addEventListener('change', function() {
+            document.getElementById('ethics-details').classList.remove('hidden');
+        });
+        
+        document.getElementById('ethics-no').addEventListener('change', function() {
+            document.getElementById('ethics-details').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

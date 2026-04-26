@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+    <div id="header" class="bg-white border-b border-neutral-200 fixed w-full top-0 z-10">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between py-3">
+      <div class="flex items-center">
+        <span class="flex items-center cursor-pointer">
+          <div class="h-8 w-8 bg-neutral-800 rounded-md flex items-center justify-center text-white">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <span class="ml-2 text-lg">AIEOU Journal</span>
+        </span>
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <span class="text-neutral-900 cursor-pointer">Dashboard</span>
+        <span class="text-neutral-900 cursor-pointer">Papers</span>
+        <span class="text-neutral-900 cursor-pointer">Reviews</span>
+        <span class="text-neutral-900 cursor-pointer">Discover</span>
+        <span class="text-neutral-900 cursor-pointer">API</span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <div class="relative">
+          <button class="p-2 rounded-full bg-neutral-100 text-neutral-600">
+            <i class="fa-solid fa-bell"></i>
+          </button>
+          <div class="absolute top-0 right-0 w-2 h-2 bg-neutral-700 rounded-full"></div>
+        </div>
+        <div class="relative">
+          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full border border-neutral-200" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="container mx-auto px-4 pt-16 pb-8">
+  <div class="mb-6 mt-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl text-neutral-800">Review Logs</h1>
+        <p class="text-neutral-600">Manage and monitor peer review activity across all papers</p>
+      </div>
+      <div class="flex space-x-2">
+        <button class="px-4 py-2 bg-neutral-100 text-neutral-700 rounded-md text-sm flex items-center">
+          <i class="fa-solid fa-filter mr-2"></i>
+          <span>Filter</span>
+        </button>
+        <button class="px-4 py-2 bg-neutral-100 text-neutral-700 rounded-md text-sm flex items-center">
+          <i class="fa-solid fa-download mr-2"></i>
+          <span>Export</span>
+        </button>
+        <button class="px-4 py-2 bg-neutral-800 text-white rounded-md text-sm flex items-center">
+          <i class="fa-solid fa-plus mr-2"></i>
+          <span>New Review</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Review Statistics -->
+  <div id="review-stats" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+    <div class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-sm text-neutral-500">TOTAL REVIEWS</h3>
+        <div class="bg-neutral-100 rounded-full p-2">
+          <i class="fa-solid fa-clipboard-check text-neutral-700"></i>
+        </div>
+      </div>
+      <div class="flex items-end">
+        <span class="text-3xl text-neutral-800">523</span>
+        <span class="ml-2 text-sm text-neutral-700">reviews</span>
+      </div>
+      <div class="flex items-center mt-2">
+        <span class="text-sm text-neutral-600">+8% from last month</span>
+        <i class="fa-solid fa-arrow-trend-up ml-1 text-neutral-700"></i>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-sm text-neutral-500">PENDING REVIEWS</h3>
+        <div class="bg-neutral-100 rounded-full p-2">
+          <i class="fa-solid fa-hourglass-half text-neutral-700"></i>
+        </div>
+      </div>
+      <div class="flex items-end">
+        <span class="text-3xl text-neutral-800">67</span>
+        <span class="ml-2 text-sm text-neutral-700">pending</span>
+      </div>
+      <div class="flex items-center mt-2">
+        <span class="text-sm text-neutral-600">Avg wait: 8.3 days</span>
+        <i class="fa-solid fa-clock ml-1 text-neutral-700"></i>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-sm text-neutral-500">AVG REVIEW SCORE</h3>
+        <div class="bg-neutral-100 rounded-full p-2">
+          <i class="fa-solid fa-star-half-alt text-neutral-700"></i>
+        </div>
+      </div>
+      <div class="flex items-end">
+        <span class="text-3xl text-neutral-800">3.8</span>
+        <span class="ml-2 text-sm text-neutral-700">/ 5.0</span>
+      </div>
+      <div class="flex items-center mt-2">
+        <span class="text-sm text-neutral-600">+0.2 from last month</span>
+        <i class="fa-solid fa-arrow-trend-up ml-1 text-neutral-700"></i>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-sm text-neutral-500">COMPLETION RATE</h3>
+        <div class="bg-neutral-100 rounded-full p-2">
+          <i class="fa-solid fa-chart-pie text-neutral-700"></i>
+        </div>
+      </div>
+      <div class="flex items-end">
+        <span class="text-3xl text-neutral-800">86%</span>
+        <span class="ml-2 text-sm text-neutral-700">completed</span>
+      </div>
+      <div class="flex items-center mt-2">
+        <span class="text-sm text-neutral-600">-2% from last month</span>
+        <i class="fa-solid fa-arrow-trend-down ml-1 text-neutral-700"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Review Logs Table -->
+  <div id="review-logs-table" class="bg-white rounded-lg shadow-sm border border-neutral-200 mb-6">
+    <div class="p-4 border-b border-neutral-200 flex justify-between items-center">
+      <h2 class="text-lg text-neutral-800">Review Logs</h2>
+      <div class="flex items-center">
+        <div class="relative mr-4">
+          <input type="text" placeholder="Search reviews..." class="pl-8 pr-4 py-2 border border-neutral-200 rounded-md text-sm w-64 focus:outline-none focus:ring-2 focus:ring-neutral-800 focus:border-transparent" />
+          <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400"></i>
+        </div>
+        <select class="border border-neutral-200 rounded-md text-sm py-2 px-3 bg-white focus:outline-none focus:ring-2 focus:ring-neutral-800 focus:border-transparent">
+          <option>All Papers</option>
+          <option>Published Papers</option>
+          <option>In Review</option>
+          <option>Rejected</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-neutral-200">
+        <thead>
+          <tr class="bg-neutral-50">
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              <div class="flex items-center">
+                Paper Title
+                <i class="fa-solid fa-sort ml-1"></i>
+              </div>
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              <div class="flex items-center">
+                Reviewer
+                <i class="fa-solid fa-sort ml-1"></i>
+              </div>
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              <div class="flex items-center">
+                Date
+                <i class="fa-solid fa-sort ml-1"></i>
+              </div>
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              <div class="flex items-center">
+                Version
+                <i class="fa-solid fa-sort ml-1"></i>
+              </div>
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              <div class="flex items-center">
+                Overall Score
+                <i class="fa-solid fa-sort ml-1"></i>
+              </div>
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              <div class="flex items-center">
+                Labels
+              </div>
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              <div class="flex items-center">
+                Actions
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-neutral-200">
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">Neural mechanisms of attention in corvids</div>
+              <div class="text-xs text-neutral-500">ID: 1094</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=111" alt="Reviewer" class="w-6 h-6 rounded-full mr-2" />
+                <div>
+                  <div class="text-sm text-neutral-900">Dr. Emily Chen</div>
+                  <div class="text-xs text-neutral-500">Neuroscience Dept.</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">Jun 19, 2025</div>
+              <div class="text-xs text-neutral-500">10:23 AM</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">v2.1</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <span class="text-sm text-neutral-900">4.2</span>
+                <div class="ml-2 flex">
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-regular fa-star text-neutral-400 text-xs"></i>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4">
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Relevant</span>
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Novel</span>
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Well-designed</span>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap text-sm">
+              <div class="flex space-x-2">
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">Quantum entanglement in biological systems</div>
+              <div class="text-xs text-neutral-500">ID: 1088</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=222" alt="Reviewer" class="w-6 h-6 rounded-full mr-2" />
+                <div>
+                  <div class="text-sm text-neutral-900">Prof. James Wilson</div>
+                  <div class="text-xs text-neutral-500">Quantum Physics</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">Jun 18, 2025</div>
+              <div class="text-xs text-neutral-500">2:45 PM</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">v1.0</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <span class="text-sm text-neutral-900">3.5</span>
+                <div class="ml-2 flex">
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star-half-alt text-neutral-700 text-xs"></i>
+                  <i class="fa-regular fa-star text-neutral-400 text-xs"></i>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4">
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Relevant</span>
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Needs more data</span>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap text-sm">
+              <div class="flex space-x-2">
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">Algorithmic bias in medical imaging</div>
+              <div class="text-xs text-neutral-500">ID: 1082</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=333" alt="Reviewer" class="w-6 h-6 rounded-full mr-2" />
+                <div>
+                  <div class="text-sm text-neutral-900">Dr. Sarah Johnson</div>
+                  <div class="text-xs text-neutral-500">AI Ethics</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">Jun 15, 2025</div>
+              <div class="text-xs text-neutral-500">9:12 AM</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">v3.2</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <span class="text-sm text-neutral-900">4.8</span>
+                <div class="ml-2 flex">
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4">
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Relevant</span>
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Novel</span>
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Impactful</span>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap text-sm">
+              <div class="flex space-x-2">
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">Climate adaptation strategies in urban planning</div>
+              <div class="text-xs text-neutral-500">ID: 1076</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=444" alt="Reviewer" class="w-6 h-6 rounded-full mr-2" />
+                <div>
+                  <div class="text-sm text-neutral-900">Dr. Michael Lee</div>
+                  <div class="text-xs text-neutral-500">Urban Planning</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">Jun 12, 2025</div>
+              <div class="text-xs text-neutral-500">3:30 PM</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">v2.0</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <span class="text-sm text-neutral-900">3.2</span>
+                <div class="ml-2 flex">
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-regular fa-star text-neutral-400 text-xs"></i>
+                  <i class="fa-regular fa-star text-neutral-400 text-xs"></i>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4">
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Needs revisions</span>
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Methodology issues</span>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap text-sm">
+              <div class="flex space-x-2">
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">Emergent properties in swarm intelligence</div>
+              <div class="text-xs text-neutral-500">ID: 1070</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=555" alt="Reviewer" class="w-6 h-6 rounded-full mr-2" />
+                <div>
+                  <div class="text-sm text-neutral-900">Prof. Alex Thompson</div>
+                  <div class="text-xs text-neutral-500">Computer Science</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">Jun 10, 2025</div>
+              <div class="text-xs text-neutral-500">11:15 AM</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">v1.5</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <span class="text-sm text-neutral-900">4.0</span>
+                <div class="ml-2 flex">
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-solid fa-star text-neutral-700 text-xs"></i>
+                  <i class="fa-regular fa-star text-neutral-400 text-xs"></i>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4">
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Relevant</span>
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Minor revisions</span>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap text-sm">
+              <div class="flex space-x-2">
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
+                <button class="p-1 text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="px-4 py-3 border-t border-neutral-200 flex items-center justify-between">
+      <div class="text-sm text-neutral-600">
+        Showing <span>1</span> to <span>5</span> of <span>523</span> results
+      </div>
+      <div class="flex items-center space-x-2">
+        <button class="px-3 py-1 border border-neutral-200 rounded-md text-sm text-neutral-600 disabled:opacity-50" disabled>
+          Previous
+        </button>
+        <button class="px-3 py-1 bg-neutral-800 text-white rounded-md text-sm">
+          1
+        </button>
+        <button class="px-3 py-1 border border-neutral-200 rounded-md text-sm text-neutral-600">
+          2
+        </button>
+        <button class="px-3 py-1 border border-neutral-200 rounded-md text-sm text-neutral-600">
+          3
+        </button>
+        <button class="px-3 py-1 border border-neutral-200 rounded-md text-sm text-neutral-600">
+          4
+        </button>
+        <button class="px-3 py-1 border border-neutral-200 rounded-md text-sm text-neutral-600">
+          5
+        </button>
+        <button class="px-3 py-1 border border-neutral-200 rounded-md text-sm text-neutral-600">
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Review Metrics -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- Rubric Scores Distribution -->
+    <div id="rubric-scores" class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg text-neutral-800">Rubric Scores Distribution</h2>
+        <select class="border border-neutral-200 rounded-md text-sm py-1 px-2 bg-white focus:outline-none">
+          <option>Last 30 days</option>
+          <option>Last 90 days</option>
+          <option>Last year</option>
+          <option>All time</option>
+        </select>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-neutral-600">Overall Quality</span>
+            <span class="text-neutral-800">3.8 / 5.0</span>
+          </div>
+          <div class="w-full h-2 bg-neutral-200 rounded-full">
+            <div class="bg-neutral-700 h-2 rounded-full" style="width: 76%"></div>
+          </div>
+        </div>
+        
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-neutral-600">Originality</span>
+            <span class="text-neutral-800">3.5 / 5.0</span>
+          </div>
+          <div class="w-full h-2 bg-neutral-200 rounded-full">
+            <div class="bg-neutral-700 h-2 rounded-full" style="width: 70%"></div>
+          </div>
+        </div>
+        
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-neutral-600">Methodology</span>
+            <span class="text-neutral-800">4.1 / 5.0</span>
+          </div>
+          <div class="w-full h-2 bg-neutral-200 rounded-full">
+            <div class="bg-neutral-700 h-2 rounded-full" style="width: 82%"></div>
+          </div>
+        </div>
+        
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-neutral-600">Transparency</span>
+            <span class="text-neutral-800">3.9 / 5.0</span>
+          </div>
+          <div class="w-full h-2 bg-neutral-200 rounded-full">
+            <div class="bg-neutral-700 h-2 rounded-full" style="width: 78%"></div>
+          </div>
+        </div>
+        
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-neutral-600">AI Disclosure</span>
+            <span class="text-neutral-800">4.3 / 5.0</span>
+          </div>
+          <div class="w-full h-2 bg-neutral-200 rounded-full">
+            <div class="bg-neutral-700 h-2 rounded-full" style="width: 86%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review Label Usage -->
+    <div id="review-labels" class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg text-neutral-800">Review Label Usage</h2>
+        <button class="text-sm text-neutral-700 flex items-center">
+          <i class="fa-solid fa-cog mr-1"></i>
+          <span>Manage Labels</span>
+        </button>
+      </div>
+      
+      <div class="h-64 relative">
+        <!-- Label Distribution Chart -->
+        <div class="absolute inset-0 flex items-end justify-around px-4">
+          <!-- Relevant -->
+          <div class="flex flex-col items-center">
+            <div class="h-40 w-12 bg-neutral-200 rounded-md relative overflow-hidden">
+              <div class="absolute bottom-0 w-full bg-neutral-700 h-[85%]"></div>
+            </div>
+            <div class="mt-2 text-center">
+              <span class="text-xs text-neutral-600">Relevant</span>
+              <div class="text-sm text-neutral-800">85%</div>
+            </div>
+          </div>
+          
+          <!-- Novel -->
+          <div class="flex flex-col items-center">
+            <div class="h-40 w-12 bg-neutral-200 rounded-md relative overflow-hidden">
+              <div class="absolute bottom-0 w-full bg-neutral-700 h-[62%]"></div>
+            </div>
+            <div class="mt-2 text-center">
+              <span class="text-xs text-neutral-600">Novel</span>
+              <div class="text-sm text-neutral-800">62%</div>
+            </div>
+          </div>
+          
+          <!-- Well-designed -->
+          <div class="flex flex-col items-center">
+            <div class="h-40 w-12 bg-neutral-200 rounded-md relative overflow-hidden">
+              <div class="absolute bottom-0 w-full bg-neutral-700 h-[53%]"></div>
+            </div>
+            <div class="mt-2 text-center">
+              <span class="text-xs text-neutral-600">Well-designed</span>
+              <div class="text-sm text-neutral-800">53%</div>
+            </div>
+          </div>
+          
+          <!-- Needs revisions -->
+          <div class="flex flex-col items-center">
+            <div class="h-40 w-12 bg-neutral-200 rounded-md relative overflow-hidden">
+              <div class="absolute bottom-0 w-full bg-neutral-700 h-[35%]"></div>
+            </div>
+            <div class="mt-2 text-center">
+              <span class="text-xs text-neutral-600">Needs revisions</span>
+              <div class="text-sm text-neutral-800">35%</div>
+            </div>
+          </div>
+          
+          <!-- Impactful -->
+          <div class="flex flex-col items-center">
+            <div class="h-40 w-12 bg-neutral-200 rounded-md relative overflow-hidden">
+              <div class="absolute bottom-0 w-full bg-neutral-700 h-[30%]"></div>
+            </div>
+            <div class="mt-2 text-center">
+              <span class="text-xs text-neutral-600">Impactful</span>
+              <div class="text-sm text-neutral-800">30%</div>
+            </div>
+          </div>
+          
+          <!-- Method. issues -->
+          <div class="flex flex-col items-center">
+            <div class="h-40 w-12 bg-neutral-200 rounded-md relative overflow-hidden">
+              <div class="absolute bottom-0 w-full bg-neutral-700 h-[23%]"></div>
+            </div>
+            <div class="mt-2 text-center">
+              <span class="text-xs text-neutral-600">Method. issues</span>
+              <div class="text-sm text-neutral-800">23%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-4 text-sm text-neutral-600 border-t border-neutral-200 pt-4">
+        <div class="flex justify-between">
+          <span>Total labels applied: <span class="text-neutral-800">1,247</span></span>
+          <span>Avg labels per review: <span class="text-neutral-800">2.4</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Reviewers -->
+  <div id="top-reviewers" class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4 mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg text-neutral-800">Top Reviewers</h2>
+      <div class="flex space-x-2">
+        <button class="px-3 py-1 text-xs rounded-md bg-neutral-800 text-white">Last 30 days</button>
+        <button class="px-3 py-1 text-xs rounded-md bg-neutral-100 text-neutral-700">Last 90 days</button>
+        <button class="px-3 py-1 text-xs rounded-md bg-neutral-100 text-neutral-700">All time</button>
+      </div>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-neutral-200">
+        <thead>
+          <tr>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Reviewer</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Reviews Completed</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Avg. Response Time</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Avg. Score Given</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Common Labels</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-neutral-200">
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=111" alt="Reviewer" class="w-8 h-8 rounded-full mr-3" />
+                <div>
+                  <div class="text-sm text-neutral-900">Dr. Emily Chen</div>
+                  <div class="text-xs text-neutral-500">Neuroscience</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">18</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">4.2 days</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">4.1 / 5.0</div>
+            </td>
+            <td class="px-4 py-4">
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Relevant</span>
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Novel</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=222" alt="Reviewer" class="w-8 h-8 rounded-full mr-3" />
+                <div>
+                  <div class="text-sm text-neutral-900">Prof. James Wilson</div>
+                  <div class="text-xs text-neutral-500">Quantum Physics</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">15</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">5.7 days</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">3.8 / 5.0</div>
+            </td>
+            <td class="px-4 py-4">
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Needs more data</span>
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Relevant</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=333" alt="Reviewer" class="w-8 h-8 rounded-full mr-3" />
+                <div>
+                  <div class="text-sm text-neutral-900">Dr. Sarah Johnson</div>
+                  <div class="text-xs text-neutral-500">AI Ethics</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">12</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">3.5 days</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-900">4.3 / 5.0</div>
+            </td>
+            <td class="px-4 py-4">
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Impactful</span>
+                <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Well-designed</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-neutral-100 border-t border-neutral-200 mt-8">
+  <div class="container mx-auto px-4 py-6">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0">
+        <div class="flex items-center">
+          <div class="h-8 w-8 bg-neutral-800 rounded-md flex items-center justify-center text-white mr-2">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <span class="text-sm text-neutral-600">AIEOU Journal Platform v5.3</span>
+        </div>
+      </div>
+      <div class="flex space-x-6">
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Documentation</span>
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Support</span>
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Privacy Policy</span>
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Terms of Service</span>
+      </div>
+    </div>
+  </div>
+</div>
+  </body>
+</html>

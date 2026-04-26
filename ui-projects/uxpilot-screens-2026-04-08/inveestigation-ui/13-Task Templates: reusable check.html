@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style>::-webkit-scrollbar { display: none;}</style>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Inter', 'sans-serif'],
+                        },
+                        colors: {
+                            primary: {
+                                50: '#f0f9ff',
+                                100: '#e0f2fe',
+                                200: '#bae6fd',
+                                300: '#7dd3fc',
+                                400: '#38bdf8',
+                                500: '#0ea5e9',
+                                600: '#0284c7',
+                                700: '#0369a1',
+                                800: '#075985',
+                                900: '#0c4a6e',
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="font-sans bg-gray-50 text-gray-800">
+    
+    <!-- Main Layout -->
+    <div class="flex h-[100vh]">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-gray-900 text-white flex flex-col h-full">
+            <!-- Logo -->
+            <div class="p-4 flex items-center border-b border-gray-700">
+                <div class="h-8 w-8 rounded-md bg-primary-500 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <span class="ml-2 font-bold text-xl">ProjectHub</span>
+            </div>
+            
+            <!-- Admin Menu -->
+            <div class="p-4">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">Admin Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-gauge-high w-6"></i>
+                            <span>Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-folder w-6"></i>
+                            <span>Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-flag w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md bg-primary-700 text-white cursor-pointer">
+                            <i class="fa-solid fa-check-square w-6"></i>
+                            <span>Tasks</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar w-6"></i>
+                            <span>Events</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-file w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Panel -->
+            <div class="p-4 mt-4 border-t border-gray-700">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">User Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-house w-6"></i>
+                            <span>My Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-briefcase w-6"></i>
+                            <span>My Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-tasks w-6"></i>
+                            <span>Task List</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-map-signs w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar-alt w-6"></i>
+                            <span>Calendar</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-paperclip w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Profile -->
+            <div class="mt-auto p-4 border-t border-gray-700 flex items-center">
+                <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium">Admin User</p>
+                    <p class="text-xs text-gray-400">Super Admin</p>
+                </div>
+                <button class="ml-auto text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-cog"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 flex flex-col h-full overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 flex items-center justify-between p-4">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-800">Task Management</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search tasks..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                    <button class="relative p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">5</span>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-question-circle"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Task Management Content -->
+            <div class="flex-1 overflow-auto p-6">
+                <!-- Tabs for Task Management -->
+                <div id="task-tabs" class="border-b border-gray-200 mb-6">
+                    <div class="flex">
+                        <button class="px-4 py-2 text-sm font-medium text-primary-600 border-b-2 border-primary-500 focus:outline-none">
+                            All Tasks
+                        </button>
+                        <button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 focus:outline-none">
+                            My Tasks
+                        </button>
+                        <button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 focus:outline-none">
+                            Overdue
+                        </button>
+                        <button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 focus:outline-none">
+                            Completed
+                        </button>
+                        <button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300 focus:outline-none">
+                            Templates
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Task Templates Section -->
+                <div id="task-templates" class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold">Task Templates</h2>
+                        <button class="bg-primary-500 hover:bg-primary-600 text-white px-3 py-1.5 rounded-md text-sm flex items-center">
+                            <i class="fa-solid fa-plus mr-2"></i> Create Template
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Template 1 -->
+                        <div class="bg-white rounded-lg shadow p-5 border-l-4 border-blue-500">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="font-semibold text-gray-800">Intake Interview Protocol</h3>
+                                <div class="flex">
+                                    <button class="text-gray-400 hover:text-gray-600 mr-2">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Standardized checklist for conducting initial client interviews.</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center text-sm">
+                                    <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                                    <span>Verify client identification</span>
+                                </div>
+                                <div class="flex items-center text-sm">
+                                    <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                                    <span>Record basic contact information</span>
+                                </div>
+                                <div class="flex items-center text-sm">
+                                    <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                                    <span>Document primary concerns</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-400">
+                                    <i class="fa-regular fa-circle mr-2"></i>
+                                    <span>+4 more steps</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+                                <span class="text-xs text-gray-500">Last updated: May 10, 2023</span>
+                                <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">
+                                    Use Template
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Template 2 -->
+                        <div class="bg-white rounded-lg shadow p-5 border-l-4 border-purple-500">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="font-semibold text-gray-800">Document Review Process</h3>
+                                <div class="flex">
+                                    <button class="text-gray-400 hover:text-gray-600 mr-2">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Standard procedure for legal document review and approval.</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center text-sm">
+                                    <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                                    <span>Initial document scan</span>
+                                </div>
+                                <div class="flex items-center text-sm">
+                                    <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                                    <span>Check for required signatures</span>
+                                </div>
+                                <div class="flex items-center text-sm">
+                                    <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                                    <span>Verify document dates</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-400">
+                                    <i class="fa-regular fa-circle mr-2"></i>
+                                    <span>+6 more steps</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+                                <span class="text-xs text-gray-500">Last updated: Apr 22, 2023</span>
+                                <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">
+                                    Use Template
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Template 3 -->
+                        <div class="bg-white rounded-lg shadow p-5 border-l-4 border-green-500">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="font-semibold text-gray-800">Case Closure Protocol</h3>
+                                <div class="flex">
+                                    <button class="text-gray-400 hover:text-gray-600 mr-2">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Complete checklist for properly closing client cases.</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center text-sm">
+                                    <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                                    <span>Final client meeting</span>
+                                </div>
+                                <div class="flex items-center text-sm">
+                                    <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                                    <span>Complete satisfaction survey</span>
+                                </div>
+                                <div class="flex items-center text-sm">
+                                    <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                                    <span>Archive all documents</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-400">
+                                    <i class="fa-regular fa-circle mr-2"></i>
+                                    <span>+5 more steps</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+                                <span class="text-xs text-gray-500">Last updated: May 5, 2023</span>
+                                <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">
+                                    Use Template
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Smart Assistant Panel -->
+                <div id="smart-assistant" class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold">Smart Assistant</h2>
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fa-solid fa-cog"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="bg-gray-800 text-white p-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
+                                    <i class="fa-solid fa-robot text-lg"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="font-medium">Task Assistant</h3>
+                                    <p class="text-xs text-gray-300">Highlights risks and issues that need attention</p>
+                                </div>
+                                <div class="ml-auto">
+                                    <span class="bg-green-500 text-xs text-white px-2 py-0.5 rounded-full">Active</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-5">
+                            <div class="space-y-4">
+                                <!-- Overdue Tasks Alert -->
+                                <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-md">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="fa-solid fa-exclamation-circle text-red-500"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h4 class="text-sm font-medium text-red-800">Overdue Tasks (5)</h4>
+                                            <div class="mt-2 space-y-1">
+                                                <p class="text-xs text-red-700 flex justify-between">
+                                                    <span>Client follow-up: Sarah Johnson</span>
+                                                    <span>3 days overdue</span>
+                                                </p>
+                                                <p class="text-xs text-red-700 flex justify-between">
+                                                    <span>Document submission for Case #45892</span>
+                                                    <span>2 days overdue</span>
+                                                </p>
+                                                <p class="text-xs text-red-700 flex justify-between">
+                                                    <span>Review contract amendments</span>
+                                                    <span>1 day overdue</span>
+                                                </p>
+                                            </div>
+                                            <button class="mt-2 text-xs text-red-800 font-medium hover:text-red-900">
+                                                View all overdue tasks →
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Blocked Tasks Alert -->
+                                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-md">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="fa-solid fa-exclamation-triangle text-yellow-500"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h4 class="text-sm font-medium text-yellow-800">Blocked Tasks (3)</h4>
+                                            <div class="mt-2 space-y-1">
+                                                <p class="text-xs text-yellow-700 flex justify-between">
+                                                    <span>Generate final report - Website Redesign</span>
+                                                    <span>Waiting for approval</span>
+                                                </p>
+                                                <p class="text-xs text-yellow-700 flex justify-between">
+                                                    <span>Security audit implementation</span>
+                                                    <span>Pending IT resources</span>
+                                                </p>
+                                                <p class="text-xs text-yellow-700 flex justify-between">
+                                                    <span>Client onboarding - ABC Corp</span>
+                                                    <span>Missing documents</span>
+                                                </p>
+                                            </div>
+                                            <button class="mt-2 text-xs text-yellow-800 font-medium hover:text-yellow-900">
+                                                Resolve blockers →
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Risk Assessment Alert -->
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="fa-solid fa-info-circle text-blue-500"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h4 class="text-sm font-medium text-blue-800">Risk Assessment</h4>
+                                            <div class="mt-2 space-y-1">
+                                                <p class="text-xs text-blue-700">
+                                                    <span class="font-medium">Mobile App Development</span>: 2 tasks at risk of missing deadline
+                                                </p>
+                                                <p class="text-xs text-blue-700">
+                                                    <span class="font-medium">Database Migration</span>: Resource allocation may be insufficient
+                                                </p>
+                                            </div>
+                                            <button class="mt-2 text-xs text-blue-800 font-medium hover:text-blue-900">
+                                                View detailed risk report →
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 pt-4 border-t border-gray-200">
+                                <button class="w-full bg-primary-50 hover:bg-primary-100 text-primary-700 py-2 rounded-md text-sm font-medium">
+                                    Run Complete Task Analysis
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Voice Notes Upload Section -->
+                <div id="voice-notes" class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold">Voice Notes</h2>
+                        <button class="bg-primary-500 hover:bg-primary-600 text-white px-3 py-1.5 rounded-md text-sm flex items-center">
+                            <i class="fa-solid fa-microphone mr-2"></i> Record New Note
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="p-5">
+                            <div class="mb-4">
+                                <h3 class="text-sm font-medium text-gray-700 mb-2">Upload Audio</h3>
+                                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                    <div class="mb-3">
+                                        <i class="fa-solid fa-cloud-upload-alt text-3xl text-gray-400"></i>
+                                    </div>
+                                    <p class="text-sm text-gray-500 mb-2">Drag and drop audio files here, or click to browse</p>
+                                    <p class="text-xs text-gray-400">Supported formats: MP3, WAV, M4A (Max 30MB)</p>
+                                    <button class="mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-md text-sm">
+                                        Browse Files
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <h3 class="text-sm font-medium text-gray-700 mb-3">Recent Voice Notes</h3>
+                                <div class="space-y-3">
+                                    <!-- Voice Note 1 -->
+                                    <div class="border border-gray-200 rounded-lg p-3">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center mr-3">
+                                                    <i class="fa-solid fa-headphones text-orange-600"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="text-sm font-medium">Client Call - Sarah Johnson</h4>
+                                                    <p class="text-xs text-gray-500">May 16, 2023 • 4:32 min</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <button class="text-gray-400 hover:text-gray-600 mr-2">
+                                                    <i class="fa-solid fa-download"></i>
+                                                </button>
+                                                <button class="text-gray-400 hover:text-gray-600">
+                                                    <i class="fa-solid fa-ellipsis-v"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <button class="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center text-white">
+                                                <i class="fa-solid fa-play"></i>
+                                            </button>
+                                            <div class="mx-3 flex-1">
+                                                <div class="h-2 bg-gray-200 rounded-full">
+                                                    <div class="h-2 bg-primary-500 rounded-full w-1/3"></div>
+                                                </div>
+                                            </div>
+                                            <span class="text-xs text-gray-500">1:26 / 4:32</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Voice Note 2 -->
+                                    <div class="border border-gray-200 rounded-lg p-3">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                                    <i class="fa-solid fa-headphones text-green-600"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="text-sm font-medium">Interview Notes - Michael Brown</h4>
+                                                    <p class="text-xs text-gray-500">May 14, 2023 • 8:15 min</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <button class="text-gray-400 hover:text-gray-600 mr-2">
+                                                    <i class="fa-solid fa-download"></i>
+                                                </button>
+                                                <button class="text-gray-400 hover:text-gray-600">
+                                                    <i class="fa-solid fa-ellipsis-v"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <button class="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center text-white">
+                                                <i class="fa-solid fa-play"></i>
+                                            </button>
+                                            <div class="mx-3 flex-1">
+                                                <div class="h-2 bg-gray-200 rounded-full">
+                                                    <div class="h-2 bg-primary-500 rounded-full w-0"></div>
+                                                </div>
+                                            </div>
+                                            <span class="text-xs text-gray-500">0:00 / 8:15</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Voice Note 3 -->
+                                    <div class="border border-gray-200 rounded-lg p-3">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                                    <i class="fa-solid fa-headphones text-purple-600"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="text-sm font-medium">Meeting Summary - API Integration</h4>
+                                                    <p class="text-xs text-gray-500">May 10, 2023 • 12:47 min</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <button class="text-gray-400 hover:text-gray-600 mr-2">
+                                                    <i class="fa-solid fa-download"></i>
+                                                </button>
+                                                <button class="text-gray-400 hover:text-gray-600">
+                                                    <i class="fa-solid fa-ellipsis-v"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <button class="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center text-white">
+                                                <i class="fa-solid fa-play"></i>
+                                            </button>
+                                            <div class="mx-3 flex-1">
+                                                <div class="h-2 bg-gray-200 rounded-full">
+                                                    <div class="h-2 bg-primary-500 rounded-full w-0"></div>
+                                                </div>
+                                            </div>
+                                            <span class="text-xs text-gray-500">0:00 / 12:47</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4 text-center">
+                                    <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">
+                                        View All Voice Notes →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer id="footer" class="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+                <p>&copy; 2023 ProjectHub Admin Panel. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+    
+    </body>
+<html>

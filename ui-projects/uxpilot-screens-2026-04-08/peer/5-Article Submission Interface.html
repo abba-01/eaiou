@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#007cba',
+                        emerald: '#00b894',
+                        coral: '#fd79a8',
+                        orange: '#fdcb6e',
+                        purple: '#6c5ce7',
+                        charcoal: '#2d3436',
+                        mediumgray: '#636e72',
+                        success: '#00b894',
+                        warning: '#fdcb6e',
+                        error: '#e17055',
+                        info: '#007cba',
+                        offwhite: '#FAFAF8'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                        'mono': ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-offwhite text-charcoal">
+    <header id="header" class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                        PR
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-lg">PeerTrail</span>
+                        <span class="text-xs text-mediumgray">Transparent Scientific Publishing</span>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <span class="font-medium text-primary transition cursor-pointer">Submit Article</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Browse Articles</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Reviews</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Submissions</span>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="search-toggle" class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-highlighter"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition relative">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-coral text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                    </button>
+                    <div class="w-8 h-8 rounded-full overflow-hidden">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User profile" class="w-full h-full object-cover">
+                    </div>
+                    <button class="md:hidden text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="global-search" class="hidden bg-white shadow-md py-4 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="relative">
+                <input type="text" placeholder="Search articles, authors, audit trails, annotations..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <button class="absolute right-3 top-3 text-gray-400 hover:text-primary">
+                    <i class="fa-solid fa-search"></i>
+                </button>
+            </div>
+            <div class="mt-3 flex space-x-2 text-sm">
+                <span class="font-medium">Quick filters:</span>
+                <button class="text-primary hover:underline">Recent articles</button>
+                <button class="text-primary hover:underline">Most annotated</button>
+                <button class="text-primary hover:underline">Top audit trails</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="submission-wizard" class="container mx-auto px-4 py-8">
+        <div class="max-w-5xl mx-auto">
+            <!-- Progress Indicator -->
+            <div id="progress-indicator" class="mb-8">
+                <div class="flex items-center justify-between">
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold">1</div>
+                        <span class="text-sm mt-2 font-medium">Basic Info</span>
+                    </div>
+                    <div class="flex-1 h-1 bg-gray-200 mx-2">
+                        <div class="h-full bg-primary" style="width: 100%;"></div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold">2</div>
+                        <span class="text-sm mt-2 font-medium">Manuscript</span>
+                    </div>
+                    <div class="flex-1 h-1 bg-gray-200 mx-2">
+                        <div class="h-full bg-primary" style="width: 50%;"></div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 text-charcoal flex items-center justify-center font-bold">3</div>
+                        <span class="text-sm mt-2 font-medium">Audit Trail</span>
+                    </div>
+                    <div class="flex-1 h-1 bg-gray-200 mx-2">
+                        <div class="h-full bg-primary" style="width: 0%;"></div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 text-charcoal flex items-center justify-center font-bold">4</div>
+                        <span class="text-sm mt-2 font-medium">Authors</span>
+                    </div>
+                    <div class="flex-1 h-1 bg-gray-200 mx-2">
+                        <div class="h-full bg-primary" style="width: 0%;"></div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 text-charcoal flex items-center justify-center font-bold">5</div>
+                        <span class="text-sm mt-2 font-medium">Review</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step Title -->
+            <div id="step-title" class="mb-6">
+                <h1 class="text-3xl font-bold">Upload Manuscript</h1>
+                <p class="text-mediumgray mt-2">Upload your manuscript files and provide additional metadata for your submission.</p>
+            </div>
+
+            <!-- Main Form Area -->
+            <div id="manuscript-form" class="bg-white rounded-xl shadow-md p-8 mb-8">
+                <!-- Manuscript Upload Section -->
+                <div id="manuscript-upload" class="mb-8">
+                    <h2 class="text-xl font-bold mb-4">Manuscript Files</h2>
+                    
+                    <!-- Main Manuscript Upload -->
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center mb-6 bg-gray-50">
+                        <div class="mb-4">
+                            <i class="fa-solid fa-file-arrow-up text-5xl text-mediumgray"></i>
+                        </div>
+                        <h3 class="text-lg font-medium mb-2">Drag and drop your main manuscript file</h3>
+                        <p class="text-mediumgray mb-4">Supported formats: PDF, DOCX, LaTeX (.tex)</p>
+                        <div class="flex justify-center">
+                            <label for="manuscript-file" class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition cursor-pointer">
+                                <i class="fa-solid fa-upload mr-2"></i>
+                                Browse Files
+                            </label>
+                            <input id="manuscript-file" type="file" class="hidden">
+                        </div>
+                    </div>
+                    
+                    <!-- Supplementary Files -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-medium mb-3">Supplementary Files</h3>
+                        <p class="text-mediumgray mb-4">Upload any additional files that support your manuscript (data, code, figures, etc.)</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div class="border border-gray-200 rounded-lg p-4 flex items-center bg-white">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-file-code text-primary"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-medium">analysis_code.R</div>
+                                    <div class="text-sm text-mediumgray">2.4 MB • Code</div>
+                                </div>
+                                <button class="text-mediumgray hover:text-error">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4 flex items-center bg-white">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-table text-primary"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-medium">dataset_full.csv</div>
+                                    <div class="text-sm text-mediumgray">8.7 MB • Data</div>
+                                </div>
+                                <button class="text-mediumgray hover:text-error">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button class="flex items-center text-primary hover:text-primary/80 font-medium">
+                            <i class="fa-solid fa-plus mr-2"></i>
+                            Add Supplementary File
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Metadata Section -->
+                <div id="manuscript-metadata" class="mb-8">
+                    <h2 class="text-xl font-bold mb-4">Manuscript Metadata</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label for="manuscript-title" class="block font-medium mb-1">Title *</label>
+                            <input id="manuscript-title" type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter the full title of your manuscript" value="Novel Neural Mechanisms in Decision-Making: A Comprehensive Review">
+                        </div>
+                        
+                        <div>
+                            <label for="manuscript-abstract" class="block font-medium mb-1">Abstract *</label>
+                            <textarea id="manuscript-abstract" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary h-32" placeholder="Enter your manuscript abstract">This study explores previously undocumented neural pathways involved in complex decision-making processes under uncertainty. We present evidence from multiple neuroimaging studies and propose a new theoretical framework for understanding how these pathways contribute to decision-making in various contexts.</textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block font-medium mb-1">Keywords *</label>
+                            <div class="flex flex-wrap gap-2 p-3 border border-gray-300 rounded-lg">
+                                <div class="bg-primary/10 rounded-full px-3 py-1 flex items-center">
+                                    <span class="mr-2 text-primary">Neuroscience</span>
+                                    <button class="text-primary/80">×</button>
+                                </div>
+                                <div class="bg-primary/10 rounded-full px-3 py-1 flex items-center">
+                                    <span class="mr-2 text-primary">Decision-making</span>
+                                    <button class="text-primary/80">×</button>
+                                </div>
+                                <div class="bg-primary/10 rounded-full px-3 py-1 flex items-center">
+                                    <span class="mr-2 text-primary">Neural pathways</span>
+                                    <button class="text-primary/80">×</button>
+                                </div>
+                                <div class="bg-primary/10 rounded-full px-3 py-1 flex items-center">
+                                    <span class="mr-2 text-primary">Uncertainty</span>
+                                    <button class="text-primary/80">×</button>
+                                </div>
+                                <input type="text" class="flex-1 min-w-[150px] outline-none" placeholder="Add keyword...">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="manuscript-category" class="block font-medium mb-1">Research Category *</label>
+                                <select id="manuscript-category" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                                    <option value="neuroscience">Neuroscience</option>
+                                    <option value="cognitive">Cognitive Science</option>
+                                    <option value="behavioral">Behavioral Science</option>
+                                    <option value="clinical">Clinical Neuroscience</option>
+                                    <option value="computational">Computational Neuroscience</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="manuscript-type" class="block font-medium mb-1">Article Type *</label>
+                                <select id="manuscript-type" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                                    <option value="original">Original Research</option>
+                                    <option value="review" selected>Review Article</option>
+                                    <option value="methods">Methodology</option>
+                                    <option value="perspective">Perspective</option>
+                                    <option value="brief">Brief Communication</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Funding and Declarations -->
+                <div id="funding-declarations">
+                    <h2 class="text-xl font-bold mb-4">Funding and Declarations</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label for="funding-sources" class="block font-medium mb-1">Funding Sources</label>
+                            <textarea id="funding-sources" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary h-24" placeholder="List all funding sources for this research">This work was supported by the National Institute of Mental Health (Grant R01-MH123456) and the Brain Research Foundation (Grant BRF-2023-01).</textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="conflicts" class="block font-medium mb-1">Conflicts of Interest</label>
+                            <textarea id="conflicts" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary h-24" placeholder="Declare any conflicts of interest">The authors declare no conflicts of interest.</textarea>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <input id="ethics-checkbox" type="checkbox" class="mt-1 mr-2" checked>
+                            <label for="ethics-checkbox" class="text-mediumgray">
+                                I confirm that this research adheres to all applicable ethical guidelines and has received appropriate institutional review board approval where necessary.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Next Step Preview -->
+            <div id="next-step-preview" class="bg-white rounded-xl shadow-md p-6 mb-8 border-l-4 border-orange">
+                <h2 class="text-xl font-bold mb-2 flex items-center">
+                    <i class="fa-solid fa-magnifying-glass-chart text-orange mr-2"></i>
+                    Coming Up: Audit Trail Documentation
+                </h2>
+                <p class="text-mediumgray mb-4">In the next step, you'll document your research journey by adding discarded approaches, methodology changes, and lessons learned to create a comprehensive audit trail.</p>
+                <div class="flex items-center text-orange">
+                    <i class="fa-solid fa-lightbulb mr-2"></i>
+                    <p class="text-sm">Tip: Prepare notes on abandoned methodologies, analyses that didn't work, and pivots in your research approach.</p>
+                </div>
+            </div>
+            
+            <!-- Navigation Buttons -->
+            <div id="navigation-buttons" class="flex justify-between">
+                <button class="px-6 py-3 border border-gray-300 rounded-lg text-charcoal hover:bg-gray-50 font-medium transition flex items-center">
+                    <i class="fa-solid fa-arrow-left mr-2"></i>
+                    Previous Step
+                </button>
+                
+                <div class="flex space-x-4">
+                    <button class="px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary/5 font-medium transition">
+                        Save Draft
+                    </button>
+                    <button class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 font-medium transition flex items-center">
+                        Continue to Audit Trail
+                        <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="bg-charcoal text-white py-12 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                            PR
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-lg">PeerTrail</span>
+                            <span class="text-xs text-gray-400">Transparent Scientific Publishing</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4">The world's first comprehensive audit trail system for transparent scientific publishing.</p>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-twitter"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-github"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-researchgate"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Platform</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Browse Articles</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Submit Research</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Peer Review Process</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Audit Trail System</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Annotation Tools</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">API Documentation</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">FAQs</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Support Center</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">About Us</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Our Mission</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Partners</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Contact Us</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Careers</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 PeerTrail. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Cookie Policy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle global search
+        document.getElementById('search-toggle').addEventListener('click', function() {
+            const searchBar = document.getElementById('global-search');
+            searchBar.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

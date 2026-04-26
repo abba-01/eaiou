@@ -1,0 +1,1070 @@
+
+              <html class="">
+                
+  <head>
+    
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest', // Options: 'nest', 'remove', 'replace'
+      };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+<style>
+  * {
+    font-family: "{{font}}", sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+    
+<style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+</style>
+
+    
+<style>
+   :root {
+          /* Base colors */
+          --color-base: #ffffff;
+          --color-base-50: #f9fafb;
+          --color-base-100: #f3f4f6;
+          --color-base-200: #e5e7eb;
+          --color-base-300: #d1d5db;
+          --color-base-400: #9ca3af;
+          --color-base-500: #6b7280;
+          --color-base-600: #4b5563;  
+          --color-base-700: #374151;
+          --color-base-800: #1f2937;  
+          --color-base-900: #111827;
+          --color-base-content: #1f2937;
+
+          /* Primary colors */
+          --color-primary: #3b82f6;
+          --color-primary-50: #eff6ff;
+          --color-primary-100: #dbeafe;
+          --color-primary-200: #bfdbfe;
+          --color-primary-300: #93c5fd;
+          --color-primary-400: #60a5fa;
+          --color-primary-500: #3b82f6;
+          --color-primary-600: #2563eb;
+          --color-primary-700: #1d4ed8;
+          --color-primary-800: #1e40af;
+          --color-primary-900: #1e3a8a;
+          --color-primary-focus: #2563eb;
+          --color-primary-content: #ffffff;
+
+          /* Secondary colors */
+          --color-secondary: #8b5cf6;
+          --color-secondary-50: #f5f3ff;
+          --color-secondary-100: #ede9fe;
+          --color-secondary-200: #ddd6fe;
+          --color-secondary-300: #c4b5fd;
+          --color-secondary-400: #a78bfa;
+          --color-secondary-500: #8b5cf6;
+          --color-secondary-600: #7c3aed;
+          --color-secondary-700: #6d28d9;
+          --color-secondary-800: #5b21b6;
+          --color-secondary-900: #4c1d95;
+          --color-secondary-focus: #7c3aed;
+          --color-secondary-content: #ffffff;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #fdf2f8;
+          --color-accent-100: #fce7f3;
+          --color-accent-200: #fbcfe8;
+          --color-accent-300: #f9a8d4;
+          --color-accent-400: #f472b6;
+          --color-accent-500: #ec4899;
+          --color-accent-600: #db2777;
+          --color-accent-700: #be185d;
+          --color-accent-800: #9d174d;
+          --color-accent-900: #831843;
+          --color-accent-focus: #db2777;
+          --color-accent-content: #ffffff;
+
+          /* Neutral colors */
+          --color-neutral: #6b7280;
+          --color-neutral-50: #f9fafb;
+          --color-neutral-100: #f3f4f6;
+          --color-neutral-200: #e5e7eb;
+          --color-neutral-300: #d1d5db;
+          --color-neutral-400: #9ca3af;
+          --color-neutral-500: #6b7280;
+          --color-neutral-600: #4b5563;
+          --color-neutral-700: #374151;
+          --color-neutral-800: #1f2937;
+          --color-neutral-900: #111827;
+          --color-neutral-focus: #4b5563;
+          --color-neutral-content: #ffffff;
+
+          /* Info colors */
+          --color-info: #3b82f6;
+          --color-info-50: #eff6ff;
+          --color-info-100: #dbeafe;
+          --color-info-200: #bfdbfe;
+          --color-info-300: #93c5fd;
+          --color-info-400: #60a5fa;
+          --color-info-500: #3b82f6;
+          --color-info-600: #2563eb;
+          --color-info-700: #1d4ed8;
+          --color-info-800: #1e40af;
+          --color-info-900: #1e3a8a;
+          --color-info-focus: #2563eb;
+          --color-info-content: #ffffff;
+
+          /* Success colors */
+          --color-success: #10b981;
+          --color-success-50: #ecfdf5;
+          --color-success-100: #d1fae5;
+          --color-success-200: #a7f3d0;
+          --color-success-300: #6ee7b7;
+          --color-success-400: #34d399;
+          --color-success-500: #10b981;
+          --color-success-600: #059669;
+          --color-success-700: #047857;
+          --color-success-800: #065f46;
+          --color-success-900: #064e3b;
+          --color-success-focus: #059669;
+          --color-success-content: #ffffff;
+
+          /* Warning colors */
+          --color-warning: #f59e0b;
+          --color-warning-50: #fffbeb;
+          --color-warning-100: #fef3c7;
+          --color-warning-200: #fde68a;
+          --color-warning-300: #fcd34d;
+          --color-warning-400: #fbbf24;
+          --color-warning-500: #f59e0b;
+          --color-warning-600: #d97706;
+          --color-warning-700: #b45309;
+          --color-warning-800: #92400e;
+          --color-warning-900: #78350f;
+          --color-warning-focus: #d97706;
+          --color-warning-content: #ffffff;
+
+          /* Error colors */
+          --color-error: #ef4444;
+          --color-error-50: #fef2f2;
+          --color-error-100: #fee2e2;
+          --color-error-200: #fecaca;
+          --color-error-300: #fca5a5;
+          --color-error-400: #f87171;
+          --color-error-500: #ef4444;
+          --color-error-600: #dc2626;
+          --color-error-700: #b91c1c;
+          --color-error-800: #991b1b;
+          --color-error-900: #7f1d1d;
+          --color-error-focus: #dc2626;
+          --color-error-content: #ffffff;
+        }
+</style>
+
+    
+<style>
+/* Dark theme */
+        .dark {
+          /* Base colors */
+          --color-base: #1f2937;
+          --color-base-50: #111827;
+          --color-base-100: #1f2937;
+          --color-base-200: #374151;
+          --color-base-300: #4b5563;
+          --color-base-400: #6b7280;
+          --color-base-500: #9ca3af;
+          --color-base-600: #d1d5db;
+          --color-base-700: #e5e7eb;
+          --color-base-800: #f3f4f6;
+          --color-base-900: #f9fafb;
+          --color-base-content: #f9fafb;
+
+          /* Primary colors */
+          --color-primary: #60a5fa;
+          --color-primary-50: #1e3a8a;
+          --color-primary-100: #1e40af;
+          --color-primary-200: #1d4ed8;
+          --color-primary-300: #2563eb;
+          --color-primary-400: #3b82f6;
+          --color-primary-500: #60a5fa;
+          --color-primary-600: #93c5fd;
+          --color-primary-700: #bfdbfe;
+          --color-primary-800: #dbeafe;
+          --color-primary-900: #eff6ff;
+          --color-primary-focus: #3b82f6;
+          --color-primary-content: #1f2937;
+
+          /* Secondary colors */
+          --color-secondary: #a78bfa;
+          --color-secondary-50: #4c1d95;
+          --color-secondary-100: #5b21b6;
+          --color-secondary-200: #6d28d9;
+          --color-secondary-300: #7c3aed;
+          --color-secondary-400: #8b5cf6;
+          --color-secondary-500: #a78bfa;
+          --color-secondary-600: #c4b5fd;
+          --color-secondary-700: #ddd6fe;
+          --color-secondary-800: #ede9fe;
+          --color-secondary-900: #f5f3ff;
+          --color-secondary-focus: #8b5cf6;
+          --color-secondary-content: #1f2937;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #831843;
+          --color-accent-100: #9d174d;
+          --color-accent-200: #be185d;
+          --color-accent-300: #db2777;
+          --color-accent-400: #ec4899;
+          --color-accent-500: #f472b6;
+          --color-accent-600: #f9a8d4;
+          --color-accent-700: #fbcfe8;
+          --color-accent-800: #fce7f3;
+          --color-accent-900: #fdf2f8;
+          --color-accent-focus: #ec4899;
+          --color-accent-content: #1f2937;
+
+          /* Neutral colors remain the same as light theme */
+
+          /* Info colors */
+          --color-info: #60a5fa;
+          --color-info-50: #1e3a8a;
+          --color-info-100: #1e40af;
+          --color-info-200: #1d4ed8;
+          --color-info-300: #2563eb;
+          --color-info-400: #3b82f6;
+          --color-info-500: #60a5fa;
+          --color-info-600: #93c5fd;
+          --color-info-700: #bfdbfe;
+          --color-info-800: #dbeafe;
+          --color-info-900: #eff6ff;
+          --color-info-focus: #3b82f6;
+          --color-info-content: #1f2937;
+
+          /* Success colors */
+          --color-success: #34d399;
+          --color-success-50: #064e3b;
+          --color-success-100: #065f46;
+          --color-success-200: #047857;
+          --color-success-300: #059669;
+          --color-success-400: #10b981;
+          --color-success-500: #34d399;
+          --color-success-600: #6ee7b7;
+          --color-success-700: #a7f3d0;
+          --color-success-800: #d1fae5;
+          --color-success-900: #ecfdf5;
+          --color-success-focus: #10b981;
+          --color-success-content: #1f2937;
+
+          /* Warning colors */
+          --color-warning: #fbbf24;
+          --color-warning-50: #78350f;
+          --color-warning-100: #92400e;
+          --color-warning-200: #b45309;
+          --color-warning-300: #d97706;
+          --color-warning-400: #f59e0b;
+          --color-warning-500: #fbbf24;
+          --color-warning-600: #fcd34d;
+          --color-warning-700: #fde68a;
+          --color-warning-800: #fef3c7;
+          --color-warning-900: #fffbeb;
+          --color-warning-focus: #f59e0b;
+          --color-warning-content: #1f2937;
+
+          /* Error colors */
+          --color-error: #f87171;
+          --color-error-50: #7f1d1d;
+          --color-error-100: #991b1b;
+          --color-error-200: #b91c1c;
+          --color-error-300: #dc2626;
+          --color-error-400: #ef4444;
+          --color-error-500: #f87171;
+          --color-error-600: #fca5a5;
+          --color-error-700: #fecaca;
+          --color-error-800: #fee2e2;
+          --color-error-900: #fef2f2;
+          --color-error-focus: #ef4444;
+          --color-error-content: #1f2937;
+        }
+</style>
+
+    
+  <script>
+        tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                ...{"transparent":"transparent","current":"currentColor","black":"#000000","white":"#ffffff","gray":{"50":"#f9fafb","100":"#f3f4f6","200":"#e5e7eb","300":"#d1d5db","400":"#9ca3af","500":"#6b7280","600":"#4b5563","700":"#374151","800":"#1f2937","900":"#111827"},"red":{"50":"#fef2f2","100":"#fee2e2","200":"#fecaca","300":"#fca5a5","400":"#f87171","500":"#ef4444","600":"#dc2626","700":"#b91c1c","800":"#991b1b","900":"#7f1d1d"},"yellow":{"50":"#fffbeb","100":"#fef3c7","200":"#fde68a","300":"#fcd34d","400":"#fbbf24","500":"#f59e0b","600":"#d97706","700":"#b45309","800":"#92400e","900":"#78350f"},"green":{"50":"#ecfdf5","100":"#d1fae5","200":"#a7f3d0","300":"#6ee7b7","400":"#34d399","500":"#10b981","600":"#059669","700":"#047857","800":"#065f46","900":"#064e3b"},"blue":{"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a"},"indigo":{"50":"#eef2ff","100":"#e0e7ff","200":"#c7d2fe","300":"#a5b4fc","400":"#818cf8","500":"#6366f1","600":"#4f46e5","700":"#4338ca","800":"#3730a3","900":"#312e81"},"purple":{"50":"#f5f3ff","100":"#ede9fe","200":"#ddd6fe","300":"#c4b5fd","400":"#a78bfa","500":"#8b5cf6","600":"#7c3aed","700":"#6d28d9","800":"#5b21b6","900":"#4c1d95"},"pink":{"50":"#fdf2f8","100":"#fce7f3","200":"#fbcfe8","300":"#f9a8d4","400":"#f472b6","500":"#ec4899","600":"#db2777","700":"#be185d","800":"#9d174d","900":"#831843"}},
+                ...{"primary":{"50":"var(--color-primary-50)","100":"var(--color-primary-100)","200":"var(--color-primary-200)","300":"var(--color-primary-300)","400":"var(--color-primary-400)","500":"var(--color-primary-500)","600":"var(--color-primary-600)","700":"var(--color-primary-700)","800":"var(--color-primary-800)","900":"var(--color-primary-900)","DEFAULT":"var(--color-primary)","focus":"var(--color-primary-focus)","content":"var(--color-primary-content)"},"secondary":{"50":"var(--color-secondary-50)","100":"var(--color-secondary-100)","200":"var(--color-secondary-200)","300":"var(--color-secondary-300)","400":"var(--color-secondary-400)","500":"var(--color-secondary-500)","600":"var(--color-secondary-600)","700":"var(--color-secondary-700)","800":"var(--color-secondary-800)","900":"var(--color-secondary-900)","DEFAULT":"var(--color-secondary)","focus":"var(--color-secondary-focus)","content":"var(--color-secondary-content)"},"accent":{"50":"var(--color-accent-50)","100":"var(--color-accent-100)","200":"var(--color-accent-200)","300":"var(--color-accent-300)","400":"var(--color-accent-400)","500":"var(--color-accent-500)","600":"var(--color-accent-600)","700":"var(--color-accent-700)","800":"var(--color-accent-800)","900":"var(--color-accent-900)","DEFAULT":"var(--color-accent)","focus":"var(--color-accent-focus)","content":"var(--color-accent-content)"},"neutral":{"50":"var(--color-neutral-50)","100":"var(--color-neutral-100)","200":"var(--color-neutral-200)","300":"var(--color-neutral-300)","400":"var(--color-neutral-400)","500":"var(--color-neutral-500)","600":"var(--color-neutral-600)","700":"var(--color-neutral-700)","800":"var(--color-neutral-800)","900":"var(--color-neutral-900)","DEFAULT":"var(--color-neutral)","focus":"var(--color-neutral-focus)","content":"var(--color-neutral-content)"},"info":{"50":"var(--color-info-50)","100":"var(--color-info-100)","200":"var(--color-info-200)","300":"var(--color-info-300)","400":"var(--color-info-400)","500":"var(--color-info-500)","600":"var(--color-info-600)","700":"var(--color-info-700)","800":"var(--color-info-800)","900":"var(--color-info-900)","DEFAULT":"var(--color-info)","focus":"var(--color-info-focus)","content":"var(--color-info-content)"},"success":{"50":"var(--color-success-50)","100":"var(--color-success-100)","200":"var(--color-success-200)","300":"var(--color-success-300)","400":"var(--color-success-400)","500":"var(--color-success-500)","600":"var(--color-success-600)","700":"var(--color-success-700)","800":"var(--color-success-800)","900":"var(--color-success-900)","DEFAULT":"var(--color-success)","focus":"var(--color-success-focus)","content":"var(--color-success-content)"},"warning":{"50":"var(--color-warning-50)","100":"var(--color-warning-100)","200":"var(--color-warning-200)","300":"var(--color-warning-300)","400":"var(--color-warning-400)","500":"var(--color-warning-500)","600":"var(--color-warning-600)","700":"var(--color-warning-700)","800":"var(--color-warning-800)","900":"var(--color-warning-900)","DEFAULT":"var(--color-warning)","focus":"var(--color-warning-focus)","content":"var(--color-warning-content)"},"error":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"danger":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"failure":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"}},
+                },
+              },
+            },
+            variants: {
+              extend: {
+                backgroundColor: ['active', 'group-hover'],
+                textColor: ['active', 'group-hover'],
+              },
+            },
+            plugins: [],
+          };
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+                <body class="h-full text-base-content">
+                  <div id="ai-project-articles" class="bg-neutral-100 min-h-screen">
+  <header id="header" class="flex items-center justify-between p-4 bg-white shadow-sm">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <div class="flex items-center space-x-4">
+      <button class="w-10 h-10 flex items-center justify-center rounded-md bg-neutral-200 text-neutral-800">
+        <span>PM</span>
+      </button>
+      <nav class="flex items-center space-x-4">
+        <span class="text-neutral-800 cursor-pointer">Dashboard</span>
+        <span class="text-neutral-800 cursor-pointer">Projects</span>
+        <span class="text-neutral-700 cursor-pointer">Articles</span>
+        <span class="text-neutral-800 cursor-pointer">Settings</span>
+      </nav>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="text-neutral-700">
+        <i class="fa-regular fa-bell text-xl"></i>
+      </button>
+      <div class="relative">
+        <button class="w-10 h-10 bg-neutral-200 rounded-full flex items-center justify-center">
+          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-full h-full rounded-full" />
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="main-content" class="flex">
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="w-64 bg-white border-r border-neutral-200 h-[800px]">
+      <div class="p-4">
+        <h2 class="text-lg text-neutral-800 mb-4">Article Management</h2>
+        <nav class="space-y-1">
+          <span class="flex items-center px-3 py-2 text-neutral-700 bg-neutral-50 rounded-md cursor-pointer">
+            <i class="fa-solid fa-file-alt mr-3 w-5"></i>
+            <span>All Articles</span>
+          </span>
+          <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+            <i class="fa-solid fa-edit mr-3 w-5"></i>
+            <span>Drafts</span>
+          </span>
+          <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+            <i class="fa-solid fa-check-circle mr-3 w-5"></i>
+            <span>Completed</span>
+          </span>
+          <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+            <i class="fa-solid fa-clock mr-3 w-5"></i>
+            <span>Pending Review</span>
+          </span>
+          <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+            <i class="fa-solid fa-sync mr-3 w-5"></i>
+            <span>Processing</span>
+          </span>
+          <div class="pt-4 mt-4 border-t border-neutral-200">
+            <h3 class="text-sm text-neutral-500 mb-2 px-3">PROJECTS</h3>
+          </div>
+          <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+            <i class="fa-solid fa-folder mr-3 w-5"></i>
+            <span>Quantum Computing</span>
+          </span>
+          <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+            <i class="fa-solid fa-folder mr-3 w-5"></i>
+            <span>Climate Science</span>
+          </span>
+          <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+            <i class="fa-solid fa-folder mr-3 w-5"></i>
+            <span>Neural Networks</span>
+          </span>
+          <div class="pt-4 mt-4 border-t border-neutral-200">
+            <h3 class="text-sm text-neutral-500 mb-2 px-3">TEMPLATES</h3>
+          </div>
+          <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+            <i class="fa-solid fa-file-alt mr-3 w-5"></i>
+            <span>Academic Paper</span>
+          </span>
+          <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+            <i class="fa-solid fa-file-alt mr-3 w-5"></i>
+            <span>Scientific Review</span>
+          </span>
+          <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+            <i class="fa-solid fa-file-alt mr-3 w-5"></i>
+            <span>Research Proposal</span>
+          </span>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main id="articles-content" class="flex-1 p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl text-neutral-800">Project Articles</h1>
+        <div class="flex space-x-3">
+          <div class="relative">
+            <input type="text" placeholder="Search articles..." class="px-4 py-2 pr-10 border border-neutral-300 rounded-md focus:outline-none focus:ring-1 focus:ring-neutral-500 w-64" />
+            <i class="fa-solid fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-400"></i>
+          </div>
+          <button class="px-4 py-2 bg-neutral-700 text-white rounded-md shadow-sm hover:bg-neutral-800 flex items-center">
+            <i class="fa-solid fa-plus mr-2"></i>
+            <span>New Article</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Project Selection -->
+      <div id="project-selector" class="bg-white p-4 rounded-md shadow-sm mb-6 border border-neutral-200">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-md bg-neutral-700 flex items-center justify-center text-white mr-3">
+              <i class="fa-solid fa-atom"></i>
+            </div>
+            <div>
+              <h3 class="text-neutral-800">Quantum Computing Research</h3>
+              <p class="text-neutral-500 text-sm">7 articles • 3 in progress • Last updated: July 6, 2025</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button class="px-3 py-1.5 border border-neutral-300 rounded-md text-neutral-700 hover:bg-neutral-50 text-sm flex items-center">
+              <i class="fa-solid fa-cog mr-1.5"></i>
+              Project Settings
+            </button>
+            <button class="px-3 py-1.5 border border-neutral-300 rounded-md text-neutral-700 hover:bg-neutral-50 text-sm">
+              <i class="fa-solid fa-filter mr-1.5"></i>
+              Filter
+            </button>
+            <select class="px-3 py-1.5 border border-neutral-300 rounded-md text-neutral-700 hover:bg-neutral-50 text-sm">
+              <option>Sort: Last Updated</option>
+              <option>Sort: Title A-Z</option>
+              <option>Sort: Status</option>
+              <option>Sort: Creation Date</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kanban Board -->
+      <div id="kanban-board" class="grid grid-cols-3 gap-6">
+        <!-- Draft Column -->
+        <div id="draft-column" class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden">
+          <div class="p-3 border-b border-neutral-200 bg-neutral-50 flex justify-between items-center">
+            <div class="flex items-center">
+              <div class="w-6 h-6 rounded-full bg-neutral-200 flex items-center justify-center mr-2">
+                <i class="fa-solid fa-edit text-neutral-700 text-xs"></i>
+              </div>
+              <h3 class="text-neutral-800">Drafts</h3>
+              <span class="ml-2 text-xs bg-neutral-200 text-neutral-700 px-2 py-0.5 rounded-full">3</span>
+            </div>
+            <button class="text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-ellipsis-h"></i>
+            </button>
+          </div>
+          <div class="p-3 space-y-3 h-[600px] overflow-y-auto">
+            <!-- Draft Article 1 -->
+            <div class="bg-white border border-neutral-200 rounded-md shadow-sm hover:shadow-md transition-all p-3">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="text-neutral-800">Quantum Entanglement Principles</h4>
+                <div class="flex">
+                  <button class="text-neutral-400 hover:text-neutral-700">
+                    <i class="fa-solid fa-expand"></i>
+                  </button>
+                </div>
+              </div>
+              <p class="text-neutral-600 text-sm mb-3 line-clamp-2">A comprehensive analysis of quantum entanglement principles and their applications in quantum computing systems.</p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User avatar" class="w-6 h-6 rounded-full border border-white" />
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-6 h-6 rounded-full border border-white" />
+                  </div>
+                  <span class="text-xs text-neutral-500 ml-2">2 collaborators</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="text-xs text-neutral-500">Created: July 3, 2025</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-neutral-100">
+                <div class="flex items-center space-x-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-robot mr-1 text-xs"></i>
+                    UX Pilot Opus
+                  </span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-tag mr-1 text-xs"></i>
+                    Physics
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-edit"></i>
+                  </button>
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-trash-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Draft Article 2 -->
+            <div class="bg-white border border-neutral-200 rounded-md shadow-sm hover:shadow-md transition-all p-3">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="text-neutral-800">Quantum Error Correction Methods</h4>
+                <div class="flex">
+                  <button class="text-neutral-400 hover:text-neutral-700">
+                    <i class="fa-solid fa-expand"></i>
+                  </button>
+                </div>
+              </div>
+              <p class="text-neutral-600 text-sm mb-3 line-clamp-2">Exploring modern approaches to quantum error correction and fault tolerance in quantum computing systems.</p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-6 h-6 rounded-full border border-white" />
+                  </div>
+                  <span class="text-xs text-neutral-500 ml-2">1 collaborator</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="text-xs text-neutral-500">Created: July 4, 2025</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-neutral-100">
+                <div class="flex items-center space-x-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-robot mr-1 text-xs"></i>
+                    GPT-4o
+                  </span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-tag mr-1 text-xs"></i>
+                    Computing
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-edit"></i>
+                  </button>
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-trash-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Draft Article 3 -->
+            <div class="bg-white border border-neutral-200 rounded-md shadow-sm hover:shadow-md transition-all p-3">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="text-neutral-800">Quantum Algorithm Optimization</h4>
+                <div class="flex">
+                  <button class="text-neutral-400 hover:text-neutral-700">
+                    <i class="fa-solid fa-expand"></i>
+                  </button>
+                </div>
+              </div>
+              <p class="text-neutral-600 text-sm mb-3 line-clamp-2">Strategies for optimizing quantum algorithms for specific hardware architectures and problem domains.</p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-6 h-6 rounded-full border border-white" />
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-6 h-6 rounded-full border border-white" />
+                  </div>
+                  <span class="text-xs text-neutral-500 ml-2">2 collaborators</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="text-xs text-neutral-500">Created: July 5, 2025</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-neutral-100">
+                <div class="flex items-center space-x-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-robot mr-1 text-xs"></i>
+                    UX Pilot Sonnet
+                  </span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-tag mr-1 text-xs"></i>
+                    Algorithms
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-edit"></i>
+                  </button>
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-trash-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- In Progress Column -->
+        <div id="in-progress-column" class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden">
+          <div class="p-3 border-b border-neutral-200 bg-neutral-50 flex justify-between items-center">
+            <div class="flex items-center">
+              <div class="w-6 h-6 rounded-full bg-neutral-100 flex items-center justify-center mr-2">
+                <i class="fa-solid fa-sync text-neutral-600 text-xs"></i>
+              </div>
+              <h3 class="text-neutral-800">In Progress</h3>
+              <span class="ml-2 text-xs bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-full">2</span>
+            </div>
+            <button class="text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-ellipsis-h"></i>
+            </button>
+          </div>
+          <div class="p-3 space-y-3 h-[600px] overflow-y-auto">
+            <!-- In Progress Article 1 -->
+            <div class="bg-white border border-neutral-200 rounded-md shadow-sm hover:shadow-md transition-all p-3">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="text-neutral-800">Quantum Supremacy Analysis</h4>
+                <div class="flex">
+                  <button class="text-neutral-400 hover:text-neutral-700">
+                    <i class="fa-solid fa-expand"></i>
+                  </button>
+                </div>
+              </div>
+              <p class="text-neutral-600 text-sm mb-3 line-clamp-2">A critical examination of quantum supremacy claims and experimental validations in recent research.</p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User avatar" class="w-6 h-6 rounded-full border border-white" />
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-6 h-6 rounded-full border border-white" />
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-6 h-6 rounded-full border border-white" />
+                  </div>
+                  <span class="text-xs text-neutral-500 ml-2">3 collaborators</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="text-xs text-neutral-500">Updated: July 6, 2025</span>
+                </div>
+              </div>
+              <div class="mt-3 pt-3 border-t border-neutral-100">
+                <div class="w-full bg-neutral-100 rounded-full h-1.5 mb-1">
+                  <div class="bg-neutral-500 h-1.5 rounded-full" style="width: 75%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-neutral-500">
+                  <span>Progress: 75%</span>
+                  <span>Est. completion: July 8, 2025</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-neutral-100">
+                <div class="flex items-center space-x-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-robot mr-1 text-xs"></i>
+                    UX Pilot Opus
+                  </span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-tag mr-1 text-xs"></i>
+                    Research
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-edit"></i>
+                  </button>
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- In Progress Article 2 -->
+            <div class="bg-white border border-neutral-200 rounded-md shadow-sm hover:shadow-md transition-all p-3">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="text-neutral-800">Quantum Hardware Comparison</h4>
+                <div class="flex">
+                  <button class="text-neutral-400 hover:text-neutral-700">
+                    <i class="fa-solid fa-expand"></i>
+                  </button>
+                </div>
+              </div>
+              <p class="text-neutral-600 text-sm mb-3 line-clamp-2">Comparative analysis of current quantum computing hardware platforms including superconducting qubits and ion traps.</p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User avatar" class="w-6 h-6 rounded-full border border-white" />
+                  </div>
+                  <span class="text-xs text-neutral-500 ml-2">1 collaborator</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="text-xs text-neutral-500">Updated: July 5, 2025</span>
+                </div>
+              </div>
+              <div class="mt-3 pt-3 border-t border-neutral-100">
+                <div class="w-full bg-neutral-100 rounded-full h-1.5 mb-1">
+                  <div class="bg-neutral-500 h-1.5 rounded-full" style="width: 45%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-neutral-500">
+                  <span>Progress: 45%</span>
+                  <span>Est. completion: July 10, 2025</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-neutral-100">
+                <div class="flex items-center space-x-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-robot mr-1 text-xs"></i>
+                    GPT-4o
+                  </span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-tag mr-1 text-xs"></i>
+                    Hardware
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-edit"></i>
+                  </button>
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Completed Column -->
+        <div id="completed-column" class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden">
+          <div class="p-3 border-b border-neutral-200 bg-neutral-50 flex justify-between items-center">
+            <div class="flex items-center">
+              <div class="w-6 h-6 rounded-full bg-neutral-100 flex items-center justify-center mr-2">
+                <i class="fa-solid fa-check text-neutral-600 text-xs"></i>
+              </div>
+              <h3 class="text-neutral-800">Completed</h3>
+              <span class="ml-2 text-xs bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-full">2</span>
+            </div>
+            <button class="text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-ellipsis-h"></i>
+            </button>
+          </div>
+          <div class="p-3 space-y-3 h-[600px] overflow-y-auto">
+            <!-- Completed Article 1 -->
+            <div class="bg-white border border-neutral-200 rounded-md shadow-sm hover:shadow-md transition-all p-3">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="text-neutral-800">Introduction to Quantum Computing</h4>
+                <div class="flex">
+                  <button class="text-neutral-400 hover:text-neutral-700">
+                    <i class="fa-solid fa-expand"></i>
+                  </button>
+                </div>
+              </div>
+              <p class="text-neutral-600 text-sm mb-3 line-clamp-2">A comprehensive introduction to quantum computing principles, concepts, and applications for academic researchers.</p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User avatar" class="w-6 h-6 rounded-full border border-white" />
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-6 h-6 rounded-full border border-white" />
+                  </div>
+                  <span class="text-xs text-neutral-500 ml-2">2 collaborators</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="text-xs text-neutral-500">Completed: July 2, 2025</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-neutral-100">
+                <div class="flex items-center space-x-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-check-circle mr-1 text-xs"></i>
+                    Peer Reviewed
+                  </span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-robot mr-1 text-xs"></i>
+                    UX Pilot Opus
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-download"></i>
+                  </button>
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Completed Article 2 -->
+            <div class="bg-white border border-neutral-200 rounded-md shadow-sm hover:shadow-md transition-all p-3">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="text-neutral-800">Quantum Computing Applications in Cryptography</h4>
+                <div class="flex">
+                  <button class="text-neutral-400 hover:text-neutral-700">
+                    <i class="fa-solid fa-expand"></i>
+                  </button>
+                </div>
+              </div>
+              <p class="text-neutral-600 text-sm mb-3 line-clamp-2">Analysis of quantum computing applications in modern cryptography, including threats to current encryption standards.</p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="flex -space-x-2">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-6 h-6 rounded-full border border-white" />
+                  </div>
+                  <span class="text-xs text-neutral-500 ml-2">1 collaborator</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="text-xs text-neutral-500">Completed: June 28, 2025</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-neutral-100">
+                <div class="flex items-center space-x-2">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-check-circle mr-1 text-xs"></i>
+                    Peer Reviewed
+                  </span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    <i class="fa-solid fa-robot mr-1 text-xs"></i>
+                    UX Pilot Sonnet
+                  </span>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-download"></i>
+                  </button>
+                  <button class="text-neutral-500 hover:text-neutral-700 text-sm">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Article Editor Modal -->
+  <div id="article-editor-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg w-full max-w-4xl h-[700px] flex flex-col overflow-hidden">
+      <div class="p-4 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+        <div class="flex items-center">
+          <button class="mr-3 text-neutral-500 hover:text-neutral-700">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <h2 class="text-lg text-neutral-800">Edit Article</h2>
+        </div>
+        <div class="flex items-center space-x-3">
+          <button class="px-3 py-1.5 bg-neutral-100 text-neutral-700 rounded-md text-sm flex items-center hover:bg-neutral-200">
+            <i class="fa-solid fa-check mr-1.5"></i>
+            Save Draft
+          </button>
+          <button class="px-3 py-1.5 bg-neutral-700 text-white rounded-md text-sm flex items-center hover:bg-neutral-800">
+            <i class="fa-solid fa-paper-plane mr-1.5"></i>
+            Submit for Review
+          </button>
+          <button class="text-neutral-500 hover:text-neutral-700">
+            <i class="fa-solid fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="flex-1 flex overflow-hidden">
+        <div class="w-2/3 border-r border-neutral-200 p-6 overflow-y-auto">
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">Article Title</label>
+            <input type="text" value="Quantum Error Correction Methods" class="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-1 focus:ring-neutral-500" />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">Abstract</label>
+            <textarea class="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-1 focus:ring-neutral-500 h-24">This paper explores modern approaches to quantum error correction and fault tolerance in quantum computing systems. We analyze current methods and propose improvements for specific quantum architectures.</textarea>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">Content</label>
+            <div class="border border-neutral-300 rounded-md p-3 min-h-[300px]">
+              <h2 class="text-xl mb-3">Introduction</h2>
+              <p class="mb-3">Quantum error correction is essential for reliable quantum computation. Unlike classical error correction, quantum error correction must overcome unique challenges posed by the quantum nature of information, including the no-cloning theorem and the continuous nature of quantum errors.</p>
+              
+              <p class="mb-3">This paper presents a comprehensive review of current quantum error correction methods, with a particular focus on surface codes and topological quantum error correction. We also discuss recent experimental demonstrations and practical implementations in various quantum computing platforms.</p>
+              
+              <h2 class="text-xl mb-3">Background</h2>
+              <p class="mb-3">Quantum errors arise from decoherence, imperfect gate operations, and measurement errors. These errors can be broadly categorized as bit-flip errors, phase-flip errors, or combinations thereof. Traditional classical error correction techniques are insufficient for quantum systems due to fundamental differences in how quantum information behaves.</p>
+              
+              <h2 class="text-xl mb-3">Methods</h2>
+              <p>We analyze the performance of various quantum error correction codes using numerical simulations and theoretical analysis. Our evaluation metrics include logical error rates, resource requirements, and implementation complexity.</p>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">References</label>
+            <div class="border border-neutral-300 rounded-md p-3 bg-neutral-50">
+              <ol class="list-decimal pl-5 text-sm">
+                <li class="mb-2">Smith, J., & Johnson, A. (2024). "Advances in Surface Code Implementation." <em>Quantum Information Processing</em>, 23(4), 145-163.</li>
+                <li class="mb-2">Chen, Y., et al. (2024). "Experimental Demonstration of Fault-Tolerant Quantum Computation." <em>Nature Physics</em>, 20(2), 89-97.</li>
+                <li class="mb-2">Williams, R. (2023). "Topological Quantum Codes for Near-Term Quantum Devices." <em>Physical Review A</em>, 108(5), 052408.</li>
+                <li>Brown, L., & Davis, M. (2025). "Resource Optimization for Quantum Error Correction." <em>Quantum</em>, 9(1), 12-28.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="w-1/3 p-4 overflow-y-auto">
+          <div class="mb-6">
+            <h3 class="text-sm text-neutral-700 mb-3">Article Settings</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-xs text-neutral-500 mb-1">Project</label>
+                <select class="w-full px-3 py-2 border border-neutral-300 rounded-md text-sm">
+                  <option>Quantum Computing Research</option>
+                  <option>Climate Science</option>
+                  <option>Neural Networks</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-neutral-500 mb-1">Article Type</label>
+                <select class="w-full px-3 py-2 border border-neutral-300 rounded-md text-sm">
+                  <option>Research Paper</option>
+                  <option>Review Article</option>
+                  <option>Technical Report</option>
+                  <option>Case Study</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-neutral-500 mb-1">Tags</label>
+                <div class="flex flex-wrap gap-2 p-2 border border-neutral-300 rounded-md">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    Computing
+                    <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-times"></i>
+                    </button>
+                  </span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-neutral-100 text-neutral-800">
+                    Error Correction
+                    <button class="ml-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-times"></i>
+                    </button>
+                  </span>
+                  <input type="text" placeholder="Add tag..." class="border-none outline-none text-sm flex-1 min-w-[100px]" />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-sm text-neutral-700 mb-3">AI Generation Settings</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-xs text-neutral-500 mb-1">AI Model</label>
+                <select class="w-full px-3 py-2 border border-neutral-300 rounded-md text-sm">
+                  <option>GPT-4o</option>
+                  <option>UX Pilot Opus</option>
+                  <option>UX Pilot Sonnet</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-neutral-500 mb-1">Academic Style</label>
+                <select class="w-full px-3 py-2 border border-neutral-300 rounded-md text-sm">
+                  <option>Doctoral</option>
+                  <option>Peer-Review Journal</option>
+                  <option>Graduate</option>
+                  <option>Undergraduate</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs text-neutral-500 mb-1">Citation Style</label>
+                <select class="w-full px-3 py-2 border border-neutral-300 rounded-md text-sm">
+                  <option>APA 7th Edition</option>
+                  <option>IEEE</option>
+                  <option>Chicago 17th Edition</option>
+                  <option>MLA 9th Edition</option>
+                </select>
+              </div>
+              <div class="flex items-start">
+                <div class="flex items-center h-5">
+                  <input id="fact-checking" name="fact-checking" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+                </div>
+                <div class="ml-3">
+                  <label for="fact-checking" class="text-xs text-neutral-700">Fact Checking</label>
+                  <p class="text-xs text-neutral-500">Verify content against reliable sources</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="flex items-center h-5">
+                  <input id="plagiarism-detection" name="plagiarism-detection" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+                </div>
+                <div class="ml-3">
+                  <label for="plagiarism-detection" class="text-xs text-neutral-700">Plagiarism Detection</label>
+                  <p class="text-xs text-neutral-500">Ensure content originality</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-sm text-neutral-700 mb-3">Collaborators</h3>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between p-2 bg-neutral-50 rounded-md">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-6 h-6 rounded-full mr-2" />
+                  <span class="text-sm">Alex Johnson</span>
+                </div>
+                <span class="text-xs bg-neutral-200 px-2 py-0.5 rounded-full">Owner</span>
+              </div>
+              <button class="w-full flex items-center justify-center px-3 py-2 border border-dashed border-neutral-300 rounded-md text-neutral-600 hover:bg-neutral-50 text-sm">
+                <i class="fa-solid fa-plus mr-1.5"></i>
+                Add Collaborator
+              </button>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-sm text-neutral-700 mb-3">AI Assistant</h3>
+            <div class="border border-neutral-300 rounded-md overflow-hidden">
+              <div class="p-3 bg-neutral-50 border-b border-neutral-200 flex justify-between items-center">
+                <span class="text-sm">Get Help with Writing</span>
+                <button class="text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div class="p-3">
+                <div class="space-y-2">
+                  <button class="w-full text-left px-3 py-2 text-sm bg-neutral-100 hover:bg-neutral-200 rounded-md">
+                    Improve writing style
+                  </button>
+                  <button class="w-full text-left px-3 py-2 text-sm bg-neutral-100 hover:bg-neutral-200 rounded-md">
+                    Check for academic rigor
+                  </button>
+                  <button class="w-full text-left px-3 py-2 text-sm bg-neutral-100 hover:bg-neutral-200 rounded-md">
+                    Generate additional references
+                  </button>
+                  <button class="w-full text-left px-3 py-2 text-sm bg-neutral-100 hover:bg-neutral-200 rounded-md">
+                    Expand on current section
+                  </button>
+                </div>
+                <div class="mt-3">
+                  <input type="text" placeholder="Ask the AI assistant..." class="w-full px-3 py-2 border border-neutral-300 rounded-md text-sm" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer" class="bg-white border-t border-neutral-200 p-4 text-center text-neutral-600 text-sm">
+    <p>© 2025 Academic AI Project Management System - Joomla 5.3 Component</p>
+  </footer>
+</div>
+                <script src="theme-switcher.js"></script>
+</body>
+              </html>
+            

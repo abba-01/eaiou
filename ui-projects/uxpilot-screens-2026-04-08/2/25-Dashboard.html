@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="bg-white shadow-sm border-b">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <i class="fa-solid fa-brain text-neutral-800 text-2xl mr-3"></i>
+      <h1 class="text-xl text-neutral-800">AI Research Assistant</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-bell mr-2"></i>
+        <span class="relative">
+          Notifications
+          <span class="absolute -top-1 -right-2 bg-neutral-800 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+        </span>
+      </button>
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-question-circle mr-2"></i>
+        Help
+      </button>
+      <div class="relative">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full cursor-pointer"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="flex h-[800px] bg-neutral-50">
+  <div id="sidebar" class="w-64 bg-white border-r">
+    <div class="p-4">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-sm text-neutral-500">WORKSPACE</h2>
+        <button class="text-neutral-400 hover:text-neutral-600">
+          <i class="fa-solid fa-cog"></i>
+        </button>
+      </div>
+      
+      <nav class="space-y-1">
+        <span class="flex items-center px-3 py-2 text-sm bg-neutral-100 text-neutral-900 rounded-md cursor-pointer">
+          <i class="fa-solid fa-tachometer-alt mr-3 text-neutral-700"></i>
+          Dashboard
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-folder mr-3 text-neutral-400"></i>
+          Projects
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-file-alt mr-3 text-neutral-400"></i>
+          Articles
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tasks mr-3 text-neutral-400"></i>
+          Tasks
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-cogs mr-3 text-neutral-400"></i>
+          Settings
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-users mr-3 text-neutral-400"></i>
+          User Management
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-chart-bar mr-3 text-neutral-400"></i>
+          Analytics
+        </span>
+      </nav>
+    </div>
+  </div>
+
+  <div id="content" class="flex-1 overflow-auto p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl text-neutral-800">Dashboard</h1>
+      <div class="flex items-center space-x-3">
+        <div class="relative">
+          <input type="text" placeholder="Search projects..." class="px-4 py-2 bg-white border border-neutral-200 rounded-md text-sm w-64 focus:outline-none focus:ring-1 focus:ring-neutral-800 focus:border-neutral-800"/>
+          <i class="fa-solid fa-search absolute right-3 top-2.5 text-neutral-400"></i>
+        </div>
+        <button class="px-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 flex items-center text-sm">
+          <i class="fa-solid fa-plus mr-2"></i>
+          New Project
+        </button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div id="projects-summary" class="bg-white rounded-lg shadow-sm p-5">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg text-neutral-800">Projects</h2>
+          <span class="text-neutral-500 text-sm">July 2025</span>
+        </div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="text-3xl text-neutral-800">12</div>
+          <div class="text-sm text-neutral-500">+3 from last month</div>
+        </div>
+        <div class="grid grid-cols-3 gap-2 mb-4">
+          <div class="bg-neutral-100 p-2 rounded-md text-center">
+            <div class="text-xl text-neutral-800">7</div>
+            <div class="text-xs text-neutral-500">Active</div>
+          </div>
+          <div class="bg-neutral-100 p-2 rounded-md text-center">
+            <div class="text-xl text-neutral-800">3</div>
+            <div class="text-xs text-neutral-500">Pending</div>
+          </div>
+          <div class="bg-neutral-100 p-2 rounded-md text-center">
+            <div class="text-xl text-neutral-800">2</div>
+            <div class="text-xs text-neutral-500">Completed</div>
+          </div>
+        </div>
+        <div class="w-full bg-neutral-100 h-1.5 rounded-full">
+          <div class="bg-neutral-800 h-1.5 rounded-full" style="width: 58%;"></div>
+        </div>
+        <div class="text-xs text-neutral-500 mt-1">58% completion rate</div>
+      </div>
+
+      <div id="articles-summary" class="bg-white rounded-lg shadow-sm p-5">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg text-neutral-800">Articles</h2>
+          <span class="text-neutral-500 text-sm">July 2025</span>
+        </div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="text-3xl text-neutral-800">28</div>
+          <div class="text-sm text-neutral-500">+5 from last month</div>
+        </div>
+        <div class="grid grid-cols-3 gap-2 mb-4">
+          <div class="bg-neutral-100 p-2 rounded-md text-center">
+            <div class="text-xl text-neutral-800">16</div>
+            <div class="text-xs text-neutral-500">Draft</div>
+          </div>
+          <div class="bg-neutral-100 p-2 rounded-md text-center">
+            <div class="text-xl text-neutral-800">8</div>
+            <div class="text-xs text-neutral-500">Review</div>
+          </div>
+          <div class="bg-neutral-100 p-2 rounded-md text-center">
+            <div class="text-xl text-neutral-800">4</div>
+            <div class="text-xs text-neutral-500">Published</div>
+          </div>
+        </div>
+        <div class="w-full bg-neutral-100 h-1.5 rounded-full">
+          <div class="bg-neutral-800 h-1.5 rounded-full" style="width: 43%;"></div>
+        </div>
+        <div class="text-xs text-neutral-500 mt-1">43% publication rate</div>
+      </div>
+
+      <div id="ai-usage" class="bg-white rounded-lg shadow-sm p-5">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg text-neutral-800">AI Usage</h2>
+          <span class="text-neutral-500 text-sm">July 2025</span>
+        </div>
+        <div class="flex items-center justify-between mb-4">
+          <div class="text-3xl text-neutral-800">1.2M</div>
+          <div class="text-sm text-neutral-500">tokens used</div>
+        </div>
+        <div class="grid grid-cols-3 gap-2 mb-4">
+          <div class="bg-neutral-100 p-2 rounded-md text-center">
+            <div class="text-xl text-neutral-800">65%</div>
+            <div class="text-xs text-neutral-500">UX Pilot Opus</div>
+          </div>
+          <div class="bg-neutral-100 p-2 rounded-md text-center">
+            <div class="text-xl text-neutral-800">25%</div>
+            <div class="text-xs text-neutral-500">UX Pilot Sonnet</div>
+          </div>
+          <div class="bg-neutral-100 p-2 rounded-md text-center">
+            <div class="text-xl text-neutral-800">10%</div>
+            <div class="text-xs text-neutral-500">GPT-4o</div>
+          </div>
+        </div>
+        <div class="w-full bg-neutral-100 h-1.5 rounded-full">
+          <div class="bg-neutral-800 h-1.5 rounded-full" style="width: 72%;"></div>
+        </div>
+        <div class="text-xs text-neutral-500 mt-1">72% of monthly quota</div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div id="ai-model-performance" class="col-span-2 bg-white rounded-lg shadow-sm p-5">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-lg text-neutral-800">AI Model Performance</h2>
+          <div class="flex items-center space-x-2">
+            <button class="px-3 py-1 text-xs border border-neutral-200 rounded-md bg-white text-neutral-600 hover:bg-neutral-100">
+              Day
+            </button>
+            <button class="px-3 py-1 text-xs border border-neutral-200 rounded-md bg-white text-neutral-600 hover:bg-neutral-100">
+              Week
+            </button>
+            <button class="px-3 py-1 text-xs border border-neutral-800 rounded-md bg-neutral-800 text-white">
+              Month
+            </button>
+          </div>
+        </div>
+        
+        <div class="h-64 flex items-end justify-between space-x-2 px-2">
+          <div class="flex flex-col items-center">
+            <div class="w-16 bg-neutral-800 rounded-t-sm" style="height: 70%;"></div>
+            <div class="text-xs text-neutral-500 mt-2">UX Pilot Opus</div>
+            <div class="text-xs text-neutral-800">92%</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-16 bg-neutral-700 rounded-t-sm" style="height: 65%;"></div>
+            <div class="text-xs text-neutral-500 mt-2">UX Pilot Sonnet</div>
+            <div class="text-xs text-neutral-800">88%</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-16 bg-neutral-600 rounded-t-sm" style="height: 60%;"></div>
+            <div class="text-xs text-neutral-500 mt-2">GPT-4o</div>
+            <div class="text-xs text-neutral-800">84%</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-16 bg-neutral-500 rounded-t-sm" style="height: 50%;"></div>
+            <div class="text-xs text-neutral-500 mt-2">GPT-3.5</div>
+            <div class="text-xs text-neutral-800">76%</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-16 bg-neutral-400 rounded-t-sm" style="height: 40%;"></div>
+            <div class="text-xs text-neutral-500 mt-2">Gemini Pro</div>
+            <div class="text-xs text-neutral-800">68%</div>
+          </div>
+        </div>
+        
+        <div class="mt-4 grid grid-cols-3 gap-4">
+          <div class="border border-neutral-200 rounded-md p-3">
+            <div class="text-xs text-neutral-500">Citation Accuracy</div>
+            <div class="text-lg text-neutral-800">87%</div>
+            <div class="text-xs text-neutral-500">+5% from last month</div>
+          </div>
+          <div class="border border-neutral-200 rounded-md p-3">
+            <div class="text-xs text-neutral-500">Academic Style</div>
+            <div class="text-lg text-neutral-800">92%</div>
+            <div class="text-xs text-neutral-500">+2% from last month</div>
+          </div>
+          <div class="border border-neutral-200 rounded-md p-3">
+            <div class="text-xs text-neutral-500">Scientific Validity</div>
+            <div class="text-lg text-neutral-800">89%</div>
+            <div class="text-xs text-neutral-500">+3% from last month</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="recent-activities" class="bg-white rounded-lg shadow-sm p-5">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg text-neutral-800">Recent Activities</h2>
+          <button class="text-neutral-400 hover:text-neutral-600">
+            <i class="fa-solid fa-ellipsis-h"></i>
+          </button>
+        </div>
+        
+        <div class="space-y-4">
+          <div class="flex items-start space-x-3">
+            <div class="w-8 h-8 bg-neutral-800 rounded-full flex items-center justify-center text-white">
+              <i class="fa-solid fa-file-alt"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between">
+                <p class="text-sm text-neutral-800">Article Generated</p>
+                <span class="text-xs text-neutral-500">2h ago</span>
+              </div>
+              <p class="text-xs text-neutral-600">Quantum Computing: A Comprehensive Review</p>
+              <p class="text-xs text-neutral-500">Generated with UX Pilot Opus</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start space-x-3">
+            <div class="w-8 h-8 bg-neutral-700 rounded-full flex items-center justify-center text-white">
+              <i class="fa-solid fa-folder"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between">
+                <p class="text-sm text-neutral-800">Project Created</p>
+                <span class="text-xs text-neutral-500">5h ago</span>
+              </div>
+              <p class="text-xs text-neutral-600">Neural Networks in Medical Imaging</p>
+              <p class="text-xs text-neutral-500">3 articles planned</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start space-x-3">
+            <div class="w-8 h-8 bg-neutral-600 rounded-full flex items-center justify-center text-white">
+              <i class="fa-solid fa-sync"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between">
+                <p class="text-sm text-neutral-800">Article Revised</p>
+                <span class="text-xs text-neutral-500">8h ago</span>
+              </div>
+              <p class="text-xs text-neutral-600">Climate Change: Policy Implications</p>
+              <p class="text-xs text-neutral-500">Revision #3 with UX Pilot Sonnet</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start space-x-3">
+            <div class="w-8 h-8 bg-neutral-500 rounded-full flex items-center justify-center text-white">
+              <i class="fa-solid fa-check-circle"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between">
+                <p class="text-sm text-neutral-800">Project Completed</p>
+                <span class="text-xs text-neutral-500">1d ago</span>
+              </div>
+              <p class="text-xs text-neutral-600">Renewable Energy Technologies</p>
+              <p class="text-xs text-neutral-500">5 articles published</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start space-x-3">
+            <div class="w-8 h-8 bg-neutral-400 rounded-full flex items-center justify-center text-white">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between">
+                <p class="text-sm text-neutral-800">Model Added</p>
+                <span class="text-xs text-neutral-500">2d ago</span>
+              </div>
+              <p class="text-xs text-neutral-600">UX Pilot Opus 2.0</p>
+              <p class="text-xs text-neutral-500">Upgraded capabilities</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-4 text-center">
+          <button class="text-sm text-neutral-600 hover:text-neutral-800">
+            View all activities
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6">
+      <div id="project-board" class="bg-white rounded-lg shadow-sm p-5">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-lg text-neutral-800">Project Board</h2>
+          <div class="flex items-center space-x-3">
+            <button class="px-3 py-1.5 text-sm border border-neutral-200 rounded-md bg-white text-neutral-600 hover:bg-neutral-100 flex items-center">
+              <i class="fa-solid fa-filter mr-2"></i>
+              Filter
+            </button>
+            <button class="px-3 py-1.5 text-sm border border-neutral-200 rounded-md bg-white text-neutral-600 hover:bg-neutral-100 flex items-center">
+              <i class="fa-solid fa-sort mr-2"></i>
+              Sort
+            </button>
+            <button class="px-3 py-1.5 text-sm bg-neutral-800 text-white rounded-md hover:bg-neutral-700 flex items-center">
+              <i class="fa-solid fa-plus mr-2"></i>
+              Add Task
+            </button>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-4 gap-4">
+          <div class="flex flex-col">
+            <div class="bg-neutral-100 rounded-t-md px-4 py-2 flex justify-between items-center">
+              <h3 class="text-sm text-neutral-800">To Do</h3>
+              <span class="text-xs bg-white px-2 py-0.5 rounded-full text-neutral-600">4</span>
+            </div>
+            <div class="bg-neutral-50 rounded-b-md p-2 min-h-[300px] border border-neutral-200 space-y-2">
+              <div class="bg-white p-3 rounded-md shadow-sm border border-neutral-200 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start">
+                  <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Research</span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis-v"></i>
+                  </button>
+                </div>
+                <h4 class="text-sm mt-2">Literature Review: Quantum Computing</h4>
+                <p class="text-xs text-neutral-500 mt-1">Gather sources for comprehensive review</p>
+                <div class="flex justify-between items-center mt-3">
+                  <div class="flex items-center">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User avatar" class="w-5 h-5 rounded-full"/>
+                  </div>
+                  <span class="text-xs text-neutral-500">Jul 10, 2025</span>
+                </div>
+              </div>
+              
+              <div class="bg-white p-3 rounded-md shadow-sm border border-neutral-200 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start">
+                  <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Draft</span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis-v"></i>
+                  </button>
+                </div>
+                <h4 class="text-sm mt-2">Neural Networks Introduction</h4>
+                <p class="text-xs text-neutral-500 mt-1">Create first draft with UX Pilot Opus</p>
+                <div class="flex justify-between items-center mt-3">
+                  <div class="flex items-center">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-5 h-5 rounded-full"/>
+                  </div>
+                  <span class="text-xs text-neutral-500">Jul 12, 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex flex-col">
+            <div class="bg-neutral-100 rounded-t-md px-4 py-2 flex justify-between items-center">
+              <h3 class="text-sm text-neutral-800">In Progress</h3>
+              <span class="text-xs bg-white px-2 py-0.5 rounded-full text-neutral-600">3</span>
+            </div>
+            <div class="bg-neutral-50 rounded-b-md p-2 min-h-[300px] border border-neutral-200 space-y-2">
+              <div class="bg-white p-3 rounded-md shadow-sm border border-neutral-200 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start">
+                  <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Writing</span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis-v"></i>
+                  </button>
+                </div>
+                <h4 class="text-sm mt-2">Climate Change Policy Analysis</h4>
+                <p class="text-xs text-neutral-500 mt-1">50% complete - reviewing citations</p>
+                <div class="flex justify-between items-center mt-3">
+                  <div class="flex items-center">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-5 h-5 rounded-full"/>
+                  </div>
+                  <span class="text-xs text-neutral-500">Jul 8, 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex flex-col">
+            <div class="bg-neutral-100 rounded-t-md px-4 py-2 flex justify-between items-center">
+              <h3 class="text-sm text-neutral-800">Review</h3>
+              <span class="text-xs bg-white px-2 py-0.5 rounded-full text-neutral-600">2</span>
+            </div>
+            <div class="bg-neutral-50 rounded-b-md p-2 min-h-[300px] border border-neutral-200 space-y-2">
+              <div class="bg-white p-3 rounded-md shadow-sm border border-neutral-200 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start">
+                  <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Review</span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis-v"></i>
+                  </button>
+                </div>
+                <h4 class="text-sm mt-2">Renewable Energy Technologies</h4>
+                <p class="text-xs text-neutral-500 mt-1">Final review before publication</p>
+                <div class="flex justify-between items-center mt-3">
+                  <div class="flex items-center">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=321" alt="User avatar" class="w-5 h-5 rounded-full"/>
+                  </div>
+                  <span class="text-xs text-neutral-500">Jul 7, 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex flex-col">
+            <div class="bg-neutral-100 rounded-t-md px-4 py-2 flex justify-between items-center">
+              <h3 class="text-sm text-neutral-800">Completed</h3>
+              <span class="text-xs bg-white px-2 py-0.5 rounded-full text-neutral-600">5</span>
+            </div>
+            <div class="bg-neutral-50 rounded-b-md p-2 min-h-[300px] border border-neutral-200 space-y-2">
+              <div class="bg-white p-3 rounded-md shadow-sm border border-neutral-200 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start">
+                  <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 text-xs rounded-full">Published</span>
+                  <button class="text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-ellipsis-v"></i>
+                  </button>
+                </div>
+                <h4 class="text-sm mt-2">Machine Learning in Healthcare</h4>
+                <p class="text-xs text-neutral-500 mt-1">Published in Journal of Medical AI</p>
+                <div class="flex justify-between items-center mt-3">
+                  <div class="flex items-center">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=654" alt="User avatar" class="w-5 h-5 rounded-full"/>
+                  </div>
+                  <span class="text-xs text-neutral-500">Jul 5, 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-white border-t mt-auto">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="text-sm text-neutral-500">
+        © 2025 AI Research Assistant | Joomla 5.3 Component
+      </div>
+      <div class="flex space-x-4 mt-2 md:mt-0">
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Privacy Policy</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Terms of Service</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Contact Support</span>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

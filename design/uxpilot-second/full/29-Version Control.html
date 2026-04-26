@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header Navigation -->
+    <nav id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 flex items-center justify-between px-4 py-3 z-50">
+        <div class="flex items-center">
+            <span class="flex items-center mr-10 cursor-pointer">
+                <i class="fa-solid fa-flask-vial text-primary-600 text-2xl mr-2"></i>
+                <span class="text-xl font-bold text-gray-800">SciPeerReview</span>
+            </span>
+            <div class="hidden md:flex space-x-6">
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Dashboard</span>
+                <span class="text-gray-600 hover:text-primary-600 font-medium text-primary-600 border-b-2 border-primary-600 cursor-pointer">My Manuscripts</span>
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Reviews</span>
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Journals</span>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span class="hidden md:inline-block text-gray-600 mr-2">
+                <i class="fa-regular fa-bell"></i>
+                <span class="bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center absolute -mt-8 ml-3">2</span>
+            </span>
+            <button class="hidden md:flex items-center text-gray-600 hover:text-gray-800">
+                <i class="fa-regular fa-question-circle mr-1"></i>
+                <span>Help</span>
+            </button>
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-full h-full object-cover" />
+                </div>
+                <span class="hidden md:inline-block text-gray-700 font-medium">Dr. Michael Chen</span>
+                <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="pt-16 flex min-h-screen bg-gray-50">
+        <!-- Sidebar -->
+        <div id="sidebar" class="hidden md:block w-64 bg-white border-r border-gray-200 fixed h-full pt-4">
+            <div class="px-4 py-2">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase">Author Dashboard</h2>
+                </div>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-home w-5 text-gray-500"></i>
+                        <span>Overview</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 bg-primary-50 text-primary-700 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-file-lines w-5"></i>
+                        <span>My Manuscripts</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-plus w-5 text-gray-500"></i>
+                        <span>New Submission</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-clock-rotate-left w-5 text-gray-500"></i>
+                        <span>Submission History</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-comment w-5 text-gray-500"></i>
+                        <span>Messages</span>
+                        <span class="ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="px-4 py-2 mt-6">
+                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-4">Reviewer Tools</h2>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-clipboard-check w-5 text-gray-500"></i>
+                        <span>Review Requests</span>
+                        <span class="ml-auto bg-yellow-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">2</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-star w-5 text-gray-500"></i>
+                        <span>My Reviews</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-medal w-5 text-gray-500"></i>
+                        <span>Review History</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="px-4 py-2 mt-6">
+                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-4">Account</h2>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-user w-5 text-gray-500"></i>
+                        <span>Profile</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-gear w-5 text-gray-500"></i>
+                        <span>Settings</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-right-from-bracket w-5 text-gray-500"></i>
+                        <span>Logout</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 ml-0 md:ml-64 p-6">
+            <!-- Breadcrumb and Actions -->
+            <div id="page-header" class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                <div>
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                        <span class="hover:text-primary-600 cursor-pointer">Dashboard</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="hover:text-primary-600 cursor-pointer">My Manuscripts</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="text-gray-700">Version History</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900">Manuscript Version History</h1>
+                    <p class="text-gray-600 mt-1">Novel Approaches to CRISPR Gene Editing in Cancer Treatment</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-3">
+                    <button id="btn-compare" class="px-3 py-2 border border-gray-300 rounded-md flex items-center text-gray-700 hover:bg-gray-50">
+                        <i class="fa-solid fa-code-compare mr-2"></i>
+                        <span>Compare Versions</span>
+                    </button>
+                    <button id="btn-new-version" class="px-4 py-2 bg-primary-600 text-white rounded-md flex items-center hover:bg-primary-700">
+                        <i class="fa-solid fa-upload mr-2"></i>
+                        <span>Upload New Version</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Manuscript Info -->
+            <div id="manuscript-info" class="bg-white rounded-lg shadow p-5 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-1">Manuscript ID</h3>
+                        <p class="text-gray-900">MS-2023-0042</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-1">Journal</h3>
+                        <p class="text-gray-900">Nature Biotechnology</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-1">Current Status</h3>
+                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Under Review</span>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-1">First Submitted</h3>
+                        <p class="text-gray-900">Jun 18, 2023</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-1">Latest Version</h3>
+                        <p class="text-gray-900">v2.0 (Jul 12, 2023)</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-1">Corresponding Author</h3>
+                        <p class="text-gray-900">Dr. Michael Chen</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Version History Timeline -->
+            <div id="version-timeline" class="bg-white rounded-lg shadow p-5 mb-6">
+                <h2 class="text-lg font-medium text-gray-900 mb-5">Version Timeline</h2>
+                
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                    
+                    <!-- Version 2.0 (Current) -->
+                    <div id="version-2" class="relative mb-8">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 z-10">
+                                <div class="h-16 w-16 bg-primary-100 rounded-full flex items-center justify-center border-4 border-white">
+                                    <span class="text-primary-700 font-bold">v2.0</span>
+                                </div>
+                            </div>
+                            <div class="ml-6 bg-white border border-gray-200 rounded-lg shadow-sm p-4 flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div>
+                                        <span class="text-sm font-medium text-gray-900">Current Version</span>
+                                        <span class="ml-2 px-2 py-0.5 bg-yellow-100 text-yellow-800 text-xs rounded-full">Under Review</span>
+                                    </div>
+                                    <span class="text-sm text-gray-500">Jul 12, 2023</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">Revised manuscript addressing reviewer comments on methodology and results interpretation.</p>
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs">Main Text (revised)</span>
+                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs">Figures (revised)</span>
+                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs">Supplementary Materials</span>
+                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs">Response to Reviewers</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <button class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                                        <i class="fa-solid fa-download mr-1"></i> Download
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                                        <i class="fa-solid fa-eye mr-1"></i> View
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                                        <i class="fa-solid fa-list-check mr-1"></i> View Reviews
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Reviewer Comments -->
+                    <div id="reviewer-comments" class="relative mb-8">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 z-10">
+                                <div class="h-16 w-16 bg-yellow-100 rounded-full flex items-center justify-center border-4 border-white">
+                                    <i class="fa-solid fa-comments text-yellow-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-6 bg-white border border-gray-200 rounded-lg shadow-sm p-4 flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-900">Reviewer Comments Received</span>
+                                    <span class="text-sm text-gray-500">Jul 2, 2023</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">3 reviewers provided feedback on the initial submission.</p>
+                                <div class="space-y-3 mb-3">
+                                    <div class="bg-gray-50 p-3 rounded-md">
+                                        <p class="text-sm text-gray-700 mb-1"><span class="font-medium">Reviewer #1:</span> The methodology needs further clarification, particularly regarding the CRISPR design strategy.</p>
+                                        <div class="flex items-center">
+                                            <span class="px-2 py-0.5 bg-yellow-100 text-yellow-800 text-xs rounded-full">Minor Revision</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-gray-50 p-3 rounded-md">
+                                        <p class="text-sm text-gray-700 mb-1"><span class="font-medium">Reviewer #2:</span> Results are promising but additional control experiments are needed to support conclusions.</p>
+                                        <div class="flex items-center">
+                                            <span class="px-2 py-0.5 bg-orange-100 text-orange-800 text-xs rounded-full">Major Revision</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-gray-50 p-3 rounded-md">
+                                        <p class="text-sm text-gray-700 mb-1"><span class="font-medium">Reviewer #3:</span> Well-designed study with novel insights. Minor edits to discussion recommended.</p>
+                                        <div class="flex items-center">
+                                            <span class="px-2 py-0.5 bg-green-100 text-green-800 text-xs rounded-full">Accept with Minor Changes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <button class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                                        <i class="fa-solid fa-file-lines mr-1"></i> View Full Reviews
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                                        <i class="fa-solid fa-reply mr-1"></i> View Response Letter
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Version 1.0 (Initial) -->
+                    <div id="version-1" class="relative mb-8">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 z-10">
+                                <div class="h-16 w-16 bg-gray-100 rounded-full flex items-center justify-center border-4 border-white">
+                                    <span class="text-gray-700 font-bold">v1.0</span>
+                                </div>
+                            </div>
+                            <div class="ml-6 bg-white border border-gray-200 rounded-lg shadow-sm p-4 flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div>
+                                        <span class="text-sm font-medium text-gray-900">Initial Submission</span>
+                                    </div>
+                                    <span class="text-sm text-gray-500">Jun 18, 2023</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">Original manuscript submission with complete methodology, results, and discussion.</p>
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs">Main Text</span>
+                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs">Figures (6)</span>
+                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs">Supplementary Materials</span>
+                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs">Cover Letter</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <button class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                                        <i class="fa-solid fa-download mr-1"></i> Download
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                                        <i class="fa-solid fa-eye mr-1"></i> View
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Draft Version -->
+                    <div id="version-draft" class="relative">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 z-10">
+                                <div class="h-16 w-16 bg-gray-100 rounded-full flex items-center justify-center border-4 border-white">
+                                    <span class="text-gray-500 font-medium">Draft</span>
+                                </div>
+                            </div>
+                            <div class="ml-6 bg-white border border-gray-200 rounded-lg shadow-sm p-4 flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-900">Draft Created</span>
+                                    <span class="text-sm text-gray-500">Jun 5, 2023</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">Initial draft manuscript created in the system with preliminary data and abstract.</p>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <button class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                                        <i class="fa-solid fa-download mr-1"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Version Comparison Tool -->
+            <div id="version-comparison" class="bg-white rounded-lg shadow p-5 mb-6">
+                <h2 class="text-lg font-medium text-gray-900 mb-4">Version Comparison</h2>
+                
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Compare From</label>
+                        <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            <option>Version 1.0 (Initial Submission)</option>
+                            <option>Draft Version</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <i class="fa-solid fa-right-long text-gray-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Compare To</label>
+                        <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            <option>Version 2.0 (Current Version)</option>
+                            <option>Version 1.0 (Initial Submission)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="mt-6 px-4 py-2 bg-primary-600 text-white rounded-md flex items-center hover:bg-primary-700">
+                            <i class="fa-solid fa-magnifying-glass mr-2"></i>
+                            <span>Compare</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg">
+                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+                        <div class="flex space-x-4">
+                            <button class="px-3 py-1 bg-white border border-gray-300 rounded text-sm text-gray-700 flex items-center">
+                                <i class="fa-solid fa-align-left mr-1"></i>
+                                <span>Text</span>
+                            </button>
+                            <button class="px-3 py-1 hover:bg-white border border-transparent hover:border-gray-300 rounded text-sm text-gray-700 flex items-center">
+                                <i class="fa-regular fa-image mr-1"></i>
+                                <span>Figures</span>
+                            </button>
+                            <button class="px-3 py-1 hover:bg-white border border-transparent hover:border-gray-300 rounded text-sm text-gray-700 flex items-center">
+                                <i class="fa-solid fa-table mr-1"></i>
+                                <span>Tables</span>
+                            </button>
+                            <button class="px-3 py-1 hover:bg-white border border-transparent hover:border-gray-300 rounded text-sm text-gray-700 flex items-center">
+                                <i class="fa-solid fa-book mr-1"></i>
+                                <span>References</span>
+                            </button>
+                        </div>
+                        <div>
+                            <button class="text-primary-600 hover:text-primary-800 text-sm font-medium">
+                                <i class="fa-solid fa-download mr-1"></i>
+                                <span>Download Diff Report</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4">
+                        <div class="flex mb-3">
+                            <div class="w-1/2 pr-2">
+                                <div class="bg-gray-100 px-3 py-1 rounded-t-md">
+                                    <span class="text-sm font-medium text-gray-700">Version 1.0 (Initial)</span>
+                                </div>
+                            </div>
+                            <div class="w-1/2 pl-2">
+                                <div class="bg-gray-100 px-3 py-1 rounded-t-md">
+                                    <span class="text-sm font-medium text-gray-700">Version 2.0 (Current)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex border border-gray-200 rounded-md">
+                            <div class="w-1/2 p-3 border-r border-gray-200 text-sm">
+                                <p class="mb-2 text-gray-800">CRISPR-Cas9 gene editing has emerged as a powerful tool for targeted genetic modifications. In this study, we developed a novel <span class="bg-red-100">approach for enhancing the efficiency of CRISPR-mediated gene editing in cancer cells</span>.</p>
+                                
+                                <p class="mb-2 text-gray-800">Our method utilizes a <span class="bg-red-100">modified guide RNA structure</span> that improves target specificity while reducing off-target effects.</p>
+                                
+                                <p class="text-gray-800">Experimental results demonstrate a <span class="bg-red-100">significant improvement in editing efficiency</span> across multiple cancer cell lines, including those resistant to conventional therapies.</p>
+                            </div>
+                            <div class="w-1/2 p-3 text-sm">
+                                <p class="mb-2 text-gray-800">CRISPR-Cas9 gene editing has emerged as a powerful tool for targeted genetic modifications. In this study, we developed a novel <span class="bg-green-100">dual-guide RNA system for enhancing both the specificity and efficiency of CRISPR-mediated gene editing in various cancer cell types</span>.</p>
+                                
+                                <p class="mb-2 text-gray-800">Our method utilizes a <span class="bg-green-100">chemically modified guide RNA structure with improved stability</span> that improves target specificity while reducing off-target effects.</p>
+                                
+                                <p class="text-gray-800">Experimental results demonstrate a <span class="bg-green-100">2.5-fold improvement in editing efficiency (p&lt;0.001)</span> across multiple cancer cell lines, including those resistant to conventional therapies.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 flex justify-between items-center">
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 border border-gray-300 rounded text-sm text-gray-700 flex items-center">
+                                    <i class="fa-solid fa-chevron-left mr-1"></i>
+                                    <span>Previous</span>
+                                </button>
+                                <button class="px-3 py-1 border border-gray-300 rounded text-sm text-gray-700 flex items-center">
+                                    <span>Next</span>
+                                    <i class="fa-solid fa-chevron-right ml-1"></i>
+                                </button>
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                Page 1 of 15
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Upload New Version -->
+            <div id="upload-version" class="bg-white rounded-lg shadow p-5 mb-6">
+                <h2 class="text-lg font-medium text-gray-900 mb-4">Upload New Version</h2>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Version Notes (Required)</label>
+                    <textarea rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Describe the changes made in this version..."></textarea>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Main Manuscript (PDF or DOCX)</label>
+                        <div class="border border-dashed border-gray-300 rounded-md p-4 text-center">
+                            <div class="space-y-2">
+                                <i class="fa-solid fa-cloud-arrow-up text-gray-400 text-xl"></i>
+                                <p class="text-sm text-gray-500">Drag and drop your file here, or <span class="text-primary-600">browse</span></p>
+                                <p class="text-xs text-gray-400">Max file size: 25MB</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Figures (ZIP or PDF)</label>
+                        <div class="border border-dashed border-gray-300 rounded-md p-4 text-center">
+                            <div class="space-y-2">
+                                <i class="fa-solid fa-cloud-arrow-up text-gray-400 text-xl"></i>
+                                <p class="text-sm text-gray-500">Drag and drop your file here, or <span class="text-primary-600">browse</span></p>
+                                <p class="text-xs text-gray-400">Max file size: 50MB</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Supplementary Materials (Optional)</label>
+                        <div class="border border-dashed border-gray-300 rounded-md p-4 text-center">
+                            <div class="space-y-2">
+                                <i class="fa-solid fa-cloud-arrow-up text-gray-400 text-xl"></i>
+                                <p class="text-sm text-gray-500">Drag and drop your file here, or <span class="text-primary-600">browse</span></p>
+                                <p class="text-xs text-gray-400">Max file size: 100MB</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Response to Reviewers (PDF or DOCX)</label>
+                        <div class="border border-dashed border-gray-300 rounded-md p-4 text-center">
+                            <div class="space-y-2">
+                                <i class="fa-solid fa-cloud-arrow-up text-gray-400 text-xl"></i>
+                                <p class="text-sm text-gray-500">Drag and drop your file here, or <span class="text-primary-600">browse</span></p>
+                                <p class="text-xs text-gray-400">Max file size: 25MB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-2 mb-4">
+                    <input type="checkbox" id="confirm-changes" class="rounded text-primary-600 focus:ring-primary-500">
+                    <label for="confirm-changes" class="text-sm text-gray-700">I confirm that this version includes all required changes and is ready for review</label>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+                        Submit New Version
+                    </button>
+                    <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+                        Save as Draft
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-white border-t border-gray-200 mt-8 py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-600 text-sm">&copy; 2023 SciPeerReview. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Help Center</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Contact Us</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

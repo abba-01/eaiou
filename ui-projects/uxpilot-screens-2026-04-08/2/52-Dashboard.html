@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="flex items-center p-3 bg-white border-b">
+  <div class="flex items-center space-x-4">
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <span class="flex items-center cursor-pointer">
+      <img alt="AcademiAI Logo" class="h-6" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/default-placeholder.png"/>
+      <span class="ml-1">AcademiAI Manager</span>
+    </span>
+    <div class="flex items-center space-x-4">
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 bg-neutral-100 rounded">
+          Dashboard
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded flex items-center">
+          Projects
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-600 hover:bg-neutral-100 rounded flex items-center">
+          Settings
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded flex items-center">
+          Analytics
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <button class="bg-neutral-600 text-white px-4 py-1.5 rounded">
+        New Project
+      </button>
+    </div>
+  </div>
+  <div class="ml-auto flex items-center space-x-3">
+    <div class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm flex items-center">
+      <i class="fa-solid fa-gem mr-1 text-xs"></i>
+      Academic License
+    </div>
+    <div class="relative">
+      <div class="relative">
+        <i class="fa-solid fa-search text-neutral-400 absolute left-3 top-2.5"></i>
+        <input class="pl-9 pr-4 py-2 bg-neutral-100 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-neutral-500" placeholder="Search projects or articles" type="text"/>
+      </div>
+    </div>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-regular fa-bell"></i>
+    </button>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-regular fa-circle-question"></i>
+    </button>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-solid fa-cog"></i>
+    </button>
+    <button class="w-8 h-8 rounded-full bg-neutral-600 text-white flex items-center justify-center text-sm">
+      AD
+    </button>
+  </div>
+</div>
+
+<div id="main-content" class="flex h-[800px]">
+  <div id="sidebar" class="w-56 bg-white p-4 border-r">
+    <h2 class="text-lg mb-4">
+      Dashboard
+    </h2>
+    <div class="space-y-1">
+      <span class="flex items-center py-1.5 px-2 rounded bg-neutral-50 text-neutral-700 cursor-pointer">
+        <i class="fa-solid fa-home w-5 text-center mr-2"></i>
+        <span class="text-sm">Overview</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-folder-open w-5 text-center mr-2"></i>
+        <span class="text-sm">My Projects</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-robot w-5 text-center mr-2"></i>
+        <span class="text-sm">AI Models</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-file-alt w-5 text-center mr-2"></i>
+        <span class="text-sm">Articles</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-chart-line w-5 text-center mr-2"></i>
+        <span class="text-sm">Performance</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-clock w-5 text-center mr-2"></i>
+        <span class="text-sm">Recent Activity</span>
+      </span>
+    </div>
+    <div class="mt-6 pt-6 border-t">
+      <div class="text-xs text-neutral-500 mb-3">
+        Joomla 5.3 Component v2.1.4
+      </div>
+      <button class="flex items-center text-sm text-neutral-600 hover:underline">
+        <i class="fa-regular fa-life-ring mr-2"></i>
+        Get Support
+      </button>
+    </div>
+  </div>
+  
+  <div id="content" class="flex-1 bg-neutral-50 overflow-auto">
+    <div class="p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl">Dashboard Overview</h1>
+        <div class="flex items-center space-x-2">
+          <div class="text-sm text-neutral-500">
+            Last updated: July 6, 2025 - 10:11 AM
+          </div>
+          <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded">
+            <i class="fa-solid fa-sync-alt"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Stats Overview Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-neutral-500 text-sm">Active Projects</h3>
+            <div class="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center">
+              <i class="fa-solid fa-folder text-neutral-700"></i>
+            </div>
+          </div>
+          <div class="flex items-end">
+            <span class="text-2xl">12</span>
+            <span class="ml-2 text-sm text-neutral-600 flex items-center">
+              <i class="fa-solid fa-arrow-up mr-1"></i>
+              +3 this month
+            </span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-neutral-500 text-sm">Articles Generated</h3>
+            <div class="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center">
+              <i class="fa-solid fa-file-alt text-neutral-700"></i>
+            </div>
+          </div>
+          <div class="flex items-end">
+            <span class="text-2xl">47</span>
+            <span class="ml-2 text-sm text-neutral-600 flex items-center">
+              <i class="fa-solid fa-arrow-up mr-1"></i>
+              +8 this week
+            </span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-neutral-500 text-sm">Active AI Models</h3>
+            <div class="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center">
+              <i class="fa-solid fa-robot text-neutral-700"></i>
+            </div>
+          </div>
+          <div class="flex items-end">
+            <span class="text-2xl">3</span>
+            <span class="ml-2 text-sm text-neutral-500 flex items-center">
+              <i class="fa-solid fa-minus mr-1"></i>
+              No change
+            </span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-neutral-500 text-sm">API Usage</h3>
+            <div class="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center">
+              <i class="fa-solid fa-chart-pie text-neutral-700"></i>
+            </div>
+          </div>
+          <div class="flex items-end">
+            <span class="text-2xl">68%</span>
+            <span class="ml-2 text-sm text-neutral-600 flex items-center">
+              <i class="fa-solid fa-arrow-up mr-1"></i>
+              +12% this month
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project Status and AI Performance -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <!-- Project Status -->
+        <div class="lg:col-span-2 bg-white rounded-lg shadow-md border border-neutral-200">
+          <div class="flex items-center justify-between p-4 border-b">
+            <h2 class="text-lg">Project Status Overview</h2>
+            <div class="flex space-x-2">
+              <button class="px-3 py-1 bg-neutral-100 rounded text-neutral-700 text-sm">
+                All Projects
+              </button>
+              <button class="text-neutral-400 hover:text-neutral-600">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <div class="grid grid-cols-4 gap-2 mb-4">
+              <div class="text-center p-2 bg-neutral-100 rounded">
+                <div class="text-2xl">5</div>
+                <div class="text-xs text-neutral-500">Planning</div>
+              </div>
+              <div class="text-center p-2 bg-neutral-100 rounded">
+                <div class="text-2xl">3</div>
+                <div class="text-xs text-neutral-500">In Progress</div>
+              </div>
+              <div class="text-center p-2 bg-neutral-100 rounded">
+                <div class="text-2xl">2</div>
+                <div class="text-xs text-neutral-500">Review</div>
+              </div>
+              <div class="text-center p-2 bg-neutral-100 rounded">
+                <div class="text-2xl">2</div>
+                <div class="text-xs text-neutral-500">Completed</div>
+              </div>
+            </div>
+            
+            <!-- Project List -->
+            <div class="space-y-3">
+              <div class="flex items-center p-3 border rounded hover:bg-neutral-50">
+                <div class="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center text-white mr-3">
+                  <i class="fa-solid fa-microscope"></i>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <h3>Quantum Computing Research</h3>
+                    <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 rounded-full text-xs">In Progress</span>
+                  </div>
+                  <div class="flex items-center text-sm text-neutral-500">
+                    <span>3 articles</span>
+                    <span class="mx-2">•</span>
+                    <span>Last updated: 2 hours ago</span>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <div class="w-24 bg-neutral-200 rounded-full h-2">
+                    <div class="bg-neutral-600 h-2 rounded-full" style="width: 45%"></div>
+                  </div>
+                  <div class="text-xs text-neutral-500 text-right mt-1">45% complete</div>
+                </div>
+              </div>
+              
+              <div class="flex items-center p-3 border rounded hover:bg-neutral-50">
+                <div class="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center text-white mr-3">
+                  <i class="fa-solid fa-dna"></i>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <h3>CRISPR Gene Editing Analysis</h3>
+                    <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 rounded-full text-xs">Review</span>
+                  </div>
+                  <div class="flex items-center text-sm text-neutral-500">
+                    <span>5 articles</span>
+                    <span class="mx-2">•</span>
+                    <span>Last updated: 1 day ago</span>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <div class="w-24 bg-neutral-200 rounded-full h-2">
+                    <div class="bg-neutral-600 h-2 rounded-full" style="width: 85%"></div>
+                  </div>
+                  <div class="text-xs text-neutral-500 text-right mt-1">85% complete</div>
+                </div>
+              </div>
+              
+              <div class="flex items-center p-3 border rounded hover:bg-neutral-50">
+                <div class="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center text-white mr-3">
+                  <i class="fa-solid fa-brain"></i>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <h3>Neural Network Applications</h3>
+                    <span class="px-2 py-0.5 bg-neutral-100 text-neutral-800 rounded-full text-xs">Completed</span>
+                  </div>
+                  <div class="flex items-center text-sm text-neutral-500">
+                    <span>7 articles</span>
+                    <span class="mx-2">•</span>
+                    <span>Last updated: 3 days ago</span>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <div class="w-24 bg-neutral-200 rounded-full h-2">
+                    <div class="bg-neutral-600 h-2 rounded-full" style="width: 100%"></div>
+                  </div>
+                  <div class="text-xs text-neutral-500 text-right mt-1">100% complete</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-4 text-center">
+              <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                View All Projects
+                <i class="fa-solid fa-chevron-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- AI Model Performance -->
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200">
+          <div class="flex items-center justify-between p-4 border-b">
+            <h2 class="text-lg">AI Model Performance</h2>
+            <button class="text-neutral-400 hover:text-neutral-600">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+          </div>
+          <div class="p-4">
+            <div class="space-y-4">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <div class="flex items-center">
+                    <div class="w-6 h-6 rounded-full bg-neutral-800 flex items-center justify-center text-white text-xs mr-2">
+                      <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <span class="text-sm">UX Pilot Opus</span>
+                  </div>
+                  <span class="text-sm text-neutral-600">94%</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-2">
+                  <div class="bg-neutral-600 h-2 rounded-full" style="width: 94%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-neutral-500 mt-1">
+                  <span>Response time: 1.2s</span>
+                  <span>Usage: High</span>
+                </div>
+              </div>
+              
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <div class="flex items-center">
+                    <div class="w-6 h-6 rounded-full bg-neutral-800 flex items-center justify-center text-white text-xs mr-2">
+                      <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <span class="text-sm">UX Pilot Sonnet</span>
+                  </div>
+                  <span class="text-sm text-neutral-600">87%</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-2">
+                  <div class="bg-neutral-600 h-2 rounded-full" style="width: 87%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-neutral-500 mt-1">
+                  <span>Response time: 0.9s</span>
+                  <span>Usage: Medium</span>
+                </div>
+              </div>
+              
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <div class="flex items-center">
+                    <div class="w-6 h-6 rounded-full bg-neutral-800 flex items-center justify-center text-white text-xs mr-2">
+                      <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <span class="text-sm">GPT-4o</span>
+                  </div>
+                  <span class="text-sm text-neutral-600">91%</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-2">
+                  <div class="bg-neutral-600 h-2 rounded-full" style="width: 91%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-neutral-500 mt-1">
+                  <span>Response time: 1.5s</span>
+                  <span>Usage: High</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-6 p-3 bg-neutral-50 rounded border">
+              <h3 class="text-sm mb-2">Citation Accuracy</h3>
+              <div class="flex items-center">
+                <div class="w-16 h-16 rounded-full border-4 border-neutral-500 flex items-center justify-center mr-3">
+                  <span class="text-xl">92%</span>
+                </div>
+                <div>
+                  <p class="text-sm text-neutral-600">Academic citation standards are being maintained with high accuracy across all models.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-4 text-center">
+              <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                View Detailed Analytics
+                <i class="fa-solid fa-chevron-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Recent Activity and Quick Actions -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Recent Activity -->
+        <div class="lg:col-span-2 bg-white rounded-lg shadow-md border border-neutral-200">
+          <div class="flex items-center justify-between p-4 border-b">
+            <h2 class="text-lg">Recent Activity</h2>
+            <button class="text-neutral-400 hover:text-neutral-600">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+          </div>
+          <div class="p-4">
+            <div class="space-y-4">
+              <div class="flex">
+                <div class="flex-shrink-0 w-10">
+                  <div class="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center">
+                    <i class="fa-solid fa-file-alt text-neutral-600"></i>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <p class="text-sm">
+                      <span>Article Generated:</span> "Quantum Computing: A Comprehensive Review"
+                    </p>
+                    <span class="text-xs text-neutral-500">10 min ago</span>
+                  </div>
+                  <p class="text-xs text-neutral-500">Model: UX Pilot Opus • Project: Quantum Computing Research</p>
+                </div>
+              </div>
+              
+              <div class="flex">
+                <div class="flex-shrink-0 w-10">
+                  <div class="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center">
+                    <i class="fa-solid fa-folder-plus text-neutral-600"></i>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <p class="text-sm">
+                      <span>New Project Created:</span> "Renewable Energy Innovations"
+                    </p>
+                    <span class="text-xs text-neutral-500">1 hour ago</span>
+                  </div>
+                  <p class="text-xs text-neutral-500">Created by: Admin • 0 articles</p>
+                </div>
+              </div>
+              
+              <div class="flex">
+                <div class="flex-shrink-0 w-10">
+                  <div class="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center">
+                    <i class="fa-solid fa-check-circle text-neutral-600"></i>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <p class="text-sm">
+                      <span>Article Approved:</span> "CRISPR Applications in Agriculture"
+                    </p>
+                    <span class="text-xs text-neutral-500">3 hours ago</span>
+                  </div>
+                  <p class="text-xs text-neutral-500">Approved by: Reviewer • Project: CRISPR Gene Editing Analysis</p>
+                </div>
+              </div>
+              
+              <div class="flex">
+                <div class="flex-shrink-0 w-10">
+                  <div class="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center">
+                    <i class="fa-solid fa-pencil-alt text-neutral-600"></i>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <p class="text-sm">
+                      <span>Article Revision:</span> "Neural Networks in Medical Diagnostics"
+                    </p>
+                    <span class="text-xs text-neutral-500">5 hours ago</span>
+                  </div>
+                  <p class="text-xs text-neutral-500">Model: GPT-4o • Project: Neural Network Applications</p>
+                </div>
+              </div>
+              
+              <div class="flex">
+                <div class="flex-shrink-0 w-10">
+                  <div class="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center">
+                    <i class="fa-solid fa-robot text-neutral-600"></i>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <p class="text-sm">
+                      <span>Model Configuration Updated:</span> UX Pilot Opus
+                    </p>
+                    <span class="text-xs text-neutral-500">Yesterday</span>
+                  </div>
+                  <p class="text-xs text-neutral-500">Changed by: Admin • Temperature adjusted to 0.7</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-4 text-center">
+              <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                View All Activity
+                <i class="fa-solid fa-chevron-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200">
+          <div class="flex items-center justify-between p-4 border-b">
+            <h2 class="text-lg">Quick Actions</h2>
+          </div>
+          <div class="p-4">
+            <div class="space-y-3">
+              <button class="w-full flex items-center p-3 bg-neutral-50 hover:bg-neutral-100 rounded border border-neutral-200 transition-colors">
+                <div class="w-8 h-8 rounded-full bg-neutral-700 flex items-center justify-center text-white mr-3">
+                  <i class="fa-solid fa-plus"></i>
+                </div>
+                <span class="text-sm">Create New Project</span>
+              </button>
+              
+              <button class="w-full flex items-center p-3 bg-neutral-50 hover:bg-neutral-100 rounded border border-neutral-200 transition-colors">
+                <div class="w-8 h-8 rounded-full bg-neutral-700 flex items-center justify-center text-white mr-3">
+                  <i class="fa-solid fa-file-alt"></i>
+                </div>
+                <span class="text-sm">Generate New Article</span>
+              </button>
+              
+              <button class="w-full flex items-center p-3 bg-neutral-50 hover:bg-neutral-100 rounded border border-neutral-200 transition-colors">
+                <div class="w-8 h-8 rounded-full bg-neutral-700 flex items-center justify-center text-white mr-3">
+                  <i class="fa-solid fa-robot"></i>
+                </div>
+                <span class="text-sm">Configure AI Models</span>
+              </button>
+              
+              <button class="w-full flex items-center p-3 bg-neutral-50 hover:bg-neutral-100 rounded border border-neutral-200 transition-colors">
+                <div class="w-8 h-8 rounded-full bg-neutral-700 flex items-center justify-center text-white mr-3">
+                  <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <span class="text-sm">View Analytics</span>
+              </button>
+            </div>
+            
+            <div class="mt-6 p-4 bg-neutral-50 rounded border">
+              <h3 class="text-sm mb-2">Usage Summary</h3>
+              <div class="space-y-2">
+                <div>
+                  <div class="flex justify-between text-xs text-neutral-600 mb-1">
+                    <span>API Tokens Used</span>
+                    <span>68% of allocation</span>
+                  </div>
+                  <div class="w-full bg-neutral-200 rounded-full h-2">
+                    <div class="bg-neutral-600 h-2 rounded-full" style="width: 68%"></div>
+                  </div>
+                </div>
+                
+                <div>
+                  <div class="flex justify-between text-xs text-neutral-600 mb-1">
+                    <span>Storage Used</span>
+                    <span>42% of allocation</span>
+                  </div>
+                  <div class="w-full bg-neutral-200 rounded-full h-2">
+                    <div class="bg-neutral-600 h-2 rounded-full" style="width: 42%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="border-t bg-white p-4 text-center text-neutral-500 text-sm">
+  <p>AcademiAI Manager © 2025 | Joomla 5.3 Component | Version 2.1.4</p>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

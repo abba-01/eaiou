@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1a56db',
+                        'primary-dark': '#1245b5',
+                        'secondary': '#6b7280',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 flex items-center justify-between px-4 py-2">
+        <div class="flex items-center space-x-4">
+            <button class="text-gray-700 hover:text-gray-900">
+                <i class="fa-solid fa-arrow-left text-xl"></i>
+            </button>
+            <h1 class="text-lg font-semibold text-gray-800">Notification Templates</h1>
+        </div>
+        <div class="flex items-center space-x-2">
+            <button class="flex items-center justify-center px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                <i class="fa-solid fa-rotate-left mr-2"></i>
+                Reset to Defaults
+            </button>
+            <button class="px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                Save Changes
+            </button>
+        </div>
+    </div>
+
+    <div id="notification-templates" class="max-w-5xl mx-auto pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+        <div id="page-header" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Notification Message Templates</h2>
+                <p class="text-gray-600">Customize the notification messages sent to users during different stages of the peer review workflow. Use the placeholders provided to include dynamic content.</p>
+                <div class="mt-4 flex items-center text-sm text-gray-500">
+                    <span class="flex items-center mr-4">
+                        <i class="fa-solid fa-circle-info mr-1 text-primary"></i>
+                        Available placeholders: {article_title}, {author_name}, {reviewer_name}, {editor_name}, {submission_date}, {review_due_date}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="template-categories" class="mb-6">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div class="flex border-b border-gray-200">
+                    <button id="tab-author" class="flex-1 py-3 px-4 text-center font-medium text-primary border-b-2 border-primary">
+                        Author Notifications
+                    </button>
+                    <button id="tab-reviewer" class="flex-1 py-3 px-4 text-center font-medium text-gray-500 hover:text-gray-700">
+                        Reviewer Notifications
+                    </button>
+                    <button id="tab-editor" class="flex-1 py-3 px-4 text-center font-medium text-gray-500 hover:text-gray-700">
+                        Editor Notifications
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="author-templates" class="space-y-6">
+            <div id="submission-received" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800">Submission Received</h3>
+                        <p class="text-sm text-gray-600">Sent to authors when their article is successfully submitted</p>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-xs bg-green-100 text-green-800 py-1 px-2 rounded-full font-medium">Active</span>
+                        <div class="ml-2">
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="submission-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                    <input type="text" id="submission-subject" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" value="[Peer Review] Submission Received: {article_title}">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="submission-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                    <textarea id="submission-body" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">Dear {author_name},
+
+Thank you for submitting your article "{article_title}" for peer review. Your submission has been received on {submission_date}.
+
+Your article will now be reviewed by our editorial team before being assigned to reviewers. You will receive further notifications about the status of your submission.
+
+You can track the progress of your submission by logging into your account.
+
+Best regards,
+The Editorial Team</textarea>
+                </div>
+                
+                <div class="flex justify-end">
+                    <button class="text-sm text-primary hover:text-primary-dark font-medium">
+                        Restore Default Template
+                    </button>
+                </div>
+            </div>
+
+            <div id="review-assigned" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800">Reviewers Assigned</h3>
+                        <p class="text-sm text-gray-600">Sent to authors when reviewers are assigned to their article</p>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-xs bg-green-100 text-green-800 py-1 px-2 rounded-full font-medium">Active</span>
+                        <div class="ml-2">
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="assigned-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                    <input type="text" id="assigned-subject" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" value="[Peer Review] Reviewers Assigned: {article_title}">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="assigned-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                    <textarea id="assigned-body" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">Dear {author_name},
+
+We are pleased to inform you that reviewers have been assigned to evaluate your article "{article_title}".
+
+The review process is expected to take 2-4 weeks. You will be notified once all reviews have been submitted and a decision has been made.
+
+Thank you for your patience during this process.
+
+Best regards,
+The Editorial Team</textarea>
+                </div>
+                
+                <div class="flex justify-end">
+                    <button class="text-sm text-primary hover:text-primary-dark font-medium">
+                        Restore Default Template
+                    </button>
+                </div>
+            </div>
+
+            <div id="revision-requested" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800">Revision Requested</h3>
+                        <p class="text-sm text-gray-600">Sent to authors when revisions are requested for their article</p>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-xs bg-green-100 text-green-800 py-1 px-2 rounded-full font-medium">Active</span>
+                        <div class="ml-2">
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="revision-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                    <input type="text" id="revision-subject" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" value="[Peer Review] Revision Requested: {article_title}">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="revision-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                    <textarea id="revision-body" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">Dear {author_name},
+
+After careful review of your article "{article_title}", the editorial team has requested revisions before making a final decision.
+
+Please log in to your account to view the detailed feedback from the reviewers and editor. The feedback includes specific points that need to be addressed in your revision.
+
+Please submit your revised article within 30 days. If you need additional time, please contact the editorial team.
+
+Best regards,
+{editor_name}
+Editor</textarea>
+                </div>
+                
+                <div class="flex justify-end">
+                    <button class="text-sm text-primary hover:text-primary-dark font-medium">
+                        Restore Default Template
+                    </button>
+                </div>
+            </div>
+
+            <div id="article-accepted" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800">Article Accepted</h3>
+                        <p class="text-sm text-gray-600">Sent to authors when their article is accepted for publication</p>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-xs bg-green-100 text-green-800 py-1 px-2 rounded-full font-medium">Active</span>
+                        <div class="ml-2">
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="accepted-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                    <input type="text" id="accepted-subject" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" value="[Peer Review] Article Accepted: {article_title}">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="accepted-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                    <textarea id="accepted-body" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">Dear {author_name},
+
+Congratulations! We are pleased to inform you that your article "{article_title}" has been accepted for publication.
+
+The editorial team found your work to meet the quality standards of our journal. The article will now proceed to the production stage.
+
+You will receive further instructions regarding the publication process in the coming days.
+
+Thank you for your valuable contribution to our journal.
+
+Best regards,
+{editor_name}
+Editor</textarea>
+                </div>
+                
+                <div class="flex justify-end">
+                    <button class="text-sm text-primary hover:text-primary-dark font-medium">
+                        Restore Default Template
+                    </button>
+                </div>
+            </div>
+
+            <div id="article-rejected" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-800">Article Rejected</h3>
+                        <p class="text-sm text-gray-600">Sent to authors when their article is rejected</p>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-xs bg-green-100 text-green-800 py-1 px-2 rounded-full font-medium">Active</span>
+                        <div class="ml-2">
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="rejected-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                    <input type="text" id="rejected-subject" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" value="[Peer Review] Decision on Your Submission: {article_title}">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="rejected-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                    <textarea id="rejected-body" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">Dear {author_name},
+
+Thank you for submitting your article "{article_title}" for consideration.
+
+After careful review, we regret to inform you that your article has not been accepted for publication. The decision was based on the evaluations provided by our reviewers and the editorial assessment.
+
+You can log in to your account to view the detailed feedback, which we hope will be helpful for your future work.
+
+We appreciate your interest in our journal and encourage you to consider submitting your future research for publication.
+
+Best regards,
+{editor_name}
+Editor</textarea>
+                </div>
+                
+                <div class="flex justify-end">
+                    <button class="text-sm text-primary hover:text-primary-dark font-medium">
+                        Restore Default Template
+                    </button>
+                </div>
+            </div>
+
+            <div id="add-template-section" class="mt-6">
+                <button class="flex items-center text-primary hover:text-primary-dark font-medium">
+                    <i class="fa-solid fa-plus mr-2"></i>
+                    Add Custom Notification Template
+                </button>
+            </div>
+        </div>
+
+        <div id="reviewer-templates" class="hidden space-y-6">
+            <!-- Reviewer notification templates would go here -->
+        </div>
+
+        <div id="editor-templates" class="hidden space-y-6">
+            <!-- Editor notification templates would go here -->
+        </div>
+
+        <div id="placeholders-reference" class="mt-8 bg-blue-50 p-6 rounded-lg border border-blue-200">
+            <h3 class="text-lg font-medium text-gray-800 mb-3">Available Placeholders</h3>
+            <p class="text-sm text-gray-600 mb-4">Use these placeholders in your notification templates to include dynamic content:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <span class="font-mono bg-white px-2 py-1 rounded border border-gray-300 text-gray-700 mr-2">{article_title}</span>
+                            <span class="text-gray-600">Title of the submitted article</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="font-mono bg-white px-2 py-1 rounded border border-gray-300 text-gray-700 mr-2">{author_name}</span>
+                            <span class="text-gray-600">Name of the article's author</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="font-mono bg-white px-2 py-1 rounded border border-gray-300 text-gray-700 mr-2">{reviewer_name}</span>
+                            <span class="text-gray-600">Name of the assigned reviewer</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <span class="font-mono bg-white px-2 py-1 rounded border border-gray-300 text-gray-700 mr-2">{editor_name}</span>
+                            <span class="text-gray-600">Name of the handling editor</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="font-mono bg-white px-2 py-1 rounded border border-gray-300 text-gray-700 mr-2">{submission_date}</span>
+                            <span class="text-gray-600">Date when the article was submitted</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="font-mono bg-white px-2 py-1 rounded border border-gray-300 text-gray-700 mr-2">{review_due_date}</span>
+                            <span class="text-gray-600">Deadline for submitting reviews</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="form-actions" class="mt-8 flex justify-between items-center">
+            <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                Cancel
+            </button>
+            <button class="px-6 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                Save All Changes
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.getElementById('tab-author').addEventListener('click', function() {
+            // Show author templates, hide others
+            document.getElementById('author-templates').classList.remove('hidden');
+            document.getElementById('reviewer-templates').classList.add('hidden');
+            document.getElementById('editor-templates').classList.add('hidden');
+            
+            // Update active tab styling
+            this.classList.add('text-primary', 'border-b-2', 'border-primary');
+            this.classList.remove('text-gray-500');
+            
+            document.getElementById('tab-reviewer').classList.remove('text-primary', 'border-b-2', 'border-primary');
+            document.getElementById('tab-reviewer').classList.add('text-gray-500');
+            
+            document.getElementById('tab-editor').classList.remove('text-primary', 'border-b-2', 'border-primary');
+            document.getElementById('tab-editor').classList.add('text-gray-500');
+        });
+        
+        document.getElementById('tab-reviewer').addEventListener('click', function() {
+            // Show reviewer templates, hide others
+            document.getElementById('author-templates').classList.add('hidden');
+            document.getElementById('reviewer-templates').classList.remove('hidden');
+            document.getElementById('editor-templates').classList.add('hidden');
+            
+            // Update active tab styling
+            this.classList.add('text-primary', 'border-b-2', 'border-primary');
+            this.classList.remove('text-gray-500');
+            
+            document.getElementById('tab-author').classList.remove('text-primary', 'border-b-2', 'border-primary');
+            document.getElementById('tab-author').classList.add('text-gray-500');
+            
+            document.getElementById('tab-editor').classList.remove('text-primary', 'border-b-2', 'border-primary');
+            document.getElementById('tab-editor').classList.add('text-gray-500');
+        });
+        
+        document.getElementById('tab-editor').addEventListener('click', function() {
+            // Show editor templates, hide others
+            document.getElementById('author-templates').classList.add('hidden');
+            document.getElementById('reviewer-templates').classList.add('hidden');
+            document.getElementById('editor-templates').classList.remove('hidden');
+            
+            // Update active tab styling
+            this.classList.add('text-primary', 'border-b-2', 'border-primary');
+            this.classList.remove('text-gray-500');
+            
+            document.getElementById('tab-author').classList.remove('text-primary', 'border-b-2', 'border-primary');
+            document.getElementById('tab-author').classList.add('text-gray-500');
+            
+            document.getElementById('tab-reviewer').classList.remove('text-primary', 'border-b-2', 'border-primary');
+            document.getElementById('tab-reviewer').classList.add('text-gray-500');
+        });
+    </script>
+</body>
+</html>

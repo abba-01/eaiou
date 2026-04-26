@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1a56db',
+                        'primary-dark': '#1245b5',
+                        'secondary': '#6b7280',
+                        'review-amber': '#f59e0b',
+                        'review-red': '#ef4444',
+                        'review-green': '#10b981',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 flex items-center justify-between px-4 py-2">
+        <div class="flex items-center space-x-4">
+            <button class="text-gray-700 hover:text-gray-900">
+                <i class="fa-solid fa-arrow-left text-xl"></i>
+            </button>
+            <h1 class="text-lg font-semibold text-gray-800">Article Revision</h1>
+            <div class="flex items-center space-x-2 ml-4">
+                <span class="px-2 py-1 bg-review-amber bg-opacity-20 text-review-amber text-xs font-medium rounded">Revision Requested</span>
+                <span class="text-xs text-gray-500">Submission ID: JART-2023-0042</span>
+            </div>
+        </div>
+        <div class="flex items-center space-x-2">
+            <button class="flex items-center justify-center px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                <i class="fa-regular fa-floppy-disk mr-2"></i>
+                Save Draft
+            </button>
+            <button class="px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                Submit Revision
+            </button>
+        </div>
+    </div>
+
+    <div id="revision-container" class="max-w-5xl mx-auto pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+        <div id="revision-header" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-1">Observer Modal Dynamics in Anomalous Contact</h2>
+                        <p class="text-gray-500 text-sm">Originally submitted: June 15, 2023 • Revision requested: July 2, 2023</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-500">Version: 2.0</span>
+                        <span class="px-2 py-1 bg-review-amber bg-opacity-20 text-review-amber text-xs font-medium rounded">Major Revision</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between border-t border-gray-200 pt-4 mt-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-clock text-gray-400 mr-2"></i>
+                            <span class="text-sm text-gray-600">Revision due by: July 23, 2023</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-user-shield text-gray-400 mr-2"></i>
+                            <span class="text-sm text-gray-600">Double-blind review</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="text-primary hover:text-primary-dark text-sm font-medium flex items-center">
+                            <i class="fa-solid fa-history mr-1"></i>
+                            View submission history
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="revision-tabs" class="mb-6 border-b border-gray-200">
+            <div class="flex space-x-8">
+                <button class="px-1 py-4 border-b-2 border-primary text-primary font-medium text-sm">
+                    Reviewer Comments
+                </button>
+                <button class="px-1 py-4 text-gray-500 font-medium text-sm hover:text-gray-700">
+                    Editor Decision
+                </button>
+                <button class="px-1 py-4 text-gray-500 font-medium text-sm hover:text-gray-700">
+                    Revision History
+                </button>
+                <button class="px-1 py-4 text-gray-500 font-medium text-sm hover:text-gray-700">
+                    Edit Article
+                </button>
+            </div>
+        </div>
+
+        <div id="editor-summary" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-800">Editor Summary</h3>
+                    <span class="px-3 py-1 bg-review-amber bg-opacity-20 text-review-amber text-sm font-medium rounded-full">Major Revision Required</span>
+                </div>
+                <div class="prose max-w-none text-gray-700 mb-6">
+                    <p class="mb-4">Thank you for your submission. Based on the reviewers' feedback, we believe your article has potential but requires significant revisions before it can be accepted for publication. Please address all the reviewer comments below and pay particular attention to the following key areas:</p>
+                    <ol class="list-decimal pl-6 space-y-2">
+                        <li>Strengthen the methodological approach and provide clearer justification for your research design</li>
+                        <li>Address the conflicting interpretations in your discussion section</li>
+                        <li>Improve the literature review to include more recent studies (post-2020)</li>
+                        <li>Clarify which claims are speculative vs. empirically supported</li>
+                    </ol>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-md text-sm text-gray-600">
+                    <p><strong>Decision date:</strong> July 2, 2023</p>
+                    <p><strong>Revision deadline:</strong> July 23, 2023 (21 days)</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="reviewer-comments" class="space-y-8">
+            <div id="reviewer-1" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                <i class="fa-solid fa-user-tie text-gray-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h4 class="font-medium text-gray-800">Reviewer #1</h4>
+                                <p class="text-sm text-gray-500">Academic Field: Theoretical Physics</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-3 py-1 bg-review-red bg-opacity-20 text-review-red text-sm font-medium rounded-full">Major Revision</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div id="reviewer1-rubric" class="mb-6">
+                        <h5 class="font-medium text-gray-800 mb-3">Evaluation Scores</h5>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Scholarly structure</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">3/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-amber h-full" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Originality</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">4/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-green h-full" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Literature grounding</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">2/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-red h-full" style="width: 40%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Methodological rigor</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">2/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-red h-full" style="width: 40%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Results evidence</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">3/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-amber h-full" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Discussion nuance</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">3/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-amber h-full" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Citation accuracy</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">4/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-green h-full" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Overall impact</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">3/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-amber h-full" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="reviewer1-comments" class="space-y-6">
+                        <div>
+                            <h5 class="font-medium text-gray-800 mb-2">General Comments</h5>
+                            <div class="bg-gray-50 p-4 rounded-md text-gray-700">
+                                <p class="mb-3">The article presents an interesting theoretical framework for observer modal dynamics, but suffers from methodological weaknesses and insufficient literature grounding. While the concept is original, the execution needs significant improvement.</p>
+                                <p>The speculative nature of many claims is not clearly delineated from empirically supported assertions, making it difficult to evaluate the validity of the arguments presented.</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h5 class="font-medium text-gray-800 mb-2">Literature Review</h5>
+                            <div class="bg-gray-50 p-4 rounded-md text-gray-700">
+                                <p class="mb-3">The literature review is inadequate and outdated. Several key studies from the past three years are missing, particularly those by Zhang et al. (2021) and Hernandez (2022) which directly address observer effects in similar contexts.</p>
+                                <p>I recommend expanding this section to include more recent developments in the field and to better situate your research within the current scholarly conversation.</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h5 class="font-medium text-gray-800 mb-2">Methodology</h5>
+                            <div class="bg-gray-50 p-4 rounded-md text-gray-700">
+                                <p class="mb-3">The methodological approach lacks rigor and clear justification. The sampling strategy is not well explained, and the analytical framework appears inconsistent with the stated research questions.</p>
+                                <p>I strongly suggest revising this section to provide a more transparent account of your research design, including explicit justification for methodological choices and acknowledgment of limitations.</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h5 class="font-medium text-gray-800 mb-2">Results and Discussion</h5>
+                            <div class="bg-gray-50 p-4 rounded-md text-gray-700">
+                                <p class="mb-3">The results section presents interesting findings, but the interpretation in the discussion section often exceeds what the data can support. There are several instances where speculative claims are presented as definitive conclusions.</p>
+                                <p>Please revise to clearly distinguish between what your data directly supports and what represents theoretical extension or speculation.</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h5 class="font-medium text-gray-800 mb-2">Specific Recommendations</h5>
+                            <div class="bg-gray-50 p-4 rounded-md text-gray-700">
+                                <ol class="list-decimal pl-5 space-y-2">
+                                    <li>Update the literature review with recent studies (2020-2023)</li>
+                                    <li>Restructure the methodology section to provide clearer justification</li>
+                                    <li>Add explicit "speculative" tags to theoretical extensions in the discussion</li>
+                                    <li>Revise Figure 2 to better represent the actual data collected</li>
+                                    <li>Consider alternative interpretations of your findings in the discussion section</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reviewer-2" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                <i class="fa-solid fa-user-graduate text-gray-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h4 class="font-medium text-gray-800">Reviewer #2</h4>
+                                <p class="text-sm text-gray-500">Academic Field: Applied Mathematics</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-3 py-1 bg-review-green bg-opacity-20 text-review-green text-sm font-medium rounded-full">Minor Revision</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div id="reviewer2-rubric" class="mb-6">
+                        <h5 class="font-medium text-gray-800 mb-3">Evaluation Scores</h5>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Scholarly structure</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">4/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-green h-full" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Originality</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">5/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-green h-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Literature grounding</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">3/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-amber h-full" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Methodological rigor</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">4/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-green h-full" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Results evidence</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">4/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-green h-full" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Discussion nuance</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">4/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-green h-full" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Citation accuracy</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">4/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-green h-full" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-600">Overall impact</span>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-2">5/5</span>
+                                        <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="bg-review-green h-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="reviewer2-comments" class="space-y-6">
+                        <div>
+                            <h5 class="font-medium text-gray-800 mb-2">General Comments</h5>
+                            <div class="bg-gray-50 p-4 rounded-md text-gray-700">
+                                <p class="mb-3">This is an innovative and thought-provoking article that makes a significant contribution to the field. The mathematical modeling of observer effects is particularly impressive and represents a novel approach to a complex problem.</p>
+                                <p>While I recommend publication with minor revisions, there are several areas that could be strengthened to enhance the overall quality and impact of the work.</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h5 class="font-medium text-gray-800 mb-2">Strengths</h5>
+                            <div class="bg-gray-50 p-4 rounded-md text-gray-700">
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li>Highly original theoretical framework</li>
+                                    <li>Sophisticated mathematical modeling</li>
+                                    <li>Clear and logical presentation of complex ideas</li>
+                                    <li>Thoughtful discussion of implications</li>
+                                    <li>Excellent integration of quantitative and qualitative approaches</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h5 class="font-medium text-gray-800 mb-2">Areas for Improvement</h5>
+                            <div class="bg-gray-50 p-4 rounded-md text-gray-700">
+                                <p class="mb-3">Despite the overall quality, there are several areas that require attention:</p>
+                                <ol class="list-decimal pl-5 space-y-2">
+                                    <li>The literature review would benefit from including more recent studies, particularly those addressing similar mathematical approaches to observer effects.</li>
+                                    <li>Some of the speculative claims in the discussion section should be more clearly identified as such.</li>
+                                    <li>The limitations section could be expanded to acknowledge potential methodological constraints.</li>
+                                    <li>The appendix containing the mathematical proofs contains several minor errors that should be corrected.</li>
+                                </ol>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h5 class="font-medium text-gray-800 mb-2">Specific Recommendations</h5>
+                            <div class="bg-gray-50 p-4 rounded-md text-gray-700">
+                                <p class="mb-3">I recommend the following specific revisions:</p>
+                                <ol class="list-decimal pl-5 space-y-2">
+                                    <li>On page 7, equation 3.4 contains an error in the second derivative term.</li>
+                                    <li>The discussion on page 12 regarding observer-bound effects should more clearly distinguish between empirical findings and theoretical extensions.</li>
+                                    <li>Consider adding a brief section addressing potential practical applications of the theoretical framework.</li>
+                                    <li>The reference to Wilson (2019) on page 5 appears to misrepresent their findings slightly - please verify and adjust as needed.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="revision-actions" class="mt-8 flex justify-between items-center">
+            <div class="flex space-x-4">
+                <button class="flex items-center text-gray-600 hover:text-gray-800">
+                    <i class="fa-solid fa-print mr-2"></i>
+                    Print comments
+                </button>
+                <button class="flex items-center text-gray-600 hover:text-gray-800">
+                    <i class="fa-solid fa-download mr-2"></i>
+                    Download as PDF
+                </button>
+            </div>
+            <div>
+                <button class="px-6 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                    Proceed to Revision
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="revision-checklist" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <i class="fa-solid fa-clipboard-check text-primary mr-2"></i>
+            <span class="font-medium text-gray-800">Revision Checklist:</span>
+            <span class="ml-2 text-gray-600">0 of 8 items addressed</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button class="text-primary hover:text-primary-dark font-medium">
+                View Checklist
+            </button>
+            <button class="px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                Submit Revision
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // This would implement tab switching functionality
+        document.querySelectorAll('#revision-tabs button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('#revision-tabs button').forEach(btn => {
+                    btn.classList.remove('border-b-2', 'border-primary', 'text-primary');
+                    btn.classList.add('text-gray-500');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('border-b-2', 'border-primary', 'text-primary');
+                this.classList.remove('text-gray-500');
+                
+                // Here you would also switch the visible content section
+                // based on which tab was clicked
+            });
+        });
+    </script>
+</body>
+</html>

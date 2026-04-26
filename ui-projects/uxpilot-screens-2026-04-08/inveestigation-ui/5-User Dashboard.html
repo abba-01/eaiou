@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Main Layout -->
+    <div class="flex h-[100vh]">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-gray-900 text-white flex flex-col h-full">
+            <!-- Logo -->
+            <div class="p-4 flex items-center border-b border-gray-700">
+                <div class="h-8 w-8 rounded-md bg-primary-500 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <span class="ml-2 font-bold text-xl">ProjectHub</span>
+            </div>
+            
+            <!-- Admin Menu -->
+            <div class="p-4">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">Admin Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-gauge-high w-6"></i>
+                            <span>Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-folder w-6"></i>
+                            <span>Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-flag w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-check-square w-6"></i>
+                            <span>Tasks</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar w-6"></i>
+                            <span>Events</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-file w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Panel -->
+            <div class="p-4 mt-4 border-t border-gray-700">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">User Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md bg-primary-700 text-white cursor-pointer">
+                            <i class="fa-solid fa-house w-6"></i>
+                            <span>My Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-briefcase w-6"></i>
+                            <span>My Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-tasks w-6"></i>
+                            <span>Task List</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-map-signs w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar-alt w-6"></i>
+                            <span>Calendar</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-paperclip w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Profile -->
+            <div class="mt-auto p-4 border-t border-gray-700 flex items-center">
+                <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium">Alex Morgan</p>
+                    <p class="text-xs text-gray-400">Team Member</p>
+                </div>
+                <button class="ml-auto text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-cog"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 flex flex-col h-full overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 flex items-center justify-between p-4">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-800">My Dashboard</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                    <button class="relative p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">5</span>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-question-circle"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Dashboard Content -->
+            <div class="flex-1 overflow-auto p-6">
+                <!-- Welcome Section -->
+                <div id="welcome-section" class="mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Welcome back, Alex!</h2>
+                    <p class="text-gray-600">Here's what's happening with your projects today.</p>
+                </div>
+                
+                <!-- Summary Stats Row -->
+                <div id="summary-stats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white rounded-lg shadow p-5">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-sm text-gray-500 font-medium">My Active Tasks</p>
+                                <p class="text-2xl font-bold mt-1">12</p>
+                            </div>
+                            <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                                <i class="fa-solid fa-check-square fa-lg"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-sm text-red-600">3 overdue</span>
+                            <span class="text-sm text-gray-500">9 on track</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow p-5">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-sm text-gray-500 font-medium">Upcoming Events</p>
+                                <p class="text-2xl font-bold mt-1">4</p>
+                            </div>
+                            <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                                <i class="fa-solid fa-calendar-alt fa-lg"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-sm text-orange-600">2 this week</span>
+                            <span class="text-sm text-gray-500">2 next week</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow p-5">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-sm text-gray-500 font-medium">My Projects</p>
+                                <p class="text-2xl font-bold mt-1">5</p>
+                            </div>
+                            <div class="p-3 rounded-full bg-green-100 text-green-600">
+                                <i class="fa-solid fa-folder fa-lg"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-sm text-green-600">4 on track</span>
+                            <span class="text-sm text-yellow-600">1 at risk</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow p-5">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-sm text-gray-500 font-medium">Recent Documents</p>
+                                <p class="text-2xl font-bold mt-1">7</p>
+                            </div>
+                            <div class="p-3 rounded-full bg-amber-100 text-amber-600">
+                                <i class="fa-solid fa-file fa-lg"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-sm text-gray-500">3 new uploads</span>
+                            <span class="text-sm text-primary-600 cursor-pointer">View all</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tasks and Events Row -->
+                <div id="tasks-events-row" class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- My Tasks -->
+                    <div id="my-tasks" class="bg-white rounded-lg shadow lg:col-span-2">
+                        <div class="p-5 border-b border-gray-200 flex justify-between items-center">
+                            <h2 class="text-lg font-semibold">My Tasks</h2>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 text-xs bg-primary-500 text-white rounded-md">All</button>
+                                <button class="px-3 py-1 text-xs bg-gray-100 rounded-md hover:bg-gray-200">Today</button>
+                                <button class="px-3 py-1 text-xs bg-gray-100 rounded-md hover:bg-gray-200">This Week</button>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <ul class="divide-y divide-gray-200">
+                                <li class="py-3 flex items-start">
+                                    <div class="mt-1 mr-3">
+                                        <div class="w-5 h-5 border-2 border-red-500 rounded flex items-center justify-center">
+                                            <i class="fa-solid fa-exclamation text-xs text-red-500"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="text-sm font-medium">Finalize UI design for dashboard</h3>
+                                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Overdue</span>
+                                        </div>
+                                        <div class="mt-1 flex items-center text-xs text-gray-500">
+                                            <span class="mr-3 flex items-center">
+                                                <i class="fa-solid fa-calendar-day mr-1"></i> Due 2 days ago
+                                            </span>
+                                            <span class="mr-3 flex items-center">
+                                                <i class="fa-solid fa-folder mr-1"></i> Website Redesign
+                                            </span>
+                                            <span class="flex items-center">
+                                                <i class="fa-solid fa-flag mr-1"></i> High Priority
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-3 flex items-start">
+                                    <div class="mt-1 mr-3">
+                                        <div class="w-5 h-5 border-2 border-red-500 rounded flex items-center justify-center">
+                                            <i class="fa-solid fa-exclamation text-xs text-red-500"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="text-sm font-medium">Review API documentation</h3>
+                                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Overdue</span>
+                                        </div>
+                                        <div class="mt-1 flex items-center text-xs text-gray-500">
+                                            <span class="mr-3 flex items-center">
+                                                <i class="fa-solid fa-calendar-day mr-1"></i> Due yesterday
+                                            </span>
+                                            <span class="mr-3 flex items-center">
+                                                <i class="fa-solid fa-folder mr-1"></i> API Integration
+                                            </span>
+                                            <span class="flex items-center">
+                                                <i class="fa-solid fa-flag mr-1"></i> Medium Priority
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-3 flex items-start">
+                                    <div class="mt-1 mr-3">
+                                        <div class="w-5 h-5 border-2 border-red-500 rounded flex items-center justify-center">
+                                            <i class="fa-solid fa-exclamation text-xs text-red-500"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="text-sm font-medium">Submit security assessment report</h3>
+                                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Overdue</span>
+                                        </div>
+                                        <div class="mt-1 flex items-center text-xs text-gray-500">
+                                            <span class="mr-3 flex items-center">
+                                                <i class="fa-solid fa-calendar-day mr-1"></i> Due 3 days ago
+                                            </span>
+                                            <span class="mr-3 flex items-center">
+                                                <i class="fa-solid fa-folder mr-1"></i> Security Audit
+                                            </span>
+                                            <span class="flex items-center">
+                                                <i class="fa-solid fa-flag mr-1"></i> High Priority
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-3 flex items-start">
+                                    <div class="mt-1 mr-3">
+                                        <div class="w-5 h-5 border-2 border-amber-500 rounded"></div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="text-sm font-medium">Prepare project status presentation</h3>
+                                            <span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full">Today</span>
+                                        </div>
+                                        <div class="mt-1 flex items-center text-xs text-gray-500">
+                                            <span class="mr-3 flex items-center">
+                                                <i class="fa-solid fa-calendar-day mr-1"></i> Due today
+                                            </span>
+                                            <span class="mr-3 flex items-center">
+                                                <i class="fa-solid fa-folder mr-1"></i> Website Redesign
+                                            </span>
+                                            <span class="flex items-center">
+                                                <i class="fa-solid fa-flag mr-1"></i> Medium Priority
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-3 flex items-start">
+                                    <div class="mt-1 mr-3">
+                                        <div class="w-5 h-5 border-2 border-gray-300 rounded"></div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="text-sm font-medium">Create wireframes for mobile app</h3>
+                                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">This Week</span>
+                                        </div>
+                                        <div class="mt-1 flex items-center text-xs text-gray-500">
+                                            <span class="mr-3 flex items-center">
+                                                <i class="fa-solid fa-calendar-day mr-1"></i> Due in 2 days
+                                            </span>
+                                            <span class="mr-3 flex items-center">
+                                                <i class="fa-solid fa-folder mr-1"></i> Mobile App Development
+                                            </span>
+                                            <span class="flex items-center">
+                                                <i class="fa-solid fa-flag mr-1"></i> Medium Priority
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-3 flex items-start">
+                                    <div class="mt-1 mr-3">
+                                        <div class="w-5 h-5 border-2 border-gray-300 rounded"></div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="text-sm font-medium">Review pull requests</h3>
+                                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">This Week</span>
+                                        </div>
+                                        <div class="mt-1 flex items-center text-xs text-gray-500">
+                                            <span class="mr-3 flex items-center">
+                                                <i class="fa-solid fa-calendar-day mr-1"></i> Due in 3 days
+                                            </span>
+                                            <span class="mr-3 flex items-center">
+                                                <i class="fa-solid fa-folder mr-1"></i> API Integration
+                                            </span>
+                                            <span class="flex items-center">
+                                                <i class="fa-solid fa-flag mr-1"></i> Low Priority
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="mt-4 flex justify-center">
+                                <button class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 flex items-center">
+                                    <i class="fa-solid fa-plus mr-2"></i> Add New Task
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Upcoming Events -->
+                    <div id="upcoming-events" class="bg-white rounded-lg shadow">
+                        <div class="p-5 border-b border-gray-200">
+                            <h2 class="text-lg font-semibold">Upcoming Events</h2>
+                        </div>
+                        <div class="p-5">
+                            <div class="mb-4">
+                                <h3 class="font-medium text-gray-900">Today</h3>
+                                <div class="mt-2 bg-blue-50 border-l-4 border-blue-500 p-3 rounded-r-md">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-sm">Team Standup Meeting</p>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">10:00 AM</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mt-1">
+                                        <i class="fa-solid fa-video mr-1"></i> Zoom Conference
+                                    </p>
+                                </div>
+                                <div class="mt-3 bg-green-50 border-l-4 border-green-500 p-3 rounded-r-md">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-sm">Project Status Review</p>
+                                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">2:30 PM</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mt-1">
+                                        <i class="fa-solid fa-users mr-1"></i> Conference Room A
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h3 class="font-medium text-gray-900">Tomorrow</h3>
+                                <div class="mt-2 bg-purple-50 border-l-4 border-purple-500 p-3 rounded-r-md">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-sm">Design Review</p>
+                                        <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">11:00 AM</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mt-1">
+                                        <i class="fa-solid fa-video mr-1"></i> Google Meet
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="font-medium text-gray-900">Next Week</h3>
+                                <div class="mt-2 bg-amber-50 border-l-4 border-amber-500 p-3 rounded-r-md">
+                                    <div class="flex items-center justify-between">
+                                        <p class="font-medium text-sm">Client Presentation</p>
+                                        <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full">Mon, 10:00 AM</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mt-1">
+                                        <i class="fa-solid fa-building mr-1"></i> Client Office
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 flex justify-center">
+                                <button class="flex items-center text-primary-600 hover:text-primary-700 text-sm">
+                                    <i class="fa-solid fa-calendar-plus mr-1"></i>
+                                    View Full Calendar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Updates Row -->
+                <div id="project-updates" class="grid grid-cols-1 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow">
+                        <div class="p-5 border-b border-gray-200 flex justify-between items-center">
+                            <h2 class="text-lg font-semibold">Recent Project Updates</h2>
+                            <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">View All Projects</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Updated</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">My Tasks</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progress</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-md bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
+                                                    <i class="fa-solid fa-globe"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">Website Redesign</div>
+                                                    <div class="text-xs text-gray-500">Lead: John Smith</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Today, 10:30 AM</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">In Progress</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <span class="font-medium text-red-600">2 overdue</span> / 4 total
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 65%"></div>
+                                            </div>
+                                            <span class="text-xs text-gray-500">65%</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-md bg-purple-100 flex items-center justify-center text-purple-600 mr-3">
+                                                    <i class="fa-solid fa-mobile-alt"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">Mobile App Development</div>
+                                                    <div class="text-xs text-gray-500">Lead: Michael Brown</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Yesterday, 4:15 PM</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Planning</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <span class="font-medium text-gray-600">1 active</span> / 1 total
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 15%"></div>
+                                            </div>
+                                            <span class="text-xs text-gray-500">15%</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-md bg-green-100 flex items-center justify-center text-green-600 mr-3">
+                                                    <i class="fa-solid fa-code"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">API Integration</div>
+                                                    <div class="text-xs text-gray-500">Lead: Emily Wilson</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2 days ago</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">Testing</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <span class="font-medium text-red-600">1 overdue</span> / 3 total
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                                <div class="bg-primary-500 h-2.5 rounded-full" style="width: 80%"></div>
+                                            </div>
+                                            <span class="text-xs text-gray-500">80%</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-md bg-red-100 flex items-center justify-center text-red-600 mr-3">
+                                                    <i class="fa-solid fa-shield-alt"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">Security Audit</div>
+                                                    <div class="text-xs text-gray-500">Lead: Robert Davis</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">5 days ago</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Delayed</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <span class="font-medium text-gray-600">2 active</span> / 2 total
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                                <div class="bg-red-500 h-2.5 rounded-full" style="width: 45%"></div>
+                                            </div>
+                                            <span class="text-xs text-gray-500">45%</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Documents -->
+                <div id="recent-documents" class="grid grid-cols-1 gap-6">
+                    <div class="bg-white rounded-lg shadow">
+                        <div class="p-5 border-b border-gray-200 flex justify-between items-center">
+                            <h2 class="text-lg font-semibold">Recent Documents</h2>
+                            <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">View All Documents</button>
+                        </div>
+                        <div class="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center text-red-600 mr-3">
+                                        <i class="fa-solid fa-file-pdf"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <p class="text-sm font-medium text-gray-900 truncate">Website_Requirements.pdf</p>
+                                        <p class="text-xs text-gray-500">Added today</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>2.4 MB</span>
+                                    <div class="flex space-x-2">
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
+                                        <i class="fa-solid fa-file-word"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <p class="text-sm font-medium text-gray-900 truncate">Project_Timeline.docx</p>
+                                        <p class="text-xs text-gray-500">Added yesterday</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>1.2 MB</span>
+                                    <div class="flex space-x-2">
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center text-green-600 mr-3">
+                                        <i class="fa-solid fa-file-excel"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <p class="text-sm font-medium text-gray-900 truncate">Budget_Q2_2023.xlsx</p>
+                                        <p class="text-xs text-gray-500">Added 3 days ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>3.7 MB</span>
+                                    <div class="flex space-x-2">
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600 mr-3">
+                                        <i class="fa-solid fa-file-image"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <p class="text-sm font-medium text-gray-900 truncate">UI_Mockups_v2.png</p>
+                                        <p class="text-xs text-gray-500">Added 5 days ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>5.1 MB</span>
+                                    <div class="flex space-x-2">
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-600 mr-3">
+                                        <i class="fa-solid fa-file-powerpoint"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <p class="text-sm font-medium text-gray-900 truncate">Presentation_Client.pptx</p>
+                                        <p class="text-xs text-gray-500">Added 1 week ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>7.8 MB</span>
+                                    <div class="flex space-x-2">
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600 mr-3">
+                                        <i class="fa-solid fa-file-code"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <p class="text-sm font-medium text-gray-900 truncate">API_Documentation.md</p>
+                                        <p class="text-xs text-gray-500">Added 1 week ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>256 KB</span>
+                                    <div class="flex space-x-2">
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-share-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer id="footer" class="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+                <p>&copy; 2023 ProjectHub User Dashboard. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

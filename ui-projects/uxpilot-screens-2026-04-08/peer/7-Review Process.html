@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@10.3.3/highcharts.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#007cba',
+                        emerald: '#00b894',
+                        coral: '#fd79a8',
+                        orange: '#fdcb6e',
+                        purple: '#6c5ce7',
+                        charcoal: '#2d3436',
+                        mediumgray: '#636e72',
+                        success: '#00b894',
+                        warning: '#fdcb6e',
+                        error: '#e17055',
+                        info: '#007cba',
+                        offwhite: '#FAFAF8'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                        'mono': ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-offwhite text-charcoal">
+    <header id="header" class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                        PR
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-lg">PeerTrail</span>
+                        <span class="text-xs text-mediumgray">Transparent Scientific Publishing</span>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Submit Article</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Browse Articles</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Reviews</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Submissions</span>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="search-toggle" class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-highlighter"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition relative">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-coral text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                    </button>
+                    <div class="w-8 h-8 rounded-full overflow-hidden">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User profile" class="w-full h-full object-cover">
+                    </div>
+                    <button class="md:hidden text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="global-search" class="hidden bg-white shadow-md py-4 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="relative">
+                <input type="text" placeholder="Search articles, authors, audit trails, annotations..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <button class="absolute right-3 top-3 text-gray-400 hover:text-primary">
+                    <i class="fa-solid fa-search"></i>
+                </button>
+            </div>
+            <div class="mt-3 flex space-x-2 text-sm">
+                <span class="font-medium">Quick filters:</span>
+                <button class="text-primary hover:underline">Recent articles</button>
+                <button class="text-primary hover:underline">Most annotated</button>
+                <button class="text-primary hover:underline">Top audit trails</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row">
+        <!-- Left Sidebar -->
+        <div id="sidebar" class="w-full md:w-64 bg-white shadow-md md:min-h-screen">
+            <div class="p-4 border-b border-gray-200">
+                <h2 class="font-bold text-lg text-primary">Review Dashboard</h2>
+                <p class="text-sm text-mediumgray">Manage your review assignments</p>
+            </div>
+            
+            <div class="p-4">
+                <div class="mb-6">
+                    <h3 class="text-sm font-semibold text-mediumgray uppercase mb-3">Review Status</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center justify-between px-2 py-2 bg-primary/10 rounded-lg text-primary">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-clock mr-3"></i>
+                                <span>Pending (4)</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </li>
+                        <li class="flex items-center justify-between px-2 py-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-spinner mr-3 text-orange"></i>
+                                <span>In Progress (2)</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+                        </li>
+                        <li class="flex items-center justify-between px-2 py-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-check mr-3 text-emerald"></i>
+                                <span>Completed (8)</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+                        </li>
+                        <li class="flex items-center justify-between px-2 py-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-rotate mr-3 text-coral"></i>
+                                <span>Revision Requested (3)</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-sm font-semibold text-mediumgray uppercase mb-3">Filter By Category</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                            <span>Neuroscience</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                            <span>Climate Science</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                            <span>Genetics</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                            <span>Computer Science</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                            <span>Medicine</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-sm font-semibold text-mediumgray uppercase mb-3">Review Analytics</h3>
+                    <div id="review-completion-chart" class="h-40 mt-2"></div>
+                    <div class="text-xs text-center mt-2 text-mediumgray">Your completion rate: 85%</div>
+                </div>
+                
+                <div>
+                    <h3 class="text-sm font-semibold text-mediumgray uppercase mb-3">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-primary hover:underline cursor-pointer">
+                            <i class="fa-solid fa-book mr-2"></i>
+                            <span>Reviewer Guidelines</span>
+                        </li>
+                        <li class="flex items-center text-primary hover:underline cursor-pointer">
+                            <i class="fa-solid fa-calendar mr-2"></i>
+                            <span>Set Availability</span>
+                        </li>
+                        <li class="flex items-center text-primary hover:underline cursor-pointer">
+                            <i class="fa-solid fa-user-gear mr-2"></i>
+                            <span>Update Expertise</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 p-6">
+            <div id="assignments-header" class="mb-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">Pending Review Assignments</h1>
+                        <p class="text-mediumgray">You have 4 articles waiting for your expert review</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex items-center space-x-3">
+                        <div class="relative">
+                            <select class="appearance-none bg-white border border-gray-300 rounded-lg py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary">
+                                <option>Sort by Due Date</option>
+                                <option>Sort by Submission Date</option>
+                                <option>Sort by Category</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <i class="fa-solid fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                        <button class="bg-primary hover:bg-primary/90 text-white py-2 px-4 rounded-lg flex items-center">
+                            <i class="fa-solid fa-filter mr-2"></i>
+                            Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="assignment-cards" class="space-y-6">
+                <!-- Assignment Card 1 -->
+                <div id="assignment-1" class="bg-white rounded-xl shadow-md overflow-hidden border-l-4 border-primary">
+                    <div class="p-6">
+                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
+                            <div>
+                                <div class="flex space-x-2 mb-2">
+                                    <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded">Neuroscience</span>
+                                    <span class="bg-purple/10 text-purple text-xs px-2 py-1 rounded">Priority</span>
+                                    <span class="bg-warning/10 text-warning text-xs px-2 py-1 rounded">Due in 5 days</span>
+                                </div>
+                                <h2 class="text-xl font-bold">Neuroplasticity in Adult Learning: New Perspectives</h2>
+                                <p class="text-mediumgray text-sm mt-1">Submitted by Dr. Sarah Chen on July 15, 2023</p>
+                            </div>
+                            <div class="mt-4 lg:mt-0">
+                                <button class="bg-primary hover:bg-primary/90 text-white py-2 px-4 rounded-lg">
+                                    Start Review
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t border-gray-100 pt-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div id="review-progress-1" class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="text-sm font-semibold mb-2">Review Progress</h3>
+                                    <div class="space-y-2">
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span>Methodology</span>
+                                                <span>0%</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 w-0 bg-primary rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span>Results</span>
+                                                <span>0%</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 w-0 bg-primary rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span>Discussion</span>
+                                                <span>0%</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 w-0 bg-primary rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span>Audit Trail</span>
+                                                <span>0%</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 w-0 bg-primary rounded-full"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="audit-trail-1" class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="text-sm font-semibold mb-2">Audit Trail Summary</h3>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center text-xs">
+                                            <i class="fa-solid fa-flask text-primary mr-2"></i>
+                                            <span>3 discarded methodologies</span>
+                                        </div>
+                                        <div class="flex items-center text-xs">
+                                            <i class="fa-solid fa-chart-line text-emerald mr-2"></i>
+                                            <span>2 alternative data analyses</span>
+                                        </div>
+                                        <div class="flex items-center text-xs">
+                                            <i class="fa-solid fa-lightbulb text-orange mr-2"></i>
+                                            <span>4 theoretical considerations</span>
+                                        </div>
+                                        <div class="mt-3 text-primary text-xs hover:underline cursor-pointer">
+                                            View complete audit trail
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="annotation-summary-1" class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="text-sm font-semibold mb-2">Annotation Activity</h3>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span>Total annotations</span>
+                                            <span class="font-semibold">0</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span>Your annotations</span>
+                                            <span class="font-semibold">0</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span>Other reviewers</span>
+                                            <span class="font-semibold">0</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span>Author responses</span>
+                                            <span class="font-semibold">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Assignment Card 2 -->
+                <div id="assignment-2" class="bg-white rounded-xl shadow-md overflow-hidden border-l-4 border-primary">
+                    <div class="p-6">
+                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
+                            <div>
+                                <div class="flex space-x-2 mb-2">
+                                    <span class="bg-emerald/10 text-emerald text-xs px-2 py-1 rounded">Climate Science</span>
+                                    <span class="bg-warning/10 text-warning text-xs px-2 py-1 rounded">Due in 7 days</span>
+                                </div>
+                                <h2 class="text-xl font-bold">Improved Predictions of Arctic Sea Ice Melt Using Neural Networks</h2>
+                                <p class="text-mediumgray text-sm mt-1">Submitted by Prof. James Wilson on July 18, 2023</p>
+                            </div>
+                            <div class="mt-4 lg:mt-0">
+                                <button class="bg-primary hover:bg-primary/90 text-white py-2 px-4 rounded-lg">
+                                    Start Review
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t border-gray-100 pt-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div id="review-progress-2" class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="text-sm font-semibold mb-2">Review Progress</h3>
+                                    <div class="space-y-2">
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span>Methodology</span>
+                                                <span>0%</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 w-0 bg-primary rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span>Results</span>
+                                                <span>0%</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 w-0 bg-primary rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span>Discussion</span>
+                                                <span>0%</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 w-0 bg-primary rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span>Audit Trail</span>
+                                                <span>0%</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 w-0 bg-primary rounded-full"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="audit-trail-2" class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="text-sm font-semibold mb-2">Audit Trail Summary</h3>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center text-xs">
+                                            <i class="fa-solid fa-flask text-primary mr-2"></i>
+                                            <span>2 discarded methodologies</span>
+                                        </div>
+                                        <div class="flex items-center text-xs">
+                                            <i class="fa-solid fa-chart-line text-emerald mr-2"></i>
+                                            <span>5 alternative data analyses</span>
+                                        </div>
+                                        <div class="flex items-center text-xs">
+                                            <i class="fa-solid fa-code text-purple mr-2"></i>
+                                            <span>3 algorithm iterations</span>
+                                        </div>
+                                        <div class="mt-3 text-primary text-xs hover:underline cursor-pointer">
+                                            View complete audit trail
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="annotation-summary-2" class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="text-sm font-semibold mb-2">Annotation Activity</h3>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span>Total annotations</span>
+                                            <span class="font-semibold">0</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span>Your annotations</span>
+                                            <span class="font-semibold">0</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span>Other reviewers</span>
+                                            <span class="font-semibold">0</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span>Author responses</span>
+                                            <span class="font-semibold">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Assignment Card 3 - In Progress -->
+                <div id="assignment-3" class="bg-white rounded-xl shadow-md overflow-hidden border-l-4 border-orange">
+                    <div class="p-6">
+                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
+                            <div>
+                                <div class="flex space-x-2 mb-2">
+                                    <span class="bg-coral/10 text-coral text-xs px-2 py-1 rounded">Genetics</span>
+                                    <span class="bg-orange/10 text-orange text-xs px-2 py-1 rounded">In Progress</span>
+                                    <span class="bg-warning/10 text-warning text-xs px-2 py-1 rounded">Due in 3 days</span>
+                                </div>
+                                <h2 class="text-xl font-bold">CRISPR-Cas9 Applications in Rare Genetic Disorders</h2>
+                                <p class="text-mediumgray text-sm mt-1">Submitted by Dr. Emily Rodriguez on July 12, 2023</p>
+                            </div>
+                            <div class="mt-4 lg:mt-0">
+                                <button class="bg-orange hover:bg-orange/90 text-white py-2 px-4 rounded-lg">
+                                    Continue Review
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t border-gray-100 pt-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div id="review-progress-3" class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="text-sm font-semibold mb-2">Review Progress</h3>
+                                    <div class="space-y-2">
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span>Methodology</span>
+                                                <span>75%</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 w-3/4 bg-primary rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span>Results</span>
+                                                <span>40%</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 w-2/5 bg-primary rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span>Discussion</span>
+                                                <span>10%</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 w-1/10 bg-primary rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span>Audit Trail</span>
+                                                <span>60%</span>
+                                            </div>
+                                            <div class="h-2 bg-gray-200 rounded-full">
+                                                <div class="h-2 w-3/5 bg-primary rounded-full"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="audit-trail-3" class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="text-sm font-semibold mb-2">Audit Trail Summary</h3>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center text-xs">
+                                            <i class="fa-solid fa-flask text-primary mr-2"></i>
+                                            <span>4 discarded methodologies</span>
+                                        </div>
+                                        <div class="flex items-center text-xs">
+                                            <i class="fa-solid fa-dna text-coral mr-2"></i>
+                                            <span>6 gene targeting approaches</span>
+                                        </div>
+                                        <div class="flex items-center text-xs">
+                                            <i class="fa-solid fa-vial text-purple mr-2"></i>
+                                            <span>3 experimental designs</span>
+                                        </div>
+                                        <div class="mt-3 text-primary text-xs hover:underline cursor-pointer">
+                                            View complete audit trail
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="annotation-summary-3" class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="text-sm font-semibold mb-2">Annotation Activity</h3>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span>Total annotations</span>
+                                            <span class="font-semibold">28</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span>Your annotations</span>
+                                            <span class="font-semibold">16</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span>Other reviewers</span>
+                                            <span class="font-semibold">12</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span>Author responses</span>
+                                            <span class="font-semibold">7</span>
+                                        </div>
+                                        <div class="mt-1 text-primary text-xs hover:underline cursor-pointer">
+                                            View discussion threads
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Annotation Discussion Panel -->
+            <div id="annotation-panel" class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-gray-50 p-4 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h2 class="font-bold text-lg">Recent Annotation Discussions</h2>
+                        <button class="text-primary hover:text-primary/80">
+                            <i class="fa-solid fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="space-y-6">
+                        <div id="discussion-1" class="border-b border-gray-100 pb-6">
+                            <div class="flex items-start space-x-3 mb-3">
+                                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="User" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <div class="flex items-center mb-1">
+                                        <span class="font-medium">Dr. Emily Rodriguez</span>
+                                        <span class="text-xs text-mediumgray ml-2">Author</span>
+                                        <span class="text-xs text-mediumgray ml-2">2 days ago</span>
+                                    </div>
+                                    <div class="bg-primary/5 p-3 rounded-lg mb-2">
+                                        <p class="text-sm">In response to your question about the off-target effects in Figure 3, we've conducted additional validation using the method described in the audit trail (approach #2). The results confirm minimal off-target activity.</p>
+                                    </div>
+                                    <div class="flex items-center text-xs text-mediumgray">
+                                        <span class="mr-4">From: <span class="text-primary">CRISPR Applications - Figure 3</span></span>
+                                        <span class="flex items-center cursor-pointer hover:text-primary">
+                                            <i class="fa-solid fa-reply mr-1"></i> Reply
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 ml-11">
+                                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <div class="flex items-center mb-1">
+                                        <span class="font-medium">You</span>
+                                        <span class="text-xs text-mediumgray ml-2">Reviewer</span>
+                                        <span class="text-xs text-mediumgray ml-2">1 day ago</span>
+                                    </div>
+                                    <div class="bg-gray-100 p-3 rounded-lg">
+                                        <p class="text-sm">Thank you for the clarification. The additional validation is helpful. Could you please add this information to the main text as well?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="discussion-2">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="User" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <div class="flex items-center mb-1">
+                                        <span class="font-medium">Dr. Michael Thompson</span>
+                                        <span class="text-xs text-mediumgray ml-2">Reviewer</span>
+                                        <span class="text-xs text-mediumgray ml-2">3 days ago</span>
+                                    </div>
+                                    <div class="bg-purple/5 p-3 rounded-lg mb-2">
+                                        <p class="text-sm">The audit trail for the statistical analysis is particularly thorough. I appreciate the transparency about the initial approaches that didn't work. This significantly strengthens the paper's methodology section.</p>
+                                    </div>
+                                    <div class="flex items-center text-xs text-mediumgray">
+                                        <span class="mr-4">From: <span class="text-primary">CRISPR Applications - Methods</span></span>
+                                        <span class="flex items-center cursor-pointer hover:text-primary">
+                                            <i class="fa-solid fa-reply mr-1"></i> Reply
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Sidebar - Review Categories -->
+        <div id="review-categories" class="w-full md:w-64 bg-white shadow-md p-4 md:min-h-screen">
+            <h2 class="font-bold text-lg mb-4">Review Categories</h2>
+            
+            <div class="space-y-4">
+                <div id="category-methodology" class="border-l-4 border-primary pl-3">
+                    <h3 class="font-medium mb-1">Methodology</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Experimental design
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Statistical approach
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Controls and validation
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Reproducibility
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="category-results" class="border-l-4 border-emerald pl-3">
+                    <h3 class="font-medium mb-1">Results</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Data presentation
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Statistical significance
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Figure quality
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Data interpretation
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="category-discussion" class="border-l-4 border-purple pl-3">
+                    <h3 class="font-medium mb-1">Discussion</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Context in literature
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Limitations addressed
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Conclusions supported
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Future directions
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="category-audit" class="border-l-4 border-orange pl-3">
+                    <h3 class="font-medium mb-1">Audit Trail</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Discarded approaches
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Methodology changes
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Analysis iterations
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Lessons learned
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="category-originality" class="border-l-4 border-coral pl-3">
+                    <h3 class="font-medium mb-1">Originality</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Novel contribution
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Innovation level
+                        </li>
+                        <li class="flex items-center text-mediumgray">
+                            <i class="fa-solid fa-check-circle text-emerald mr-2"></i>
+                            Advancement of field
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-gray-50 p-4 rounded-lg">
+                <h3 class="font-medium text-sm mb-3">Review Checklist</h3>
+                <div class="space-y-2">
+                    <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                        <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                        <span>Verify methodology</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                        <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                        <span>Check statistical analysis</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                        <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                        <span>Evaluate figures & tables</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                        <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                        <span>Assess audit trail quality</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                        <input type="checkbox" class="rounded text-primary focus:ring-primary">
+                        <span>Review literature citations</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="bg-charcoal text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold text-xs">
+                        PR
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold">PeerTrail</span>
+                        <span class="text-xs text-gray-400">Transparent Scientific Publishing</span>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Help Center</span>
+                </div>
+                
+                <p class="text-gray-400 text-sm mt-4 md:mt-0">© 2023 PeerTrail. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle global search
+        document.getElementById('search-toggle').addEventListener('click', function() {
+            const searchBar = document.getElementById('global-search');
+            searchBar.classList.toggle('hidden');
+        });
+
+        // Review completion chart
+        Highcharts.chart('review-completion-chart', {
+            chart: {
+                type: 'pie',
+                backgroundColor: 'transparent',
+                height: 160
+            },
+            title: {
+                text: null
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: false
+                }
+            },
+            series: [{
+                name: 'Status',
+                colorByPoint: true,
+                innerSize: '60%',
+                data: [{
+                    name: 'Completed',
+                    y: 8,
+                    color: '#00b894'
+                }, {
+                    name: 'In Progress',
+                    y: 2,
+                    color: '#fdcb6e'
+                }, {
+                    name: 'Pending',
+                    y: 4,
+                    color: '#007cba'
+                }, {
+                    name: 'Revision',
+                    y: 3,
+                    color: '#fd79a8'
+                }]
+            }]
+        });
+    </script>
+</body>
+</html>

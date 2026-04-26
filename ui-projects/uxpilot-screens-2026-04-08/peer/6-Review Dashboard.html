@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@10.3.3/highcharts.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#007cba',
+                        emerald: '#00b894',
+                        coral: '#fd79a8',
+                        orange: '#fdcb6e',
+                        purple: '#6c5ce7',
+                        charcoal: '#2d3436',
+                        mediumgray: '#636e72',
+                        success: '#00b894',
+                        warning: '#fdcb6e',
+                        error: '#e17055',
+                        info: '#007cba',
+                        offwhite: '#FAFAF8'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                        'mono': ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-offwhite text-charcoal">
+    <header id="header" class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                        PR
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-lg">PeerTrail</span>
+                        <span class="text-xs text-mediumgray">Transparent Scientific Publishing</span>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Submit Article</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Browse Articles</span>
+                    <span class="font-medium text-primary border-b-2 border-primary pb-1 transition cursor-pointer">My Reviews</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Submissions</span>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="search-toggle" class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-highlighter"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition relative">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-coral text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                    </button>
+                    <div class="w-8 h-8 rounded-full overflow-hidden">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User profile" class="w-full h-full object-cover">
+                    </div>
+                    <button class="md:hidden text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="global-search" class="hidden bg-white shadow-md py-4 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="relative">
+                <input type="text" placeholder="Search articles, authors, audit trails, annotations..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <button class="absolute right-3 top-3 text-gray-400 hover:text-primary">
+                    <i class="fa-solid fa-search"></i>
+                </button>
+            </div>
+            <div class="mt-3 flex space-x-2 text-sm">
+                <span class="font-medium">Quick filters:</span>
+                <button class="text-primary hover:underline">My assigned reviews</button>
+                <button class="text-primary hover:underline">Recently active</button>
+                <button class="text-primary hover:underline">Pending comments</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="review-dashboard" class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold mb-2">My Review Assignments</h1>
+                <p class="text-mediumgray">Track your review progress and contribute to transparent scientific publishing</p>
+            </div>
+            <div class="flex space-x-3 mt-4 md:mt-0">
+                <div class="relative">
+                    <select class="appearance-none bg-white border border-gray-300 rounded-lg py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option>All Reviews</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Pending</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </div>
+                </div>
+                <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg flex items-center">
+                    <i class="fa-solid fa-sliders mr-2"></i>
+                    Filters
+                </button>
+            </div>
+        </div>
+
+        <div id="review-stats" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-xl shadow-sm p-4 border-l-4 border-primary">
+                <div class="flex justify-between items-center">
+                    <span class="text-mediumgray">Assigned</span>
+                    <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </div>
+                </div>
+                <div class="text-3xl font-bold mt-2">8</div>
+                <div class="text-xs text-mediumgray mt-1">2 new this week</div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-4 border-l-4 border-orange">
+                <div class="flex justify-between items-center">
+                    <span class="text-mediumgray">In Progress</span>
+                    <div class="w-10 h-10 rounded-lg bg-orange/10 flex items-center justify-center text-orange">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                    </div>
+                </div>
+                <div class="text-3xl font-bold mt-2">5</div>
+                <div class="text-xs text-mediumgray mt-1">3 need action</div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-4 border-l-4 border-emerald">
+                <div class="flex justify-between items-center">
+                    <span class="text-mediumgray">Completed</span>
+                    <div class="w-10 h-10 rounded-lg bg-emerald/10 flex items-center justify-center text-emerald">
+                        <i class="fa-solid fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="text-3xl font-bold mt-2">3</div>
+                <div class="text-xs text-mediumgray mt-1">1 this week</div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-4 border-l-4 border-purple">
+                <div class="flex justify-between items-center">
+                    <span class="text-mediumgray">Annotations</span>
+                    <div class="w-10 h-10 rounded-lg bg-purple/10 flex items-center justify-center text-purple">
+                        <i class="fa-solid fa-comment-dots"></i>
+                    </div>
+                </div>
+                <div class="text-3xl font-bold mt-2">124</div>
+                <div class="text-xs text-mediumgray mt-1">18 new replies</div>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <div id="articles-list" class="w-full lg:w-2/3">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="flex items-center border-b border-gray-100 p-4">
+                        <div class="flex-1">
+                            <h2 class="text-xl font-bold">Active Review Assignments</h2>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="relative mr-2">
+                                <input type="text" placeholder="Search assignments..." class="pl-8 pr-4 py-1.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary">
+                                <i class="fa-solid fa-search absolute left-3 top-2 text-gray-400 text-xs"></i>
+                            </div>
+                            <button class="text-mediumgray hover:text-primary p-1">
+                                <i class="fa-solid fa-arrow-down-short-wide"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="article-1" class="border-b border-gray-100 hover:bg-gray-50 transition">
+                        <div class="p-4">
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <div class="flex items-center mb-1">
+                                        <span class="bg-orange/10 text-orange text-xs px-2 py-0.5 rounded-full mr-2">In Review</span>
+                                        <span class="bg-primary/10 text-primary text-xs px-2 py-0.5 rounded-full">Neuroscience</span>
+                                        <span class="bg-coral/10 text-coral text-xs px-2 py-0.5 rounded-full ml-2">High Priority</span>
+                                    </div>
+                                    <h3 class="font-bold text-lg mb-1 hover:text-primary cursor-pointer">Novel Neural Mechanisms in Decision-Making: A Comprehensive Review</h3>
+                                    <div class="flex items-center text-sm text-mediumgray mb-2">
+                                        <span>Dr. Sarah Chen</span>
+                                        <span class="mx-2">•</span>
+                                        <span>Due in 5 days</span>
+                                        <span class="mx-2">•</span>
+                                        <span>ID: NEUR-2023-0142</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <div class="text-sm font-medium text-emerald">78% Complete</div>
+                                    <div class="w-24 h-2 bg-gray-200 rounded-full mt-1 overflow-hidden">
+                                        <div class="h-full bg-emerald rounded-full" style="width: 78%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary mr-3">
+                                        <i class="fa-solid fa-book-open-reader text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-mediumgray">Reading</div>
+                                        <div class="text-sm font-medium">Complete</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-purple/10 flex items-center justify-center text-purple mr-3">
+                                        <i class="fa-solid fa-magnifying-glass-chart text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-mediumgray">Audit Trail</div>
+                                        <div class="text-sm font-medium">8/12 items</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-emerald/10 flex items-center justify-center text-emerald mr-3">
+                                        <i class="fa-solid fa-comment-dots text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-mediumgray">Annotations</div>
+                                        <div class="text-sm font-medium">24 added</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-orange/10 flex items-center justify-center text-orange mr-3">
+                                        <i class="fa-solid fa-file-signature text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-mediumgray">Final Review</div>
+                                        <div class="text-sm font-medium">Not Started</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-4">
+                                <button class="text-primary hover:text-primary/80 text-sm font-medium flex items-center">
+                                    <i class="fa-solid fa-arrow-right-to-bracket mr-1.5"></i>
+                                    Continue Review
+                                </button>
+                                <div class="flex space-x-3">
+                                    <button class="text-mediumgray hover:text-primary text-sm flex items-center">
+                                        <i class="fa-solid fa-users mr-1.5"></i>
+                                        3 Reviewers
+                                    </button>
+                                    <button class="text-mediumgray hover:text-primary text-sm flex items-center">
+                                        <i class="fa-solid fa-bell mr-1.5"></i>
+                                        Set Reminder
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="article-2" class="border-b border-gray-100 hover:bg-gray-50 transition">
+                        <div class="p-4">
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <div class="flex items-center mb-1">
+                                        <span class="bg-orange/10 text-orange text-xs px-2 py-0.5 rounded-full mr-2">In Review</span>
+                                        <span class="bg-emerald/10 text-emerald text-xs px-2 py-0.5 rounded-full">Climate Science</span>
+                                    </div>
+                                    <h3 class="font-bold text-lg mb-1 hover:text-primary cursor-pointer">Improved Climate Modeling Through Parallel Computation Methods</h3>
+                                    <div class="flex items-center text-sm text-mediumgray mb-2">
+                                        <span>Prof. James Wilson</span>
+                                        <span class="mx-2">•</span>
+                                        <span>Due in 12 days</span>
+                                        <span class="mx-2">•</span>
+                                        <span>ID: CLIM-2023-0089</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <div class="text-sm font-medium text-orange">45% Complete</div>
+                                    <div class="w-24 h-2 bg-gray-200 rounded-full mt-1 overflow-hidden">
+                                        <div class="h-full bg-orange rounded-full" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary mr-3">
+                                        <i class="fa-solid fa-book-open-reader text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-mediumgray">Reading</div>
+                                        <div class="text-sm font-medium">Complete</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-purple/10 flex items-center justify-center text-purple mr-3">
+                                        <i class="fa-solid fa-magnifying-glass-chart text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-mediumgray">Audit Trail</div>
+                                        <div class="text-sm font-medium">6/15 items</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-emerald/10 flex items-center justify-center text-emerald mr-3">
+                                        <i class="fa-solid fa-comment-dots text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-mediumgray">Annotations</div>
+                                        <div class="text-sm font-medium">12 added</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-orange/10 flex items-center justify-center text-orange mr-3">
+                                        <i class="fa-solid fa-file-signature text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-mediumgray">Final Review</div>
+                                        <div class="text-sm font-medium">Not Started</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-4">
+                                <button class="text-primary hover:text-primary/80 text-sm font-medium flex items-center">
+                                    <i class="fa-solid fa-arrow-right-to-bracket mr-1.5"></i>
+                                    Continue Review
+                                </button>
+                                <div class="flex space-x-3">
+                                    <button class="text-mediumgray hover:text-primary text-sm flex items-center">
+                                        <i class="fa-solid fa-users mr-1.5"></i>
+                                        4 Reviewers
+                                    </button>
+                                    <button class="text-mediumgray hover:text-primary text-sm flex items-center">
+                                        <i class="fa-solid fa-bell mr-1.5"></i>
+                                        Set Reminder
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="article-3" class="border-b border-gray-100 hover:bg-gray-50 transition">
+                        <div class="p-4">
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <div class="flex items-center mb-1">
+                                        <span class="bg-orange/10 text-orange text-xs px-2 py-0.5 rounded-full mr-2">In Review</span>
+                                        <span class="bg-coral/10 text-coral text-xs px-2 py-0.5 rounded-full">Genetics</span>
+                                    </div>
+                                    <h3 class="font-bold text-lg mb-1 hover:text-primary cursor-pointer">CRISPR-Cas9 Modifications for Targeted Gene Therapy Applications</h3>
+                                    <div class="flex items-center text-sm text-mediumgray mb-2">
+                                        <span>Dr. Emily Rodriguez</span>
+                                        <span class="mx-2">•</span>
+                                        <span>Due in 8 days</span>
+                                        <span class="mx-2">•</span>
+                                        <span>ID: GEN-2023-0217</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <div class="text-sm font-medium text-primary">32% Complete</div>
+                                    <div class="w-24 h-2 bg-gray-200 rounded-full mt-1 overflow-hidden">
+                                        <div class="h-full bg-primary rounded-full" style="width: 32%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary mr-3">
+                                        <i class="fa-solid fa-book-open-reader text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-mediumgray">Reading</div>
+                                        <div class="text-sm font-medium">In Progress</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-purple/10 flex items-center justify-center text-purple mr-3">
+                                        <i class="fa-solid fa-magnifying-glass-chart text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-mediumgray">Audit Trail</div>
+                                        <div class="text-sm font-medium">3/18 items</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-emerald/10 flex items-center justify-center text-emerald mr-3">
+                                        <i class="fa-solid fa-comment-dots text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-mediumgray">Annotations</div>
+                                        <div class="text-sm font-medium">8 added</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-orange/10 flex items-center justify-center text-orange mr-3">
+                                        <i class="fa-solid fa-file-signature text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-mediumgray">Final Review</div>
+                                        <div class="text-sm font-medium">Not Started</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-4">
+                                <button class="text-primary hover:text-primary/80 text-sm font-medium flex items-center">
+                                    <i class="fa-solid fa-arrow-right-to-bracket mr-1.5"></i>
+                                    Continue Review
+                                </button>
+                                <div class="flex space-x-3">
+                                    <button class="text-mediumgray hover:text-primary text-sm flex items-center">
+                                        <i class="fa-solid fa-users mr-1.5"></i>
+                                        3 Reviewers
+                                    </button>
+                                    <button class="text-mediumgray hover:text-primary text-sm flex items-center">
+                                        <i class="fa-solid fa-bell mr-1.5"></i>
+                                        Set Reminder
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 flex justify-center">
+                        <button class="text-primary hover:text-primary/80 font-medium flex items-center">
+                            <i class="fa-solid fa-eye mr-2"></i>
+                            View All Assignments
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="annotation-tools" class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-4 border-b border-gray-100">
+                        <h2 class="text-xl font-bold">Annotation Tools</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <button class="flex items-center bg-primary/10 hover:bg-primary/20 text-primary px-3 py-2 rounded-lg transition">
+                                <i class="fa-solid fa-highlighter mr-2"></i>
+                                Highlight
+                            </button>
+                            <button class="flex items-center bg-purple/10 hover:bg-purple/20 text-purple px-3 py-2 rounded-lg transition">
+                                <i class="fa-solid fa-comment mr-2"></i>
+                                Comment
+                            </button>
+                            <button class="flex items-center bg-emerald/10 hover:bg-emerald/20 text-emerald px-3 py-2 rounded-lg transition">
+                                <i class="fa-solid fa-check-circle mr-2"></i>
+                                Approve
+                            </button>
+                            <button class="flex items-center bg-coral/10 hover:bg-coral/20 text-coral px-3 py-2 rounded-lg transition">
+                                <i class="fa-solid fa-circle-question mr-2"></i>
+                                Question
+                            </button>
+                            <button class="flex items-center bg-orange/10 hover:bg-orange/20 text-orange px-3 py-2 rounded-lg transition">
+                                <i class="fa-solid fa-triangle-exclamation mr-2"></i>
+                                Issue
+                            </button>
+                        </div>
+                        
+                        <h3 class="font-medium mb-3">Annotation Modes</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                            <div class="border border-primary rounded-lg p-3 bg-primary/5 relative">
+                                <div class="absolute top-3 right-3">
+                                    <i class="fa-solid fa-check-circle text-primary"></i>
+                                </div>
+                                <h4 class="font-medium text-primary mb-1">Review Mode</h4>
+                                <p class="text-sm text-mediumgray">Annotations tied to specific review criteria and visible to editors</p>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-3 hover:border-purple hover:bg-purple/5 transition">
+                                <h4 class="font-medium mb-1">Discussion Mode</h4>
+                                <p class="text-sm text-mediumgray">Collaborative annotations visible to all reviewers for discussion</p>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-3 hover:border-emerald hover:bg-emerald/5 transition">
+                                <h4 class="font-medium mb-1">Private Mode</h4>
+                                <p class="text-sm text-mediumgray">Personal notes visible only to you during the review process</p>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-3 hover:border-orange hover:bg-orange/5 transition">
+                                <h4 class="font-medium mb-1">Audit Mode</h4>
+                                <p class="text-sm text-mediumgray">Annotations specifically on audit trail items and methodology</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <button class="text-primary hover:text-primary/80 font-medium flex items-center">
+                                <i class="fa-solid fa-book mr-2"></i>
+                                Annotation Guidelines
+                            </button>
+                            <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg">
+                                Launch Annotation Tool
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="sidebar" class="w-full lg:w-1/3">
+                <div id="review-progress" class="bg-white rounded-xl shadow-md overflow-hidden mb-6">
+                    <div class="p-4 border-b border-gray-100">
+                        <h2 class="text-xl font-bold">Review Progress</h2>
+                    </div>
+                    
+                    <div class="p-4">
+                        <div id="progress-chart" class="h-64 mb-4"></div>
+                        
+                        <div class="border-t border-gray-100 pt-4 mt-2">
+                            <h3 class="font-medium mb-3">Current Focus</h3>
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 rounded-full bg-primary mr-2"></div>
+                                    <span class="text-sm">Methodology Review</span>
+                                </div>
+                                <span class="text-sm font-medium">65%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 rounded-full mb-4">
+                                <div class="h-full bg-primary rounded-full" style="width: 65%"></div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 rounded-full bg-purple mr-2"></div>
+                                    <span class="text-sm">Audit Trail Validation</span>
+                                </div>
+                                <span class="text-sm font-medium">42%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 rounded-full mb-4">
+                                <div class="h-full bg-purple rounded-full" style="width: 42%"></div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 rounded-full bg-emerald mr-2"></div>
+                                    <span class="text-sm">Results Verification</span>
+                                </div>
+                                <span class="text-sm font-medium">78%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 rounded-full">
+                                <div class="h-full bg-emerald rounded-full" style="width: 78%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="recent-activity" class="bg-white rounded-xl shadow-md overflow-hidden mb-6">
+                    <div class="p-4 border-b border-gray-100 flex justify-between items-center">
+                        <h2 class="text-xl font-bold">Recent Activity</h2>
+                        <button class="text-primary hover:text-primary/80 text-sm">
+                            View All
+                        </button>
+                    </div>
+                    
+                    <div class="divide-y divide-gray-100">
+                        <div class="p-4 hover:bg-gray-50 transition">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-3 mt-1">
+                                    <i class="fa-solid fa-comment-dots text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm">You added <span class="font-medium">3 new annotations</span> to <span class="text-primary hover:underline cursor-pointer">Novel Neural Mechanisms in Decision-Making</span></p>
+                                    <p class="text-xs text-mediumgray mt-1">Today, 10:42 AM</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 hover:bg-gray-50 transition">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-emerald/10 flex items-center justify-center text-emerald mr-3 mt-1">
+                                    <i class="fa-solid fa-reply text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm"><span class="font-medium">Dr. Sarah Chen</span> replied to your annotation on <span class="text-primary hover:underline cursor-pointer">Neural Mechanisms in Decision-Making</span></p>
+                                    <p class="text-xs text-mediumgray mt-1">Yesterday, 4:15 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 hover:bg-gray-50 transition">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-purple/10 flex items-center justify-center text-purple mr-3 mt-1">
+                                    <i class="fa-solid fa-magnifying-glass-chart text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm">You reviewed <span class="font-medium">5 audit trail items</span> in <span class="text-primary hover:underline cursor-pointer">Improved Climate Modeling</span></p>
+                                    <p class="text-xs text-mediumgray mt-1">Yesterday, 2:30 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 hover:bg-gray-50 transition">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-orange/10 flex items-center justify-center text-orange mr-3 mt-1">
+                                    <i class="fa-solid fa-clipboard-list text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm">You were assigned <span class="font-medium">a new article</span> for review: <span class="text-primary hover:underline cursor-pointer">CRISPR-Cas9 Modifications</span></p>
+                                    <p class="text-xs text-mediumgray mt-1">2 days ago, 9:18 AM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="collaboration" class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-4 border-b border-gray-100">
+                        <h2 class="text-xl font-bold">Collaboration</h2>
+                    </div>
+                    
+                    <div class="p-4">
+                        <h3 class="font-medium mb-3">Active Reviewers</h3>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Reviewer" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium">Dr. Michael Johnson</div>
+                                        <div class="text-xs text-mediumgray">Computational Neuroscience</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-emerald/10 text-emerald px-2 py-0.5 rounded-full mr-2">32 annotations</span>
+                                    <button class="text-primary hover:text-primary/80">
+                                        <i class="fa-solid fa-message"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Reviewer" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium">Prof. Alicia Wang</div>
+                                        <div class="text-xs text-mediumgray">Decision Science</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-emerald/10 text-emerald px-2 py-0.5 rounded-full mr-2">18 annotations</span>
+                                    <button class="text-primary hover:text-primary/80">
+                                        <i class="fa-solid fa-message"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" alt="Reviewer" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium">Dr. Robert Chen</div>
+                                        <div class="text-xs text-mediumgray">Clinical Neurology</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-xs bg-emerald/10 text-emerald px-2 py-0.5 rounded-full mr-2">26 annotations</span>
+                                    <button class="text-primary hover:text-primary/80">
+                                        <i class="fa-solid fa-message"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="font-medium mb-3">Collaboration Tools</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="flex items-center justify-center bg-primary hover:bg-primary/90 text-white p-3 rounded-lg transition">
+                                <i class="fa-solid fa-users mr-2"></i>
+                                Group Discussion
+                            </button>
+                            <button class="flex items-center justify-center border border-primary text-primary hover:bg-primary/5 p-3 rounded-lg transition">
+                                <i class="fa-solid fa-video mr-2"></i>
+                                Video Meeting
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="bg-charcoal text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                            PR
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-lg">PeerTrail</span>
+                            <span class="text-xs text-gray-400">Transparent Scientific Publishing</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4">The world's first comprehensive audit trail system for transparent scientific publishing.</p>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-twitter"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-github"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-researchgate"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Platform</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Browse Articles</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Submit Research</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Peer Review Process</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Audit Trail System</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Annotation Tools</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">API Documentation</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">FAQs</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Support Center</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">About Us</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Our Mission</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Partners</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Contact Us</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Careers</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 PeerTrail. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Cookie Policy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle global search
+        document.getElementById('search-toggle').addEventListener('click', function() {
+            const searchBar = document.getElementById('global-search');
+            searchBar.classList.toggle('hidden');
+        });
+
+        // Review progress chart
+        Highcharts.chart('progress-chart', {
+            chart: {
+                type: 'pie',
+                backgroundColor: 'transparent'
+            },
+            title: {
+                text: null
+            },
+            tooltip: {
+                pointFormat: '<b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true,
+                    innerSize: '60%'
+                }
+            },
+            legend: {
+                align: 'center',
+                verticalAlign: 'bottom',
+                layout: 'horizontal',
+                itemStyle: {
+                    fontWeight: 'normal',
+                    fontSize: '12px',
+                    color: '#636e72'
+                }
+            },
+            series: [{
+                name: 'Review Progress',
+                colorByPoint: true,
+                data: [{
+                    name: 'Methodology',
+                    y: 35,
+                    color: '#007cba'
+                }, {
+                    name: 'Audit Trail',
+                    y: 25,
+                    color: '#6c5ce7'
+                }, {
+                    name: 'Results',
+                    y: 20,
+                    color: '#00b894'
+                }, {
+                    name: 'Discussion',
+                    y: 15,
+                    color: '#fdcb6e'
+                }, {
+                    name: 'Final Review',
+                    y: 5,
+                    color: '#fd79a8'
+                }]
+            }]
+        });
+    </script>
+</body>
+</html>

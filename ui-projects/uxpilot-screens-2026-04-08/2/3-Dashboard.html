@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div class="flex items-center justify-between p-4">
+    <div class="flex items-center space-x-4">
+      <button class="w-10 h-10 flex items-center justify-center rounded-md bg-neutral-200 text-neutral-800">
+        <span>PM</span>
+      </button>
+      <nav class="flex items-center space-x-4">
+        <span class="text-neutral-800 cursor-pointer">Dashboard</span>
+        <span class="text-neutral-700 cursor-pointer">Projects</span>
+        <span class="text-neutral-700 cursor-pointer">Articles</span>
+        <span class="text-neutral-700 cursor-pointer">Settings</span>
+      </nav>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="text-neutral-700">
+        <i class="fa-regular fa-bell text-xl"></i>
+      </button>
+      <div class="relative">
+        <button class="w-10 h-10 bg-neutral-200 rounded-full flex items-center justify-center">
+          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-full h-full rounded-full" />
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="main-content" class="flex">
+  <!-- Sidebar Navigation -->
+  <aside id="sidebar" class="w-64 bg-white border-r border-neutral-200 h-[800px]">
+    <div class="p-4">
+      <h2 class="text-lg text-neutral-800 mb-4">Dashboard</h2>
+      <nav class="space-y-1">
+        <span class="flex items-center px-3 py-2 text-neutral-700 bg-neutral-50 rounded-md cursor-pointer">
+          <i class="fa-solid fa-home mr-3 w-5"></i>
+          <span>Overview</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-project-diagram mr-3 w-5"></i>
+          <span>Projects</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-robot mr-3 w-5"></i>
+          <span>AI Models</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-file-alt mr-3 w-5"></i>
+          <span>Recent Articles</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-chart-line mr-3 w-5"></i>
+          <span>Analytics</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-tasks mr-3 w-5"></i>
+          <span>Tasks</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-calendar-alt mr-3 w-5"></i>
+          <span>Calendar</span>
+        </span>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main id="dashboard-content" class="flex-1 p-6 bg-neutral-100">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl text-neutral-800">Dashboard Overview</h1>
+      <div class="flex items-center space-x-3">
+        <div class="relative">
+          <select class="appearance-none bg-white border border-neutral-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
+            <option>Last 7 days</option>
+            <option>Last 30 days</option>
+            <option>Last quarter</option>
+            <option>Custom range</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral-700">
+            <i class="fa-solid fa-chevron-down text-xs"></i>
+          </div>
+        </div>
+        <button class="px-3 py-2 bg-neutral-700 text-white rounded-md shadow-sm hover:bg-neutral-800 flex items-center text-sm">
+          <i class="fa-solid fa-plus mr-2"></i>
+          <span>New Project</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats Overview -->
+    <div id="stats-overview" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+      <div class="bg-white rounded-md shadow-sm p-4 border border-neutral-200">
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="text-neutral-500 text-sm">Active Projects</h3>
+          <span class="text-neutral-700 bg-neutral-100 rounded-full w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-folder"></i>
+          </span>
+        </div>
+        <div class="flex items-end">
+          <span class="text-3xl text-neutral-800">12</span>
+          <span class="ml-2 text-xs text-neutral-600 flex items-center">
+            <i class="fa-solid fa-arrow-up mr-1"></i>
+            +3 this month
+          </span>
+        </div>
+        <div class="mt-2 text-sm text-neutral-600">
+          3 pending approval
+        </div>
+      </div>
+
+      <div class="bg-white rounded-md shadow-sm p-4 border border-neutral-200">
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="text-neutral-500 text-sm">Articles Generated</h3>
+          <span class="text-neutral-700 bg-neutral-100 rounded-full w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-file-alt"></i>
+          </span>
+        </div>
+        <div class="flex items-end">
+          <span class="text-3xl text-neutral-800">47</span>
+          <span class="ml-2 text-xs text-neutral-600 flex items-center">
+            <i class="fa-solid fa-arrow-up mr-1"></i>
+            +12 this week
+          </span>
+        </div>
+        <div class="mt-2 text-sm text-neutral-600">
+          8 pending review
+        </div>
+      </div>
+
+      <div class="bg-white rounded-md shadow-sm p-4 border border-neutral-200">
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="text-neutral-500 text-sm">AI Model Usage</h3>
+          <span class="text-neutral-700 bg-neutral-100 rounded-full w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-robot"></i>
+          </span>
+        </div>
+        <div class="flex items-end">
+          <span class="text-3xl text-neutral-800">89%</span>
+          <span class="ml-2 text-xs text-neutral-600 flex items-center">
+            <i class="fa-solid fa-arrow-up mr-1"></i>
+            +7% this month
+          </span>
+        </div>
+        <div class="mt-2 text-sm text-neutral-600">
+          3 active models
+        </div>
+      </div>
+
+      <div class="bg-white rounded-md shadow-sm p-4 border border-neutral-200">
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="text-neutral-500 text-sm">Token Usage</h3>
+          <span class="text-neutral-700 bg-neutral-100 rounded-full w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-chart-pie"></i>
+          </span>
+        </div>
+        <div class="flex items-end">
+          <span class="text-3xl text-neutral-800">1.2M</span>
+          <span class="ml-2 text-xs text-neutral-600 flex items-center">
+            of 5M monthly
+          </span>
+        </div>
+        <div class="mt-2 text-sm text-neutral-600">
+          <div class="w-full bg-neutral-200 rounded-full h-1.5">
+            <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 24%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Model Performance -->
+    <div id="ai-model-performance" class="mb-6">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-lg text-neutral-800">AI Model Performance</h2>
+        <button class="text-neutral-600 hover:text-neutral-800">
+          <i class="fa-solid fa-ellipsis-h"></i>
+        </button>
+      </div>
+      <div class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden">
+        <div class="p-4">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 rounded-md bg-neutral-100 flex items-center justify-center mr-2">
+                    <i class="fa-solid fa-robot text-neutral-600"></i>
+                  </div>
+                  <span class="text-neutral-800">UX Pilot Opus</span>
+                </div>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+                  Excellent
+                </span>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-1 text-sm">
+                  <span class="text-neutral-600">Accuracy</span>
+                  <span class="text-neutral-800">96%</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-1.5">
+                  <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 96%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-1 text-sm">
+                  <span class="text-neutral-600">Citations</span>
+                  <span class="text-neutral-800">98%</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-1.5">
+                  <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 98%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-1 text-sm">
+                  <span class="text-neutral-600">Response Time</span>
+                  <span class="text-neutral-800">1.2s</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-1.5">
+                  <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 rounded-md bg-neutral-100 flex items-center justify-center mr-2">
+                    <i class="fa-solid fa-robot text-neutral-600"></i>
+                  </div>
+                  <span class="text-neutral-800">UX Pilot Sonnet</span>
+                </div>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+                  Good
+                </span>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-1 text-sm">
+                  <span class="text-neutral-600">Accuracy</span>
+                  <span class="text-neutral-800">92%</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-1.5">
+                  <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 92%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-1 text-sm">
+                  <span class="text-neutral-600">Citations</span>
+                  <span class="text-neutral-800">94%</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-1.5">
+                  <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 94%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-1 text-sm">
+                  <span class="text-neutral-600">Response Time</span>
+                  <span class="text-neutral-800">0.8s</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-1.5">
+                  <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 rounded-md bg-neutral-100 flex items-center justify-center mr-2">
+                    <i class="fa-solid fa-robot text-neutral-600"></i>
+                  </div>
+                  <span class="text-neutral-800">GPT-4o</span>
+                </div>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+                  Average
+                </span>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-1 text-sm">
+                  <span class="text-neutral-600">Accuracy</span>
+                  <span class="text-neutral-800">88%</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-1.5">
+                  <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 88%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-1 text-sm">
+                  <span class="text-neutral-600">Citations</span>
+                  <span class="text-neutral-800">85%</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-1.5">
+                  <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-1 text-sm">
+                  <span class="text-neutral-600">Response Time</span>
+                  <span class="text-neutral-800">1.5s</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-1.5">
+                  <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 75%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Status and Recent Activities -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Project Status -->
+      <div id="project-status" class="lg:col-span-2">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg text-neutral-800">Project Status</h2>
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">View all projects</button>
+        </div>
+        <div class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-neutral-200">
+              <thead class="bg-neutral-50">
+                <tr>
+                  <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Project</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Status</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Progress</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Due Date</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Articles</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-neutral-200">
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="flex-shrink-0 h-8 w-8 rounded-md bg-neutral-100 flex items-center justify-center text-neutral-600">
+                        <i class="fa-solid fa-microscope"></i>
+                      </div>
+                      <div class="ml-3">
+                        <div class="text-sm text-neutral-800">Quantum Computing Research</div>
+                        <div class="text-xs text-neutral-500">Academic Journal</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 rounded-full bg-neutral-100 text-neutral-800">
+                      In Progress
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="w-full bg-neutral-200 rounded-full h-1.5 mr-2">
+                        <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 65%"></div>
+                      </div>
+                      <span class="text-xs text-neutral-500">65%</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">
+                    July 15, 2025
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">
+                    5 / 8
+                  </td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="flex-shrink-0 h-8 w-8 rounded-md bg-neutral-100 flex items-center justify-center text-neutral-600">
+                        <i class="fa-solid fa-brain"></i>
+                      </div>
+                      <div class="ml-3">
+                        <div class="text-sm text-neutral-800">Neural Networks Analysis</div>
+                        <div class="text-xs text-neutral-500">Scientific Paper</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 rounded-full bg-neutral-100 text-neutral-800">
+                      Review
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="w-full bg-neutral-200 rounded-full h-1.5 mr-2">
+                        <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 90%"></div>
+                      </div>
+                      <span class="text-xs text-neutral-500">90%</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">
+                    July 10, 2025
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">
+                    3 / 3
+                  </td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="flex-shrink-0 h-8 w-8 rounded-md bg-neutral-100 flex items-center justify-center text-neutral-600">
+                        <i class="fa-solid fa-leaf"></i>
+                      </div>
+                      <div class="ml-3">
+                        <div class="text-sm text-neutral-800">Sustainable Energy Sources</div>
+                        <div class="text-xs text-neutral-500">Research Paper</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 rounded-full bg-neutral-100 text-neutral-800">
+                      Planning
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="w-full bg-neutral-200 rounded-full h-1.5 mr-2">
+                        <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 20%"></div>
+                      </div>
+                      <span class="text-xs text-neutral-500">20%</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">
+                    August 22, 2025
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">
+                    1 / 5
+                  </td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="flex-shrink-0 h-8 w-8 rounded-md bg-neutral-100 flex items-center justify-center text-neutral-600">
+                        <i class="fa-solid fa-virus"></i>
+                      </div>
+                      <div class="ml-3">
+                        <div class="text-sm text-neutral-800">Pandemic Response Analysis</div>
+                        <div class="text-xs text-neutral-500">Medical Journal</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 rounded-full bg-neutral-100 text-neutral-800">
+                      Complete
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="w-full bg-neutral-200 rounded-full h-1.5 mr-2">
+                        <div class="bg-neutral-700 h-1.5 rounded-full" style="width: 100%"></div>
+                      </div>
+                      <span class="text-xs text-neutral-500">100%</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">
+                    July 1, 2025
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">
+                    4 / 4
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activities -->
+      <div id="recent-activities">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg text-neutral-800">Recent Activities</h2>
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">View all</button>
+        </div>
+        <div class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden">
+          <div class="divide-y divide-neutral-200">
+            <div class="p-4">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden mr-3">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=124" alt="User avatar" class="w-full h-full" />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-neutral-800">
+                    <span>Alex Johnson</span> generated a new article 
+                    <span>"Quantum Computing Applications in Medicine"</span>
+                  </p>
+                  <p class="text-xs text-neutral-500 mt-1">Today, 10:23 AM</p>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden mr-3">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-full h-full" />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-neutral-800">
+                    <span>You</span> updated model parameters for 
+                    <span>UX Pilot Opus</span>
+                  </p>
+                  <p class="text-xs text-neutral-500 mt-1">Today, 09:45 AM</p>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden mr-3">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-full h-full" />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-neutral-800">
+                    <span>Sarah Williams</span> completed review for 
+                    <span>"Neural Networks in Climate Prediction"</span>
+                  </p>
+                  <p class="text-xs text-neutral-500 mt-1">Yesterday, 16:30 PM</p>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden mr-3">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-full h-full" />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-neutral-800">
+                    <span>David Chen</span> created a new project 
+                    <span>"Sustainable Energy Sources"</span>
+                  </p>
+                  <p class="text-xs text-neutral-500 mt-1">Yesterday, 14:15 PM</p>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden mr-3">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-full h-full" />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-neutral-800">
+                    <span>You</span> added a new AI model 
+                    <span>GPT-4o</span> to the system
+                  </p>
+                  <p class="text-xs text-neutral-500 mt-1">July 4, 2025</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Access -->
+    <div id="quick-access" class="mt-6">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-lg text-neutral-800">Quick Access</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-md shadow-sm border border-neutral-200 p-4 hover:shadow-md transition-all cursor-pointer">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-md bg-neutral-100 flex items-center justify-center mr-3 text-neutral-700">
+              <i class="fa-solid fa-plus"></i>
+            </div>
+            <div>
+              <h3 class="text-neutral-800">New Project</h3>
+              <p class="text-xs text-neutral-500 mt-1">Create academic research project</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-md shadow-sm border border-neutral-200 p-4 hover:shadow-md transition-all cursor-pointer">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-md bg-neutral-100 flex items-center justify-center mr-3 text-neutral-700">
+              <i class="fa-solid fa-file-alt"></i>
+            </div>
+            <div>
+              <h3 class="text-neutral-800">New Article</h3>
+              <p class="text-xs text-neutral-500 mt-1">Generate academic content</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-md shadow-sm border border-neutral-200 p-4 hover:shadow-md transition-all cursor-pointer">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-md bg-neutral-100 flex items-center justify-center mr-3 text-neutral-700">
+              <i class="fa-solid fa-cog"></i>
+            </div>
+            <div>
+              <h3 class="text-neutral-800">AI Settings</h3>
+              <p class="text-xs text-neutral-500 mt-1">Configure model parameters</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-md shadow-sm border border-neutral-200 p-4 hover:shadow-md transition-all cursor-pointer">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-md bg-neutral-100 flex items-center justify-center mr-3 text-neutral-700">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div>
+              <h3 class="text-neutral-800">Reports</h3>
+              <p class="text-xs text-neutral-500 mt-1">View analytics and statistics</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer id="footer" class="bg-white border-t border-neutral-200 p-4 text-center text-neutral-600 text-sm">
+  <p>© 2025 Academic AI Project Management System - Joomla 5.3 Component</p>
+</footer>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

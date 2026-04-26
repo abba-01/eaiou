@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        success: {
+                            50: '#ecfdf5',
+                            500: '#10b981',
+                            600: '#059669'
+                        },
+                        warning: {
+                            50: '#fffbeb',
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        },
+                        danger: {
+                            50: '#fef2f2',
+                            500: '#ef4444',
+                            600: '#dc2626'
+                        }
+                    }
+                }
+            }
+        }
+    
+        // B&W override
+        tailwind.config.theme.extend.colors.primary = {
+          50: '#F7F6F3', 100: '#EDECE9', 200: '#E2E0DB',
+          300: '#CAC8C2', 400: '#9A9895', 500: '#5A5856',
+          600: '#18171A', 700: '#18171A', 800: '#18171A', 900: '#0A090B'
+        };
+        tailwind.config.theme.extend.fontFamily = { sans: ['DM Sans', 'system-ui', 'sans-serif'] };
+
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F7F6F3;
+        }
+    </style>
+
+<style id="eaiou-ds">
+/* ── eaiou Design System — Monochrome ── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+:root {
+  --ds-bg:       #F7F6F3;
+  --ds-surface:  #FFFFFF;
+  --ds-border:   #E2E0DB;
+  --ds-ink-1:    #18171A;
+  --ds-ink-2:    #5A5856;
+  --ds-ink-3:    #9A9895;
+  --ds-accent:   #18171A;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-full: 9999px;
+}
+
+/* Font override */
+body, button, input, select, textarea { font-family: 'DM Sans', system-ui, sans-serif !important; }
+h1, h2 { letter-spacing: -0.02em; }
+h1 { font-size: 1.5rem; font-weight: 600; }
+h2 { font-size: 1.25rem; font-weight: 600; }
+h3 { font-size: 1.0625rem; font-weight: 600; }
+
+/* Radius standardisation */
+.rounded-sm  { border-radius: 4px !important; }
+.rounded     { border-radius: 6px !important; }
+.rounded-md  { border-radius: 6px !important; }
+.rounded-lg  { border-radius: 10px !important; }
+.rounded-xl  { border-radius: 14px !important; }
+.rounded-2xl { border-radius: 20px !important; }
+.rounded-full { border-radius: 9999px !important; }
+
+/* Background neutralise */
+body { background-color: #F7F6F3 !important; }
+.bg-\[\#f8fafc\], .bg-gray-50 { background-color: #F7F6F3 !important; }
+
+/* Primary button polish */
+.bg-gray-900 { background-color: #18171A !important; }
+.hover\:bg-gray-800:hover { background-color: #2E2D30 !important; }
+.text-gray-900 { color: #18171A !important; }
+
+/* Card polish */
+.shadow, .shadow-sm { box-shadow: 0 1px 4px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04) !important; }
+.shadow-md { box-shadow: 0 4px 12px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.05) !important; }
+.shadow-lg { box-shadow: 0 8px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06) !important; }
+
+/* Brand accent → near-black */
+[class*="text-primary"], [class*="text-blue"] { color: #18171A !important; }
+[class*="bg-primary-6"], [class*="bg-primary-7"], [class*="bg-primary-8"],
+[class*="bg-primary-9"], [class*="bg-blue-5"], [class*="bg-blue-6"] {
+  background-color: #18171A !important; color: #fff !important;
+}
+[class*="bg-primary-5"]:not([class*="50"]) { background-color: #5A5856 !important; }
+[class*="bg-primary-50"], [class*="bg-primary-100"],
+[class*="bg-blue-50"], [class*="bg-blue-100"] { background-color: #F0EFEB !important; }
+[class*="border-primary"], [class*="border-blue"] { border-color: #CAC8C2 !important; }
+[class*="ring-primary"], [class*="focus\:ring-primary"] { --tw-ring-color: #9A9895 !important; }
+
+/* Badge colour fix: blue badges → neutral */
+.bg-blue-100.text-blue-800, .bg-primary-100.text-primary-700 {
+  background: #EDECE9 !important; color: #18171A !important;
+}
+
+/* Active / selected states */
+[class*="border-b-2"][class*="border-primary"],
+[class*="border-b-2"][class*="border-blue"] { border-color: #18171A !important; }
+
+/* Nav brand */
+.text-primary-700.font-bold, .text-primary-600.font-bold { color: #18171A !important; font-family: 'DM Serif Display', Georgia, serif !important; font-style: italic; }
+
+/* Sidebar active */
+[class*="bg-primary-50"][class*="text-primary-7"] { background: #EDECE9 !important; color: #18171A !important; border-left: 2px solid #18171A; }
+[class*="bg-primary-50"][class*="text-primary-6"] { background: #EDECE9 !important; color: #18171A !important; }
+
+/* Tailwind config primary override (for runtime) */
+</style>
+</head>
+<body>
+    <div id="header" class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="text-gray-800 font-bold text-xl">eaiou</div>
+                <div class="hidden md:flex space-x-6 ml-10">
+                    <span class="text-gray-600 hover:text-gray-700 cursor-pointer">Dashboard</span>
+                    <span class="text-gray-600 hover:text-gray-700 cursor-pointer">My Articles</span>
+                    <span class="text-gray-600 hover:text-gray-700 cursor-pointer">Submit Article</span>
+                    <span class="text-gray-700 font-medium cursor-pointer">Reviews</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-500 hover:text-gray-700">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center">
+                        <span class="text-sm font-medium">JD</span>
+                    </div>
+                    <span class="text-gray-700 hidden md:inline-block">John Doe</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content" class="container mx-auto px-4 py-8">
+        <div class="mb-6">
+            <div class="flex items-center mb-2">
+                <span class="text-gray-700 hover:text-gray-800 cursor-pointer">
+                    <i class="fa-solid fa-arrow-left mr-2"></i>Back to Reviews
+                </span>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-800">Review Decision: Observer Modal Dynamics in Anomalous Contact</h1>
+            <div class="flex items-center mt-2">
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Under Review</span>
+                <span class="text-gray-500 text-sm ml-3">Submission ID: JACS-2023-0042</span>
+                <span class="text-gray-500 text-sm ml-3">Submitted: July 15, 2023</span>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Left column: Review summary -->
+            <div id="review-summary" class="w-full lg:w-2/3">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                    <div class="flex justify-between items-start mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800">Review Summary</h2>
+                        <div class="flex items-center">
+                            <span class="text-sm text-gray-500 mr-2">Last updated: Aug 2, 2023</span>
+                            <button class="text-gray-400 hover:text-gray-600">
+                                <i class="fa-solid fa-arrows-rotate"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="score-summary" class="mb-8">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Aggregate Scores</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div class="bg-secondary-50 rounded-lg p-4 border border-secondary-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-gray-700">Overall Recommendation</span>
+                                    <div class="flex items-center text-yellow-600">
+                                        <i class="fa-solid fa-triangle-exclamation mr-1"></i>
+                                        <span class="text-sm font-medium">Conflicting</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-center h-28">
+                                    <div class="flex flex-col items-center">
+                                        <div class="flex items-center space-x-1 text-sm text-gray-500 mb-2">
+                                            <span class="w-3 h-3 bg-success-500 rounded-full"></span>
+                                            <span>Approve: 1</span>
+                                            <span class="w-3 h-3 bg-warning-500 rounded-full ml-2"></span>
+                                            <span>Major Revision: 1</span>
+                                        </div>
+                                        <div class="relative w-full h-6 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="absolute top-0 left-0 h-full w-1/2 bg-success-500"></div>
+                                            <div class="absolute top-0 left-1/2 h-full w-1/2 bg-warning-500"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-secondary-50 rounded-lg p-4 border border-secondary-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-gray-700">Average Score</span>
+                                    <span class="text-sm text-gray-500">Scale: 1-5</span>
+                                </div>
+                                <div class="flex items-center justify-center h-28">
+                                    <div class="text-center">
+                                        <div class="text-4xl font-bold text-gray-700">3.7</div>
+                                        <div class="text-sm text-gray-500 mt-2">out of 5.0</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="criteria-scores" class="mb-6">
+                            <h4 class="font-medium text-gray-700 mb-3">Criteria Scores</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Scholarly Structure</span>
+                                        <span class="font-medium">4.0</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-gray-900 h-2.5 rounded-full" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Originality</span>
+                                        <span class="font-medium">4.5</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-gray-900 h-2.5 rounded-full" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Literature Grounding</span>
+                                        <span class="font-medium">3.0</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-gray-900 h-2.5 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Methodological Rigor</span>
+                                        <div class="flex items-center">
+                                            <i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-1"></i>
+                                            <span class="font-medium">2.5</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 50%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Results Evidence</span>
+                                        <div class="flex items-center">
+                                            <i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-1"></i>
+                                            <span class="font-medium">3.0</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Discussion Nuance</span>
+                                        <span class="font-medium">4.0</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-gray-900 h-2.5 rounded-full" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Citation Accuracy</span>
+                                        <span class="font-medium">4.5</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-gray-900 h-2.5 rounded-full" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Overall Impact</span>
+                                        <span class="font-medium">4.0</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-gray-900 h-2.5 rounded-full" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="disagreement-analysis" class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                            <h4 class="font-medium text-yellow-800 mb-2 flex items-center">
+                                <i class="fa-solid fa-triangle-exclamation mr-2"></i>
+                                Disagreement Analysis
+                            </h4>
+                            <p class="text-yellow-700 text-sm mb-3">Significant disagreements detected in the following areas:</p>
+                            <div class="space-y-2">
+                                <div class="flex items-start">
+                                    <i class="fa-solid fa-circle text-xs text-yellow-700 mt-1.5 mr-2"></i>
+                                    <div>
+                                        <span class="text-sm font-medium text-yellow-800">Methodological Rigor:</span>
+                                        <span class="text-sm text-yellow-700"> Reviewer 1 scored 4.0, Reviewer 2 scored 1.0</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fa-solid fa-circle text-xs text-yellow-700 mt-1.5 mr-2"></i>
+                                    <div>
+                                        <span class="text-sm font-medium text-yellow-800">Results Evidence:</span>
+                                        <span class="text-sm text-yellow-700"> Reviewer 1 scored 4.5, Reviewer 2 scored 1.5</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fa-solid fa-circle text-xs text-yellow-700 mt-1.5 mr-2"></i>
+                                    <div>
+                                        <span class="text-sm font-medium text-yellow-800">Overall Recommendation:</span>
+                                        <span class="text-sm text-yellow-700"> Reviewer 1 recommends Approve, Reviewer 2 recommends Major Revision</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="reviewer-comments" class="mb-8">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Reviewer Comments</h3>
+                        
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 text-gray-800 flex items-center justify-center mr-2">
+                                        <span class="text-sm font-medium">R1</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Reviewer 1</h4>
+                                        <div class="flex items-center text-xs text-gray-500">
+                                            <span>Submitted: Jul 28, 2023</span>
+                                            <span class="mx-2">•</span>
+                                            <span class="text-success-500 font-medium">Approve</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="text-gray-700 text-sm font-medium hover:text-gray-800">
+                                    View Full Review
+                                </button>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4 bg-white">
+                                <h5 class="font-medium text-gray-800 mb-2">Summary Comments</h5>
+                                <p class="text-gray-700 text-sm mb-4">This is a highly original study that presents a novel approach to observer modal dynamics. The theoretical framework is well-constructed and the speculative elements are clearly marked. The methodology is sound and the results, while preliminary, are promising.</p>
+                                <h5 class="font-medium text-gray-800 mb-2">Key Strengths</h5>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 mb-4">
+                                    <li>Novel theoretical approach to observer modal dynamics</li>
+                                    <li>Clear delineation between established facts and speculative claims</li>
+                                    <li>Well-structured argument flow</li>
+                                    <li>Comprehensive literature review</li>
+                                </ul>
+                                <h5 class="font-medium text-gray-800 mb-2">Areas for Improvement</h5>
+                                <ul class="list-disc pl-5 text-sm text-gray-700">
+                                    <li>Some minor clarifications needed in the methodology section</li>
+                                    <li>Additional examples would strengthen the results section</li>
+                                    <li>Consider expanding on the limitations of the approach</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 text-gray-800 flex items-center justify-center mr-2">
+                                        <span class="text-sm font-medium">R2</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Reviewer 2</h4>
+                                        <div class="flex items-center text-xs text-gray-500">
+                                            <span>Submitted: Jul 30, 2023</span>
+                                            <span class="mx-2">•</span>
+                                            <span class="text-warning-500 font-medium">Major Revision</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="text-gray-700 text-sm font-medium hover:text-gray-800">
+                                    View Full Review
+                                </button>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4 bg-white">
+                                <h5 class="font-medium text-gray-800 mb-2">Summary Comments</h5>
+                                <p class="text-gray-700 text-sm mb-4">While the paper presents an interesting theoretical framework, there are significant methodological concerns that need to be addressed. The results lack sufficient empirical evidence, and many claims remain highly speculative without adequate support.</p>
+                                <h5 class="font-medium text-gray-800 mb-2">Key Strengths</h5>
+                                <ul class="list-disc pl-5 text-sm text-gray-700 mb-4">
+                                    <li>Original theoretical concept</li>
+                                    <li>Well-written and structured paper</li>
+                                    <li>Good use of citations and referencing</li>
+                                </ul>
+                                <h5 class="font-medium text-gray-800 mb-2">Areas for Improvement</h5>
+                                <ul class="list-disc pl-5 text-sm text-gray-700">
+                                    <li>Methodology lacks rigor and needs substantial revision</li>
+                                    <li>Results are not sufficiently supported by evidence</li>
+                                    <li>Too many speculative claims without clear identification</li>
+                                    <li>Need more concrete examples and empirical data</li>
+                                    <li>Discussion should address alternative interpretations</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="editor-notes" class="mb-6">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Editor Notes</h3>
+                        <div class="border border-gray-200 rounded-lg p-4 bg-white">
+                            <textarea class="w-full min-h-[120px] p-3 border border-gray-300 rounded-md text-gray-700 text-sm focus:border-gray-400 focus:ring focus:ring-gray-400 focus:ring-opacity-50" placeholder="Add your editorial notes here. These will not be shared with the author."></textarea>
+                        </div>
+                    </div>
+
+                    <div id="decision-form" class="border border-gray-200 rounded-lg p-6 bg-secondary-50">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Editorial Decision</h3>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Decision</label>
+                            <select class="w-full p-2.5 border border-gray-300 rounded-md text-gray-700 bg-white focus:border-gray-400 focus:ring focus:ring-gray-400 focus:ring-opacity-50">
+                                <option value="">Select a decision</option>
+                                <option value="approve">Approve & Publish</option>
+                                <option value="minor-revision">Request Minor Revision</option>
+                                <option value="major-revision" selected>Request Major Revision</option>
+                                <option value="reject">Reject</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Feedback to Author</label>
+                            <div class="bg-white border border-gray-300 rounded-md p-4 mb-4">
+                                <p class="text-gray-700 text-sm mb-4">Thank you for your submission "Observer Modal Dynamics in Anomalous Contact." We have received reviews from our experts, and while they found your work original and interesting, there are several areas that require significant revision before the manuscript can be accepted.</p>
+                                <p class="text-gray-700 text-sm mb-4">The primary concerns relate to methodological rigor and the evidence supporting your results. One reviewer has recommended major revisions to address these issues.</p>
+                                <p class="text-gray-700 text-sm">Please carefully consider the reviewers' comments and revise your manuscript accordingly. In particular, please address:</p>
+                                <ol class="list-decimal pl-6 text-sm text-gray-700 my-3">
+                                    <li>Strengthen the methodology section with more detailed procedures</li>
+                                    <li>Provide additional empirical evidence to support your results</li>
+                                    <li>Clearly mark speculative claims throughout the manuscript</li>
+                                    <li>Address alternative interpretations in the discussion section</li>
+                                </ol>
+                                <p class="text-gray-700 text-sm">We look forward to receiving your revised manuscript.</p>
+                            </div>
+                            <button class="text-gray-700 text-sm font-medium hover:text-gray-800">
+                                <i class="fa-solid fa-pen-to-square mr-1"></i>
+                                Edit Feedback
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input id="notify-reviewers" type="checkbox" class="h-4 w-4 text-gray-700 border-gray-300 rounded focus:ring-gray-400">
+                                <label for="notify-reviewers" class="ml-2 text-sm text-gray-700">Notify reviewers of decision</label>
+                            </div>
+                            <div class="flex space-x-3">
+                                <button class="py-2 px-4 bg-white border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50">
+                                    Save Draft
+                                </button>
+                                <button class="py-2 px-4 bg-gray-900 text-white rounded-md font-medium hover:bg-gray-900">
+                                    Submit Decision
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right column: Article info and history -->
+            <div id="article-info" class="w-full lg:w-1/3">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Article Information</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-medium text-gray-700 mb-3">Authors</h3>
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 rounded-full bg-secondary-200 flex items-center justify-center mr-3">
+                                <span class="text-secondary-600 font-medium">AB</span>
+                            </div>
+                            <div>
+                                <div class="font-medium text-gray-800">Dr. Alice Brown</div>
+                                <div class="text-sm text-gray-500">University of Science, Dept. of Physics</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-secondary-200 flex items-center justify-center mr-3">
+                                <span class="text-secondary-600 font-medium">RJ</span>
+                            </div>
+                            <div>
+                                <div class="font-medium text-gray-800">Prof. Robert Johnson</div>
+                                <div class="text-sm text-gray-500">Institute of Advanced Studies</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-medium text-gray-700 mb-3">Abstract</h3>
+                        <p class="text-sm text-gray-600">This paper examines the modal dynamics of observer interactions in anomalous contact scenarios. We present a theoretical framework that combines quantum field theory with phenomenological approaches to consciousness. Our methodology includes both computational modeling and qualitative analysis of reported experiences. Results suggest a correlation between observer expectation and modal outcomes, with implications for future research in consciousness studies and quantum mechanics.</p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-medium text-gray-700 mb-3">Article Metadata</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Submission Date:</span>
+                                <span class="text-gray-700">July 15, 2023</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Current Version:</span>
+                                <span class="text-gray-700">1.0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Review Type:</span>
+                                <span class="text-gray-700">Double-blind</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">DOI:</span>
+                                <span class="text-gray-700">10.xxxx/pending</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Word Count:</span>
+                                <span class="text-gray-700">6,842</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Keywords:</span>
+                                <span class="text-gray-700">quantum, consciousness, modal dynamics</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-medium text-gray-700 mb-3">Epistemic Status Tags</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-900 text-xs font-medium px-2.5 py-0.5 rounded-full">Speculative Claims</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Observer-bound</span>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Empirical Evidence</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <button class="w-full flex items-center justify-center py-2 px-4 bg-secondary-100 text-secondary-700 rounded-md text-sm font-medium hover:bg-secondary-200 mb-2">
+                            <i class="fa-regular fa-file-pdf mr-2"></i>
+                            View Full Manuscript
+                        </button>
+                        <button class="w-full flex items-center justify-center py-2 px-4 bg-white border border-gray-300 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-50">
+                            <i class="fa-solid fa-user-plus mr-2"></i>
+                            Assign Additional Reviewer
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Review History</h2>
+                    
+                    <div class="relative">
+                        <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                        
+                        <div class="relative pl-10 pb-6">
+                            <div class="absolute left-0 top-1.5 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center border-2 border-white">
+                                <i class="fa-solid fa-file-arrow-up text-gray-700 text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">Article Submitted</h3>
+                                <div class="text-sm text-gray-500 mb-1">July 15, 2023 at 10:23 AM</div>
+                                <p class="text-sm text-gray-600">Initial submission received from authors</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative pl-10 pb-6">
+                            <div class="absolute left-0 top-1.5 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center border-2 border-white">
+                                <i class="fa-solid fa-user-check text-gray-700 text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">Reviewers Assigned</h3>
+                                <div class="text-sm text-gray-500 mb-1">July 18, 2023 at 2:45 PM</div>
+                                <p class="text-sm text-gray-600">2 reviewers assigned by Editor</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative pl-10 pb-6">
+                            <div class="absolute left-0 top-1.5 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center border-2 border-white">
+                                <i class="fa-solid fa-clipboard-check text-gray-700 text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">Review 1 Received</h3>
+                                <div class="text-sm text-gray-500 mb-1">July 28, 2023 at 9:12 AM</div>
+                                <p class="text-sm text-gray-600">Reviewer 1 recommends: <span class="text-success-500 font-medium">Approve</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative pl-10 pb-6">
+                            <div class="absolute left-0 top-1.5 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center border-2 border-white">
+                                <i class="fa-solid fa-clipboard-check text-gray-700 text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">Review 2 Received</h3>
+                                <div class="text-sm text-gray-500 mb-1">July 30, 2023 at 4:37 PM</div>
+                                <p class="text-sm text-gray-600">Reviewer 2 recommends: <span class="text-warning-500 font-medium">Major Revision</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative pl-10">
+                            <div class="absolute left-0 top-1.5 w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center border-2 border-white">
+                                <i class="fa-solid fa-hourglass-half text-yellow-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">Awaiting Editor Decision</h3>
+                                <div class="text-sm text-gray-500 mb-1">Current Status</div>
+                                <p class="text-sm text-gray-600">All reviews received, editor decision pending</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="reviewer-stats" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Reviewer Statistics</h2>
+                    <div id="review-chart" class="h-64 mb-4"></div>
+                    <div class="text-xs text-gray-500 text-center">
+                        Chart: Comparison of reviewer scores across evaluation criteria
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="footer" class="bg-white border-t border-gray-200 mt-8">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 eaiou. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Help</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Contact</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Highcharts.chart('review-chart', {
+                chart: {
+                    type: 'column',
+                    backgroundColor: 'transparent'
+                },
+                title: {
+                    text: null
+                },
+                xAxis: {
+                    categories: ['Structure', 'Originality', 'Literature', 'Methods', 'Results', 'Discussion', 'Citations', 'Impact'],
+                    labels: {
+                        style: {
+                            fontSize: '10px'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    max: 5,
+                    title: {
+                        text: 'Score'
+                    }
+                },
+                legend: {
+                    itemStyle: {
+                        fontSize: '11px'
+                    }
+                },
+                tooltip: {
+                    shared: true
+                },
+                plotOptions: {
+                    column: {
+                        grouping: false,
+                        shadow: false,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Reviewer 1',
+                    color: '#0ea5e9',
+                    data: [4.5, 5.0, 4.0, 4.0, 4.5, 4.5, 4.5, 4.5]
+                }, {
+                    name: 'Reviewer 2',
+                    color: '#f59e0b',
+                    data: [3.5, 4.0, 2.0, 1.0, 1.5, 3.5, 4.5, 3.5]
+                }]
+            });
+        });
+    </script>
+</body>
+</html>

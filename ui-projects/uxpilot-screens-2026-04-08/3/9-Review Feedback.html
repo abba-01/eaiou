@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#2563eb',
+                        'primary-dark': '#1d4ed8',
+                        'secondary': '#64748b',
+                        'success': '#10b981',
+                        'warning': '#f59e0b',
+                        'danger': '#ef4444',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <header id="header" class="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fa-solid fa-newspaper text-primary text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-gray-800">Academic Journal</span>
+                    </div>
+                    <nav class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <span class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            Submit Article
+                        </span>
+                        <span class="border-primary text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            My Submissions
+                        </span>
+                        <span class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            Reviews
+                        </span>
+                        <span class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            Help
+                        </span>
+                    </nav>
+                </div>
+                <div class="flex items-center">
+                    <div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
+                        <button class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fa-regular fa-bell text-xl"></i>
+                        </button>
+                        <div class="ml-3 relative">
+                            <div class="flex items-center">
+                                <img class="h-8 w-8 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User avatar">
+                                <span class="ml-2 text-sm font-medium text-gray-700">Dr. John Smith</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="pt-16 pb-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-8">
+            <div id="article-review-container" class="bg-white shadow-sm rounded-lg">
+                <div id="article-header" class="p-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                Revision Requested
+                            </span>
+                            <span class="ml-3 text-sm text-gray-500">Submission ID: ACAD-2023-0142</span>
+                        </div>
+                        <div>
+                            <button class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                <i class="fa-solid fa-file-pdf mr-2"></i> Download PDF
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <h1 id="article-title" class="text-2xl font-bold text-gray-900 mb-2">Observer Modal Dynamics in Anomalous Contact</h1>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Speculative</span>
+                        <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Observer-Bound</span>
+                        <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">Theoretical Physics</span>
+                    </div>
+                    
+                    <div class="text-sm text-gray-500">
+                        <p>Submitted: June 15, 2023 • Last Revised: July 28, 2023 • Review Type: Double-blind</p>
+                    </div>
+                </div>
+                
+                <div id="revision-status" class="bg-blue-50 p-4 border-b border-blue-100">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fa-solid fa-circle-info text-blue-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-blue-800">Revision Status</h3>
+                            <div class="mt-2 text-sm text-blue-700">
+                                <p>The editor has requested revisions based on reviewer feedback. Please address all comments and resubmit your article by <strong>August 15, 2023</strong>.</p>
+                            </div>
+                            <div class="mt-4">
+                                <div class="flex items-center">
+                                    <span class="text-sm font-medium text-blue-800 mr-2">Revision Progress:</span>
+                                    <div class="w-48 bg-blue-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: 25%"></div>
+                                    </div>
+                                    <span class="ml-2 text-xs text-blue-800">25% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="editor-directive" class="p-6 border-b border-gray-200">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Editor Directive</h2>
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-pen-to-square text-yellow-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-yellow-800">Major Revision Required</h3>
+                                <div class="mt-2 text-sm text-yellow-700">
+                                    <p>Thank you for your submission. Based on the reviewers' feedback, I am requesting major revisions before your manuscript can be considered for publication. Please address all reviewer comments, particularly those regarding methodological rigor and the speculative nature of certain claims.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div id="editor-comment-1" class="border border-gray-200 rounded-md p-4">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center">
+                                    <div class="bg-purple-100 rounded-full p-2">
+                                        <i class="fa-solid fa-user-pen text-purple-600"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <h4 class="text-sm font-medium text-gray-900">Editor's Note</h4>
+                                        <p class="text-xs text-gray-500">July 30, 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3 text-sm text-gray-700">
+                                <p>The theoretical framework needs substantial strengthening. Both reviewers noted concerns about the speculative nature of the claims in sections 3 and 4. Please clearly distinguish between established theory and your novel contributions, and provide stronger justification for speculative elements.</p>
+                            </div>
+                        </div>
+                        
+                        <div id="editor-checklist" class="border border-gray-200 rounded-md p-4">
+                            <h4 class="text-sm font-medium text-gray-900 mb-3">Revision Checklist</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 relative mt-1">
+                                        <input type="checkbox" class="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                                    </div>
+                                    <p class="ml-2 text-sm text-gray-700">Strengthen the methodological section with clearer procedural details</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 relative mt-1">
+                                        <input type="checkbox" class="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                                    </div>
+                                    <p class="ml-2 text-sm text-gray-700">Address Reviewer #1's concerns about observer-bound claims</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 relative mt-1">
+                                        <input type="checkbox" class="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                                    </div>
+                                    <p class="ml-2 text-sm text-gray-700">Revise the discussion section to better contextualize findings</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 relative mt-1">
+                                        <input type="checkbox" class="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                                    </div>
+                                    <p class="ml-2 text-sm text-gray-700">Clearly label speculative claims throughout the manuscript</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 relative mt-1">
+                                        <input type="checkbox" class="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary">
+                                    </div>
+                                    <p class="ml-2 text-sm text-gray-700">Update references to include recent literature suggested by Reviewer #2</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="reviewer-comments" class="p-6">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Reviewer Comments</h2>
+                    
+                    <div id="reviewer-1-section" class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-medium text-gray-900">Reviewer #1</h3>
+                            <div class="flex items-center">
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 mr-2">Major Revision</span>
+                                <span class="text-sm text-gray-500">Overall Score: 2.5/5</span>
+                            </div>
+                        </div>
+                        
+                        <div id="reviewer-1-comments" class="space-y-4">
+                            <div id="comment-1-1" class="border border-gray-200 rounded-md p-4">
+                                <div class="flex justify-between">
+                                    <h4 class="text-sm font-medium text-gray-900">Scholarly Structure</h4>
+                                    <div class="flex items-center">
+                                        <div class="flex">
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-regular fa-star text-gray-300"></i>
+                                            <i class="fa-regular fa-star text-gray-300"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600">3/5</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2 text-sm text-gray-700">
+                                    <p>The manuscript follows the expected structure of a research article, but the methodology section lacks sufficient detail to allow replication. The introduction provides adequate context, but the literature review misses several key recent publications in this field.</p>
+                                </div>
+                            </div>
+                            
+                            <div id="comment-1-2" class="border border-gray-200 rounded-md p-4">
+                                <div class="flex justify-between">
+                                    <h4 class="text-sm font-medium text-gray-900">Methodological Rigor</h4>
+                                    <div class="flex items-center">
+                                        <div class="flex">
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-regular fa-star text-gray-300"></i>
+                                            <i class="fa-regular fa-star text-gray-300"></i>
+                                            <i class="fa-regular fa-star text-gray-300"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600">2/5</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2 text-sm text-gray-700">
+                                    <p>The methodological approach is problematic. The author claims to use a novel framework but fails to adequately describe the procedural details. The observer-bound claims are particularly concerning as they lack proper controls for observer bias. I recommend a complete revision of this section with clearer procedural details and justification for the chosen methods.</p>
+                                </div>
+                            </div>
+                            
+                            <div id="comment-1-3" class="border border-gray-200 rounded-md p-4">
+                                <div class="flex justify-between">
+                                    <h4 class="text-sm font-medium text-gray-900">Results & Discussion</h4>
+                                    <div class="flex items-center">
+                                        <div class="flex">
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-regular fa-star text-gray-300"></i>
+                                            <i class="fa-regular fa-star text-gray-300"></i>
+                                            <i class="fa-regular fa-star text-gray-300"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600">2/5</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2 text-sm text-gray-700">
+                                    <p>The results section contains interesting findings, but the interpretation in the discussion overreaches what the data supports. The speculative nature of many claims is not adequately labeled as such. The author needs to clearly distinguish between established theory, empirical results, and speculative extensions.</p>
+                                </div>
+                            </div>
+                            
+                            <div id="comment-1-4" class="border border-gray-200 rounded-md p-4 bg-gray-50">
+                                <h4 class="text-sm font-medium text-gray-900 mb-2">Summary Recommendation</h4>
+                                <div class="text-sm text-gray-700">
+                                    <p>This manuscript contains potentially valuable contributions to the field, but requires major revisions before it can be considered for publication. The author needs to substantially strengthen the methodological section, clearly label speculative claims, and revise the discussion to better contextualize the findings within existing literature.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="reviewer-2-section">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-medium text-gray-900">Reviewer #2</h3>
+                            <div class="flex items-center">
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 mr-2">Minor Revision</span>
+                                <span class="text-sm text-gray-500">Overall Score: 4/5</span>
+                            </div>
+                        </div>
+                        
+                        <div id="reviewer-2-comments" class="space-y-4">
+                            <div id="comment-2-1" class="border border-gray-200 rounded-md p-4">
+                                <div class="flex justify-between">
+                                    <h4 class="text-sm font-medium text-gray-900">Originality & Impact</h4>
+                                    <div class="flex items-center">
+                                        <div class="flex">
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600">5/5</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2 text-sm text-gray-700">
+                                    <p>This is a highly original contribution to the field with potentially significant impact. The author presents a novel theoretical framework that challenges existing paradigms in a productive way. The speculative nature of some claims is appropriate given the cutting-edge nature of this research area.</p>
+                                </div>
+                            </div>
+                            
+                            <div id="comment-2-2" class="border border-gray-200 rounded-md p-4">
+                                <div class="flex justify-between">
+                                    <h4 class="text-sm font-medium text-gray-900">Literature Grounding</h4>
+                                    <div class="flex items-center">
+                                        <div class="flex">
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-regular fa-star text-gray-300"></i>
+                                            <i class="fa-regular fa-star text-gray-300"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600">3/5</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2 text-sm text-gray-700">
+                                    <p>The literature review is adequate but could be strengthened. I recommend including the following recent publications that are relevant to this work:</p>
+                                    <ul class="list-disc ml-5 mt-2">
+                                        <li>Zhang et al. (2022) "Modal Dynamics in Theoretical Physics"</li>
+                                        <li>Patel & Rodriguez (2023) "Observer Effects in Quantum Systems"</li>
+                                        <li>Nakamura (2022) "Speculative Frameworks in Modern Physics"</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div id="comment-2-3" class="border border-gray-200 rounded-md p-4">
+                                <div class="flex justify-between">
+                                    <h4 class="text-sm font-medium text-gray-900">Methodological Approach</h4>
+                                    <div class="flex items-center">
+                                        <div class="flex">
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-solid fa-star text-yellow-400"></i>
+                                            <i class="fa-regular fa-star text-gray-300"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600">4/5</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2 text-sm text-gray-700">
+                                    <p>The methodological approach is innovative and generally sound. While I appreciate the novel framework, some additional details would strengthen this section. In particular, the description of how observer effects were measured could be more precise.</p>
+                                </div>
+                            </div>
+                            
+                            <div id="comment-2-4" class="border border-gray-200 rounded-md p-4 bg-gray-50">
+                                <h4 class="text-sm font-medium text-gray-900 mb-2">Summary Recommendation</h4>
+                                <div class="text-sm text-gray-700">
+                                    <p>This is a strong manuscript that makes a valuable contribution to the field. I recommend minor revisions to address the literature gaps and methodological clarifications noted above. The author should also consider more clearly labeling speculative claims, though I find the speculative elements to be appropriate and valuable in this context.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="revision-actions" class="p-6 bg-gray-50 border-t border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary mr-3">
+                                <i class="fa-regular fa-file-lines mr-2"></i> View Original Submission
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary mr-3">
+                                <i class="fa-regular fa-message mr-2"></i> Contact Editor
+                            </button>
+                            <button type="button" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                Submit Revision <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="response-section" class="mt-6 bg-white shadow-sm rounded-lg p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Response to Reviewers</h2>
+                <p class="text-sm text-gray-600 mb-4">Prepare your response to reviewer comments. Be specific about changes made to address each point.</p>
+                
+                <div class="mb-6">
+                    <label for="response-text" class="block text-sm font-medium text-gray-700 mb-1">Response Letter</label>
+                    <textarea id="response-text" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border" placeholder="Dear Editor, Thank you for the opportunity to revise our manuscript. We have addressed the reviewers' comments as follows:"></textarea>
+                </div>
+                
+                <div class="border-t border-gray-200 pt-4">
+                    <h3 class="text-md font-medium text-gray-900 mb-3">Response to Specific Comments</h3>
+                    
+                    <div id="response-reviewer-1" class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Reviewer #1</h4>
+                        
+                        <div class="border border-gray-200 rounded-md mb-3">
+                            <div class="p-3 bg-gray-50 border-b border-gray-200">
+                                <p class="text-sm text-gray-700"><strong>Comment:</strong> The methodological approach is problematic. The author claims to use a novel framework but fails to adequately describe the procedural details.</p>
+                            </div>
+                            <div class="p-3">
+                                <label for="response-1-1" class="block text-sm font-medium text-gray-700 mb-1">Your Response</label>
+                                <textarea id="response-1-1" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="We thank the reviewer for this observation. We have revised the methodology section to..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-md">
+                            <div class="p-3 bg-gray-50 border-b border-gray-200">
+                                <p class="text-sm text-gray-700"><strong>Comment:</strong> The results section contains interesting findings, but the interpretation in the discussion overreaches what the data supports.</p>
+                            </div>
+                            <div class="p-3">
+                                <label for="response-1-2" class="block text-sm font-medium text-gray-700 mb-1">Your Response</label>
+                                <textarea id="response-1-2" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="We appreciate this feedback and have revised the discussion section to..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="response-reviewer-2">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Reviewer #2</h4>
+                        
+                        <div class="border border-gray-200 rounded-md mb-3">
+                            <div class="p-3 bg-gray-50 border-b border-gray-200">
+                                <p class="text-sm text-gray-700"><strong>Comment:</strong> The literature review is adequate but could be strengthened. I recommend including the following recent publications...</p>
+                            </div>
+                            <div class="p-3">
+                                <label for="response-2-1" class="block text-sm font-medium text-gray-700 mb-1">Your Response</label>
+                                <textarea id="response-2-1" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="Thank you for suggesting these relevant references. We have incorporated them into our literature review and..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-md">
+                            <div class="p-3 bg-gray-50 border-b border-gray-200">
+                                <p class="text-sm text-gray-700"><strong>Comment:</strong> While I appreciate the novel framework, some additional details would strengthen this section.</p>
+                            </div>
+                            <div class="p-3">
+                                <label for="response-2-2" class="block text-sm font-medium text-gray-700 mb-1">Your Response</label>
+                                <textarea id="response-2-2" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="We have added more details to the methodological section to address this concern..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary mr-3">
+                        Save Draft
+                    </button>
+                    <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                        Include with Revision
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer" class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Academic Journal</h3>
+                    <p class="text-gray-400 text-sm">A platform for publishing peer-reviewed academic articles across various disciplines.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><span class="hover:text-white cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Publication Ethics</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Contact Editorial Office</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><span class="hover:text-white cursor-pointer">Help Center</span></li>
+                        <li><span class="hover:text-white cursor-pointer">FAQ</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Privacy Policy</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Terms of Service</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-sm text-gray-400 flex flex-col md:flex-row justify-between items-center">
+                <p>© 2023 Academic Journal. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-twitter"></i></span>
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-facebook"></i></span>
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-linkedin"></i></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+<style>body { padding-bottom: 50px !important; }</style>
+
+<!-- EAIOU NAV BAR -->
+<div id="eaiou-nav" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(15,23,42,0.95);backdrop-filter:blur(10px);padding:8px 12px;display:flex;gap:6px;overflow-x:auto;align-items:center;border-top:2px solid #0ea5e9;"><span style="color:#38bdf8;font-weight:700;font-size:12px;font-family:Inter,sans-serif;margin-right:8px;white-space:nowrap;">EAIOU</span><a href="2-Author Status View.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-house" style="margin-right:4px;font-size:10px;"></i>Dashboard</a><a href="6-Author Submission.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-file-arrow-up" style="margin-right:4px;font-size:10px;"></i>Submit</a><a href="3-Submission Metadata.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-tags" style="margin-right:4px;font-size:10px;"></i>Metadata</a><a href="5-Editor Decision Interface.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-gavel" style="margin-right:4px;font-size:10px;"></i>Editor</a><a href="10-Reviewer Assignment.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-user-check" style="margin-right:4px;font-size:10px;"></i>Reviewers</a><a href="7-Reviewer Review Submission.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-pen-to-square" style="margin-right:4px;font-size:10px;"></i>Review</a><a href="9-Review Feedback.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;background:#0ea5e9;color:white;color:white;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='#0ea5e9';this.style.color='white';"><i class="fa-solid fa-comments" style="margin-right:4px;font-size:10px;"></i>Feedback</a><a href="4-Notification Templates.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-bell" style="margin-right:4px;font-size:10px;"></i>Notifications</a><a href="8-Admin Configuration.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-gear" style="margin-right:4px;font-size:10px;"></i>Admin</a><a href="18-The public facing article for.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-newspaper" style="margin-right:4px;font-size:10px;"></i>Article</a><a href="../uxpilot-export-1775634389622/2-Homepage Dashboard.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-globe" style="margin-right:4px;font-size:10px;"></i>PT: Home</a><a href="../uxpilot-export-1775634389622/1-Article Reading Interface.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-book-open" style="margin-right:4px;font-size:10px;"></i>PT: Read</a><a href="../uxpilot-export-1775634389622/4-Search Results.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-magnifying-glass" style="margin-right:4px;font-size:10px;"></i>PT: Search</a><a href="../uxpilot-export-1775634389622/5-Article Submission Interface.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-paper-plane" style="margin-right:4px;font-size:10px;"></i>PT: Submit</a><a href="../uxpilot-export-1775634389622/6-Review Dashboard.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-clipboard-check" style="margin-right:4px;font-size:10px;"></i>PT: Reviews</a><a href="../uxpilot-export-1775634389622/7-Review Process.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-arrows-spin" style="margin-right:4px;font-size:10px;"></i>PT: Process</a><a href="../uxpilot-export-1775634389622/8-Notification Center.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-tower-broadcast" style="margin-right:4px;font-size:10px;"></i>PT: Alerts</a></div>
+<!-- /EAIOU NAV BAR -->
+</body>
+</html>

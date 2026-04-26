@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="bg-white shadow-sm border-b">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <i class="fa-solid fa-brain text-neutral-800 text-2xl mr-3"></i>
+      <h1 class="text-xl text-neutral-800">AI Research Assistant</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-bell mr-2"></i>
+        <span class="relative">
+          Notifications
+          <span class="absolute -top-1 -right-2 bg-neutral-800 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+        </span>
+      </button>
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-question-circle mr-2"></i>
+        Help
+      </button>
+      <div class="relative">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full cursor-pointer"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="flex h-[800px] bg-neutral-50">
+  <div id="sidebar" class="w-64 bg-white border-r">
+    <div class="p-4">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-sm text-neutral-500">WORKSPACE</h2>
+        <button class="text-neutral-400 hover:text-neutral-600">
+          <i class="fa-solid fa-cog"></i>
+        </button>
+      </div>
+      
+      <nav class="space-y-1">
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tachometer-alt mr-3 text-neutral-400"></i>
+          Dashboard
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-folder mr-3 text-neutral-400"></i>
+          Projects
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-file-alt mr-3 text-neutral-400"></i>
+          Articles
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tasks mr-3 text-neutral-400"></i>
+          Tasks
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm bg-neutral-100 text-neutral-900 rounded-md cursor-pointer">
+          <i class="fa-solid fa-cogs mr-3 text-neutral-700"></i>
+          Settings
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-users mr-3 text-neutral-400"></i>
+          User Management
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-chart-bar mr-3 text-neutral-400"></i>
+          Analytics
+        </span>
+      </nav>
+    </div>
+  </div>
+
+  <div id="content" class="flex-1 overflow-auto p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl text-neutral-800">AI Model Management</h1>
+      <button class="px-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 flex items-center">
+        <i class="fa-solid fa-plus mr-2"></i>
+        Add New Model
+      </button>
+    </div>
+
+    <div class="grid grid-cols-12 gap-6">
+      <div class="col-span-12 lg:col-span-3">
+        <div class="bg-white rounded-lg shadow-sm p-4 sticky top-4">
+          <h3 class="text-sm text-neutral-500 mb-4">SETTINGS NAVIGATION</h3>
+          <div class="space-y-1">
+            <button class="w-full text-left px-3 py-2 text-sm rounded-md bg-neutral-800 text-white">
+              <i class="fa-solid fa-robot mr-2"></i>
+              AI Models
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-project-diagram mr-2"></i>
+              Project Settings
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-file-alt mr-2"></i>
+              Article Templates
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-shield-alt mr-2"></i>
+              Security
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-database mr-2"></i>
+              Data Storage
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-key mr-2"></i>
+              API Keys
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-bell mr-2"></i>
+              Notifications
+            </button>
+            <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100">
+              <i class="fa-solid fa-user-lock mr-2"></i>
+              Access Control
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 lg:col-span-9 space-y-6">
+        <div id="model-tabs" class="bg-white rounded-lg shadow-sm">
+          <div class="flex border-b">
+            <button class="px-6 py-3 text-sm border-b-2 border-neutral-800 text-neutral-800">
+              Models
+            </button>
+            <button class="px-6 py-3 text-sm text-neutral-500 hover:text-neutral-700">
+              Instructions
+            </button>
+            <button class="px-6 py-3 text-sm text-neutral-500 hover:text-neutral-700">
+              Knowledge Base
+            </button>
+            <button class="px-6 py-3 text-sm text-neutral-500 hover:text-neutral-700">
+              OMMP Format
+            </button>
+          </div>
+          
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex">
+                <div class="relative mr-4">
+                  <input type="text" placeholder="Search models..." class="pl-9 pr-4 py-2 border border-neutral-300 rounded-md text-sm w-64">
+                  <i class="fa-solid fa-search absolute left-3 top-2.5 text-neutral-400"></i>
+                </div>
+                <select class="border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>All Models</option>
+                  <option>Active</option>
+                  <option>Maintenance</option>
+                  <option>Disabled</option>
+                </select>
+              </div>
+              <div class="flex space-x-2">
+                <button class="px-3 py-2 text-sm border border-neutral-300 rounded-md hover:bg-neutral-50">
+                  <i class="fa-solid fa-filter mr-1"></i>
+                  Filter
+                </button>
+                <button class="px-3 py-2 text-sm border border-neutral-300 rounded-md hover:bg-neutral-50">
+                  <i class="fa-solid fa-sort mr-1"></i>
+                  Sort
+                </button>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                      <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-neutral-800">UX Pilot Opus</h3>
+                      <p class="text-sm text-neutral-500">UX Pilot AI</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">Active</span>
+                    <div class="flex space-x-2">
+                      <button class="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded">
+                        <i class="fa-solid fa-pencil"></i>
+                      </button>
+                      <button class="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded">
+                        <i class="fa-solid fa-copy"></i>
+                      </button>
+                      <button class="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded">
+                        <i class="fa-solid fa-trash-alt"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">API ENDPOINT</h4>
+                    <p class="text-sm text-neutral-800">https://api.UX Pilot AI.com/v1/messages</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">API KEY</h4>
+                    <div class="flex items-center">
+                      <p class="text-sm text-neutral-800">••••••••••••••••••••••••</p>
+                      <button class="ml-2 text-neutral-400 hover:text-neutral-600">
+                        <i class="fa-solid fa-eye"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">MAX TOKENS</h4>
+                    <p class="text-sm text-neutral-800">200,000</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">COST PER 1K TOKENS</h4>
+                    <p class="text-sm text-neutral-800">$15.00 / $75.00 (Input/Output)</p>
+                  </div>
+                </div>
+                
+                <div class="mt-4">
+                  <h4 class="text-xs text-neutral-500 mb-1">MODEL CAPABILITIES</h4>
+                  <div class="flex flex-wrap gap-2 mt-1">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Academic Writing</span>
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Scientific Research</span>
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Literature Review</span>
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Data Analysis</span>
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Complex Reasoning</span>
+                  </div>
+                </div>
+                
+                <div class="mt-4 flex justify-end">
+                  <button class="px-3 py-1.5 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md">
+                    <i class="fa-solid fa-sliders mr-1"></i>
+                    Configure Parameters
+                  </button>
+                </div>
+              </div>
+              
+              <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                      <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-neutral-800">UX Pilot Sonnet</h3>
+                      <p class="text-sm text-neutral-500">UX Pilot AI</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">Active</span>
+                    <div class="flex space-x-2">
+                      <button class="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded">
+                        <i class="fa-solid fa-pencil"></i>
+                      </button>
+                      <button class="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded">
+                        <i class="fa-solid fa-copy"></i>
+                      </button>
+                      <button class="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded">
+                        <i class="fa-solid fa-trash-alt"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">API ENDPOINT</h4>
+                    <p class="text-sm text-neutral-800">https://api.UX Pilot AI.com/v1/messages</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">API KEY</h4>
+                    <div class="flex items-center">
+                      <p class="text-sm text-neutral-800">••••••••••••••••••••••••</p>
+                      <button class="ml-2 text-neutral-400 hover:text-neutral-600">
+                        <i class="fa-solid fa-eye"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">MAX TOKENS</h4>
+                    <p class="text-sm text-neutral-800">180,000</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">COST PER 1K TOKENS</h4>
+                    <p class="text-sm text-neutral-800">$3.00 / $15.00 (Input/Output)</p>
+                  </div>
+                </div>
+                
+                <div class="mt-4">
+                  <h4 class="text-xs text-neutral-500 mb-1">MODEL CAPABILITIES</h4>
+                  <div class="flex flex-wrap gap-2 mt-1">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Academic Writing</span>
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Scientific Research</span>
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Literature Review</span>
+                  </div>
+                </div>
+                
+                <div class="mt-4 flex justify-end">
+                  <button class="px-3 py-1.5 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md">
+                    <i class="fa-solid fa-sliders mr-1"></i>
+                    Configure Parameters
+                  </button>
+                </div>
+              </div>
+              
+              <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <div class="bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                      <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-neutral-800">GPT-4o</h3>
+                      <p class="text-sm text-neutral-500">UX Pilot AI</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-3">Maintenance</span>
+                    <div class="flex space-x-2">
+                      <button class="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded">
+                        <i class="fa-solid fa-pencil"></i>
+                      </button>
+                      <button class="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded">
+                        <i class="fa-solid fa-copy"></i>
+                      </button>
+                      <button class="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded">
+                        <i class="fa-solid fa-trash-alt"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">API ENDPOINT</h4>
+                    <p class="text-sm text-neutral-800">https://api.UX Pilot AI.com/v1/chat/completions</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">API KEY</h4>
+                    <div class="flex items-center">
+                      <p class="text-sm text-neutral-800">••••••••••••••••••••••••</p>
+                      <button class="ml-2 text-neutral-400 hover:text-neutral-600">
+                        <i class="fa-solid fa-eye"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">MAX TOKENS</h4>
+                    <p class="text-sm text-neutral-800">128,000</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs text-neutral-500 mb-1">COST PER 1K TOKENS</h4>
+                    <p class="text-sm text-neutral-800">$5.00 / $15.00 (Input/Output)</p>
+                  </div>
+                </div>
+                
+                <div class="mt-4">
+                  <h4 class="text-xs text-neutral-500 mb-1">MODEL CAPABILITIES</h4>
+                  <div class="flex flex-wrap gap-2 mt-1">
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Academic Writing</span>
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Scientific Research</span>
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Data Analysis</span>
+                    <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-md">Coding</span>
+                  </div>
+                </div>
+                
+                <div class="mt-4 flex justify-end">
+                  <button class="px-3 py-1.5 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md">
+                    <i class="fa-solid fa-sliders mr-1"></i>
+                    Configure Parameters
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="model-form" class="bg-white rounded-lg shadow-sm p-6">
+          <h2 class="text-xl text-neutral-800 mb-6">Add New AI Model</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Model Name*</label>
+              <input type="text" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="e.g., UX Pilot 3 Opus">
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Provider*</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>UX Pilot AI</option>
+                <option>UX Pilot AI</option>
+                <option>Google</option>
+                <option>Cohere</option>
+                <option>Mistral AI</option>
+                <option>Other</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">API Endpoint*</label>
+              <input type="text" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="https://api.example.com/v1/messages">
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">API Key*</label>
+              <div class="relative">
+                <input type="password" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="Enter your API key">
+                <button class="absolute right-2 top-2 text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Model Version</label>
+              <input type="text" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="e.g., 1.0, 2023-05, etc.">
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Status</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>Active</option>
+                <option>Maintenance</option>
+                <option>Disabled</option>
+                <option>Testing</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Max Input Tokens</label>
+              <input type="number" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="e.g., 200000">
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Max Output Tokens</label>
+              <input type="number" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="e.g., 4096">
+            </div>
+            
+            <div class="md:col-span-2">
+              <label class="block text-sm text-neutral-700 mb-1">Cost Structure</label>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs text-neutral-500 mb-1">Input Cost (per 1K tokens)</label>
+                  <div class="flex items-center">
+                    <span class="text-sm mr-2">$</span>
+                    <input type="number" step="0.01" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="e.g., 10.00">
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs text-neutral-500 mb-1">Output Cost (per 1K tokens)</label>
+                  <div class="flex items-center">
+                    <span class="text-sm mr-2">$</span>
+                    <input type="number" step="0.01" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="e.g., 30.00">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="md:col-span-2">
+              <label class="block text-sm text-neutral-700 mb-1">Model Capabilities</label>
+              <div class="border border-neutral-300 rounded-md p-4">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <div class="flex items-center">
+                    <input type="checkbox" id="cap-academic" class="h-4 w-4 rounded border-neutral-300 mr-2">
+                    <label for="cap-academic" class="text-sm text-neutral-700">Academic Writing</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input type="checkbox" id="cap-scientific" class="h-4 w-4 rounded border-neutral-300 mr-2">
+                    <label for="cap-scientific" class="text-sm text-neutral-700">Scientific Research</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input type="checkbox" id="cap-literature" class="h-4 w-4 rounded border-neutral-300 mr-2">
+                    <label for="cap-literature" class="text-sm text-neutral-700">Literature Review</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input type="checkbox" id="cap-data" class="h-4 w-4 rounded border-neutral-300 mr-2">
+                    <label for="cap-data" class="text-sm text-neutral-700">Data Analysis</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input type="checkbox" id="cap-coding" class="h-4 w-4 rounded border-neutral-300 mr-2">
+                    <label for="cap-coding" class="text-sm text-neutral-700">Coding</label>
+                  </div>
+                  <div class="flex items-center">
+                    <input type="checkbox" id="cap-reasoning" class="h-4 w-4 rounded border-neutral-300 mr-2">
+                    <label for="cap-reasoning" class="text-sm text-neutral-700">Complex Reasoning</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="md:col-span-2">
+              <label class="block text-sm text-neutral-700 mb-1">Description</label>
+              <textarea class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm h-24" placeholder="Describe the model and its specific use cases..."></textarea>
+            </div>
+          </div>
+          
+          <div class="mt-6 flex justify-end space-x-3">
+            <button class="px-4 py-2 border border-neutral-300 text-neutral-700 rounded-md hover:bg-neutral-50 text-sm">
+              Cancel
+            </button>
+            <button class="px-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 text-sm">
+              Save Model
+            </button>
+          </div>
+        </div>
+
+        <div id="knowledge-base-section" class="bg-white rounded-lg shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl text-neutral-800">OMMP Knowledge Base Integration</h2>
+            <button class="px-3 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 flex items-center text-sm">
+              <i class="fa-solid fa-sync-alt mr-2"></i>
+              Sync Knowledge Base
+            </button>
+          </div>
+          
+          <div class="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+            <div class="flex items-start">
+              <i class="fa-solid fa-info-circle text-neutral-500 mt-1 mr-3"></i>
+              <div>
+                <h3 class="text-sm text-neutral-800">About OMMP Format</h3>
+                <p class="text-sm text-neutral-600 mt-1">The Open Metamodal Platform (OMMP) format is a machine-readable, minified, and indexed format for storing and retrieving knowledge. Learn more at <span class="text-neutral-800 underline cursor-pointer">metamodalplatform.org</span>.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Knowledge Base Status</label>
+              <div class="flex items-center">
+                <span class="inline-block w-3 h-3 bg-neutral-500 rounded-full mr-2"></span>
+                <span class="text-sm text-neutral-700">Connected and Synced (Last update: July 5, 2025)</span>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Total Indexed Documents</label>
+              <p class="text-sm text-neutral-800">1,243 documents (87.5 MB)</p>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Indexing Method</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>OMMP Standard (Recommended)</option>
+                <option>Vector Embedding</option>
+                <option>Hybrid Approach</option>
+                <option>Custom Schema</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Update Frequency</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>Real-time</option>
+                <option>Hourly</option>
+                <option>Daily</option>
+                <option>Weekly</option>
+                <option>Manual only</option>
+              </select>
+            </div>
+            
+            <div class="md:col-span-2">
+              <label class="block text-sm text-neutral-700 mb-1">Knowledge Base Sources</label>
+              <div class="border border-neutral-300 rounded-md divide-y">
+                <div class="p-3 flex justify-between items-center">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-folder text-neutral-500 mr-2"></i>
+                    <span class="text-sm text-neutral-700">Research Papers</span>
+                  </div>
+                  <span class="text-xs text-neutral-500">512 documents</span>
+                </div>
+                <div class="p-3 flex justify-between items-center">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-folder text-neutral-500 mr-2"></i>
+                    <span class="text-sm text-neutral-700">Project History</span>
+                  </div>
+                  <span class="text-xs text-neutral-500">328 documents</span>
+                </div>
+                <div class="p-3 flex justify-between items-center">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-folder text-neutral-500 mr-2"></i>
+                    <span class="text-sm text-neutral-700">Academic Standards</span>
+                  </div>
+                  <span class="text-xs text-neutral-500">156 documents</span>
+                </div>
+                <div class="p-3 flex justify-between items-center">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-folder text-neutral-500 mr-2"></i>
+                    <span class="text-sm text-neutral-700">Conversation History</span>
+                  </div>
+                  <span class="text-xs text-neutral-500">247 documents</span>
+                </div>
+              </div>
+              <div class="mt-2 flex justify-end">
+                <button class="text-sm text-neutral-700 hover:text-neutral-900 flex items-center">
+                  <i class="fa-solid fa-plus mr-1"></i>
+                  Add Source
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-white border-t mt-auto">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="text-sm text-neutral-500">
+        © 2025 AI Research Assistant | Joomla 5.3 Component
+      </div>
+      <div class="flex space-x-4 mt-2 md:mt-0">
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Privacy Policy</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Terms of Service</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Contact Support</span>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

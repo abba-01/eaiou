@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1a56db',
+                        'primary-dark': '#1245b5',
+                        'secondary': '#6b7280',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 flex items-center justify-between px-4 py-2">
+        <div class="flex items-center space-x-4">
+            <button class="text-gray-700 hover:text-gray-900">
+                <i class="fa-solid fa-arrow-left text-xl"></i>
+            </button>
+            <h1 class="text-lg font-semibold text-gray-800">Article Submission</h1>
+        </div>
+        <div class="flex items-center space-x-2">
+            <button class="flex items-center justify-center px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                <i class="fa-regular fa-floppy-disk mr-2"></i>
+                Save Draft
+            </button>
+            <button class="px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                Submit for Review
+            </button>
+        </div>
+    </div>
+
+    <div id="submission-form" class="max-w-5xl mx-auto pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+        <div id="form-header" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Article Submission Form</h2>
+                <p class="text-gray-600">Complete all required fields below to submit your article for peer review. Fields marked with an asterisk (*) are required.</p>
+                <div class="mt-4 flex items-center text-sm text-gray-500">
+                    <span class="flex items-center mr-4">
+                        <i class="fa-solid fa-circle-info mr-1 text-primary"></i>
+                        Your article will be reviewed by peers before publication
+                    </span>
+                    <span class="flex items-center">
+                        <i class="fa-regular fa-clock mr-1"></i>
+                        Estimated completion time: 15-20 minutes
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="article-metadata" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Article Metadata</h3>
+                
+                <div class="mb-6">
+                    <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+                    <input type="text" id="title" name="title" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter article title" required>
+                </div>
+                
+                <div id="authors-section" class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Authors *</label>
+                    <div id="author-1" class="bg-gray-50 p-4 rounded-md mb-3">
+                        <div class="flex flex-wrap gap-4">
+                            <div class="w-full md:w-[calc(50%-0.5rem)]">
+                                <label for="author-name-1" class="block text-xs font-medium text-gray-500 mb-1">Full Name</label>
+                                <input type="text" id="author-name-1" name="authors[0][name]" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="e.g., John Smith">
+                            </div>
+                            <div class="w-full md:w-[calc(50%-0.5rem)]">
+                                <label for="author-email-1" class="block text-xs font-medium text-gray-500 mb-1">Email</label>
+                                <input type="email" id="author-email-1" name="authors[0][email]" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="e.g., john.smith@example.com">
+                            </div>
+                            <div class="w-full md:w-[calc(50%-0.5rem)]">
+                                <label for="author-affiliation-1" class="block text-xs font-medium text-gray-500 mb-1">Affiliation</label>
+                                <input type="text" id="author-affiliation-1" name="authors[0][affiliation]" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="e.g., University of Science">
+                            </div>
+                            <div class="w-full md:w-[calc(50%-0.5rem)]">
+                                <label for="author-orcid-1" class="block text-xs font-medium text-gray-500 mb-1">ORCID ID (optional)</label>
+                                <input type="text" id="author-orcid-1" name="authors[0][orcid]" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="e.g., 0000-0002-1825-0097">
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <label for="author-contribution-1" class="block text-xs font-medium text-gray-500 mb-1">Contribution Statement</label>
+                            <textarea id="author-contribution-1" name="authors[0][contribution]" rows="2" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Describe this author's contribution to the article"></textarea>
+                        </div>
+                    </div>
+                    
+                    <button id="add-author-btn" class="flex items-center text-primary hover:text-primary-dark text-sm font-medium">
+                        <i class="fa-solid fa-plus mr-1"></i>
+                        Add another author
+                    </button>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="corresponding-author" class="block text-sm font-medium text-gray-700 mb-1">Corresponding Author *</label>
+                    <select id="corresponding-author" name="corresponding_author" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="0">Author 1</option>
+                    </select>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="keywords" class="block text-sm font-medium text-gray-700 mb-1">Keywords (comma separated) *</label>
+                    <input type="text" id="keywords" name="keywords" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="e.g., machine learning, artificial intelligence, neural networks">
+                </div>
+                
+                <div class="mb-6">
+                    <label for="review-preference" class="block text-sm font-medium text-gray-700 mb-1">Review Anonymity Preference</label>
+                    <select id="review-preference" name="review_preference" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="double-blind">Double-blind (Authors and reviewers are anonymous)</option>
+                        <option value="single-blind">Single-blind (Reviewers are anonymous)</option>
+                        <option value="open">Open review (No anonymity)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="article-content" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Article Content</h3>
+                
+                <div class="mb-6">
+                    <label for="abstract" class="block text-sm font-medium text-gray-700 mb-1">Abstract *</label>
+                    <p class="text-xs text-gray-500 mb-2">Provide a concise summary of your article (150-250 words)</p>
+                    <textarea id="abstract" name="abstract" rows="4" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your abstract here..."></textarea>
+                    <div class="text-xs text-gray-500 mt-1 text-right">0/250 words</div>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="introduction" class="block text-sm font-medium text-gray-700 mb-1">Introduction *</label>
+                    <p class="text-xs text-gray-500 mb-2">Provide background information and state the purpose of your research</p>
+                    <textarea id="introduction" name="introduction" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your introduction here..."></textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="literature-review" class="block text-sm font-medium text-gray-700 mb-1">Literature Review *</label>
+                    <p class="text-xs text-gray-500 mb-2">Summarize relevant previous research and theoretical foundations</p>
+                    <textarea id="literature-review" name="literature_review" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your literature review here..."></textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="methodology" class="block text-sm font-medium text-gray-700 mb-1">Methodology *</label>
+                    <p class="text-xs text-gray-500 mb-2">Describe your research design, data collection methods, and analysis techniques</p>
+                    <textarea id="methodology" name="methodology" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your methodology here..."></textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="results" class="block text-sm font-medium text-gray-700 mb-1">Results *</label>
+                    <p class="text-xs text-gray-500 mb-2">Present your findings without interpretation</p>
+                    <textarea id="results" name="results" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your results here..."></textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="discussion" class="block text-sm font-medium text-gray-700 mb-1">Discussion *</label>
+                    <p class="text-xs text-gray-500 mb-2">Interpret your results and explain their significance</p>
+                    <textarea id="discussion" name="discussion" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your discussion here..."></textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="conclusion" class="block text-sm font-medium text-gray-700 mb-1">Conclusion *</label>
+                    <p class="text-xs text-gray-500 mb-2">Summarize key findings and implications</p>
+                    <textarea id="conclusion" name="conclusion" rows="4" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your conclusion here..."></textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="references" class="block text-sm font-medium text-gray-700 mb-1">References (APA7 Format) *</label>
+                    <p class="text-xs text-gray-500 mb-2">List all sources cited in your article following APA 7th edition format</p>
+                    <textarea id="references" name="references" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your references here..."></textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="appendices" class="block text-sm font-medium text-gray-700 mb-1">Appendices (optional)</label>
+                    <p class="text-xs text-gray-500 mb-2">Include supplementary materials, tables, or figures</p>
+                    <textarea id="appendices" name="appendices" rows="4" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter any appendices here..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div id="additional-information" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Additional Information</h3>
+                
+                <div class="mb-6">
+                    <label for="contribution-statement" class="block text-sm font-medium text-gray-700 mb-1">Contribution Statement *</label>
+                    <p class="text-xs text-gray-500 mb-2">Describe the contributions of each author to the article</p>
+                    <textarea id="contribution-statement" name="contribution_statement" rows="4" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter the contribution statement here..."></textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">AI Assistance Disclosure *</label>
+                    <p class="text-xs text-gray-500 mb-2">Indicate if AI tools (e.g., UX Pilot) were used in the preparation of this article</p>
+                    
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="ai-yes" name="ai_assistance" value="yes" class="mr-2">
+                        <label for="ai-yes" class="text-sm text-gray-700">Yes, AI tools were used</label>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="radio" id="ai-no" name="ai_assistance" value="no" class="mr-2">
+                        <label for="ai-no" class="text-sm text-gray-700">No, AI tools were not used</label>
+                    </div>
+                    
+                    <div id="ai-disclosure" class="mt-3 hidden">
+                        <label for="ai-details" class="block text-xs font-medium text-gray-500 mb-1">Please describe how AI tools were used</label>
+                        <textarea id="ai-details" name="ai_details" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Describe how AI tools were used in the preparation of this article..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Epistemic Status Flags *</label>
+                    <p class="text-xs text-gray-500 mb-2">Indicate the epistemic status of claims made in your article</p>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="flag-empirical" name="epistemic_flags[]" value="empirical" class="mr-2">
+                            <label for="flag-empirical" class="text-sm text-gray-700">Empirical (based on data)</label>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input type="checkbox" id="flag-theoretical" name="epistemic_flags[]" value="theoretical" class="mr-2">
+                            <label for="flag-theoretical" class="text-sm text-gray-700">Theoretical</label>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input type="checkbox" id="flag-speculative" name="epistemic_flags[]" value="speculative" class="mr-2">
+                            <label for="flag-speculative" class="text-sm text-gray-700">Speculative</label>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input type="checkbox" id="flag-observer" name="epistemic_flags[]" value="observer-bound" class="mr-2">
+                            <label for="flag-observer" class="text-sm text-gray-700">Observer-bound</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="additional-notes" class="block text-sm font-medium text-gray-700 mb-1">Additional Notes for Reviewers (optional)</label>
+                    <textarea id="additional-notes" name="additional_notes" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter any additional notes for reviewers..."></textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="terms-agreement" name="terms_agreement" class="mr-2" required>
+                        <label for="terms-agreement" class="text-sm text-gray-700">I confirm that this article is original, has not been published elsewhere, and complies with the journal's submission guidelines *</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="form-actions" class="flex justify-between items-center">
+            <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                Save as Draft
+            </button>
+            <div>
+                <button class="mr-3 px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    Preview
+                </button>
+                <button class="px-6 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                    Submit for Review
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Show/hide AI disclosure section based on radio selection
+        document.getElementById('ai-yes').addEventListener('change', function() {
+            document.getElementById('ai-disclosure').classList.remove('hidden');
+        });
+        
+        document.getElementById('ai-no').addEventListener('change', function() {
+            document.getElementById('ai-disclosure').classList.add('hidden');
+        });
+        
+        // Add author functionality would be implemented here
+        document.getElementById('add-author-btn').addEventListener('click', function() {
+            // This would add another author form section
+            alert('Add author functionality would be implemented here');
+        });
+    </script>
+</body>
+</html>

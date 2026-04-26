@@ -1,0 +1,972 @@
+
+              <html class="">
+                
+  <head>
+    
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest', // Options: 'nest', 'remove', 'replace'
+      };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+<style>
+  * {
+    font-family: "{{font}}", sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+    
+<style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+</style>
+
+    
+<style>
+   :root {
+          /* Base colors */
+          --color-base: #ffffff;
+          --color-base-50: #f9fafb;
+          --color-base-100: #f3f4f6;
+          --color-base-200: #e5e7eb;
+          --color-base-300: #d1d5db;
+          --color-base-400: #9ca3af;
+          --color-base-500: #6b7280;
+          --color-base-600: #4b5563;  
+          --color-base-700: #374151;
+          --color-base-800: #1f2937;  
+          --color-base-900: #111827;
+          --color-base-content: #1f2937;
+
+          /* Primary colors */
+          --color-primary: #3b82f6;
+          --color-primary-50: #eff6ff;
+          --color-primary-100: #dbeafe;
+          --color-primary-200: #bfdbfe;
+          --color-primary-300: #93c5fd;
+          --color-primary-400: #60a5fa;
+          --color-primary-500: #3b82f6;
+          --color-primary-600: #2563eb;
+          --color-primary-700: #1d4ed8;
+          --color-primary-800: #1e40af;
+          --color-primary-900: #1e3a8a;
+          --color-primary-focus: #2563eb;
+          --color-primary-content: #ffffff;
+
+          /* Secondary colors */
+          --color-secondary: #8b5cf6;
+          --color-secondary-50: #f5f3ff;
+          --color-secondary-100: #ede9fe;
+          --color-secondary-200: #ddd6fe;
+          --color-secondary-300: #c4b5fd;
+          --color-secondary-400: #a78bfa;
+          --color-secondary-500: #8b5cf6;
+          --color-secondary-600: #7c3aed;
+          --color-secondary-700: #6d28d9;
+          --color-secondary-800: #5b21b6;
+          --color-secondary-900: #4c1d95;
+          --color-secondary-focus: #7c3aed;
+          --color-secondary-content: #ffffff;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #fdf2f8;
+          --color-accent-100: #fce7f3;
+          --color-accent-200: #fbcfe8;
+          --color-accent-300: #f9a8d4;
+          --color-accent-400: #f472b6;
+          --color-accent-500: #ec4899;
+          --color-accent-600: #db2777;
+          --color-accent-700: #be185d;
+          --color-accent-800: #9d174d;
+          --color-accent-900: #831843;
+          --color-accent-focus: #db2777;
+          --color-accent-content: #ffffff;
+
+          /* Neutral colors */
+          --color-neutral: #6b7280;
+          --color-neutral-50: #f9fafb;
+          --color-neutral-100: #f3f4f6;
+          --color-neutral-200: #e5e7eb;
+          --color-neutral-300: #d1d5db;
+          --color-neutral-400: #9ca3af;
+          --color-neutral-500: #6b7280;
+          --color-neutral-600: #4b5563;
+          --color-neutral-700: #374151;
+          --color-neutral-800: #1f2937;
+          --color-neutral-900: #111827;
+          --color-neutral-focus: #4b5563;
+          --color-neutral-content: #ffffff;
+
+          /* Info colors */
+          --color-info: #3b82f6;
+          --color-info-50: #eff6ff;
+          --color-info-100: #dbeafe;
+          --color-info-200: #bfdbfe;
+          --color-info-300: #93c5fd;
+          --color-info-400: #60a5fa;
+          --color-info-500: #3b82f6;
+          --color-info-600: #2563eb;
+          --color-info-700: #1d4ed8;
+          --color-info-800: #1e40af;
+          --color-info-900: #1e3a8a;
+          --color-info-focus: #2563eb;
+          --color-info-content: #ffffff;
+
+          /* Success colors */
+          --color-success: #10b981;
+          --color-success-50: #ecfdf5;
+          --color-success-100: #d1fae5;
+          --color-success-200: #a7f3d0;
+          --color-success-300: #6ee7b7;
+          --color-success-400: #34d399;
+          --color-success-500: #10b981;
+          --color-success-600: #059669;
+          --color-success-700: #047857;
+          --color-success-800: #065f46;
+          --color-success-900: #064e3b;
+          --color-success-focus: #059669;
+          --color-success-content: #ffffff;
+
+          /* Warning colors */
+          --color-warning: #f59e0b;
+          --color-warning-50: #fffbeb;
+          --color-warning-100: #fef3c7;
+          --color-warning-200: #fde68a;
+          --color-warning-300: #fcd34d;
+          --color-warning-400: #fbbf24;
+          --color-warning-500: #f59e0b;
+          --color-warning-600: #d97706;
+          --color-warning-700: #b45309;
+          --color-warning-800: #92400e;
+          --color-warning-900: #78350f;
+          --color-warning-focus: #d97706;
+          --color-warning-content: #ffffff;
+
+          /* Error colors */
+          --color-error: #ef4444;
+          --color-error-50: #fef2f2;
+          --color-error-100: #fee2e2;
+          --color-error-200: #fecaca;
+          --color-error-300: #fca5a5;
+          --color-error-400: #f87171;
+          --color-error-500: #ef4444;
+          --color-error-600: #dc2626;
+          --color-error-700: #b91c1c;
+          --color-error-800: #991b1b;
+          --color-error-900: #7f1d1d;
+          --color-error-focus: #dc2626;
+          --color-error-content: #ffffff;
+        }
+</style>
+
+    
+<style>
+/* Dark theme */
+        .dark {
+          /* Base colors */
+          --color-base: #1f2937;
+          --color-base-50: #111827;
+          --color-base-100: #1f2937;
+          --color-base-200: #374151;
+          --color-base-300: #4b5563;
+          --color-base-400: #6b7280;
+          --color-base-500: #9ca3af;
+          --color-base-600: #d1d5db;
+          --color-base-700: #e5e7eb;
+          --color-base-800: #f3f4f6;
+          --color-base-900: #f9fafb;
+          --color-base-content: #f9fafb;
+
+          /* Primary colors */
+          --color-primary: #60a5fa;
+          --color-primary-50: #1e3a8a;
+          --color-primary-100: #1e40af;
+          --color-primary-200: #1d4ed8;
+          --color-primary-300: #2563eb;
+          --color-primary-400: #3b82f6;
+          --color-primary-500: #60a5fa;
+          --color-primary-600: #93c5fd;
+          --color-primary-700: #bfdbfe;
+          --color-primary-800: #dbeafe;
+          --color-primary-900: #eff6ff;
+          --color-primary-focus: #3b82f6;
+          --color-primary-content: #1f2937;
+
+          /* Secondary colors */
+          --color-secondary: #a78bfa;
+          --color-secondary-50: #4c1d95;
+          --color-secondary-100: #5b21b6;
+          --color-secondary-200: #6d28d9;
+          --color-secondary-300: #7c3aed;
+          --color-secondary-400: #8b5cf6;
+          --color-secondary-500: #a78bfa;
+          --color-secondary-600: #c4b5fd;
+          --color-secondary-700: #ddd6fe;
+          --color-secondary-800: #ede9fe;
+          --color-secondary-900: #f5f3ff;
+          --color-secondary-focus: #8b5cf6;
+          --color-secondary-content: #1f2937;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #831843;
+          --color-accent-100: #9d174d;
+          --color-accent-200: #be185d;
+          --color-accent-300: #db2777;
+          --color-accent-400: #ec4899;
+          --color-accent-500: #f472b6;
+          --color-accent-600: #f9a8d4;
+          --color-accent-700: #fbcfe8;
+          --color-accent-800: #fce7f3;
+          --color-accent-900: #fdf2f8;
+          --color-accent-focus: #ec4899;
+          --color-accent-content: #1f2937;
+
+          /* Neutral colors remain the same as light theme */
+
+          /* Info colors */
+          --color-info: #60a5fa;
+          --color-info-50: #1e3a8a;
+          --color-info-100: #1e40af;
+          --color-info-200: #1d4ed8;
+          --color-info-300: #2563eb;
+          --color-info-400: #3b82f6;
+          --color-info-500: #60a5fa;
+          --color-info-600: #93c5fd;
+          --color-info-700: #bfdbfe;
+          --color-info-800: #dbeafe;
+          --color-info-900: #eff6ff;
+          --color-info-focus: #3b82f6;
+          --color-info-content: #1f2937;
+
+          /* Success colors */
+          --color-success: #34d399;
+          --color-success-50: #064e3b;
+          --color-success-100: #065f46;
+          --color-success-200: #047857;
+          --color-success-300: #059669;
+          --color-success-400: #10b981;
+          --color-success-500: #34d399;
+          --color-success-600: #6ee7b7;
+          --color-success-700: #a7f3d0;
+          --color-success-800: #d1fae5;
+          --color-success-900: #ecfdf5;
+          --color-success-focus: #10b981;
+          --color-success-content: #1f2937;
+
+          /* Warning colors */
+          --color-warning: #fbbf24;
+          --color-warning-50: #78350f;
+          --color-warning-100: #92400e;
+          --color-warning-200: #b45309;
+          --color-warning-300: #d97706;
+          --color-warning-400: #f59e0b;
+          --color-warning-500: #fbbf24;
+          --color-warning-600: #fcd34d;
+          --color-warning-700: #fde68a;
+          --color-warning-800: #fef3c7;
+          --color-warning-900: #fffbeb;
+          --color-warning-focus: #f59e0b;
+          --color-warning-content: #1f2937;
+
+          /* Error colors */
+          --color-error: #f87171;
+          --color-error-50: #7f1d1d;
+          --color-error-100: #991b1b;
+          --color-error-200: #b91c1c;
+          --color-error-300: #dc2626;
+          --color-error-400: #ef4444;
+          --color-error-500: #f87171;
+          --color-error-600: #fca5a5;
+          --color-error-700: #fecaca;
+          --color-error-800: #fee2e2;
+          --color-error-900: #fef2f2;
+          --color-error-focus: #ef4444;
+          --color-error-content: #1f2937;
+        }
+</style>
+
+    
+  <script>
+        tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                ...{"transparent":"transparent","current":"currentColor","black":"#000000","white":"#ffffff","gray":{"50":"#f9fafb","100":"#f3f4f6","200":"#e5e7eb","300":"#d1d5db","400":"#9ca3af","500":"#6b7280","600":"#4b5563","700":"#374151","800":"#1f2937","900":"#111827"},"red":{"50":"#fef2f2","100":"#fee2e2","200":"#fecaca","300":"#fca5a5","400":"#f87171","500":"#ef4444","600":"#dc2626","700":"#b91c1c","800":"#991b1b","900":"#7f1d1d"},"yellow":{"50":"#fffbeb","100":"#fef3c7","200":"#fde68a","300":"#fcd34d","400":"#fbbf24","500":"#f59e0b","600":"#d97706","700":"#b45309","800":"#92400e","900":"#78350f"},"green":{"50":"#ecfdf5","100":"#d1fae5","200":"#a7f3d0","300":"#6ee7b7","400":"#34d399","500":"#10b981","600":"#059669","700":"#047857","800":"#065f46","900":"#064e3b"},"blue":{"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a"},"indigo":{"50":"#eef2ff","100":"#e0e7ff","200":"#c7d2fe","300":"#a5b4fc","400":"#818cf8","500":"#6366f1","600":"#4f46e5","700":"#4338ca","800":"#3730a3","900":"#312e81"},"purple":{"50":"#f5f3ff","100":"#ede9fe","200":"#ddd6fe","300":"#c4b5fd","400":"#a78bfa","500":"#8b5cf6","600":"#7c3aed","700":"#6d28d9","800":"#5b21b6","900":"#4c1d95"},"pink":{"50":"#fdf2f8","100":"#fce7f3","200":"#fbcfe8","300":"#f9a8d4","400":"#f472b6","500":"#ec4899","600":"#db2777","700":"#be185d","800":"#9d174d","900":"#831843"}},
+                ...{"primary":{"50":"var(--color-primary-50)","100":"var(--color-primary-100)","200":"var(--color-primary-200)","300":"var(--color-primary-300)","400":"var(--color-primary-400)","500":"var(--color-primary-500)","600":"var(--color-primary-600)","700":"var(--color-primary-700)","800":"var(--color-primary-800)","900":"var(--color-primary-900)","DEFAULT":"var(--color-primary)","focus":"var(--color-primary-focus)","content":"var(--color-primary-content)"},"secondary":{"50":"var(--color-secondary-50)","100":"var(--color-secondary-100)","200":"var(--color-secondary-200)","300":"var(--color-secondary-300)","400":"var(--color-secondary-400)","500":"var(--color-secondary-500)","600":"var(--color-secondary-600)","700":"var(--color-secondary-700)","800":"var(--color-secondary-800)","900":"var(--color-secondary-900)","DEFAULT":"var(--color-secondary)","focus":"var(--color-secondary-focus)","content":"var(--color-secondary-content)"},"accent":{"50":"var(--color-accent-50)","100":"var(--color-accent-100)","200":"var(--color-accent-200)","300":"var(--color-accent-300)","400":"var(--color-accent-400)","500":"var(--color-accent-500)","600":"var(--color-accent-600)","700":"var(--color-accent-700)","800":"var(--color-accent-800)","900":"var(--color-accent-900)","DEFAULT":"var(--color-accent)","focus":"var(--color-accent-focus)","content":"var(--color-accent-content)"},"neutral":{"50":"var(--color-neutral-50)","100":"var(--color-neutral-100)","200":"var(--color-neutral-200)","300":"var(--color-neutral-300)","400":"var(--color-neutral-400)","500":"var(--color-neutral-500)","600":"var(--color-neutral-600)","700":"var(--color-neutral-700)","800":"var(--color-neutral-800)","900":"var(--color-neutral-900)","DEFAULT":"var(--color-neutral)","focus":"var(--color-neutral-focus)","content":"var(--color-neutral-content)"},"info":{"50":"var(--color-info-50)","100":"var(--color-info-100)","200":"var(--color-info-200)","300":"var(--color-info-300)","400":"var(--color-info-400)","500":"var(--color-info-500)","600":"var(--color-info-600)","700":"var(--color-info-700)","800":"var(--color-info-800)","900":"var(--color-info-900)","DEFAULT":"var(--color-info)","focus":"var(--color-info-focus)","content":"var(--color-info-content)"},"success":{"50":"var(--color-success-50)","100":"var(--color-success-100)","200":"var(--color-success-200)","300":"var(--color-success-300)","400":"var(--color-success-400)","500":"var(--color-success-500)","600":"var(--color-success-600)","700":"var(--color-success-700)","800":"var(--color-success-800)","900":"var(--color-success-900)","DEFAULT":"var(--color-success)","focus":"var(--color-success-focus)","content":"var(--color-success-content)"},"warning":{"50":"var(--color-warning-50)","100":"var(--color-warning-100)","200":"var(--color-warning-200)","300":"var(--color-warning-300)","400":"var(--color-warning-400)","500":"var(--color-warning-500)","600":"var(--color-warning-600)","700":"var(--color-warning-700)","800":"var(--color-warning-800)","900":"var(--color-warning-900)","DEFAULT":"var(--color-warning)","focus":"var(--color-warning-focus)","content":"var(--color-warning-content)"},"error":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"danger":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"failure":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"}},
+                },
+              },
+            },
+            variants: {
+              extend: {
+                backgroundColor: ['active', 'group-hover'],
+                textColor: ['active', 'group-hover'],
+              },
+            },
+            plugins: [],
+          };
+  </script>
+
+  </head>
+
+                <body class="h-full text-base-content">
+                  <header id="header" class="bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-50">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <div class="container mx-auto px-4">
+    <nav class="flex items-center justify-between py-4">
+      <div class="flex items-center">
+        <span class="flex items-center cursor-pointer">
+          <span class="text-2xl text-neutral-900">EAIOU.org</span>
+          <span class="ml-2 text-sm bg-neutral-200 px-2 py-1 rounded text-neutral-700">Beta</span>
+        </span>
+      </div>
+      
+      <div class="hidden md:flex items-center space-x-6">
+        <span class="text-neutral-700 cursor-pointer">About</span>
+        <span class="text-neutral-700 cursor-pointer">Journals</span>
+        <div class="relative group">
+          <button class="flex items-center text-neutral-700">
+            Resources
+            <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+          </button>
+        </div>
+        <div class="relative group">
+          <button class="flex items-center text-neutral-700">
+            Collaboration
+            <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+          </button>
+        </div>
+        <span class="text-neutral-700 cursor-pointer">Guidelines</span>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <span class="text-neutral-700 cursor-pointer">Login</span>
+        <span class="bg-neutral-800 text-white px-5 py-2 rounded-md cursor-pointer">Register</span>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div id="breadcrumb" class="bg-neutral-100 border-b border-neutral-200">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex items-center text-sm">
+      <span class="text-neutral-600 cursor-pointer">Home</span>
+      <i class="fa-solid fa-chevron-right mx-2 text-neutral-400 text-xs"></i>
+      <span class="text-neutral-600 cursor-pointer">Articles</span>
+      <i class="fa-solid fa-chevron-right mx-2 text-neutral-400 text-xs"></i>
+      <span class="text-neutral-800">Transparent Observer-Preserving AI Integration in Academic Research Workflows</span>
+    </div>
+  </div>
+</div>
+
+<main id="main-content" class="container mx-auto px-4 py-8">
+  <div class="flex flex-col lg:flex-row gap-8">
+    <!-- Main content area -->
+    <div class="lg:w-2/3">
+      <section id="article-header" class="mb-8">
+        <div class="flex items-center mb-4">
+          <span class="px-3 py-1 bg-neutral-800 text-white text-xs rounded-full">New</span>
+          <span class="ml-3 text-sm text-neutral-600">Published: May 15, 2025</span>
+          <div class="ml-auto flex items-center space-x-3">
+            <button class="text-neutral-500 hover:text-neutral-700">
+              <i class="fa-regular fa-bookmark"></i>
+            </button>
+            <button class="text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-share-nodes"></i>
+            </button>
+            <button class="text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-download"></i>
+            </button>
+          </div>
+        </div>
+        
+        <h1 class="text-3xl text-neutral-900 mb-4">
+          Transparent Observer-Preserving AI Integration in Academic Research Workflows
+        </h1>
+        
+        <div class="flex flex-wrap items-center mb-6">
+          <div class="flex items-center mr-6 mb-2">
+            <div class="flex -space-x-2 mr-2">
+              <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="Author" class="w-8 h-8 rounded-full border-2 border-white">
+              <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="Author" class="w-8 h-8 rounded-full border-2 border-white">
+              <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="Author" class="w-8 h-8 rounded-full border-2 border-white">
+            </div>
+            <span class="text-neutral-700">
+              J. Smith, A. Johnson, et al. + <span class="text-neutral-500">AI co-observer</span>
+            </span>
+          </div>
+          <div class="flex items-center mb-2">
+            <span class="text-neutral-600 mr-6">DOI: 10.1234/eaiou.2025.1234</span>
+            <span class="flex items-center text-neutral-600">
+              <i class="fa-regular fa-eye mr-1"></i> 243 views
+            </span>
+          </div>
+        </div>
+        
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="px-2 py-1 bg-neutral-200 text-neutral-700 text-xs rounded">AI Ethics</span>
+          <span class="px-2 py-1 bg-neutral-200 text-neutral-700 text-xs rounded">Research Methodology</span>
+          <span class="px-2 py-1 bg-neutral-200 text-neutral-700 text-xs rounded">Transparency</span>
+          <span class="px-2 py-1 bg-neutral-200 text-neutral-700 text-xs rounded">Academic Publishing</span>
+        </div>
+      </section>
+      
+      <section id="article-tabs" class="mb-8">
+        <div class="border-b border-neutral-200">
+          <nav class="flex -mb-px">
+            <span class="mr-8 py-4 border-b-2 border-transparent text-neutral-500 hover:text-neutral-700 cursor-pointer">
+              Abstract
+            </span>
+            <span class="mr-8 py-4 border-b-2 border-transparent text-neutral-500 hover:text-neutral-700 cursor-pointer">
+              Full Text
+            </span>
+            <span class="mr-8 py-4 border-b-2 border-neutral-800 text-neutral-800 cursor-pointer">
+              Metadata & Versions
+            </span>
+            <span class="mr-8 py-4 border-b-2 border-transparent text-neutral-500 hover:text-neutral-700 cursor-pointer">
+              Reviews
+            </span>
+            <span class="mr-8 py-4 border-b-2 border-transparent text-neutral-500 hover:text-neutral-700 cursor-pointer">
+              Discussion
+            </span>
+            <span class="py-4 border-b-2 border-transparent text-neutral-500 hover:text-neutral-700 cursor-pointer">
+              Citations
+            </span>
+          </nav>
+        </div>
+      </section>
+      
+      <section id="metadata-section" class="mb-8">
+        <div class="bg-white border border-neutral-200 rounded-lg shadow-sm p-6 mb-6">
+          <h2 class="text-xl text-neutral-900 mb-4">Public Metadata</h2>
+          
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <h3 class="text-sm text-neutral-500 mb-1">Publication Type</h3>
+                <p class="text-neutral-800">Research Article</p>
+              </div>
+              <div>
+                <h3 class="text-sm text-neutral-500 mb-1">Publication Date</h3>
+                <p class="text-neutral-800">May 15, 2025</p>
+              </div>
+              <div>
+                <h3 class="text-sm text-neutral-500 mb-1">Journal</h3>
+                <p class="text-neutral-800">Journal of Transparent Research</p>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <h3 class="text-sm text-neutral-500 mb-1">Volume</h3>
+                <p class="text-neutral-800">12</p>
+              </div>
+              <div>
+                <h3 class="text-sm text-neutral-500 mb-1">Issue</h3>
+                <p class="text-neutral-800">3</p>
+              </div>
+              <div>
+                <h3 class="text-sm text-neutral-500 mb-1">Pages</h3>
+                <p class="text-neutral-800">125-142</p>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-sm text-neutral-500 mb-1">DOI</h3>
+              <p class="text-neutral-800">10.1234/eaiou.2025.1234</p>
+            </div>
+            
+            <div>
+              <h3 class="text-sm text-neutral-500 mb-1">License</h3>
+              <p class="text-neutral-800 flex items-center">
+                <i class="fa-brands fa-creative-commons mr-1"></i>
+                CC BY 4.0 (Attribution 4.0 International)
+              </p>
+            </div>
+            
+            <div>
+              <h3 class="text-sm text-neutral-500 mb-1">Funding Information</h3>
+              <p class="text-neutral-800">National Science Foundation, Grant #NSF-2025-0123</p>
+            </div>
+            
+            <div>
+              <h3 class="text-sm text-neutral-500 mb-1">Data Availability</h3>
+              <p class="text-neutral-800 flex items-center">
+                <i class="fa-solid fa-database mr-1"></i>
+                <span class="text-neutral-600 hover:text-neutral-900 cursor-pointer underline">Open Science Framework Repository (DOI: 10.17605/OSF.IO/ABC123)</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white border border-neutral-200 rounded-lg shadow-sm p-6 mb-6">
+          <h2 class="text-xl text-neutral-900 mb-4">Attribution & Observer Information</h2>
+          
+          <div class="space-y-5">
+            <div>
+              <h3 class="text-sm text-neutral-500 mb-2">Human Authors</h3>
+              <div class="space-y-3">
+                <div class="flex items-start">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="Author" class="w-10 h-10 rounded-full mr-3">
+                  <div>
+                    <p class="text-neutral-800">Dr. Jonathan Smith</p>
+                    <p class="text-sm text-neutral-600">Department of Computer Science, University of Example</p>
+                    <div class="flex items-center mt-1">
+                      <span class="text-xs bg-neutral-200 px-2 py-1 rounded text-neutral-700 mr-2">Lead Author</span>
+                      <span class="text-xs text-neutral-500 flex items-center">
+                        <i class="fa-solid fa-id-card mr-1"></i> ORCID: 0000-0001-2345-6789
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="Author" class="w-10 h-10 rounded-full mr-3">
+                  <div>
+                    <p class="text-neutral-800">Dr. Amelia Johnson</p>
+                    <p class="text-sm text-neutral-600">AI Ethics Institute, Example University</p>
+                    <div class="flex items-center mt-1">
+                      <span class="text-xs bg-neutral-200 px-2 py-1 rounded text-neutral-700 mr-2">Co-Author</span>
+                      <span class="text-xs text-neutral-500 flex items-center">
+                        <i class="fa-solid fa-id-card mr-1"></i> ORCID: 0000-0002-3456-7890
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="Author" class="w-10 h-10 rounded-full mr-3">
+                  <div>
+                    <p class="text-neutral-800">Dr. Michael Chen</p>
+                    <p class="text-sm text-neutral-600">Research Transparency Lab, Technical University</p>
+                    <div class="flex items-center mt-1">
+                      <span class="text-xs bg-neutral-200 px-2 py-1 rounded text-neutral-700 mr-2">Co-Author</span>
+                      <span class="text-xs text-neutral-500 flex items-center">
+                        <i class="fa-solid fa-id-card mr-1"></i> ORCID: 0000-0003-4567-8901
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border-t border-neutral-200 pt-4">
+              <h3 class="text-sm text-neutral-500 mb-2">AI Co-Observers</h3>
+              <div class="bg-neutral-100 p-4 rounded-md">
+                <div class="flex items-start">
+                  <div class="w-10 h-10 rounded-full bg-neutral-200 flex items-center justify-center mr-3">
+                    <i class="fa-solid fa-robot text-neutral-600"></i>
+                  </div>
+                  <div>
+                    <p class="text-neutral-800">ResearchGPT 3.5</p>
+                    <p class="text-sm text-neutral-600">Literature analysis, citation verification, data analysis support</p>
+                    <div class="flex items-center mt-1">
+                      <span class="text-xs bg-neutral-200 px-2 py-1 rounded text-neutral-700 mr-2">AI Co-Observer</span>
+                      <span class="text-xs text-neutral-500">Version: 3.5.12 (March 2025)</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-2 text-sm text-neutral-600">
+                  <p class="mb-1"><strong>Attribution Statement:</strong></p>
+                  <p>This AI system contributed to literature analysis, data processing, and citation verification. All AI contributions were reviewed and validated by human authors. Full contribution logs available in the transparency section.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border-t border-neutral-200 pt-4">
+              <h3 class="text-sm text-neutral-500 mb-2">Contribution Statement</h3>
+              <p class="text-neutral-700">J. Smith: Conceptualization, Methodology, Investigation, Writing - Original Draft<br>
+              A. Johnson: Formal Analysis, Writing - Review & Editing<br>
+              M. Chen: Data Curation, Validation, Visualization<br>
+              ResearchGPT 3.5: Literature Analysis Support, Citation Verification, Data Processing Support</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white border border-neutral-200 rounded-lg shadow-sm p-6 mb-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl text-neutral-900">Version History</h2>
+            <div class="flex items-center">
+              <span class="text-sm text-neutral-600 mr-2">View as:</span>
+              <button class="p-2 bg-neutral-100 rounded-l-md text-neutral-800">
+                <i class="fa-solid fa-list"></i>
+              </button>
+              <button class="p-2 bg-neutral-200 rounded-r-md text-neutral-700">
+                <i class="fa-solid fa-code-compare"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="border-l-4 border-neutral-800 pl-4 py-1">
+              <div class="flex items-center">
+                <span class="bg-neutral-800 text-white text-xs px-2 py-1 rounded-full">Current</span>
+                <span class="ml-2 text-neutral-800">Version 1.2 (Published)</span>
+                <span class="ml-auto text-sm text-neutral-600">May 15, 2025</span>
+              </div>
+              <p class="text-sm text-neutral-700 mt-1">Final published version after peer review and revisions</p>
+              <div class="flex mt-2">
+                <button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 rounded text-neutral-700 mr-2">
+                  View
+                </button>
+                <button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 rounded text-neutral-700 mr-2">
+                  Download PDF
+                </button>
+                <button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 rounded text-neutral-700">
+                  Cite
+                </button>
+              </div>
+            </div>
+            
+            <div class="border-l-4 border-neutral-300 pl-4 py-1">
+              <div class="flex items-center">
+                <span class="bg-neutral-200 text-neutral-700 text-xs px-2 py-1 rounded-full">Revision</span>
+                <span class="ml-2 text-neutral-800">Version 1.1</span>
+                <span class="ml-auto text-sm text-neutral-600">April 2, 2025</span>
+              </div>
+              <p class="text-sm text-neutral-700 mt-1">Revised version addressing reviewer comments</p>
+              <div class="flex mt-2">
+                <button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 rounded text-neutral-700 mr-2">
+                  View
+                </button>
+                <button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 rounded text-neutral-700 mr-2">
+                  Download PDF
+                </button>
+                <button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 rounded text-neutral-700 mr-2">
+                  Compare with current
+                </button>
+              </div>
+            </div>
+            
+            <div class="border-l-4 border-neutral-300 pl-4 py-1">
+              <div class="flex items-center">
+                <span class="bg-neutral-200 text-neutral-700 text-xs px-2 py-1 rounded-full">Preprint</span>
+                <span class="ml-2 text-neutral-800">Version 1.0</span>
+                <span class="ml-auto text-sm text-neutral-600">February 18, 2025</span>
+              </div>
+              <p class="text-sm text-neutral-700 mt-1">Original submission</p>
+              <div class="flex mt-2">
+                <button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 rounded text-neutral-700 mr-2">
+                  View
+                </button>
+                <button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 rounded text-neutral-700 mr-2">
+                  Download PDF
+                </button>
+                <button class="text-xs bg-neutral-100 hover:bg-neutral-200 px-3 py-1 rounded text-neutral-700 mr-2">
+                  Compare with current
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white border border-neutral-200 rounded-lg shadow-sm p-6">
+          <h2 class="text-xl text-neutral-900 mb-4">Peer Review</h2>
+          
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-neutral-800">Open Peer Review</h3>
+              <span class="text-sm text-neutral-600">3 reviews</span>
+            </div>
+            
+            <div class="bg-neutral-100 p-4 rounded-md mb-4">
+              <div class="flex items-start">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=101" alt="Reviewer" class="w-10 h-10 rounded-full mr-3">
+                <div class="flex-1">
+                  <div class="flex justify-between items-start">
+                    <div>
+                      <p class="text-neutral-800">Dr. Sarah Williams</p>
+                      <p class="text-sm text-neutral-600">AI Ethics Department, University Research</p>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-sm text-neutral-600 mr-2">Rating:</span>
+                      <div class="flex">
+                        <i class="fa-solid fa-star text-neutral-700"></i>
+                        <i class="fa-solid fa-star text-neutral-700"></i>
+                        <i class="fa-solid fa-star text-neutral-700"></i>
+                        <i class="fa-solid fa-star text-neutral-700"></i>
+                        <i class="fa-regular fa-star text-neutral-700"></i>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="mt-2">
+                    <p class="text-sm text-neutral-700 mb-2">This paper makes a significant contribution to the field of transparent AI integration in research workflows. The methodology is sound and the results are promising. I recommend publication with minor revisions to strengthen the discussion section.</p>
+                    <div class="flex items-center mt-3">
+                      <span class="text-xs text-neutral-500">March 20, 2025</span>
+                      <button class="ml-auto text-xs bg-neutral-200 hover:bg-neutral-300 px-3 py-1 rounded text-neutral-700">
+                        Read full review
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-neutral-100 p-4 rounded-md mb-4">
+              <div class="flex items-start">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=202" alt="Reviewer" class="w-10 h-10 rounded-full mr-3">
+                <div class="flex-1">
+                  <div class="flex justify-between items-start">
+                    <div>
+                      <p class="text-neutral-800">Dr. Robert Lee</p>
+                      <p class="text-sm text-neutral-600">Computer Science, Tech University</p>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-sm text-neutral-600 mr-2">Rating:</span>
+                      <div class="flex">
+                        <i class="fa-solid fa-star text-neutral-700"></i>
+                        <i class="fa-solid fa-star text-neutral-700"></i>
+                        <i class="fa-solid fa-star text-neutral-700"></i>
+                        <i class="fa-solid fa-star text-neutral-700"></i>
+                        <i class="fa-solid fa-star text-neutral-700"></i>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="mt-2">
+                    <p class="text-sm text-neutral-700 mb-2">An excellent contribution that addresses a critical gap in the literature. The proposed framework is well-designed and the evaluation is thorough. I particularly appreciate the transparency in describing the AI co-observer's role.</p>
+                    <div class="flex items-center mt-3">
+                      <span class="text-xs text-neutral-500">March 15, 2025</span>
+                      <button class="ml-auto text-xs bg-neutral-200 hover:bg-neutral-300 px-3 py-1 rounded text-neutral-700">
+                        Read full review
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-neutral-100 p-4 rounded-md">
+              <div class="flex items-start">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=303" alt="Reviewer" class="w-10 h-10 rounded-full mr-3">
+                <div class="flex-1">
+                  <div class="flex justify-between items-start">
+                    <div>
+                      <p class="text-neutral-800">Dr. Elena Rodriguez</p>
+                      <p class="text-sm text-neutral-600">Research Methodology, Global Institute</p>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-sm text-neutral-600 mr-2">Rating:</span>
+                      <div class="flex">
+                        <i class="fa-solid fa-star text-neutral-700"></i>
+                        <i class="fa-solid fa-star text-neutral-700"></i>
+                        <i class="fa-solid fa-star text-neutral-700"></i>
+                        <i class="fa-regular fa-star text-neutral-700"></i>
+                        <i class="fa-regular fa-star text-neutral-700"></i>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="mt-2">
+                    <p class="text-sm text-neutral-700 mb-2">The paper presents interesting ideas but has some methodological weaknesses. The sample size for the user study is too small to draw robust conclusions. I recommend major revisions to strengthen the empirical evaluation.</p>
+                    <div class="flex items-center mt-3">
+                      <span class="text-xs text-neutral-500">March 18, 2025</span>
+                      <button class="ml-auto text-xs bg-neutral-200 hover:bg-neutral-300 px-3 py-1 rounded text-neutral-700">
+                        Read full review
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-neutral-800 mb-3">Author Response to Reviews</h3>
+            <div class="bg-neutral-100 p-4 rounded-md">
+              <p class="text-sm text-neutral-700 mb-3">We thank all reviewers for their thoughtful feedback. We have addressed the concerns raised by Reviewer 3 by expanding our user study to include 50 additional participants, which strengthens our empirical evaluation. We have also enhanced the discussion section as suggested by Reviewer 1.</p>
+              <div class="flex items-center">
+                <span class="text-xs text-neutral-500">April 1, 2025</span>
+                <button class="ml-auto text-xs bg-neutral-200 hover:bg-neutral-300 px-3 py-1 rounded text-neutral-700">
+                  Read full response
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="lg:w-1/3">
+      <div class="bg-white border border-neutral-200 rounded-lg shadow-sm p-6 mb-6 sticky top-24">
+        <h2 class="text-xl text-neutral-900 mb-4">Article Information</h2>
+        
+        <div class="space-y-4">
+          <div>
+            <h3 class="text-sm text-neutral-500 mb-1">Citation</h3>
+            <p class="text-sm text-neutral-700 bg-neutral-100 p-3 rounded-md">
+              Smith, J., Johnson, A., Chen, M. (2025). Transparent Observer-Preserving AI Integration in Academic Research Workflows. Journal of Transparent Research, 12(3), 125-142. https://doi.org/10.1234/eaiou.2025.1234
+            </p>
+            <div class="flex mt-2">
+              <button class="text-xs bg-neutral-200 hover:bg-neutral-300 px-3 py-1 rounded text-neutral-700 mr-2 flex items-center">
+                <i class="fa-regular fa-copy mr-1"></i> Copy
+              </button>
+              <div class="relative group">
+                <button class="text-xs bg-neutral-200 hover:bg-neutral-300 px-3 py-1 rounded text-neutral-700 flex items-center">
+                  <i class="fa-solid fa-download mr-1"></i> Export <i class="fa-solid fa-chevron-down ml-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="border-t border-neutral-200 pt-4">
+            <h3 class="text-sm text-neutral-500 mb-2">Article Metrics</h3>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="bg-neutral-100 p-3 rounded-md text-center">
+                <div class="text-2xl text-neutral-800">243</div>
+                <p class="text-xs text-neutral-600">Views</p>
+              </div>
+              <div class="bg-neutral-100 p-3 rounded-md text-center">
+                <div class="text-2xl text-neutral-800">18</div>
+                <p class="text-xs text-neutral-600">Citations</p>
+              </div>
+              <div class="bg-neutral-100 p-3 rounded-md text-center">
+                <div class="text-2xl text-neutral-800">32</div>
+                <p class="text-xs text-neutral-600">Shares</p>
+              </div>
+              <div class="bg-neutral-100 p-3 rounded-md text-center">
+                <div class="text-2xl text-neutral-800">4.0</div>
+                <p class="text-xs text-neutral-600">Average Rating</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="border-t border-neutral-200 pt-4">
+            <h3 class="text-sm text-neutral-500 mb-2">Related Articles</h3>
+            <div class="space-y-3">
+              <div class="group">
+                <h4 class="text-sm text-neutral-800 group-hover:text-neutral-600 cursor-pointer">
+                  Structured Attribution Models for Collaborative Human-AI Academic Publishing
+                </h4>
+                <p class="text-xs text-neutral-600">M. Chen, R. Patel (2025)</p>
+              </div>
+              <div class="group">
+                <h4 class="text-sm text-neutral-800 group-hover:text-neutral-600 cursor-pointer">
+                  Reproducibility Challenges in AI-Assisted Research: A Systematic Review
+                </h4>
+                <p class="text-xs text-neutral-600">K. Roberts, T. Yamamoto (2025)</p>
+              </div>
+              <div class="group">
+                <h4 class="text-sm text-neutral-800 group-hover:text-neutral-600 cursor-pointer">
+                  Transparency Logs as a Mechanism for Trust in Multi-Observer Systems
+                </h4>
+                <p class="text-xs text-neutral-600">J. Garcia, P. Kim, S. Ahmed (2025)</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="border-t border-neutral-200 pt-4">
+            <h3 class="text-sm text-neutral-500 mb-2">Actions</h3>
+            <div class="space-y-2">
+              <button class="w-full py-2 bg-neutral-800 text-white rounded-md text-sm flex items-center justify-center">
+                <i class="fa-solid fa-download mr-2"></i> Download PDF
+              </button>
+              <button class="w-full py-2 border border-neutral-300 text-neutral-700 rounded-md text-sm flex items-center justify-center">
+                <i class="fa-regular fa-bookmark mr-2"></i> Save to Library
+              </button>
+              <button class="w-full py-2 border border-neutral-300 text-neutral-700 rounded-md text-sm flex items-center justify-center">
+                <i class="fa-solid fa-share-nodes mr-2"></i> Share Article
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer id="footer" class="bg-neutral-900 text-white">
+  <div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-lg mb-4">EAIOU.org</h3>
+        <p class="text-neutral-400 text-sm mb-4">
+          An observer-preserving research platform built on Joomla, designed to support transparent peer review, structured attribution, and discovery.
+        </p>
+        <div class="flex space-x-4">
+          <span class="text-neutral-400 hover:text-white cursor-pointer">
+            <i class="fa-brands fa-twitter"></i>
+          </span>
+          <span class="text-neutral-400 hover:text-white cursor-pointer">
+            <i class="fa-brands fa-github"></i>
+          </span>
+          <span class="text-neutral-400 hover:text-white cursor-pointer">
+            <i class="fa-brands fa-linkedin"></i>
+          </span>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-lg mb-4">Resources</h3>
+        <ul class="space-y-2 text-neutral-400">
+          <li><span class="hover:text-white cursor-pointer">About EAIOU</span></li>
+          <li><span class="hover:text-white cursor-pointer">Guidelines</span></li>
+          <li><span class="hover:text-white cursor-pointer">Submission Process</span></li>
+          <li><span class="hover:text-white cursor-pointer">Peer Review</span></li>
+          <li><span class="hover:text-white cursor-pointer">Attribution Policy</span></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="text-lg mb-4">Community</h3>
+        <ul class="space-y-2 text-neutral-400">
+          <li><span class="hover:text-white cursor-pointer">Collaboration Hub</span></li>
+          <li><span class="hover:text-white cursor-pointer">Research Gap Maps</span></li>
+          <li><span class="hover:text-white cursor-pointer">Events & Workshops</span></li>
+          <li><span class="hover:text-white cursor-pointer">Editorial Board</span></li>
+          <li><span class="hover:text-white cursor-pointer">Join as Reviewer</span></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="text-lg mb-4">Support</h3>
+        <ul class="space-y-2 text-neutral-400">
+          <li><span class="hover:text-white cursor-pointer">Help Center</span></li>
+          <li><span class="hover:text-white cursor-pointer">Contact Us</span></li>
+          <li><span class="hover:text-white cursor-pointer">FAQs</span></li>
+          <li><span class="hover:text-white cursor-pointer">Privacy Policy</span></li>
+          <li><span class="hover:text-white cursor-pointer">Terms of Service</span></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="border-t border-neutral-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-neutral-400 text-sm">
+        © 2025 EAIOU.org. All rights reserved. Licensed under Modified MIT – Educational Use Only.
+      </p>
+      <div class="flex items-center mt-4 md:mt-0">
+        <span class="text-xs text-neutral-500 mr-2">Powered by</span>
+        <span class="text-neutral-400">Joomla</span>
+      </div>
+    </div>
+  </div>
+</footer>
+                </body>
+              </html>
+            

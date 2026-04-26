@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="bg-neutral-100 border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+  <div class="flex items-center">
+    <div class="w-10 h-10 rounded-md bg-neutral-800 flex items-center justify-center text-white">
+      <i class="fa-solid fa-brain"></i>
+    </div>
+    <span class="ml-3 text-xl">AI Project Hub</span>
+  </div>
+  <div class="flex items-center space-x-4">
+    <div class="relative">
+      <input type="text" placeholder="Search models..." class="pl-9 pr-4 py-2 rounded-md border border-neutral-300 w-64 focus:outline-none focus:ring-2 focus:ring-neutral-400 text-sm">
+      <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-neutral-400"></i>
+    </div>
+    <button class="p-2 text-neutral-600 hover:bg-neutral-200 rounded-full">
+      <i class="fa-solid fa-bell"></i>
+    </button>
+    <div class="flex items-center">
+      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full border border-neutral-300">
+      <span class="ml-2 text-sm">Alex Morgan</span>
+      <i class="fa-solid fa-chevron-down ml-2 text-xs text-neutral-500"></i>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="flex min-h-[calc(100vh-72px)]">
+  <div id="sidebar" class="w-64 border-r border-neutral-200 bg-white">
+    <div class="p-4">
+      <h2 class="text-lg mb-4">Settings</h2>
+      <div class="space-y-1">
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-sliders mr-3 text-neutral-500"></i>
+          <span>General</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-800 bg-neutral-100 rounded-md">
+          <i class="fa-solid fa-microchip mr-3 text-neutral-600"></i>
+          <span>AI Models</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-folder-tree mr-3 text-neutral-500"></i>
+          <span>Projects</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-users mr-3 text-neutral-500"></i>
+          <span>Team Members</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-shield-halved mr-3 text-neutral-500"></i>
+          <span>Security</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-credit-card mr-3 text-neutral-500"></i>
+          <span>Billing</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-plug mr-3 text-neutral-500"></i>
+          <span>Integrations</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="p-4 border-t border-neutral-200">
+      <h3 class="text-sm text-neutral-500 mb-3">PROJECTS</h3>
+      <div class="space-y-1">
+        <div class="flex items-center justify-between px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <div class="flex items-center">
+            <i class="fa-solid fa-flask mr-3 text-neutral-500"></i>
+            <span>Scientific Research</span>
+          </div>
+          <span class="text-xs bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded-full">Active</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-book mr-3 text-neutral-500"></i>
+          <span>Academic Papers</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-chart-line mr-3 text-neutral-500"></i>
+          <span>Data Analysis</span>
+        </div>
+      </div>
+      <button class="mt-3 w-full flex items-center justify-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 border border-neutral-300 rounded-md text-sm">
+        <i class="fa-solid fa-plus mr-2"></i>
+        <span>New Project</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="content" class="flex-1 bg-neutral-50 p-6 overflow-auto">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl text-neutral-800">AI Model Templating</h1>
+        <button class="px-4 py-2 bg-neutral-800 text-white rounded-md flex items-center">
+          <i class="fa-solid fa-code mr-2"></i>
+          <span>Add Custom Code</span>
+        </button>
+      </div>
+
+      <div id="notification-section" class="mb-6 bg-neutral-50 border border-neutral-200 rounded-lg p-4 flex items-start">
+        <i class="fa-solid fa-code-branch text-neutral-500 mt-0.5 mr-3 text-lg"></i>
+        <div>
+          <h3 class="text-neutral-800 mb-1">Custom Code Capabilities</h3>
+          <p class="text-neutral-600 text-sm">As you use the system, AI will learn your requirements and can suggest custom code for the REST API to enhance functionality.</p>
+          <button class="mt-2 text-sm text-neutral-600 hover:text-neutral-700">
+            Learn more about custom integrations
+          </button>
+        </div>
+      </div>
+
+      <div id="templating-filters" class="flex items-center space-x-4 mb-6">
+        <div class="relative">
+          <select class="pl-3 pr-8 py-2 border border-neutral-300 rounded-md appearance-none bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+            <option>All Templates</option>
+            <option>Academic</option>
+            <option>Scientific</option>
+            <option>Data Processing</option>
+          </select>
+          <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-neutral-400 pointer-events-none"></i>
+        </div>
+        <div class="relative">
+          <select class="pl-3 pr-8 py-2 border border-neutral-300 rounded-md appearance-none bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+            <option>All Formats</option>
+            <option>JSON</option>
+            <option>XML</option>
+            <option>Python</option>
+          </select>
+          <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-neutral-400 pointer-events-none"></i>
+        </div>
+        <button class="px-3 py-2 border border-neutral-300 rounded-md bg-white text-neutral-700 flex items-center hover:bg-neutral-50">
+          <i class="fa-solid fa-code-compare mr-2"></i>
+          <span>Compare Templates</span>
+        </button>
+      </div>
+
+      <div id="templates-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <!-- Template Card 1 -->
+        <div class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden">
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center text-white">
+                  <i class="fa-solid fa-file-code"></i>
+                </div>
+                <div class="ml-3">
+                  <h3 class="text-neutral-800">Citation Generator</h3>
+                  <span class="text-xs text-neutral-500">Last modified: June 7, 2025</span>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Active</span>
+            </div>
+            <p class="text-sm text-neutral-600 mb-4">REST API template for generating academic citations in multiple formats from input text.</p>
+            <div class="bg-neutral-100 rounded-md p-3 text-xs text-neutral-700 mb-4 overflow-x-auto">
+              <pre>@api.route('/citations/generate')
+def generate_citation(text, style='apa'):
+    # AI processes citation data
+    return formatted_citation</pre>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <span class="text-xs text-neutral-500 block">Format</span>
+                <span class="text-sm">Python</span>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-500 block">Usage</span>
+                <span class="text-sm">High (143/day)</span>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-500 block">Models</span>
+                <span class="text-sm">GPT-Academic</span>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-500 block">Projects</span>
+                <span class="text-sm">2 Active</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50">
+                Edit Template
+              </button>
+              <div class="flex space-x-2">
+                <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-code"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-clone"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Template Card 2 -->
+        <div class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden">
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center text-white">
+                  <i class="fa-solid fa-chart-simple"></i>
+                </div>
+                <div class="ml-3">
+                  <h3 class="text-neutral-800">Data Visualizer</h3>
+                  <span class="text-xs text-neutral-500">Last modified: May 22, 2025</span>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Active</span>
+            </div>
+            <p class="text-sm text-neutral-600 mb-4">Transforms raw research data into visualization code for scientific papers.</p>
+            <div class="bg-neutral-100 rounded-md p-3 text-xs text-neutral-700 mb-4 overflow-x-auto">
+              <pre>@api.route('/visualize/data', methods=['POST'])
+def create_visualization(data, chart_type):
+    # Process and generate visualization code
+    return { "code": viz_code, "preview_url": url }</pre>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <span class="text-xs text-neutral-500 block">Format</span>
+                <span class="text-sm">Python</span>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-500 block">Usage</span>
+                <span class="text-sm">Medium (87/day)</span>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-500 block">Models</span>
+                <span class="text-sm">SciViz-Generator</span>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-500 block">Projects</span>
+                <span class="text-sm">3 Active</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50">
+                Edit Template
+              </button>
+              <div class="flex space-x-2">
+                <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-code"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-clone"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Template Card 3 -->
+        <div class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden">
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center text-white">
+                  <i class="fa-solid fa-database"></i>
+                </div>
+                <div class="ml-3">
+                  <h3 class="text-neutral-800">Data Processor</h3>
+                  <span class="text-xs text-neutral-500">Last modified: July 1, 2025</span>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Draft</span>
+            </div>
+            <p class="text-sm text-neutral-600 mb-4">Processes raw research data with statistical methods and generates insights via REST API.</p>
+            <div class="bg-neutral-100 rounded-md p-3 text-xs text-neutral-700 mb-4 overflow-x-auto">
+              <pre>@api.route('/data/process', methods=['POST'])
+def process_data(dataset, analysis_type='descriptive'):
+    # Process data and generate statistical insights
+    return { "results": analysis_results }</pre>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <span class="text-xs text-neutral-500 block">Format</span>
+                <span class="text-sm">Python</span>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-500 block">Usage</span>
+                <span class="text-sm">None (Draft)</span>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-500 block">Models</span>
+                <span class="text-sm">DataAnalyst-AI</span>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-500 block">Projects</span>
+                <span class="text-sm">0 Active</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50">
+                Edit Template
+              </button>
+              <div class="flex space-x-2">
+                <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-code"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-clone"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Template Card 4 -->
+        <div class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden">
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center text-white">
+                  <i class="fa-solid fa-language"></i>
+                </div>
+                <div class="ml-3">
+                  <h3 class="text-neutral-800">Translation API</h3>
+                  <span class="text-xs text-neutral-500">Last modified: April 15, 2025</span>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Inactive</span>
+            </div>
+            <p class="text-sm text-neutral-600 mb-4">Translates academic content between languages while preserving terminology.</p>
+            <div class="bg-neutral-100 rounded-md p-3 text-xs text-neutral-700 mb-4 overflow-x-auto">
+              <pre>@api.route('/translate', methods=['POST'])
+def translate_content(text, source_lang, target_lang):
+    # Translate content preserving academic terminology
+    return { "translated_text": result }</pre>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <span class="text-xs text-neutral-500 block">Format</span>
+                <span class="text-sm">Python</span>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-500 block">Usage</span>
+                <span class="text-sm">Low (0/day)</span>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-500 block">Models</span>
+                <span class="text-sm">MultiLingual-Scholar</span>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-500 block">Projects</span>
+                <span class="text-sm">0 Active</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50">
+                Edit Template
+              </button>
+              <div class="flex space-x-2">
+                <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-code"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-clone"></i>
+                </button>
+                <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="custom-code-editor" class="bg-white rounded-lg border border-neutral-200 shadow-sm p-6 mb-6">
+        <h2 class="text-lg text-neutral-800 mb-4">Custom Code Editor</h2>
+        <p class="text-sm text-neutral-600 mb-4">Add custom code to extend the REST API with new functionality as you learn about the system.</p>
+        
+        <div class="mb-4">
+          <label class="block text-sm text-neutral-700 mb-1">Endpoint Name</label>
+          <input type="text" class="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400" placeholder="/api/v1/custom/endpoint">
+        </div>
+        
+        <div class="mb-4">
+          <label class="block text-sm text-neutral-700 mb-1">Description</label>
+          <input type="text" class="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400" placeholder="What does this endpoint do?">
+        </div>
+        
+        <div class="mb-4">
+          <label class="block text-sm text-neutral-700 mb-1">Code</label>
+          <div class="border border-neutral-300 rounded-md overflow-hidden">
+            <div class="bg-neutral-800 text-white px-4 py-2 text-sm flex justify-between items-center">
+              <span>Python Code</span>
+              <div class="flex space-x-2">
+                <button class="p-1 hover:bg-neutral-700 rounded">
+                  <i class="fa-solid fa-copy"></i>
+                </button>
+                <button class="p-1 hover:bg-neutral-700 rounded">
+                  <i class="fa-solid fa-expand"></i>
+                </button>
+              </div>
+            </div>
+            <div class="bg-neutral-100 p-4 h-48">
+              <pre class="text-xs text-neutral-700">@api.route('/custom/endpoint', methods=['POST'])
+def custom_function():
+    # Get request data
+    data = request.json
+    
+    # Process with AI model
+    result = ai_model.process(data)
+    
+    # Return response
+    return jsonify({
+        "status": "success",
+        "data": result
+    })</pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mb-4">
+          <label class="block text-sm text-neutral-700 mb-1">Associated AI Model</label>
+          <div class="relative">
+            <select class="w-full pl-3 pr-8 py-2 border border-neutral-300 rounded-md appearance-none bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+              <option>GPT-Academic</option>
+              <option>SciViz-Generator</option>
+              <option>DataAnalyst-AI</option>
+              <option>MultiLingual-Scholar</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-neutral-400 pointer-events-none"></i>
+          </div>
+        </div>
+        
+        <div class="flex items-center mb-4">
+          <input id="test-mode" type="checkbox" class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+          <label for="test-mode" class="ml-2 text-sm text-neutral-700">Enable test mode (no production data)</label>
+        </div>
+        
+        <div class="flex justify-end space-x-3">
+          <button class="px-4 py-2 border border-neutral-300 rounded-md text-neutral-700 hover:bg-neutral-50">
+            Test Code
+          </button>
+          <button class="px-4 py-2 bg-neutral-800 text-white rounded-md">
+            Save Custom Code
+          </button>
+        </div>
+      </div>
+
+      <div id="api-documentation" class="bg-white rounded-lg border border-neutral-200 shadow-sm p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg text-neutral-800">API Documentation</h2>
+          <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50 flex items-center">
+            <i class="fa-solid fa-download mr-1"></i>
+            Export Docs
+          </button>
+        </div>
+        
+        <div class="border border-neutral-200 rounded-md mb-6">
+          <div class="bg-neutral-50 px-4 py-3 border-b border-neutral-200 flex items-center justify-between">
+            <div class="flex items-center">
+              <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded mr-2">GET</span>
+              <span class="text-neutral-800 text-sm">/api/v1/models</span>
+            </div>
+            <button class="text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-neutral-600 mb-3">Returns a list of all available AI models with their configurations.</p>
+            <div class="mb-3">
+              <h4 class="text-xs text-neutral-500 uppercase mb-1">Parameters</h4>
+              <div class="bg-neutral-50 p-3 rounded-md text-sm">
+                <div class="grid grid-cols-3 gap-2">
+                  <div>status</div>
+                  <div class="text-neutral-600">string</div>
+                  <div class="text-neutral-500">Filter by model status (optional)</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-xs text-neutral-500 uppercase mb-1">Response</h4>
+              <div class="bg-neutral-50 p-3 rounded-md text-xs overflow-x-auto">
+                <pre>{
+  "models": [
+    {
+      "id": "gpt-academic",
+      "name": "GPT-Academic",
+      "version": "3.2.1",
+      "status": "active",
+      "type": "text-generation",
+      "token_limit": 16000
+    },
+    ...
+  ]
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border border-neutral-200 rounded-md">
+          <div class="bg-neutral-50 px-4 py-3 border-b border-neutral-200 flex items-center justify-between">
+            <div class="flex items-center">
+              <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded mr-2">POST</span>
+              <span class="text-neutral-800 text-sm">/api/v1/generate</span>
+            </div>
+            <button class="text-neutral-500 hover:text-neutral-700">
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-neutral-600 mb-3">Generates content using the specified AI model.</p>
+            <div class="mb-3">
+              <h4 class="text-xs text-neutral-500 uppercase mb-1">Request Body</h4>
+              <div class="bg-neutral-50 p-3 rounded-md text-xs overflow-x-auto">
+                <pre>{
+  "model_id": "gpt-academic",
+  "prompt": "Write an abstract for a research paper about...",
+  "parameters": {
+    "max_tokens": 500,
+    "temperature": 0.7
+  }
+}</pre>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-xs text-neutral-500 uppercase mb-1">Response</h4>
+              <div class="bg-neutral-50 p-3 rounded-md text-xs overflow-x-auto">
+                <pre>{
+  "id": "gen-123456",
+  "created": "2025-07-06T10:15:30Z",
+  "content": "This research paper explores...",
+  "usage": {
+    "prompt_tokens": 25,
+    "completion_tokens": 487,
+    "total_tokens": 512
+  }
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-white border-t border-neutral-200 py-4 px-6 text-center text-sm text-neutral-500">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <div>© 2025 AI Project Hub. All rights reserved.</div>
+    <div class="flex space-x-4">
+      <span class="hover:text-neutral-700 cursor-pointer">Terms</span>
+      <span class="hover:text-neutral-700 cursor-pointer">Privacy</span>
+      <span class="hover:text-neutral-700 cursor-pointer">Help</span>
+      <span class="hover:text-neutral-700 cursor-pointer">Contact</span>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

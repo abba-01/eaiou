@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div class="flex items-center space-x-4">
+    <button class="w-10 h-10 flex items-center justify-center rounded-md bg-neutral-200 text-neutral-800">
+      <span>PM</span>
+    </button>
+    <nav class="flex items-center space-x-4">
+      <span class="text-neutral-800 cursor-pointer">Dashboard</span>
+      <span class="text-neutral-800 cursor-pointer">Projects</span>
+      <span class="text-neutral-800 cursor-pointer">Articles</span>
+      <span class="text-neutral-700 cursor-pointer">Settings</span>
+    </nav>
+  </div>
+  <div class="flex items-center space-x-4">
+    <button class="text-neutral-700">
+      <i class="fa-regular fa-bell text-xl"></i>
+    </button>
+    <div class="relative">
+      <button class="w-10 h-10 bg-neutral-200 rounded-full flex items-center justify-center">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-full h-full rounded-full" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<div id="main-content" class="flex">
+  <!-- Sidebar Navigation -->
+  <aside id="sidebar" class="w-64 bg-white border-r border-neutral-200 h-[800px]">
+    <div class="p-4">
+      <h2 class="text-lg text-neutral-800 mb-4">Settings</h2>
+      <nav class="space-y-1">
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-robot mr-3 w-5"></i>
+          <span>AI Models</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-project-diagram mr-3 w-5"></i>
+          <span>Project Settings</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-file-alt mr-3 w-5"></i>
+          <span>Article Templates</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-key mr-3 w-5"></i>
+          <span>API Keys</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 bg-neutral-50 rounded-md cursor-pointer">
+          <i class="fa-solid fa-users mr-3 w-5"></i>
+          <span>User Management</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-shield-alt mr-3 w-5"></i>
+          <span>Security Settings</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-database mr-3 w-5"></i>
+          <span>Data Storage</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-bell mr-3 w-5"></i>
+          <span>Notifications</span>
+        </span>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main id="settings-content" class="flex-1 p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl text-neutral-800">Access Control Management</h1>
+      <button class="px-4 py-2 bg-neutral-700 text-white rounded-md shadow-sm hover:bg-neutral-800 flex items-center">
+        <i class="fa-solid fa-plus mr-2"></i>
+        <span>Add New Role</span>
+      </button>
+    </div>
+
+    <!-- Info Card -->
+    <div id="info-card" class="bg-white p-4 rounded-md shadow-sm mb-6 border-l-4 border-neutral-500">
+      <div class="flex items-start">
+        <i class="fa-solid fa-info-circle text-neutral-500 mt-1 mr-3"></i>
+        <div>
+          <h3 class="text-neutral-800">Managing User Permissions</h3>
+          <p class="text-neutral-600 mt-1">Configure access controls and permissions for different user roles within the application. Define who can access, create, edit, or delete content and settings.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Roles Tab Navigation -->
+    <div id="roles-tabs" class="flex border-b border-neutral-200 mb-6">
+      <button class="px-4 py-2 border-b-2 border-neutral-700 text-neutral-800">User Roles</button>
+      <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">Permission Sets</button>
+      <button class="px-4 py-2 text-neutral-600 hover:text-neutral-800">Access Logs</button>
+    </div>
+
+    <!-- Roles List -->
+    <div id="roles-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <!-- Administrator Role Card -->
+      <div class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden transition-all hover:shadow-md">
+        <div class="p-4 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-md bg-neutral-800 flex items-center justify-center mr-3 text-white">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <h3 class="text-neutral-800">Administrator</h3>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+              System
+            </span>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="text-sm text-neutral-600 mb-4">Full access to all system features and settings.</p>
+          <div class="space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Users</span>
+              <span class="text-xs bg-neutral-700 text-white px-2 py-0.5 rounded">Full Access</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Projects</span>
+              <span class="text-xs bg-neutral-700 text-white px-2 py-0.5 rounded">Full Access</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">AI Models</span>
+              <span class="text-xs bg-neutral-700 text-white px-2 py-0.5 rounded">Full Access</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Settings</span>
+              <span class="text-xs bg-neutral-700 text-white px-2 py-0.5 rounded">Full Access</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 border-t border-neutral-200 bg-neutral-50 flex justify-between">
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+            <i class="fa-solid fa-edit mr-1"></i> Edit
+          </button>
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+            <i class="fa-solid fa-users mr-1"></i> Assign Users
+          </button>
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm opacity-50 cursor-not-allowed">
+            <i class="fa-solid fa-trash-alt mr-1"></i> Remove
+          </button>
+        </div>
+      </div>
+
+      <!-- Content Manager Role Card -->
+      <div class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden transition-all hover:shadow-md">
+        <div class="p-4 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-md bg-neutral-600 flex items-center justify-center mr-3 text-white">
+              <i class="fa-solid fa-user-edit"></i>
+            </div>
+            <h3 class="text-neutral-800">Content Manager</h3>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+              Custom
+            </span>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="text-sm text-neutral-600 mb-4">Can manage all content but has limited access to system settings.</p>
+          <div class="space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Users</span>
+              <span class="text-xs bg-neutral-400 text-white px-2 py-0.5 rounded">View Only</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Projects</span>
+              <span class="text-xs bg-neutral-700 text-white px-2 py-0.5 rounded">Full Access</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">AI Models</span>
+              <span class="text-xs bg-neutral-500 text-white px-2 py-0.5 rounded">Use Only</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Settings</span>
+              <span class="text-xs bg-neutral-400 text-white px-2 py-0.5 rounded">Limited</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 border-t border-neutral-200 bg-neutral-50 flex justify-between">
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+            <i class="fa-solid fa-edit mr-1"></i> Edit
+          </button>
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+            <i class="fa-solid fa-users mr-1"></i> Assign Users
+          </button>
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+            <i class="fa-solid fa-trash-alt mr-1"></i> Remove
+          </button>
+        </div>
+      </div>
+
+      <!-- Researcher Role Card -->
+      <div class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden transition-all hover:shadow-md">
+        <div class="p-4 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-md bg-neutral-500 flex items-center justify-center mr-3 text-white">
+              <i class="fa-solid fa-microscope"></i>
+            </div>
+            <h3 class="text-neutral-800">Researcher</h3>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+              Custom
+            </span>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="text-sm text-neutral-600 mb-4">Can create and edit articles but cannot modify system settings.</p>
+          <div class="space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Users</span>
+              <span class="text-xs bg-neutral-300 text-neutral-700 px-2 py-0.5 rounded">No Access</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Projects</span>
+              <span class="text-xs bg-neutral-500 text-white px-2 py-0.5 rounded">Edit Assigned</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">AI Models</span>
+              <span class="text-xs bg-neutral-500 text-white px-2 py-0.5 rounded">Use Only</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Settings</span>
+              <span class="text-xs bg-neutral-300 text-neutral-700 px-2 py-0.5 rounded">No Access</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 border-t border-neutral-200 bg-neutral-50 flex justify-between">
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+            <i class="fa-solid fa-edit mr-1"></i> Edit
+          </button>
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+            <i class="fa-solid fa-users mr-1"></i> Assign Users
+          </button>
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+            <i class="fa-solid fa-trash-alt mr-1"></i> Remove
+          </button>
+        </div>
+      </div>
+
+      <!-- Viewer Role Card -->
+      <div class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden transition-all hover:shadow-md">
+        <div class="p-4 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-md bg-neutral-400 flex items-center justify-center mr-3 text-white">
+              <i class="fa-solid fa-eye"></i>
+            </div>
+            <h3 class="text-neutral-800">Viewer</h3>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+              System
+            </span>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="text-sm text-neutral-600 mb-4">Read-only access to projects and articles.</p>
+          <div class="space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Users</span>
+              <span class="text-xs bg-neutral-300 text-neutral-700 px-2 py-0.5 rounded">No Access</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Projects</span>
+              <span class="text-xs bg-neutral-400 text-white px-2 py-0.5 rounded">View Only</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">AI Models</span>
+              <span class="text-xs bg-neutral-300 text-neutral-700 px-2 py-0.5 rounded">No Access</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Settings</span>
+              <span class="text-xs bg-neutral-300 text-neutral-700 px-2 py-0.5 rounded">No Access</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 border-t border-neutral-200 bg-neutral-50 flex justify-between">
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+            <i class="fa-solid fa-edit mr-1"></i> Edit
+          </button>
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+            <i class="fa-solid fa-users mr-1"></i> Assign Users
+          </button>
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+            <i class="fa-solid fa-trash-alt mr-1"></i> Remove
+          </button>
+        </div>
+      </div>
+
+      <!-- Add New Role Card -->
+      <div class="bg-neutral-50 rounded-md border border-dashed border-neutral-300 flex items-center justify-center h-[268px] cursor-pointer hover:bg-neutral-100 transition-all">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-3">
+            <i class="fa-solid fa-plus text-neutral-600"></i>
+          </div>
+          <h3 class="text-neutral-700">Create Custom Role</h3>
+          <p class="text-neutral-500 text-sm mt-1">Define a new role with custom permissions</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detailed Permissions Section -->
+    <div id="detailed-permissions" class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden">
+      <div class="p-4 border-b border-neutral-200 flex justify-between items-center">
+        <h2 class="text-lg text-neutral-800">Content Manager Role - Detailed Permissions</h2>
+        <button class="px-3 py-1.5 bg-neutral-700 text-white rounded-md text-sm hover:bg-neutral-800">
+          Save Changes
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-neutral-200">
+          <thead class="bg-neutral-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                Permission
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                View
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                Create
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                Edit
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                Delete
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                Manage
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-neutral-200">
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-800">
+                Projects
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-800">
+                Articles
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-800">
+                AI Models
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-800">
+                Users
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-800">
+                Templates
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-800">
+                System Settings
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-800">
+                Reports
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="p-4 border-t border-neutral-200 bg-neutral-50 flex justify-end space-x-3">
+        <button class="px-4 py-2 bg-white border border-neutral-300 rounded-md text-neutral-700 hover:bg-neutral-50">
+          Cancel
+        </button>
+        <button class="px-4 py-2 bg-neutral-700 text-white rounded-md hover:bg-neutral-800">
+          Save Changes
+        </button>
+      </div>
+    </div>
+
+    <!-- User Assignment Section -->
+    <div id="user-assignment" class="mt-8">
+      <h2 class="text-xl text-neutral-800 mb-4">Role Assignments</h2>
+      
+      <div class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden">
+        <div class="p-4 border-b border-neutral-200">
+          <div class="flex justify-between items-center">
+            <h3 class="text-neutral-800">Users with Content Manager Role</h3>
+            <div class="relative w-64">
+              <input type="text" placeholder="Search users..." class="w-full pl-8 pr-4 py-1.5 border border-neutral-300 rounded-md focus:outline-none focus:ring-1 focus:ring-neutral-500">
+              <i class="fa-solid fa-search absolute left-3 top-2.5 text-neutral-400"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="overflow-y-auto max-h-64">
+          <ul class="divide-y divide-neutral-200">
+            <li class="p-4 flex items-center justify-between hover:bg-neutral-50">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-10 h-10 rounded-full mr-3" />
+                <div>
+                  <h4 class="text-neutral-800">Alex Johnson</h4>
+                  <p class="text-neutral-500 text-sm">alex.johnson@example.com</p>
+                </div>
+              </div>
+              <button class="text-neutral-600 hover:text-neutral-800">
+                <i class="fa-solid fa-times"></i>
+              </button>
+            </li>
+            <li class="p-4 flex items-center justify-between hover:bg-neutral-50">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-10 h-10 rounded-full mr-3" />
+                <div>
+                  <h4 class="text-neutral-800">Sarah Williams</h4>
+                  <p class="text-neutral-500 text-sm">sarah.williams@example.com</p>
+                </div>
+              </div>
+              <button class="text-neutral-600 hover:text-neutral-800">
+                <i class="fa-solid fa-times"></i>
+              </button>
+            </li>
+            <li class="p-4 flex items-center justify-between hover:bg-neutral-50">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=101" alt="User avatar" class="w-10 h-10 rounded-full mr-3" />
+                <div>
+                  <h4 class="text-neutral-800">Michael Chen</h4>
+                  <p class="text-neutral-500 text-sm">michael.chen@example.com</p>
+                </div>
+              </div>
+              <button class="text-neutral-600 hover:text-neutral-800">
+                <i class="fa-solid fa-times"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="p-4 border-t border-neutral-200 bg-neutral-50 flex justify-between">
+          <button class="px-4 py-2 bg-white border border-neutral-300 rounded-md text-neutral-700 hover:bg-neutral-50 flex items-center">
+            <i class="fa-solid fa-user-plus mr-2"></i>
+            Assign New Users
+          </button>
+          <button class="px-4 py-2 bg-neutral-700 text-white rounded-md hover:bg-neutral-800">
+            Save Assignments
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer id="footer" class="bg-white border-t border-neutral-200 p-4 text-center text-neutral-600 text-sm">
+  <p>© 2025 Academic AI Project Management System - Joomla 5.3 Component</p>
+</footer>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <div id="header" class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="text-primary-700 font-bold text-xl">Joomla Academic</div>
+                <div class="hidden md:flex space-x-6 ml-10">
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Dashboard</span>
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">My Articles</span>
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Submit Article</span>
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Reviews</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-500 hover:text-gray-700">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center">
+                        <span class="text-sm font-medium">JD</span>
+                    </div>
+                    <span class="text-gray-700 hidden md:inline-block">John Doe</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content" class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row">
+            <!-- Left sidebar with settings categories -->
+            <div id="sidebar" class="w-full md:w-64 mb-6 md:mb-0">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sticky top-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">System Settings</h3>
+                    <div class="space-y-1">
+                        <span class="block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-primary-600 cursor-pointer">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-gear mr-3 w-5 text-gray-500"></i>
+                                <span>General</span>
+                            </div>
+                        </span>
+                        <span class="block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-primary-600 cursor-pointer">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-users mr-3 w-5 text-gray-500"></i>
+                                <span>User Roles</span>
+                            </div>
+                        </span>
+                        <span class="block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-primary-600 cursor-pointer">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-diagram-project mr-3 w-5 text-gray-500"></i>
+                                <span>Workflow</span>
+                            </div>
+                        </span>
+                        <span class="block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-primary-600 cursor-pointer">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-list-check mr-3 w-5 text-gray-500"></i>
+                                <span>Review Rubric</span>
+                            </div>
+                        </span>
+                        <span class="block px-3 py-2 rounded-md bg-primary-50 text-primary-700 cursor-pointer">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-bell mr-3 w-5 text-primary-600"></i>
+                                <span>Notifications</span>
+                            </div>
+                        </span>
+                        <span class="block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-primary-600 cursor-pointer">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-file-export mr-3 w-5 text-gray-500"></i>
+                                <span>Export Settings</span>
+                            </div>
+                        </span>
+                        <span class="block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100 hover:text-primary-600 cursor-pointer">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-shield-halved mr-3 w-5 text-gray-500"></i>
+                                <span>Permissions</span>
+                            </div>
+                        </span>
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <span class="block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100 cursor-pointer">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-arrow-left mr-3 w-5"></i>
+                                <span>Back to Admin</span>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main form area -->
+            <div id="notification-settings" class="flex-1 md:ml-8">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800">Notification Messages</h2>
+                        <div class="flex items-center space-x-2">
+                            <button id="save-btn" class="py-2 px-4 bg-primary-600 text-white rounded-md font-medium hover:bg-primary-700">
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <p class="text-gray-600">Customize notification messages sent to users at different stages of the peer-review workflow. Use placeholders to dynamically insert content.</p>
+                    </div>
+                    
+                    <!-- Tabs for different notification types -->
+                    <div id="notification-tabs" class="border-b border-gray-200 mb-6">
+                        <div class="flex space-x-1 overflow-x-auto">
+                            <button class="px-4 py-2 text-primary-600 border-b-2 border-primary-600 font-medium">Author</button>
+                            <button class="px-4 py-2 text-gray-500 hover:text-gray-700">Reviewer</button>
+                            <button class="px-4 py-2 text-gray-500 hover:text-gray-700">Editor</button>
+                            <button class="px-4 py-2 text-gray-500 hover:text-gray-700">Admin</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Author notification templates -->
+                    <div id="author-notifications">
+                        <!-- Submission Received -->
+                        <div id="submission-received" class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-paper-plane text-gray-500 mr-2"></i>
+                                    <h3 class="font-medium text-gray-800">Submission Received</h3>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="flex items-center">
+                                        <label class="relative inline-flex items-center cursor-pointer mr-3">
+                                            <input type="checkbox" checked class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                        </label>
+                                        <span class="text-sm text-gray-600">Enabled</span>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                    <div class="col-span-1">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                                        <input type="text" value="Your article submission has been received" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500">
+                                    </div>
+                                    <div class="col-span-1">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Send to</label>
+                                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500">
+                                            <option>Author</option>
+                                            <option>Co-authors</option>
+                                            <option>All authors</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-span-1">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Trigger</label>
+                                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500">
+                                            <option>On submission</option>
+                                            <option>After validation</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Message Body</label>
+                                    <div class="border border-gray-300 rounded-md mb-1">
+                                        <div class="flex flex-wrap items-center border-b border-gray-200 p-2 gap-1">
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-bold"></i>
+                                            </button>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-italic"></i>
+                                            </button>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-underline"></i>
+                                            </button>
+                                            <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-heading"></i>
+                                            </button>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-list-ul"></i>
+                                            </button>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-list-ol"></i>
+                                            </button>
+                                            <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-link"></i>
+                                            </button>
+                                        </div>
+                                        <div class="p-4 min-h-[150px]">
+                                            <p>Dear {author_name},</p>
+                                            <p class="my-2">Thank you for submitting your article "{article_title}" to Joomla Academic. Your submission has been received and assigned the reference number {submission_id}.</p>
+                                            <p class="my-2">We will now begin the review process. You can check the status of your submission at any time by logging into your account.</p>
+                                            <p class="my-2">If you have any questions, please contact us at {support_email}.</p>
+                                            <p>Best regards,<br>The Editorial Team</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded-md">
+                                    <h4 class="text-sm font-medium text-gray-700 mb-2">Available Placeholders</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{author_name}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{article_title}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{submission_id}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{submission_date}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{support_email}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{login_url}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Reviewer Assigned -->
+                        <div id="reviewer-assigned" class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-user-check text-gray-500 mr-2"></i>
+                                    <h3 class="font-medium text-gray-800">Reviewers Assigned</h3>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="flex items-center">
+                                        <label class="relative inline-flex items-center cursor-pointer mr-3">
+                                            <input type="checkbox" checked class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                        </label>
+                                        <span class="text-sm text-gray-600">Enabled</span>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                    <div class="col-span-1">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                                        <input type="text" value="Reviewers have been assigned to your submission" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500">
+                                    </div>
+                                    <div class="col-span-1">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Send to</label>
+                                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500">
+                                            <option>Author</option>
+                                            <option>Co-authors</option>
+                                            <option>All authors</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-span-1">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Trigger</label>
+                                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500">
+                                            <option>When all reviewers assigned</option>
+                                            <option>For each reviewer assigned</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Message Body</label>
+                                    <div class="border border-gray-300 rounded-md mb-1">
+                                        <div class="flex flex-wrap items-center border-b border-gray-200 p-2 gap-1">
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-bold"></i>
+                                            </button>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-italic"></i>
+                                            </button>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-underline"></i>
+                                            </button>
+                                            <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-heading"></i>
+                                            </button>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-list-ul"></i>
+                                            </button>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-list-ol"></i>
+                                            </button>
+                                        </div>
+                                        <div class="p-4 min-h-[150px]">
+                                            <p>Dear {author_name},</p>
+                                            <p class="my-2">We are pleased to inform you that reviewers have been assigned to evaluate your article "{article_title}" (ID: {submission_id}).</p>
+                                            <p class="my-2">The review process is expected to take approximately {review_duration} days. You will be notified once all reviews have been submitted and a decision has been made.</p>
+                                            <p class="my-2">You can check the status of your submission at any time by logging into your account.</p>
+                                            <p>Best regards,<br>The Editorial Team</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded-md">
+                                    <h4 class="text-sm font-medium text-gray-700 mb-2">Available Placeholders</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{author_name}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{article_title}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{submission_id}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{reviewer_count}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{review_duration}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{login_url}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Decision Made -->
+                        <div id="decision-made" class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-clipboard-check text-gray-500 mr-2"></i>
+                                    <h3 class="font-medium text-gray-800">Decision Made</h3>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="flex items-center">
+                                        <label class="relative inline-flex items-center cursor-pointer mr-3">
+                                            <input type="checkbox" checked class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                        </label>
+                                        <span class="text-sm text-gray-600">Enabled</span>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                    <div class="col-span-1">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                                        <input type="text" value="Decision on your article submission" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500">
+                                    </div>
+                                    <div class="col-span-1">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Send to</label>
+                                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500">
+                                            <option>Author</option>
+                                            <option>All authors</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-span-1">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Customize by Decision</label>
+                                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500">
+                                            <option>All decisions (one template)</option>
+                                            <option>Separate templates by decision</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Message Body</label>
+                                    <div class="border border-gray-300 rounded-md mb-1">
+                                        <div class="flex flex-wrap items-center border-b border-gray-200 p-2 gap-1">
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-bold"></i>
+                                            </button>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-italic"></i>
+                                            </button>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-underline"></i>
+                                            </button>
+                                            <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-heading"></i>
+                                            </button>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-list-ul"></i>
+                                            </button>
+                                            <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                                <i class="fa-solid fa-list-ol"></i>
+                                            </button>
+                                        </div>
+                                        <div class="p-4 min-h-[150px]">
+                                            <p>Dear {author_name},</p>
+                                            <p class="my-2">We have completed the review of your article "{article_title}" (ID: {submission_id}).</p>
+                                            <p class="my-2">Based on the reviewers' evaluations and editorial assessment, we have reached the following decision:</p>
+                                            <p class="my-2 font-medium">{decision}</p>
+                                            <p class="my-2">{decision_comments}</p>
+                                            <p class="my-2">You can view the complete reviewer feedback and next steps by logging into your account.</p>
+                                            <p>Best regards,<br>{editor_name}<br>Editor</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded-md">
+                                    <h4 class="text-sm font-medium text-gray-700 mb-2">Available Placeholders</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{author_name}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{article_title}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{submission_id}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{decision}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{decision_comments}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{editor_name}</span>
+                                        <span class="inline-flex items-center px-2 py-1 bg-gray-200 text-gray-800 text-xs rounded-md">{revision_deadline}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Add New Template Button -->
+                        <div class="flex justify-center">
+                            <button class="flex items-center px-4 py-2 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50">
+                                <i class="fa-solid fa-plus mr-2"></i>
+                                <span>Add New Template</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notification Delivery Settings -->
+                <div id="delivery-settings" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Notification Delivery Settings</h2>
+                    <p class="text-gray-600 mb-6">Configure how notifications are delivered to users in the peer-review system.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center mb-4">
+                                    <i class="fa-solid fa-envelope text-gray-500 text-xl mr-3"></i>
+                                    <h3 class="font-medium text-gray-800">Email Notifications</h3>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Send email notifications</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" checked class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Include HTML formatting</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" checked class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Send plain text alternative</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" checked class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center mb-4">
+                                    <i class="fa-solid fa-bell text-gray-500 text-xl mr-3"></i>
+                                    <h3 class="font-medium text-gray-800">In-App Notifications</h3>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Enable in-app notifications</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" checked class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Show notification badge</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" checked class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Desktop notifications</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center mb-4">
+                                <i class="fa-solid fa-clock text-gray-500 text-xl mr-3"></i>
+                                <h3 class="font-medium text-gray-800">Scheduling & Frequency</h3>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Notification Digest</label>
+                                    <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500">
+                                        <option>Send immediately</option>
+                                        <option>Daily digest</option>
+                                        <option>Weekly digest</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Reminder Frequency</label>
+                                    <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500">
+                                        <option>No reminders</option>
+                                        <option>Every 3 days</option>
+                                        <option>Every 7 days</option>
+                                        <option>Custom</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md">
+                                <span class="text-gray-600">Send automatic reminders for pending tasks</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end mt-6">
+                        <button class="py-2 px-4 bg-primary-600 text-white rounded-md font-medium hover:bg-primary-700">
+                            Save Settings
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right sidebar with help -->
+            <div id="help-sidebar" class="hidden lg:block w-72 ml-8">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sticky top-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Notification Help</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-primary-500 pl-3">
+                            <h4 class="text-primary-700 font-medium mb-1">Using Placeholders</h4>
+                            <p class="text-sm text-gray-600">Placeholders are automatically replaced with actual values when notifications are sent. Use curly braces around placeholder names.</p>
+                        </div>
+                        <div class="border-l-4 border-primary-500 pl-3">
+                            <h4 class="text-primary-700 font-medium mb-1">Message Formatting</h4>
+                            <p class="text-sm text-gray-600">Basic HTML formatting is supported in notification messages. Use the formatting toolbar to add emphasis to important information.</p>
+                        </div>
+                        <div class="border-l-4 border-primary-500 pl-3">
+                            <h4 class="text-primary-700 font-medium mb-1">Conditional Content</h4>
+                            <p class="text-sm text-gray-600">You can create separate templates for different decisions (approve, revise, reject) using the "Customize by Decision" option.</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <h4 class="font-medium text-gray-800 mb-2">Testing Notifications</h4>
+                        <p class="text-sm text-gray-600 mb-4">You can send test notifications to verify your templates before saving changes.</p>
+                        <button class="w-full flex items-center justify-center py-2 px-4 bg-secondary-100 text-secondary-700 rounded-md text-sm font-medium hover:bg-secondary-200">
+                            <i class="fa-solid fa-paper-plane mr-2"></i>
+                            Send Test Notification
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="footer" class="bg-white border-t border-gray-200 mt-8">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 Joomla Academic. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Help</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Contact</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

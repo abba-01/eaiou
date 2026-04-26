@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="flex items-center p-3 bg-white border-b">
+  <div class="flex items-center space-x-4">
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <span class="flex items-center cursor-pointer">
+      <img alt="AcademiAI Logo" class="h-6" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/default-placeholder.png"/>
+      <span class="ml-1">AcademiAI Manager</span>
+    </span>
+    <div class="flex items-center space-x-4">
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded">
+          Dashboard
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded flex items-center">
+          Projects
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-600 hover:bg-neutral-100 rounded flex items-center">
+          Settings
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded flex items-center">
+          Analytics
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <button class="bg-neutral-600 text-white px-4 py-1.5 rounded">
+        New Project
+      </button>
+    </div>
+  </div>
+  <div class="ml-auto flex items-center space-x-3">
+    <div class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm flex items-center">
+      <i class="fa-solid fa-gem mr-1 text-xs"></i>
+      Academic License
+    </div>
+    <div class="relative">
+      <div class="relative">
+        <i class="fa-solid fa-search text-neutral-400 absolute left-3 top-2.5"></i>
+        <input class="pl-9 pr-4 py-2 bg-neutral-100 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-neutral-500" placeholder="Search projects or articles" type="text"/>
+      </div>
+    </div>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full relative">
+      <i class="fa-regular fa-bell"></i>
+      <span class="absolute top-0 right-0 h-3 w-3 bg-neutral-600 rounded-full"></span>
+    </button>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-regular fa-circle-question"></i>
+    </button>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-solid fa-cog"></i>
+    </button>
+    <button class="w-8 h-8 rounded-full bg-neutral-600 text-white flex items-center justify-center text-sm">
+      AD
+    </button>
+  </div>
+</div>
+
+<div id="main-content" class="flex h-[800px]">
+  <div id="sidebar" class="w-56 bg-white p-4 border-r">
+    <h2 class="text-lg mb-4">
+      Settings
+    </h2>
+    <div class="space-y-1">
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-robot w-5 text-center mr-2"></i>
+        <span class="text-sm">AI Models</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-key w-5 text-center mr-2"></i>
+        <span class="text-sm">API Keys</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-lock w-5 text-center mr-2"></i>
+        <span class="text-sm">Security</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-users w-5 text-center mr-2"></i>
+        <span class="text-sm">User Access</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-database w-5 text-center mr-2"></i>
+        <span class="text-sm">Data Storage</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded bg-neutral-50 text-neutral-700 cursor-pointer">
+        <i class="fa-solid fa-bell w-5 text-center mr-2"></i>
+        <span class="text-sm">Notifications</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-file-export w-5 text-center mr-2"></i>
+        <span class="text-sm">Export Settings</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-sliders w-5 text-center mr-2"></i>
+        <span class="text-sm">Preferences</span>
+      </span>
+    </div>
+    <div class="mt-6 pt-6 border-t">
+      <div class="text-xs text-neutral-500 mb-3">
+        Joomla 5.3 Component v2.1.4
+      </div>
+      <button class="flex items-center text-sm text-neutral-600 hover:underline">
+        <i class="fa-regular fa-life-ring mr-2"></i>
+        Get Support
+      </button>
+    </div>
+  </div>
+  
+  <div id="content" class="flex-1 bg-neutral-50 overflow-auto">
+    <div class="p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl">Reminders & Notifications</h1>
+        <button class="bg-neutral-600 text-white px-4 py-2 rounded shadow-md hover:bg-neutral-700 flex items-center">
+          <i class="fa-solid fa-plus mr-2"></i>
+          Add New Reminder
+        </button>
+      </div>
+      
+      <div class="mb-6">
+        <div class="bg-white p-4 rounded-lg shadow-md border border-neutral-200">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg">Notification Settings</h2>
+            <div class="flex space-x-2">
+              <button class="px-3 py-1.5 bg-neutral-100 rounded text-neutral-700 text-sm flex items-center">
+                <i class="fa-solid fa-check-double mr-1"></i>
+                Mark All Read
+              </button>
+              <button class="px-3 py-1.5 bg-neutral-100 rounded text-neutral-700 text-sm flex items-center">
+                <i class="fa-solid fa-sliders mr-1"></i>
+                Preferences
+              </button>
+            </div>
+          </div>
+          
+          <p class="text-neutral-600 mb-4">Configure how you receive notifications about project deadlines, submissions, and AI processing status updates.</p>
+          
+          <div class="flex items-center space-x-3 mb-4">
+            <button class="px-3 py-1.5 bg-neutral-50 text-neutral-700 rounded-full text-sm">All Notifications</button>
+            <button class="px-3 py-1.5 bg-neutral-100 text-neutral-700 rounded-full text-sm">Project Deadlines</button>
+            <button class="px-3 py-1.5 bg-neutral-100 text-neutral-700 rounded-full text-sm">Submissions</button>
+            <button class="px-3 py-1.5 bg-neutral-100 text-neutral-700 rounded-full text-sm">Processing</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="upcoming-deadlines" class="mb-6">
+        <h2 class="text-lg mb-3">Upcoming Deadlines</h2>
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 overflow-hidden">
+          <div class="p-4 border-b border-neutral-100 flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-neutral-100 flex items-center justify-center mr-3">
+                <i class="fa-solid fa-calendar-day text-neutral-600"></i>
+              </div>
+              <div>
+                <div>Research Paper Submission</div>
+                <div class="text-sm text-neutral-500">Quantum Physics Analysis</div>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <div class="text-sm bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full mr-3">
+                <i class="fa-regular fa-clock mr-1"></i>
+                2 days left
+              </div>
+              <button class="text-neutral-400 hover:text-neutral-600">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="p-4 border-b border-neutral-100 flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-neutral-100 flex items-center justify-center mr-3">
+                <i class="fa-solid fa-calendar-day text-neutral-600"></i>
+              </div>
+              <div>
+                <div>Journal Article Review</div>
+                <div class="text-sm text-neutral-500">Cognitive Behavioral Study</div>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <div class="text-sm bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full mr-3">
+                <i class="fa-regular fa-clock mr-1"></i>
+                Due tomorrow
+              </div>
+              <button class="text-neutral-400 hover:text-neutral-600">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="p-4 border-b border-neutral-100 flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-neutral-100 flex items-center justify-center mr-3">
+                <i class="fa-solid fa-calendar-day text-neutral-600"></i>
+              </div>
+              <div>
+                <div>Peer Review Feedback</div>
+                <div class="text-sm text-neutral-500">Environmental Impact Assessment</div>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <div class="text-sm bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full mr-3">
+                <i class="fa-regular fa-clock mr-1"></i>
+                5 days left
+              </div>
+              <button class="text-neutral-400 hover:text-neutral-600">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="p-3 bg-neutral-50 text-center">
+            <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+              View All Deadlines
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="notification-rules" class="mb-6">
+        <h2 class="text-lg mb-3">Notification Rules</h2>
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200">
+          <div class="p-4 border-b border-neutral-100">
+            <div class="flex items-center justify-between mb-4">
+              <div>Project Deadline Reminders</div>
+              <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                <input type="checkbox" id="toggle-deadlines" checked class="sr-only"/>
+                <label for="toggle-deadlines" class="block h-6 rounded-full bg-neutral-300 cursor-pointer"></label>
+                <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">First Reminder</label>
+                <div class="flex">
+                  <select class="w-20 border border-neutral-300 rounded-l-md shadow-sm focus:outline-none focus:ring-neutral-500 focus:border-neutral-500 sm:text-sm">
+                    <option>1</option>
+                    <option>2</option>
+                    <option selected>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                  <select class="border-t border-b border-neutral-300 shadow-sm focus:outline-none focus:ring-neutral-500 focus:border-neutral-500 sm:text-sm">
+                    <option>hours</option>
+                    <option selected>days</option>
+                    <option>weeks</option>
+                  </select>
+                  <div class="px-3 py-2 bg-neutral-100 border border-neutral-300 rounded-r-md text-sm">before deadline</div>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">Reminder Frequency</label>
+                <select class="w-full border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-neutral-500 focus:border-neutral-500 sm:text-sm">
+                  <option>Once only</option>
+                  <option selected>Daily until deadline</option>
+                  <option>Every 12 hours until deadline</option>
+                  <option>Every hour on final day</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-4 border-b border-neutral-100">
+            <div class="flex items-center justify-between mb-4">
+              <div>Submission Confirmations</div>
+              <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                <input type="checkbox" id="toggle-submissions" checked class="sr-only"/>
+                <label for="toggle-submissions" class="block h-6 rounded-full bg-neutral-300 cursor-pointer"></label>
+                <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <div class="flex items-center mb-2">
+                  <input id="submission-email" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                  <label for="submission-email" class="ml-2 block text-sm text-neutral-700">Email notification</label>
+                </div>
+                <div class="flex items-center mb-2">
+                  <input id="submission-browser" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                  <label for="submission-browser" class="ml-2 block text-sm text-neutral-700">Browser notification</label>
+                </div>
+                <div class="flex items-center">
+                  <input id="submission-sms" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                  <label for="submission-sms" class="ml-2 block text-sm text-neutral-700">SMS notification</label>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">Additional Recipients</label>
+                <div class="relative">
+                  <input type="text" placeholder="Enter email addresses" class="w-full border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-neutral-500 focus:border-neutral-500 sm:text-sm"/>
+                  <button class="absolute right-2 top-1.5 text-neutral-400 hover:text-neutral-600">
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-4 border-b border-neutral-100">
+            <div class="flex items-center justify-between mb-4">
+              <div>AI Processing Updates</div>
+              <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                <input type="checkbox" id="toggle-processing" checked class="sr-only"/>
+                <label for="toggle-processing" class="block h-6 rounded-full bg-neutral-300 cursor-pointer"></label>
+                <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center">
+                <input id="processing-start" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                <label for="processing-start" class="ml-2 block text-sm text-neutral-700">When processing starts</label>
+              </div>
+              <div class="flex items-center">
+                <input id="processing-complete" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                <label for="processing-complete" class="ml-2 block text-sm text-neutral-700">When processing completes</label>
+              </div>
+              <div class="flex items-center">
+                <input id="processing-error" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                <label for="processing-error" class="ml-2 block text-sm text-neutral-700">When errors occur</label>
+              </div>
+              <div class="flex items-center">
+                <input id="processing-threshold" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                <label for="processing-threshold" class="ml-2 block text-sm text-neutral-700">When processing exceeds time threshold</label>
+              </div>
+              <div class="ml-6 mt-2">
+                <div class="flex">
+                  <select class="w-20 border border-neutral-300 rounded-l-md shadow-sm focus:outline-none focus:ring-neutral-500 focus:border-neutral-500 sm:text-sm">
+                    <option>5</option>
+                    <option>10</option>
+                    <option selected>15</option>
+                    <option>30</option>
+                    <option>60</option>
+                  </select>
+                  <div class="px-3 py-2 bg-neutral-100 border border-neutral-300 rounded-r-md text-sm">minutes</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-4">
+            <div class="flex items-center justify-between mb-4">
+              <div>Academic Calendar Integration</div>
+              <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                <input type="checkbox" id="toggle-calendar" checked class="sr-only"/>
+                <label for="toggle-calendar" class="block h-6 rounded-full bg-neutral-300 cursor-pointer"></label>
+                <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-3 mb-3">
+              <div class="flex items-center">
+                <input id="calendar-google" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                <label for="calendar-google" class="ml-2 block text-sm text-neutral-700">Google Calendar</label>
+              </div>
+              <div class="flex items-center">
+                <input id="calendar-outlook" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                <label for="calendar-outlook" class="ml-2 block text-sm text-neutral-700">Outlook</label>
+              </div>
+              <div class="flex items-center">
+                <input id="calendar-ical" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                <label for="calendar-ical" class="ml-2 block text-sm text-neutral-700">iCal</label>
+              </div>
+            </div>
+            <div class="text-sm text-neutral-500">
+              Sync project deadlines and submission dates with your academic calendar.
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="recent-notifications" class="mb-6">
+        <h2 class="text-lg mb-3">Recent Notifications</h2>
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 overflow-hidden">
+          <div class="p-4 border-l-4 border-neutral-600 border-b border-neutral-100 flex items-start hover:bg-neutral-50">
+            <div class="w-10 h-10 rounded-full bg-neutral-600 flex items-center justify-center mr-3 flex-shrink-0">
+              <i class="fa-solid fa-check text-white"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between">
+                <div>Article Processing Complete</div>
+                <div class="text-sm text-neutral-500">2 hours ago</div>
+              </div>
+              <div class="text-neutral-600 text-sm mt-1">
+                "Neural Networks in Cognitive Science" has been processed successfully using UX Pilot Opus.
+              </div>
+              <div class="mt-2">
+                <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                  View Results
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-4 border-l-4 border-neutral-500 border-b border-neutral-100 flex items-start hover:bg-neutral-50">
+            <div class="w-10 h-10 rounded-full bg-neutral-500 flex items-center justify-center mr-3 flex-shrink-0">
+              <i class="fa-solid fa-exclamation text-white"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between">
+                <div>Deadline Approaching</div>
+                <div class="text-sm text-neutral-500">5 hours ago</div>
+              </div>
+              <div class="text-neutral-600 text-sm mt-1">
+                "Journal Article Review" for the Cognitive Behavioral Study project is due tomorrow.
+              </div>
+              <div class="mt-2">
+                <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                  View Project
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-4 border-l-4 border-neutral-500 border-b border-neutral-100 flex items-start hover:bg-neutral-50">
+            <div class="w-10 h-10 rounded-full bg-neutral-500 flex items-center justify-center mr-3 flex-shrink-0">
+              <i class="fa-solid fa-triangle-exclamation text-white"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between">
+                <div>Processing Error</div>
+                <div class="text-sm text-neutral-500">Yesterday</div>
+              </div>
+              <div class="text-neutral-600 text-sm mt-1">
+                Error processing "Climate Change Analysis" with GPT-4o. The model encountered a token limit issue.
+              </div>
+              <div class="mt-2">
+                <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                  Retry Processing
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-4 border-l-4 border-neutral-500 border-b border-neutral-100 flex items-start hover:bg-neutral-50">
+            <div class="w-10 h-10 rounded-full bg-neutral-500 flex items-center justify-center mr-3 flex-shrink-0">
+              <i class="fa-solid fa-bell text-white"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between">
+                <div>New Project Assignment</div>
+                <div class="text-sm text-neutral-500">2 days ago</div>
+              </div>
+              <div class="text-neutral-600 text-sm mt-1">
+                You have been assigned to "Quantum Physics Analysis" project with a deadline of July 8, 2025.
+              </div>
+              <div class="mt-2">
+                <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                  View Assignment
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-3 bg-neutral-50 text-center">
+            <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+              View All Notifications
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="email-templates" class="mb-6">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-lg">Notification Templates</h2>
+          <button class="text-neutral-600 hover:text-neutral-800 text-sm flex items-center">
+            <i class="fa-solid fa-plus mr-1"></i>
+            Create Template
+          </button>
+        </div>
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 overflow-hidden">
+          <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-100">
+            <div class="p-4">
+              <div class="mb-2">Deadline Reminder</div>
+              <div class="text-sm text-neutral-600 mb-3">
+                Template for project deadline notifications
+              </div>
+              <div class="flex justify-between">
+                <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                  <i class="fa-solid fa-pen-to-square mr-1"></i>
+                  Edit
+                </button>
+                <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                  <i class="fa-regular fa-eye mr-1"></i>
+                  Preview
+                </button>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="mb-2">Processing Complete</div>
+              <div class="text-sm text-neutral-600 mb-3">
+                Template for AI processing completion
+              </div>
+              <div class="flex justify-between">
+                <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                  <i class="fa-solid fa-pen-to-square mr-1"></i>
+                  Edit
+                </button>
+                <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                  <i class="fa-regular fa-eye mr-1"></i>
+                  Preview
+                </button>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="mb-2">Error Notification</div>
+              <div class="text-sm text-neutral-600 mb-3">
+                Template for processing errors
+              </div>
+              <div class="flex justify-between">
+                <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                  <i class="fa-solid fa-pen-to-square mr-1"></i>
+                  Edit
+                </button>
+                <button class="text-neutral-600 hover:text-neutral-800 text-sm">
+                  <i class="fa-regular fa-eye mr-1"></i>
+                  Preview
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-6 flex justify-end space-x-3">
+        <button class="px-4 py-2 border border-neutral-300 rounded-md shadow-sm text-sm text-neutral-700 bg-white hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500">
+          Reset to Defaults
+        </button>
+        <button class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm text-white bg-neutral-600 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500">
+          Save Settings
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="border-t bg-white p-4 text-center text-neutral-500 text-sm">
+  <p>AcademiAI Manager © 2025 | Joomla 5.3 Component | Version 2.1.4</p>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

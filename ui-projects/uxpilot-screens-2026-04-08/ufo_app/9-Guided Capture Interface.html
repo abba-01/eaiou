@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C63FF',
+                        secondary: '#2A265F',
+                        accent: '#00F5A0',
+                        dark: '#121212',
+                        darkGray: '#1E1E1E',
+                        lightGray: '#2A2A2A',
+                        success: '#00C853',
+                        warning: '#FFD600',
+                        danger: '#FF3D00',
+                        info: '#00B0FF'
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-white font-sans">
+    <!-- Status Bar -->
+    <div id="status-bar" class="bg-darkGray p-2 flex justify-between items-center text-xs">
+        <div>
+            <span>9:41</span>
+        </div>
+        <div class="flex space-x-2">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-three-quarters"></i>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="bg-darkGray p-4 flex justify-between items-center">
+        <button id="back-btn" class="flex items-center space-x-2">
+            <i class="fa-solid fa-chevron-left"></i>
+            <span>Back</span>
+        </button>
+        <div class="flex items-center">
+            <h1 class="text-lg font-bold">Sighting Capture</h1>
+        </div>
+        <button id="help-btn">
+            <i class="fa-solid fa-circle-question text-xl text-primary"></i>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pb-20">
+        <!-- AR Viewport -->
+        <section id="ar-viewport" class="relative h-[50vh] bg-black">
+            <div class="absolute inset-0 bg-black opacity-90">
+                <img class="w-full h-full object-cover opacity-40" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/1503fd51a3-e43af469062e23e39466.png" alt="night sky with stars, AR overlay showing a UFO tracking interface with targeting reticle and measurement guides, mobile app UI" />
+            </div>
+            
+            <!-- AR Overlay Elements -->
+            <div id="ar-overlay-elements" class="absolute inset-0 p-4">
+                <!-- Compass & Alignment -->
+                <div id="compass-indicator" class="absolute top-4 left-4 bg-darkGray bg-opacity-70 rounded-lg p-2 flex items-center space-x-2">
+                    <i class="fa-solid fa-compass text-accent"></i>
+                    <span class="text-sm">N 42°</span>
+                </div>
+                
+                <!-- Stability Indicator -->
+                <div id="stability-indicator" class="absolute top-4 right-4 bg-darkGray bg-opacity-70 rounded-lg p-2">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm">Stability</span>
+                        <div class="w-16 bg-gray-700 rounded-full h-1.5">
+                            <div class="bg-success h-1.5 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Targeting Reticle -->
+                <div id="targeting-reticle" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div class="w-24 h-24 border-2 border-accent rounded-full flex items-center justify-center">
+                        <div class="w-4 h-4 border-2 border-accent rounded-full"></div>
+                        <div class="absolute w-full h-0.5 bg-accent opacity-50"></div>
+                        <div class="absolute w-0.5 h-full bg-accent opacity-50"></div>
+                    </div>
+                </div>
+                
+                <!-- Tilt Indicator -->
+                <div id="tilt-indicator" class="absolute bottom-4 left-4 bg-darkGray bg-opacity-70 rounded-lg p-2">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-angle-up text-accent"></i>
+                        <span class="text-sm">Tilt: 15°</span>
+                    </div>
+                </div>
+                
+                <!-- Recording Status -->
+                <div id="recording-status" class="absolute bottom-4 right-4 bg-danger bg-opacity-90 rounded-lg px-3 py-1.5 flex items-center space-x-2">
+                    <div class="h-2 w-2 rounded-full bg-white animate-pulse"></div>
+                    <span class="text-sm">REC 00:32</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Voice Guidance Box -->
+        <section id="voice-guidance" class="p-4 bg-secondary mb-4">
+            <div class="flex items-start space-x-3">
+                <div class="bg-primary rounded-full p-2 mt-1">
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg">Voice Guidance</h3>
+                    <p class="text-gray-300">Point your camera where the object first appeared, then press "Mark Start"</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Capture Steps -->
+        <section id="capture-steps" class="px-4 mb-4">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold">Capture Progress</h2>
+                <span class="text-accent text-sm">Step 1 of 4</span>
+            </div>
+            
+            <div class="bg-darkGray rounded-xl p-4">
+                <div class="relative">
+                    <div class="w-full bg-gray-700 h-2 rounded-full mb-6">
+                        <div class="bg-accent h-2 rounded-full" style="width: 25%"></div>
+                    </div>
+                    
+                    <!-- Step Markers -->
+                    <div class="absolute top-0 left-0 transform -translate-y-1/2 flex justify-between w-full px-1">
+                        <div class="flex flex-col items-center">
+                            <div class="h-4 w-4 rounded-full bg-accent"></div>
+                            <span class="text-xs mt-1 text-accent">Start</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="h-4 w-4 rounded-full bg-gray-600"></div>
+                            <span class="text-xs mt-1 text-gray-500">Path</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="h-4 w-4 rounded-full bg-gray-600"></div>
+                            <span class="text-xs mt-1 text-gray-500">End</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="h-4 w-4 rounded-full bg-gray-600"></div>
+                            <span class="text-xs mt-1 text-gray-500">Details</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Current Step Instructions -->
+                <div id="current-step" class="mt-2">
+                    <h3 class="font-medium">Mark Starting Point</h3>
+                    <p class="text-sm text-gray-400 mt-1">Hold your phone steady and align the reticle with where you first saw the object.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <section id="action-buttons" class="px-4 mb-4">
+            <div class="grid grid-cols-2 gap-3">
+                <button id="mark-start-btn" class="bg-primary hover:bg-opacity-90 transition py-3 rounded-xl flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-location-crosshairs"></i>
+                    <span class="font-bold">Mark Start</span>
+                </button>
+                <button id="cancel-btn" class="bg-darkGray border border-gray-600 hover:bg-opacity-90 transition py-3 rounded-xl flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-xmark"></i>
+                    <span class="font-bold">Cancel</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Capture Options -->
+        <section id="capture-options" class="px-4 mb-4">
+            <h2 class="text-lg font-bold mb-3">Capture Options</h2>
+            <div class="grid grid-cols-4 gap-3">
+                <div id="option-photo" class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                    <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-camera text-accent"></i>
+                    </div>
+                    <span class="text-xs text-center">Photo</span>
+                </div>
+                <div id="option-video" class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                    <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-video text-accent"></i>
+                    </div>
+                    <span class="text-xs text-center">Video</span>
+                </div>
+                <div id="option-audio" class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                    <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-microphone text-accent"></i>
+                    </div>
+                    <span class="text-xs text-center">Audio</span>
+                </div>
+                <div id="option-notes" class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                    <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-note-sticky text-accent"></i>
+                    </div>
+                    <span class="text-xs text-center">Notes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Capture Settings -->
+        <section id="capture-settings" class="px-4 mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold">Capture Settings</h2>
+                <button class="text-primary text-sm">Reset</button>
+            </div>
+            
+            <div class="bg-darkGray rounded-xl p-4 space-y-4">
+                <!-- AR Overlay Toggle -->
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="font-medium">AR Overlay</h3>
+                        <p class="text-xs text-gray-400">Show alignment guides</p>
+                    </div>
+                    <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full bg-primary">
+                        <label for="toggle-ar" class="absolute left-0 bg-white border-2 border-primary w-6 h-6 rounded-full transition-transform duration-200 ease-in-out transform translate-x-6"></label>
+                        <input type="checkbox" id="toggle-ar" class="hidden" checked>
+                    </div>
+                </div>
+                
+                <!-- Voice Guidance Toggle -->
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="font-medium">Voice Guidance</h3>
+                        <p class="text-xs text-gray-400">Step-by-step audio instructions</p>
+                    </div>
+                    <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full bg-primary">
+                        <label for="toggle-voice" class="absolute left-0 bg-white border-2 border-primary w-6 h-6 rounded-full transition-transform duration-200 ease-in-out transform translate-x-6"></label>
+                        <input type="checkbox" id="toggle-voice" class="hidden" checked>
+                    </div>
+                </div>
+                
+                <!-- Vibration Toggle -->
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="font-medium">Stability Vibration</h3>
+                        <p class="text-xs text-gray-400">Vibrate when stable enough</p>
+                    </div>
+                    <div class="relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full bg-primary">
+                        <label for="toggle-vibration" class="absolute left-0 bg-white border-2 border-primary w-6 h-6 rounded-full transition-transform duration-200 ease-in-out transform translate-x-6"></label>
+                        <input type="checkbox" id="toggle-vibration" class="hidden" checked>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Group Sighting Option -->
+        <section id="group-sighting" class="px-4 mb-6">
+            <div class="bg-secondary bg-opacity-50 rounded-xl p-4">
+                <div class="flex items-start space-x-3">
+                    <div class="bg-primary rounded-full p-2 mt-1">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold">Group Sighting Available</h3>
+                        <p class="text-sm text-gray-300 mt-1">2 other witnesses are currently recording this sighting</p>
+                        <button class="mt-3 bg-primary hover:bg-opacity-90 transition py-2 px-4 rounded-lg flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-link"></i>
+                            <span>Join Group Capture</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-darkGray border-t border-gray-800 px-2 py-2">
+        <div class="flex justify-around items-center">
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-house text-lg"></i>
+                <span class="text-xs mt-1">Home</span>
+            </span>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-map-location-dot text-lg"></i>
+                <span class="text-xs mt-1">Map</span>
+            </span>
+            <div class="relative -mt-8">
+                <button class="bg-danger h-16 w-16 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                    <i class="fa-solid fa-circle text-2xl"></i>
+                </button>
+            </div>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-chart-line text-lg"></i>
+                <span class="text-xs mt-1">Activity</span>
+            </span>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-gear text-lg"></i>
+                <span class="text-xs mt-1">Settings</span>
+            </span>
+        </div>
+    </nav>
+
+    <!-- Stability Notification -->
+    <div id="stability-notification" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-success bg-opacity-80 text-white px-6 py-4 rounded-lg shadow-lg flex items-center space-x-3">
+        <i class="fa-solid fa-check-circle text-xl"></i>
+        <span class="text-lg font-bold">Stable Position Achieved</span>
+    </div>
+</body>
+</html>

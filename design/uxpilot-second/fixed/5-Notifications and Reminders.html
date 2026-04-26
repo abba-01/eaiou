@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@10.3.3/highcharts.js"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 hidden md:block">
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-primary-600 rounded-md flex items-center justify-center text-white mr-2">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <h1 class="text-lg font-bold text-gray-800">SciReview</h1>
+                </div>
+            </div>
+            <nav class="p-4">
+                <div class="mb-4">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Main Menu</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md bg-primary-50 text-primary-700 cursor-pointer">
+                                <i class="fa-solid fa-house w-5 h-5 mr-2"></i>
+                                Dashboard
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-file-lines w-5 h-5 mr-2"></i>
+                                My Manuscripts
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-user-check w-5 h-5 mr-2"></i>
+                                Review Requests
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-bell w-5 h-5 mr-2"></i>
+                                Notifications
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mb-4">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Author Tools</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-plus w-5 h-5 mr-2"></i>
+                                New Submission
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-clock-rotate-left w-5 h-5 mr-2"></i>
+                                Submission History
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-book w-5 h-5 mr-2"></i>
+                                Author Guidelines
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Account</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-user w-5 h-5 mr-2"></i>
+                                Profile
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-gear w-5 h-5 mr-2"></i>
+                                Settings
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-sign-out-alt w-5 h-5 mr-2"></i>
+                                Sign Out
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200">
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center">
+                        <button class="md:hidden mr-2 text-gray-600">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <h2 class="text-lg font-semibold text-gray-800">Notifications & Updates</h2>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-600 hover:text-gray-900 relative">
+                            <i class="fa-solid fa-bell"></i>
+                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">5</span>
+                        </button>
+                        <button class="text-gray-600 hover:text-gray-900">
+                            <i class="fa-solid fa-question-circle"></i>
+                        </button>
+                        <div class="flex items-center">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-8 h-8 rounded-full mr-2">
+                            <span class="text-sm font-medium text-gray-700">Dr. James Wilson</span>
+                            <i class="fa-solid fa-chevron-down ml-1 text-gray-500 text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-4">
+                <div id="notifications-dashboard" class="max-w-5xl mx-auto">
+                    <!-- Notification Header -->
+                    <div class="mb-6 flex items-center justify-between">
+                        <h1 class="text-2xl font-bold text-gray-900">Notification Center</h1>
+                        <div class="flex space-x-2">
+                            <button class="bg-white border border-gray-300 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium hover:bg-gray-50 flex items-center">
+                                <i class="fa-solid fa-filter mr-1.5"></i>
+                                Filter
+                            </button>
+                            <button class="bg-white border border-gray-300 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium hover:bg-gray-50 flex items-center">
+                                <i class="fa-solid fa-check-double mr-1.5"></i>
+                                Mark All as Read
+                            </button>
+                            <button class="bg-primary-600 text-white px-3 py-1.5 rounded-md text-sm font-medium hover:bg-primary-700 flex items-center">
+                                <i class="fa-solid fa-gear mr-1.5"></i>
+                                Notification Settings
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div id="notification-stats" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">Pending Reviews</p>
+                                    <h3 class="text-2xl font-bold text-gray-900 mt-1">3</h3>
+                                </div>
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Upcoming</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">Deadline for earliest: <span class="font-medium">Aug 15, 2023</span></p>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">Manuscript Updates</p>
+                                    <h3 class="text-2xl font-bold text-gray-900 mt-1">2</h3>
+                                </div>
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">New</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">Latest update: <span class="font-medium">2 hours ago</span></p>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">Unread Messages</p>
+                                    <h3 class="text-2xl font-bold text-gray-900 mt-1">5</h3>
+                                </div>
+                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Urgent</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">From: <span class="font-medium">Editorial Office, Reviewers</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Activity Timeline Chart -->
+                    <div id="activity-timeline" class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Activity Timeline</h2>
+                        <div id="timeline-chart" class="h-64"></div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                Highcharts.chart('timeline-chart', {
+                                    chart: {
+                                        type: 'column'
+                                    },
+                                    title: {
+                                        text: null
+                                    },
+                                    xAxis: {
+                                        categories: ['Jul 24', 'Jul 25', 'Jul 26', 'Jul 27', 'Jul 28', 'Jul 29', 'Jul 30', 'Jul 31', 'Aug 1', 'Aug 2'],
+                                        crosshair: true
+                                    },
+                                    yAxis: {
+                                        min: 0,
+                                        title: {
+                                            text: 'Number of Activities'
+                                        }
+                                    },
+                                    tooltip: {
+                                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                                        footerFormat: '</table>',
+                                        shared: true,
+                                        useHTML: true
+                                    },
+                                    plotOptions: {
+                                        column: {
+                                            pointPadding: 0.2,
+                                            borderWidth: 0
+                                        }
+                                    },
+                                    series: [{
+                                        name: 'Reviews',
+                                        color: '#0284c7',
+                                        data: [1, 0, 2, 1, 0, 0, 1, 0, 2, 1]
+                                    }, {
+                                        name: 'Submissions',
+                                        color: '#16a34a',
+                                        data: [0, 1, 0, 0, 1, 0, 0, 1, 0, 0]
+                                    }, {
+                                        name: 'Messages',
+                                        color: '#dc2626',
+                                        data: [2, 1, 3, 2, 1, 0, 2, 1, 4, 3]
+                                    }]
+                                });
+                            });
+                        </script>
+                    </div>
+
+                    <!-- Notification Tabs -->
+                    <div id="notification-tabs" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                        <div class="border-b border-gray-200">
+                            <nav class="flex -mb-px">
+                                <button class="text-primary-600 border-b-2 border-primary-500 py-4 px-6 text-sm font-medium">
+                                    All Notifications
+                                </button>
+                                <button class="text-gray-500 hover:text-gray-700 py-4 px-6 text-sm font-medium">
+                                    Reviews
+                                </button>
+                                <button class="text-gray-500 hover:text-gray-700 py-4 px-6 text-sm font-medium">
+                                    Manuscripts
+                                </button>
+                                <button class="text-gray-500 hover:text-gray-700 py-4 px-6 text-sm font-medium">
+                                    Messages
+                                </button>
+                                <button class="text-gray-500 hover:text-gray-700 py-4 px-6 text-sm font-medium">
+                                    System
+                                </button>
+                            </nav>
+                        </div>
+                        
+                        <!-- Notification List -->
+                        <div id="notification-list" class="divide-y divide-gray-200">
+                            <!-- Urgent Review Request -->
+                            <div class="p-4 hover:bg-gray-50 flex items-start bg-red-50">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-4">
+                                    <i class="fa-solid fa-exclamation-circle text-red-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3 class="text-sm font-semibold text-gray-900">Urgent Review Deadline Reminder</h3>
+                                        <span class="text-xs text-gray-500">1 hour ago</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-1">Your review for "Novel Approaches to Quantum Computing" is due in 48 hours. Please complete your review as soon as possible.</p>
+                                    <div class="mt-2 flex space-x-2">
+                                        <button class="text-xs bg-primary-600 text-white px-2.5 py-1 rounded hover:bg-primary-700">
+                                            Complete Review
+                                        </button>
+                                        <button class="text-xs bg-white border border-gray-300 text-gray-700 px-2.5 py-1 rounded hover:bg-gray-50">
+                                            Request Extension
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Manuscript Status Update -->
+                            <div class="p-4 hover:bg-gray-50 flex items-start">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                                    <i class="fa-solid fa-file-circle-check text-green-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3 class="text-sm font-semibold text-gray-900">Manuscript Status Update</h3>
+                                        <span class="text-xs text-gray-500">2 hours ago</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-1">Your manuscript "Advancements in Neural Network Architectures" has moved to the "Under Review" stage. The editor has assigned 3 reviewers.</p>
+                                    <div class="mt-2">
+                                        <button class="text-xs bg-white border border-gray-300 text-gray-700 px-2.5 py-1 rounded hover:bg-gray-50">
+                                            View Details
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Review Invitation -->
+                            <div class="p-4 hover:bg-gray-50 flex items-start">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                    <i class="fa-solid fa-envelope-open-text text-blue-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3 class="text-sm font-semibold text-gray-900">New Review Invitation</h3>
+                                        <span class="text-xs text-gray-500">Yesterday</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-1">You have been invited to review "Machine Learning Applications in Climate Science". Please respond within 5 days.</p>
+                                    <div class="mt-2 flex space-x-2">
+                                        <button class="text-xs bg-primary-600 text-white px-2.5 py-1 rounded hover:bg-primary-700">
+                                            Accept
+                                        </button>
+                                        <button class="text-xs bg-white border border-gray-300 text-gray-700 px-2.5 py-1 rounded hover:bg-gray-50">
+                                            Decline
+                                        </button>
+                                        <button class="text-xs bg-white border border-gray-300 text-gray-700 px-2.5 py-1 rounded hover:bg-gray-50">
+                                            View Abstract
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Reviewer Comment -->
+                            <div class="p-4 hover:bg-gray-50 flex items-start">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+                                    <i class="fa-solid fa-comments text-purple-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3 class="text-sm font-semibold text-gray-900">Reviewer Comments Received</h3>
+                                        <span class="text-xs text-gray-500">2 days ago</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-1">Reviewer #2 has submitted their comments for your manuscript "Data Privacy in Distributed Systems". The editor will compile all reviews shortly.</p>
+                                    <div class="mt-2">
+                                        <button class="text-xs bg-white border border-gray-300 text-gray-700 px-2.5 py-1 rounded hover:bg-gray-50">
+                                            Track Progress
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Editorial Decision -->
+                            <div class="p-4 hover:bg-gray-50 flex items-start">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center mr-4">
+                                    <i class="fa-solid fa-gavel text-yellow-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3 class="text-sm font-semibold text-gray-900">Editorial Decision: Revisions Required</h3>
+                                        <span class="text-xs text-gray-500">3 days ago</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-1">The editor has requested minor revisions for your manuscript "Blockchain Applications in Healthcare". Please submit your revised manuscript within 30 days.</p>
+                                    <div class="mt-2 flex space-x-2">
+                                        <button class="text-xs bg-primary-600 text-white px-2.5 py-1 rounded hover:bg-primary-700">
+                                            View Decision Letter
+                                        </button>
+                                        <button class="text-xs bg-white border border-gray-300 text-gray-700 px-2.5 py-1 rounded hover:bg-gray-50">
+                                            Submit Revision
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="px-4 py-3 border-t border-gray-200 flex items-center justify-between">
+                            <div class="flex-1 flex justify-between sm:hidden">
+                                <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    Previous
+                                </button>
+                                <button class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    Next
+                                </button>
+                            </div>
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">
+                                        Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">24</span> results
+                                    </p>
+                                </div>
+                                <div>
+                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                        <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                                        </button>
+                                        <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-primary-50 text-sm font-medium text-primary-600">
+                                            1
+                                        </button>
+                                        <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            2
+                                        </button>
+                                        <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            3
+                                        </button>
+                                        <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
+                                            ...
+                                        </span>
+                                        <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            5
+                                        </button>
+                                        <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                                        </button>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Upcoming Deadlines -->
+                    <div id="upcoming-deadlines" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="px-4 py-3 border-b border-gray-200">
+                            <h2 class="text-lg font-semibold text-gray-800">Upcoming Deadlines</h2>
+                        </div>
+                        <div class="p-4">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deadline</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <i class="fa-solid fa-user-check text-blue-500 mr-2"></i>
+                                                    <span class="text-sm text-gray-900">Review</span>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">Novel Approaches to Quantum Computing</div>
+                                                <div class="text-xs text-gray-500">Journal of Quantum Physics</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-red-600 font-medium">August 4, 2023 (2 days)</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                    In Progress
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <button class="text-primary-600 hover:text-primary-800 font-medium">
+                                                    Continue
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <i class="fa-solid fa-file-pen text-green-500 mr-2"></i>
+                                                    <span class="text-sm text-gray-900">Revision</span>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">Blockchain Applications in Healthcare</div>
+                                                <div class="text-xs text-gray-500">Journal of Medical Informatics</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">September 1, 2023 (30 days)</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                                                    Not Started
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <button class="text-primary-600 hover:text-primary-800 font-medium">
+                                                    Start
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <i class="fa-solid fa-user-check text-blue-500 mr-2"></i>
+                                                    <span class="text-sm text-gray-900">Review</span>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">Machine Learning Applications in Climate Science</div>
+                                                <div class="text-xs text-gray-500">Environmental Data Science</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">August 15, 2023 (13 days)</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                                    Invitation
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <button class="text-primary-600 hover:text-primary-800 font-medium">
+                                                    Respond
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <i class="fa-solid fa-user-check text-blue-500 mr-2"></i>
+                                                    <span class="text-sm text-gray-900">Review</span>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">Advances in Neural Network Optimization</div>
+                                                <div class="text-xs text-gray-500">Computational Intelligence Journal</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">August 22, 2023 (20 days)</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                                                    Not Started
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <button class="text-primary-600 hover:text-primary-800 font-medium">
+                                                    Start
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Right Sidebar - Calendar & Reminders -->
+        <aside id="calendar-sidebar" class="w-80 bg-white border-l border-gray-200 hidden lg:block overflow-y-auto">
+            <div class="p-4 border-b border-gray-200">
+                <h3 class="font-semibold text-gray-800">Calendar & Reminders</h3>
+            </div>
+            <div class="p-4">
+                <!-- Mini Calendar -->
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-sm font-medium text-gray-700">August 2023</h4>
+                        <div class="flex space-x-1">
+                            <button class="p-1 text-gray-500 hover:text-gray-700 rounded">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button class="p-1 text-gray-500 hover:text-gray-700 rounded">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-7 gap-1 text-center text-xs mb-2">
+                        <div class="text-gray-500">Su</div>
+                        <div class="text-gray-500">Mo</div>
+                        <div class="text-gray-500">Tu</div>
+                        <div class="text-gray-500">We</div>
+                        <div class="text-gray-500">Th</div>
+                        <div class="text-gray-500">Fr</div>
+                        <div class="text-gray-500">Sa</div>
+                    </div>
+                    <div class="grid grid-cols-7 gap-1 text-center">
+                        <div class="text-gray-400 py-1">30</div>
+                        <div class="text-gray-400 py-1">31</div>
+                        <div class="py-1">1</div>
+                        <div class="py-1">2</div>
+                        <div class="bg-primary-100 text-primary-800 rounded-full py-1 font-medium">3</div>
+                        <div class="bg-red-100 text-red-800 rounded-full py-1 font-medium">4</div>
+                        <div class="py-1">5</div>
+                        <div class="py-1">6</div>
+                        <div class="py-1">7</div>
+                        <div class="py-1">8</div>
+                        <div class="py-1">9</div>
+                        <div class="py-1">10</div>
+                        <div class="py-1">11</div>
+                        <div class="py-1">12</div>
+                        <div class="py-1">13</div>
+                        <div class="py-1">14</div>
+                        <div class="bg-yellow-100 text-yellow-800 rounded-full py-1 font-medium">15</div>
+                        <div class="py-1">16</div>
+                        <div class="py-1">17</div>
+                        <div class="py-1">18</div>
+                        <div class="py-1">19</div>
+                        <div class="py-1">20</div>
+                        <div class="py-1">21</div>
+                        <div class="bg-blue-100 text-blue-800 rounded-full py-1 font-medium">22</div>
+                        <div class="py-1">23</div>
+                        <div class="py-1">24</div>
+                        <div class="py-1">25</div>
+                        <div class="py-1">26</div>
+                        <div class="py-1">27</div>
+                        <div class="py-1">28</div>
+                        <div class="py-1">29</div>
+                        <div class="py-1">30</div>
+                        <div class="py-1">31</div>
+                        <div class="text-gray-400 py-1">1</div>
+                        <div class="text-gray-400 py-1">2</div>
+                    </div>
+                </div>
+
+                <!-- Today's Schedule -->
+                <div class="mb-6">
+                    <h4 class="text-sm font-medium text-gray-700 mb-3">Today's Schedule</h4>
+                    <div class="space-y-3">
+                        <div class="bg-gray-50 p-3 rounded-md border border-gray-200">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-xs font-medium text-gray-500">10:00 AM - 11:00 AM</span>
+                                <span class="px-1.5 py-0.5 bg-blue-100 text-blue-800 text-xs rounded">Meeting</span>
+                            </div>
+                            <p class="text-sm font-medium text-gray-800">Editorial Board Meeting</p>
+                            <p class="text-xs text-gray-600">Zoom Conference</p>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-md border border-gray-200">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-xs font-medium text-gray-500">2:00 PM - 3:30 PM</span>
+                                <span class="px-1.5 py-0.5 bg-red-100 text-red-800 text-xs rounded">Deadline</span>
+                            </div>
+                            <p class="text-sm font-medium text-gray-800">Complete Quantum Computing Review</p>
+                            <p class="text-xs text-gray-600">High Priority</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Reminders -->
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-sm font-medium text-gray-700">Upcoming Reminders</h4>
+                        <button class="text-primary-600 text-xs font-medium">Set Reminder</button>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-bell text-yellow-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-800">Review Deadline</p>
+                                <p class="text-xs text-gray-600">Tomorrow, 9:00 AM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-bell text-green-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-800">Submit Revision Draft</p>
+                                <p class="text-xs text-gray-600">Aug 10, 5:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-bell text-purple-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-800">Conference Abstract Deadline</p>
+                                <p class="text-xs text-gray-600">Aug 15, 11:59 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div>
+                    <h4 class="text-sm font-medium text-gray-700 mb-3">Notification Preferences</h4>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-700">Email Notifications</span>
+                            <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                <input type="checkbox" name="toggle" id="email" checked class="sr-only toggle-checkbox"/>
+                                <label for="email" class="block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"></label>
+                                <div class="absolute block w-5 h-5 rounded-full bg-white border-2 border-gray-300 transform translate-x-0 transition ease-in-out duration-200 toggle-dot"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-700">Browser Notifications</span>
+                            <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                <input type="checkbox" name="toggle" id="browser" checked class="sr-only toggle-checkbox"/>
+                                <label for="browser" class="block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"></label>
+                                <div class="absolute block w-5 h-5 rounded-full bg-white border-2 border-gray-300 transform translate-x-0 transition ease-in-out duration-200 toggle-dot"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-700">SMS Notifications</span>
+                            <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                <input type="checkbox" name="toggle" id="sms" class="sr-only toggle-checkbox"/>
+                                <label for="sms" class="block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"></label>
+                                <div class="absolute block w-5 h-5 rounded-full bg-white border-2 border-gray-300 transform translate-x-0 transition ease-in-out duration-200 toggle-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // Toggle checkbox styling
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggles = document.querySelectorAll('.toggle-checkbox');
+            toggles.forEach(toggle => {
+                toggle.addEventListener('change', function() {
+                    const dot = this.nextElementSibling.nextElementSibling;
+                    if (this.checked) {
+                        dot.classList.add('translate-x-5');
+                        this.nextElementSibling.classList.add('bg-primary-500');
+                        this.nextElementSibling.classList.remove('bg-gray-300');
+                    } else {
+                        dot.classList.remove('translate-x-5');
+                        this.nextElementSibling.classList.remove('bg-primary-500');
+                        this.nextElementSibling.classList.add('bg-gray-300');
+                    }
+                });
+                
+                // Initialize state
+                if (toggle.checked) {
+                    const dot = toggle.nextElementSibling.nextElementSibling;
+                    dot.classList.add('translate-x-5');
+                    toggle.nextElementSibling.classList.add('bg-primary-500');
+                    toggle.nextElementSibling.classList.remove('bg-gray-300');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

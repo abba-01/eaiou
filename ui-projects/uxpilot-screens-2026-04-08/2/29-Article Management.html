@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="bg-white shadow-sm border-b">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <i class="fa-solid fa-brain text-neutral-800 text-2xl mr-3"></i>
+      <h1 class="text-xl text-neutral-800">AI Research Assistant</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-bell mr-2"></i>
+        <span class="relative">
+          Notifications
+          <span class="absolute -top-1 -right-2 bg-neutral-800 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+        </span>
+      </button>
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-question-circle mr-2"></i>
+        Help
+      </button>
+      <div class="relative">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full cursor-pointer"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="flex h-[800px] bg-neutral-50">
+  <div id="sidebar" class="w-64 bg-white border-r">
+    <div class="p-4">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-sm text-neutral-500">WORKSPACE</h2>
+        <button class="text-neutral-400 hover:text-neutral-600">
+          <i class="fa-solid fa-cog"></i>
+        </button>
+      </div>
+      
+      <nav class="space-y-1">
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tachometer-alt mr-3 text-neutral-400"></i>
+          Dashboard
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-folder mr-3 text-neutral-400"></i>
+          Projects
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm bg-neutral-100 text-neutral-900 rounded-md cursor-pointer">
+          <i class="fa-solid fa-file-alt mr-3 text-neutral-700"></i>
+          Articles
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tasks mr-3 text-neutral-400"></i>
+          Tasks
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-cogs mr-3 text-neutral-400"></i>
+          Settings
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-users mr-3 text-neutral-400"></i>
+          User Management
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-chart-bar mr-3 text-neutral-400"></i>
+          Analytics
+        </span>
+      </nav>
+    </div>
+  </div>
+
+  <div id="content" class="flex-1 overflow-auto p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl text-neutral-800">Articles Management</h1>
+      <button class="px-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 flex items-center">
+        <i class="fa-solid fa-plus mr-2"></i>
+        New Article
+      </button>
+    </div>
+
+    <div class="grid grid-cols-12 gap-6">
+      <div class="col-span-12 lg:col-span-3">
+        <div class="bg-white rounded-lg shadow-sm p-4 sticky top-4">
+          <h3 class="text-sm text-neutral-500 mb-4">PROJECT SELECTION</h3>
+          
+          <div class="relative mb-4">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fa-solid fa-search text-neutral-400"></i>
+            </div>
+            <input type="text" placeholder="Search projects" class="pl-10 pr-3 py-2 w-full border border-neutral-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-neutral-800">
+          </div>
+          
+          <div class="space-y-2 max-h-[400px] overflow-y-auto">
+            <button id="project-1" class="w-full text-left px-3 py-2 text-sm rounded-md bg-neutral-800 text-white flex items-center justify-between">
+              <span>Quantum Computing Research</span>
+              <span class="bg-white text-neutral-800 text-xs px-2 py-0.5 rounded-full">4</span>
+            </button>
+            <button id="project-2" class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 flex items-center justify-between">
+              <span>Climate Change Analysis</span>
+              <span class="bg-neutral-200 text-neutral-800 text-xs px-2 py-0.5 rounded-full">2</span>
+            </button>
+            <button id="project-3" class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 flex items-center justify-between">
+              <span>Neural Network Applications</span>
+              <span class="bg-neutral-200 text-neutral-800 text-xs px-2 py-0.5 rounded-full">3</span>
+            </button>
+            <button id="project-4" class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 flex items-center justify-between">
+              <span>Renewable Energy Solutions</span>
+              <span class="bg-neutral-200 text-neutral-800 text-xs px-2 py-0.5 rounded-full">1</span>
+            </button>
+            <button id="project-5" class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 flex items-center justify-between">
+              <span>Biomedical Engineering</span>
+              <span class="bg-neutral-200 text-neutral-800 text-xs px-2 py-0.5 rounded-full">5</span>
+            </button>
+          </div>
+          
+          <div class="mt-6">
+            <h3 class="text-sm text-neutral-500 mb-4">ARTICLE FILTERS</h3>
+            <div class="space-y-2">
+              <label class="flex items-center text-sm text-neutral-700">
+                <input type="checkbox" checked class="mr-2 rounded border-neutral-300">
+                Show draft articles
+              </label>
+              <label class="flex items-center text-sm text-neutral-700">
+                <input type="checkbox" checked class="mr-2 rounded border-neutral-300">
+                Show published articles
+              </label>
+              <label class="flex items-center text-sm text-neutral-700">
+                <input type="checkbox" class="mr-2 rounded border-neutral-300">
+                Show archived articles
+              </label>
+            </div>
+            
+            <div class="mt-4">
+              <label class="block text-sm text-neutral-700 mb-2">Sort by</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>Date created (newest)</option>
+                <option>Date created (oldest)</option>
+                <option>Last modified</option>
+                <option>Alphabetical (A-Z)</option>
+                <option>Alphabetical (Z-A)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 lg:col-span-9">
+        <div id="articles-kanban" class="bg-white rounded-lg shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-neutral-800 rounded-md flex items-center justify-center text-white mr-3">
+                <i class="fa-solid fa-atom"></i>
+              </div>
+              <h2 class="text-xl text-neutral-800">Quantum Computing Research</h2>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+              <div class="flex items-center">
+                <span class="text-sm text-neutral-600 mr-2">View:</span>
+                <button class="p-2 text-neutral-800 bg-neutral-100 rounded-l-md">
+                  <i class="fa-solid fa-th-large"></i>
+                </button>
+                <button class="p-2 text-neutral-500 bg-neutral-50 rounded-r-md">
+                  <i class="fa-solid fa-list"></i>
+                </button>
+              </div>
+              <button class="px-3 py-2 text-neutral-600 border border-neutral-300 rounded-md text-sm flex items-center">
+                <i class="fa-solid fa-cog mr-2"></i>
+                Project Settings
+              </button>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-3 gap-4">
+            <!-- Draft Column -->
+            <div id="draft-column" class="bg-neutral-50 rounded-lg p-4">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-neutral-800 flex items-center">
+                  <i class="fa-solid fa-pencil-alt mr-2 text-neutral-500"></i>
+                  Draft
+                  <span class="ml-2 bg-neutral-200 text-neutral-800 text-xs px-2 py-0.5 rounded-full">2</span>
+                </h3>
+                <button class="text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </div>
+              
+              <!-- Draft Articles -->
+              <div class="space-y-3">
+                <div id="article-1" class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-neutral-800 hover:shadow-md transition-shadow cursor-pointer">
+                  <div class="flex justify-between items-start">
+                    <h4 class="text-neutral-800">Quantum Computing: Current Challenges</h4>
+                    <div class="flex">
+                      <button class="text-neutral-400 hover:text-neutral-600">
+                        <i class="fa-solid fa-pencil"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <p class="mt-2 text-sm text-neutral-600 line-clamp-2">This article explores the current challenges in quantum computing including decoherence, error correction, and scalability issues.</p>
+                  <div class="mt-3 flex justify-between items-center">
+                    <div class="flex items-center">
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="Author" class="w-6 h-6 rounded-full mr-2">
+                      <span class="text-xs text-neutral-500">Last edited: July 5, 2025</span>
+                    </div>
+                    <div>
+                      <span class="bg-neutral-100 text-neutral-700 text-xs px-2 py-1 rounded-full">UX Pilot Opus</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="article-2" class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-neutral-800 hover:shadow-md transition-shadow cursor-pointer">
+                  <div class="flex justify-between items-start">
+                    <h4 class="text-neutral-800">Quantum Entanglement: A Review</h4>
+                    <div class="flex">
+                      <button class="text-neutral-400 hover:text-neutral-600">
+                        <i class="fa-solid fa-pencil"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <p class="mt-2 text-sm text-neutral-600 line-clamp-2">A comprehensive review of quantum entanglement and its applications in quantum computing and quantum cryptography.</p>
+                  <div class="mt-3 flex justify-between items-center">
+                    <div class="flex items-center">
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="Author" class="w-6 h-6 rounded-full mr-2">
+                      <span class="text-xs text-neutral-500">Last edited: July 2, 2025</span>
+                    </div>
+                    <div>
+                      <span class="bg-neutral-100 text-neutral-700 text-xs px-2 py-1 rounded-full">UX Pilot Sonnet</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- In Review Column -->
+            <div id="review-column" class="bg-neutral-50 rounded-lg p-4">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-neutral-800 flex items-center">
+                  <i class="fa-solid fa-magnifying-glass mr-2 text-neutral-500"></i>
+                  In Review
+                  <span class="ml-2 bg-neutral-200 text-neutral-800 text-xs px-2 py-0.5 rounded-full">1</span>
+                </h3>
+                <button class="text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </div>
+              
+              <!-- In Review Articles -->
+              <div class="space-y-3">
+                <div id="article-3" class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-neutral-500 hover:shadow-md transition-shadow cursor-pointer">
+                  <div class="flex justify-between items-start">
+                    <h4 class="text-neutral-800">Quantum Algorithms: Shor's and Grover's</h4>
+                    <div class="flex">
+                      <button class="text-neutral-400 hover:text-neutral-600">
+                        <i class="fa-solid fa-pencil"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <p class="mt-2 text-sm text-neutral-600 line-clamp-2">An analysis of Shor's factoring algorithm and Grover's search algorithm, with implications for cryptography and database searching.</p>
+                  <div class="mt-3 flex justify-between items-center">
+                    <div class="flex items-center">
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="Author" class="w-6 h-6 rounded-full mr-2">
+                      <span class="text-xs text-neutral-500">Last edited: July 4, 2025</span>
+                    </div>
+                    <div>
+                      <span class="bg-neutral-100 text-neutral-700 text-xs px-2 py-1 rounded-full">GPT-4o</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Published Column -->
+            <div id="published-column" class="bg-neutral-50 rounded-lg p-4">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-neutral-800 flex items-center">
+                  <i class="fa-solid fa-check-circle mr-2 text-neutral-500"></i>
+                  Published
+                  <span class="ml-2 bg-neutral-200 text-neutral-800 text-xs px-2 py-0.5 rounded-full">1</span>
+                </h3>
+                <button class="text-neutral-500 hover:text-neutral-700">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </div>
+              
+              <!-- Published Articles -->
+              <div class="space-y-3">
+                <div id="article-4" class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-neutral-500 hover:shadow-md transition-shadow cursor-pointer">
+                  <div class="flex justify-between items-start">
+                    <h4 class="text-neutral-800">Quantum Computing: An Introduction</h4>
+                    <div class="flex">
+                      <button class="text-neutral-400 hover:text-neutral-600">
+                        <i class="fa-solid fa-pencil"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <p class="mt-2 text-sm text-neutral-600 line-clamp-2">A comprehensive introduction to quantum computing principles, including qubits, superposition, and quantum gates.</p>
+                  <div class="mt-3 flex justify-between items-center">
+                    <div class="flex items-center">
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="Author" class="w-6 h-6 rounded-full mr-2">
+                      <span class="text-xs text-neutral-500">Published: June 28, 2025</span>
+                    </div>
+                    <div>
+                      <span class="bg-neutral-100 text-neutral-700 text-xs px-2 py-1 rounded-full">UX Pilot Opus</span>
+                    </div>
+                  </div>
+                  <div class="mt-2 flex items-center text-xs text-neutral-500">
+                    <i class="fa-solid fa-eye mr-1"></i>
+                    <span>246 views</span>
+                    <i class="fa-solid fa-download ml-3 mr-1"></i>
+                    <span>52 downloads</span>
+                    <i class="fa-solid fa-quote-right ml-3 mr-1"></i>
+                    <span>8 citations</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="article-editor" class="mt-6 bg-white rounded-lg shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl text-neutral-800">Edit Article</h2>
+            <div class="flex items-center space-x-3">
+              <button class="px-3 py-2 text-neutral-600 border border-neutral-300 rounded-md text-sm">
+                Preview
+              </button>
+              <button class="px-3 py-2 text-neutral-600 border border-neutral-300 rounded-md text-sm">
+                Export
+              </button>
+              <button class="px-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 text-sm">
+                Save Changes
+              </button>
+            </div>
+          </div>
+          
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Article Title</label>
+              <input type="text" value="Quantum Computing: Current Challenges" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">AI Model</label>
+                <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>UX Pilot Opus</option>
+                  <option>UX Pilot Sonnet</option>
+                  <option>GPT-4o</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-sm text-neutral-700 mb-1">Academic Style</label>
+                <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>APA 7th Edition</option>
+                  <option>MLA 9th Edition</option>
+                  <option>Chicago 17th Edition</option>
+                  <option>IEEE</option>
+                </select>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Article Abstract</label>
+              <textarea rows="3" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">This article explores the current challenges in quantum computing including decoherence, error correction, and scalability issues. We examine recent advancements and potential solutions to these challenges.</textarea>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Keywords</label>
+              <input type="text" value="quantum computing, decoherence, error correction, scalability, quantum supremacy" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+              <p class="mt-1 text-xs text-neutral-500">Separate keywords with commas</p>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Content Structure</label>
+              <div class="border border-neutral-300 rounded-md p-4 space-y-3">
+                <div class="flex items-center justify-between bg-neutral-50 p-3 rounded-md">
+                  <span>1. Introduction</span>
+                  <div class="flex items-center">
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600">
+                      <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="flex items-center justify-between bg-neutral-50 p-3 rounded-md">
+                  <span>2. Decoherence Challenges</span>
+                  <div class="flex items-center">
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600">
+                      <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="flex items-center justify-between bg-neutral-50 p-3 rounded-md">
+                  <span>3. Error Correction Methods</span>
+                  <div class="flex items-center">
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600">
+                      <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="flex items-center justify-between bg-neutral-50 p-3 rounded-md">
+                  <span>4. Scalability Issues</span>
+                  <div class="flex items-center">
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600">
+                      <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="flex items-center justify-between bg-neutral-50 p-3 rounded-md">
+                  <span>5. Recent Advancements</span>
+                  <div class="flex items-center">
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600">
+                      <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="flex items-center justify-between bg-neutral-50 p-3 rounded-md">
+                  <span>6. Conclusion</span>
+                  <div class="flex items-center">
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600">
+                      <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <button class="w-full flex items-center justify-center px-3 py-2 border border-dashed border-neutral-300 rounded-md text-neutral-600 hover:bg-neutral-50">
+                  <i class="fa-solid fa-plus mr-2"></i>
+                  Add Section
+                </button>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Section Content</label>
+              <div class="border border-neutral-300 rounded-md">
+                <div class="flex border-b border-neutral-300">
+                  <button class="p-2 text-neutral-600 hover:bg-neutral-50">
+                    <i class="fa-solid fa-bold"></i>
+                  </button>
+                  <button class="p-2 text-neutral-600 hover:bg-neutral-50">
+                    <i class="fa-solid fa-italic"></i>
+                  </button>
+                  <button class="p-2 text-neutral-600 hover:bg-neutral-50">
+                    <i class="fa-solid fa-underline"></i>
+                  </button>
+                  <button class="p-2 text-neutral-600 hover:bg-neutral-50">
+                    <i class="fa-solid fa-list"></i>
+                  </button>
+                  <button class="p-2 text-neutral-600 hover:bg-neutral-50">
+                    <i class="fa-solid fa-list-ol"></i>
+                  </button>
+                  <button class="p-2 text-neutral-600 hover:bg-neutral-50">
+                    <i class="fa-solid fa-quote-right"></i>
+                  </button>
+                  <button class="p-2 text-neutral-600 hover:bg-neutral-50">
+                    <i class="fa-solid fa-link"></i>
+                  </button>
+                  <button class="p-2 text-neutral-600 hover:bg-neutral-50">
+                    <i class="fa-solid fa-image"></i>
+                  </button>
+                  <button class="p-2 text-neutral-600 hover:bg-neutral-50">
+                    <i class="fa-solid fa-table"></i>
+                  </button>
+                  <button class="p-2 text-neutral-600 hover:bg-neutral-50">
+                    <i class="fa-solid fa-code"></i>
+                  </button>
+                </div>
+                <textarea rows="10" class="w-full px-3 py-2 text-sm" placeholder="Write or generate content for this section...">Quantum computing faces several significant challenges that must be overcome before practical, large-scale quantum computers can be realized. This section introduces the primary obstacles researchers are currently addressing.
+
+Decoherence occurs when quantum systems interact with their environment, causing quantum states to lose their quantum properties. This phenomenon represents one of the biggest challenges in quantum computing as it limits the time during which computations can be performed.
+
+Error correction is essential in quantum systems due to their inherent fragility. Unlike classical computers that can use simple redundancy, quantum error correction requires complex techniques due to the no-cloning theorem.
+
+Scalability remains a significant hurdle, as adding more qubits exponentially increases the complexity of the system. Current quantum computers are limited to dozens or hundreds of qubits, far from the millions needed for many practical applications.</textarea>
+              </div>
+            </div>
+            
+            <div class="bg-neutral-50 p-4 rounded-lg">
+              <div class="flex justify-between items-center mb-3">
+                <h3 class="text-neutral-800">AI Generation Options</h3>
+                <button class="px-3 py-1 bg-neutral-800 text-white rounded-md text-sm">
+                  Generate Content
+                </button>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm text-neutral-700 mb-1">Content Type</label>
+                  <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                    <option>Full Section</option>
+                    <option>Introduction Paragraph</option>
+                    <option>Literature Review</option>
+                    <option>Methodology</option>
+                    <option>Results Analysis</option>
+                    <option>Conclusion</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label class="block text-sm text-neutral-700 mb-1">Academic Level</label>
+                  <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                    <option>Undergraduate</option>
+                    <option>Graduate</option>
+                    <option>Doctoral</option>
+                    <option>Post-Doctoral</option>
+                    <option>Professional Journal</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="mt-3">
+                <label class="block text-sm text-neutral-700 mb-1">Generation Prompt</label>
+                <textarea rows="2" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="Describe what you want the AI to generate...">Generate a comprehensive analysis of recent advancements in quantum error correction methods, including surface codes and fault-tolerant quantum computation. Include citations from peer-reviewed sources published within the last 3 years.</textarea>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Citations & References</label>
+              <div class="border border-neutral-300 rounded-md p-4 space-y-3">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm">Arute, F., Arya, K., Babbush, R., et al. (2023)</p>
+                    <p class="text-xs text-neutral-500">Quantum supremacy using a programmable superconducting processor. Nature, 574(7779), 505-510.</p>
+                  </div>
+                  <div class="flex items-center">
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600">
+                      <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm">Preskill, J. (2024)</p>
+                    <p class="text-xs text-neutral-500">Quantum Computing in the NISQ era and beyond. Quantum, 2, 79.</p>
+                  </div>
+                  <div class="flex items-center">
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600">
+                      <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm">Fowler, A. G., Mariantoni, M., Martinis, J. M., & Cleland, A. N. (2024)</p>
+                    <p class="text-xs text-neutral-500">Surface codes: Towards practical large-scale quantum computation. Physical Review A, 86(3), 032324.</p>
+                  </div>
+                  <div class="flex items-center">
+                    <button class="text-neutral-400 hover:text-neutral-600 mr-2">
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                    <button class="text-neutral-400 hover:text-neutral-600">
+                      <i class="fa-solid fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <button class="w-full flex items-center justify-center px-3 py-2 border border-dashed border-neutral-300 rounded-md text-neutral-600 hover:bg-neutral-50">
+                  <i class="fa-solid fa-plus mr-2"></i>
+                  Add Citation
+                </button>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center pt-4 border-t border-neutral-200">
+              <div class="flex items-center">
+                <button class="px-3 py-2 text-neutral-600 border border-neutral-300 rounded-md text-sm mr-3">
+                  <i class="fa-solid fa-eye mr-2"></i>
+                  Preview
+                </button>
+                <select class="border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>Draft</option>
+                  <option>In Review</option>
+                  <option>Published</option>
+                </select>
+              </div>
+              
+              <div class="flex items-center">
+                <button class="px-3 py-2 text-neutral-600 border border-neutral-300 rounded-md text-sm mr-3">
+                  Cancel
+                </button>
+                <button class="px-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 text-sm">
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-white border-t mt-auto">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="text-sm text-neutral-500">
+        © 2025 AI Research Assistant | Joomla 5.3 Component
+      </div>
+      <div class="flex space-x-4 mt-2 md:mt-0">
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Privacy Policy</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Terms of Service</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Contact Support</span>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

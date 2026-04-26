@@ -1,0 +1,992 @@
+
+              <html class="">
+                
+  <head>
+    
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest', // Options: 'nest', 'remove', 'replace'
+      };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+<style>
+  * {
+    font-family: "{{font}}", sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+    
+<style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+</style>
+
+    
+<style>
+   :root {
+          /* Base colors */
+          --color-base: #ffffff;
+          --color-base-50: #f9fafb;
+          --color-base-100: #f3f4f6;
+          --color-base-200: #e5e7eb;
+          --color-base-300: #d1d5db;
+          --color-base-400: #9ca3af;
+          --color-base-500: #6b7280;
+          --color-base-600: #4b5563;  
+          --color-base-700: #374151;
+          --color-base-800: #1f2937;  
+          --color-base-900: #111827;
+          --color-base-content: #1f2937;
+
+          /* Primary colors */
+          --color-primary: #3b82f6;
+          --color-primary-50: #eff6ff;
+          --color-primary-100: #dbeafe;
+          --color-primary-200: #bfdbfe;
+          --color-primary-300: #93c5fd;
+          --color-primary-400: #60a5fa;
+          --color-primary-500: #3b82f6;
+          --color-primary-600: #2563eb;
+          --color-primary-700: #1d4ed8;
+          --color-primary-800: #1e40af;
+          --color-primary-900: #1e3a8a;
+          --color-primary-focus: #2563eb;
+          --color-primary-content: #ffffff;
+
+          /* Secondary colors */
+          --color-secondary: #8b5cf6;
+          --color-secondary-50: #f5f3ff;
+          --color-secondary-100: #ede9fe;
+          --color-secondary-200: #ddd6fe;
+          --color-secondary-300: #c4b5fd;
+          --color-secondary-400: #a78bfa;
+          --color-secondary-500: #8b5cf6;
+          --color-secondary-600: #7c3aed;
+          --color-secondary-700: #6d28d9;
+          --color-secondary-800: #5b21b6;
+          --color-secondary-900: #4c1d95;
+          --color-secondary-focus: #7c3aed;
+          --color-secondary-content: #ffffff;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #fdf2f8;
+          --color-accent-100: #fce7f3;
+          --color-accent-200: #fbcfe8;
+          --color-accent-300: #f9a8d4;
+          --color-accent-400: #f472b6;
+          --color-accent-500: #ec4899;
+          --color-accent-600: #db2777;
+          --color-accent-700: #be185d;
+          --color-accent-800: #9d174d;
+          --color-accent-900: #831843;
+          --color-accent-focus: #db2777;
+          --color-accent-content: #ffffff;
+
+          /* Neutral colors */
+          --color-neutral: #6b7280;
+          --color-neutral-50: #f9fafb;
+          --color-neutral-100: #f3f4f6;
+          --color-neutral-200: #e5e7eb;
+          --color-neutral-300: #d1d5db;
+          --color-neutral-400: #9ca3af;
+          --color-neutral-500: #6b7280;
+          --color-neutral-600: #4b5563;
+          --color-neutral-700: #374151;
+          --color-neutral-800: #1f2937;
+          --color-neutral-900: #111827;
+          --color-neutral-focus: #4b5563;
+          --color-neutral-content: #ffffff;
+
+          /* Info colors */
+          --color-info: #3b82f6;
+          --color-info-50: #eff6ff;
+          --color-info-100: #dbeafe;
+          --color-info-200: #bfdbfe;
+          --color-info-300: #93c5fd;
+          --color-info-400: #60a5fa;
+          --color-info-500: #3b82f6;
+          --color-info-600: #2563eb;
+          --color-info-700: #1d4ed8;
+          --color-info-800: #1e40af;
+          --color-info-900: #1e3a8a;
+          --color-info-focus: #2563eb;
+          --color-info-content: #ffffff;
+
+          /* Success colors */
+          --color-success: #10b981;
+          --color-success-50: #ecfdf5;
+          --color-success-100: #d1fae5;
+          --color-success-200: #a7f3d0;
+          --color-success-300: #6ee7b7;
+          --color-success-400: #34d399;
+          --color-success-500: #10b981;
+          --color-success-600: #059669;
+          --color-success-700: #047857;
+          --color-success-800: #065f46;
+          --color-success-900: #064e3b;
+          --color-success-focus: #059669;
+          --color-success-content: #ffffff;
+
+          /* Warning colors */
+          --color-warning: #f59e0b;
+          --color-warning-50: #fffbeb;
+          --color-warning-100: #fef3c7;
+          --color-warning-200: #fde68a;
+          --color-warning-300: #fcd34d;
+          --color-warning-400: #fbbf24;
+          --color-warning-500: #f59e0b;
+          --color-warning-600: #d97706;
+          --color-warning-700: #b45309;
+          --color-warning-800: #92400e;
+          --color-warning-900: #78350f;
+          --color-warning-focus: #d97706;
+          --color-warning-content: #ffffff;
+
+          /* Error colors */
+          --color-error: #ef4444;
+          --color-error-50: #fef2f2;
+          --color-error-100: #fee2e2;
+          --color-error-200: #fecaca;
+          --color-error-300: #fca5a5;
+          --color-error-400: #f87171;
+          --color-error-500: #ef4444;
+          --color-error-600: #dc2626;
+          --color-error-700: #b91c1c;
+          --color-error-800: #991b1b;
+          --color-error-900: #7f1d1d;
+          --color-error-focus: #dc2626;
+          --color-error-content: #ffffff;
+        }
+</style>
+
+    
+<style>
+/* Dark theme */
+        .dark {
+          /* Base colors */
+          --color-base: #1f2937;
+          --color-base-50: #111827;
+          --color-base-100: #1f2937;
+          --color-base-200: #374151;
+          --color-base-300: #4b5563;
+          --color-base-400: #6b7280;
+          --color-base-500: #9ca3af;
+          --color-base-600: #d1d5db;
+          --color-base-700: #e5e7eb;
+          --color-base-800: #f3f4f6;
+          --color-base-900: #f9fafb;
+          --color-base-content: #f9fafb;
+
+          /* Primary colors */
+          --color-primary: #60a5fa;
+          --color-primary-50: #1e3a8a;
+          --color-primary-100: #1e40af;
+          --color-primary-200: #1d4ed8;
+          --color-primary-300: #2563eb;
+          --color-primary-400: #3b82f6;
+          --color-primary-500: #60a5fa;
+          --color-primary-600: #93c5fd;
+          --color-primary-700: #bfdbfe;
+          --color-primary-800: #dbeafe;
+          --color-primary-900: #eff6ff;
+          --color-primary-focus: #3b82f6;
+          --color-primary-content: #1f2937;
+
+          /* Secondary colors */
+          --color-secondary: #a78bfa;
+          --color-secondary-50: #4c1d95;
+          --color-secondary-100: #5b21b6;
+          --color-secondary-200: #6d28d9;
+          --color-secondary-300: #7c3aed;
+          --color-secondary-400: #8b5cf6;
+          --color-secondary-500: #a78bfa;
+          --color-secondary-600: #c4b5fd;
+          --color-secondary-700: #ddd6fe;
+          --color-secondary-800: #ede9fe;
+          --color-secondary-900: #f5f3ff;
+          --color-secondary-focus: #8b5cf6;
+          --color-secondary-content: #1f2937;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #831843;
+          --color-accent-100: #9d174d;
+          --color-accent-200: #be185d;
+          --color-accent-300: #db2777;
+          --color-accent-400: #ec4899;
+          --color-accent-500: #f472b6;
+          --color-accent-600: #f9a8d4;
+          --color-accent-700: #fbcfe8;
+          --color-accent-800: #fce7f3;
+          --color-accent-900: #fdf2f8;
+          --color-accent-focus: #ec4899;
+          --color-accent-content: #1f2937;
+
+          /* Neutral colors remain the same as light theme */
+
+          /* Info colors */
+          --color-info: #60a5fa;
+          --color-info-50: #1e3a8a;
+          --color-info-100: #1e40af;
+          --color-info-200: #1d4ed8;
+          --color-info-300: #2563eb;
+          --color-info-400: #3b82f6;
+          --color-info-500: #60a5fa;
+          --color-info-600: #93c5fd;
+          --color-info-700: #bfdbfe;
+          --color-info-800: #dbeafe;
+          --color-info-900: #eff6ff;
+          --color-info-focus: #3b82f6;
+          --color-info-content: #1f2937;
+
+          /* Success colors */
+          --color-success: #34d399;
+          --color-success-50: #064e3b;
+          --color-success-100: #065f46;
+          --color-success-200: #047857;
+          --color-success-300: #059669;
+          --color-success-400: #10b981;
+          --color-success-500: #34d399;
+          --color-success-600: #6ee7b7;
+          --color-success-700: #a7f3d0;
+          --color-success-800: #d1fae5;
+          --color-success-900: #ecfdf5;
+          --color-success-focus: #10b981;
+          --color-success-content: #1f2937;
+
+          /* Warning colors */
+          --color-warning: #fbbf24;
+          --color-warning-50: #78350f;
+          --color-warning-100: #92400e;
+          --color-warning-200: #b45309;
+          --color-warning-300: #d97706;
+          --color-warning-400: #f59e0b;
+          --color-warning-500: #fbbf24;
+          --color-warning-600: #fcd34d;
+          --color-warning-700: #fde68a;
+          --color-warning-800: #fef3c7;
+          --color-warning-900: #fffbeb;
+          --color-warning-focus: #f59e0b;
+          --color-warning-content: #1f2937;
+
+          /* Error colors */
+          --color-error: #f87171;
+          --color-error-50: #7f1d1d;
+          --color-error-100: #991b1b;
+          --color-error-200: #b91c1c;
+          --color-error-300: #dc2626;
+          --color-error-400: #ef4444;
+          --color-error-500: #f87171;
+          --color-error-600: #fca5a5;
+          --color-error-700: #fecaca;
+          --color-error-800: #fee2e2;
+          --color-error-900: #fef2f2;
+          --color-error-focus: #ef4444;
+          --color-error-content: #1f2937;
+        }
+</style>
+
+    
+  <script>
+        tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                ...{"transparent":"transparent","current":"currentColor","black":"#000000","white":"#ffffff","gray":{"50":"#f9fafb","100":"#f3f4f6","200":"#e5e7eb","300":"#d1d5db","400":"#9ca3af","500":"#6b7280","600":"#4b5563","700":"#374151","800":"#1f2937","900":"#111827"},"red":{"50":"#fef2f2","100":"#fee2e2","200":"#fecaca","300":"#fca5a5","400":"#f87171","500":"#ef4444","600":"#dc2626","700":"#b91c1c","800":"#991b1b","900":"#7f1d1d"},"yellow":{"50":"#fffbeb","100":"#fef3c7","200":"#fde68a","300":"#fcd34d","400":"#fbbf24","500":"#f59e0b","600":"#d97706","700":"#b45309","800":"#92400e","900":"#78350f"},"green":{"50":"#ecfdf5","100":"#d1fae5","200":"#a7f3d0","300":"#6ee7b7","400":"#34d399","500":"#10b981","600":"#059669","700":"#047857","800":"#065f46","900":"#064e3b"},"blue":{"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a"},"indigo":{"50":"#eef2ff","100":"#e0e7ff","200":"#c7d2fe","300":"#a5b4fc","400":"#818cf8","500":"#6366f1","600":"#4f46e5","700":"#4338ca","800":"#3730a3","900":"#312e81"},"purple":{"50":"#f5f3ff","100":"#ede9fe","200":"#ddd6fe","300":"#c4b5fd","400":"#a78bfa","500":"#8b5cf6","600":"#7c3aed","700":"#6d28d9","800":"#5b21b6","900":"#4c1d95"},"pink":{"50":"#fdf2f8","100":"#fce7f3","200":"#fbcfe8","300":"#f9a8d4","400":"#f472b6","500":"#ec4899","600":"#db2777","700":"#be185d","800":"#9d174d","900":"#831843"}},
+                ...{"primary":{"50":"var(--color-primary-50)","100":"var(--color-primary-100)","200":"var(--color-primary-200)","300":"var(--color-primary-300)","400":"var(--color-primary-400)","500":"var(--color-primary-500)","600":"var(--color-primary-600)","700":"var(--color-primary-700)","800":"var(--color-primary-800)","900":"var(--color-primary-900)","DEFAULT":"var(--color-primary)","focus":"var(--color-primary-focus)","content":"var(--color-primary-content)"},"secondary":{"50":"var(--color-secondary-50)","100":"var(--color-secondary-100)","200":"var(--color-secondary-200)","300":"var(--color-secondary-300)","400":"var(--color-secondary-400)","500":"var(--color-secondary-500)","600":"var(--color-secondary-600)","700":"var(--color-secondary-700)","800":"var(--color-secondary-800)","900":"var(--color-secondary-900)","DEFAULT":"var(--color-secondary)","focus":"var(--color-secondary-focus)","content":"var(--color-secondary-content)"},"accent":{"50":"var(--color-accent-50)","100":"var(--color-accent-100)","200":"var(--color-accent-200)","300":"var(--color-accent-300)","400":"var(--color-accent-400)","500":"var(--color-accent-500)","600":"var(--color-accent-600)","700":"var(--color-accent-700)","800":"var(--color-accent-800)","900":"var(--color-accent-900)","DEFAULT":"var(--color-accent)","focus":"var(--color-accent-focus)","content":"var(--color-accent-content)"},"neutral":{"50":"var(--color-neutral-50)","100":"var(--color-neutral-100)","200":"var(--color-neutral-200)","300":"var(--color-neutral-300)","400":"var(--color-neutral-400)","500":"var(--color-neutral-500)","600":"var(--color-neutral-600)","700":"var(--color-neutral-700)","800":"var(--color-neutral-800)","900":"var(--color-neutral-900)","DEFAULT":"var(--color-neutral)","focus":"var(--color-neutral-focus)","content":"var(--color-neutral-content)"},"info":{"50":"var(--color-info-50)","100":"var(--color-info-100)","200":"var(--color-info-200)","300":"var(--color-info-300)","400":"var(--color-info-400)","500":"var(--color-info-500)","600":"var(--color-info-600)","700":"var(--color-info-700)","800":"var(--color-info-800)","900":"var(--color-info-900)","DEFAULT":"var(--color-info)","focus":"var(--color-info-focus)","content":"var(--color-info-content)"},"success":{"50":"var(--color-success-50)","100":"var(--color-success-100)","200":"var(--color-success-200)","300":"var(--color-success-300)","400":"var(--color-success-400)","500":"var(--color-success-500)","600":"var(--color-success-600)","700":"var(--color-success-700)","800":"var(--color-success-800)","900":"var(--color-success-900)","DEFAULT":"var(--color-success)","focus":"var(--color-success-focus)","content":"var(--color-success-content)"},"warning":{"50":"var(--color-warning-50)","100":"var(--color-warning-100)","200":"var(--color-warning-200)","300":"var(--color-warning-300)","400":"var(--color-warning-400)","500":"var(--color-warning-500)","600":"var(--color-warning-600)","700":"var(--color-warning-700)","800":"var(--color-warning-800)","900":"var(--color-warning-900)","DEFAULT":"var(--color-warning)","focus":"var(--color-warning-focus)","content":"var(--color-warning-content)"},"error":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"danger":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"failure":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"}},
+                },
+              },
+            },
+            variants: {
+              extend: {
+                backgroundColor: ['active', 'group-hover'],
+                textColor: ['active', 'group-hover'],
+              },
+            },
+            plugins: [],
+          };
+  </script>
+
+  </head>
+
+                <body class="h-full text-base-content">
+                  <header id="header" class="bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-50">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <div class="container mx-auto px-4">
+    <nav class="flex items-center justify-between py-4">
+      <div class="flex items-center">
+        <span class="flex items-center cursor-pointer">
+          <span class="text-2xl text-neutral-900">EAIOU.org</span>
+          <span class="ml-2 text-sm bg-neutral-200 px-2 py-1 rounded text-neutral-700">Beta</span>
+        </span>
+      </div>
+      
+      <div class="hidden md:flex items-center space-x-6">
+        <span class="text-neutral-700 cursor-pointer">About</span>
+        <span class="text-neutral-700 cursor-pointer">Journals</span>
+        <div class="relative group">
+          <button class="flex items-center text-neutral-700">
+            Resources
+            <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+          </button>
+        </div>
+        <div class="relative group">
+          <button class="flex items-center text-neutral-700">
+            Collaboration
+            <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+          </button>
+        </div>
+        <span class="text-neutral-700 cursor-pointer">Guidelines</span>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <span class="text-neutral-700 flex items-center cursor-pointer">
+          <i class="fa-regular fa-bell mr-1"></i>
+          <span class="bg-neutral-800 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+        </span>
+        <div class="flex items-center">
+          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User" class="w-8 h-8 rounded-full mr-2">
+          <span class="text-neutral-700">Dr. Smith</span>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div id="review-toolbar" class="bg-neutral-800 text-white">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        <button class="mr-4 text-neutral-400 hover:text-white">
+          <i class="fa-solid fa-arrow-left mr-2"></i>
+          Back to Dashboard
+        </button>
+        <span class="text-sm text-neutral-400">Reviewing Submission ID: EAIOU-2025-0142</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <button class="flex items-center px-3 py-1.5 text-sm bg-neutral-700 rounded-md hover:bg-neutral-600">
+          <i class="fa-regular fa-comment mr-2"></i>
+          <span>Discussion</span>
+        </button>
+        <button class="flex items-center px-3 py-1.5 text-sm bg-neutral-700 rounded-md hover:bg-neutral-600">
+          <i class="fa-regular fa-clock mr-2"></i>
+          <span>Review History</span>
+        </button>
+        <button class="flex items-center px-3 py-1.5 text-sm bg-neutral-700 rounded-md hover:bg-neutral-600">
+          <i class="fa-solid fa-gear mr-2"></i>
+          <span>Settings</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="main-content" class="container mx-auto px-4 py-6">
+  <div id="review-header" class="mb-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+      <div>
+        <h1 class="text-2xl text-neutral-900">Review Assignment</h1>
+        <p class="text-neutral-600">Due by: June 15, 2025 (12 days remaining)</p>
+      </div>
+      <div class="mt-4 md:mt-0 flex items-center space-x-3">
+        <div class="flex items-center">
+          <span class="w-3 h-3 bg-neutral-500 rounded-full mr-2"></span>
+          <span class="text-sm text-neutral-700">In Progress</span>
+        </div>
+        <button class="px-4 py-2 bg-neutral-200 text-neutral-700 rounded-md hover:bg-neutral-300">
+          Save Draft
+        </button>
+        <button class="px-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700">
+          Submit Review
+        </button>
+      </div>
+    </div>
+    
+    <div class="bg-white border border-neutral-200 rounded-lg shadow-sm p-6 mb-6">
+      <h2 class="text-xl text-neutral-900 mb-4">Transparent Observer-Preserving AI Integration in Academic Research Workflows</h2>
+      <div class="flex flex-wrap gap-3 mb-4">
+        <span class="px-2 py-1 bg-neutral-200 text-neutral-700 text-xs rounded">AI Ethics</span>
+        <span class="px-2 py-1 bg-neutral-200 text-neutral-700 text-xs rounded">Research Methodology</span>
+        <span class="px-2 py-1 bg-neutral-200 text-neutral-700 text-xs rounded">Transparency</span>
+      </div>
+      <div class="flex items-center mb-4">
+        <div class="flex -space-x-2 mr-3">
+          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="Author" class="w-8 h-8 rounded-full border-2 border-white">
+          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="Author" class="w-8 h-8 rounded-full border-2 border-white">
+          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="Author" class="w-8 h-8 rounded-full border-2 border-white">
+        </div>
+        <span class="text-sm text-neutral-600">
+          J. Smith, A. Johnson, et al. + <span class="text-neutral-500">AI co-observer</span>
+        </span>
+      </div>
+      <p class="text-neutral-700 mb-4">
+        This study examines how AI systems and humans can collaborate as co-observers within the same academic workflow while maintaining attribution integrity and reproducibility.
+      </p>
+      <div class="flex flex-col sm:flex-row sm:items-center text-sm text-neutral-600">
+        <span class="flex items-center mr-6 mb-2 sm:mb-0">
+          <i class="fa-regular fa-calendar mr-2"></i>
+          Submitted: May 1, 2025
+        </span>
+        <span class="flex items-center mr-6 mb-2 sm:mb-0">
+          <i class="fa-solid fa-file-pdf mr-2"></i>
+          PDF, 24 pages
+        </span>
+        <span class="flex items-center">
+          <i class="fa-solid fa-code-branch mr-2"></i>
+          Version 1.2
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <div id="review-content" class="flex flex-col lg:flex-row gap-6">
+    <div id="manuscript-viewer" class="lg:w-1/2 order-2 lg:order-1">
+      <div class="bg-white border border-neutral-200 rounded-lg shadow-sm mb-6">
+        <div class="flex items-center justify-between border-b border-neutral-200 p-4">
+          <h3 class="text-lg text-neutral-900">Manuscript</h3>
+          <div class="flex items-center space-x-3">
+            <button class="text-neutral-600 hover:text-neutral-900">
+              <i class="fa-solid fa-download"></i>
+            </button>
+            <button class="text-neutral-600 hover:text-neutral-900">
+              <i class="fa-solid fa-expand"></i>
+            </button>
+            <div class="flex items-center border border-neutral-300 rounded-md">
+              <button class="px-2 py-1 text-neutral-600 hover:bg-neutral-100">
+                <i class="fa-solid fa-minus"></i>
+              </button>
+              <span class="px-2 text-neutral-700">100%</span>
+              <button class="px-2 py-1 text-neutral-600 hover:bg-neutral-100">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="p-4 border-b border-neutral-200 bg-neutral-100">
+          <div class="flex items-center space-x-3">
+            <button class="px-3 py-1.5 bg-white text-neutral-700 border border-neutral-300 rounded-md flex items-center hover:bg-neutral-50">
+              <i class="fa-solid fa-pencil mr-2"></i>
+              <span>Annotate</span>
+            </button>
+            <button class="px-3 py-1.5 bg-white text-neutral-700 border border-neutral-300 rounded-md flex items-center hover:bg-neutral-50">
+              <i class="fa-solid fa-comment mr-2"></i>
+              <span>Comment</span>
+            </button>
+            <button class="px-3 py-1.5 bg-white text-neutral-700 border border-neutral-300 rounded-md flex items-center hover:bg-neutral-50">
+              <i class="fa-solid fa-highlighter mr-2"></i>
+              <span>Highlight</span>
+            </button>
+            <div class="relative">
+              <button class="px-3 py-1.5 bg-white text-neutral-700 border border-neutral-300 rounded-md flex items-center hover:bg-neutral-50">
+                <i class="fa-solid fa-ellipsis-h"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="h-[600px] overflow-y-auto p-6 bg-white">
+          <div class="bg-neutral-200 h-full flex items-center justify-center">
+            <div class="text-center p-6">
+              <i class="fa-regular fa-file-pdf text-neutral-500 text-5xl mb-4"></i>
+              <p class="text-neutral-700 mb-2">Manuscript PDF Viewer</p>
+              <p class="text-neutral-500 text-sm mb-4">Interactive document with annotation capabilities</p>
+              <button class="px-4 py-2 bg-neutral-800 text-white rounded-md text-sm">
+                View in Full Screen
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border-t border-neutral-200 p-4 flex items-center justify-between bg-neutral-50">
+          <div class="flex items-center">
+            <button class="text-neutral-600 hover:text-neutral-900 mr-4">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <span class="text-neutral-700">Page 1 of 24</span>
+            <button class="text-neutral-600 hover:text-neutral-900 ml-4">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+          <div>
+            <button class="px-3 py-1.5 text-sm bg-neutral-200 text-neutral-700 rounded-md hover:bg-neutral-300">
+              View All Annotations
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white border border-neutral-200 rounded-lg shadow-sm">
+        <div class="flex items-center justify-between border-b border-neutral-200 p-4">
+          <h3 class="text-lg text-neutral-900">Supplementary Materials</h3>
+          <button class="text-neutral-600 hover:text-neutral-900">
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        </div>
+        
+        <div class="p-4">
+          <div class="flex items-center justify-between p-3 border border-neutral-200 rounded-md mb-3 hover:bg-neutral-50 cursor-pointer">
+            <div class="flex items-center">
+              <i class="fa-solid fa-table text-neutral-500 mr-3"></i>
+              <div>
+                <p class="text-neutral-800">dataset_analysis.csv</p>
+                <p class="text-neutral-500 text-xs">2.4 MB • CSV</p>
+              </div>
+            </div>
+            <button class="text-neutral-600 hover:text-neutral-900">
+              <i class="fa-solid fa-download"></i>
+            </button>
+          </div>
+          
+          <div class="flex items-center justify-between p-3 border border-neutral-200 rounded-md mb-3 hover:bg-neutral-50 cursor-pointer">
+            <div class="flex items-center">
+              <i class="fa-solid fa-code text-neutral-500 mr-3"></i>
+              <div>
+                <p class="text-neutral-800">analysis_scripts.zip</p>
+                <p class="text-neutral-500 text-xs">5.7 MB • ZIP</p>
+              </div>
+            </div>
+            <button class="text-neutral-600 hover:text-neutral-900">
+              <i class="fa-solid fa-download"></i>
+            </button>
+          </div>
+          
+          <div class="flex items-center justify-between p-3 border border-neutral-200 rounded-md hover:bg-neutral-50 cursor-pointer">
+            <div class="flex items-center">
+              <i class="fa-solid fa-image text-neutral-500 mr-3"></i>
+              <div>
+                <p class="text-neutral-800">high_res_figures.pdf</p>
+                <p class="text-neutral-500 text-xs">8.2 MB • PDF</p>
+              </div>
+            </div>
+            <button class="text-neutral-600 hover:text-neutral-900">
+              <i class="fa-solid fa-download"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="review-form" class="lg:w-1/2 order-1 lg:order-2">
+      <div class="bg-white border border-neutral-200 rounded-lg shadow-sm mb-6">
+        <div class="border-b border-neutral-200 p-4">
+          <h3 class="text-lg text-neutral-900">Review Form</h3>
+        </div>
+        
+        <div class="p-6">
+          <div class="mb-6">
+            <h4 class="text-neutral-800 mb-2">1. Overall Recommendation</h4>
+            <div class="space-y-2">
+              <div class="flex items-center">
+                <input type="radio" id="accept" name="recommendation" class="mr-2">
+                <label for="accept" class="text-neutral-700">Accept (No revisions needed)</label>
+              </div>
+              <div class="flex items-center">
+                <input type="radio" id="minor" name="recommendation" class="mr-2">
+                <label for="minor" class="text-neutral-700">Accept with Minor Revisions</label>
+              </div>
+              <div class="flex items-center">
+                <input type="radio" id="major" name="recommendation" class="mr-2" checked>
+                <label for="major" class="text-neutral-700">Major Revisions Required</label>
+              </div>
+              <div class="flex items-center">
+                <input type="radio" id="reject" name="recommendation" class="mr-2">
+                <label for="reject" class="text-neutral-700">Reject</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h4 class="text-neutral-800 mb-2">2. Evaluation Criteria</h4>
+            <p class="text-neutral-600 text-sm mb-4">Rate the manuscript on the following criteria (1-5, where 5 is excellent)</p>
+            
+            <div class="space-y-4">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <label class="text-neutral-700">Originality & Innovation</label>
+                  <span class="text-sm text-neutral-600">4/5</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-2">
+                  <div class="bg-neutral-700 h-2 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+              
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <label class="text-neutral-700">Methodology & Rigor</label>
+                  <span class="text-sm text-neutral-600">3/5</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-2">
+                  <div class="bg-neutral-700 h-2 rounded-full" style="width: 60%"></div>
+                </div>
+              </div>
+              
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <label class="text-neutral-700">Clarity & Presentation</label>
+                  <span class="text-sm text-neutral-600">4/5</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-2">
+                  <div class="bg-neutral-700 h-2 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+              
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <label class="text-neutral-700">Relevance & Significance</label>
+                  <span class="text-sm text-neutral-600">5/5</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-2">
+                  <div class="bg-neutral-700 h-2 rounded-full" style="width: 100%"></div>
+                </div>
+              </div>
+              
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <label class="text-neutral-700">Attribution & Transparency</label>
+                  <span class="text-sm text-neutral-600">3/5</span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-2">
+                  <div class="bg-neutral-700 h-2 rounded-full" style="width: 60%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h4 class="text-neutral-800 mb-2">3. Comments to Authors</h4>
+            <p class="text-neutral-600 text-sm mb-2">Provide detailed feedback for the authors. This will be shared with the authors.</p>
+            
+            <div class="border border-neutral-300 rounded-md mb-3">
+              <div class="border-b border-neutral-200 px-3 py-2 flex items-center bg-neutral-50">
+                <button class="text-neutral-600 hover:text-neutral-900 mr-3">
+                  <i class="fa-solid fa-bold"></i>
+                </button>
+                <button class="text-neutral-600 hover:text-neutral-900 mr-3">
+                  <i class="fa-solid fa-italic"></i>
+                </button>
+                <button class="text-neutral-600 hover:text-neutral-900 mr-3">
+                  <i class="fa-solid fa-list-ul"></i>
+                </button>
+                <button class="text-neutral-600 hover:text-neutral-900">
+                  <i class="fa-solid fa-list-ol"></i>
+                </button>
+              </div>
+              <textarea class="w-full p-3 h-36 focus:outline-none" placeholder="Enter your comments to the authors here...">The manuscript presents a novel framework for AI-human collaboration in academic workflows. The conceptual model is strong, but there are several methodological issues that need to be addressed:
+
+1. The validation approach lacks sufficient statistical rigor. Consider adding quantitative metrics to support your qualitative findings.
+
+2. The attribution mechanism described in Section 3.2 needs more clarity on how it handles edge cases.
+
+3. The discussion of observer preservation is compelling but would benefit from more concrete examples.
+
+Overall, this is promising work that addresses an important gap in the literature, but requires significant methodological improvements before publication.</textarea>
+            </div>
+            
+            <div class="flex items-center text-sm text-neutral-600">
+              <i class="fa-solid fa-lock mr-1"></i>
+              <span>Authors will not see your identity (double-blind review)</span>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h4 class="text-neutral-800 mb-2">4. Confidential Comments to Editor</h4>
+            <p class="text-neutral-600 text-sm mb-2">These comments will only be visible to the editorial team.</p>
+            
+            <div class="border border-neutral-300 rounded-md mb-3">
+              <textarea class="w-full p-3 h-24 focus:outline-none" placeholder="Enter your confidential comments to the editor here...">This paper has significant potential but requires substantial revisions to the methodology section. The authors appear to have strong theoretical understanding but may need guidance on empirical validation approaches. I would recommend requesting major revisions rather than rejection as the core contribution is valuable.</textarea>
+            </div>
+            
+            <div class="flex items-center text-sm text-neutral-600">
+              <i class="fa-solid fa-user-shield mr-1"></i>
+              <span>Only visible to editors</span>
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h4 class="text-neutral-800 mb-2">5. AI Disclosure</h4>
+            <div class="bg-neutral-100 p-4 rounded-md">
+              <div class="flex items-start mb-3">
+                <input type="checkbox" id="ai-assistance" class="mt-1 mr-2" checked>
+                <label for="ai-assistance" class="text-neutral-700">
+                  I used AI assistance in preparing this review (e.g., for language editing, summarization)
+                </label>
+              </div>
+              <div class="pl-6">
+                <p class="text-neutral-600 text-sm mb-2">If checked, please describe how AI was used:</p>
+                <textarea class="w-full p-3 h-16 border border-neutral-300 rounded-md focus:outline-none text-sm" placeholder="Describe AI usage...">I used GPT-4 to help organize my thoughts and for language editing. All substantive evaluations and recommendations are my own.</textarea>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex justify-between">
+            <button class="px-4 py-2 bg-neutral-200 text-neutral-700 rounded-md hover:bg-neutral-300">
+              Save Draft
+            </button>
+            <div>
+              <button class="px-4 py-2 bg-white border border-neutral-300 text-neutral-700 rounded-md hover:bg-neutral-100 mr-2">
+                Preview
+              </button>
+              <button class="px-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700">
+                Submit Review
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white border border-neutral-200 rounded-lg shadow-sm">
+        <div class="flex items-center justify-between border-b border-neutral-200 p-4">
+          <h3 class="text-lg text-neutral-900">Review Guidelines</h3>
+          <button class="text-neutral-600 hover:text-neutral-900">
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        </div>
+        
+        <div class="p-4">
+          <div class="bg-neutral-100 p-4 rounded-md mb-4">
+            <h4 class="text-neutral-800 mb-2">Reviewer Responsibilities</h4>
+            <ul class="list-disc pl-5 text-sm text-neutral-700 space-y-1">
+              <li>Provide objective, constructive feedback on the manuscript</li>
+              <li>Evaluate methodology, results, and conclusions</li>
+              <li>Highlight strengths and areas for improvement</li>
+              <li>Maintain confidentiality of the manuscript</li>
+              <li>Disclose any potential conflicts of interest</li>
+            </ul>
+          </div>
+          
+          <div class="flex items-center text-neutral-600 hover:text-neutral-800 cursor-pointer">
+            <i class="fa-solid fa-book-open mr-2"></i>
+            <span>View complete reviewer guidelines</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="annotation-sidebar" class="fixed top-0 right-0 w-80 h-full bg-white shadow-lg border-l border-neutral-200 transform translate-x-full transition-transform duration-300 ease-in-out z-40">
+  <div class="p-4 border-b border-neutral-200 flex items-center justify-between">
+    <h3 class="text-lg text-neutral-900">Annotations</h3>
+    <button class="text-neutral-600 hover:text-neutral-900">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  
+  <div class="p-4 border-b border-neutral-200">
+    <div class="flex items-center justify-between mb-2">
+      <h4 class="text-neutral-800">Filter</h4>
+      <button class="text-sm text-neutral-600 hover:text-neutral-800">Clear All</button>
+    </div>
+    <div class="space-y-2 mb-2">
+      <div class="flex items-center">
+        <input type="checkbox" id="filter-comments" class="mr-2" checked>
+        <label for="filter-comments" class="text-neutral-700 text-sm">Comments</label>
+      </div>
+      <div class="flex items-center">
+        <input type="checkbox" id="filter-highlights" class="mr-2" checked>
+        <label for="filter-highlights" class="text-neutral-700 text-sm">Highlights</label>
+      </div>
+      <div class="flex items-center">
+        <input type="checkbox" id="filter-questions" class="mr-2" checked>
+        <label for="filter-questions" class="text-neutral-700 text-sm">Questions</label>
+      </div>
+    </div>
+    <div class="relative">
+      <input type="text" placeholder="Search annotations..." class="w-full pl-8 pr-4 py-2 border border-neutral-300 rounded-md text-sm">
+      <i class="fa-solid fa-search absolute left-3 top-2.5 text-neutral-400"></i>
+    </div>
+  </div>
+  
+  <div class="overflow-y-auto h-[calc(100%-160px)]">
+    <div class="p-4 border-b border-neutral-200 hover:bg-neutral-50">
+      <div class="flex items-start mb-2">
+        <div class="flex-shrink-0 w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center mr-2">
+          <i class="fa-solid fa-highlighter text-neutral-600 text-sm"></i>
+        </div>
+        <div>
+          <div class="flex items-center mb-1">
+            <p class="text-sm text-neutral-800">Page 4 - Methodology</p>
+            <span class="ml-auto text-xs text-neutral-500">5m ago</span>
+          </div>
+          <p class="text-sm text-neutral-700">"...the attribution mechanism requires further validation with larger datasets..."</p>
+        </div>
+      </div>
+      <div class="pl-10">
+        <p class="text-sm text-neutral-600">This is a key concern that needs to be addressed in the revision.</p>
+      </div>
+    </div>
+    
+    <div class="p-4 border-b border-neutral-200 hover:bg-neutral-50">
+      <div class="flex items-start mb-2">
+        <div class="flex-shrink-0 w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center mr-2">
+          <i class="fa-solid fa-comment text-neutral-600 text-sm"></i>
+        </div>
+        <div>
+          <div class="flex items-center mb-1">
+            <p class="text-sm text-neutral-800">Page 7 - Results</p>
+            <span class="ml-auto text-xs text-neutral-500">12m ago</span>
+          </div>
+          <p class="text-sm text-neutral-700">The statistical analysis in Table 2 needs clarification.</p>
+        </div>
+      </div>
+      <div class="pl-10">
+        <p class="text-sm text-neutral-600">Authors should provide more details on the statistical methods used and justify the choice of parameters.</p>
+      </div>
+    </div>
+    
+    <div class="p-4 border-b border-neutral-200 hover:bg-neutral-50">
+      <div class="flex items-start mb-2">
+        <div class="flex-shrink-0 w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center mr-2">
+          <i class="fa-solid fa-question text-neutral-600 text-sm"></i>
+        </div>
+        <div>
+          <div class="flex items-center mb-1">
+            <p class="text-sm text-neutral-800">Page 12 - Discussion</p>
+            <span class="ml-auto text-xs text-neutral-500">25m ago</span>
+          </div>
+          <p class="text-sm text-neutral-700">"...observer preservation is maintained through a novel ACL implementation..."</p>
+        </div>
+      </div>
+      <div class="pl-10">
+        <p class="text-sm text-neutral-600">How does this implementation differ from standard approaches? This needs more explanation.</p>
+      </div>
+    </div>
+    
+    <div class="p-4 border-b border-neutral-200 hover:bg-neutral-50">
+      <div class="flex items-start mb-2">
+        <div class="flex-shrink-0 w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center mr-2">
+          <i class="fa-solid fa-highlighter text-neutral-600 text-sm"></i>
+        </div>
+        <div>
+          <div class="flex items-center mb-1">
+            <p class="text-sm text-neutral-800">Page 15 - Conclusion</p>
+            <span class="ml-auto text-xs text-neutral-500">32m ago</span>
+          </div>
+          <p class="text-sm text-neutral-700">"...future work should focus on scaling the observer-preserving approach..."</p>
+        </div>
+      </div>
+      <div class="pl-10">
+        <p class="text-sm text-neutral-600">Good point about scalability challenges, but needs more specific research directions.</p>
+      </div>
+    </div>
+    
+    <div class="p-4 hover:bg-neutral-50">
+      <div class="flex items-start mb-2">
+        <div class="flex-shrink-0 w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center mr-2">
+          <i class="fa-solid fa-comment text-neutral-600 text-sm"></i>
+        </div>
+        <div>
+          <div class="flex items-center mb-1">
+            <p class="text-sm text-neutral-800">Page 18 - References</p>
+            <span class="ml-auto text-xs text-neutral-500">45m ago</span>
+          </div>
+          <p class="text-sm text-neutral-700">Missing some key recent papers on observer-preserving systems.</p>
+        </div>
+      </div>
+      <div class="pl-10">
+        <p class="text-sm text-neutral-600">Authors should include Johnson et al. (2024) and Martinez & Lee (2025) in their literature review.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="help-button" class="fixed bottom-6 right-6 z-30">
+  <button class="w-12 h-12 bg-neutral-800 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-neutral-700">
+    <i class="fa-solid fa-question"></i>
+  </button>
+</div>
+
+<footer id="footer" class="bg-neutral-900 text-white mt-8">
+  <div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-lg mb-4">EAIOU.org</h3>
+        <p class="text-neutral-400 text-sm mb-4">
+          An observer-preserving research platform built on Joomla, designed to support transparent peer review, structured attribution, and discovery.
+        </p>
+        <div class="flex space-x-4">
+          <span class="text-neutral-400 hover:text-white cursor-pointer">
+            <i class="fa-brands fa-twitter"></i>
+          </span>
+          <span class="text-neutral-400 hover:text-white cursor-pointer">
+            <i class="fa-brands fa-github"></i>
+          </span>
+          <span class="text-neutral-400 hover:text-white cursor-pointer">
+            <i class="fa-brands fa-linkedin"></i>
+          </span>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-lg mb-4">Resources</h3>
+        <ul class="space-y-2 text-neutral-400">
+          <li><span class="hover:text-white cursor-pointer">About EAIOU</span></li>
+          <li><span class="hover:text-white cursor-pointer">Guidelines</span></li>
+          <li><span class="hover:text-white cursor-pointer">Submission Process</span></li>
+          <li><span class="hover:text-white cursor-pointer">Peer Review</span></li>
+          <li><span class="hover:text-white cursor-pointer">Attribution Policy</span></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="text-lg mb-4">Community</h3>
+        <ul class="space-y-2 text-neutral-400">
+          <li><span class="hover:text-white cursor-pointer">Collaboration Hub</span></li>
+          <li><span class="hover:text-white cursor-pointer">Research Gap Maps</span></li>
+          <li><span class="hover:text-white cursor-pointer">Events & Workshops</span></li>
+          <li><span class="hover:text-white cursor-pointer">Editorial Board</span></li>
+          <li><span class="hover:text-white cursor-pointer">Join as Reviewer</span></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="text-lg mb-4">Support</h3>
+        <ul class="space-y-2 text-neutral-400">
+          <li><span class="hover:text-white cursor-pointer">Help Center</span></li>
+          <li><span class="hover:text-white cursor-pointer">Contact Us</span></li>
+          <li><span class="hover:text-white cursor-pointer">FAQs</span></li>
+          <li><span class="hover:text-white cursor-pointer">Privacy Policy</span></li>
+          <li><span class="hover:text-white cursor-pointer">Terms of Service</span></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="border-t border-neutral-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-neutral-400 text-sm">
+        © 2025 EAIOU.org. All rights reserved. Licensed under Modified MIT – Educational Use Only.
+      </p>
+      <div class="flex items-center mt-4 md:mt-0">
+        <span class="text-xs text-neutral-500 mr-2">Powered by</span>
+        <span class="text-neutral-400">Joomla</span>
+      </div>
+    </div>
+  </div>
+</footer>
+                </body>
+              </html>
+            

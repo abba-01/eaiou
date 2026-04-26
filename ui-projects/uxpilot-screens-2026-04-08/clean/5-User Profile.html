@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-900">
+    <!-- Header -->
+    <header id="header" class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="flex items-center cursor-pointer">
+                        <i class="fa-solid fa-microscope text-primary-600 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-gray-900">SciReview</span>
+                    </span>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Home</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Articles</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Categories</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Submit</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">About</span>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-primary-700">
+                        <i class="fa-solid fa-search text-lg"></i>
+                    </button>
+                    <button class="hidden md:block text-gray-600 hover:text-primary-700">
+                        <i class="fa-solid fa-bell text-lg"></i>
+                    </button>
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="User profile" class="w-8 h-8 rounded-full object-cover border border-gray-200">
+                    </div>
+                    <button class="md:hidden text-gray-600">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Profile Header -->
+        <section id="profile-header" class="bg-white rounded-xl shadow-sm overflow-hidden mb-8">
+            <div class="bg-gradient-to-r from-primary-600 to-primary-800 h-48 relative">
+                <div class="absolute bottom-0 left-0 right-0 px-6 md:px-10 transform translate-y-1/2 flex justify-between items-end">
+                    <div class="flex items-end">
+                        <div class="bg-white p-1 rounded-full shadow-md">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="User profile" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white">
+                        </div>
+                        <div class="ml-4 mb-2 hidden md:block">
+                            <h1 class="text-2xl font-bold text-white">Dr. Robert Chen</h1>
+                            <p class="text-primary-100">Professor of Molecular Biology</p>
+                        </div>
+                    </div>
+                    <button class="bg-white text-primary-600 font-medium py-2 px-6 rounded-md hover:bg-gray-50 transition duration-200 shadow-sm">
+                        Edit Profile
+                    </button>
+                </div>
+            </div>
+            <div class="pt-16 pb-6 px-6 md:px-10 md:hidden">
+                <h1 class="text-2xl font-bold text-gray-900">Dr. Robert Chen</h1>
+                <p class="text-gray-600">Professor of Molecular Biology</p>
+            </div>
+            <div class="pb-6 px-6 md:px-10 pt-4 flex flex-wrap gap-y-4">
+                <div class="flex items-center text-gray-700 mr-6">
+                    <i class="fa-solid fa-location-dot mr-2 text-gray-500"></i>
+                    <span>Stanford University, USA</span>
+                </div>
+                <div class="flex items-center text-gray-700 mr-6">
+                    <i class="fa-solid fa-envelope mr-2 text-gray-500"></i>
+                    <span>robert.chen@stanford.edu</span>
+                </div>
+                <div class="flex items-center text-gray-700 mr-6">
+                    <i class="fa-solid fa-link mr-2 text-gray-500"></i>
+                    <span class="text-primary-600 hover:underline cursor-pointer">orcid.org/0000-0002-1825-0097</span>
+                </div>
+                <div class="flex items-center text-gray-700">
+                    <i class="fa-solid fa-graduation-cap mr-2 text-gray-500"></i>
+                    <span>h-index: 42</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Navigation -->
+        <div id="profile-navigation" class="bg-white rounded-lg shadow-sm mb-8">
+            <div class="flex overflow-x-auto">
+                <button class="px-6 py-4 font-medium text-primary-600 border-b-2 border-primary-600 flex-shrink-0">Overview</button>
+                <button class="px-6 py-4 font-medium text-gray-600 hover:text-gray-900 flex-shrink-0">Articles</button>
+                <button class="px-6 py-4 font-medium text-gray-600 hover:text-gray-900 flex-shrink-0">Submissions</button>
+                <button class="px-6 py-4 font-medium text-gray-600 hover:text-gray-900 flex-shrink-0">Reviews</button>
+                <button class="px-6 py-4 font-medium text-gray-600 hover:text-gray-900 flex-shrink-0">Collaborators</button>
+                <button class="px-6 py-4 font-medium text-gray-600 hover:text-gray-900 flex-shrink-0">Settings</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column -->
+            <div class="lg:col-span-2">
+                <!-- About Section -->
+                <section id="about-section" class="bg-white rounded-lg shadow-sm p-6 mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-gray-900">About</h2>
+                        <button class="text-gray-500 hover:text-primary-600">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Dr. Robert Chen is a Professor of Molecular Biology with over 15 years of research experience in gene expression regulation and epigenetics. His work focuses on understanding the molecular mechanisms that control cell differentiation and development.
+                    </p>
+                    <p class="text-gray-700">
+                        He leads the Epigenetic Regulation Laboratory at Stanford University, where his team investigates chromatin modifications and their role in gene expression during development and disease. Dr. Chen has published over 75 peer-reviewed articles and serves on the editorial boards of several prestigious journals.
+                    </p>
+                </section>
+
+                <!-- Recent Activity -->
+                <section id="activity-section" class="bg-white rounded-lg shadow-sm p-6 mb-8">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">Recent Activity</h2>
+                    <div class="space-y-6">
+                        <div id="activity-1" class="border-l-4 border-green-500 pl-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-1">
+                                <i class="fa-solid fa-book-open mr-2"></i>
+                                <span>Published an article</span>
+                                <span class="mx-2">•</span>
+                                <span>May 12, 2023</span>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Epigenetic Modifications in Neural Development: New Insights</h3>
+                            <p class="text-gray-600 text-sm mt-1">Published in Journal of Neuroscience, Volume 43, Issue 5</p>
+                        </div>
+                        
+                        <div id="activity-2" class="border-l-4 border-yellow-500 pl-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-1">
+                                <i class="fa-solid fa-magnifying-glass mr-2"></i>
+                                <span>Completed a review</span>
+                                <span class="mx-2">•</span>
+                                <span>May 8, 2023</span>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Reviewed "CRISPR-Based Epigenetic Reprogramming Techniques"</h3>
+                            <p class="text-gray-600 text-sm mt-1">For Molecular Cell Biology Journal</p>
+                        </div>
+                        
+                        <div id="activity-3" class="border-l-4 border-blue-500 pl-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-1">
+                                <i class="fa-solid fa-upload mr-2"></i>
+                                <span>Submitted a manuscript</span>
+                                <span class="mx-2">•</span>
+                                <span>April 30, 2023</span>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Chromatin Accessibility Dynamics During Stem Cell Differentiation</h3>
+                            <p class="text-gray-600 text-sm mt-1">Submitted to Nature Genetics</p>
+                        </div>
+                        
+                        <div id="activity-4" class="border-l-4 border-purple-500 pl-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-1">
+                                <i class="fa-solid fa-comment mr-2"></i>
+                                <span>Commented on an article</span>
+                                <span class="mx-2">•</span>
+                                <span>April 25, 2023</span>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Comment on "Single-Cell Analysis of Chromatin States"</h3>
+                            <p class="text-gray-600 text-sm mt-1">In Cell Journal, Volume 185, Issue 7</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-center">
+                        <button class="text-primary-600 font-medium hover:text-primary-700">
+                            View all activity
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column -->
+            <div>
+                <!-- Stats Card -->
+                <section id="stats-card" class="bg-white rounded-lg shadow-sm p-6 mb-8">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">Publication Stats</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-50 rounded-lg p-4 text-center">
+                            <span class="block text-3xl font-bold text-primary-600">75</span>
+                            <span class="text-gray-600 text-sm">Publications</span>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4 text-center">
+                            <span class="block text-3xl font-bold text-primary-600">3.2k</span>
+                            <span class="text-gray-600 text-sm">Citations</span>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4 text-center">
+                            <span class="block text-3xl font-bold text-primary-600">42</span>
+                            <span class="text-gray-600 text-sm">h-index</span>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4 text-center">
+                            <span class="block text-3xl font-bold text-primary-600">18</span>
+                            <span class="text-gray-600 text-sm">Reviews</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Expertise -->
+                <section id="expertise-section" class="bg-white rounded-lg shadow-sm p-6 mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-gray-900">Expertise</h2>
+                        <button class="text-gray-500 hover:text-primary-600">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm">Molecular Biology</span>
+                        <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm">Epigenetics</span>
+                        <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm">Gene Expression</span>
+                        <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm">Chromatin</span>
+                        <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm">DNA Methylation</span>
+                        <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm">Histone Modifications</span>
+                        <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm">CRISPR</span>
+                        <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm">Cell Differentiation</span>
+                    </div>
+                </section>
+
+                <!-- Pending Reviews -->
+                <section id="pending-reviews" class="bg-white rounded-lg shadow-sm p-6 mb-8">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">Pending Reviews</h2>
+                    <div class="space-y-4">
+                        <div id="review-1" class="border-l-4 border-yellow-500 pl-3 py-1">
+                            <h3 class="font-medium text-gray-900 text-sm">Histone Deacetylase Inhibitors in Cancer Therapy</h3>
+                            <div class="flex justify-between items-center mt-1">
+                                <span class="text-xs text-gray-500">Due: May 25, 2023</span>
+                                <button class="text-primary-600 text-xs font-medium hover:text-primary-700">Review</button>
+                            </div>
+                        </div>
+                        <div id="review-2" class="border-l-4 border-yellow-500 pl-3 py-1">
+                            <h3 class="font-medium text-gray-900 text-sm">Single-Cell Analysis of Transcription Factor Binding</h3>
+                            <div class="flex justify-between items-center mt-1">
+                                <span class="text-xs text-gray-500">Due: June 2, 2023</span>
+                                <button class="text-primary-600 text-xs font-medium hover:text-primary-700">Review</button>
+                            </div>
+                        </div>
+                        <div id="review-3" class="border-l-4 border-red-500 pl-3 py-1">
+                            <h3 class="font-medium text-gray-900 text-sm">Epigenetic Inheritance in Mammals</h3>
+                            <div class="flex justify-between items-center mt-1">
+                                <span class="text-xs text-gray-500">Overdue: May 18, 2023</span>
+                                <button class="text-primary-600 text-xs font-medium hover:text-primary-700">Review</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <button class="text-primary-600 font-medium hover:text-primary-700 text-sm">
+                            View all pending reviews
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Recent Submissions -->
+        <section id="recent-submissions" class="mb-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Your Submissions</h2>
+                <button class="bg-primary-600 text-white font-medium py-2 px-6 rounded-md hover:bg-primary-700 transition duration-200 flex items-center">
+                    <i class="fa-solid fa-plus mr-2"></i>
+                    New Submission
+                </button>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                            <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Co-Authors</th>
+                            <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Journal</th>
+                            <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Submitted</th>
+                            <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4">
+                                <span class="text-primary-600 hover:text-primary-800 font-medium cursor-pointer">Chromatin Accessibility Dynamics During Stem Cell Differentiation</span>
+                            </td>
+                            <td class="px-6 py-4 hidden md:table-cell">
+                                <div class="flex -space-x-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" class="w-6 h-6 rounded-full border border-white" alt="Co-author">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" class="w-6 h-6 rounded-full border border-white" alt="Co-author">
+                                    <div class="w-6 h-6 rounded-full bg-gray-200 border border-white flex items-center justify-center text-xs text-gray-600">+2</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 hidden md:table-cell text-sm text-gray-600">
+                                Nature Genetics
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">
+                                April 30, 2023
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">Under Review</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="text-primary-600 hover:text-primary-800">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4">
+                                <span class="text-primary-600 hover:text-primary-800 font-medium cursor-pointer">Epigenetic Modifications in Neural Development: New Insights</span>
+                            </td>
+                            <td class="px-6 py-4 hidden md:table-cell">
+                                <div class="flex -space-x-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" class="w-6 h-6 rounded-full border border-white" alt="Co-author">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" class="w-6 h-6 rounded-full border border-white" alt="Co-author">
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 hidden md:table-cell text-sm text-gray-600">
+                                Journal of Neuroscience
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">
+                                March 15, 2023
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Published</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="text-primary-600 hover:text-primary-800">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4">
+                                <span class="text-primary-600 hover:text-primary-800 font-medium cursor-pointer">Role of DNA Methylation in Cellular Senescence</span>
+                            </td>
+                            <td class="px-6 py-4 hidden md:table-cell">
+                                <div class="flex -space-x-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" class="w-6 h-6 rounded-full border border-white" alt="Co-author">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" class="w-6 h-6 rounded-full border border-white" alt="Co-author">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" class="w-6 h-6 rounded-full border border-white" alt="Co-author">
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 hidden md:table-cell text-sm text-gray-600">
+                                Cell Aging
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">
+                                February 28, 2023
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">Revision Requested</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="text-primary-600 hover:text-primary-800">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4">
+                                <span class="text-primary-600 hover:text-primary-800 font-medium cursor-pointer">CRISPR-Mediated Epigenome Editing: Advances and Challenges</span>
+                            </td>
+                            <td class="px-6 py-4 hidden md:table-cell">
+                                <div class="flex -space-x-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" class="w-6 h-6 rounded-full border border-white" alt="Co-author">
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 hidden md:table-cell text-sm text-gray-600">
+                                Genome Research
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">
+                                January 10, 2023
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Published</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button class="text-primary-600 hover:text-primary-800">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="px-6 py-4 border-t border-gray-200 bg-gray-50 flex items-center justify-between">
+                    <p class="text-sm text-gray-600">Showing 4 of 12 submissions</p>
+                    <div class="flex space-x-2">
+                        <button class="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-100 disabled:opacity-50" disabled>
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button class="px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-100">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-gray-900 text-white mt-16">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa-solid fa-microscope text-primary-400 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl">SciReview</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Advancing scientific knowledge through rigorous peer review and open access publishing.</p>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-400 hover:text-white cursor-pointer">
+                            <i class="fa-brands fa-twitter"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white cursor-pointer">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white cursor-pointer">
+                            <i class="fa-brands fa-github"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Home</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Browse Articles</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Submit Research</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Peer Review Process</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Editorial Board</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Ethics Statement</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Open Access Policy</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">FAQs</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-envelope mr-2"></i>
+                            contact@scireview.org
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-phone mr-2"></i>
+                            +1 (555) 123-4567
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-location-dot mr-2"></i>
+                            123 Science Way, Research Park
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">© 2023 SciReview. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <span class="text-gray-400 hover:text-white text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-400 hover:text-white text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-400 hover:text-white text-sm cursor-pointer">Cookie Policy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

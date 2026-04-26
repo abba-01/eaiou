@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C63FF',
+                        secondary: '#2A265F',
+                        accent: '#00F5A0',
+                        dark: '#121212',
+                        darkGray: '#1E1E1E',
+                        lightGray: '#2A2A2A',
+                        success: '#00C853',
+                        warning: '#FFD600',
+                        danger: '#FF3D00',
+                        info: '#00B0FF'
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-white font-sans">
+    <!-- Status Bar -->
+    <div id="status-bar" class="bg-darkGray p-2 flex justify-between items-center text-xs">
+        <div>
+            <span>9:41</span>
+        </div>
+        <div class="flex space-x-2">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-three-quarters"></i>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="bg-darkGray p-4 flex justify-between items-center">
+        <button id="back-btn" class="flex items-center space-x-2">
+            <i class="fa-solid fa-chevron-left"></i>
+            <span>Back</span>
+        </button>
+        <h1 class="text-lg font-bold">Reenactment Guide</h1>
+        <button id="help-btn">
+            <i class="fa-solid fa-circle-question text-gray-400"></i>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pb-20">
+        <!-- Progress Indicator -->
+        <section id="progress-indicator" class="px-4 py-3 bg-darkGray">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-sm font-medium">Sighting Reenactment</h2>
+                <span class="text-xs text-accent">Step 2 of 5</span>
+            </div>
+            <div class="w-full bg-lightGray rounded-full h-1.5">
+                <div class="bg-accent h-1.5 rounded-full" style="width: 40%"></div>
+            </div>
+        </section>
+
+        <!-- AR Viewfinder -->
+        <section id="ar-viewfinder" class="relative h-64">
+            <div class="absolute inset-0 bg-black">
+                <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/0e6b00d6fd-997c8fe38e547a884e12.png" alt="dark night sky with AR interface overlay showing grid lines, compass markers, and trajectory tracking for UFO reenactment, mobile app viewfinder" />
+                
+                <!-- AR Overlay Elements -->
+                <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 flex items-center">
+                    <i class="fa-solid fa-compass text-accent mr-1.5"></i>
+                    <span class="text-xs">N 42° W</span>
+                </div>
+                
+                <div class="absolute top-3 right-3 bg-black bg-opacity-50 rounded px-2 py-1 flex items-center">
+                    <i class="fa-solid fa-angle-up text-accent mr-1.5"></i>
+                    <span class="text-xs">Elev: 37°</span>
+                </div>
+                
+                <div id="stability-indicator" class="absolute bottom-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 flex items-center">
+                    <i class="fa-solid fa-hand text-success mr-1.5"></i>
+                    <span class="text-xs">Stable</span>
+                </div>
+                
+                <div class="absolute bottom-3 right-3 bg-black bg-opacity-50 rounded px-2 py-1 flex items-center">
+                    <i class="fa-solid fa-clock text-accent mr-1.5"></i>
+                    <span class="text-xs">00:23</span>
+                </div>
+            </div>
+            
+            <!-- AR Control Buttons -->
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4">
+                <button id="start-point-btn" class="bg-primary h-12 w-12 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-play text-lg"></i>
+                </button>
+                <button id="record-path-btn" class="bg-danger h-12 w-12 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-circle text-lg"></i>
+                </button>
+                <button id="end-point-btn" class="bg-darkGray h-12 w-12 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-stop text-lg"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Instruction Panel -->
+        <section id="instruction-panel" class="p-4 bg-darkGray mb-4">
+            <div class="flex items-start space-x-3">
+                <div class="bg-primary h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold">Trace Object Path</h2>
+                    <p class="text-sm text-gray-400 mt-1">Point your device where the object first appeared, tap START, then follow its path until it disappeared.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Voice Guide -->
+        <section id="voice-guide" class="px-4 mb-4">
+            <div class="bg-secondary bg-opacity-50 rounded-xl p-4 border border-primary border-opacity-30">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center">
+                        <i class="fa-solid fa-volume-high text-accent mr-2"></i>
+                        <h3 class="font-medium">Voice Guidance</h3>
+                    </div>
+                    <div class="relative">
+                        <input type="checkbox" id="voice-toggle" class="sr-only" checked>
+                        <label for="voice-toggle" class="block bg-gray-600 w-12 h-6 rounded-full cursor-pointer"></label>
+                        <span class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 transform translate-x-6"></span>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-300 italic">"Point your device where the object first appeared, then press the START button."</p>
+            </div>
+        </section>
+
+        <!-- Step Details -->
+        <section id="step-details" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3">Step 2: Trace Movement</h2>
+            
+            <div class="space-y-4">
+                <div id="detail-item-1" class="flex items-start space-x-3">
+                    <div class="bg-success h-6 w-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i class="fa-solid fa-check text-sm"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium">Point at first appearance</h3>
+                        <p class="text-sm text-gray-400">Completed</p>
+                    </div>
+                </div>
+                
+                <div id="detail-item-2" class="flex items-start space-x-3">
+                    <div class="bg-primary h-6 w-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span class="text-sm font-bold">2</span>
+                    </div>
+                    <div>
+                        <h3 class="font-medium">Trace movement path</h3>
+                        <p class="text-sm text-gray-400">Move your device to follow the exact path</p>
+                    </div>
+                </div>
+                
+                <div id="detail-item-3" class="flex items-start space-x-3">
+                    <div class="bg-darkGray h-6 w-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 border border-gray-500">
+                        <span class="text-sm font-bold">3</span>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-400">Mark disappearance point</h3>
+                        <p class="text-sm text-gray-500">Press STOP when complete</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Capture Options -->
+        <section id="additional-options" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3">Additional Data</h2>
+            
+            <div class="grid grid-cols-2 gap-3">
+                <div id="option-1" class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                    <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-ruler text-accent"></i>
+                    </div>
+                    <span class="text-xs text-center">Size Reference</span>
+                </div>
+                
+                <div id="option-2" class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                    <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-stopwatch text-accent"></i>
+                    </div>
+                    <span class="text-xs text-center">Duration Tracking</span>
+                </div>
+                
+                <div id="option-3" class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                    <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-camera text-accent"></i>
+                    </div>
+                    <span class="text-xs text-center">Photo Evidence</span>
+                </div>
+                
+                <div id="option-4" class="bg-darkGray rounded-xl p-3 flex flex-col items-center">
+                    <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-microphone text-accent"></i>
+                    </div>
+                    <span class="text-xs text-center">Audio Notes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collaboration Panel -->
+        <section id="collaboration-panel" class="px-4 mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold">Witness Collaboration</h2>
+                <span class="text-primary text-sm cursor-pointer">Invite</span>
+            </div>
+            
+            <div class="bg-darkGray rounded-xl p-3">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-users-viewfinder text-accent"></i>
+                        <span class="font-medium">Group Capture Mode</span>
+                    </div>
+                    <div class="relative">
+                        <input type="checkbox" id="collab-toggle" class="sr-only">
+                        <label for="collab-toggle" class="block bg-gray-600 w-12 h-6 rounded-full cursor-pointer"></label>
+                        <span class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200"></span>
+                    </div>
+                </div>
+                
+                <p class="text-sm text-gray-400 mb-3">Enable multi-witness triangulation for more accurate data collection</p>
+                
+                <div class="flex items-center space-x-2 text-sm text-gray-300">
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>No other witnesses nearby</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-darkGray border-t border-gray-800 px-6 py-3">
+        <div class="flex justify-between items-center">
+            <button id="prev-step-btn" class="bg-lightGray px-5 py-2.5 rounded-lg flex items-center justify-center">
+                <i class="fa-solid fa-chevron-left mr-2"></i>
+                <span>Previous</span>
+            </button>
+            
+            <button id="next-step-btn" class="bg-primary px-5 py-2.5 rounded-lg flex items-center justify-center">
+                <span>Continue</span>
+                <i class="fa-solid fa-chevron-right ml-2"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Stability Hint Tooltip -->
+    <div id="stability-hint" class="fixed top-1/3 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2 max-w-xs">
+        <i class="fa-solid fa-hand-holding text-warning"></i>
+        <span class="text-sm">Hold steady for better tracking accuracy</span>
+        <button class="ml-2">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+</body>
+</html>

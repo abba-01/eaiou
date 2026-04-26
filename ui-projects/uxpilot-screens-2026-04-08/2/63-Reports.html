@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="bg-neutral-100 border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+  <div class="flex items-center">
+    <div class="w-10 h-10 rounded-md bg-neutral-800 flex items-center justify-center text-white">
+      <i class="fa-solid fa-brain"></i>
+    </div>
+    <span class="ml-3 text-xl">AI Project Hub</span>
+  </div>
+  <div class="flex items-center space-x-4">
+    <div class="relative">
+      <input type="text" placeholder="Search reports..." class="pl-9 pr-4 py-2 rounded-md border border-neutral-300 w-64 focus:outline-none focus:ring-2 focus:ring-neutral-400 text-sm">
+      <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-neutral-400"></i>
+    </div>
+    <button class="p-2 text-neutral-600 hover:bg-neutral-200 rounded-full">
+      <i class="fa-solid fa-bell"></i>
+    </button>
+    <div class="flex items-center">
+      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full border border-neutral-300">
+      <span class="ml-2 text-sm">Alex Morgan</span>
+      <i class="fa-solid fa-chevron-down ml-2 text-xs text-neutral-500"></i>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="flex min-h-[calc(100vh-72px)]">
+  <div id="sidebar" class="w-64 border-r border-neutral-200 bg-white">
+    <div class="p-4">
+      <h2 class="text-lg mb-4">Reports</h2>
+      <div class="space-y-1">
+        <div class="flex items-center px-3 py-2 text-neutral-800 bg-neutral-100 rounded-md">
+          <i class="fa-solid fa-chart-column mr-3 text-neutral-600"></i>
+          <span>Project Progress</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-file-lines mr-3 text-neutral-500"></i>
+          <span>Article Submissions</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-comments mr-3 text-neutral-500"></i>
+          <span>Peer Reviews</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-clock-rotate-left mr-3 text-neutral-500"></i>
+          <span>Historical Data</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-sliders mr-3 text-neutral-500"></i>
+          <span>Report Settings</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="p-4 border-t border-neutral-200">
+      <h3 class="text-sm text-neutral-500 mb-3">PROJECTS</h3>
+      <div class="space-y-1">
+        <div class="flex items-center justify-between px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <div class="flex items-center">
+            <i class="fa-solid fa-flask mr-3 text-neutral-500"></i>
+            <span>Scientific Research</span>
+          </div>
+          <span class="text-xs bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded-full">Active</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-book mr-3 text-neutral-500"></i>
+          <span>Academic Papers</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-chart-line mr-3 text-neutral-500"></i>
+          <span>Data Analysis</span>
+        </div>
+      </div>
+      <button class="mt-3 w-full flex items-center justify-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 border border-neutral-300 rounded-md text-sm">
+        <i class="fa-solid fa-plus mr-2"></i>
+        <span>New Project</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="content" class="flex-1 bg-neutral-50 p-6 overflow-auto">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl text-neutral-800">Project Progress Reports</h1>
+        <button class="px-4 py-2 bg-neutral-800 text-white rounded-md flex items-center">
+          <i class="fa-solid fa-plus mr-2"></i>
+          <span>Generate New Report</span>
+        </button>
+      </div>
+
+      <div id="notification-section" class="mb-6 bg-neutral-50 border border-neutral-200 rounded-lg p-4 flex items-start">
+        <i class="fa-solid fa-circle-info text-neutral-500 mt-0.5 mr-3 text-lg"></i>
+        <div>
+          <h3 class="text-neutral-800 mb-1">Recent Updates</h3>
+          <p class="text-neutral-600 text-sm">3 new peer reviews have been submitted for your articles. Review feedback and respond to improve your acceptance rate.</p>
+          <button class="mt-2 text-sm text-neutral-600 hover:text-neutral-700">
+            View Reviews
+          </button>
+        </div>
+      </div>
+
+      <div id="report-filters" class="flex items-center space-x-4 mb-6">
+        <div class="relative">
+          <select class="pl-3 pr-8 py-2 border border-neutral-300 rounded-md appearance-none bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+            <option>All Projects</option>
+            <option>Scientific Research</option>
+            <option>Academic Papers</option>
+            <option>Data Analysis</option>
+          </select>
+          <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-neutral-400 pointer-events-none"></i>
+        </div>
+        <div class="relative">
+          <select class="pl-3 pr-8 py-2 border border-neutral-300 rounded-md appearance-none bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+            <option>Last 30 days</option>
+            <option>Last 90 days</option>
+            <option>Last 6 months</option>
+            <option>Last year</option>
+          </select>
+          <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-neutral-400 pointer-events-none"></i>
+        </div>
+        <button class="px-3 py-2 border border-neutral-300 rounded-md bg-white text-neutral-700 flex items-center hover:bg-neutral-50">
+          <i class="fa-solid fa-filter mr-2"></i>
+          <span>More Filters</span>
+        </button>
+      </div>
+
+      <div id="progress-summary" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div class="bg-white rounded-lg border border-neutral-200 shadow-sm p-4">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-neutral-700">Project Completion</h3>
+            <span class="text-xl">68%</span>
+          </div>
+          <div class="w-full bg-neutral-100 rounded-full h-2.5">
+            <div class="bg-neutral-700 h-2.5 rounded-full" style="width: 68%"></div>
+          </div>
+          <div class="mt-3 text-sm text-neutral-500">
+            <span>15 of 22 milestones completed</span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg border border-neutral-200 shadow-sm p-4">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-neutral-700">Article Submissions</h3>
+            <span class="text-xl">7</span>
+          </div>
+          <div class="flex items-center justify-between mt-3 text-sm">
+            <span class="text-neutral-500">Accepted</span>
+            <span>3</span>
+          </div>
+          <div class="flex items-center justify-between mt-2 text-sm">
+            <span class="text-neutral-500">Under Review</span>
+            <span>3</span>
+          </div>
+          <div class="flex items-center justify-between mt-2 text-sm">
+            <span class="text-neutral-500">Rejected</span>
+            <span>1</span>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg border border-neutral-200 shadow-sm p-4">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-neutral-700">Peer Review Score</h3>
+            <span class="text-xl">4.2/5</span>
+          </div>
+          <div class="flex items-center mt-2">
+            <div class="text-neutral-700">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+            </div>
+            <span class="ml-2 text-sm text-neutral-500">Based on 18 reviews</span>
+          </div>
+          <div class="mt-3 text-sm text-neutral-500">
+            <i class="fa-solid fa-arrow-up text-neutral-700 mr-1"></i>
+            <span>+0.3 from previous period</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="recent-reports" class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden mb-6">
+        <div class="px-6 py-4 border-b border-neutral-200">
+          <h2 class="text-lg text-neutral-800">Recent Reports</h2>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="bg-neutral-50">
+                <th class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Report Name</th>
+                <th class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Project</th>
+                <th class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Generated</th>
+                <th class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Status</th>
+                <th class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200">
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-file-chart-column text-neutral-400 mr-2"></i>
+                    <span>Q2 Progress Summary</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">Scientific Research</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">July 1, 2025</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 rounded-full bg-neutral-100 text-neutral-800">Complete</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                  <div class="flex space-x-2">
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-download"></i>
+                    </button>
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-file-lines text-neutral-400 mr-2"></i>
+                    <span>Submission Analysis</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">Academic Papers</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">June 28, 2025</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 rounded-full bg-neutral-100 text-neutral-800">Complete</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                  <div class="flex space-x-2">
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-download"></i>
+                    </button>
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-file-signature text-neutral-400 mr-2"></i>
+                    <span>Peer Review Feedback</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">Academic Papers</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">June 25, 2025</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 rounded-full bg-neutral-100 text-neutral-800">Complete</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                  <div class="flex space-x-2">
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-download"></i>
+                    </button>
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-chart-line text-neutral-400 mr-2"></i>
+                    <span>Research Progress</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">Data Analysis</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">June 20, 2025</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 rounded-full bg-neutral-100 text-neutral-800">In Review</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                  <div class="flex space-x-2">
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-download"></i>
+                    </button>
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <i class="fa-solid fa-file-chart-column text-neutral-400 mr-2"></i>
+                    <span>Q1 Progress Summary</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">Scientific Research</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">April 5, 2025</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 rounded-full bg-neutral-100 text-neutral-800">Complete</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-500">
+                  <div class="flex space-x-2">
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-download"></i>
+                    </button>
+                    <button class="p-1 text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="peer-review-feedback" class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden mb-6">
+        <div class="px-6 py-4 border-b border-neutral-200 flex justify-between items-center">
+          <h2 class="text-lg text-neutral-800">Recent Peer Review Feedback</h2>
+          <button class="text-sm text-neutral-600 hover:text-neutral-800">View All</button>
+        </div>
+        <div class="p-6">
+          <div class="space-y-6">
+            <div class="border-b border-neutral-200 pb-6">
+              <div class="flex justify-between mb-2">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="Reviewer avatar" class="w-8 h-8 rounded-full border border-neutral-300">
+                  <div class="ml-3">
+                    <h4 class="text-neutral-800">Dr. Sarah Johnson</h4>
+                    <p class="text-xs text-neutral-500">Nature Journal • July 3, 2025</p>
+                  </div>
+                </div>
+                <div class="flex">
+                  <i class="fa-solid fa-star text-neutral-700"></i>
+                  <i class="fa-solid fa-star text-neutral-700"></i>
+                  <i class="fa-solid fa-star text-neutral-700"></i>
+                  <i class="fa-solid fa-star text-neutral-700"></i>
+                  <i class="fa-solid fa-star-half-stroke text-neutral-700"></i>
+                </div>
+              </div>
+              <h3 class="text-neutral-800 mb-2">Quantum Computing Applications in Genomics</h3>
+              <p class="text-neutral-600 text-sm mb-3">
+                Strong methodology and innovative approach. The data visualization needs improvement and some claims require additional evidence. Consider addressing the limitations more thoroughly.
+              </p>
+              <div class="flex space-x-3">
+                <button class="text-xs px-3 py-1 border border-neutral-300 rounded-full text-neutral-700 hover:bg-neutral-50">
+                  View Full Review
+                </button>
+                <button class="text-xs px-3 py-1 border border-neutral-300 rounded-full text-neutral-700 hover:bg-neutral-50">
+                  Respond
+                </button>
+              </div>
+            </div>
+
+            <div class="border-b border-neutral-200 pb-6">
+              <div class="flex justify-between mb-2">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="Reviewer avatar" class="w-8 h-8 rounded-full border border-neutral-300">
+                  <div class="ml-3">
+                    <h4 class="text-neutral-800">Prof. Michael Chen</h4>
+                    <p class="text-xs text-neutral-500">Science Advances • June 28, 2025</p>
+                  </div>
+                </div>
+                <div class="flex">
+                  <i class="fa-solid fa-star text-neutral-700"></i>
+                  <i class="fa-solid fa-star text-neutral-700"></i>
+                  <i class="fa-solid fa-star text-neutral-700"></i>
+                  <i class="fa-regular fa-star text-neutral-700"></i>
+                  <i class="fa-regular fa-star text-neutral-700"></i>
+                </div>
+              </div>
+              <h3 class="text-neutral-800 mb-2">Neural Networks for Climate Prediction</h3>
+              <p class="text-neutral-600 text-sm mb-3">
+                Interesting premise but significant methodological flaws. The model validation is inadequate and there's insufficient comparison with existing approaches. The literature review needs expansion.
+              </p>
+              <div class="flex space-x-3">
+                <button class="text-xs px-3 py-1 border border-neutral-300 rounded-full text-neutral-700 hover:bg-neutral-50">
+                  View Full Review
+                </button>
+                <button class="text-xs px-3 py-1 border border-neutral-300 rounded-full text-neutral-700 hover:bg-neutral-50">
+                  Respond
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between mb-2">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="Reviewer avatar" class="w-8 h-8 rounded-full border border-neutral-300">
+                  <div class="ml-3">
+                    <h4 class="text-neutral-800">Dr. Emily Rodriguez</h4>
+                    <p class="text-xs text-neutral-500">Cell Research • June 25, 2025</p>
+                  </div>
+                </div>
+                <div class="flex">
+                  <i class="fa-solid fa-star text-neutral-700"></i>
+                  <i class="fa-solid fa-star text-neutral-700"></i>
+                  <i class="fa-solid fa-star text-neutral-700"></i>
+                  <i class="fa-solid fa-star text-neutral-700"></i>
+                  <i class="fa-solid fa-star text-neutral-700"></i>
+                </div>
+              </div>
+              <h3 class="text-neutral-800 mb-2">CRISPR Applications in Autoimmune Disease Treatment</h3>
+              <p class="text-neutral-600 text-sm mb-3">
+                Excellent work with groundbreaking implications. The methodology is sound and the results are compelling. Particularly impressed with the ethical considerations section. Minor revisions needed for clarity.
+              </p>
+              <div class="flex space-x-3">
+                <button class="text-xs px-3 py-1 border border-neutral-300 rounded-full text-neutral-700 hover:bg-neutral-50">
+                  View Full Review
+                </button>
+                <button class="text-xs px-3 py-1 border border-neutral-300 rounded-full text-neutral-700 hover:bg-neutral-50">
+                  Respond
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="generate-report-section" class="bg-white rounded-lg border border-neutral-200 shadow-sm p-6">
+        <h2 class="text-lg text-neutral-800 mb-4">Generate New Report</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm text-neutral-700 mb-2">Report Type</label>
+            <div class="relative">
+              <select class="w-full pl-3 pr-8 py-2 border border-neutral-300 rounded-md appearance-none bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+                <option>Project Progress</option>
+                <option>Article Submission Analysis</option>
+                <option>Peer Review Summary</option>
+                <option>Research Impact</option>
+                <option>Custom Report</option>
+              </select>
+              <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-neutral-400 pointer-events-none"></i>
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm text-neutral-700 mb-2">Project</label>
+            <div class="relative">
+              <select class="w-full pl-3 pr-8 py-2 border border-neutral-300 rounded-md appearance-none bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+                <option>All Projects</option>
+                <option>Scientific Research</option>
+                <option>Academic Papers</option>
+                <option>Data Analysis</option>
+              </select>
+              <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-neutral-400 pointer-events-none"></i>
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm text-neutral-700 mb-2">Date Range</label>
+            <div class="flex items-center space-x-4">
+              <div class="relative flex-1">
+                <input type="text" placeholder="Start Date" class="w-full pl-9 pr-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400">
+                <i class="fa-solid fa-calendar absolute left-3 top-2.5 text-neutral-400"></i>
+              </div>
+              <div class="relative flex-1">
+                <input type="text" placeholder="End Date" class="w-full pl-9 pr-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400">
+                <i class="fa-solid fa-calendar absolute left-3 top-2.5 text-neutral-400"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm text-neutral-700 mb-2">Report Format</label>
+            <div class="flex space-x-4">
+              <div class="flex items-center">
+                <input id="format-pdf" name="format" type="radio" checked class="h-4 w-4 border-neutral-300 text-neutral-800 focus:ring-neutral-500">
+                <label for="format-pdf" class="ml-2 text-sm text-neutral-700">PDF</label>
+              </div>
+              <div class="flex items-center">
+                <input id="format-docx" name="format" type="radio" class="h-4 w-4 border-neutral-300 text-neutral-800 focus:ring-neutral-500">
+                <label for="format-docx" class="ml-2 text-sm text-neutral-700">DOCX</label>
+              </div>
+              <div class="flex items-center">
+                <input id="format-xlsx" name="format" type="radio" class="h-4 w-4 border-neutral-300 text-neutral-800 focus:ring-neutral-500">
+                <label for="format-xlsx" class="ml-2 text-sm text-neutral-700">Excel</label>
+              </div>
+              <div class="flex items-center">
+                <input id="format-pptx" name="format" type="radio" class="h-4 w-4 border-neutral-300 text-neutral-800 focus:ring-neutral-500">
+                <label for="format-pptx" class="ml-2 text-sm text-neutral-700">PowerPoint</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-6">
+          <label class="block text-sm text-neutral-700 mb-2">Include Sections</label>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="flex items-center">
+              <input id="section-summary" type="checkbox" checked class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+              <label for="section-summary" class="ml-2 text-sm text-neutral-700">Executive Summary</label>
+            </div>
+            <div class="flex items-center">
+              <input id="section-milestones" type="checkbox" checked class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+              <label for="section-milestones" class="ml-2 text-sm text-neutral-700">Milestones</label>
+            </div>
+            <div class="flex items-center">
+              <input id="section-submissions" type="checkbox" checked class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+              <label for="section-submissions" class="ml-2 text-sm text-neutral-700">Submissions</label>
+            </div>
+            <div class="flex items-center">
+              <input id="section-reviews" type="checkbox" checked class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+              <label for="section-reviews" class="ml-2 text-sm text-neutral-700">Peer Reviews</label>
+            </div>
+            <div class="flex items-center">
+              <input id="section-metrics" type="checkbox" checked class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+              <label for="section-metrics" class="ml-2 text-sm text-neutral-700">Performance Metrics</label>
+            </div>
+            <div class="flex items-center">
+              <input id="section-charts" type="checkbox" checked class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+              <label for="section-charts" class="ml-2 text-sm text-neutral-700">Charts & Graphs</label>
+            </div>
+            <div class="flex items-center">
+              <input id="section-forecast" type="checkbox" class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+              <label for="section-forecast" class="ml-2 text-sm text-neutral-700">Forecast</label>
+            </div>
+            <div class="flex items-center">
+              <input id="section-recommendations" type="checkbox" class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+              <label for="section-recommendations" class="ml-2 text-sm text-neutral-700">Recommendations</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-6 flex justify-end">
+          <button class="px-4 py-2 border border-neutral-300 rounded-md text-neutral-700 hover:bg-neutral-50 mr-3">
+            Save as Template
+          </button>
+          <button class="px-4 py-2 bg-neutral-800 text-white rounded-md">
+            Generate Report
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-white border-t border-neutral-200 py-4 px-6 text-center text-sm text-neutral-500">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <div>© 2025 AI Project Hub. All rights reserved.</div>
+    <div class="flex space-x-4">
+      <span class="hover:text-neutral-700 cursor-pointer">Terms</span>
+      <span class="hover:text-neutral-700 cursor-pointer">Privacy</span>
+      <span class="hover:text-neutral-700 cursor-pointer">Help</span>
+      <span class="hover:text-neutral-700 cursor-pointer">Contact</span>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

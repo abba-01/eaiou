@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@10.0.0/highcharts.js"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1a56db',
+                        'primary-dark': '#1245b5',
+                        'secondary': '#6b7280',
+                        'success': '#10b981',
+                        'warning': '#f59e0b',
+                        'danger': '#ef4444',
+                        'info': '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 flex items-center justify-between px-4 py-2">
+        <div class="flex items-center space-x-4">
+            <button class="text-gray-700 hover:text-gray-900">
+                <i class="fa-solid fa-arrow-left text-xl"></i>
+            </button>
+            <h1 class="text-lg font-semibold text-gray-800">Editor Review Panel</h1>
+        </div>
+        <div class="flex items-center space-x-2">
+            <span class="text-sm text-gray-600 mr-2">Article ID: JOOM-2023-0042</span>
+            <button class="flex items-center justify-center px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                <i class="fa-solid fa-print mr-2"></i>
+                Print Report
+            </button>
+        </div>
+    </div>
+
+    <div id="editor-dashboard" class="max-w-7xl mx-auto pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+        <div id="article-overview" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-1">Observer Modal Dynamics in Anomalous Contact</h2>
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded mr-2">Under Review</span>
+                            <span class="text-sm text-gray-600">Submitted: 2023-07-15 • Version: 1.2</span>
+                        </div>
+                        <div class="flex flex-wrap items-center text-sm text-gray-600">
+                            <span class="mr-3"><i class="fa-solid fa-user mr-1"></i> Lead Author: Sarah Johnson, PhD</span>
+                            <span class="mr-3"><i class="fa-solid fa-users mr-1"></i> 3 Co-authors</span>
+                            <span><i class="fa-solid fa-tag mr-1"></i> quantum physics, observer effect, anomalous phenomena</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="flex items-center px-3 py-1.5 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            <i class="fa-regular fa-eye mr-1.5"></i>
+                            View Article
+                        </button>
+                        <button class="flex items-center px-3 py-1.5 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            <i class="fa-solid fa-user-pen mr-1.5"></i>
+                            Manage Reviewers
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="review-summary" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Review Summary</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div id="review-status" class="bg-gray-50 p-4 rounded-md">
+                        <h4 class="text-sm font-medium text-gray-700 mb-3">Review Status</h4>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-600">Assigned Reviewers:</span>
+                            <span class="font-medium">3</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-600">Reviews Completed:</span>
+                            <span class="font-medium">2</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-600">Reviews Pending:</span>
+                            <span class="font-medium text-amber-600">1</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Review Deadline:</span>
+                            <span class="font-medium text-red-600">2023-08-05</span>
+                        </div>
+                    </div>
+                    
+                    <div id="review-scores" class="bg-gray-50 p-4 rounded-md">
+                        <h4 class="text-sm font-medium text-gray-700 mb-3">Average Scores</h4>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-600">Overall Score:</span>
+                            <div class="flex items-center">
+                                <span class="font-medium mr-2">3.2</span>
+                                <div class="w-24 bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 64%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-500 mb-2">Individual Criteria:</div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-xs text-gray-600">Scholarly Structure:</span>
+                            <div class="flex items-center">
+                                <span class="text-xs font-medium mr-2">4.0</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-1.5">
+                                    <div class="bg-green-500 h-1.5 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-xs text-gray-600">Originality:</span>
+                            <div class="flex items-center">
+                                <span class="text-xs font-medium mr-2">4.5</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-1.5">
+                                    <div class="bg-green-500 h-1.5 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-xs text-gray-600">Methodological Rigor:</span>
+                            <div class="flex items-center">
+                                <span class="text-xs font-medium mr-2">2.5</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-1.5">
+                                    <div class="bg-yellow-500 h-1.5 rounded-full" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-600">Citation Accuracy:</span>
+                            <div class="flex items-center">
+                                <span class="text-xs font-medium mr-2">2.0</span>
+                                <div class="w-16 bg-gray-200 rounded-full h-1.5">
+                                    <div class="bg-red-500 h-1.5 rounded-full" style="width: 40%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="review-recommendations" class="bg-gray-50 p-4 rounded-md">
+                        <h4 class="text-sm font-medium text-gray-700 mb-3">Reviewer Recommendations</h4>
+                        <div id="recommendation-chart" class="h-44"></div>
+                    </div>
+                </div>
+                
+                <div id="disagreement-alert" class="mt-5 bg-amber-50 border border-amber-200 rounded-md p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-amber-800">Significant Reviewer Disagreement Detected</h3>
+                            <div class="mt-2 text-sm text-amber-700">
+                                <p>Reviewers have conflicting opinions on methodological rigor and results evidence. One reviewer recommends approval with minor revisions, while another suggests major revisions are needed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="reviewer-feedback" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Reviewer Feedback</h3>
+                
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-base font-medium text-gray-700">Reviewer #1</h4>
+                        <div class="flex items-center">
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded mr-2">Approve</span>
+                            <span class="text-sm text-gray-600">Overall Score: 4.2/5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-md">
+                        <div class="border-b border-gray-200 p-3 bg-gray-50">
+                            <div class="flex justify-between items-center">
+                                <h5 class="text-sm font-medium text-gray-700">Summary Comments</h5>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-700 mb-3">This article presents a novel approach to observer modal dynamics, with strong theoretical foundations and excellent scholarly structure. The originality of the work is commendable, and the discussion section effectively interprets the findings within the broader field.</p>
+                            <p class="text-sm text-gray-700">I recommend acceptance with minor revisions to address some citation issues and clarify the methodology section, particularly regarding the statistical analysis of observer effects.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="border border-gray-200 rounded-md">
+                            <div class="border-b border-gray-200 p-2 bg-gray-50">
+                                <h5 class="text-sm font-medium text-gray-700">Strengths</h5>
+                            </div>
+                            <div class="p-3">
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>Innovative theoretical framework</li>
+                                    <li>Well-structured literature review</li>
+                                    <li>Clear articulation of complex concepts</li>
+                                    <li>Strong discussion of implications</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-md">
+                            <div class="border-b border-gray-200 p-2 bg-gray-50">
+                                <h5 class="text-sm font-medium text-gray-700">Areas for Improvement</h5>
+                            </div>
+                            <div class="p-3">
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>Several citation errors in the references section</li>
+                                    <li>Methodology needs clearer explanation of statistical approach</li>
+                                    <li>Some speculative claims not properly flagged</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-base font-medium text-gray-700">Reviewer #2</h4>
+                        <div class="flex items-center">
+                            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded mr-2">Major Revision</span>
+                            <span class="text-sm text-gray-600">Overall Score: 2.3/5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-md">
+                        <div class="border-b border-gray-200 p-3 bg-gray-50">
+                            <div class="flex justify-between items-center">
+                                <h5 class="text-sm font-medium text-gray-700">Summary Comments</h5>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-700 mb-3">While the article presents an interesting theoretical framework, there are significant methodological issues that undermine the validity of the conclusions. The results section lacks sufficient evidence to support several key claims, and the statistical analysis appears flawed in multiple areas.</p>
+                            <p class="text-sm text-gray-700">I recommend major revisions to address the methodological weaknesses, improve the evidence base for claims made, and properly distinguish between empirical findings and speculative interpretations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="border border-gray-200 rounded-md">
+                            <div class="border-b border-gray-200 p-2 bg-gray-50">
+                                <h5 class="text-sm font-medium text-gray-700">Strengths</h5>
+                            </div>
+                            <div class="p-3">
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>Novel theoretical approach</li>
+                                    <li>Well-written abstract and introduction</li>
+                                    <li>Important research question</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-md">
+                            <div class="border-b border-gray-200 p-2 bg-gray-50">
+                                <h5 class="text-sm font-medium text-gray-700">Areas for Improvement</h5>
+                            </div>
+                            <div class="p-3">
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>Serious methodological flaws in experimental design</li>
+                                    <li>Insufficient evidence for key claims</li>
+                                    <li>Poor distinction between empirical results and speculation</li>
+                                    <li>Inadequate literature review in key areas</li>
+                                    <li>Multiple citation errors and omissions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-base font-medium text-gray-700">Reviewer #3</h4>
+                        <div class="flex items-center">
+                            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded mr-2">Pending</span>
+                            <span class="text-sm text-gray-600">Due: 2023-08-05</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-md bg-gray-50 p-4 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fa-regular fa-hourglass text-gray-400 text-2xl mb-2"></i>
+                            <p class="text-sm text-gray-600">Review in progress. Reminder sent on 2023-07-30.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="editor-decision" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Editor Decision</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="md:col-span-2">
+                        <div class="mb-5">
+                            <label for="decision" class="block text-sm font-medium text-gray-700 mb-1">Decision *</label>
+                            <select id="decision" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <option value="">Select a decision</option>
+                                <option value="approve">Approve and Publish</option>
+                                <option value="minor">Approve with Minor Revisions</option>
+                                <option value="major" selected>Request Major Revisions</option>
+                                <option value="reject">Reject</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-5">
+                            <label for="editor-comments" class="block text-sm font-medium text-gray-700 mb-1">Editor Comments to Author *</label>
+                            <textarea id="editor-comments" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">Thank you for your submission on "Observer Modal Dynamics in Anomalous Contact." After careful review, we request major revisions to address several important issues highlighted by our reviewers.
+
+The theoretical framework is innovative and shows promise, but there are significant methodological concerns that need to be addressed. In particular, please revise the statistical analysis section to provide stronger evidence for your claims, and clearly distinguish between empirical findings and speculative interpretations.
+
+Please address all citation errors and ensure proper referencing throughout the manuscript. Additionally, the literature review should be expanded to include recent work in quantum observer effects.
+
+We look forward to receiving your revised manuscript.</textarea>
+                        </div>
+                        
+                        <div id="revision-checklist" class="mb-5">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Revision Checklist</label>
+                            <p class="text-xs text-gray-500 mb-2">Select items that the author must address in their revision</p>
+                            
+                            <div class="space-y-2 border border-gray-200 rounded-md p-3">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="check-methodology" checked class="mr-2">
+                                    <label for="check-methodology" class="text-sm text-gray-700">Improve methodology section with clearer statistical approach</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="check-evidence" checked class="mr-2">
+                                    <label for="check-evidence" class="text-sm text-gray-700">Strengthen evidence for key claims in results section</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="check-citations" checked class="mr-2">
+                                    <label for="check-citations" class="text-sm text-gray-700">Fix citation errors and expand references</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="check-speculative" checked class="mr-2">
+                                    <label for="check-speculative" class="text-sm text-gray-700">Clearly mark speculative claims vs. empirical findings</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="check-literature" checked class="mr-2">
+                                    <label for="check-literature" class="text-sm text-gray-700">Expand literature review in quantum observer effects</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="check-custom" class="mr-2">
+                                    <label for="check-custom" class="text-sm text-gray-700">
+                                        <input type="text" placeholder="Add custom item..." class="border-b border-dashed border-gray-300 bg-transparent focus:outline-none w-full">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-5">
+                            <label for="internal-notes" class="block text-sm font-medium text-gray-700 mb-1">Internal Notes (not visible to authors)</label>
+                            <textarea id="internal-notes" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">The disagreement between reviewers is significant but expected given the speculative nature of some claims. Will wait for third reviewer before final decision, but currently leaning toward major revision with focus on methodology improvements.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-gray-50 p-4 rounded-md mb-4">
+                            <h4 class="text-sm font-medium text-gray-700 mb-3">Decision Timeline</h4>
+                            <div class="space-y-3">
+                                <div class="flex">
+                                    <div class="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
+                                        <i class="fa-solid fa-check text-white text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-700">Article Submitted</p>
+                                        <p class="text-xs text-gray-500">2023-07-15</p>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
+                                        <i class="fa-solid fa-check text-white text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-700">Reviewers Assigned</p>
+                                        <p class="text-xs text-gray-500">2023-07-18</p>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center mt-0.5">
+                                        <i class="fa-solid fa-spinner text-white text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-700">Reviews In Progress</p>
+                                        <p class="text-xs text-gray-500">2 of 3 completed</p>
+                                    </div>
+                                </div>
+                                <div class="flex opacity-50">
+                                    <div class="flex-shrink-0 w-5 h-5 rounded-full bg-gray-300 flex items-center justify-center mt-0.5">
+                                        <i class="fa-solid fa-gavel text-white text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-700">Editor Decision</p>
+                                        <p class="text-xs text-gray-500">Pending</p>
+                                    </div>
+                                </div>
+                                <div class="flex opacity-50">
+                                    <div class="flex-shrink-0 w-5 h-5 rounded-full bg-gray-300 flex items-center justify-center mt-0.5">
+                                        <i class="fa-solid fa-pen-to-square text-white text-xs"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-700">Author Revision</p>
+                                        <p class="text-xs text-gray-500">Not started</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 rounded-md">
+                            <h4 class="text-sm font-medium text-gray-700 mb-3">Decision Options</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><span class="font-medium">Approve and Publish:</span> Article meets all criteria and can be published as is.</p>
+                                <p><span class="font-medium">Approve with Minor Revisions:</span> Article is acceptable but needs small changes before publication.</p>
+                                <p><span class="font-medium">Request Major Revisions:</span> Article has potential but requires significant changes for reconsideration.</p>
+                                <p><span class="font-medium">Reject:</span> Article does not meet publication standards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center mt-6">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="wait-reviewer" class="mr-2">
+                        <label for="wait-reviewer" class="text-sm text-gray-700">Wait for all reviews before finalizing decision</label>
+                    </div>
+                    <div class="flex space-x-3">
+                        <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                            Save Draft
+                        </button>
+                        <button class="px-6 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                            Submit Decision
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="audit-log" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium text-gray-800">Audit Log</h3>
+                    <button class="text-sm text-primary hover:text-primary-dark">
+                        View Full History
+                    </button>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date & Time</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-07-30 09:15:22</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Dr. Michael Chen (Editor)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Sent Reminder</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">Reminder sent to Reviewer #3</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-07-25 14:32:05</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Dr. Alicia Rodriguez (Reviewer)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Submitted Review</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">Reviewer #2 submitted review with recommendation: Major Revision</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-07-22 10:47:18</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Dr. James Wilson (Reviewer)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Submitted Review</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">Reviewer #1 submitted review with recommendation: Approve</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-07-18 16:09:37</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Dr. Michael Chen (Editor)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Assigned Reviewers</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">Assigned 3 reviewers to the submission</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-07-15 11:23:45</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Dr. Sarah Johnson (Author)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Submitted Article</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">Initial submission of "Observer Modal Dynamics in Anomalous Contact"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize the recommendation chart
+        Highcharts.chart('recommendation-chart', {
+            chart: {
+                type: 'column',
+                backgroundColor: 'transparent',
+                style: {
+                    fontFamily: 'Inter, sans-serif'
+                }
+            },
+            title: {
+                text: null
+            },
+            xAxis: {
+                categories: ['Approve', 'Minor Revision', 'Major Revision', 'Reject'],
+                labels: {
+                    style: {
+                        fontSize: '11px'
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                max: 3,
+                title: {
+                    text: null
+                },
+                tickInterval: 1,
+                labels: {
+                    style: {
+                        fontSize: '10px'
+                    }
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>' + this.x + '</b>: ' + this.y + ' reviewer' + (this.y !== 1 ? 's' : '');
+                }
+            },
+            plotOptions: {
+                column: {
+                    borderRadius: 3
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Recommendations',
+                data: [
+                    {y: 1, color: '#10b981'}, // Approve - green
+                    {y: 0, color: '#3b82f6'}, // Minor Revision - blue
+                    {y: 1, color: '#f59e0b'}, // Major Revision - amber
+                    {y: 0, color: '#ef4444'}  // Reject - red
+                ],
+                colorByPoint: true
+            }]
+        });
+    </script>
+</body>
+</html>

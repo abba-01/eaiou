@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@10.3.3/highcharts.js"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header Navigation -->
+    <nav id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 flex items-center justify-between px-4 py-3 z-50">
+        <div class="flex items-center">
+            <span class="flex items-center mr-10 cursor-pointer">
+                <i class="fa-solid fa-flask-vial text-primary-600 text-2xl mr-2"></i>
+                <span class="text-xl font-bold text-gray-800">SciPeerReview</span>
+            </span>
+            <div class="hidden md:flex space-x-6">
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Dashboard</span>
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">My Manuscripts</span>
+                <span class="text-gray-600 hover:text-primary-600 font-medium text-primary-600 border-b-2 border-primary-600 cursor-pointer">Reviews</span>
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Journals</span>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span class="hidden md:inline-block text-gray-600 mr-2">
+                <i class="fa-regular fa-bell"></i>
+                <span class="bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center absolute -mt-8 ml-3">2</span>
+            </span>
+            <button class="hidden md:flex items-center text-gray-600 hover:text-gray-800">
+                <i class="fa-regular fa-question-circle mr-1"></i>
+                <span>Help</span>
+            </button>
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-full h-full object-cover" />
+                </div>
+                <span class="hidden md:inline-block text-gray-700 font-medium">Dr. Michael Chen</span>
+                <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="pt-16 flex min-h-screen bg-gray-50">
+        <!-- Sidebar -->
+        <div id="sidebar" class="hidden md:block w-64 bg-white border-r border-gray-200 fixed h-full pt-4">
+            <div class="px-4 py-2">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase">Editor Dashboard</h2>
+                </div>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-home w-5 text-gray-500"></i>
+                        <span>Overview</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-file-lines w-5 text-gray-500"></i>
+                        <span>Submissions</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 bg-primary-50 text-primary-700 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-user-check w-5"></i>
+                        <span>Reviewer Management</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-chart-line w-5 text-gray-500"></i>
+                        <span>Analytics</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-comment w-5 text-gray-500"></i>
+                        <span>Messages</span>
+                        <span class="ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="px-4 py-2 mt-6">
+                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-4">Journal Management</h2>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-book w-5 text-gray-500"></i>
+                        <span>Journal Settings</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-users w-5 text-gray-500"></i>
+                        <span>Editorial Board</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-clipboard-list w-5 text-gray-500"></i>
+                        <span>Publication Criteria</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="px-4 py-2 mt-6">
+                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-4">Account</h2>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-user w-5 text-gray-500"></i>
+                        <span>Profile</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-gear w-5 text-gray-500"></i>
+                        <span>Settings</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-right-from-bracket w-5 text-gray-500"></i>
+                        <span>Logout</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 ml-0 md:ml-64 p-6">
+            <!-- Breadcrumb and Actions -->
+            <div id="page-header" class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                <div>
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                        <span class="hover:text-primary-600 cursor-pointer">Dashboard</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="hover:text-primary-600 cursor-pointer">Reviewer Management</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="text-gray-700">Performance Metrics</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900">Reviewer Performance Metrics</h1>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-3">
+                    <button id="btn-export" class="px-3 py-2 border border-gray-300 rounded-md flex items-center text-gray-700 hover:bg-gray-50">
+                        <i class="fa-solid fa-download mr-2"></i>
+                        <span>Export</span>
+                    </button>
+                    <button id="btn-settings" class="px-4 py-2 bg-primary-600 text-white rounded-md flex items-center hover:bg-primary-700">
+                        <i class="fa-solid fa-gear mr-2"></i>
+                        <span>Settings</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Performance Summary Cards -->
+            <div id="performance-summary" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-green-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500">Average Response Time</p>
+                            <p class="text-2xl font-bold">3.2 days</p>
+                        </div>
+                        <div class="p-3 bg-green-100 rounded-full">
+                            <i class="fa-solid fa-clock text-green-500"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-blue-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500">Average Review Score</p>
+                            <p class="text-2xl font-bold">4.3/5.0</p>
+                        </div>
+                        <div class="p-3 bg-blue-100 rounded-full">
+                            <i class="fa-solid fa-star-half-alt text-blue-500"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-purple-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500">Completion Rate</p>
+                            <p class="text-2xl font-bold">87%</p>
+                        </div>
+                        <div class="p-3 bg-purple-100 rounded-full">
+                            <i class="fa-solid fa-check-circle text-purple-500"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-yellow-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500">Active Reviewers</p>
+                            <p class="text-2xl font-bold">142</p>
+                        </div>
+                        <div class="p-3 bg-yellow-100 rounded-full">
+                            <i class="fa-solid fa-users text-yellow-500"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Response Time Chart -->
+            <div id="response-time-chart" class="bg-white rounded-lg shadow p-4 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-medium text-gray-900">Response Time Trends</h2>
+                    <div class="flex space-x-2">
+                        <select class="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            <option>Last 12 Months</option>
+                            <option>Last 6 Months</option>
+                            <option>Last 3 Months</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="response-time-chart-container" class="h-[300px]"></div>
+            </div>
+            
+            <!-- Reviewer Performance Table -->
+            <div id="reviewer-table" class="bg-white rounded-lg shadow overflow-hidden mb-6">
+                <div class="p-4 border-b border-gray-200">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <h2 class="text-lg font-medium text-gray-900 mb-2 md:mb-0">Top Reviewers by Performance</h2>
+                        <div class="flex items-center">
+                            <div class="relative mr-2">
+                                <input type="text" placeholder="Search reviewers..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-solid fa-search text-gray-400"></i>
+                                </div>
+                            </div>
+                            <select class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <option>All Disciplines</option>
+                                <option>Biology</option>
+                                <option>Chemistry</option>
+                                <option>Physics</option>
+                                <option>Medicine</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reviewer</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Discipline</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reviews Completed</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Avg. Response Time</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quality Score</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Reviewer" class="h-full w-full object-cover">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Dr. James Wilson</div>
+                                        <div class="text-sm text-gray-500">Harvard University</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Molecular Biology</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">28</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">2.1 days</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="text-sm text-gray-900 mr-2">4.8/5.0</div>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star-half-alt text-xs"></i>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Reviewer" class="h-full w-full object-cover">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Dr. Sarah Johnson</div>
+                                        <div class="text-sm text-gray-500">Stanford University</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Neuroscience</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">24</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">2.8 days</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="text-sm text-gray-900 mr-2">4.6/5.0</div>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star-half-alt text-xs"></i>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="Reviewer" class="h-full w-full object-cover">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Dr. Robert Chen</div>
+                                        <div class="text-sm text-gray-500">MIT</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Quantum Physics</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">19</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">3.5 days</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="text-sm text-gray-900 mr-2">4.5/5.0</div>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star-half-alt text-xs"></i>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="Reviewer" class="h-full w-full object-cover">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Dr. Emily Thompson</div>
+                                        <div class="text-sm text-gray-500">University of Cambridge</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Biochemistry</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">22</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">3.0 days</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="text-sm text-gray-900 mr-2">4.4/5.0</div>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-regular fa-star text-xs"></i>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" alt="Reviewer" class="h-full w-full object-cover">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Dr. Daniel Lee</div>
+                                        <div class="text-sm text-gray-500">University of Tokyo</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Materials Science</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">17</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">4.2 days</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="text-sm text-gray-900 mr-2">4.2/5.0</div>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-solid fa-star text-xs"></i>
+                                        <i class="fa-regular fa-star text-xs"></i>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </button>
+                                    <button class="text-primary-600 hover:text-primary-900">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex-1 flex justify-between sm:hidden">
+                            <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 cursor-pointer">
+                                Previous
+                            </span>
+                            <span class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 cursor-pointer">
+                                Next
+                            </span>
+                        </div>
+                        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                            <div>
+                                <p class="text-sm text-gray-700">
+                                    Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">42</span> reviewers
+                                </p>
+                            </div>
+                            <div>
+                                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                    <span class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer">
+                                        <i class="fa-solid fa-chevron-left"></i>
+                                    </span>
+                                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-primary-50 text-sm font-medium text-primary-600 hover:bg-primary-100 cursor-pointer">
+                                        1
+                                    </span>
+                                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">
+                                        2
+                                    </span>
+                                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">
+                                        3
+                                    </span>
+                                    <span class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer">
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quality Metrics -->
+            <div id="quality-metrics" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow p-4">
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Feedback Quality Distribution</h2>
+                    <div id="feedback-quality-chart" class="h-[300px]"></div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4">
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Reviewer Completion Rates</h2>
+                    <div id="completion-rate-chart" class="h-[300px]"></div>
+                </div>
+            </div>
+            
+            <!-- Recent Reviewer Activity -->
+            <div id="recent-activity" class="bg-white rounded-lg shadow p-4">
+                <h2 class="text-lg font-medium text-gray-900 mb-4">Recent Reviewer Activity</h2>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-green-100 rounded-full p-2">
+                            <i class="fa-solid fa-check text-green-600"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-gray-700">
+                                <span class="font-medium">Dr. James Wilson</span> completed review for manuscript "Quantum Computing Applications in Drug Discovery"
+                            </p>
+                            <p class="text-xs text-gray-500">2 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-blue-100 rounded-full p-2">
+                            <i class="fa-solid fa-user-plus text-blue-600"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-gray-700">
+                                <span class="font-medium">Dr. Sarah Johnson</span> accepted review invitation for "Novel Approaches to CRISPR Gene Editing in Cancer Treatment"
+                            </p>
+                            <p class="text-xs text-gray-500">Yesterday at 10:34 AM</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-yellow-100 rounded-full p-2">
+                            <i class="fa-solid fa-clock text-yellow-600"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-gray-700">
+                                <span class="font-medium">Dr. Robert Chen</span> requested extension for review deadline of "Climate Change Impact on Marine Ecosystems"
+                            </p>
+                            <p class="text-xs text-gray-500">Jul 15, 2023</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 bg-red-100 rounded-full p-2">
+                            <i class="fa-solid fa-times text-red-600"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-gray-700">
+                                <span class="font-medium">Dr. Emily Thompson</span> declined review invitation for "Neural Networks in Early Alzheimer's Detection"
+                            </p>
+                            <p class="text-xs text-gray-500">Jul 12, 2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <span class="text-primary-600 hover:text-primary-800 text-sm font-medium cursor-pointer">View All Activity</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-white border-t border-gray-200 mt-8 py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-600 text-sm">&copy; 2023 SciPeerReview. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Help Center</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Contact Us</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Response Time Chart
+        Highcharts.chart('response-time-chart-container', {
+            chart: {
+                type: 'line',
+                style: {
+                    fontFamily: 'Inter, sans-serif'
+                }
+            },
+            title: {
+                text: null
+            },
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                labels: {
+                    style: {
+                        color: '#6B7280'
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Days',
+                    style: {
+                        color: '#6B7280'
+                    }
+                },
+                labels: {
+                    style: {
+                        color: '#6B7280'
+                    }
+                }
+            },
+            legend: {
+                enabled: true
+            },
+            tooltip: {
+                shared: true
+            },
+            series: [{
+                name: 'Average Response Time',
+                color: '#0EA5E9',
+                data: [4.2, 4.1, 3.8, 3.6, 3.5, 3.4, 3.3, 3.2, 3.2, 3.1, 3.0, 3.2]
+            }, {
+                name: 'Target Response Time',
+                color: '#22C55E',
+                dashStyle: 'shortdash',
+                data: [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0]
+            }]
+        });
+
+        // Feedback Quality Chart
+        Highcharts.chart('feedback-quality-chart', {
+            chart: {
+                type: 'column',
+                style: {
+                    fontFamily: 'Inter, sans-serif'
+                }
+            },
+            title: {
+                text: null
+            },
+            xAxis: {
+                categories: ['5 (Excellent)', '4 (Good)', '3 (Average)', '2 (Poor)', '1 (Very Poor)'],
+                labels: {
+                    style: {
+                        color: '#6B7280'
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Number of Reviews',
+                    style: {
+                        color: '#6B7280'
+                    }
+                },
+                labels: {
+                    style: {
+                        color: '#6B7280'
+                    }
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>' + this.x + '</b><br/>' +
+                        'Number of reviews: ' + this.y;
+                }
+            },
+            series: [{
+                name: 'Reviews',
+                color: '#8B5CF6',
+                data: [42, 65, 28, 10, 5]
+            }]
+        });
+
+        // Completion Rate Chart
+        Highcharts.chart('completion-rate-chart', {
+            chart: {
+                type: 'pie',
+                style: {
+                    fontFamily: 'Inter, sans-serif'
+                }
+            },
+            title: {
+                text: null
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: '#6B7280'
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Reviews',
+                colorByPoint: true,
+                data: [{
+                    name: 'Completed',
+                    y: 87,
+                    color: '#22C55E'
+                }, {
+                    name: 'Declined',
+                    y: 8,
+                    color: '#EF4444'
+                }, {
+                    name: 'Expired',
+                    y: 5,
+                    color: '#F59E0B'
+                }]
+            }]
+        });
+    </script>
+</body>
+</html>

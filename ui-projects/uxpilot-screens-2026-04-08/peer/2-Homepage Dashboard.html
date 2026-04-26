@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@10.3.3/highcharts.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#007cba',
+                        emerald: '#00b894',
+                        coral: '#fd79a8',
+                        orange: '#fdcb6e',
+                        purple: '#6c5ce7',
+                        charcoal: '#2d3436',
+                        mediumgray: '#636e72',
+                        success: '#00b894',
+                        warning: '#fdcb6e',
+                        error: '#e17055',
+                        info: '#007cba',
+                        offwhite: '#FAFAF8'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                        'mono': ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-offwhite text-charcoal">
+    <header id="header" class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                        PR
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-lg">PeerTrail</span>
+                        <span class="text-xs text-mediumgray">Transparent Scientific Publishing</span>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Submit Article</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Browse Articles</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Reviews</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Submissions</span>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="search-toggle" class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-highlighter"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition relative">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-coral text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                    </button>
+                    <div class="w-8 h-8 rounded-full overflow-hidden">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User profile" class="w-full h-full object-cover">
+                    </div>
+                    <button class="md:hidden text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="global-search" class="hidden bg-white shadow-md py-4 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="relative">
+                <input type="text" placeholder="Search articles, authors, audit trails, annotations..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <button class="absolute right-3 top-3 text-gray-400 hover:text-primary">
+                    <i class="fa-solid fa-search"></i>
+                </button>
+            </div>
+            <div class="mt-3 flex space-x-2 text-sm">
+                <span class="font-medium">Quick filters:</span>
+                <button class="text-primary hover:underline">Recent articles</button>
+                <button class="text-primary hover:underline">Most annotated</button>
+                <button class="text-primary hover:underline">Top audit trails</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="hero" class="bg-gradient-to-br from-primary/10 via-purple/5 to-emerald/10 py-16 h-[500px]">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Revolutionizing Scientific Peer Review</h1>
+                <p class="text-xl md:text-2xl mb-8 text-mediumgray">The world's first comprehensive audit trail system for transparent scientific publishing with integrated web annotation.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
+                    <span class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-lg transition flex items-center justify-center cursor-pointer">
+                        <i class="fa-solid fa-upload mr-2"></i>
+                        Submit Your Research
+                    </span>
+                    <span class="border border-primary text-primary hover:bg-primary/5 font-medium py-3 px-6 rounded-lg transition flex items-center justify-center cursor-pointer">
+                        <i class="fa-solid fa-book-open mr-2"></i>
+                        Explore Articles
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Key Platform Features</h2>
+                <p class="text-lg text-mediumgray max-w-2xl mx-auto">Our innovative platform combines audit trail documentation with integrated web annotation for truly transparent scientific publishing.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div id="feature-audit" class="bg-white rounded-xl shadow-md p-6 border-t-4 border-primary hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
+                        <i class="fa-solid fa-magnifying-glass-chart text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Submit with Audit Trail</h3>
+                    <p class="text-mediumgray">Document discarded research approaches and methodology changes for complete transparency.</p>
+                </div>
+                
+                <div id="feature-annotation" class="bg-white rounded-xl shadow-md p-6 border-t-4 border-purple hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-purple/10 rounded-lg flex items-center justify-center text-purple mb-4">
+                        <i class="fa-solid fa-comments text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Collaborative Annotation</h3>
+                    <p class="text-mediumgray">Engage in rich discussions with integrated web annotation powered by Hypothesis.</p>
+                </div>
+                
+                <div id="feature-transparency" class="bg-white rounded-xl shadow-md p-6 border-t-4 border-emerald hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-emerald/10 rounded-lg flex items-center justify-center text-emerald mb-4">
+                        <i class="fa-solid fa-award text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Transparent Reviews</h3>
+                    <p class="text-mediumgray">Open review process with full visibility into reviewer comments and author responses.</p>
+                </div>
+                
+                <div id="feature-analytics" class="bg-white rounded-xl shadow-md p-6 border-t-4 border-orange hover:shadow-lg transition">
+                    <div class="w-12 h-12 bg-orange/10 rounded-lg flex items-center justify-center text-orange mb-4">
+                        <i class="fa-solid fa-chart-line text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Analytics Dashboard</h3>
+                    <p class="text-mediumgray">Gain insights into your research impact, annotation engagement, and review quality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="statistics" class="py-16 bg-gradient-to-r from-primary/5 to-purple/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Live Platform Statistics</h2>
+                <p class="text-lg text-mediumgray max-w-2xl mx-auto">Real-time metrics showing the growing impact of transparent scientific publishing.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div id="stat-articles" class="bg-white rounded-xl shadow-md p-6 text-center">
+                    <div class="text-5xl font-bold text-primary mb-2">3,842</div>
+                    <div class="text-lg font-medium">Articles Published</div>
+                    <div class="text-sm text-mediumgray">+12% this month</div>
+                </div>
+                
+                <div id="stat-reviews" class="bg-white rounded-xl shadow-md p-6 text-center">
+                    <div class="text-5xl font-bold text-purple mb-2">15,967</div>
+                    <div class="text-lg font-medium">Reviews Completed</div>
+                    <div class="text-sm text-mediumgray">+8% this month</div>
+                </div>
+                
+                <div id="stat-audit" class="bg-white rounded-xl shadow-md p-6 text-center">
+                    <div class="text-5xl font-bold text-emerald mb-2">27,394</div>
+                    <div class="text-lg font-medium">Audit Items Documented</div>
+                    <div class="text-sm text-mediumgray">+15% this month</div>
+                </div>
+                
+                <div id="stat-annotations" class="bg-white rounded-xl shadow-md p-6 text-center">
+                    <div class="text-5xl font-bold text-orange mb-2">48,721</div>
+                    <div class="text-lg font-medium">Annotations Created</div>
+                    <div class="text-sm text-mediumgray">+23% this month</div>
+                </div>
+            </div>
+            
+            <div id="stats-chart" class="mt-12 bg-white rounded-xl shadow-md p-6">
+                <h3 class="text-xl font-bold mb-4">Platform Growth Trends</h3>
+                <div id="growth-chart" class="h-80"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="recent-articles" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold">Recent Articles</h2>
+                <span class="text-primary hover:underline flex items-center cursor-pointer">
+                    View all articles
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div id="article-1" class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="h-48 bg-gradient-to-r from-primary/20 to-purple/20 relative">
+                        <div class="absolute top-4 right-4 bg-emerald text-white text-xs font-medium px-2 py-1 rounded-md">
+                            Published
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex space-x-2 mb-3">
+                            <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded">Neuroscience</span>
+                            <span class="bg-purple/10 text-purple text-xs px-2 py-1 rounded">Open Access</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Novel Neural Mechanisms in Decision-Making: A Comprehensive Review</h3>
+                        <p class="text-mediumgray mb-4 line-clamp-2">This study explores previously undocumented neural pathways involved in complex decision-making processes under uncertainty.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full overflow-hidden mr-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Author" class="w-full h-full object-cover">
+                                </div>
+                                <span class="text-sm">Dr. Sarah Chen</span>
+                            </div>
+                            <div class="flex items-center text-sm text-mediumgray">
+                                <i class="fa-solid fa-comment mr-1"></i> 24
+                                <i class="fa-solid fa-magnifying-glass-chart ml-3 mr-1"></i> 8
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="article-2" class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="h-48 bg-gradient-to-r from-emerald/20 to-orange/20 relative">
+                        <div class="absolute top-4 right-4 bg-orange text-white text-xs font-medium px-2 py-1 rounded-md">
+                            In Review
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex space-x-2 mb-3">
+                            <span class="bg-emerald/10 text-emerald text-xs px-2 py-1 rounded">Climate Science</span>
+                            <span class="bg-purple/10 text-purple text-xs px-2 py-1 rounded">Open Access</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Improved Climate Modeling Through Parallel Computation Methods</h3>
+                        <p class="text-mediumgray mb-4 line-clamp-2">A novel approach to climate modeling utilizing advanced parallel computation methods to increase accuracy and reduce processing time.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full overflow-hidden mr-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Author" class="w-full h-full object-cover">
+                                </div>
+                                <span class="text-sm">Prof. James Wilson</span>
+                            </div>
+                            <div class="flex items-center text-sm text-mediumgray">
+                                <i class="fa-solid fa-comment mr-1"></i> 16
+                                <i class="fa-solid fa-magnifying-glass-chart ml-3 mr-1"></i> 12
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="article-3" class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="h-48 bg-gradient-to-r from-coral/20 to-primary/20 relative">
+                        <div class="absolute top-4 right-4 bg-emerald text-white text-xs font-medium px-2 py-1 rounded-md">
+                            Published
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex space-x-2 mb-3">
+                            <span class="bg-coral/10 text-coral text-xs px-2 py-1 rounded">Genetics</span>
+                            <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded">Featured</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">CRISPR-Cas9 Modifications for Targeted Gene Therapy Applications</h3>
+                        <p class="text-mediumgray mb-4 line-clamp-2">Exploring novel modifications to the CRISPR-Cas9 system to enhance specificity and reduce off-target effects in gene therapy.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full overflow-hidden mr-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Author" class="w-full h-full object-cover">
+                                </div>
+                                <span class="text-sm">Dr. Emily Rodriguez</span>
+                            </div>
+                            <div class="flex items-center text-sm text-mediumgray">
+                                <i class="fa-solid fa-comment mr-1"></i> 32
+                                <i class="fa-solid fa-magnifying-glass-chart ml-3 mr-1"></i> 15
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta" class="py-16 bg-gradient-to-br from-primary via-purple to-emerald text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Ready to Transform Scientific Publishing?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of researchers embracing transparent science with comprehensive audit trails and collaborative annotation.</p>
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
+                <span class="bg-white text-primary hover:bg-gray-100 font-medium py-3 px-6 rounded-lg transition flex items-center justify-center cursor-pointer">
+                    <i class="fa-solid fa-user-plus mr-2"></i>
+                    Create Account
+                </span>
+                <span class="border border-white text-white hover:bg-white/10 font-medium py-3 px-6 rounded-lg transition flex items-center justify-center cursor-pointer">
+                    <i class="fa-solid fa-circle-info mr-2"></i>
+                    Learn More
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer" class="bg-charcoal text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                            PR
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-lg">PeerTrail</span>
+                            <span class="text-xs text-gray-400">Transparent Scientific Publishing</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4">The world's first comprehensive audit trail system for transparent scientific publishing.</p>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-twitter"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-github"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-researchgate"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Platform</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Browse Articles</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Submit Research</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Peer Review Process</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Audit Trail System</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Annotation Tools</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">API Documentation</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">FAQs</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Support Center</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">About Us</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Our Mission</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Partners</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Contact Us</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Careers</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 PeerTrail. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Cookie Policy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle global search
+        document.getElementById('search-toggle').addEventListener('click', function() {
+            const searchBar = document.getElementById('global-search');
+            searchBar.classList.toggle('hidden');
+        });
+
+        // Growth chart
+        Highcharts.chart('growth-chart', {
+            chart: {
+                type: 'spline',
+                backgroundColor: 'transparent'
+            },
+            title: {
+                text: null
+            },
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                labels: {
+                    style: {
+                        color: '#636e72'
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: null
+                },
+                labels: {
+                    style: {
+                        color: '#636e72'
+                    }
+                },
+                gridLineColor: '#f1f1f1'
+            },
+            tooltip: {
+                crosshairs: true,
+                shared: true
+            },
+            legend: {
+                align: 'center'
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        radius: 4,
+                        lineColor: '#666666',
+                        lineWidth: 1
+                    }
+                }
+            },
+            series: [{
+                name: 'Articles',
+                color: '#007cba',
+                data: [280, 310, 340, 380, 420, 490, 540, 580, 620]
+            }, {
+                name: 'Reviews',
+                color: '#6c5ce7',
+                data: [1200, 1350, 1450, 1600, 1750, 1900, 2050, 2200, 2350]
+            }, {
+                name: 'Audit Items',
+                color: '#00b894',
+                data: [1800, 2000, 2200, 2500, 2800, 3100, 3400, 3700, 4000]
+            }, {
+                name: 'Annotations',
+                color: '#fdcb6e',
+                data: [3200, 3600, 4000, 4400, 4800, 5300, 5800, 6300, 6800]
+            }]
+        });
+    </script>
+</body>
+</html>

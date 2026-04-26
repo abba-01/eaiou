@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-full">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 h-[100vh] bg-white border-r border-gray-200 fixed top-0 left-0 z-30 overflow-y-auto">
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-layer-group text-primary-600 text-xl"></i>
+                    <span class="text-xl font-semibold text-gray-800">ProjectHub</span>
+                </div>
+            </div>
+            
+            <div id="sidebar-nav" class="py-4">
+                <ul class="space-y-1">
+                    <li>
+                        <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-pie w-5 h-5 mr-3 text-gray-500"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center px-4 py-2 text-white bg-primary-600 hover:bg-primary-700">
+                            <i class="fa-solid fa-folder w-5 h-5 mr-3"></i>
+                            <span>Projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            <i class="fa-solid fa-flag w-5 h-5 mr-3 text-gray-500"></i>
+                            <span>Milestones</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            <i class="fa-solid fa-clipboard-check w-5 h-5 mr-3 text-gray-500"></i>
+                            <span>Tasks</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            <i class="fa-solid fa-calendar w-5 h-5 mr-3 text-gray-500"></i>
+                            <span>Events</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            <i class="fa-solid fa-file-lines w-5 h-5 mr-3 text-gray-500"></i>
+                            <span>Documents</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="pt-4 mt-4 border-t border-gray-200">
+                    <ul class="space-y-1">
+                        <li>
+                            <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                <i class="fa-solid fa-users w-5 h-5 mr-3 text-gray-500"></i>
+                                <span>Team</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                <i class="fa-solid fa-gear w-5 h-5 mr-3 text-gray-500"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                <i class="fa-solid fa-circle-question w-5 h-5 mr-3 text-gray-500"></i>
+                                <span>Help</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 ml-64">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 p-4 flex justify-between items-center sticky top-0 z-20">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-semibold text-gray-800">My Projects</h1>
+                    <div class="ml-4">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <i class="fa-solid fa-search text-gray-400"></i>
+                            </div>
+                            <input type="search" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500" placeholder="Search projects...">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 rounded-full hover:bg-gray-100 relative">
+                        <i class="fa-regular fa-bell text-gray-600"></i>
+                        <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+                    </button>
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="User avatar" class="h-8 w-8 rounded-full object-cover">
+                        <div class="ml-2">
+                            <p class="text-sm font-medium text-gray-700">Sarah Johnson</p>
+                            <p class="text-xs text-gray-500">Project Manager</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main id="main-content" class="p-6">
+                <!-- Project Filters -->
+                <section id="project-filters" class="mb-6">
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                        <div class="flex items-center space-x-2">
+                            <button class="bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium">All Projects</button>
+                            <button class="bg-white text-gray-700 px-4 py-2 rounded-lg text-sm font-medium border border-gray-300">Active</button>
+                            <button class="bg-white text-gray-700 px-4 py-2 rounded-lg text-sm font-medium border border-gray-300">Completed</button>
+                            <button class="bg-white text-gray-700 px-4 py-2 rounded-lg text-sm font-medium border border-gray-300">Archived</button>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="flex items-center space-x-1 bg-white text-gray-700 px-3 py-2 rounded-lg text-sm font-medium border border-gray-300">
+                                <i class="fa-solid fa-filter text-gray-500"></i>
+                                <span>Filter</span>
+                            </button>
+                            <button class="flex items-center space-x-1 bg-white text-gray-700 px-3 py-2 rounded-lg text-sm font-medium border border-gray-300">
+                                <i class="fa-solid fa-sort text-gray-500"></i>
+                                <span>Sort</span>
+                            </button>
+                            <button class="flex items-center space-x-1 bg-primary-600 text-white px-3 py-2 rounded-lg text-sm font-medium">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>New Project</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Project Grid -->
+                <section id="project-grid" class="mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Project Card 1 -->
+                        <div id="project-card-1" class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <div class="p-5">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="p-2 bg-primary-100 rounded-lg">
+                                        <i class="fa-solid fa-laptop-code text-primary-600 text-xl"></i>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">On Track</span>
+                                        <button class="ml-2 text-gray-500 hover:text-gray-700">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-1">Website Redesign</h3>
+                                <p class="text-sm text-gray-600 mb-4">Redesign the company website with modern UI/UX principles and improved accessibility.</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fa-regular fa-calendar mr-1"></i> Due Jun 15, 2023
+                                    </div>
+                                    <div class="text-sm font-medium text-primary-600">75% Complete</div>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 75%"></div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex -space-x-2">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="User 1">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User 2">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User 3">
+                                        <div class="flex items-center justify-center w-7 h-7 text-xs font-medium text-white bg-gray-500 rounded-full border-2 border-white">+2</div>
+                                    </div>
+                                    <a href="#" class="text-sm font-medium text-primary-600 hover:underline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Project Card 2 -->
+                        <div id="project-card-2" class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <div class="p-5">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="p-2 bg-blue-100 rounded-lg">
+                                        <i class="fa-solid fa-mobile-screen text-blue-600 text-xl"></i>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">At Risk</span>
+                                        <button class="ml-2 text-gray-500 hover:text-gray-700">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-1">Mobile App Development</h3>
+                                <p class="text-sm text-gray-600 mb-4">Create a cross-platform mobile application for customers to access our services on the go.</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fa-regular fa-calendar mr-1"></i> Due Jul 30, 2023
+                                    </div>
+                                    <div class="text-sm font-medium text-yellow-600">45% Complete</div>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                                    <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 45%"></div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex -space-x-2">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User 2">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="User 4">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="User 7">
+                                    </div>
+                                    <a href="#" class="text-sm font-medium text-primary-600 hover:underline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Project Card 3 -->
+                        <div id="project-card-3" class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <div class="p-5">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="p-2 bg-purple-100 rounded-lg">
+                                        <i class="fa-solid fa-bullhorn text-purple-600 text-xl"></i>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">On Track</span>
+                                        <button class="ml-2 text-gray-500 hover:text-gray-700">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-1">Marketing Campaign</h3>
+                                <p class="text-sm text-gray-600 mb-4">Launch a comprehensive marketing campaign across digital and traditional channels.</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fa-regular fa-calendar mr-1"></i> Due May 28, 2023
+                                    </div>
+                                    <div class="text-sm font-medium text-primary-600">90% Complete</div>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 90%"></div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex -space-x-2">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="User 5">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="User 6">
+                                        <div class="flex items-center justify-center w-7 h-7 text-xs font-medium text-white bg-gray-500 rounded-full border-2 border-white">+4</div>
+                                    </div>
+                                    <a href="#" class="text-sm font-medium text-primary-600 hover:underline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Project Card 4 -->
+                        <div id="project-card-4" class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <div class="p-5">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="p-2 bg-red-100 rounded-lg">
+                                        <i class="fa-solid fa-rocket text-red-600 text-xl"></i>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Delayed</span>
+                                        <button class="ml-2 text-gray-500 hover:text-gray-700">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-1">Product Launch</h3>
+                                <p class="text-sm text-gray-600 mb-4">Coordinate the launch of our new flagship product including marketing and distribution.</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fa-regular fa-calendar mr-1"></i> Due Aug 10, 2023
+                                    </div>
+                                    <div class="text-sm font-medium text-red-600">20% Complete</div>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                                    <div class="bg-red-600 h-2.5 rounded-full" style="width: 20%"></div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex -space-x-2">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User 3">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="User 8">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" alt="User 9">
+                                    </div>
+                                    <a href="#" class="text-sm font-medium text-primary-600 hover:underline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Project Card 5 -->
+                        <div id="project-card-5" class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <div class="p-5">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="p-2 bg-green-100 rounded-lg">
+                                        <i class="fa-solid fa-users text-green-600 text-xl"></i>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">On Track</span>
+                                        <button class="ml-2 text-gray-500 hover:text-gray-700">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-1">Client Onboarding</h3>
+                                <p class="text-sm text-gray-600 mb-4">Develop a streamlined onboarding process for new enterprise clients.</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fa-regular fa-calendar mr-1"></i> Due Jun 5, 2023
+                                    </div>
+                                    <div class="text-sm font-medium text-primary-600">60% Complete</div>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 60%"></div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex -space-x-2">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="User 6">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="User 1">
+                                    </div>
+                                    <a href="#" class="text-sm font-medium text-primary-600 hover:underline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Project Card 6 -->
+                        <div id="project-card-6" class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <div class="p-5">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="p-2 bg-orange-100 rounded-lg">
+                                        <i class="fa-solid fa-chart-line text-orange-600 text-xl"></i>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">At Risk</span>
+                                        <button class="ml-2 text-gray-500 hover:text-gray-700">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-1">Data Analytics Platform</h3>
+                                <p class="text-sm text-gray-600 mb-4">Build an internal data analytics platform to track business metrics and performance.</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fa-regular fa-calendar mr-1"></i> Due Sep 15, 2023
+                                    </div>
+                                    <div class="text-sm font-medium text-yellow-600">35% Complete</div>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                                    <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 35%"></div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex -space-x-2">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User 2">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User 3">
+                                        <img class="w-7 h-7 rounded-full border-2 border-white" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="User 4">
+                                    </div>
+                                    <a href="#" class="text-sm font-medium text-primary-600 hover:underline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Recent Activity -->
+                <section id="recent-activity" class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Recent Activity</h3>
+                    </div>
+                    
+                    <div id="activity-timeline" class="bg-white rounded-lg border border-gray-200 p-5">
+                        <div class="flow-root">
+                            <ul class="divide-y divide-gray-200">
+                                <li class="py-3">
+                                    <div class="flex items-start">
+                                        <img class="h-8 w-8 rounded-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="User avatar">
+                                        <div class="ml-3 flex-1">
+                                            <p class="text-sm">
+                                                <span class="font-medium text-gray-900">Sarah Johnson</span>
+                                                <span class="text-gray-600"> added a new milestone </span>
+                                                <span class="font-medium text-gray-900">Final Design Review</span>
+                                                <span class="text-gray-600"> to </span>
+                                                <span class="font-medium text-gray-900">Website Redesign</span>
+                                            </p>
+                                            <p class="text-xs text-gray-500">Today at 10:30 AM</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-3">
+                                    <div class="flex items-start">
+                                        <img class="h-8 w-8 rounded-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User avatar">
+                                        <div class="ml-3 flex-1">
+                                            <p class="text-sm">
+                                                <span class="font-medium text-gray-900">Michael Chen</span>
+                                                <span class="text

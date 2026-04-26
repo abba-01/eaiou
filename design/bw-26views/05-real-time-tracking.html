@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@10.0.0/highcharts.js"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+<style id="eaiou-ds">
+/* ── eaiou Design System — Monochrome ── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+:root {
+  --ds-bg:       #F7F6F3;
+  --ds-surface:  #FFFFFF;
+  --ds-border:   #E2E0DB;
+  --ds-ink-1:    #18171A;
+  --ds-ink-2:    #5A5856;
+  --ds-ink-3:    #9A9895;
+  --ds-accent:   #18171A;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-full: 9999px;
+}
+
+/* Font override */
+body, button, input, select, textarea { font-family: 'DM Sans', system-ui, sans-serif !important; }
+h1, h2 { letter-spacing: -0.02em; }
+h1 { font-size: 1.5rem; font-weight: 600; }
+h2 { font-size: 1.25rem; font-weight: 600; }
+h3 { font-size: 1.0625rem; font-weight: 600; }
+
+/* Radius standardisation */
+.rounded-sm  { border-radius: 4px !important; }
+.rounded     { border-radius: 6px !important; }
+.rounded-md  { border-radius: 6px !important; }
+.rounded-lg  { border-radius: 10px !important; }
+.rounded-xl  { border-radius: 14px !important; }
+.rounded-2xl { border-radius: 20px !important; }
+.rounded-full { border-radius: 9999px !important; }
+
+/* Background neutralise */
+body { background-color: #F7F6F3 !important; }
+.bg-\[\#f8fafc\], .bg-gray-50 { background-color: #F7F6F3 !important; }
+
+/* Primary button polish */
+.bg-gray-900 { background-color: #18171A !important; }
+.hover\:bg-gray-800:hover { background-color: #2E2D30 !important; }
+.text-gray-900 { color: #18171A !important; }
+
+/* Card polish */
+.shadow, .shadow-sm { box-shadow: 0 1px 4px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04) !important; }
+.shadow-md { box-shadow: 0 4px 12px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.05) !important; }
+.shadow-lg { box-shadow: 0 8px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06) !important; }
+
+/* Brand accent → near-black */
+[class*="text-primary"], [class*="text-blue"] { color: #18171A !important; }
+[class*="bg-primary-6"], [class*="bg-primary-7"], [class*="bg-primary-8"],
+[class*="bg-primary-9"], [class*="bg-blue-5"], [class*="bg-blue-6"] {
+  background-color: #18171A !important; color: #fff !important;
+}
+[class*="bg-primary-5"]:not([class*="50"]) { background-color: #5A5856 !important; }
+[class*="bg-primary-50"], [class*="bg-primary-100"],
+[class*="bg-blue-50"], [class*="bg-blue-100"] { background-color: #F0EFEB !important; }
+[class*="border-primary"], [class*="border-blue"] { border-color: #CAC8C2 !important; }
+[class*="ring-primary"], [class*="focus\:ring-primary"] { --tw-ring-color: #9A9895 !important; }
+
+/* Badge colour fix: blue badges → neutral */
+.bg-blue-100.text-blue-800, .bg-primary-100.text-primary-700 {
+  background: #EDECE9 !important; color: #18171A !important;
+}
+
+/* Active / selected states */
+[class*="border-b-2"][class*="border-primary"],
+[class*="border-b-2"][class*="border-blue"] { border-color: #18171A !important; }
+
+/* Nav brand */
+.text-primary-700.font-bold, .text-primary-600.font-bold { color: #18171A !important; font-family: 'DM Serif Display', Georgia, serif !important; font-style: italic; }
+
+/* Sidebar active */
+[class*="bg-primary-50"][class*="text-primary-7"] { background: #EDECE9 !important; color: #18171A !important; border-left: 2px solid #18171A; }
+[class*="bg-primary-50"][class*="text-primary-6"] { background: #EDECE9 !important; color: #18171A !important; }
+
+/* Tailwind config primary override (for runtime) */
+</style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header Navigation -->
+    <nav id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 flex items-center justify-between px-4 py-3 z-50">
+        <div class="flex items-center">
+            <span class="flex items-center mr-10 cursor-pointer">
+                <i class="fa-solid fa-flask-vial text-gray-700 text-2xl mr-2"></i>
+                <span class="text-xl font-bold text-gray-800">eaiou</span>
+            </span>
+            <div class="hidden md:flex space-x-6">
+                <span class="text-gray-600 hover:text-gray-700 cursor-pointer">Dashboard</span>
+                <span class="text-gray-600 hover:text-gray-700 font-medium text-gray-700 border-b-2 border-gray-400 cursor-pointer">My Manuscripts</span>
+                <span class="text-gray-600 hover:text-gray-700 cursor-pointer">Reviews</span>
+                <span class="text-gray-600 hover:text-gray-700 cursor-pointer">Journals</span>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span class="hidden md:inline-block text-gray-600 mr-2">
+                <i class="fa-regular fa-bell"></i>
+                <span class="bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center absolute -mt-8 ml-3">2</span>
+            </span>
+            <button class="hidden md:flex items-center text-gray-600 hover:text-gray-800">
+                <i class="fa-regular fa-question-circle mr-1"></i>
+                <span>Help</span>
+            </button>
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-full h-full object-cover" />
+                </div>
+                <span class="hidden md:inline-block text-gray-700 font-medium">Dr. Michael Chen</span>
+                <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="pt-16 flex min-h-screen bg-gray-50">
+        <!-- Sidebar -->
+        <div id="sidebar" class="hidden md:block w-64 bg-white border-r border-gray-200 fixed h-full pt-4">
+            <div class="px-4 py-2">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase">Author Dashboard</h2>
+                </div>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-home w-5 text-gray-500"></i>
+                        <span>Overview</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 bg-gray-50 text-gray-800 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-file-lines w-5"></i>
+                        <span>My Manuscripts</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-plus w-5 text-gray-500"></i>
+                        <span>New Submission</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-clock-rotate-left w-5 text-gray-500"></i>
+                        <span>Submission History</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-comment w-5 text-gray-500"></i>
+                        <span>Messages</span>
+                        <span class="ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="px-4 py-2 mt-6">
+                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-4">Reviewer Tools</h2>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-clipboard-check w-5 text-gray-500"></i>
+                        <span>Review Requests</span>
+                        <span class="ml-auto bg-yellow-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">2</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-star w-5 text-gray-500"></i>
+                        <span>My Reviews</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-medal w-5 text-gray-500"></i>
+                        <span>Review History</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="px-4 py-2 mt-6">
+                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-4">Account</h2>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-user w-5 text-gray-500"></i>
+                        <span>Profile</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-gear w-5 text-gray-500"></i>
+                        <span>Settings</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-right-from-bracket w-5 text-gray-500"></i>
+                        <span>Logout</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 ml-0 md:ml-64 p-6">
+            <!-- Breadcrumb and Actions -->
+            <div id="page-header" class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                <div>
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                        <span class="hover:text-gray-700 cursor-pointer">Dashboard</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="hover:text-gray-700 cursor-pointer">My Manuscripts</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="text-gray-700">Manuscript Progress</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900">Manuscript Progress Tracking</h1>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-3">
+                    <button id="btn-back" class="px-3 py-2 border border-gray-300 rounded-md flex items-center text-gray-700 hover:bg-gray-50">
+                        <i class="fa-solid fa-arrow-left mr-2"></i>
+                        <span>Back to Manuscripts</span>
+                    </button>
+                    <button id="btn-export" class="px-4 py-2 bg-gray-900 text-white rounded-md flex items-center hover:bg-gray-900">
+                        <i class="fa-solid fa-download mr-2"></i>
+                        <span>Export Report</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Manuscript Details Card -->
+            <div id="manuscript-details" class="bg-white rounded-lg shadow mb-6 overflow-hidden">
+                <div class="border-b border-gray-200">
+                    <div class="px-6 py-4">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h2 class="text-xl font-semibold text-gray-900">Novel Approaches to CRISPR Gene Editing in Cancer Treatment</h2>
+                                <p class="text-sm text-gray-500 mt-1">Manuscript ID: MS-2023-0042</p>
+                            </div>
+                            <div class="mt-4 md:mt-0">
+                                <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                    <i class="fa-solid fa-magnifying-glass mr-2"></i>Under Review
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-6">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase mb-2">Submission Details</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="text-xs text-gray-500">Journal</p>
+                                <p class="text-sm font-medium">Nature Biotechnology</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">Submitted On</p>
+                                <p class="text-sm font-medium">July 12, 2023</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">Current Version</p>
+                                <p class="text-sm font-medium">v2.0 (Revised on Aug 5, 2023)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase mb-2">Author Information</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="text-xs text-gray-500">Corresponding Author</p>
+                                <p class="text-sm font-medium">Dr. Michael Chen</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">Co-Authors</p>
+                                <p class="text-sm font-medium">Dr. Sarah Johnson, Dr. Robert Lee</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">Institution</p>
+                                <p class="text-sm font-medium">Stanford University Medical Center</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase mb-2">Review Information</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="text-xs text-gray-500">Editor Assigned</p>
+                                <p class="text-sm font-medium">Dr. Emily Rodriguez</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">Reviewers Assigned</p>
+                                <p class="text-sm font-medium">3 of 3 Confirmed</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500">Expected Decision Date</p>
+                                <p class="text-sm font-medium">September 30, 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Progress Timeline -->
+            <div id="progress-timeline" class="bg-white rounded-lg shadow mb-6 p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-6">Progress Timeline</h2>
+                
+                <div class="relative">
+                    <!-- Timeline Track -->
+                    <div class="absolute h-full w-0.5 bg-gray-200 left-6 top-0"></div>
+                    
+                    <!-- Timeline Steps -->
+                    <div class="space-y-8">
+                        <!-- Step 1: Submission -->
+                        <div class="relative flex items-start">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full flex items-center justify-center bg-green-100 z-10">
+                                <i class="fa-solid fa-paper-plane text-green-600 text-lg"></i>
+                            </div>
+                            <div class="ml-6">
+                                <div class="flex items-center">
+                                    <h3 class="text-base font-semibold text-gray-900">Initial Submission</h3>
+                                    <span class="ml-3 bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">Completed</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">July 12, 2023 at 10:25 AM</p>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p>Manuscript submitted to Nature Biotechnology with all required documents and metadata.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2: Initial Check -->
+                        <div class="relative flex items-start">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full flex items-center justify-center bg-green-100 z-10">
+                                <i class="fa-solid fa-clipboard-check text-green-600 text-lg"></i>
+                            </div>
+                            <div class="ml-6">
+                                <div class="flex items-center">
+                                    <h3 class="text-base font-semibold text-gray-900">Initial Technical Check</h3>
+                                    <span class="ml-3 bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">Completed</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">July 14, 2023 at 3:45 PM</p>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p>Technical review passed. Manuscript meets journal formatting requirements.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3: Editor Assignment -->
+                        <div class="relative flex items-start">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full flex items-center justify-center bg-green-100 z-10">
+                                <i class="fa-solid fa-user-tie text-green-600 text-lg"></i>
+                            </div>
+                            <div class="ml-6">
+                                <div class="flex items-center">
+                                    <h3 class="text-base font-semibold text-gray-900">Editor Assignment</h3>
+                                    <span class="ml-3 bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">Completed</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">July 18, 2023 at 11:10 AM</p>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p>Dr. Emily Rodriguez assigned as handling editor for your manuscript.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4: Editor Decision -->
+                        <div class="relative flex items-start">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full flex items-center justify-center bg-green-100 z-10">
+                                <i class="fa-solid fa-check-to-slot text-green-600 text-lg"></i>
+                            </div>
+                            <div class="ml-6">
+                                <div class="flex items-center">
+                                    <h3 class="text-base font-semibold text-gray-900">Editor Initial Decision</h3>
+                                    <span class="ml-3 bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">Completed</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">July 21, 2023 at 2:30 PM</p>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p>Editor has decided to send your manuscript for peer review.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 5: Reviewer Assignment -->
+                        <div class="relative flex items-start">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full flex items-center justify-center bg-green-100 z-10">
+                                <i class="fa-solid fa-users text-green-600 text-lg"></i>
+                            </div>
+                            <div class="ml-6">
+                                <div class="flex items-center">
+                                    <h3 class="text-base font-semibold text-gray-900">Reviewer Assignment</h3>
+                                    <span class="ml-3 bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">Completed</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">July 28, 2023 at 9:15 AM</p>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p>3 reviewers have been invited and all have accepted to review your manuscript.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 6: Peer Review -->
+                        <div class="relative flex items-start">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full flex items-center justify-center bg-yellow-100 z-10">
+                                <i class="fa-solid fa-magnifying-glass text-yellow-600 text-lg"></i>
+                            </div>
+                            <div class="ml-6">
+                                <div class="flex items-center">
+                                    <h3 class="text-base font-semibold text-gray-900">Peer Review in Progress</h3>
+                                    <span class="ml-3 bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded-full">In Progress</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Started July 29, 2023</p>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p>Reviewers are currently evaluating your manuscript. 2 of 3 reviews have been submitted.</p>
+                                </div>
+                                <div class="mt-3 flex items-center">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 66%"></div>
+                                    </div>
+                                    <span class="ml-3 text-xs text-gray-500">66%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 7: Editorial Decision -->
+                        <div class="relative flex items-start opacity-50">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full flex items-center justify-center bg-gray-100 z-10">
+                                <i class="fa-solid fa-gavel text-gray-500 text-lg"></i>
+                            </div>
+                            <div class="ml-6">
+                                <div class="flex items-center">
+                                    <h3 class="text-base font-semibold text-gray-900">Editorial Decision</h3>
+                                    <span class="ml-3 bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full">Pending</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Expected by September 15, 2023</p>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p>The editor will make a decision based on the reviewer recommendations.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 8: Revision -->
+                        <div class="relative flex items-start opacity-50">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full flex items-center justify-center bg-gray-100 z-10">
+                                <i class="fa-solid fa-pen-to-square text-gray-500 text-lg"></i>
+                            </div>
+                            <div class="ml-6">
+                                <div class="flex items-center">
+                                    <h3 class="text-base font-semibold text-gray-900">Revision</h3>
+                                    <span class="ml-3 bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full">Pending</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Not yet scheduled</p>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p>If requested, you will need to submit a revised manuscript addressing reviewer comments.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 9: Final Decision -->
+                        <div class="relative flex items-start opacity-50">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full flex items-center justify-center bg-gray-100 z-10">
+                                <i class="fa-solid fa-flag-checkered text-gray-500 text-lg"></i>
+                            </div>
+                            <div class="ml-6">
+                                <div class="flex items-center">
+                                    <h3 class="text-base font-semibold text-gray-900">Final Decision</h3>
+                                    <span class="ml-3 bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full">Pending</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Expected by September 30, 2023</p>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p>Final decision on your manuscript will be made after reviewing all materials.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Review Status and Statistics -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- Review Status -->
+                <div id="review-status" class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Review Status</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                                    <span class="text-gray-600">R1</span>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">Reviewer #1</p>
+                                    <p class="text-xs text-gray-500">Expert in CRISPR Technology</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
+                                    <i class="fa-solid fa-check mr-1"></i>Completed
+                                </span>
+                                <span class="ml-2 text-xs text-gray-500">Aug 15, 2023</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                                    <span class="text-gray-600">R2</span>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">Reviewer #2</p>
+                                    <p class="text-xs text-gray-500">Cancer Research Specialist</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
+                                    <i class="fa-solid fa-check mr-1"></i>Completed
+                                </span>
+                                <span class="ml-2 text-xs text-gray-500">Aug 21, 2023</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                                    <span class="text-gray-600">R3</span>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">Reviewer #3</p>
+                                    <p class="text-xs text-gray-500">Molecular Biology Expert</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">
+                                    <i class="fa-solid fa-clock mr-1"></i>In Progress
+                                </span>
+                                <span class="ml-2 text-xs text-gray-500">Due Sep 5, 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h3 class="text-sm font-semibold text-gray-700 mb-3">Review Type</h3>
+                        <div class="bg-gray-50 p-3 rounded-md">
+                            <p class="text-sm text-gray-600">
+                                <i class="fa-solid fa-eye-slash mr-2 text-gray-500"></i>
+                                Double-blind peer review (Author and reviewer identities concealed)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review Statistics -->
+                <div id="review-statistics" class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Review Timeline Statistics</h2>
+                    <div id="timeline-chart" class="h-64"></div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        <div class="bg-gray-50 p-3 rounded-md">
+                            <p class="text-sm text-gray-500">Average Review Time</p>
+                            <p class="text-xl font-semibold text-gray-900">24 days</p>
+                            <p class="text-xs text-gray-500">Journal average: 28 days</p>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-md">
+                            <p class="text-sm text-gray-500">Expected Decision</p>
+                            <p class="text-xl font-semibold text-gray-900">30 days</p>
+                            <p class="text-xs text-gray-500">From submission to decision</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Communication History -->
+            <div id="communication-history" class="bg-white rounded-lg shadow p-6 mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold text-gray-900">Communication History</h2>
+                    <button class="text-gray-700 hover:text-gray-900 text-sm font-medium flex items-center">
+                        <i class="fa-solid fa-envelope mr-1"></i>
+                        <span>Contact Editor</span>
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Editor" class="w-full h-full object-cover" />
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Dr. Emily Rodriguez (Editor)</p>
+                                        <p class="text-xs text-gray-500">Aug 5, 2023 at 10:15 AM</p>
+                                    </div>
+                                    <span class="bg-gray-100 text-gray-900 text-xs px-2 py-0.5 rounded-full">Editor Message</span>
+                                </div>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p>Dear Dr. Chen,</p>
+                                    <p class="mt-2">Thank you for submitting your revised manuscript. We have sent it to the reviewers for evaluation. You will be notified once all reviews have been received and a decision has been made.</p>
+                                    <p class="mt-2">Best regards,<br>Dr. Emily Rodriguez</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Author" class="w-full h-full object-cover" />
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Dr. Michael Chen (You)</p>
+                                        <p class="text-xs text-gray-500">Aug 5, 2023 at 9:30 AM</p>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">Revision Submitted</span>
+                                </div>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p>Dear Dr. Rodriguez,</p>
+                                    <p class="mt-2">I have submitted the revised version of our manuscript addressing the initial technical concerns. The revised manuscript includes updated figures and supplementary materials as requested.</p>
+                                    <p class="mt-2">Sincerely,<br>Dr. Michael Chen</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Editor" class="w-full h-full object-cover" />
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Dr. Emily Rodriguez (Editor)</p>
+                                        <p class="text-xs text-gray-500">Jul 29, 2023 at 2:45 PM</p>
+                                    </div>
+                                    <span class="bg-gray-100 text-gray-900 text-xs px-2 py-0.5 rounded-full">Editor Message</span>
+                                </div>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p>Dear Dr. Chen,</p>
+                                    <p class="mt-2">Thank you for your submission to Nature Biotechnology. After initial review, we would like to request minor technical revisions before sending your manuscript to peer reviewers. Please address the following points:</p>
+                                    <ul class="list-disc pl-5 mt-2">
+                                        <li>Update Figure 2 resolution to meet journal standards (min 300 dpi)</li>
+                                        <li>Provide raw data for the gene expression analysis</li>
+                                        <li>Include additional supplementary materials as discussed</li>
+                                    </ul>
+                                    <p class="mt-2">Best regards,<br>Dr. Emily Rodriguez</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <button class="text-gray-700 hover:text-gray-900 text-sm font-medium">
+                        View All Communications
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Related Documents -->
+            <div id="related-documents" class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Related Documents</h2>
+                
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md">
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-file-pdf text-red-500 text-xl mr-3"></i>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">Manuscript_CRISPR_v2.0.pdf</p>
+                                <p class="text-xs text-gray-500">Current Version - Uploaded Aug 5, 2023</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="p-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-download"></i>
+                            </button>
+                            <button class="p-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md">
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-file-pdf text-red-500 text-xl mr-3"></i>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">Manuscript_CRISPR_v1.0.pdf</p>
+                                <p class="text-xs text-gray-500">Previous Version - Uploaded Jul 12, 2023</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="p-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-download"></i>
+                            </button>
+                            <button class="p-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md">
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-file-image text-gray-600 text-xl mr-3"></i>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">Supplementary_Figures.zip</p>
+                                <p class="text-xs text-gray-500">Uploaded Aug 5, 2023</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="p-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md">
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-file-excel text-green-500 text-xl mr-3"></i>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">Raw_Data_Gene_Expression.xlsx</p>
+                                <p class="text-xs text-gray-500">Uploaded Aug 5, 2023</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="p-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md">
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-file-lines text-gray-500 text-xl mr-3"></i>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">Cover_Letter.docx</p>
+                                <p class="text-xs text-gray-500">Uploaded Jul 12, 2023</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="p-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-download"></i>
+                            </button>
+                            <button class="p-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-white border-t border-gray-200 mt-8 py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-600 text-sm">&copy; 2023 eaiou. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-600 hover:text-gray-700 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-600 hover:text-gray-700 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-600 hover:text-gray-700 text-sm cursor-pointer">Help Center</span>
+                    <span class="text-gray-600 hover:text-gray-700 text-sm cursor-pointer">Contact Us</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize the timeline chart
+        Highcharts.chart('timeline-chart', {
+            chart: {
+                type: 'column',
+                style: {
+                    fontFamily: 'Inter, sans-serif'
+                }
+            },
+            title: {
+                text: null
+            },
+            xAxis: {
+                categories: ['Submission', 'Tech Check', 'Editor Assignment', 'Reviewer Assignment', 'Peer Review', 'Decision'],
+                labels: {
+                    style: {
+                        fontSize: '10px'
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Days'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                pointFormat: '<b>{point.y} days</b>'
+            },
+            series: [{
+                name: 'Days',
+                data: [1, 2, 4, 7, 24, 10],
+                color: '#0ea5e9'
+            }],
+            credits: {
+                enabled: false
+            }
+        });
+    </script>
+</body>
+</html>

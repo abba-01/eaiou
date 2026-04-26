@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style>::-webkit-scrollbar { display: none;}</style>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Nunito', 'sans-serif'],
+                        },
+                        colors: {
+                            primary: {
+                                50: '#f0f9ff',
+                                100: '#e0f2fe',
+                                200: '#bae6fd',
+                                300: '#7dd3fc',
+                                400: '#38bdf8',
+                                500: '#0ea5e9',
+                                600: '#0284c7',
+                                700: '#0369a1',
+                                800: '#075985',
+                                900: '#0c4a6e',
+                            },
+                            family: {
+                                blue: '#4285F4',
+                                green: '#34A853',
+                                yellow: '#FBBC05',
+                                red: '#EA4335',
+                                purple: '#9C27B0',
+                                teal: '#009688',
+                                orange: '#FF9800',
+                                pink: '#E91E63',
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="font-sans bg-gray-100">
+        <!-- Header -->
+        <header id="header" class="bg-white border-b shadow-sm">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-people-roof text-family-blue text-2xl"></i>
+                        <h1 class="text-xl font-bold text-gray-800">FamilyWall</h1>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-bell"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <div class="h-8 w-8 rounded-full bg-family-blue text-white flex items-center justify-center">
+                            <span class="font-semibold">JS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex h-[calc(100vh-64px)]">
+            <!-- Sidebar -->
+            <div id="sidebar" class="w-64 bg-white border-r hidden md:block">
+                <div class="p-4">
+                    <div class="mb-6">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-3">My Family</h2>
+                        <div class="flex -space-x-2 mb-4">
+                            <div class="h-10 w-10 rounded-full bg-family-blue text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">JS</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-green text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">LS</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-purple text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">ES</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-orange text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">MS</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <nav>
+                        <ul class="space-y-2">
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-calendar-days w-6"></i>
+                                    <span>Calendar</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-list-check w-6"></i>
+                                    <span>Tasks</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-cart-shopping w-6"></i>
+                                    <span>Shopping Lists</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-utensils w-6"></i>
+                                    <span>Meal Planner</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-book w-6"></i>
+                                    <span>Recipes</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-message w-6"></i>
+                                    <span>Messages</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-folder w-6"></i>
+                                    <span>Documents</span>
+                                </span>
+                            </li>
+                            <li class="bg-blue-50 rounded-lg text-family-blue">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-address-book w-6"></i>
+                                    <span>Contacts</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div id="main-content" class="flex-1 overflow-auto">
+                <!-- Contacts Header -->
+                <div id="contacts-header" class="bg-white p-4 border-b flex justify-between items-center">
+                    <div class="flex items-center">
+                        <h1 class="text-xl font-bold text-gray-800">Family Directory</h1>
+                        <span class="ml-3 bg-gray-100 text-gray-600 text-sm px-2 py-1 rounded-full">24 contacts</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input type="text" placeholder="Search contacts..." class="pl-9 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-family-blue focus:border-transparent w-64">
+                            <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                        <button class="px-3 py-2 bg-family-blue text-white rounded-md hover:bg-blue-600 flex items-center">
+                            <i class="fa-solid fa-plus mr-2"></i> Add Contact
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Contact Categories -->
+                <div id="contact-categories" class="bg-white p-4 border-b">
+                    <ul class="flex space-x-1">
+                        <li class="px-4 py-2 bg-family-blue text-white rounded-md cursor-pointer">All Contacts</li>
+                        <li class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 cursor-pointer">Family</li>
+                        <li class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 cursor-pointer">Childcare</li>
+                        <li class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 cursor-pointer">School</li>
+                        <li class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 cursor-pointer">Medical</li>
+                        <li class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 cursor-pointer">Activities</li>
+                        <li class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 cursor-pointer">
+                            <i class="fa-solid fa-plus mr-1"></i> New Category
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contacts Grid -->
+                <div id="contacts-grid" class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Favorites Section -->
+                    <div id="favorites-section" class="col-span-1 md:col-span-2 lg:col-span-3">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                            <i class="fa-solid fa-star text-family-yellow mr-2"></i> Favorites
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                            <!-- Favorite Contact 1 -->
+                            <div id="favorite-1" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-14 w-14 rounded-full bg-family-green text-white flex items-center justify-center text-xl font-semibold mr-3">
+                                        MJ
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Martha Johnson</h3>
+                                            <button class="text-family-yellow">
+                                                <i class="fa-solid fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Grandma</p>
+                                        <div class="flex mt-3 space-x-2">
+                                            <button class="p-2 text-family-blue bg-blue-50 rounded-full hover:bg-blue-100">
+                                                <i class="fa-solid fa-phone"></i>
+                                            </button>
+                                            <button class="p-2 text-family-green bg-green-50 rounded-full hover:bg-green-100">
+                                                <i class="fa-solid fa-message"></i>
+                                            </button>
+                                            <button class="p-2 text-family-purple bg-purple-50 rounded-full hover:bg-purple-100">
+                                                <i class="fa-solid fa-video"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Favorite Contact 2 -->
+                            <div id="favorite-2" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-14 w-14 rounded-full bg-family-blue text-white flex items-center justify-center text-xl font-semibold mr-3">
+                                        RJ
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Robert Johnson</h3>
+                                            <button class="text-family-yellow">
+                                                <i class="fa-solid fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Grandpa</p>
+                                        <div class="flex mt-3 space-x-2">
+                                            <button class="p-2 text-family-blue bg-blue-50 rounded-full hover:bg-blue-100">
+                                                <i class="fa-solid fa-phone"></i>
+                                            </button>
+                                            <button class="p-2 text-family-green bg-green-50 rounded-full hover:bg-green-100">
+                                                <i class="fa-solid fa-message"></i>
+                                            </button>
+                                            <button class="p-2 text-family-purple bg-purple-50 rounded-full hover:bg-purple-100">
+                                                <i class="fa-solid fa-video"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Favorite Contact 3 -->
+                            <div id="favorite-3" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-14 w-14 rounded-full bg-family-purple text-white flex items-center justify-center text-xl font-semibold mr-3">
+                                        SB
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Sarah Babysitter</h3>
+                                            <button class="text-family-yellow">
+                                                <i class="fa-solid fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Childcare</p>
+                                        <div class="flex mt-3 space-x-2">
+                                            <button class="p-2 text-family-blue bg-blue-50 rounded-full hover:bg-blue-100">
+                                                <i class="fa-solid fa-phone"></i>
+                                            </button>
+                                            <button class="p-2 text-family-green bg-green-50 rounded-full hover:bg-green-100">
+                                                <i class="fa-solid fa-message"></i>
+                                            </button>
+                                            <button class="p-2 text-family-purple bg-purple-50 rounded-full hover:bg-purple-100">
+                                                <i class="fa-solid fa-video"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Favorite Contact 4 -->
+                            <div id="favorite-4" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-14 w-14 rounded-full bg-family-red text-white flex items-center justify-center text-xl font-semibold mr-3">
+                                        DR
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Dr. Reynolds</h3>
+                                            <button class="text-family-yellow">
+                                                <i class="fa-solid fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Pediatrician</p>
+                                        <div class="flex mt-3 space-x-2">
+                                            <button class="p-2 text-family-blue bg-blue-50 rounded-full hover:bg-blue-100">
+                                                <i class="fa-solid fa-phone"></i>
+                                            </button>
+                                            <button class="p-2 text-family-green bg-green-50 rounded-full hover:bg-green-100">
+                                                <i class="fa-solid fa-message"></i>
+                                            </button>
+                                            <button class="p-2 text-family-red bg-red-50 rounded-full hover:bg-red-100">
+                                                <i class="fa-solid fa-calendar"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Family Section -->
+                    <div id="family-section" class="col-span-1 md:col-span-2 lg:col-span-3">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                            <i class="fa-solid fa-people-group text-family-blue mr-2"></i> Family
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                            <!-- Family Contact 1 -->
+                            <div id="family-1" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-12 w-12 rounded-full bg-family-green text-white flex items-center justify-center text-lg font-semibold mr-3">
+                                        MJ
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Martha Johnson</h3>
+                                            <button class="text-family-yellow">
+                                                <i class="fa-solid fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Grandma</p>
+                                        <div class="mt-2 text-xs text-gray-500">
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-phone w-4 mr-1"></i> (555) 123-4567
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-envelope w-4 mr-1"></i> martha.j@example.com
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Family Contact 2 -->
+                            <div id="family-2" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-12 w-12 rounded-full bg-family-blue text-white flex items-center justify-center text-lg font-semibold mr-3">
+                                        RJ
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Robert Johnson</h3>
+                                            <button class="text-family-yellow">
+                                                <i class="fa-solid fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Grandpa</p>
+                                        <div class="mt-2 text-xs text-gray-500">
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-phone w-4 mr-1"></i> (555) 123-4568
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-envelope w-4 mr-1"></i> robert.j@example.com
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Family Contact 3 -->
+                            <div id="family-3" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-12 w-12 rounded-full bg-family-teal text-white flex items-center justify-center text-lg font-semibold mr-3">
+                                        AT
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Aunt Tina</h3>
+                                            <button class="text-gray-400 hover:text-family-yellow">
+                                                <i class="fa-regular fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Aunt</p>
+                                        <div class="mt-2 text-xs text-gray-500">
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-phone w-4 mr-1"></i> (555) 987-6543
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-envelope w-4 mr-1"></i> tina@example.com
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Family Contact 4 -->
+                            <div id="family-4" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-12 w-12 rounded-full bg-family-orange text-white flex items-center justify-center text-lg font-semibold mr-3">
+                                        UM
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Uncle Mark</h3>
+                                            <button class="text-gray-400 hover:text-family-yellow">
+                                                <i class="fa-regular fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Uncle</p>
+                                        <div class="mt-2 text-xs text-gray-500">
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-phone w-4 mr-1"></i> (555) 456-7890
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-envelope w-4 mr-1"></i> mark@example.com
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Childcare Section -->
+                    <div id="childcare-section" class="col-span-1 md:col-span-2 lg:col-span-3">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                            <i class="fa-solid fa-baby text-family-purple mr-2"></i> Childcare
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                            <!-- Childcare Contact 1 -->
+                            <div id="childcare-1" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-12 w-12 rounded-full bg-family-purple text-white flex items-center justify-center text-lg font-semibold mr-3">
+                                        SB
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Sarah Babysitter</h3>
+                                            <button class="text-family-yellow">
+                                                <i class="fa-solid fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Primary Babysitter</p>
+                                        <div class="mt-2 text-xs text-gray-500">
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-phone w-4 mr-1"></i> (555) 234-5678
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-envelope w-4 mr-1"></i> sarah.b@example.com
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Childcare Contact 2 -->
+                            <div id="childcare-2" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-12 w-12 rounded-full bg-family-pink text-white flex items-center justify-center text-lg font-semibold mr-3">
+                                        JD
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Jane Daycare</h3>
+                                            <button class="text-gray-400 hover:text-family-yellow">
+                                                <i class="fa-regular fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Daycare Provider</p>
+                                        <div class="mt-2 text-xs text-gray-500">
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-phone w-4 mr-1"></i> (555) 876-5432
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-envelope w-4 mr-1"></i> jane.d@example.com
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Childcare Contact 3 -->
+                            <div id="childcare-3" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-12 w-12 rounded-full bg-family-blue text-white flex items-center justify-center text-lg font-semibold mr-3">
+                                        MB
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Michael Backup</h3>
+                                            <button class="text-gray-400 hover:text-family-yellow">
+                                                <i class="fa-regular fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Backup Sitter</p>
+                                        <div class="mt-2 text-xs text-gray-500">
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-phone w-4 mr-1"></i> (555) 345-6789
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-envelope w-4 mr-1"></i> michael.b@example.com
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Medical Section -->
+                    <div id="medical-section" class="col-span-1 md:col-span-2 lg:col-span-3">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                            <i class="fa-solid fa-user-doctor text-family-red mr-2"></i> Medical
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                            <!-- Medical Contact 1 -->
+                            <div id="medical-1" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-12 w-12 rounded-full bg-family-red text-white flex items-center justify-center text-lg font-semibold mr-3">
+                                        DR
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Dr. Reynolds</h3>
+                                            <button class="text-family-yellow">
+                                                <i class="fa-solid fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Pediatrician</p>
+                                        <div class="mt-2 text-xs text-gray-500">
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-phone w-4 mr-1"></i> (555) 789-0123
+                                            </div>
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-envelope w-4 mr-1"></i> dr.reynolds@example.com
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-location-dot w-4 mr-1"></i> 123 Medical Plaza
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Medical Contact 2 -->
+                            <div id="medical-2" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-12 w-12 rounded-full bg-family-blue text-white flex items-center justify-center text-lg font-semibold mr-3">
+                                        DS
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Dr. Smith</h3>
+                                            <button class="text-gray-400 hover:text-family-yellow">
+                                                <i class="fa-regular fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Family Doctor</p>
+                                        <div class="mt-2 text-xs text-gray-500">
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-phone w-4 mr-1"></i> (555) 567-8901
+                                            </div>
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-envelope w-4 mr-1"></i> dr.smith@example.com
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-location-dot w-4 mr-1"></i> 456 Health Center
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Medical Contact 3 -->
+                            <div id="medical-3" class="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start">
+                                    <div class="h-12 w-12 rounded-full bg-family-teal text-white flex items-center justify-center text-lg font-semibold mr-3">
+                                        DC
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-start">
+                                            <h3 class="font-semibold text-gray-800">Dr. Chen</h3>
+                                            <button class="text-gray-400 hover:text-family-yellow">
+                                                <i class="fa-regular fa-star"></i>
+                                            </button>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Dentist</p>
+                                        <div class="mt-2 text-xs text-gray-500">
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-phone w-4 mr-1"></i> (555) 678-9012
+                                            </div>
+                                            <div class="flex items-center mb-1">
+                                                <i class="fa-solid fa-envelope w-4 mr-1"></i> dr.chen@example.com
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-location-dot w-4 mr-1"></i> 789 Dental Office
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Details Sidebar -->
+            <div id="contact-details" class="w-80 bg-white border-l hidden md:block">
+                <div class="p-4 border-b">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-semibold text-gray-700">Contact Details</h2>
+                        <button class="text-gray-500 hover:text-family-blue">
+                            <i class="fa-solid fa-pencil"></i>
+                        </button>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="h-24 w-24 rounded-full bg-family-purple text-white flex items-center justify-center text-3xl font-semibold mb-3">
+                            SB
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-800">Sarah Babysitter</h3>
+                        <p class="text-gray-600">Primary Babysitter</p>
+                    </div>
+                </div>
+                
+                <div class="p-4 space-y-4">
+                    <div class="flex space-x-4 justify-center">
+                        <button class="p-3 text-family-blue bg-blue-50 rounded-full hover:bg-blue-100">
+                            <i class="fa-solid fa-phone"></i>
+                        </button>
+                        <button class="p-3 text-family-green bg-green-50 rounded-full hover:bg-green-100">
+                            <i class="fa-solid fa-message"></i>
+                        </button>
+                        <button class="p-3 text-family-purple bg-purple-50 rounded-full hover:bg-purple-100">
+                            <i class="fa-solid fa-video"></i>
+                        </button>
+                        <button class="p-3 text-family-red bg-red-50 rounded-full hover:bg-red-100">
+                            <i class="fa-solid fa-envelope"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="border-t pt-4">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-3">Contact Information</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center text-gray-700">
+                                <i class="fa-solid fa-phone w-6 text-gray-500"></i>
+                                <span>(555) 234-5678</span>
+                            </div>
+                            <div class="flex items-center text-gray-700">
+                                <i class="fa-solid fa-envelope w-6 text-gray-500"></i>
+                                <span>sarah.b@example.com</span>
+                            </div>
+                            <div class="flex items-center text-gray-700">
+                                <i class="fa-solid fa-location-dot w-6 text-gray-500"></i>
+                                <span>123 Babysitter Lane, Cityville</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t pt-4">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-3">Availability</h4>
+                        <div class="bg-gray-50 p-3 rounded-md">
+                            <p class="text-sm text-gray-700 mb-2">Regular Schedule:</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li class="flex items-center">
+                                    <i class="fa-solid fa-check text-family-green w-5"></i> Monday: 3pm - 8pm
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fa-solid fa-check text-family-green w-5"></i> Wednesday: 3pm - 8pm
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fa-solid fa-check text-family-green w-5"></i> Friday: 3pm - 10pm
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fa-solid fa-check text-family-green w-5"></i> Weekends: Available on request
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t pt-4">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-3">Notes</h4>
+                        <p class="text-sm text-gray-600">
+                            Sarah is great with the kids. She knows Emma's piano schedule and can help with homework. Has CPR certification and can drive kids to activities when needed.
+                        </p>
+                    </div>
+                    
+                    <div class="border-t pt-4">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-3">Recent Activity</h4>
+                        <div class="space-y-3">
+                            <div class="text-sm">
+                                <div class="flex items-center text-gray-700">
+                                    <i class="fa-solid fa-calendar-check w-5 text-family-blue"></i>
+                                    <span>Babysitting - Sep 8, 2023</span>
+                                </div>
+                                <p class="text-gray-500 ml-5">6:00 PM - 10:00 PM</p>
+                            </div>
+                            <div class="text-sm">
+                                <div class="flex items-center text-gray-700">
+                                    <i class="fa-solid fa-calendar-check w-5 text-family-blue"></i>
+                                    <span>Babysitting - Sep 1, 2023</span>
+                                </div>
+                                <p class="text-gray-500 ml-5">3:00 PM - 8:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4 border-t mt-4">
+                    <div class="flex space-x-2">
+                        <button class="flex-1 px-3 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 flex items-center justify-center">
+                            <i class="fa-solid fa-calendar-plus mr-2"></i> Schedule
+                        </button>
+                        <button class="flex-1 px-3 py-2 bg-family-blue text-white rounded-md hover:bg-blue-600 flex items-center justify-center">
+                            <i class="fa-solid fa-share-nodes mr-2"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation (visible on small screens) -->
+        <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg">
+            <div class="flex justify-around items-center py-2">
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span class="text-xs mt-1">Calendar</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span class="text-xs mt-1">Tasks</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="text-xs mt-1">Shopping</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span class="text-xs mt-1">Meals</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-family-blue cursor-pointer">
+                    <i class="fa-solid fa-address-book"></i>
+                    <span class="text-xs mt-1">Contacts</span>
+                </span>
+            </div>
+        </div>
+    </body>
+<html>

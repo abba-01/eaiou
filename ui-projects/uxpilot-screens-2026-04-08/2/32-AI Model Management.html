@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="w-full bg-white border-b border-neutral-200 shadow-sm">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <i class="fa-brands fa-joomla text-neutral-800 text-2xl mr-3"></i>
+      <h1 class="text-xl text-neutral-800">AcademiAI Manager</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+        <i class="fa-solid fa-bell"></i>
+      </button>
+      <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+        <i class="fa-solid fa-question-circle"></i>
+      </button>
+      <div class="flex items-center">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full mr-2" />
+        <span class="text-sm text-neutral-700">Admin User</span>
+        <i class="fa-solid fa-chevron-down ml-2 text-neutral-500 text-xs"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-container" class="flex h-[800px]">
+  <div id="sidebar" class="w-64 bg-white border-r border-neutral-200 overflow-y-auto">
+    <div class="p-4">
+      <button class="w-full flex items-center justify-center px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+        <i class="fa-solid fa-plus mr-2"></i>
+        <span>New Project</span>
+      </button>
+    </div>
+    <nav class="mt-2">
+      <ul>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-tachometer-alt w-5 text-neutral-500"></i>
+            <span class="ml-2">Dashboard</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-folder w-5 text-neutral-500"></i>
+            <span class="ml-2">Projects</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-file-alt w-5 text-neutral-500"></i>
+            <span class="ml-2">Articles</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-cog w-5 text-neutral-800"></i>
+            <span class="ml-2">Settings</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-chart-bar w-5 text-neutral-500"></i>
+            <span class="ml-2">Analytics</span>
+          </span>
+        </li>
+        <li>
+          <span class="flex items-center px-4 py-2 text-neutral-700 hover:bg-neutral-100 cursor-pointer">
+            <i class="fa-solid fa-users w-5 text-neutral-500"></i>
+            <span class="ml-2">Users</span>
+          </span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="content" class="flex-1 bg-neutral-50 overflow-y-auto">
+    <div class="p-6">
+      <div class="mb-6">
+        <h2 class="text-2xl text-neutral-800">AI Model Management</h2>
+        <p class="text-neutral-600 mt-1">Add, edit, and configure AI models for academic content generation</p>
+      </div>
+
+      <div id="model-crud-form" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden mb-6">
+        <div class="p-4 border-b border-neutral-200 bg-neutral-50">
+          <h3 class="text-neutral-800">Add New AI Model</h3>
+          <p class="text-sm text-neutral-600">Configure connection settings for a new LLM</p>
+        </div>
+        <div class="p-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Model Name *</label>
+              <input type="text" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="Enter model name" />
+            </div>
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Provider *</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>UX Pilot AI</option>
+                <option>UX Pilot AI</option>
+                <option>UX Pilot AI</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Model Type *</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                <option>UX Pilot Opus</option>
+                <option>UX Pilot Sonnet</option>
+                <option>GPT-4o</option>
+                <option>GPT-4 Turbo</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">API Version</label>
+              <input type="text" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="e.g., 2023-12-01" />
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">API Key *</label>
+            <div class="flex">
+              <input type="password" class="w-full border border-neutral-300 rounded-l-md px-3 py-2 text-sm" placeholder="Enter API key" value="••••••••••••••••••••••••••••••" />
+              <button class="bg-neutral-100 border border-neutral-300 border-l-0 rounded-r-md px-3 text-neutral-600">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <p class="text-xs text-neutral-500 mt-1">API keys are encrypted and stored securely</p>
+          </div>
+          
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">API Endpoint URL</label>
+            <input type="text" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="https://api.example.com/v1" />
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Default Temperature</label>
+              <div class="flex items-center">
+                <input type="range" min="0" max="100" value="70" class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer" />
+                <span class="ml-2 text-sm text-neutral-600">0.7</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Default Max Tokens</label>
+              <input type="number" value="4000" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" />
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">Model Context Window</label>
+            <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+              <option>8K tokens</option>
+              <option>16K tokens</option>
+              <option>32K tokens</option>
+              <option>100K tokens</option>
+              <option>200K tokens</option>
+            </select>
+          </div>
+          
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">Academic Specialization</label>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="flex items-center">
+                <input type="checkbox" id="science" class="mr-2" />
+                <label for="science" class="text-sm text-neutral-700">Scientific Research</label>
+              </div>
+              <div class="flex items-center">
+                <input type="checkbox" id="humanities" class="mr-2" />
+                <label for="humanities" class="text-sm text-neutral-700">Humanities</label>
+              </div>
+              <div class="flex items-center">
+                <input type="checkbox" id="medical" class="mr-2" />
+                <label for="medical" class="text-sm text-neutral-700">Medical Sciences</label>
+              </div>
+              <div class="flex items-center">
+                <input type="checkbox" id="engineering" class="mr-2" />
+                <label for="engineering" class="text-sm text-neutral-700">Engineering</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-sm text-neutral-700">Default System Prompt</label>
+              <span class="text-xs text-neutral-500">Academic-focused instruction set</span>
+            </div>
+            <textarea class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm h-24" placeholder="Enter default system prompt for this model">You are an academic assistant specializing in generating high-quality, scientifically accurate content suitable for peer-reviewed publications. Always maintain academic integrity, follow scientific methodology, and provide proper citations.</textarea>
+          </div>
+          
+          <div class="flex justify-between items-center border-t border-neutral-200 pt-4 mt-4">
+            <div class="flex items-center">
+              <input type="checkbox" id="active" class="mr-2" checked />
+              <label for="active" class="text-sm text-neutral-700">Set as active model</label>
+            </div>
+            <div class="flex space-x-2">
+              <button class="px-4 py-2 bg-neutral-100 text-neutral-700 rounded-md hover:bg-neutral-200">
+                Cancel
+              </button>
+              <button class="px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+                Save Model
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="models-list-section">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg text-neutral-800">Current AI Models</h3>
+          <div class="flex items-center">
+            <div class="relative mr-2">
+              <input type="text" placeholder="Search models" class="pl-8 pr-3 py-1 border border-neutral-300 rounded-md text-sm" />
+              <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 text-sm"></i>
+            </div>
+            <select class="border border-neutral-300 rounded-md px-3 py-1 text-sm">
+              <option>All Providers</option>
+              <option>UX Pilot AI</option>
+              <option>UX Pilot AI</option>
+              <option>UX Pilot AI</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="models-table" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+          <table class="w-full">
+            <thead class="bg-neutral-50 border-b border-neutral-200">
+              <tr>
+                <th class="text-left px-4 py-3 text-sm text-neutral-700">Model Name</th>
+                <th class="text-left px-4 py-3 text-sm text-neutral-700">Provider</th>
+                <th class="text-left px-4 py-3 text-sm text-neutral-700">Type</th>
+                <th class="text-left px-4 py-3 text-sm text-neutral-700">Status</th>
+                <th class="text-left px-4 py-3 text-sm text-neutral-700">Last Used</th>
+                <th class="text-left px-4 py-3 text-sm text-neutral-700">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-neutral-200">
+                <td class="px-4 py-3">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-md bg-neutral-600 flex items-center justify-center text-white mr-2">
+                      <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                      <div class="text-neutral-800">UX Pilot Opus</div>
+                      <div class="text-xs text-neutral-500">Academic Research</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-neutral-700">UX Pilot AI</td>
+                <td class="px-4 py-3 text-neutral-700">Opus</td>
+                <td class="px-4 py-3">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Active</span>
+                </td>
+                <td class="px-4 py-3 text-neutral-700">July 5, 2025</td>
+                <td class="px-4 py-3">
+                  <div class="flex space-x-2">
+                    <button class="p-1 text-neutral-600 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button class="p-1 text-neutral-600 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <button class="p-1 text-neutral-600 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b border-neutral-200">
+                <td class="px-4 py-3">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-md bg-neutral-600 flex items-center justify-center text-white mr-2">
+                      <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                      <div class="text-neutral-800">UX Pilot Sonnet</div>
+                      <div class="text-xs text-neutral-500">General Purpose</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-neutral-700">UX Pilot AI</td>
+                <td class="px-4 py-3 text-neutral-700">Sonnet</td>
+                <td class="px-4 py-3">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Active</span>
+                </td>
+                <td class="px-4 py-3 text-neutral-700">July 6, 2025</td>
+                <td class="px-4 py-3">
+                  <div class="flex space-x-2">
+                    <button class="p-1 text-neutral-600 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button class="p-1 text-neutral-600 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <button class="p-1 text-neutral-600 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-b border-neutral-200">
+                <td class="px-4 py-3">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-md bg-neutral-600 flex items-center justify-center text-white mr-2">
+                      <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                      <div class="text-neutral-800">GPT-4o</div>
+                      <div class="text-xs text-neutral-500">Medical Research</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-neutral-700">UX Pilot AI</td>
+                <td class="px-4 py-3 text-neutral-700">GPT-4o</td>
+                <td class="px-4 py-3">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Maintenance</span>
+                </td>
+                <td class="px-4 py-3 text-neutral-700">July 3, 2025</td>
+                <td class="px-4 py-3">
+                  <div class="flex space-x-2">
+                    <button class="p-1 text-neutral-600 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button class="p-1 text-neutral-600 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <button class="p-1 text-neutral-600 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-md bg-neutral-600 flex items-center justify-center text-white mr-2">
+                      <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                      <div class="text-neutral-800">GPT-4 Turbo</div>
+                      <div class="text-xs text-neutral-500">Engineering</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-neutral-700">UX Pilot AI</td>
+                <td class="px-4 py-3 text-neutral-700">GPT-4 Turbo</td>
+                <td class="px-4 py-3">
+                  <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Inactive</span>
+                </td>
+                <td class="px-4 py-3 text-neutral-700">June 28, 2025</td>
+                <td class="px-4 py-3">
+                  <div class="flex space-x-2">
+                    <button class="p-1 text-neutral-600 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button class="p-1 text-neutral-600 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <button class="p-1 text-neutral-600 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="mt-4 flex justify-between items-center">
+          <div class="text-sm text-neutral-600">
+            Showing 4 of 4 models
+          </div>
+          <div class="flex space-x-1">
+            <button class="px-3 py-1 border border-neutral-300 rounded-md bg-white text-neutral-700 text-sm">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="px-3 py-1 border border-neutral-300 rounded-md bg-neutral-600 text-white text-sm">1</button>
+            <button class="px-3 py-1 border border-neutral-300 rounded-md bg-white text-neutral-700 text-sm">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="security-section" class="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden mt-6">
+        <div class="p-4 border-b border-neutral-200 bg-neutral-50">
+          <h3 class="text-neutral-800">API Security & Data Safeguards</h3>
+          <p class="text-sm text-neutral-600">Configure security settings for AI model interactions</p>
+        </div>
+        <div class="p-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm text-neutral-700">API Key Encryption</label>
+                <div class="relative inline-block w-10 h-6">
+                  <input type="checkbox" id="toggle-encryption" class="sr-only" checked />
+                  <div class="block bg-neutral-300 w-10 h-6 rounded-full"></div>
+                  <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform translate-x-4"></div>
+                </div>
+              </div>
+              <p class="text-xs text-neutral-500 mb-4">All API keys are encrypted in the database</p>
+              
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm text-neutral-700">Request Logging</label>
+                <div class="relative inline-block w-10 h-6">
+                  <input type="checkbox" id="toggle-logging" class="sr-only" checked />
+                  <div class="block bg-neutral-300 w-10 h-6 rounded-full"></div>
+                  <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform translate-x-4"></div>
+                </div>
+              </div>
+              <p class="text-xs text-neutral-500 mb-4">Log all API requests for audit purposes</p>
+              
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm text-neutral-700">Content Filtering</label>
+                <div class="relative inline-block w-10 h-6">
+                  <input type="checkbox" id="toggle-filtering" class="sr-only" checked />
+                  <div class="block bg-neutral-300 w-10 h-6 rounded-full"></div>
+                  <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform translate-x-4"></div>
+                </div>
+              </div>
+              <p class="text-xs text-neutral-500">Filter inappropriate content from responses</p>
+            </div>
+            
+            <div>
+              <div class="mb-4">
+                <label class="block text-sm text-neutral-700 mb-1">API Rate Limiting</label>
+                <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>Strict (100 requests/hour)</option>
+                  <option>Moderate (500 requests/hour)</option>
+                  <option>Relaxed (1000 requests/hour)</option>
+                  <option>Unlimited</option>
+                </select>
+                <p class="text-xs text-neutral-500 mt-1">Prevent API abuse and control costs</p>
+              </div>
+              
+              <div class="mb-4">
+                <label class="block text-sm text-neutral-700 mb-1">Data Retention Period</label>
+                <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>30 days</option>
+                  <option>60 days</option>
+                  <option>90 days</option>
+                  <option>180 days</option>
+                  <option>1 year</option>
+                  <option>Indefinite</option>
+                </select>
+                <p class="text-xs text-neutral-500 mt-1">Control how long AI-generated content is stored</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="border-t border-neutral-200 pt-4 mt-4">
+            <div class="bg-neutral-50 border border-neutral-200 rounded-md p-3 mb-4">
+              <div class="flex items-start">
+                <i class="fa-solid fa-shield-alt text-neutral-600 mt-0.5 mr-2"></i>
+                <div>
+                  <h4 class="text-sm text-neutral-800">Academic Integrity Safeguards</h4>
+                  <p class="text-xs text-neutral-600 mt-1">All AI-generated content is processed through academic integrity checks to ensure originality and proper citation standards for scholarly work.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex justify-end">
+              <button class="px-4 py-2 bg-neutral-600 text-white rounded-md hover:bg-neutral-700">
+                Save Security Settings
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="w-full bg-white border-t border-neutral-200 py-4">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center">
+      <div class="text-sm text-neutral-600">
+        AcademiAI Manager v1.0.3 | Joomla 5.3 Component
+      </div>
+      <div class="text-sm text-neutral-600">
+        Last updated: July 6, 2025 at 10:06 AM
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

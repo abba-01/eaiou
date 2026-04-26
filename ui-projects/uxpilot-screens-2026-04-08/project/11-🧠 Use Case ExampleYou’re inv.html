@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Main Layout -->
+    <div class="flex h-[100vh]">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-gray-900 text-white flex flex-col h-full">
+            <!-- Logo -->
+            <div class="p-4 flex items-center border-b border-gray-700">
+                <div class="h-8 w-8 rounded-md bg-primary-500 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <span class="ml-2 font-bold text-xl">ProjectHub</span>
+            </div>
+            
+            <!-- Admin Menu -->
+            <div class="p-4">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">Admin Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-gauge-high w-6"></i>
+                            <span>Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-folder w-6"></i>
+                            <span>Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-flag w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-check-square w-6"></i>
+                            <span>Tasks</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar w-6"></i>
+                            <span>Events</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-file w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Panel -->
+            <div class="p-4 mt-4 border-t border-gray-700">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">User Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-house w-6"></i>
+                            <span>My Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-briefcase w-6"></i>
+                            <span>My Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-tasks w-6"></i>
+                            <span>Task List</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-map-signs w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar-alt w-6"></i>
+                            <span>Calendar</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-paperclip w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Profile -->
+            <div class="mt-auto p-4 border-t border-gray-700 flex items-center">
+                <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium">Admin User</p>
+                    <p class="text-xs text-gray-400">Super Admin</p>
+                </div>
+                <button class="ml-auto text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-cog"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 flex flex-col h-full overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 flex items-center justify-between p-4">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-800">Contact Profile</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                    <button class="relative p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">3</span>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-question-circle"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Contact Profile Content -->
+            <div class="flex-1 overflow-auto">
+                <!-- Contact Header -->
+                <div id="contact-header" class="bg-white p-6 border-b border-gray-200">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Sarah Mendoza" class="h-20 w-20 rounded-full object-cover">
+                        </div>
+                        <div class="ml-6 flex-1">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-900">Sarah Mendoza</h2>
+                                    <p class="text-gray-600">Witness</p>
+                                </div>
+                                <div class="flex space-x-3">
+                                    <button class="bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                                        <i class="fa-solid fa-envelope mr-2"></i>
+                                        Email
+                                    </button>
+                                    <button class="bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center">
+                                        <i class="fa-solid fa-phone mr-2"></i>
+                                        Call
+                                    </button>
+                                    <button class="bg-primary-500 text-white rounded-md px-4 py-2 text-sm font-medium hover:bg-primary-600 flex items-center">
+                                        <i class="fa-solid fa-edit mr-2"></i>
+                                        Edit Contact
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mt-4 grid grid-cols-3 gap-4">
+                                <div>
+                                    <p class="text-sm text-gray-500">Email</p>
+                                    <p class="text-sm font-medium">sarah.mendoza@example.com</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Phone</p>
+                                    <p class="text-sm font-medium">(555) 123-4567</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Address</p>
+                                    <p class="text-sm font-medium">123 Main St, Anytown, CA 90210</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tabs Navigation -->
+                <div id="tabs-navigation" class="bg-white border-b border-gray-200">
+                    <div class="px-6">
+                        <nav class="flex space-x-8">
+                            <button class="border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 py-4 px-1 text-sm font-medium">
+                                Profile Info
+                            </button>
+                            <button class="border-b-2 border-primary-500 text-primary-600 py-4 px-1 text-sm font-medium">
+                                Associated Projects
+                            </button>
+                            <button class="border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 py-4 px-1 text-sm font-medium">
+                                Uploaded Files
+                            </button>
+                            <button class="border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 py-4 px-1 text-sm font-medium">
+                                Contact Logs
+                            </button>
+                            <button class="border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 py-4 px-1 text-sm font-medium">
+                                Investigation Notes
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+                
+                <!-- Main Content Area -->
+                <div id="content-area" class="p-6 grid grid-cols-3 gap-6">
+                    <!-- Left Column - Projects List -->
+                    <div id="projects-list" class="col-span-2">
+                        <div class="bg-white rounded-lg shadow mb-6">
+                            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                                <h3 class="text-lg font-medium text-gray-900">Associated Projects</h3>
+                                <button id="add-to-project-btn" class="bg-primary-500 hover:bg-primary-600 text-white px-3 py-2 rounded-md text-sm flex items-center">
+                                    <i class="fa-solid fa-plus mr-2"></i> Add to Project
+                                </button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project Name</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Activity</th>
+                                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-primary-600 hover:text-primary-800 cursor-pointer">Evergreen Fraud Investigation</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Witness</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">In Progress</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 12, 2023</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                <button class="text-primary-500 hover:text-primary-700 mr-3"><i class="fa-solid fa-eye"></i></button>
+                                                <button class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-ellipsis-v"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-medium text-primary-600 hover:text-primary-800 cursor-pointer">Downtown Robbery Case</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Informant</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Apr 30, 2023</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                <button class="text-primary-500 hover:text-primary-700 mr-3"><i class="fa-solid fa-eye"></i></button>
+                                                <button class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-ellipsis-v"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Files Section -->
+                        <div id="files-section" class="bg-white rounded-lg shadow">
+                            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                                <h3 class="text-lg font-medium text-gray-900">Files from Interviews</h3>
+                                <button id="upload-file-btn" class="bg-primary-500 hover:bg-primary-600 text-white px-3 py-2 rounded-md text-sm flex items-center">
+                                    <i class="fa-solid fa-upload mr-2"></i> Upload File
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <div class="grid grid-cols-1 gap-4">
+                                    <div class="border border-gray-200 rounded-lg p-4 flex items-center">
+                                        <div class="h-10 w-10 flex-shrink-0 bg-blue-100 text-blue-500 rounded-lg flex items-center justify-center">
+                                            <i class="fa-solid fa-file-audio"></i>
+                                        </div>
+                                        <div class="ml-4 flex-1">
+                                            <h4 class="text-sm font-medium">Initial Interview Recording.mp3</h4>
+                                            <div class="flex items-center mt-1">
+                                                <span class="text-xs text-gray-500">Uploaded by John Smith on May 10, 2023</span>
+                                                <span class="mx-2 text-gray-300">|</span>
+                                                <span class="text-xs text-gray-500">15.4 MB</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-gray-500 hover:text-gray-700 p-2">
+                                                <i class="fa-solid fa-download"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700 p-2">
+                                                <i class="fa-solid fa-ellipsis-v"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="border border-gray-200 rounded-lg p-4 flex items-center">
+                                        <div class="h-10 w-10 flex-shrink-0 bg-green-100 text-green-500 rounded-lg flex items-center justify-center">
+                                            <i class="fa-solid fa-file-alt"></i>
+                                        </div>
+                                        <div class="ml-4 flex-1">
+                                            <h4 class="text-sm font-medium">Witness Statement.pdf</h4>
+                                            <div class="flex items-center mt-1">
+                                                <span class="text-xs text-gray-500">Uploaded by Emily Wilson on May 12, 2023</span>
+                                                <span class="mx-2 text-gray-300">|</span>
+                                                <span class="text-xs text-gray-500">2.3 MB</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-gray-500 hover:text-gray-700 p-2">
+                                                <i class="fa-solid fa-download"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700 p-2">
+                                                <i class="fa-solid fa-ellipsis-v"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="border border-gray-200 rounded-lg p-4 flex items-center">
+                                        <div class="h-10 w-10 flex-shrink-0 bg-purple-100 text-purple-500 rounded-lg flex items-center justify-center">
+                                            <i class="fa-solid fa-file-image"></i>
+                                        </div>
+                                        <div class="ml-4 flex-1">
+                                            <h4 class="text-sm font-medium">Evidence Photo 1.jpg</h4>
+                                            <div class="flex items-center mt-1">
+                                                <span class="text-xs text-gray-500">Uploaded by Robert Davis on May 8, 2023</span>
+                                                <span class="mx-2 text-gray-300">|</span>
+                                                <span class="text-xs text-gray-500">4.7 MB</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-gray-500 hover:text-gray-700 p-2">
+                                                <i class="fa-solid fa-download"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700 p-2">
+                                                <i class="fa-solid fa-ellipsis-v"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Contact Logs and Actions -->
+                    <div id="contact-logs" class="col-span-1">
+                        <!-- Log New Interaction -->
+                        <div id="log-interaction" class="bg-white rounded-lg shadow mb-6">
+                            <div class="p-4 border-b border-gray-200">
+                                <h3 class="text-lg font-medium text-gray-900">Log New Interaction</h3>
+                            </div>
+                            <div class="p-4">
+                                <form>
+                                    <div class="mb-4">
+                                        <label for="interaction-type" class="block text-sm font-medium text-gray-700 mb-1">Interaction Type</label>
+                                        <select id="interaction-type" class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                                            <option value="call">Phone Call</option>
+                                            <option value="email">Email</option>
+                                            <option value="meeting">Meeting</option>
+                                            <option value="interview">Interview</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="related-project" class="block text-sm font-medium text-gray-700 mb-1">Related Project</label>
+                                        <select id="related-project" class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                                            <option value="">-- Select Project --</option>
+                                            <option value="1">Evergreen Fraud Investigation</option>
+                                            <option value="2">Downtown Robbery Case</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="summary" class="block text-sm font-medium text-gray-700 mb-1">Summary</label>
+                                        <textarea id="summary" rows="3" class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Brief description of the interaction..."></textarea>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Date & Time</label>
+                                        <input type="datetime-local" id="date" class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <input id="add-reminder" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                            <label for="add-reminder" class="ml-2 block text-sm text-gray-700">Set follow-up reminder</label>
+                                        </div>
+                                        <button type="submit" class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium">
+                                            Log Interaction
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Interactions -->
+                        <div id="recent-interactions" class="bg-white rounded-lg shadow">
+                            <div class="p-4 border-b border-gray-200">
+                                <h3 class="text-lg font-medium text-gray-900">Recent Interactions</h3>
+                            </div>
+                            <div class="p-4">
+                                <div class="space-y-4">
+                                    <div class="border-l-4 border-blue-500 pl-4 py-2">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <p class="text-sm font-medium">Phone Call</p>
+                                                <p class="text-xs text-gray-500">May 15, 2023 at 2:30 PM</p>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Evergreen Fraud Investigation</span>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-600">Initial contact to schedule formal interview. Witness agreed to meet at headquarters on May 17.</p>
+                                        <div class="mt-2 flex items-center text-xs text-gray-500">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User Avatar" class="h-4 w-4 rounded-full mr-1">
+                                            <span>Logged by John Smith</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="border-l-4 border-green-500 pl-4 py-2">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <p class="text-sm font-medium">Interview</p>
+                                                <p class="text-xs text-gray-500">May 12, 2023 at 10:00 AM</p>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Evergreen Fraud Investigation</span>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-600">Conducted formal interview regarding events on April 28. Witness provided detailed account and identified suspect from photo lineup.</p>
+                                        <div class="mt-2 flex items-center text-xs text-gray-500">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User Avatar" class="h-4 w-4 rounded-full mr-1">
+                                            <span>Logged by Robert Davis</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="border-l-4 border-purple-500 pl-4 py-2">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <p class="text-sm font-medium">Email</p>
+                                                <p class="text-xs text-gray-500">May 10, 2023 at 9:15 AM</p>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Downtown Robbery Case</span>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-600">Sent follow-up email with case details and request for additional information regarding suspect description.</p>
+                                        <div class="mt-2 flex items-center text-xs text-gray-500">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="User Avatar" class="h-4 w-4 rounded-full mr-1">
+                                            <span>Logged by Emily Wilson</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4 text-center">
+                                    <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">
+                                        View All Interactions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer id="footer" class="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+                <p>&copy; 2023 ProjectHub Admin Panel. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+    
+    <!-- Add to Project Modal -->
+    <div id="add-project-modal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="fixed inset-0 bg-black opacity-50"></div>
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md z-10">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="text-lg font-medium text-gray-900">Add to Project</h3>
+                <button class="text-gray-400 hover:text-gray-500">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <div class="mb-4">
+                    <label for="project-select" class="block text-sm font-medium text-gray-700 mb-1">Select Project</label>
+                    <select id="project-select" class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                        <option value="">-- Select Project --</option>
+                        <option value="3">Security Audit</option>
+                        <option value="4">Mobile App Development</option>
+                        <option value="5">API Integration</option>
+                    </select>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="role-select" class="block text-sm font-medium text-gray-700 mb-1">Role in Project</label>
+                    <select id="role-select" class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                        <option value="witness">Witness</option>
+                        <option value="informant">Informant</option>
+                        <option value="suspect">Suspect</option>
+                        <option value="victim">Victim</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+                    <textarea id="notes" rows="3" class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Any additional information..."></textarea>
+                </div>
+            </div>
+            <div class="p-4 border-t border-gray-200 flex justify-end space-x-3">
+                <button class="bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                    Cancel
+                </button>
+                <button class="bg-primary-500 text-white rounded-md px-4 py-2 text-sm font-medium hover:bg-primary-600">
+                    Add to Project
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Upload File Modal -->
+    <div id="upload-file-modal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="fixed inset-0 bg-black opacity-50"></div>
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md z-10">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="text-lg font-medium text-gray-900">Upload File</h3>
+                <button class="text-gray-400 hover:text-gray-500">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <div class="mb-4">
+                    <label for="file-title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                    <input type="text" id="file-title" class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="File title">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="file-description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                    <textarea id="file-description" rows="2" class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Brief description of the file..."></textarea>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="file-project" class="block text-sm font-medium text-gray-700 mb-1">Related Project</label>
+                    <select id="file-project" class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                        <option value="">-- None --</option>
+                        <option value="1">Evergreen Fraud Investigation</option>
+                        <option value="2">Downtown Robbery Case</option>
+                    </select>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">File</label>
+                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                        <div class="space-y-1 text-center">
+                            <i class="fa-solid fa-cloud-upload-alt text-gray-400 text-3xl mb-2"></i>
+                            <div class="flex text-sm text-gray-600">
+                                <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-primary-600 hover:text-primary-500">
+                                    <span>Upload a file</span>
+                                    <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                                </label>
+                                <p class="pl-1">or drag and drop</p>
+                            </div>
+                            <p class="text-xs text-gray-500">
+                                Audio, PDF, DOC, JPG, PNG up to 100MB
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="flex items-center">
+                        <input id="file-private" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                        <label for="file-private" class="ml-2 block text-sm text-gray-700">Make file private (admin access only)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t border-gray-200 flex justify-end space-x-3">
+                <button class="bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                    Cancel
+                </button>
+                <button class="bg-primary-500 text-white rounded-md px-4 py-2 text-sm font-medium hover:bg-primary-600">
+                    Upload
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Toggle modals
+        document.getElementById('add-to-project-btn').addEventListener('click', function() {
+            document.getElementById('add-project-modal').classList.remove('hidden');
+        });
+        
+        document.getElementById('upload-file-btn').addEventListener('click', function() {
+            document.getElementById('upload-file-modal').classList.remove('hidden');
+        });
+        
+        // Close modals when clicking on close buttons
+        document.querySelectorAll('#add-project-modal button, #upload-file-modal button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.getElementById('add-project-modal').classList.add('hidden');
+                document.getElementById('upload-file-modal').classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

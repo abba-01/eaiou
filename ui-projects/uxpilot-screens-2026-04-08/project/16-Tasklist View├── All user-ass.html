@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Main Layout -->
+    <div class="flex h-[100vh]">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-gray-900 text-white flex flex-col h-full">
+            <!-- Logo -->
+            <div class="p-4 flex items-center border-b border-gray-700">
+                <div class="h-8 w-8 rounded-md bg-primary-500 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <span class="ml-2 font-bold text-xl">ProjectHub</span>
+            </div>
+            
+            <!-- Admin Menu -->
+            <div class="p-4">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">Admin Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-gauge-high w-6"></i>
+                            <span>Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-folder w-6"></i>
+                            <span>Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-flag w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md bg-primary-700 text-white cursor-pointer">
+                            <i class="fa-solid fa-check-square w-6"></i>
+                            <span>Tasks</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar w-6"></i>
+                            <span>Events</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-file w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Panel -->
+            <div class="p-4 mt-4 border-t border-gray-700">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">User Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-house w-6"></i>
+                            <span>My Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-briefcase w-6"></i>
+                            <span>My Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-tasks w-6"></i>
+                            <span>Task List</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-map-signs w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar-alt w-6"></i>
+                            <span>Calendar</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-paperclip w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Profile -->
+            <div class="mt-auto p-4 border-t border-gray-700 flex items-center">
+                <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium">Admin User</p>
+                    <p class="text-xs text-gray-400">Super Admin</p>
+                </div>
+                <button class="ml-auto text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-cog"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 flex flex-col h-full overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 flex items-center justify-between p-4">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-800">Task List</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search tasks..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                    <button class="relative p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">3</span>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-question-circle"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Task List Content -->
+            <div class="flex-1 overflow-auto">
+                <!-- Filter Bar -->
+                <div id="filter-bar" class="bg-white border-b border-gray-200 px-6 py-3">
+                    <div class="flex flex-wrap justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="relative">
+                                <select class="appearance-none pl-3 pr-8 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                    <option>All Tasks</option>
+                                    <option>My Tasks</option>
+                                    <option>Assigned Tasks</option>
+                                    <option>Completed Tasks</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-gray-400 text-xs"></i>
+                            </div>
+                            <div class="relative">
+                                <select class="appearance-none pl-3 pr-8 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                    <option>All Projects</option>
+                                    <option>Website Redesign</option>
+                                    <option>Mobile App Development</option>
+                                    <option>API Integration</option>
+                                    <option>Database Migration</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-gray-400 text-xs"></i>
+                            </div>
+                            <div class="relative">
+                                <select class="appearance-none pl-3 pr-8 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                    <option>Priority</option>
+                                    <option>High</option>
+                                    <option>Medium</option>
+                                    <option>Low</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-gray-400 text-xs"></i>
+                            </div>
+                            <div class="relative">
+                                <select class="appearance-none pl-3 pr-8 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                    <option>Status</option>
+                                    <option>Not Started</option>
+                                    <option>In Progress</option>
+                                    <option>Completed</option>
+                                    <option>On Hold</option>
+                                    <option>Blocked</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-gray-400 text-xs"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 mt-3 sm:mt-0">
+                            <button class="flex items-center text-sm text-gray-600 border border-gray-300 rounded-md px-3 py-2 hover:bg-gray-50">
+                                <i class="fa-solid fa-filter mr-2"></i>
+                                <span>More Filters</span>
+                            </button>
+                            <button class="flex items-center text-sm text-white bg-primary-500 hover:bg-primary-600 rounded-md px-3 py-2">
+                                <i class="fa-solid fa-plus mr-2"></i>
+                                <span>New Task</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tasks Table -->
+                <div id="tasks-table" class="px-6 py-4">
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <!-- Table Header -->
+                        <div class="grid grid-cols-12 gap-4 border-b border-gray-200 py-3 px-6 bg-gray-50 text-sm font-medium text-gray-500">
+                            <div class="col-span-5 flex items-center">
+                                <input type="checkbox" class="mr-3 h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-500">
+                                Task Name
+                            </div>
+                            <div class="col-span-2">Project</div>
+                            <div class="col-span-1">Priority</div>
+                            <div class="col-span-1">Status</div>
+                            <div class="col-span-1">Assignee</div>
+                            <div class="col-span-1">Due Date</div>
+                            <div class="col-span-1 text-right">Actions</div>
+                        </div>
+
+                        <!-- Task Items -->
+                        <div id="task-items">
+                            <!-- Task 1 -->
+                            <div class="grid grid-cols-12 gap-4 border-b border-gray-200 py-4 px-6 hover:bg-gray-50">
+                                <div class="col-span-5 flex items-center">
+                                    <input type="checkbox" class="mr-3 h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-500">
+                                    <div>
+                                        <div class="font-medium text-gray-800">Create wireframes for homepage</div>
+                                        <div class="text-sm text-gray-500 mt-1">
+                                            <i class="fa-regular fa-file-lines mr-1"></i>
+                                            <span>3 attachments</span>
+                                            <i class="fa-regular fa-comment ml-3 mr-1"></i>
+                                            <span>5 comments</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-span-2 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Website Redesign</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-red-100 text-red-800">High</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">In Progress</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                </div>
+                                <div class="col-span-1 flex items-center text-sm text-gray-600">
+                                    <i class="fa-regular fa-calendar mr-2"></i>
+                                    May 25, 2023
+                                </div>
+                                <div class="col-span-1 flex items-center justify-end">
+                                    <button class="text-gray-500 hover:text-primary-500 mr-3">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Task 2 -->
+                            <div class="grid grid-cols-12 gap-4 border-b border-gray-200 py-4 px-6 hover:bg-gray-50">
+                                <div class="col-span-5 flex items-center">
+                                    <input type="checkbox" class="mr-3 h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-500">
+                                    <div>
+                                        <div class="font-medium text-gray-800">Implement user authentication</div>
+                                        <div class="text-sm text-gray-500 mt-1">
+                                            <i class="fa-regular fa-file-lines mr-1"></i>
+                                            <span>2 attachments</span>
+                                            <i class="fa-regular fa-comment ml-3 mr-1"></i>
+                                            <span>8 comments</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-span-2 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-purple-100 text-purple-800">API Integration</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-red-100 text-red-800">High</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-green-100 text-green-800">Completed</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                </div>
+                                <div class="col-span-1 flex items-center text-sm text-gray-600">
+                                    <i class="fa-regular fa-calendar mr-2"></i>
+                                    May 20, 2023
+                                </div>
+                                <div class="col-span-1 flex items-center justify-end">
+                                    <button class="text-gray-500 hover:text-primary-500 mr-3">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Task 3 -->
+                            <div class="grid grid-cols-12 gap-4 border-b border-gray-200 py-4 px-6 hover:bg-gray-50 bg-gray-50">
+                                <div class="col-span-5 flex items-center">
+                                    <input type="checkbox" class="mr-3 h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-500" checked>
+                                    <div>
+                                        <div class="font-medium text-gray-800 line-through">Migrate database to new server</div>
+                                        <div class="text-sm text-gray-500 mt-1">
+                                            <i class="fa-regular fa-file-lines mr-1"></i>
+                                            <span>5 attachments</span>
+                                            <i class="fa-regular fa-comment ml-3 mr-1"></i>
+                                            <span>12 comments</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-span-2 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-green-100 text-green-800">Database Migration</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-orange-100 text-orange-800">Medium</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-green-100 text-green-800">Completed</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                </div>
+                                <div class="col-span-1 flex items-center text-sm text-gray-600">
+                                    <i class="fa-regular fa-calendar mr-2"></i>
+                                    May 15, 2023
+                                </div>
+                                <div class="col-span-1 flex items-center justify-end">
+                                    <button class="text-gray-500 hover:text-primary-500 mr-3">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Task 4 -->
+                            <div class="grid grid-cols-12 gap-4 border-b border-gray-200 py-4 px-6 hover:bg-gray-50">
+                                <div class="col-span-5 flex items-center">
+                                    <input type="checkbox" class="mr-3 h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-500">
+                                    <div>
+                                        <div class="font-medium text-gray-800">Design app icon and splash screen</div>
+                                        <div class="text-sm text-gray-500 mt-1">
+                                            <i class="fa-regular fa-file-lines mr-1"></i>
+                                            <span>1 attachment</span>
+                                            <i class="fa-regular fa-comment ml-3 mr-1"></i>
+                                            <span>3 comments</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-span-2 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Mobile App Development</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-green-100 text-green-800">Low</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Not Started</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                </div>
+                                <div class="col-span-1 flex items-center text-sm text-gray-600">
+                                    <i class="fa-regular fa-calendar mr-2"></i>
+                                    Jun 10, 2023
+                                </div>
+                                <div class="col-span-1 flex items-center justify-end">
+                                    <button class="text-gray-500 hover:text-primary-500 mr-3">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Task 5 -->
+                            <div class="grid grid-cols-12 gap-4 border-b border-gray-200 py-4 px-6 hover:bg-gray-50">
+                                <div class="col-span-5 flex items-center">
+                                    <input type="checkbox" class="mr-3 h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-500">
+                                    <div>
+                                        <div class="font-medium text-gray-800">Conduct security audit on API endpoints</div>
+                                        <div class="text-sm text-gray-500 mt-1">
+                                            <i class="fa-regular fa-file-lines mr-1"></i>
+                                            <span>4 attachments</span>
+                                            <i class="fa-regular fa-comment ml-3 mr-1"></i>
+                                            <span>6 comments</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-2 px-2 py-0.5 rounded text-xs bg-red-100 text-red-800">Blocked</div>
+                                </div>
+                                <div class="col-span-2 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-red-100 text-red-800">Security Audit</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-red-100 text-red-800">High</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-orange-100 text-orange-800">On Hold</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                </div>
+                                <div class="col-span-1 flex items-center text-sm text-red-600">
+                                    <i class="fa-regular fa-calendar mr-2"></i>
+                                    May 22, 2023
+                                </div>
+                                <div class="col-span-1 flex items-center justify-end">
+                                    <button class="text-gray-500 hover:text-primary-500 mr-3">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Task 6 -->
+                            <div class="grid grid-cols-12 gap-4 border-b border-gray-200 py-4 px-6 hover:bg-gray-50">
+                                <div class="col-span-5 flex items-center">
+                                    <input type="checkbox" class="mr-3 h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-500">
+                                    <div>
+                                        <div class="font-medium text-gray-800">Optimize database queries for performance</div>
+                                        <div class="text-sm text-gray-500 mt-1">
+                                            <i class="fa-regular fa-file-lines mr-1"></i>
+                                            <span>2 attachments</span>
+                                            <i class="fa-regular fa-comment ml-3 mr-1"></i>
+                                            <span>10 comments</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-span-2 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-green-100 text-green-800">Database Migration</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-orange-100 text-orange-800">Medium</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">In Progress</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                </div>
+                                <div class="col-span-1 flex items-center text-sm text-gray-600">
+                                    <i class="fa-regular fa-calendar mr-2"></i>
+                                    May 30, 2023
+                                </div>
+                                <div class="col-span-1 flex items-center justify-end">
+                                    <button class="text-gray-500 hover:text-primary-500 mr-3">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Task 7 -->
+                            <div class="grid grid-cols-12 gap-4 border-b border-gray-200 py-4 px-6 hover:bg-gray-50">
+                                <div class="col-span-5 flex items-center">
+                                    <input type="checkbox" class="mr-3 h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-500">
+                                    <div>
+                                        <div class="font-medium text-gray-800">Create responsive layouts for mobile views</div>
+                                        <div class="text-sm text-gray-500 mt-1">
+                                            <i class="fa-regular fa-file-lines mr-1"></i>
+                                            <span>6 attachments</span>
+                                            <i class="fa-regular fa-comment ml-3 mr-1"></i>
+                                            <span>4 comments</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-span-2 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Website Redesign</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-orange-100 text-orange-800">Medium</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">In Progress</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                </div>
+                                <div class="col-span-1 flex items-center text-sm text-gray-600">
+                                    <i class="fa-regular fa-calendar mr-2"></i>
+                                    Jun 5, 2023
+                                </div>
+                                <div class="col-span-1 flex items-center justify-end">
+                                    <button class="text-gray-500 hover:text-primary-500 mr-3">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Task 8 -->
+                            <div class="grid grid-cols-12 gap-4 border-b border-gray-200 py-4 px-6 hover:bg-gray-50">
+                                <div class="col-span-5 flex items-center">
+                                    <input type="checkbox" class="mr-3 h-4 w-4 rounded border-gray-300 text-primary-500 focus:ring-primary-500">
+                                    <div>
+                                        <div class="font-medium text-gray-800">Write API documentation</div>
+                                        <div class="text-sm text-gray-500 mt-1">
+                                            <i class="fa-regular fa-file-lines mr-1"></i>
+                                            <span>1 attachment</span>
+                                            <i class="fa-regular fa-comment ml-3 mr-1"></i>
+                                            <span>2 comments</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-span-2 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-purple-100 text-purple-800">API Integration</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-green-100 text-green-800">Low</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <span class="px-2.5 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Not Started</span>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                </div>
+                                <div class="col-span-1 flex items-center text-sm text-gray-600">
+                                    <i class="fa-regular fa-calendar mr-2"></i>
+                                    Jun 15, 2023
+                                </div>
+                                <div class="col-span-1 flex items-center justify-end">
+                                    <button class="text-gray-500 hover:text-primary-500 mr-3">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="px-6 py-4 flex items-center justify-between border-t border-gray-200">
+                            <div class="text-sm text-gray-600">
+                                Showing 8 of 156 tasks
+                            </div>
+                            <div class="flex space-x-1">
+                                <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200 text-gray-600">&lt;</button>
+                                <button class="px-3 py-1 text-sm bg-primary-500 text-white rounded-md">1</button>
+                                <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200 text-gray-600">2</button>
+                                <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200 text-gray-600">3</button>
+                                <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200 text-gray-600">4</button>
+                                <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200 text-gray-600">5</button>
+                                <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200 text-gray-600">&gt;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task Detail Sidebar (initially hidden, would be shown with JavaScript) -->
+            <div id="task-detail-sidebar" class="hidden fixed right-0 top-0 h-full w-[400px] bg-white shadow-lg border-l border-gray-200 overflow-y-auto">
+                <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                    <h2 class="text-lg font-semibold">Task Details</h2>
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-xl font-medium">Create wireframes for homepage</h3>
+                            <div class="flex items-center">
+                                <button class="text-gray-500 hover:text-gray-700 mr-2">
+                                    <i class="fa-regular fa-star"></i>
+                                </button>
+                                <button class="text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                            <span>Created on May 18, 2023</span>
+                            <span class="mx-2">•</span>
+                            <span>Task #WR-103</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Status</p>
+                                <select class="w-full rounded-md border-gray-300 text-sm">
+                                    <option>Not Started</option>
+                                    <option selected>In Progress</option>
+                                    <option>Completed</option>
+                                    <option>On Hold</option>
+                                </select>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Priority</p>
+                                <select class="w-full rounded-md border-gray-300 text-sm">
+                                    <option selected>High</option>
+                                    <option>Medium</option>
+                                    <option>Low</option>
+                                </select>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Assignee</p>
+                                <select class="w-full rounded-md border-gray-300 text-sm">
+                                    <option selected>John Smith</option>
+                                    <option>Sarah Johnson</option>
+                                    <option>Michael Brown</option>
+                                    <option>Emily Wilson</option>
+                                </select>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Due Date</p>
+                                <input type="date" value="2023-05-25" class="w-full rounded-md border-gray-300 text-sm">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <p class="text-sm text-gray-500 mb-1">Description</p>
+                            <textarea class="w-full rounded-md border-gray-300 text-sm" rows="4">Create detailed wireframes for the new homepage design, including mobile and desktop versions. Focus on improving user flow and call-to-action placement.</textarea>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="font-medium mb-3">Attachments (3)</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center p-3 border border-gray-200 rounded-md">
+                                <i class="fa-regular fa-file-pdf text-red-500 text-xl mr-3"></i>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium">homepage-requirements.pdf</p>
+                                    <p class="text-xs text-gray-500">1.2 MB • Uploaded 3 days ago</p>
+                                </div>
+                                <button class="text-gray-500 hover:text-primary-500">
+                                    <i class="fa-solid fa-download"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center p-3 border border-gray-200 rounded-md">
+                                <i class="fa-regular fa-file-image text-blue-500 text-xl mr-3"></i>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium">inspiration-examples.png</p>
+                                    <p class="text-xs text-gray-500">3.8 MB • Uploaded 2 days ago</p>
+                                </div>
+                                <button class="text-gray-500 hover:text-primary-500">
+                                    <i class="fa-solid fa-download"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center p-3 border border-gray-200 rounded-md">
+                                <i class="fa-regular fa-file-word text-blue-700 text-xl mr-3"></i>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium">branding-guidelines.docx</p>
+                                    <p class="text-xs text-gray-500">0.8 MB • Uploaded 1 day ago</p>
+                                </div>
+                                <button class="text-gray-500 hover:text-primary-500">
+                                    <i class="fa-solid fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="mt-3 text-sm text-primary-500 hover:text-primary-600 flex items-center">
+                            <i class="fa-solid fa-plus mr-1"></i>
+                            Add Attachment
+                        </button>
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-3">Comments (5)</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex mb-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="User Avatar" class="h-8 w-8 rounded-full mr-2">
+                                    <div class="flex-1 bg-gray-50 rounded-lg p-3">
+                                        <div class="flex justify-between items-start">
+                                            <p class="text-sm font-medium">Sarah Johnson</p>
+                                            <p class="text-xs text-gray-500">2 days ago</p>
+                                        </div>
+                                        <p class="text-sm mt-1">Can we make sure the hero section stands out more? The current examples aren't bold enough.</p>
+                                    </div>
+                                </div>
+                                <div class="flex mb-2 pl-10">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User Avatar" class="h-8 w-8 rounded-full mr-2">
+                                    <div class="flex-1 bg-gray-50 rounded-lg p-3">
+                                        <div class="flex justify-between items-start">
+                                            <p class="text-sm font-medium">John Smith</p>
+                                            <p class="text-xs text-gray-500">1 day ago</p>
+                                        </div>
+                                        <p class="text-sm mt-1">Good point. I'll update the wireframes with a more prominent hero section.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="User Avatar" class="h-8 w-8 rounded-full mr-2">
+                                <div class="flex-1 bg-gray-50 rounded-lg p-3">
+                                    <div class="flex justify-between items-start">
+                                        <p class="text-sm font-medium">Michael Brown</p>
+                                        <p class="text-xs text-gray-500">1 day ago</p>
+                                    </div>
+                                    <p class="text-sm mt-1">Let's also consider adding testimonials to the homepage. It could help with conversions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User Avatar" class="h-8 w-8 rounded-full mr-2">
+                            <div class="flex-1">
+                                <textarea placeholder="Add a comment..." class="w-full rounded-md border-gray-300 text-sm" rows="2"></textarea>
+                                <div class="mt-2 flex justify-end">
+                                    <button class="px-3 py-1 text-sm bg-primary-500 text-white rounded-md hover:bg-primary-600">
+                                        Post Comment
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer id="footer" class="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+                <p>&copy; 2023 ProjectHub Admin Panel. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

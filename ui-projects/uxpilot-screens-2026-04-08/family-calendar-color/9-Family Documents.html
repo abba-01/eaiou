@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style>::-webkit-scrollbar { display: none;}</style>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Nunito', 'sans-serif'],
+                        },
+                        colors: {
+                            primary: {
+                                50: '#f0f9ff',
+                                100: '#e0f2fe',
+                                200: '#bae6fd',
+                                300: '#7dd3fc',
+                                400: '#38bdf8',
+                                500: '#0ea5e9',
+                                600: '#0284c7',
+                                700: '#0369a1',
+                                800: '#075985',
+                                900: '#0c4a6e',
+                            },
+                            family: {
+                                blue: '#4285F4',
+                                green: '#34A853',
+                                yellow: '#FBBC05',
+                                red: '#EA4335',
+                                purple: '#9C27B0',
+                                teal: '#009688',
+                                orange: '#FF9800',
+                                pink: '#E91E63',
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="font-sans bg-gray-100">
+        <!-- Header -->
+        <header id="header" class="bg-white border-b shadow-sm">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-people-roof text-family-blue text-2xl"></i>
+                        <h1 class="text-xl font-bold text-gray-800">FamilyWall</h1>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-bell"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <div class="h-8 w-8 rounded-full bg-family-blue text-white flex items-center justify-center">
+                            <span class="font-semibold">JS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex h-[calc(100vh-64px)]">
+            <!-- Sidebar -->
+            <div id="sidebar" class="w-64 bg-white border-r hidden md:block">
+                <div class="p-4">
+                    <div class="mb-6">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-3">My Family</h2>
+                        <div class="flex -space-x-2 mb-4">
+                            <div class="h-10 w-10 rounded-full bg-family-blue text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">JS</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-green text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">LS</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-purple text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">ES</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-orange text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">MS</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <nav>
+                        <ul class="space-y-2">
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-calendar-days w-6"></i>
+                                    <span>Calendar</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-list-check w-6"></i>
+                                    <span>Tasks</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-cart-shopping w-6"></i>
+                                    <span>Shopping Lists</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-utensils w-6"></i>
+                                    <span>Meal Planner</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-book w-6"></i>
+                                    <span>Recipes</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-message w-6"></i>
+                                    <span>Messages</span>
+                                </span>
+                            </li>
+                            <li class="bg-blue-50 rounded-lg text-family-blue">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-folder w-6"></i>
+                                    <span>Documents</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-address-book w-6"></i>
+                                    <span>Contacts</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div id="main-content" class="flex-1 overflow-auto">
+                <!-- Document Controls -->
+                <div id="document-controls" class="bg-white p-4 border-b flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <h1 class="text-xl font-bold text-gray-800">Family Documents</h1>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="relative">
+                            <input type="text" placeholder="Search documents..." class="pl-10 pr-4 py-2 border rounded-lg text-sm w-64 focus:outline-none focus:ring-2 focus:ring-family-blue">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                        <button class="p-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                            <i class="fa-solid fa-sort"></i>
+                        </button>
+                        <button class="p-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                            <i class="fa-solid fa-filter"></i>
+                        </button>
+                        <button class="px-4 py-2 bg-family-blue text-white rounded-lg hover:bg-blue-600 flex items-center">
+                            <i class="fa-solid fa-plus mr-2"></i> New Folder
+                        </button>
+                        <button class="px-4 py-2 bg-family-blue text-white rounded-lg hover:bg-blue-600 flex items-center">
+                            <i class="fa-solid fa-upload mr-2"></i> Upload
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Breadcrumb -->
+                <div id="breadcrumb" class="bg-white p-3 border-b flex items-center text-sm">
+                    <span class="text-gray-600">Home</span>
+                    <i class="fa-solid fa-chevron-right mx-2 text-gray-400 text-xs"></i>
+                    <span class="text-family-blue font-medium">Documents</span>
+                </div>
+
+                <!-- Folder Grid -->
+                <div id="document-grid" class="p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Folders</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
+                        <!-- Important Documents Folder -->
+                        <div id="folder-important" class="bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow p-4 cursor-pointer">
+                            <div class="flex items-start">
+                                <div class="bg-family-red bg-opacity-10 p-3 rounded-lg mr-3">
+                                    <i class="fa-solid fa-folder text-family-red text-2xl"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="font-semibold text-gray-800 mb-1 truncate">Important Documents</h3>
+                                    <p class="text-sm text-gray-500 mb-2">10 files · Shared with all</p>
+                                    <div class="flex items-center">
+                                        <div class="flex -space-x-2 mr-2">
+                                            <div class="h-6 w-6 rounded-full bg-family-blue text-white flex items-center justify-center text-xs border-2 border-white">
+                                                JS
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-green text-white flex items-center justify-center text-xs border-2 border-white">
+                                                LS
+                                            </div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">Last updated: 2 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Medical Records Folder -->
+                        <div id="folder-medical" class="bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow p-4 cursor-pointer">
+                            <div class="flex items-start">
+                                <div class="bg-family-blue bg-opacity-10 p-3 rounded-lg mr-3">
+                                    <i class="fa-solid fa-folder text-family-blue text-2xl"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="font-semibold text-gray-800 mb-1 truncate">Medical Records</h3>
+                                    <p class="text-sm text-gray-500 mb-2">8 files · Private</p>
+                                    <div class="flex items-center">
+                                        <div class="flex -space-x-2 mr-2">
+                                            <div class="h-6 w-6 rounded-full bg-family-blue text-white flex items-center justify-center text-xs border-2 border-white">
+                                                JS
+                                            </div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">Last updated: 1 week ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- School Documents Folder -->
+                        <div id="folder-school" class="bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow p-4 cursor-pointer">
+                            <div class="flex items-start">
+                                <div class="bg-family-yellow bg-opacity-10 p-3 rounded-lg mr-3">
+                                    <i class="fa-solid fa-folder text-family-yellow text-2xl"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="font-semibold text-gray-800 mb-1 truncate">School Documents</h3>
+                                    <p class="text-sm text-gray-500 mb-2">15 files · Shared with all</p>
+                                    <div class="flex items-center">
+                                        <div class="flex -space-x-2 mr-2">
+                                            <div class="h-6 w-6 rounded-full bg-family-purple text-white flex items-center justify-center text-xs border-2 border-white">
+                                                ES
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-orange text-white flex items-center justify-center text-xs border-2 border-white">
+                                                MS
+                                            </div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">Last updated: Yesterday</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Financial Documents Folder -->
+                        <div id="folder-financial" class="bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow p-4 cursor-pointer">
+                            <div class="flex items-start">
+                                <div class="bg-family-green bg-opacity-10 p-3 rounded-lg mr-3">
+                                    <i class="fa-solid fa-folder text-family-green text-2xl"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="font-semibold text-gray-800 mb-1 truncate">Financial Documents</h3>
+                                    <p class="text-sm text-gray-500 mb-2">12 files · Private</p>
+                                    <div class="flex items-center">
+                                        <div class="flex -space-x-2 mr-2">
+                                            <div class="h-6 w-6 rounded-full bg-family-blue text-white flex items-center justify-center text-xs border-2 border-white">
+                                                JS
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-green text-white flex items-center justify-center text-xs border-2 border-white">
+                                                LS
+                                            </div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">Last updated: 3 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- House Documents Folder -->
+                        <div id="folder-house" class="bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow p-4 cursor-pointer">
+                            <div class="flex items-start">
+                                <div class="bg-family-teal bg-opacity-10 p-3 rounded-lg mr-3">
+                                    <i class="fa-solid fa-folder text-family-teal text-2xl"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="font-semibold text-gray-800 mb-1 truncate">House Documents</h3>
+                                    <p class="text-sm text-gray-500 mb-2">6 files · Shared with all</p>
+                                    <div class="flex items-center">
+                                        <div class="flex -space-x-2 mr-2">
+                                            <div class="h-6 w-6 rounded-full bg-family-blue text-white flex items-center justify-center text-xs border-2 border-white">
+                                                JS
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-green text-white flex items-center justify-center text-xs border-2 border-white">
+                                                LS
+                                            </div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">Last updated: 2 weeks ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vacation Plans Folder -->
+                        <div id="folder-vacation" class="bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow p-4 cursor-pointer">
+                            <div class="flex items-start">
+                                <div class="bg-family-purple bg-opacity-10 p-3 rounded-lg mr-3">
+                                    <i class="fa-solid fa-folder text-family-purple text-2xl"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="font-semibold text-gray-800 mb-1 truncate">Vacation Plans</h3>
+                                    <p class="text-sm text-gray-500 mb-2">5 files · Shared with all</p>
+                                    <div class="flex items-center">
+                                        <div class="flex -space-x-2 mr-2">
+                                            <div class="h-6 w-6 rounded-full bg-family-blue text-white flex items-center justify-center text-xs border-2 border-white">
+                                                JS
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-green text-white flex items-center justify-center text-xs border-2 border-white">
+                                                LS
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-purple text-white flex items-center justify-center text-xs border-2 border-white">
+                                                ES
+                                            </div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">Last updated: 5 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add New Folder -->
+                        <div id="add-folder" class="bg-white rounded-lg border border-dashed shadow-sm hover:shadow-md transition-shadow p-4 cursor-pointer flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="bg-gray-100 p-3 rounded-full inline-flex items-center justify-center mb-2">
+                                    <i class="fa-solid fa-plus text-gray-500 text-xl"></i>
+                                </div>
+                                <p class="text-gray-600 font-medium">Create New Folder</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Documents -->
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Documents</h2>
+                    <div class="bg-white rounded-lg border shadow-sm overflow-hidden mb-8">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Folder</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Shared With</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Modified</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <i class="fa-regular fa-file-pdf text-family-red mr-3 text-lg"></i>
+                                            <div>
+                                                <div class="text-sm font-medium text-gray-900">Health Insurance Policy.pdf</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-500">PDF Document</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">Medical Records</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex -space-x-2">
+                                            <div class="h-6 w-6 rounded-full bg-family-blue text-white flex items-center justify-center text-xs border-2 border-white">
+                                                JS
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-green text-white flex items-center justify-center text-xs border-2 border-white">
+                                                LS
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        Yesterday at 10:30 AM
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-gray-400 hover:text-gray-600 mr-3">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600 mr-3">
+                                            <i class="fa-solid fa-share-nodes"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <i class="fa-regular fa-file-word text-family-blue mr-3 text-lg"></i>
+                                            <div>
+                                                <div class="text-sm font-medium text-gray-900">School Permission Form.docx</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-500">Word Document</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">School Documents</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex -space-x-2">
+                                            <div class="h-6 w-6 rounded-full bg-family-blue text-white flex items-center justify-center text-xs border-2 border-white">
+                                                JS
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-green text-white flex items-center justify-center text-xs border-2 border-white">
+                                                LS
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-orange text-white flex items-center justify-center text-xs border-2 border-white">
+                                                MS
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        2 days ago
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-gray-400 hover:text-gray-600 mr-3">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600 mr-3">
+                                            <i class="fa-solid fa-share-nodes"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <i class="fa-regular fa-file-excel text-family-green mr-3 text-lg"></i>
+                                            <div>
+                                                <div class="text-sm font-medium text-gray-900">Family Budget 2023.xlsx</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-500">Excel Spreadsheet</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">Financial Documents</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex -space-x-2">
+                                            <div class="h-6 w-6 rounded-full bg-family-blue text-white flex items-center justify-center text-xs border-2 border-white">
+                                                JS
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-green text-white flex items-center justify-center text-xs border-2 border-white">
+                                                LS
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        3 days ago
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-gray-400 hover:text-gray-600 mr-3">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600 mr-3">
+                                            <i class="fa-solid fa-share-nodes"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <i class="fa-regular fa-file-image text-family-purple mr-3 text-lg"></i>
+                                            <div>
+                                                <div class="text-sm font-medium text-gray-900">House Floor Plan.jpg</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-500">Image</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">House Documents</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex -space-x-2">
+                                            <div class="h-6 w-6 rounded-full bg-family-blue text-white flex items-center justify-center text-xs border-2 border-white">
+                                                JS
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-green text-white flex items-center justify-center text-xs border-2 border-white">
+                                                LS
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        1 week ago
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-gray-400 hover:text-gray-600 mr-3">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600 mr-3">
+                                            <i class="fa-solid fa-share-nodes"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <i class="fa-regular fa-file-pdf text-family-red mr-3 text-lg"></i>
+                                            <div>
+                                                <div class="text-sm font-medium text-gray-900">Summer Camp Registration.pdf</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-500">PDF Document</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">School Documents</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex -space-x-2">
+                                            <div class="h-6 w-6 rounded-full bg-family-blue text-white flex items-center justify-center text-xs border-2 border-white">
+                                                JS
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-green text-white flex items-center justify-center text-xs border-2 border-white">
+                                                LS
+                                            </div>
+                                            <div class="h-6 w-6 rounded-full bg-family-purple text-white flex items-center justify-center text-xs border-2 border-white">
+                                                ES
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        5 days ago
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-gray-400 hover:text-gray-600 mr-3">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600 mr-3">
+                                            <i class="fa-solid fa-share-nodes"></i>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Storage Usage -->
+                    <div id="storage-usage" class="bg-white rounded-lg border shadow-sm p-6 mb-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg font-semibold text-gray-800">Storage Usage</h2>
+                            <button class="text-family-blue hover:underline text-sm font-medium">Upgrade Storage</button>
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-gray-600">3.2 GB used of 10 GB</span>
+                                <span class="text-sm font-medium text-gray-700">32%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-family-blue h-2.5 rounded-full" style="width: 32%"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div class="p-3">
+                                <div class="flex items-center justify-center mb-2">
+                                    <div class="h-3 w-3 rounded-full bg-family-blue mr-1"></div>
+                                    <span class="text-sm font-medium text-gray-700">Documents</span>
+                                </div>
+                                <p class="text-sm text-gray-500">1.5 GB</p>
+                            </div>
+                            <div class="p-3">
+                                <div class="flex items-center justify-center mb-2">
+                                    <div class="h-3 w-3 rounded-full bg-family-green mr-1"></div>
+                                    <span class="text-sm font-medium text-gray-700">Photos</span>
+                                </div>
+                                <p class="text-sm text-gray-500">1.2 GB</p>
+                            </div>
+                            <div class="p-3">
+                                <div class="flex items-center justify-center mb-2">
+                                    <div class="h-3 w-3 rounded-full bg-family-purple mr-1"></div>
+                                    <span class="text-sm font-medium text-gray-700">Others</span>
+                                </div>
+                                <p class="text-sm text-gray-500">0.5 GB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Details Sidebar -->
+            <div id="document-details" class="w-80 bg-white border-l hidden md:block">
+                <div class="p-4 border-b">
+                    <h2 class="text-lg font-semibold text-gray-700 mb-2">Document Details</h2>
+                    <p class="text-sm text-gray-600">Select a document to view details</p>
+                </div>
+                
+                <div class="p-4">
+                    <div class="text-center py-8">
+                        <div class="bg-gray-100 h-20 w-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-regular fa-folder-open text-gray-400 text-3xl"></i>
+                        </div>
+                        <p class="text-gray-500">Select a document or folder to view its details and sharing options</p>
+                    </div>
+                </div>
+                
+                <div class="p-4 border-t">
+                    <h3 class="font-medium text-gray-700 mb-3">Document Tips</h3>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="flex items-start">
+                                <i class="fa-solid fa-lightbulb text-family-blue mt-0.5 mr-2"></i>
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-800 mb-1">Organize with folders</h4>
+                                    <p class="text-xs text-gray-600">Create folders to keep your documents organized by category or family member.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="flex items-start">
+                                <i class="fa-solid fa-lightbulb text-family-blue mt-0.5 mr-2"></i>
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-800 mb-1">Secure sharing</h4>
+                                    <p class="text-xs text-gray-600">Control who has access to sensitive documents by adjusting sharing settings.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-lg">
+                            <div class="flex items-start">
+                                <i class="fa-solid fa-lightbulb text-family-blue mt-0.5 mr-2"></i>
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-800 mb-1">Access anywhere</h4>
+                                    <p class="text-xs text-gray-600">Your documents are available on all your devices, even when offline.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation (visible on small screens) -->
+        <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg">
+            <div class="flex justify-around items-center py-2">
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span class="text-xs mt-1">Calendar</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span class="text-xs mt-1">Tasks</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="text-xs mt-1">Shopping</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-family-blue cursor-pointer">
+                    <i class="fa-solid fa-folder"></i>
+                    <span class="text-xs mt-1">Documents</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-ellipsis"></i>
+                    <span class="text-xs mt-1">More</span>
+                </span>
+            </div>
+        </div>
+    </body>
+<html>

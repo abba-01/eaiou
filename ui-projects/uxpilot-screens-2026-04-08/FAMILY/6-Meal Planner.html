@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style>::-webkit-scrollbar { display: none;}</style>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Nunito', 'sans-serif'],
+                        },
+                        colors: {
+                            primary: {
+                                50: '#f0f9ff',
+                                100: '#e0f2fe',
+                                200: '#bae6fd',
+                                300: '#7dd3fc',
+                                400: '#38bdf8',
+                                500: '#0ea5e9',
+                                600: '#0284c7',
+                                700: '#0369a1',
+                                800: '#075985',
+                                900: '#0c4a6e',
+                            },
+                            family: {
+                                blue: '#4285F4',
+                                green: '#34A853',
+                                yellow: '#FBBC05',
+                                red: '#EA4335',
+                                purple: '#9C27B0',
+                                teal: '#009688',
+                                orange: '#FF9800',
+                                pink: '#E91E63',
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="font-sans bg-gray-100">
+        <!-- Header -->
+        <header id="header" class="bg-white border-b shadow-sm">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-people-roof text-family-blue text-2xl"></i>
+                        <h1 class="text-xl font-bold text-gray-800">FamilyWall</h1>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-bell"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <div class="h-8 w-8 rounded-full bg-family-blue text-white flex items-center justify-center">
+                            <span class="font-semibold">JS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex h-[calc(100vh-64px)]">
+            <!-- Sidebar -->
+            <div id="sidebar" class="w-64 bg-white border-r hidden md:block">
+                <div class="p-4">
+                    <div class="mb-6">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-3">My Family</h2>
+                        <div class="flex -space-x-2 mb-4">
+                            <div class="h-10 w-10 rounded-full bg-family-blue text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">JS</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-green text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">LS</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-purple text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">ES</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-orange text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">MS</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <nav>
+                        <ul class="space-y-2">
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-calendar-days w-6"></i>
+                                    <span>Calendar</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-list-check w-6"></i>
+                                    <span>Tasks</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-cart-shopping w-6"></i>
+                                    <span>Shopping Lists</span>
+                                </span>
+                            </li>
+                            <li class="bg-blue-50 rounded-lg text-family-blue">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-utensils w-6"></i>
+                                    <span>Meal Planner</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-book w-6"></i>
+                                    <span>Recipes</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-message w-6"></i>
+                                    <span>Messages</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-folder w-6"></i>
+                                    <span>Documents</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-address-book w-6"></i>
+                                    <span>Contacts</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div id="main-content" class="flex-1 overflow-auto">
+                <!-- Meal Planner Header -->
+                <div id="meal-planner-header" class="bg-white p-4 border-b flex justify-between items-center">
+                    <div class="flex items-center">
+                        <h1 class="text-xl font-bold text-gray-800">Meal Planner</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-2">
+                            <button class="p-1 text-gray-600 hover:bg-gray-100 rounded">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <span class="text-lg font-semibold text-gray-700">September 11 - 17, 2023</span>
+                            <button class="p-1 text-gray-600 hover:bg-gray-100 rounded">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <button class="px-3 py-1 bg-family-blue text-white rounded-md hover:bg-blue-600 flex items-center">
+                            <i class="fa-solid fa-plus mr-1"></i> Add Meal
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Meal Planner Grid -->
+                <div id="meal-planner-grid" class="bg-white p-4">
+                    <div class="grid grid-cols-7 gap-4">
+                        <!-- Day Headers -->
+                        <div class="text-center">
+                            <div class="bg-gray-100 rounded-t-lg p-2">
+                                <p class="font-semibold text-gray-700">Monday</p>
+                                <p class="text-sm text-gray-500">Sep 11</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-gray-100 rounded-t-lg p-2">
+                                <p class="font-semibold text-gray-700">Tuesday</p>
+                                <p class="text-sm text-gray-500">Sep 12</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-gray-100 rounded-t-lg p-2">
+                                <p class="font-semibold text-gray-700">Wednesday</p>
+                                <p class="text-sm text-gray-500">Sep 13</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-gray-100 rounded-t-lg p-2">
+                                <p class="font-semibold text-gray-700">Thursday</p>
+                                <p class="text-sm text-gray-500">Sep 14</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-gray-100 rounded-t-lg p-2">
+                                <p class="font-semibold text-gray-700">Friday</p>
+                                <p class="text-sm text-gray-500">Sep 15</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-gray-100 rounded-t-lg p-2">
+                                <p class="font-semibold text-gray-700">Saturday</p>
+                                <p class="text-sm text-gray-500">Sep 16</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-gray-100 rounded-t-lg p-2">
+                                <p class="font-semibold text-gray-700">Sunday</p>
+                                <p class="text-sm text-gray-500">Sep 17</p>
+                            </div>
+                        </div>
+
+                        <!-- Breakfast Row -->
+                        <div id="monday-breakfast" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Breakfast</div>
+                            <div class="bg-family-yellow bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Oatmeal with Fruit</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-user text-family-blue mr-1"></i> John
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tuesday-breakfast" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Breakfast</div>
+                            <div class="bg-family-green bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Avocado Toast</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-user text-family-green mr-1"></i> Lisa
+                                </div>
+                            </div>
+                        </div>
+                        <div id="wednesday-breakfast" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Breakfast</div>
+                            <div class="bg-family-purple bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Yogurt Parfait</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-user text-family-purple mr-1"></i> Emma
+                                </div>
+                            </div>
+                        </div>
+                        <div id="thursday-breakfast" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Breakfast</div>
+                            <div class="bg-family-orange bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Cereal & Milk</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-user text-family-orange mr-1"></i> Mike
+                                </div>
+                            </div>
+                        </div>
+                        <div id="friday-breakfast" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Breakfast</div>
+                            <div class="bg-family-blue bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Protein Smoothie</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-user text-family-blue mr-1"></i> John
+                                </div>
+                            </div>
+                        </div>
+                        <div id="saturday-breakfast" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Breakfast</div>
+                            <div class="bg-family-red bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Pancakes</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-red mr-1"></i> Family
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sunday-breakfast" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Breakfast</div>
+                            <div class="bg-family-teal bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">French Toast</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-teal mr-1"></i> Family
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lunch Row -->
+                        <div id="monday-lunch" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Lunch</div>
+                            <div class="bg-family-blue bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Chicken Salad</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-blue mr-1"></i> John, Lisa
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tuesday-lunch" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Lunch</div>
+                            <div class="bg-family-green bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Quinoa Bowl</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-user text-family-green mr-1"></i> Lisa
+                                </div>
+                            </div>
+                        </div>
+                        <div id="wednesday-lunch" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Lunch</div>
+                            <div class="bg-family-purple bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Turkey Sandwich</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-purple mr-1"></i> Emma, Mike
+                                </div>
+                            </div>
+                        </div>
+                        <div id="thursday-lunch" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Lunch</div>
+                            <div class="bg-family-orange bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Veggie Wrap</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-orange mr-1"></i> Mike, Lisa
+                                </div>
+                            </div>
+                        </div>
+                        <div id="friday-lunch" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Lunch</div>
+                            <div class="bg-family-blue bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Tuna Salad</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-user text-family-blue mr-1"></i> John
+                                </div>
+                            </div>
+                        </div>
+                        <div id="saturday-lunch" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Lunch</div>
+                            <div class="bg-family-red bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Grilled Cheese</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-red mr-1"></i> Family
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sunday-lunch" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Lunch</div>
+                            <div class="bg-family-teal bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Sunday Brunch</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-teal mr-1"></i> Family
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dinner Row -->
+                        <div id="monday-dinner" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Dinner</div>
+                            <div class="bg-family-blue bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Spaghetti Bolognese</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-blue mr-1"></i> Family
+                                </div>
+                                <div class="flex justify-end mt-1">
+                                    <button class="text-xs text-family-blue hover:underline">Add to Shopping List</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tuesday-dinner" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Dinner</div>
+                            <div class="bg-family-green bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Grilled Chicken</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-green mr-1"></i> Family
+                                </div>
+                                <div class="flex justify-end mt-1">
+                                    <button class="text-xs text-family-blue hover:underline">Add to Shopping List</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="wednesday-dinner" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Dinner</div>
+                            <div class="bg-family-purple bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Baked Salmon</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-purple mr-1"></i> Family
+                                </div>
+                                <div class="flex justify-end mt-1">
+                                    <button class="text-xs text-family-blue hover:underline">Add to Shopping List</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="thursday-dinner" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Dinner</div>
+                            <div class="bg-family-orange bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Vegetable Stir Fry</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-orange mr-1"></i> Family
+                                </div>
+                                <div class="flex justify-end mt-1">
+                                    <button class="text-xs text-family-blue hover:underline">Add to Shopping List</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="friday-dinner" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Dinner</div>
+                            <div class="bg-family-blue bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Homemade Pizza</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-blue mr-1"></i> Family
+                                </div>
+                                <div class="flex justify-end mt-1">
+                                    <button class="text-xs text-family-blue hover:underline">Add to Shopping List</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="saturday-dinner" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Dinner</div>
+                            <div class="bg-family-red bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Tacos</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-red mr-1"></i> Family
+                                </div>
+                                <div class="flex justify-end mt-1">
+                                    <button class="text-xs text-family-blue hover:underline">Add to Shopping List</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sunday-dinner" class="border rounded-lg p-2 bg-white shadow-sm">
+                            <div class="text-sm font-semibold text-gray-600 mb-2">Dinner</div>
+                            <div class="bg-family-teal bg-opacity-10 rounded p-2 mb-1">
+                                <div class="font-medium text-gray-800">Roast Chicken</div>
+                                <div class="text-xs text-gray-600 mt-1 flex items-center">
+                                    <i class="fa-solid fa-users text-family-teal mr-1"></i> Family
+                                </div>
+                                <div class="flex justify-end mt-1">
+                                    <button class="text-xs text-family-blue hover:underline">Add to Shopping List</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Shopping List Integration -->
+                <div id="shopping-list-section" class="bg-white p-4 mt-4 border-t">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold text-gray-800">Weekly Ingredients</h2>
+                        <button id="add-all-to-shopping" class="px-4 py-2 bg-family-blue text-white rounded-md hover:bg-blue-600 flex items-center">
+                            <i class="fa-solid fa-cart-shopping mr-2"></i> Add All to Shopping List
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Monday's Ingredients -->
+                        <div id="monday-ingredients" class="border rounded-lg p-4 bg-white shadow-sm">
+                            <div class="flex items-center mb-3">
+                                <div class="h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center mr-2">
+                                    <span class="text-gray-700 font-medium">M</span>
+                                </div>
+                                <h3 class="font-semibold text-gray-700">Monday</h3>
+                            </div>
+                            <ul class="space-y-2">
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="ing-1" class="mr-2">
+                                        <label for="ing-1" class="text-gray-700">Ground Beef - 1 lb</label>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Spaghetti</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="ing-2" class="mr-2">
+                                        <label for="ing-2" class="text-gray-700">Pasta - 1 package</label>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Spaghetti</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="ing-3" class="mr-2">
+                                        <label for="ing-3" class="text-gray-700">Tomato Sauce - 2 cans</label>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Spaghetti</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="ing-4" class="mr-2">
+                                        <label for="ing-4" class="text-gray-700">Onions - 1</label>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Spaghetti</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Tuesday's Ingredients -->
+                        <div id="tuesday-ingredients" class="border rounded-lg p-4 bg-white shadow-sm">
+                            <div class="flex items-center mb-3">
+                                <div class="h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center mr-2">
+                                    <span class="text-gray-700 font-medium">T</span>
+                                </div>
+                                <h3 class="font-semibold text-gray-700">Tuesday</h3>
+                            </div>
+                            <ul class="space-y-2">
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="ing-5" class="mr-2">
+                                        <label for="ing-5" class="text-gray-700">Chicken Breasts - 4</label>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Grilled Chicken</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="ing-6" class="mr-2">
+                                        <label for="ing-6" class="text-gray-700">Marinade - 1 bottle</label>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Grilled Chicken</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="ing-7" class="mr-2">
+                                        <label for="ing-7" class="text-gray-700">Mixed Vegetables - 1 bag</label>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Grilled Chicken</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Wednesday's Ingredients -->
+                        <div id="wednesday-ingredients" class="border rounded-lg p-4 bg-white shadow-sm">
+                            <div class="flex items-center mb-3">
+                                <div class="h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center mr-2">
+                                    <span class="text-gray-700 font-medium">W</span>
+                                </div>
+                                <h3 class="font-semibold text-gray-700">Wednesday</h3>
+                            </div>
+                            <ul class="space-y-2">
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="ing-8" class="mr-2">
+                                        <label for="ing-8" class="text-gray-700">Salmon Fillets - 4</label>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Baked Salmon</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="ing-9" class="mr-2">
+                                        <label for="ing-9" class="text-gray-700">Lemon - 2</label>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Baked Salmon</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="ing-10" class="mr-2">
+                                        <label for="ing-10" class="text-gray-700">Fresh Dill - 1 bunch</label>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Baked Salmon</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="ing-11" class="mr-2">
+                                        <label for="ing-11" class="text-gray-700">Rice - 2 cups</label>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Baked Salmon</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recipe Suggestions -->
+                <div id="recipe-suggestions" class="bg-white p-4 mt-4 border-t">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Recipe Suggestions</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div id="recipe-1" class="border rounded-lg overflow-hidden">
+                            <div class="h-40 bg-gray-200 flex items-center justify-center">
+                                <i class="fa-solid fa-utensils text-4xl text-gray-400"></i>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-semibold text-gray-800">Easy Chicken Parmesan</h3>
+                                <p class="text-sm text-gray-600 mt-1">30 min | 4 servings</p>
+                                <div class="flex justify-between items-center mt-2">
+                                    <button class="text-family-blue text-sm hover:underline">View Recipe</button>
+                                    <button class="text-family-green text-sm hover:underline">Add to Planner</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="recipe-2" class="border rounded-lg overflow-hidden">
+                            <div class="h-40 bg-gray-200 flex items-center justify-center">
+                                <i class="fa-solid fa-utensils text-4xl text-gray-400"></i>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-semibold text-gray-800">One-Pot Pasta Primavera</h3>
+                                <p class="text-sm text-gray-600 mt-1">25 min | 6 servings</p>
+                                <div class="flex justify-between items-center mt-2">
+                                    <button class="text-family-blue text-sm hover:underline">View Recipe</button>
+                                    <button class="text-family-green text-sm hover:underline">Add to Planner</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="recipe-3" class="border rounded-lg overflow-hidden">
+                            <div class="h-40 bg-gray-200 flex items-center justify-center">
+                                <i class="fa-solid fa-utensils text-4xl text-gray-400"></i>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-semibold text-gray-800">Sheet Pan Fajitas</h3>
+                                <p class="text-sm text-gray-600 mt-1">35 min | 4 servings</p>
+                                <div class="flex justify-between items-center mt-2">
+                                    <button class="text-family-blue text-sm hover:underline">View Recipe</button>
+                                    <button class="text-family-green text-sm hover:underline">Add to Planner</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar for Shopping Lists -->
+            <div id="shopping-list-sidebar" class="w-80 bg-white border-l hidden md:block">
+                <div class="p-4 border-b">
+                    <h2 class="text-lg font-semibold text-gray-700 mb-2">Shopping Lists</h2>
+                    <div class="text-sm text-gray-600">Manage your grocery needs</div>
+                </div>
+                
+                <div class="p-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-medium text-gray-700">Weekly Groceries</h3>
+                        <div class="text-sm text-family-green">12 items</div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div id="grocery-category-1" class="border-b pb-3">
+                            <h4 class="font-medium text-gray-600 mb-2">Produce</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <input type="checkbox" id="grocery-1" class="mr-2">
+                                    <label for="grocery-1" class="text-gray-700">Onions (2)</label>
+                                </li>
+                                <li class="flex items-center">
+                                    <input type="checkbox" id="grocery-2" class="mr-2">
+                                    <label for="grocery-2" class="text-gray-700">Lemons (2)</label>
+                                </li>
+                                <li class="flex items-center">
+                                    <input type="checkbox" id="grocery-3" class="mr-2">
+                                    <label for="grocery-3" class="text-gray-700">Fresh Dill (1 bunch)</label>
+                                </li>
+                                <li class="flex items-center">
+                                    <input type="checkbox" id="grocery-4" class="mr-2">
+                                    <label for="grocery-4" class="text-gray-700">Mixed Vegetables (1 bag)</label>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div id="grocery-category-2" class="border-b pb-3">
+                            <h4 class="font-medium text-gray-600 mb-2">Meat & Seafood</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <input type="checkbox" id="grocery-5" class="mr-2">
+                                    <label for="grocery-5" class="text-gray-700">Ground Beef (1 lb)</label>
+                                </li>
+                                <li class="flex items-center">
+                                    <input type="checkbox" id="grocery-6" class="mr-2">
+                                    <label for="grocery-6" class="text-gray-700">Chicken Breasts (4)</label>
+                                </li>
+                                <li class="flex items-center">
+                                    <input type="checkbox" id="grocery-7" class="mr-2">
+                                    <label for="grocery-7" class="text-gray-700">Salmon Fillets (4)</label>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div id="grocery-category-3">
+                            <h4 class="font-medium text-gray-600 mb-2">Pantry</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <input type="checkbox" id="grocery-8" class="mr-2">
+                                    <label for="grocery-8" class="text-gray-700">Pasta (1 package)</label>
+                                </li>
+                                <li class="flex items-center">
+                                    <input type="checkbox" id="grocery-9" class="mr-2">
+                                    <label for="grocery-9" class="text-gray-700">Tomato Sauce (2 cans)</label>
+                                </li>
+                                <li class="flex items-center">
+                                    <input type="checkbox" id="grocery-10" class="mr-2">
+                                    <label for="grocery-10" class="text-gray-700">Marinade (1 bottle)</label>
+                                </li>
+                                <li class="flex items-center">
+                                    <input type="checkbox" id="grocery-11" class="mr-2">
+                                    <label for="grocery-11" class="text-gray-700">Rice (2 cups)</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <button class="w-full px-4 py-2 bg-family-green text-white rounded-md hover:bg-green-600 flex items-center justify-center">
+                            <i class="fa-solid fa-plus mr-2"></i> Add Item
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="p-4 border-t">
+                    <h3 class="font-medium text-gray-700 mb-3">Your Shopping Lists</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center justify-between py-2 border-b">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-cart-shopping text-family-green mr-2"></i>
+                                <span class="text-gray-700">Weekly Groceries</span>
+                            </div>
+                            <div class="text-sm text-gray-500">12 items</div>
+                        </li>
+                        <li class="flex items-center justify-between py-2 border-b">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-cart-shopping text-family-blue mr-2"></i>
+                                <span class="text-gray-700">Party Supplies</span>
+                            </div>
+                            <div class="text-sm text-gray-500">8 items</div>
+                        </li>
+                        <li class="flex items-center justify-between py-2">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-cart-shopping text-family-orange mr-2"></i>
+                                <span class="text-gray-700">School Supplies</span>
+                            </div>
+                            <div class="text-sm text-gray-500">5 items</div>
+                        </li>
+                    </ul>
+                    <button class="mt-4 w-full px-3 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 flex items-center justify-center">
+                        <i class="fa-solid fa-plus mr-2"></i> New Shopping List
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation (visible on small screens) -->
+        <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg">
+            <div class="flex justify-around items-center py-2">
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span class="text-xs mt-1">Calendar</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span class="text-xs mt-1">Tasks</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="text-xs mt-1">Shopping</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-family-blue cursor-pointer">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span class="text-xs mt-1">Meals</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-ellipsis"></i>
+                    <span class="text-xs mt-1">More</span>
+                </span>
+            </div>
+        </div>
+    </body>
+<html>

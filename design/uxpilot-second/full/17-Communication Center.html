@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header Navigation -->
+    <nav id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 flex items-center justify-between px-4 py-3 z-50">
+        <div class="flex items-center">
+            <span class="flex items-center mr-10 cursor-pointer">
+                <i class="fa-solid fa-flask-vial text-primary-600 text-2xl mr-2"></i>
+                <span class="text-xl font-bold text-gray-800">SciPeerReview</span>
+            </span>
+            <div class="hidden md:flex space-x-6">
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Dashboard</span>
+                <span class="text-gray-600 hover:text-primary-600 font-medium text-primary-600 border-b-2 border-primary-600 cursor-pointer">My Manuscripts</span>
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Reviews</span>
+                <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Journals</span>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span class="hidden md:inline-block text-gray-600 mr-2">
+                <i class="fa-regular fa-bell"></i>
+                <span class="bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center absolute -mt-8 ml-3">2</span>
+            </span>
+            <button class="hidden md:flex items-center text-gray-600 hover:text-gray-800">
+                <i class="fa-regular fa-question-circle mr-1"></i>
+                <span>Help</span>
+            </button>
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-full h-full object-cover" />
+                </div>
+                <span class="hidden md:inline-block text-gray-700 font-medium">Dr. Michael Chen</span>
+                <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="pt-16 flex min-h-screen bg-gray-50">
+        <!-- Sidebar -->
+        <div id="sidebar" class="hidden md:block w-64 bg-white border-r border-gray-200 fixed h-full pt-4">
+            <div class="px-4 py-2">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase">Author Dashboard</h2>
+                </div>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-home w-5 text-gray-500"></i>
+                        <span>Overview</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 bg-primary-50 text-primary-700 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-file-lines w-5"></i>
+                        <span>My Manuscripts</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-plus w-5 text-gray-500"></i>
+                        <span>New Submission</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-clock-rotate-left w-5 text-gray-500"></i>
+                        <span>Submission History</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-comment w-5 text-gray-500"></i>
+                        <span>Messages</span>
+                        <span class="ml-auto bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="px-4 py-2 mt-6">
+                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-4">Reviewer Tools</h2>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-clipboard-check w-5 text-gray-500"></i>
+                        <span>Review Requests</span>
+                        <span class="ml-auto bg-yellow-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">2</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-star w-5 text-gray-500"></i>
+                        <span>My Reviews</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-medal w-5 text-gray-500"></i>
+                        <span>Review History</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="px-4 py-2 mt-6">
+                <h2 class="text-sm font-semibold text-gray-500 uppercase mb-4">Account</h2>
+                <div class="space-y-1">
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-user w-5 text-gray-500"></i>
+                        <span>Profile</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-gear w-5 text-gray-500"></i>
+                        <span>Settings</span>
+                    </span>
+                    <span class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer">
+                        <i class="fa-solid fa-right-from-bracket w-5 text-gray-500"></i>
+                        <span>Logout</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 ml-0 md:ml-64 p-6">
+            <!-- Breadcrumb and Actions -->
+            <div id="page-header" class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                <div>
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                        <span class="hover:text-primary-600 cursor-pointer">Dashboard</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="hover:text-primary-600 cursor-pointer">My Manuscripts</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="text-gray-700">Manuscript Communication</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900">Manuscript Communication</h1>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-3">
+                    <button id="btn-back" class="px-3 py-2 border border-gray-300 rounded-md flex items-center text-gray-700 hover:bg-gray-50">
+                        <i class="fa-solid fa-arrow-left mr-2"></i>
+                        <span>Back to Manuscripts</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Manuscript Info Card -->
+            <div id="manuscript-info" class="bg-white rounded-lg shadow p-5 mb-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900">Novel Approaches to CRISPR Gene Editing in Cancer Treatment</h2>
+                        <div class="flex flex-wrap items-center mt-2 text-sm text-gray-600">
+                            <span class="flex items-center mr-4">
+                                <i class="fa-solid fa-hashtag mr-1 text-gray-400"></i>
+                                MS-2023-0042
+                            </span>
+                            <span class="flex items-center mr-4">
+                                <i class="fa-solid fa-book mr-1 text-gray-400"></i>
+                                Nature Biotechnology
+                            </span>
+                            <span class="flex items-center mr-4">
+                                <i class="fa-solid fa-calendar mr-1 text-gray-400"></i>
+                                Submitted: Jul 12, 2023
+                            </span>
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                Under Review
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex space-x-2">
+                        <button class="px-3 py-2 border border-gray-300 rounded-md flex items-center text-gray-700 hover:bg-gray-50">
+                            <i class="fa-solid fa-file-pdf mr-1"></i>
+                            <span>View PDF</span>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 rounded-md flex items-center text-gray-700 hover:bg-gray-50">
+                            <i class="fa-solid fa-history mr-1"></i>
+                            <span>History</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Communication Interface -->
+            <div id="communication-interface" class="flex flex-col lg:flex-row gap-6">
+                <!-- Left Column - Message Thread -->
+                <div id="message-thread" class="w-full lg:w-2/3">
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <!-- Thread Header -->
+                        <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200 bg-gray-50">
+                            <h3 class="text-lg font-medium text-gray-900">Communication Thread</h3>
+                            <div class="flex items-center space-x-2">
+                                <button class="text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-filter"></i>
+                                </button>
+                                <button class="text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-sort"></i>
+                                </button>
+                                <select class="text-sm border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
+                                    <option>All Messages</option>
+                                    <option>Editor Comments</option>
+                                    <option>Reviewer Feedback</option>
+                                    <option>Author Responses</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Messages Container -->
+                        <div id="messages-container" class="p-5 h-[500px] overflow-y-auto">
+                            <!-- Editor Message -->
+                            <div class="flex mb-6">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="w-10 h-10 rounded-full overflow-hidden">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Editor" class="w-full h-full object-cover" />
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="bg-gray-50 rounded-lg p-4 shadow-sm">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div>
+                                                <span class="font-medium text-gray-900">Dr. Sarah Johnson</span>
+                                                <span class="text-gray-500 text-sm ml-2">Editor</span>
+                                            </div>
+                                            <span class="text-xs text-gray-500">Jul 15, 2023 • 10:23 AM</span>
+                                        </div>
+                                        <p class="text-gray-700 mb-3">
+                                            Dear Dr. Chen,
+                                            <br><br>
+                                            Thank you for submitting your manuscript "Novel Approaches to CRISPR Gene Editing in Cancer Treatment" to Nature Biotechnology. I am pleased to inform you that your manuscript has been sent out for peer review.
+                                            <br><br>
+                                            We have assigned two reviewers with expertise in CRISPR technology and cancer therapeutics. You can expect to receive their feedback within the next 3-4 weeks.
+                                            <br><br>
+                                            Best regards,<br>
+                                            Dr. Sarah Johnson<br>
+                                            Associate Editor, Nature Biotechnology
+                                        </p>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <button class="hover:text-primary-600 mr-4">
+                                                <i class="fa-solid fa-reply mr-1"></i> Reply
+                                            </button>
+                                            <button class="hover:text-primary-600">
+                                                <i class="fa-regular fa-bookmark mr-1"></i> Save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Author Response -->
+                            <div class="flex mb-6">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="w-10 h-10 rounded-full overflow-hidden">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Author" class="w-full h-full object-cover" />
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="bg-primary-50 rounded-lg p-4 shadow-sm border border-primary-100">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div>
+                                                <span class="font-medium text-gray-900">Dr. Michael Chen</span>
+                                                <span class="text-gray-500 text-sm ml-2">Author</span>
+                                            </div>
+                                            <span class="text-xs text-gray-500">Jul 15, 2023 • 11:45 AM</span>
+                                        </div>
+                                        <p class="text-gray-700 mb-3">
+                                            Dear Dr. Johnson,
+                                            <br><br>
+                                            Thank you for the update. I appreciate the prompt processing of our manuscript. I look forward to receiving the reviewers' feedback.
+                                            <br><br>
+                                            Best regards,<br>
+                                            Michael Chen, Ph.D.
+                                        </p>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <button class="hover:text-primary-600 mr-4">
+                                                <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
+                                            </button>
+                                            <button class="hover:text-primary-600">
+                                                <i class="fa-solid fa-trash mr-1"></i> Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Reviewer 1 Feedback -->
+                            <div class="flex mb-6">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                        <i class="fa-solid fa-user text-gray-500"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="bg-gray-50 rounded-lg p-4 shadow-sm">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div>
+                                                <span class="font-medium text-gray-900">Reviewer #1</span>
+                                                <span class="text-gray-500 text-sm ml-2">Anonymous</span>
+                                            </div>
+                                            <span class="text-xs text-gray-500">Aug 5, 2023 • 3:17 PM</span>
+                                        </div>
+                                        <p class="text-gray-700 mb-3">
+                                            This manuscript presents a novel approach to CRISPR gene editing for cancer treatment. The methodology is sound and the results are promising, but I have several concerns that should be addressed:
+                                        </p>
+                                        <ol class="list-decimal pl-5 mb-3 text-gray-700 space-y-2">
+                                            <li>The off-target effects analysis is incomplete. The authors should provide more comprehensive data on potential off-target sites.</li>
+                                            <li>The in vivo experiments use a limited number of animal models. Additional models would strengthen the conclusions.</li>
+                                            <li>The discussion should address the potential immunogenicity of the proposed delivery system more thoroughly.</li>
+                                        </ol>
+                                        <p class="text-gray-700 mb-3">
+                                            I recommend revision to address these issues before publication.
+                                        </p>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <button class="hover:text-primary-600 mr-4">
+                                                <i class="fa-solid fa-reply mr-1"></i> Reply
+                                            </button>
+                                            <button class="hover:text-primary-600">
+                                                <i class="fa-regular fa-bookmark mr-1"></i> Save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Reviewer 2 Feedback -->
+                            <div class="flex mb-6">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                        <i class="fa-solid fa-user text-gray-500"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="bg-gray-50 rounded-lg p-4 shadow-sm">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div>
+                                                <span class="font-medium text-gray-900">Reviewer #2</span>
+                                                <span class="text-gray-500 text-sm ml-2">Anonymous</span>
+                                            </div>
+                                            <span class="text-xs text-gray-500">Aug 7, 2023 • 9:42 AM</span>
+                                        </div>
+                                        <p class="text-gray-700 mb-3">
+                                            The authors present an innovative approach to CRISPR-based cancer therapy. The manuscript is well-written and the experimental design is robust. I have a few suggestions for improvement:
+                                        </p>
+                                        <ol class="list-decimal pl-5 mb-3 text-gray-700 space-y-2">
+                                            <li>The mechanistic studies in Figure 3 could be strengthened with additional biochemical assays.</li>
+                                            <li>The clinical implications section would benefit from a more detailed discussion of potential translation barriers.</li>
+                                            <li>Minor formatting issues in the references section need correction.</li>
+                                        </ol>
+                                        <p class="text-gray-700 mb-3">
+                                            Overall, this is an excellent study that merits publication after minor revisions.
+                                        </p>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <button class="hover:text-primary-600 mr-4">
+                                                <i class="fa-solid fa-reply mr-1"></i> Reply
+                                            </button>
+                                            <button class="hover:text-primary-600">
+                                                <i class="fa-regular fa-bookmark mr-1"></i> Save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Editor Decision -->
+                            <div class="flex mb-6">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="w-10 h-10 rounded-full overflow-hidden">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Editor" class="w-full h-full object-cover" />
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="bg-yellow-50 rounded-lg p-4 shadow-sm border border-yellow-200">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div>
+                                                <span class="font-medium text-gray-900">Dr. Sarah Johnson</span>
+                                                <span class="text-gray-500 text-sm ml-2">Editor</span>
+                                            </div>
+                                            <span class="text-xs text-gray-500">Aug 10, 2023 • 2:15 PM</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="bg-yellow-100 text-yellow-800 px-3 py-2 rounded-md mb-3 font-medium">
+                                                Decision: Revision Required
+                                            </div>
+                                            <p class="text-gray-700">
+                                                Dear Dr. Chen,
+                                                <br><br>
+                                                Thank you for submitting your manuscript to Nature Biotechnology. We have now received comments from two reviewers, which you can find above.
+                                                <br><br>
+                                                Based on the reviewers' feedback, we would like to invite you to submit a revised version of your manuscript that addresses the points raised. In particular, please focus on:
+                                                <br><br>
+                                                1. Expanding the off-target analysis<br>
+                                                2. Adding data from additional animal models if available<br>
+                                                3. Strengthening the mechanistic studies<br>
+                                                4. Addressing the translation barriers more comprehensively<br>
+                                                <br>
+                                                Please submit your revised manuscript within 30 days, along with a point-by-point response to the reviewers' comments.
+                                                <br><br>
+                                                Best regards,<br>
+                                                Dr. Sarah Johnson<br>
+                                                Associate Editor, Nature Biotechnology
+                                            </p>
+                                        </div>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <button class="hover:text-primary-600 mr-4">
+                                                <i class="fa-solid fa-reply mr-1"></i> Reply
+                                            </button>
+                                            <button class="hover:text-primary-600">
+                                                <i class="fa-regular fa-bookmark mr-1"></i> Save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- New Message Form -->
+                        <div id="new-message-form" class="border-t border-gray-200 p-5">
+                            <h4 class="text-md font-medium text-gray-900 mb-3">Reply to Thread</h4>
+                            <div class="mb-4">
+                                <textarea class="w-full border border-gray-300 rounded-md p-3 focus:ring-primary-500 focus:border-primary-500" rows="4" placeholder="Type your response here..."></textarea>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-paperclip"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-image"></i>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-link"></i>
+                                    </button>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                                        Save Draft
+                                    </button>
+                                    <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+                                        Send Response
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Info and Actions -->
+                <div id="info-actions" class="w-full lg:w-1/3 space-y-6">
+                    <!-- Review Status Card -->
+                    <div class="bg-white rounded-lg shadow p-5">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Review Status</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-check text-green-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Submission Received</p>
+                                    <p class="text-xs text-gray-500">Jul 12, 2023</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-check text-green-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Initial Screening Passed</p>
+                                    <p class="text-xs text-gray-500">Jul 14, 2023</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-check text-green-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Reviewers Assigned</p>
+                                    <p class="text-xs text-gray-500">Jul 15, 2023</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-check text-green-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Reviews Completed</p>
+                                    <p class="text-xs text-gray-500">Aug 7, 2023</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-clock text-yellow-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Revision Requested</p>
+                                    <p class="text-xs text-gray-500">Aug 10, 2023</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center opacity-50">
+                                <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-hourglass-half text-gray-400"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Revision Submission</p>
+                                    <p class="text-xs text-gray-500">Due by Sep 9, 2023</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Participants Card -->
+                    <div class="bg-white rounded-lg shadow p-5">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Participants</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Author" class="w-full h-full object-cover" />
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Dr. Michael Chen</p>
+                                    <p class="text-xs text-gray-500">Corresponding Author</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Editor" class="w-full h-full object-cover" />
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Dr. Sarah Johnson</p>
+                                    <p class="text-xs text-gray-500">Associate Editor</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-user text-gray-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Reviewer #1</p>
+                                    <p class="text-xs text-gray-500">Anonymous</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-user text-gray-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Reviewer #2</p>
+                                    <p class="text-xs text-gray-500">Anonymous</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Actions Card -->
+                    <div class="bg-white rounded-lg shadow p-5">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Actions</h3>
+                        <div class="space-y-3">
+                            <button class="w-full px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 flex items-center justify-center">
+                                <i class="fa-solid fa-upload mr-2"></i>
+                                <span>Submit Revision</span>
+                            </button>
+                            <button class="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 flex items-center justify-center">
+                                <i class="fa-solid fa-file-export mr-2"></i>
+                                <span>Export Communication</span>
+                            </button>
+                            <button class="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 flex items-center justify-center">
+                                <i class="fa-solid fa-envelope mr-2"></i>
+                                <span>Contact Editor</span>
+                            </button>
+                            <button class="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 flex items-center justify-center">
+                                <i class="fa-solid fa-clock-rotate-left mr-2"></i>
+                                <span>View Submission History</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Important Dates Card -->
+                    <div class="bg-white rounded-lg shadow p-5">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Important Dates</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Initial Submission:</span>
+                                <span class="text-sm font-medium">Jul 12, 2023</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Reviews Completed:</span>
+                                <span class="text-sm font-medium">Aug 7, 2023</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Revision Requested:</span>
+                                <span class="text-sm font-medium">Aug 10, 2023</span>
+                            </div>
+                            <div class="flex justify-between items-center font-medium">
+                                <span class="text-sm text-red-600">Revision Due:</span>
+                                <span class="text-sm text-red-600">Sep 9, 2023 (30 days)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-white border-t border-gray-200 mt-8 py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-600 text-sm">&copy; 2023 SciPeerReview. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Help Center</span>
+                    <span class="text-gray-600 hover:text-primary-600 text-sm cursor-pointer">Contact Us</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

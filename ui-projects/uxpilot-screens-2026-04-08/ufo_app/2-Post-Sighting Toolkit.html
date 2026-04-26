@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C63FF',
+                        secondary: '#2A265F',
+                        accent: '#00F5A0',
+                        dark: '#121212',
+                        darkGray: '#1E1E1E',
+                        lightGray: '#2A2A2A',
+                        success: '#00C853',
+                        warning: '#FFD600',
+                        danger: '#FF3D00',
+                        info: '#00B0FF'
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-white font-sans">
+    <!-- Status Bar -->
+    <div id="status-bar" class="bg-darkGray p-2 flex justify-between items-center text-xs">
+        <div>
+            <span>9:41</span>
+        </div>
+        <div class="flex space-x-2">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-three-quarters"></i>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="bg-darkGray p-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <button id="back-btn" class="h-8 w-8 rounded-full bg-secondary flex items-center justify-center">
+                <i class="fa-solid fa-chevron-left text-white"></i>
+            </button>
+            <h1 class="text-lg font-bold">Reconstruction Tools</h1>
+        </div>
+        <div>
+            <button id="help-btn" class="h-8 w-8 rounded-full bg-secondary flex items-center justify-center">
+                <i class="fa-solid fa-question text-white"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pb-20">
+        <!-- Info Banner -->
+        <section id="info-banner" class="p-4 bg-secondary bg-opacity-30 mb-4">
+            <div class="flex items-start space-x-3">
+                <i class="fa-solid fa-info-circle text-accent mt-1"></i>
+                <div>
+                    <p class="text-sm">Reconstruction tools help you accurately document environmental factors and recreate sightings after they've occurred.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Environmental Factors -->
+        <section id="environmental-factors" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3">Environmental Factors</h2>
+            <div class="bg-darkGray rounded-xl p-4 space-y-4">
+                <div id="weather-data" class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-cloud text-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium">Weather Data</h3>
+                            <p class="text-xs text-gray-400">Temperature, cloud cover, visibility</p>
+                        </div>
+                    </div>
+                    <button class="bg-primary bg-opacity-20 p-2 rounded-full">
+                        <i class="fa-solid fa-plus text-primary"></i>
+                    </button>
+                </div>
+
+                <div id="light-pollution" class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-lightbulb text-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium">Light Pollution</h3>
+                            <p class="text-xs text-gray-400">Urban lighting, visibility impact</p>
+                        </div>
+                    </div>
+                    <button class="bg-primary bg-opacity-20 p-2 rounded-full">
+                        <i class="fa-solid fa-plus text-primary"></i>
+                    </button>
+                </div>
+
+                <div id="celestial-bodies" class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-moon text-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium">Celestial Bodies</h3>
+                            <p class="text-xs text-gray-400">Moon phase, planet positions</p>
+                        </div>
+                    </div>
+                    <button class="bg-primary bg-opacity-20 p-2 rounded-full">
+                        <i class="fa-solid fa-plus text-primary"></i>
+                    </button>
+                </div>
+
+                <div id="flight-data" class="flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-plane text-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium">Flight Data</h3>
+                            <p class="text-xs text-gray-400">Aircraft traffic in the area</p>
+                        </div>
+                    </div>
+                    <button class="bg-primary bg-opacity-20 p-2 rounded-full">
+                        <i class="fa-solid fa-plus text-primary"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reconstruction Tools -->
+        <section id="reconstruction-tools" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3">Reconstruction Tools</h2>
+            <div class="space-y-3">
+                <div id="tool-1" class="bg-darkGray rounded-xl p-4">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-vr-cardboard text-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium">AR Reenactment</h3>
+                            <p class="text-xs text-gray-400">Recreate sighting in augmented reality</p>
+                        </div>
+                    </div>
+                    <div class="bg-dark rounded-lg p-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm">Step-by-step guided process</span>
+                            <span class="bg-success text-xs px-2 py-0.5 rounded-full">New</span>
+                        </div>
+                        <button class="bg-primary w-full py-2 rounded-lg text-sm font-medium">Start Reenactment</button>
+                    </div>
+                </div>
+
+                <div id="tool-2" class="bg-darkGray rounded-xl p-4">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-compass-drafting text-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium">Trajectory Mapping</h3>
+                            <p class="text-xs text-gray-400">Plot movement paths with precision</p>
+                        </div>
+                    </div>
+                    <div class="bg-dark rounded-lg overflow-hidden">
+                        <div class="h-36 relative">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/a49856f99e-d8939123c23a6d489d5d.png" alt="dark 3D grid with glowing trajectory paths showing UFO movement in space, futuristic interface" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                            <button class="absolute bottom-3 right-3 bg-primary rounded-full p-2">
+                                <i class="fa-solid fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tool-3" class="bg-darkGray rounded-xl p-4">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="bg-secondary h-10 w-10 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-clock-rotate-left text-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium">Timeline Builder</h3>
+                            <p class="text-xs text-gray-400">Sequence events with timestamps</p>
+                        </div>
+                    </div>
+                    <div class="bg-dark rounded-lg p-3">
+                        <div class="relative pb-2">
+                            <div class="absolute left-2 top-0 bottom-0 w-0.5 bg-gray-700"></div>
+                            <div class="flex items-start ml-6 mb-3 relative">
+                                <div class="absolute -left-6 top-1 h-3 w-3 rounded-full bg-primary"></div>
+                                <div>
+                                    <div class="flex items-center">
+                                        <span class="text-xs font-medium">9:42 PM</span>
+                                        <span class="ml-2 text-xs text-gray-400">First sighting</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-start ml-6 mb-3 relative">
+                                <div class="absolute -left-6 top-1 h-3 w-3 rounded-full bg-primary"></div>
+                                <div>
+                                    <div class="flex items-center">
+                                        <span class="text-xs font-medium">9:45 PM</span>
+                                        <span class="ml-2 text-xs text-gray-400">Changed direction</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-start ml-6 relative">
+                                <div class="absolute -left-6 top-1 h-3 w-3 rounded-full bg-gray-700"></div>
+                                <div>
+                                    <div class="flex items-center">
+                                        <span class="text-xs font-medium">+ Add point</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Witness State -->
+        <section id="witness-state" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3">Witness State Recording</h2>
+            <div class="bg-darkGray rounded-xl p-4">
+                <p class="text-sm text-gray-400 mb-3">Document your physical and mental state during the sighting for more accurate reconstruction.</p>
+                
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm">Alertness level</span>
+                        <div class="flex space-x-1">
+                            <div class="h-4 w-4 rounded-full bg-primary"></div>
+                            <div class="h-4 w-4 rounded-full bg-primary"></div>
+                            <div class="h-4 w-4 rounded-full bg-primary"></div>
+                            <div class="h-4 w-4 rounded-full bg-gray-700"></div>
+                            <div class="h-4 w-4 rounded-full bg-gray-700"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm">Emotional state</span>
+                        <select class="bg-dark border border-gray-700 rounded-lg text-sm px-2 py-1">
+                            <option>Calm</option>
+                            <option>Excited</option>
+                            <option>Anxious</option>
+                            <option>Fearful</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm">Physical condition</span>
+                        <select class="bg-dark border border-gray-700 rounded-lg text-sm px-2 py-1">
+                            <option>Well-rested</option>
+                            <option>Tired</option>
+                            <option>Ill</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mt-3">
+                    <textarea class="w-full bg-dark border border-gray-700 rounded-lg p-2 text-sm" placeholder="Additional notes about your state..." rows="2"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Follow-Up Tasks -->
+        <section id="follow-up-tasks" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3">Follow-Up Tasks</h2>
+            <div class="bg-darkGray rounded-xl p-4">
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="task1" class="h-4 w-4 rounded bg-dark border-gray-700 text-primary focus:ring-primary">
+                        <label for="task1" class="ml-2 text-sm">Take daytime reference photos of location</label>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="task2" class="h-4 w-4 rounded bg-dark border-gray-700 text-primary focus:ring-primary">
+                        <label for="task2" class="ml-2 text-sm">Check flight paths during sighting time</label>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="task3" class="h-4 w-4 rounded bg-dark border-gray-700 text-primary focus:ring-primary">
+                        <label for="task3" class="ml-2 text-sm">Record weather conditions at sighting time</label>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="task4" class="h-4 w-4 rounded bg-dark border-gray-700 text-primary focus:ring-primary">
+                        <label for="task4" class="ml-2 text-sm">Measure exact distances and angles</label>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="task5" class="h-4 w-4 rounded bg-dark border-gray-700 text-primary focus:ring-primary">
+                        <label for="task5" class="ml-2 text-sm">Interview other potential witnesses</label>
+                    </div>
+                </div>
+                
+                <button class="mt-4 flex items-center text-primary text-sm">
+                    <i class="fa-solid fa-plus mr-2"></i>
+                    <span>Add custom task</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-darkGray border-t border-gray-800 px-2 py-2">
+        <div class="flex justify-around items-center">
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-house text-lg"></i>
+                <span class="text-xs mt-1">Home</span>
+            </span>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-map-location-dot text-lg"></i>
+                <span class="text-xs mt-1">Map</span>
+            </span>
+            <div class="relative -mt-8">
+                <button class="bg-primary h-16 w-16 rounded-full flex items-center justify-center shadow-lg">
+                    <i class="fa-solid fa-satellite-dish text-2xl"></i>
+                </button>
+            </div>
+            <span class="flex flex-col items-center text-primary cursor-pointer">
+                <i class="fa-solid fa-chart-line text-lg"></i>
+                <span class="text-xs mt-1">Activity</span>
+            </span>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-gear text-lg"></i>
+                <span class="text-xs mt-1">Settings</span>
+            </span>
+        </div>
+    </nav>
+</body>
+</html>

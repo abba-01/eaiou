@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Main Layout -->
+    <div class="flex h-[100vh]">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-gray-900 text-white flex flex-col h-full">
+            <!-- Logo -->
+            <div class="p-4 flex items-center border-b border-gray-700">
+                <div class="h-8 w-8 rounded-md bg-primary-500 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <span class="ml-2 font-bold text-xl">ProjectHub</span>
+            </div>
+            
+            <!-- Admin Menu -->
+            <div class="p-4">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">Admin Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-gauge-high w-6"></i>
+                            <span>Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md bg-primary-700 text-white cursor-pointer">
+                            <i class="fa-solid fa-folder w-6"></i>
+                            <span>Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-flag w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-check-square w-6"></i>
+                            <span>Tasks</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar w-6"></i>
+                            <span>Events</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-file w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Panel -->
+            <div class="p-4 mt-4 border-t border-gray-700">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">User Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-house w-6"></i>
+                            <span>My Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-briefcase w-6"></i>
+                            <span>My Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-tasks w-6"></i>
+                            <span>Task List</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-map-signs w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar-alt w-6"></i>
+                            <span>Calendar</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-paperclip w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Profile -->
+            <div class="mt-auto p-4 border-t border-gray-700 flex items-center">
+                <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium">Admin User</p>
+                    <p class="text-xs text-gray-400">Super Admin</p>
+                </div>
+                <button class="ml-auto text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-cog"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 flex flex-col h-full overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 flex items-center justify-between p-4">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-800">Project Details</h1>
+                    <div class="flex ml-4">
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 mx-1">In Progress</span>
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 mx-1">High Priority</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-100">
+                        <i class="fa-solid fa-share-alt mr-1"></i> Share
+                    </button>
+                    <button class="px-3 py-1 text-sm bg-primary-500 text-white rounded-md hover:bg-primary-600">
+                        <i class="fa-solid fa-edit mr-1"></i> Edit Project
+                    </button>
+                    <div class="relative">
+                        <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                    <button class="relative p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">3</span>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Project Content -->
+            <div class="flex-1 overflow-auto p-6">
+                <!-- Project Header -->
+                <div id="project-header" class="bg-white rounded-lg shadow p-6 mb-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Website Redesign Project</h2>
+                            <p class="text-gray-600 mt-1">Complete overhaul of company website with responsive design and improved UX</p>
+                            <div class="flex mt-4 space-x-6">
+                                <div>
+                                    <p class="text-sm text-gray-500">Start Date</p>
+                                    <p class="font-medium">Apr 15, 2023</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">End Date</p>
+                                    <p class="font-medium">Jun 30, 2023</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Owner</p>
+                                    <div class="flex items-center">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User Avatar" class="h-6 w-6 rounded-full mr-2">
+                                        <p class="font-medium">John Smith</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Budget</p>
+                                    <p class="font-medium">$24,500</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <div class="flex items-center mb-2">
+                                <span class="text-2xl font-bold text-primary-600">65%</span>
+                                <span class="ml-2 text-sm text-gray-500">Complete</span>
+                            </div>
+                            <div class="w-32 bg-gray-200 rounded-full h-3">
+                                <div class="bg-primary-500 h-3 rounded-full" style="width: 65%"></div>
+                            </div>
+                            <div class="mt-4 flex">
+                                <div class="flex -space-x-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" class="w-8 h-8 rounded-full border-2 border-white" alt="Team Member">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" class="w-8 h-8 rounded-full border-2 border-white" alt="Team Member">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" class="w-8 h-8 rounded-full border-2 border-white" alt="Team Member">
+                                    <div class="w-8 h-8 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-xs font-medium text-gray-500">+3</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Milestone Timeline -->
+                <div id="milestone-timeline" class="bg-white rounded-lg shadow mb-6">
+                    <div class="p-6 border-b border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-lg font-semibold">Milestone Timeline</h2>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 text-xs bg-gray-100 rounded-md hover:bg-gray-200">Week</button>
+                                <button class="px-3 py-1 text-xs bg-primary-500 text-white rounded-md">Month</button>
+                                <button class="px-3 py-1 text-xs bg-gray-100 rounded-md hover:bg-gray-200">Quarter</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="relative">
+                            <!-- Timeline Line -->
+                            <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                            
+                            <!-- Timeline Items -->
+                            <div class="space-y-8">
+                                <!-- Completed Milestone -->
+                                <div class="relative flex items-start">
+                                    <div class="absolute left-8 -ml-3 mt-1.5 w-6 h-6 rounded-full bg-green-500 border-4 border-white flex items-center justify-center">
+                                        <i class="fa-solid fa-check text-white text-xs"></i>
+                                    </div>
+                                    <div class="ml-16 bg-green-50 p-4 rounded-lg border border-green-100 w-full">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h3 class="font-semibold text-green-800">Project Kickoff</h3>
+                                                <p class="text-sm text-green-700 mt-1">Initial planning and team assignment completed</p>
+                                                <div class="flex items-center mt-2">
+                                                    <span class="text-xs text-green-600">Apr 15, 2023</span>
+                                                </div>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Completed Milestone -->
+                                <div class="relative flex items-start">
+                                    <div class="absolute left-8 -ml-3 mt-1.5 w-6 h-6 rounded-full bg-green-500 border-4 border-white flex items-center justify-center">
+                                        <i class="fa-solid fa-check text-white text-xs"></i>
+                                    </div>
+                                    <div class="ml-16 bg-green-50 p-4 rounded-lg border border-green-100 w-full">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h3 class="font-semibold text-green-800">Design Phase</h3>
+                                                <p class="text-sm text-green-700 mt-1">Wireframes and design mockups approved</p>
+                                                <div class="flex items-center mt-2">
+                                                    <span class="text-xs text-green-600">Apr 30, 2023</span>
+                                                </div>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Current Milestone -->
+                                <div class="relative flex items-start">
+                                    <div class="absolute left-8 -ml-3 mt-1.5 w-6 h-6 rounded-full bg-yellow-500 border-4 border-white"></div>
+                                    <div class="ml-16 bg-yellow-50 p-4 rounded-lg border border-yellow-100 w-full">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h3 class="font-semibold text-yellow-800">Development Phase</h3>
+                                                <p class="text-sm text-yellow-700 mt-1">Frontend and backend implementation</p>
+                                                <div class="flex items-center mt-2">
+                                                    <span class="text-xs text-yellow-600">May 1, 2023 - May 31, 2023</span>
+                                                </div>
+                                                <div class="mt-3 w-full bg-gray-200 rounded-full h-1.5">
+                                                    <div class="bg-yellow-500 h-1.5 rounded-full" style="width: 70%"></div>
+                                                </div>
+                                                <span class="text-xs text-yellow-600">70% Complete</span>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">In Progress</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Upcoming Milestone -->
+                                <div class="relative flex items-start">
+                                    <div class="absolute left-8 -ml-3 mt-1.5 w-6 h-6 rounded-full bg-gray-300 border-4 border-white"></div>
+                                    <div class="ml-16 bg-gray-50 p-4 rounded-lg border border-gray-200 w-full">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h3 class="font-semibold text-gray-700">Testing Phase</h3>
+                                                <p class="text-sm text-gray-600 mt-1">QA testing and bug fixing</p>
+                                                <div class="flex items-center mt-2">
+                                                    <span class="text-xs text-gray-500">Jun 1, 2023 - Jun 15, 2023</span>
+                                                </div>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">Upcoming</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Upcoming Milestone -->
+                                <div class="relative flex items-start">
+                                    <div class="absolute left-8 -ml-3 mt-1.5 w-6 h-6 rounded-full bg-gray-300 border-4 border-white"></div>
+                                    <div class="ml-16 bg-gray-50 p-4 rounded-lg border border-gray-200 w-full">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h3 class="font-semibold text-gray-700">Launch</h3>
+                                                <p class="text-sm text-gray-600 mt-1">Website deployment and go-live</p>
+                                                <div class="flex items-center mt-2">
+                                                    <span class="text-xs text-gray-500">Jun 30, 2023</span>
+                                                </div>
+                                            </div>
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">Upcoming</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tasks and Events -->
+                <div id="tasks-events" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <!-- Tasks -->
+                    <div class="bg-white rounded-lg shadow">
+                        <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                            <h2 class="text-lg font-semibold">Tasks</h2>
+                            <button class="bg-primary-500 hover:bg-primary-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
+                                <i class="fa-solid fa-plus mr-1"></i> Add Task
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="space-y-3">
+                                <!-- Task Item -->
+                                <div class="p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex items-start">
+                                            <div class="mt-1 mr-3">
+                                                <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500">
+                                            </div>
+                                            <div>
+                                                <h4 class="font-medium">Create responsive navigation</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Implement collapsible menu for mobile devices</p>
+                                                <div class="flex items-center mt-2">
+                                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="User Avatar" class="h-5 w-5 rounded-full mr-1">
+                                                    <span class="text-xs text-gray-500 mr-3">Sarah Johnson</span>
+                                                    <span class="text-xs text-gray-500 mr-3">Due: May 20, 2023</span>
+                                                    <span class="px-1.5 py-0.5 text-xs rounded-full bg-yellow-100 text-yellow-800">In Progress</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Task Item -->
+                                <div class="p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex items-start">
+                                            <div class="mt-1 mr-3">
+                                                <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500">
+                                            </div>
+                                            <div>
+                                                <h4 class="font-medium">Implement user authentication</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Set up login, registration and password reset</p>
+                                                <div class="flex items-center mt-2">
+                                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User Avatar" class="h-5 w-5 rounded-full mr-1">
+                                                    <span class="text-xs text-gray-500 mr-3">John Smith</span>
+                                                    <span class="text-xs text-gray-500 mr-3">Due: May 25, 2023</span>
+                                                    <span class="px-1.5 py-0.5 text-xs rounded-full bg-blue-100 text-blue-800">Not Started</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Task Item -->
+                                <div class="p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex items-start">
+                                            <div class="mt-1 mr-3">
+                                                <input type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500">
+                                            </div>
+                                            <div>
+                                                <h4 class="font-medium line-through text-gray-500">Set up development environment</h4>
+                                                <p class="text-sm text-gray-500 mt-1 line-through">Configure Git repository and CI/CD pipeline</p>
+                                                <div class="flex items-center mt-2">
+                                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User Avatar" class="h-5 w-5 rounded-full mr-1">
+                                                    <span class="text-xs text-gray-500 mr-3">Robert Davis</span>
+                                                    <span class="text-xs text-gray-500 mr-3">Due: May 10, 2023</span>
+                                                    <span class="px-1.5 py-0.5 text-xs rounded-full bg-green-100 text-green-800">Completed</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Task Item -->
+                                <div class="p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex items-start">
+                                            <div class="mt-1 mr-3">
+                                                <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500">
+                                            </div>
+                                            <div>
+                                                <h4 class="font-medium">Optimize images and assets</h4>
+                                                <p class="text-sm text-gray-600 mt-1">Compress images and minify CSS/JS files</p>
+                                                <div class="flex items-center mt-2">
+                                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="User Avatar" class="h-5 w-5 rounded-full mr-1">
+                                                    <span class="text-xs text-gray-500 mr-3">Emily Wilson</span>
+                                                    <span class="text-xs text-gray-500 mr-3">Due: May 28, 2023</span>
+                                                    <span class="px-1.5 py-0.5 text-xs rounded-full bg-red-100 text-red-800">Blocked</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="text-gray-400 hover:text-gray-600">
+                                            <i class="fa-solid fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">View All Tasks</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Events -->
+                    <div class="bg-white rounded-lg shadow">
+                        <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                            <h2 class="text-lg font-semibold">Upcoming Events</h2>
+                            <button class="bg-primary-500 hover:bg-primary-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
+                                <i class="fa-solid fa-plus mr-1"></i> Schedule Event
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="space-y-3">
+                                <!-- Event Item -->
+                                <div class="p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 mr-3">
+                                            <div class="w-12 h-12 bg-primary-100 rounded flex flex-col items-center justify-center">
+                                                <span class="text-xs font-semibold text-primary-800">MAY</span>
+                                                <span class="text-lg font-bold text-primary-800">18</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-medium">Weekly Progress Meeting</h4>
+                                            <div class="flex items-center text-sm text-gray-600 mt-1">
+                                                <i class="fa-solid fa-clock mr-1 text-gray-400"></i>
+                                                <span>10:00 AM - 11:00 AM</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-600 mt-1">
+                                                <i class="fa-solid fa-video mr-1 text-gray-400"></i>
+                                                <span>Zoom Meeting</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-shrink-0">
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Meeting</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Event Item -->
+                                <div class="p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 mr-3">
+                                            <div class="w-12 h-12 bg-primary-100 rounded flex flex-col items-center justify-center">
+                                                <span class="text-xs font-semibold text-primary-800">MAY</span>
+                                                <span class="text-lg font-bold text-primary-800">23</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-medium">Client Demo</h4>
+                                            <div class="flex items-center text-sm text-gray-600 mt-1">
+                                                <i class="fa-solid fa-clock mr-1 text-gray-400"></i>
+                                                <span>2:00 PM - 3:30 PM</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-600 mt-1">
+                                                <i class="fa-solid fa-user-group mr-1 text-gray-400"></i>
+                                                <span>Client Office</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-shrink-0">
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">Presentation</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Event Item -->
+                                <div class="p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 mr-3">
+                                            <div class="w-12 h-12 bg-primary-100 rounded flex flex-col items-center justify-center">
+                                                <span class="text-xs font-semibold text-primary-800">MAY</span>
+                                                <span class="text-lg font-bold text-primary-800">31</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-medium">Development Phase Deadline</h4>
+                                            <div class="flex items-center text-sm text-gray-600 mt-1">
+                                                <i class="fa-solid fa-calendar-day mr-1 text-gray-400"></i>
+                                                <span>All Day</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-600 mt-1">
+                                                <i class="fa-solid fa-flag-checkered mr-1 text-gray-400"></i>
+                                                <span>Milestone Deadline</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-shrink-0">
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Deadline</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">View Calendar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Documents -->
+                <div id="documents" class="bg-white rounded-lg shadow">
+                    <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                        <h2 class="text-lg font-semibold">Project Documents</h2>
+                        <button class="bg-primary-500 hover:bg-primary-600 text-white px-3 py-1 rounded-md text-sm flex items-center">
+                            <i class="fa-solid fa-upload mr-1"></i> Upload Document
+                        </button>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <!-- Document Item -->
+                            <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 flex-shrink-0 bg-red-100 rounded-lg flex items-center justify-center text-red-600">
+                                        <i class="fa-solid fa-file-pdf fa-lg"></i>
+                                    </div>
+                                    <div class="ml-3 flex-1">
+                                        <h4 class="font-medium text-sm">Project Requirements.pdf</h4>
+                                        <p class="text-xs text-gray-500 mt-1">2.4 MB • Uploaded on Apr 15</p>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Document Item -->
+                            <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 flex-shrink-0 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+                                        <i class="fa-solid fa-file-word fa-lg"></i>
+                                    </div>
+                                    <div class="ml-3 flex-1">
+                                        <h4 class="font-medium text-sm">Project Proposal.docx</h4>
+                                        <p class="text-xs text-gray-500 mt-1">1.8 MB • Uploaded on Apr 20</p>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Document Item -->
+                            <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 flex-shrink-0 bg-green-100 rounded-lg flex items-center justify-center text-green-600">
+                                        <i class="fa-solid fa-file-excel fa-lg"></i>
+                                    </div>
+                                    <div class="ml-3 flex-1">
+                                        <h4 class="font-medium text-sm">Budget Breakdown.xlsx</h4>
+                                        <p class="text-xs text-gray-500 mt-1">956 KB • Uploaded on Apr 22</p>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Document Item -->
+                            <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 flex-shrink-0 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600">
+                                        <i class="fa-solid fa-file-image fa-lg"></i>
+                                    </div>
+                                    <div class="ml-3 flex-1">
+                                        <h4 class="font-medium text-sm">Design Mockups.zip</h4>
+                                        <p class="text-xs text-gray-500 mt-1">8.2 MB • Uploaded on Apr 30</p>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Document Item -->
+                            <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 flex-shrink-0 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600">
+                                        <i class="fa-solid fa-file-powerpoint fa-lg"></i>
+                                    </div>
+                                    <div class="ml-3 flex-1">
+                                        <h4 class="font-medium text-sm">Client Presentation.pptx</h4>
+                                        <p class="text-xs text-gray-500 mt-1">3.7 MB • Uploaded on May 10</p>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Document Item -->
+                            <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 flex-shrink-0 bg-gray-100 rounded-lg flex items-center justify-center text-gray-600">
+                                        <i class="fa-solid fa-file-code fa-lg"></i>
+                                    </div>
+                                    <div class="ml-3 flex-1">
+                                        <h4 class="font-medium text-sm">API Documentation.md</h4>
+                                        <p class="text-xs text-gray-500 mt-1">256 KB • Uploaded on May 15</p>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <button class="text-primary-500 hover:text-primary-700 text-sm font-medium">View All Documents</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer id="footer" class="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+                <p>&copy; 2023 ProjectHub Admin Panel. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

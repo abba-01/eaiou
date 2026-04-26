@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@10.3.3/highcharts.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#007cba',
+                        emerald: '#00b894',
+                        coral: '#fd79a8',
+                        orange: '#fdcb6e',
+                        purple: '#6c5ce7',
+                        charcoal: '#2d3436',
+                        mediumgray: '#636e72',
+                        success: '#00b894',
+                        warning: '#fdcb6e',
+                        error: '#e17055',
+                        info: '#007cba',
+                        offwhite: '#FAFAF8'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                        'mono': ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-offwhite text-charcoal">
+    <header id="header" class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                        PR
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-lg">PeerTrail</span>
+                        <span class="text-xs text-mediumgray">Transparent Scientific Publishing</span>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Submit Article</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Browse Articles</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Reviews</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Submissions</span>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="search-toggle" class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-highlighter"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition relative">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-coral text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                    </button>
+                    <div class="w-8 h-8 rounded-full overflow-hidden">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User profile" class="w-full h-full object-cover">
+                    </div>
+                    <button class="md:hidden text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="global-search" class="hidden bg-white shadow-md py-4 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="relative">
+                <input type="text" placeholder="Search articles, authors, audit trails, annotations..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <button class="absolute right-3 top-3 text-gray-400 hover:text-primary">
+                    <i class="fa-solid fa-search"></i>
+                </button>
+            </div>
+            <div class="mt-3 flex space-x-2 text-sm">
+                <span class="font-medium">Quick filters:</span>
+                <button class="text-primary hover:underline">Recent articles</button>
+                <button class="text-primary hover:underline">Most annotated</button>
+                <button class="text-primary hover:underline">Top audit trails</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard-container" class="flex">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-white shadow-md h-[calc(100vh-64px)] sticky top-16 overflow-y-auto hidden md:block">
+            <div class="p-4 border-b border-gray-200">
+                <h2 class="text-lg font-bold text-charcoal">Admin Dashboard</h2>
+                <p class="text-sm text-mediumgray">Manage workflow & analytics</p>
+            </div>
+            
+            <nav class="p-4">
+                <div class="mb-6">
+                    <h3 class="text-xs font-semibold text-mediumgray uppercase tracking-wider mb-2">Workflow Management</h3>
+                    <ul class="space-y-1">
+                        <li class="bg-primary/10 text-primary rounded-md">
+                            <span class="block px-4 py-2 text-sm font-medium cursor-pointer">
+                                <i class="fa-solid fa-clipboard-list mr-2"></i>
+                                Article Status Board
+                            </span>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded-md">
+                            <span class="block px-4 py-2 text-sm font-medium cursor-pointer">
+                                <i class="fa-solid fa-user-check mr-2"></i>
+                                Reviewer Assignments
+                            </span>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded-md">
+                            <span class="block px-4 py-2 text-sm font-medium cursor-pointer">
+                                <i class="fa-solid fa-comments mr-2"></i>
+                                Moderation Queue
+                            </span>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded-md">
+                            <span class="block px-4 py-2 text-sm font-medium cursor-pointer">
+                                <i class="fa-solid fa-clock-rotate-left mr-2"></i>
+                                Audit Trail Reviews
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xs font-semibold text-mediumgray uppercase tracking-wider mb-2">Analytics</h3>
+                    <ul class="space-y-1">
+                        <li class="hover:bg-gray-100 rounded-md">
+                            <span class="block px-4 py-2 text-sm font-medium cursor-pointer">
+                                <i class="fa-solid fa-chart-line mr-2"></i>
+                                Performance Metrics
+                            </span>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded-md">
+                            <span class="block px-4 py-2 text-sm font-medium cursor-pointer">
+                                <i class="fa-solid fa-users mr-2"></i>
+                                User Activity
+                            </span>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded-md">
+                            <span class="block px-4 py-2 text-sm font-medium cursor-pointer">
+                                <i class="fa-solid fa-magnifying-glass-chart mr-2"></i>
+                                Audit Trail Insights
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xs font-semibold text-mediumgray uppercase tracking-wider mb-2">Settings</h3>
+                    <ul class="space-y-1">
+                        <li class="hover:bg-gray-100 rounded-md">
+                            <span class="block px-4 py-2 text-sm font-medium cursor-pointer">
+                                <i class="fa-solid fa-gear mr-2"></i>
+                                System Configuration
+                            </span>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded-md">
+                            <span class="block px-4 py-2 text-sm font-medium cursor-pointer">
+                                <i class="fa-solid fa-users-gear mr-2"></i>
+                                User Management
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="flex-1 p-6">
+            <div id="dashboard-header" class="mb-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold">Article Status Board</h1>
+                        <p class="text-mediumgray">Manage article workflow and track review progress</p>
+                    </div>
+                    <div class="flex space-x-3 mt-4 md:mt-0">
+                        <div class="relative">
+                            <select class="bg-white border border-gray-300 rounded-md px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-primary appearance-none">
+                                <option>All Disciplines</option>
+                                <option>Neuroscience</option>
+                                <option>Climate Science</option>
+                                <option>Genetics</option>
+                                <option>Computer Science</option>
+                            </select>
+                            <div class="absolute right-3 top-2.5 pointer-events-none">
+                                <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                            </div>
+                        </div>
+                        <button class="bg-primary text-white rounded-md px-4 py-2 text-sm font-medium hover:bg-primary/90 transition">
+                            <i class="fa-solid fa-plus mr-1"></i> New Assignment
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="dashboard-metrics" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div id="metric-pending" class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-primary">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-mediumgray text-sm">Pending Review</p>
+                            <p class="text-2xl font-bold">24</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <i class="fa-solid fa-hourglass-half"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-xs">
+                        <span class="text-emerald"><i class="fa-solid fa-arrow-down mr-1"></i>8% from last week</span>
+                    </div>
+                </div>
+                
+                <div id="metric-in-review" class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-orange">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-mediumgray text-sm">In Review</p>
+                            <p class="text-2xl font-bold">37</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-orange/10 flex items-center justify-center text-orange">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-xs">
+                        <span class="text-emerald"><i class="fa-solid fa-arrow-up mr-1"></i>12% from last week</span>
+                    </div>
+                </div>
+                
+                <div id="metric-revision" class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-coral">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-mediumgray text-sm">Needs Revision</p>
+                            <p class="text-2xl font-bold">15</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-coral/10 flex items-center justify-center text-coral">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-xs">
+                        <span class="text-error"><i class="fa-solid fa-arrow-up mr-1"></i>5% from last week</span>
+                    </div>
+                </div>
+                
+                <div id="metric-approved" class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-emerald">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-mediumgray text-sm">Approved</p>
+                            <p class="text-2xl font-bold">18</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-emerald/10 flex items-center justify-center text-emerald">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-xs">
+                        <span class="text-emerald"><i class="fa-solid fa-arrow-up mr-1"></i>15% from last week</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="review-completion-chart" class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="font-bold text-lg">Review Completion Rate</h2>
+                    <div class="flex space-x-2">
+                        <button class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full">Weekly</button>
+                        <button class="text-xs bg-primary text-white px-3 py-1 rounded-full">Monthly</button>
+                        <button class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full">Quarterly</button>
+                    </div>
+                </div>
+                <div id="completion-chart" class="h-72"></div>
+            </div>
+            
+            <div id="article-kanban" class="mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="font-bold text-lg">Article Workflow</h2>
+                    <div class="flex items-center">
+                        <span class="text-sm text-mediumgray mr-2">View:</span>
+                        <button class="bg-primary text-white rounded p-1 mr-1">
+                            <i class="fa-solid fa-table-columns"></i>
+                        </button>
+                        <button class="bg-gray-100 hover:bg-gray-200 rounded p-1">
+                            <i class="fa-solid fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <!-- Pending Column -->
+                    <div id="column-pending" class="bg-gray-100 rounded-lg p-3">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-medium text-charcoal">Pending Assignment</h3>
+                            <span class="bg-white text-primary text-xs font-medium px-2 py-1 rounded-full">8</span>
+                        </div>
+                        
+                        <div id="card-pending-1" class="bg-white rounded-md shadow-sm p-3 mb-3">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-primary/10 text-primary text-xs px-2 py-0.5 rounded">Neuroscience</span>
+                                <span class="text-xs text-mediumgray">ID: ART-2843</span>
+                            </div>
+                            <h4 class="font-medium text-sm mb-2">Neural Mechanisms in Visual Processing: New Findings</h4>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Author" class="w-5 h-5 rounded-full mr-1">
+                                    <span class="text-xs">Dr. Sarah Chen</span>
+                                </div>
+                                <span class="text-xs text-mediumgray">2d ago</span>
+                            </div>
+                        </div>
+                        
+                        <div id="card-pending-2" class="bg-white rounded-md shadow-sm p-3 mb-3">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-emerald/10 text-emerald text-xs px-2 py-0.5 rounded">Climate Science</span>
+                                <span class="text-xs text-mediumgray">ID: ART-2839</span>
+                            </div>
+                            <h4 class="font-medium text-sm mb-2">Arctic Ice Sheet Melt Rate Analysis</h4>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Author" class="w-5 h-5 rounded-full mr-1">
+                                    <span class="text-xs">Prof. James Wilson</span>
+                                </div>
+                                <span class="text-xs text-mediumgray">3d ago</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full text-sm text-mediumgray hover:text-primary py-2 flex items-center justify-center">
+                            <i class="fa-solid fa-eye mr-1"></i> View All
+                        </button>
+                    </div>
+                    
+                    <!-- In Review Column -->
+                    <div id="column-review" class="bg-gray-100 rounded-lg p-3">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-medium text-charcoal">In Review</h3>
+                            <span class="bg-white text-orange text-xs font-medium px-2 py-1 rounded-full">12</span>
+                        </div>
+                        
+                        <div id="card-review-1" class="bg-white rounded-md shadow-sm p-3 mb-3 border-l-2 border-orange">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-coral/10 text-coral text-xs px-2 py-0.5 rounded">Genetics</span>
+                                <span class="text-xs text-mediumgray">ID: ART-2835</span>
+                            </div>
+                            <h4 class="font-medium text-sm mb-2">CRISPR-Cas9 Modifications for Targeted Therapy</h4>
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Author" class="w-5 h-5 rounded-full mr-1">
+                                    <span class="text-xs">Dr. Emily Rodriguez</span>
+                                </div>
+                                <span class="text-xs text-mediumgray">5d ago</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex -space-x-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="Reviewer" class="w-6 h-6 rounded-full border-2 border-white">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Reviewer" class="w-6 h-6 rounded-full border-2 border-white">
+                                </div>
+                                <div class="w-full max-w-[100px] h-1.5 bg-gray-200 rounded-full ml-2">
+                                    <div class="h-1.5 bg-orange rounded-full" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="card-review-2" class="bg-white rounded-md shadow-sm p-3 mb-3 border-l-2 border-orange">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-purple/10 text-purple text-xs px-2 py-0.5 rounded">Computer Science</span>
+                                <span class="text-xs text-mediumgray">ID: ART-2830</span>
+                            </div>
+                            <h4 class="font-medium text-sm mb-2">Quantum Computing Advancements in Algorithm Design</h4>
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Author" class="w-5 h-5 rounded-full mr-1">
+                                    <span class="text-xs">Dr. Michael Wong</span>
+                                </div>
+                                <span class="text-xs text-mediumgray">6d ago</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex -space-x-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" alt="Reviewer" class="w-6 h-6 rounded-full border-2 border-white">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="Reviewer" class="w-6 h-6 rounded-full border-2 border-white">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Reviewer" class="w-6 h-6 rounded-full border-2 border-white">
+                                </div>
+                                <div class="w-full max-w-[100px] h-1.5 bg-gray-200 rounded-full ml-2">
+                                    <div class="h-1.5 bg-orange rounded-full" style="width: 42%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full text-sm text-mediumgray hover:text-primary py-2 flex items-center justify-center">
+                            <i class="fa-solid fa-eye mr-1"></i> View All
+                        </button>
+                    </div>
+                    
+                    <!-- Needs Revision Column -->
+                    <div id="column-revision" class="bg-gray-100 rounded-lg p-3">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-medium text-charcoal">Needs Revision</h3>
+                            <span class="bg-white text-coral text-xs font-medium px-2 py-1 rounded-full">7</span>
+                        </div>
+                        
+                        <div id="card-revision-1" class="bg-white rounded-md shadow-sm p-3 mb-3 border-l-2 border-coral">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-primary/10 text-primary text-xs px-2 py-0.5 rounded">Neuroscience</span>
+                                <span class="text-xs text-mediumgray">ID: ART-2825</span>
+                            </div>
+                            <h4 class="font-medium text-sm mb-2">Neuroplasticity in Adult Learning Environments</h4>
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Author" class="w-5 h-5 rounded-full mr-1">
+                                    <span class="text-xs">Dr. Lisa Park</span>
+                                </div>
+                                <span class="text-xs text-coral font-medium">Due in 5d</span>
+                            </div>
+                            <div class="text-xs text-mediumgray mb-2">
+                                <i class="fa-solid fa-comment-dots mr-1"></i> 8 revision requests
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs bg-coral/10 text-coral px-2 py-0.5 rounded-full">Methodology</span>
+                                <span class="text-xs bg-coral/10 text-coral px-2 py-0.5 rounded-full">Data</span>
+                            </div>
+                        </div>
+                        
+                        <div id="card-revision-2" class="bg-white rounded-md shadow-sm p-3 mb-3 border-l-2 border-coral">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-emerald/10 text-emerald text-xs px-2 py-0.5 rounded">Climate Science</span>
+                                <span class="text-xs text-mediumgray">ID: ART-2820</span>
+                            </div>
+                            <h4 class="font-medium text-sm mb-2">Ocean Acidification Effects on Coral Ecosystems</h4>
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" alt="Author" class="w-5 h-5 rounded-full mr-1">
+                                    <span class="text-xs">Dr. Robert Johnson</span>
+                                </div>
+                                <span class="text-xs text-coral font-medium">Due in 3d</span>
+                            </div>
+                            <div class="text-xs text-mediumgray mb-2">
+                                <i class="fa-solid fa-comment-dots mr-1"></i> 12 revision requests
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs bg-coral/10 text-coral px-2 py-0.5 rounded-full">Audit Trail</span>
+                                <span class="text-xs bg-coral/10 text-coral px-2 py-0.5 rounded-full">Conclusions</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full text-sm text-mediumgray hover:text-primary py-2 flex items-center justify-center">
+                            <i class="fa-solid fa-eye mr-1"></i> View All
+                        </button>
+                    </div>
+                    
+                    <!-- Approved Column -->
+                    <div id="column-approved" class="bg-gray-100 rounded-lg p-3">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-medium text-charcoal">Approved</h3>
+                            <span class="bg-white text-emerald text-xs font-medium px-2 py-1 rounded-full">5</span>
+                        </div>
+                        
+                        <div id="card-approved-1" class="bg-white rounded-md shadow-sm p-3 mb-3 border-l-2 border-emerald">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-coral/10 text-coral text-xs px-2 py-0.5 rounded">Genetics</span>
+                                <span class="text-xs text-mediumgray">ID: ART-2815</span>
+                            </div>
+                            <h4 class="font-medium text-sm mb-2">Epigenetic Factors in Disease Progression</h4>
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="Author" class="w-5 h-5 rounded-full mr-1">
+                                    <span class="text-xs">Dr. Amanda Taylor</span>
+                                </div>
+                                <span class="text-xs text-emerald font-medium">
+                                    <i class="fa-solid fa-check-circle mr-1"></i>
+                                    Ready to publish
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex -space-x-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Reviewer" class="w-6 h-6 rounded-full border-2 border-white">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Reviewer" class="w-6 h-6 rounded-full border-2 border-white">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Reviewer" class="w-6 h-6 rounded-full border-2 border-white">
+                                </div>
+                                <button class="text-xs text-primary hover:underline">Publish</button>
+                            </div>
+                        </div>
+                        
+                        <div id="card-approved-2" class="bg-white rounded-md shadow-sm p-3 mb-3 border-l-2 border-emerald">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-purple/10 text-purple text-xs px-2 py-0.5 rounded">Computer Science</span>
+                                <span class="text-xs text-mediumgray">ID: ART-2810</span>
+                            </div>
+                            <h4 class="font-medium text-sm mb-2">Machine Learning for Natural Language Processing</h4>
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="Author" class="w-5 h-5 rounded-full mr-1">
+                                    <span class="text-xs">Dr. David Chang</span>
+                                </div>
+                                <span class="text-xs text-emerald font-medium">
+                                    <i class="fa-solid fa-check-circle mr-1"></i>
+                                    Ready to publish
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex -space-x-2">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Reviewer" class="w-6 h-6 rounded-full border-2 border-white">
+                                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Reviewer" class="w-6 h-6 rounded-full border-2 border-white">
+                                </div>
+                                <button class="text-xs text-primary hover:underline">Publish</button>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full text-sm text-mediumgray hover:text-primary py-2 flex items-center justify-center">
+                            <i class="fa-solid fa-eye mr-1"></i> View All
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="reviewer-activity" class="bg-white rounded-lg shadow-sm p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="font-bold text-lg">Reviewer Activity</h2>
+                    <button class="text-sm text-primary hover:underline">View All Reviewers</button>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-mediumgray">Reviewer</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-mediumgray">Discipline</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-mediumgray">Current Load</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-mediumgray">Avg. Completion Time</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-mediumgray">Annotation Quality</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-mediumgray">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Reviewer" class="w-8 h-8 rounded-full mr-2">
+                                        <div>
+                                            <p class="font-medium text-sm">Dr. Michael Wong</p>
+                                            <p class="text-xs text-mediumgray">Stanford University</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 text-sm">Computer Science</td>
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <span class="text-sm mr-2">3/5</span>
+                                        <div class="w-16 h-1.5 bg-gray-200 rounded-full">
+                                            <div class="h-1.5 bg-primary rounded-full" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 text-sm">4.2 days</td>
+                                <td class="py-3 px-4">
+                                    <div class="flex text-orange">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <span class="bg-emerald/10 text-emerald text-xs px-2 py-1 rounded-full">Available</span>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Reviewer" class="w-8 h-8 rounded-full mr-2">
+                                        <div>
+                                            <p class="font-medium text-sm">Dr. Emily Rodriguez</p>
+                                            <p class="text-xs text-mediumgray">MIT</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 text-sm">Genetics</td>
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <span class="text-sm mr-2">5/5</span>
+                                        <div class="w-16 h-1.5 bg-gray-200 rounded-full">
+                                            <div class="h-1.5 bg-coral rounded-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 text-sm">3.8 days</td>
+                                <td class="py-3 px-4">
+                                    <div class="flex text-orange">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <span class="bg-coral/10 text-coral text-xs px-2 py-1 rounded-full">At Capacity</span>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Reviewer" class="w-8 h-8 rounded-full mr-2">
+                                        <div>
+                                            <p class="font-medium text-sm">Prof. James Wilson</p>
+                                            <p class="text-xs text-mediumgray">University of Washington</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 text-sm">Climate Science</td>
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <span class="text-sm mr-2">2/5</span>
+                                        <div class="w-16 h-1.5 bg-gray-200 rounded-full">
+                                            <div class="h-1.5 bg-primary rounded-full" style="width: 40%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 text-sm">5.1 days</td>
+                                <td class="py-3 px-4">
+                                    <div class="flex text-orange">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <span class="bg-emerald/10 text-emerald text-xs px-2 py-1 rounded-full">Available</span>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Reviewer" class="w-8 h-8 rounded-full mr-2">
+                                        <div>
+                                            <p class="font-medium text-sm">Dr. Sarah Chen</p>
+                                            <p class="text-xs text-mediumgray">Johns Hopkins University</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 text-sm">Neuroscience</td>
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <span class="text-sm mr-2">4/5</span>
+                                        <div class="w-16 h-1.5 bg-gray-200 rounded-full">
+                                            <div class="h-1.5 bg-orange rounded-full" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 text-sm">3.5 days</td>
+                                <td class="py-3 px-4">
+                                    <div class="flex text-orange">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <span class="bg-orange/10 text-orange text-xs px-2 py-1 rounded-full">Limited</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="mobile-toggle" class="fixed bottom-5 right-5 md:hidden">
+        <button class="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg text-white">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+
+    <script>
+        // Toggle global search
+        document.getElementById('search-toggle').addEventListener('click', function() {
+            const searchBar = document.getElementById('global-search');
+            searchBar.classList.toggle('hidden');
+        });
+
+        // Completion rate chart
+        Highcharts.chart('completion-chart', {
+            chart: {
+                type: 'column',
+                backgroundColor: 'transparent'
+            },
+            title: {
+                text: null
+            },
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                labels: {
+                    style: {
+                        color: '#636e72'
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                max: 100,
+                title: {
+                    text: null
+                },
+                labels: {
+                    format: '{value}%',
+                    style: {
+                        color: '#636e72'
+                    }
+                },
+                gridLineColor: '#f1f1f1'
+            },
+            legend: {
+                align: 'center'
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>' + this.x + '</b><br/>' +
+                        this.series.name + ': ' + this.y + '%';
+                }
+            },
+            plotOptions: {
+                column: {
+                    borderRadius: 5
+                }
+            },
+            series: [{
+                name: 'On-time Completion',
+                color: '#00b894',
+                data: [68, 72, 75, 70, 78, 82, 85, 88, 90]
+            }, {
+                name: 'Delayed Completion',
+                color: '#fdcb6e',
+                data: [22, 18, 15, 20, 18, 12, 10, 8, 7]
+            }, {
+                name: 'Incomplete',
+                color: '#fd79a8',
+                data: [10, 10, 10, 10, 4, 6, 5, 4, 3]
+            }]
+        });
+    </script>
+</body>
+</html>

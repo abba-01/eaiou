@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 hidden md:block">
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-primary-600 rounded-md flex items-center justify-center text-white mr-2">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <h1 class="text-lg font-bold text-gray-800">SciReview</h1>
+                </div>
+            </div>
+            <nav class="p-4">
+                <div class="mb-4">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Main Menu</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-house w-5 h-5 mr-2"></i>
+                                Dashboard
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-file-lines w-5 h-5 mr-2"></i>
+                                My Manuscripts
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-user-check w-5 h-5 mr-2"></i>
+                                Review Requests
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-bell w-5 h-5 mr-2"></i>
+                                Notifications
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mb-4">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Author Tools</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-plus w-5 h-5 mr-2"></i>
+                                New Submission
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-clock-rotate-left w-5 h-5 mr-2"></i>
+                                Submission History
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md bg-primary-50 text-primary-700 cursor-pointer">
+                                <i class="fa-solid fa-book w-5 h-5 mr-2"></i>
+                                Author Guidelines
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Account</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-user w-5 h-5 mr-2"></i>
+                                Profile
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-gear w-5 h-5 mr-2"></i>
+                                Settings
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-sign-out-alt w-5 h-5 mr-2"></i>
+                                Sign Out
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200">
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center">
+                        <button class="md:hidden mr-2 text-gray-600">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <h2 class="text-lg font-semibold text-gray-800">Transparency Settings</h2>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-600 hover:text-gray-900">
+                            <i class="fa-solid fa-bell"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-gray-900">
+                            <i class="fa-solid fa-question-circle"></i>
+                        </button>
+                        <div class="flex items-center">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-8 h-8 rounded-full mr-2">
+                            <span class="text-sm font-medium text-gray-700">Dr. James Wilson</span>
+                            <i class="fa-solid fa-chevron-down ml-1 text-gray-500 text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-4">
+                <div id="transparency-settings-section" class="max-w-5xl mx-auto">
+                    <div class="mb-6 flex items-center justify-between">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">Review Transparency Options</h1>
+                            <p class="text-gray-600 mt-1">Configure how review reports and author responses are displayed alongside published articles</p>
+                        </div>
+                        <div>
+                            <button class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium mr-2 hover:bg-gray-50">
+                                Cancel
+                            </button>
+                            <button class="bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-700">
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Information Banner -->
+                    <div id="info-banner" class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-info-circle text-blue-500 mt-0.5"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-blue-800">About Review Transparency</h3>
+                                <div class="mt-2 text-sm text-blue-700">
+                                    <p>Transparency in the peer review process enhances accountability and credibility of published research. Configure how review reports and author responses are displayed alongside your published articles.</p>
+                                </div>
+                                <div class="mt-2">
+                                    <span class="text-sm text-blue-800 font-medium hover:underline cursor-pointer">Learn more about transparency options</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transparency Settings Form -->
+                    <div id="transparency-form" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                        <!-- Form Header -->
+                        <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-lg font-semibold text-gray-800">Display Options</h2>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
+                                    Journal Settings
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Form Content -->
+                        <div class="p-6">
+                            <!-- Transparency Model -->
+                            <div id="transparency-model" class="mb-8">
+                                <h3 class="text-md font-semibold text-gray-700 mb-3">Review Transparency Model</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input id="model-standard" name="transparency_model" type="radio" checked class="h-4 w-4 text-primary-600 border-gray-300 focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3">
+                                            <label for="model-standard" class="text-sm font-medium text-gray-700">Standard Model</label>
+                                            <p class="text-sm text-gray-500">Display anonymized reviewer comments and author responses after article publication.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input id="model-open" name="transparency_model" type="radio" class="h-4 w-4 text-primary-600 border-gray-300 focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3">
+                                            <label for="model-open" class="text-sm font-medium text-gray-700">Open Review Model</label>
+                                            <p class="text-sm text-gray-500">Display signed reviewer comments, author responses, and editor decisions after publication.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input id="model-enhanced" name="transparency_model" type="radio" class="h-4 w-4 text-primary-600 border-gray-300 focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3">
+                                            <label for="model-enhanced" class="text-sm font-medium text-gray-700">Enhanced Transparency Model</label>
+                                            <p class="text-sm text-gray-500">Display full review history including all review rounds, reviewer identities (with opt-out option), and editorial decisions.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input id="model-none" name="transparency_model" type="radio" class="h-4 w-4 text-primary-600 border-gray-300 focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3">
+                                            <label for="model-none" class="text-sm font-medium text-gray-700">No Public Reviews</label>
+                                            <p class="text-sm text-gray-500">Do not display any review information alongside published articles.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Content Display Options -->
+                            <div id="content-display-options" class="mb-8">
+                                <h3 class="text-md font-semibold text-gray-700 mb-3">Content Display Options</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                                        <div>
+                                            <label class="text-sm font-medium text-gray-700">Reviewer Comments</label>
+                                            <p class="text-xs text-gray-500">Display reviewer feedback alongside the published article</p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <label class="inline-flex relative items-center cursor-pointer">
+                                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                                        <div>
+                                            <label class="text-sm font-medium text-gray-700">Author Responses</label>
+                                            <p class="text-xs text-gray-500">Display author responses to reviewer comments</p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <label class="inline-flex relative items-center cursor-pointer">
+                                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                                        <div>
+                                            <label class="text-sm font-medium text-gray-700">Editorial Decisions</label>
+                                            <p class="text-xs text-gray-500">Display editor's decision letters and comments</p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <label class="inline-flex relative items-center cursor-pointer">
+                                                <input type="checkbox" value="" class="sr-only peer">
+                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                                        <div>
+                                            <label class="text-sm font-medium text-gray-700">Previous Manuscript Versions</label>
+                                            <p class="text-xs text-gray-500">Allow readers to access earlier versions of the manuscript</p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <label class="inline-flex relative items-center cursor-pointer">
+                                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between py-3">
+                                        <div>
+                                            <label class="text-sm font-medium text-gray-700">Reviewer Identities</label>
+                                            <p class="text-xs text-gray-500">Display reviewer names (reviewers can opt out)</p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <label class="inline-flex relative items-center cursor-pointer">
+                                                <input type="checkbox" value="" class="sr-only peer">
+                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Layout & Display Settings -->
+                            <div id="layout-settings" class="mb-8">
+                                <h3 class="text-md font-semibold text-gray-700 mb-3">Layout & Display Settings</h3>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Review Display Position</label>
+                                    <select class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
+                                        <option>After the article (recommended)</option>
+                                        <option>In a tabbed interface</option>
+                                        <option>In a side panel</option>
+                                        <option>On a separate page with prominent link</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Content Organization</label>
+                                    <select class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
+                                        <option>Group by review round</option>
+                                        <option>Group by reviewer</option>
+                                        <option>Chronological order</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input id="highlight-changes" type="checkbox" checked class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3">
+                                            <label for="highlight-changes" class="text-sm font-medium text-gray-700">Highlight Manuscript Changes</label>
+                                            <p class="text-sm text-gray-500">Visually highlight changes made between manuscript versions in response to reviews</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preview Section -->
+                            <div id="preview-section" class="mb-8">
+                                <h3 class="text-md font-semibold text-gray-700 mb-3">Preview</h3>
+                                <div class="border border-gray-300 rounded-lg overflow-hidden">
+                                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-300 flex justify-between items-center">
+                                        <h4 class="font-medium text-gray-700">How it will appear to readers</h4>
+                                        <button class="text-primary-600 text-sm font-medium">View Full Preview</button>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="mb-4 pb-4 border-b border-gray-200">
+                                            <div class="flex items-center justify-between mb-2">
+                                                <h5 class="font-medium text-gray-800">Peer Review History</h5>
+                                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Published with Article</span>
+                                            </div>
+                                            <p class="text-sm text-gray-600">This article includes the complete peer review history.</p>
+                                        </div>
+                                        
+                                        <div class="mb-4">
+                                            <div class="flex items-center mb-2">
+                                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded-full mr-2">Round 1</span>
+                                                <h5 class="font-medium text-gray-800">Reviewer #1</h5>
+                                            </div>
+                                            
+                                            <div class="mb-3 bg-gray-50 p-3 rounded-md text-sm text-gray-700">
+                                                <p class="mb-2">The manuscript presents interesting findings but lacks sufficient methodological detail in several key areas:</p>
+                                                <ol class="list-decimal pl-5 space-y-1">
+                                                    <li>The sample selection process needs clarification</li>
+                                                    <li>Statistical methods should be described in more detail</li>
+                                                    <li>Additional controls may be necessary for the analysis</li>
+                                                </ol>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <div class="flex items-center mb-1">
+                                                    <span class="text-xs font-medium text-orange-600 mr-2">Author Response:</span>
+                                                </div>
+                                                <div class="bg-orange-50 p-3 rounded-md text-sm text-gray-700">
+                                                    <p>We thank the reviewer for their thoughtful comments. We have addressed each point as follows:</p>
+                                                    <ol class="list-decimal pl-5 space-y-1 mt-2">
+                                                        <li>We've added details on the sample selection process in the Methods section (p.4)</li>
+                                                        <li>Statistical methods have been expanded in a new subsection (p.7)</li>
+                                                        <li>We've included additional control variables as suggested (Table 3)</li>
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="text-center">
+                                            <button class="text-primary-600 text-sm font-medium">Show more review content</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Save Settings -->
+                            <div class="flex justify-between pt-4 border-t border-gray-200">
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="default-future" type="checkbox" class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                    </div>
+                                    <div class="ml-3">
+                                        <label for="default-future" class="text-sm font-medium text-gray-700">Set as default for future submissions</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium mr-2 hover:bg-gray-50">
+                                        Cancel
+                                    </button>
+                                    <button class="bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-700">
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Resources -->
+                    <div id="additional-resources" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                            <h2 class="text-lg font-semibold text-gray-800">Additional Resources</h2>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 bg-primary-100 rounded-md p-2 mr-3">
+                                            <i class="fa-solid fa-book text-primary-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-sm font-medium text-gray-800 mb-1">Best Practices Guide</h3>
+                                            <p class="text-xs text-gray-600 mb-2">Learn about implementing transparent peer review effectively</p>
+                                            <span class="text-primary-600 text-xs font-medium hover:underline cursor-pointer">Read the guide</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 bg-primary-100 rounded-md p-2 mr-3">
+                                            <i class="fa-solid fa-chart-bar text-primary-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-sm font-medium text-gray-800 mb-1">Transparency Impact</h3>
+                                            <p class="text-xs text-gray-600 mb-2">Research on how transparency affects citation rates</p>
+                                            <span class="text-primary-600 text-xs font-medium hover:underline cursor-pointer">View research</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 bg-primary-100 rounded-md p-2 mr-3">
+                                            <i class="fa-solid fa-users text-primary-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-sm font-medium text-gray-800 mb-1">Community Standards</h3>
+                                            <p class="text-xs text-gray-600 mb-2">Guidelines for constructive peer review discussions</p>
+                                            <span class="text-primary-600 text-xs font-medium hover:underline cursor-pointer">View standards</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 bg-primary-100 rounded-md p-2 mr-3">
+                                            <i class="fa-solid fa-video text-primary-600"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-sm font-medium text-gray-800 mb-1">Tutorial Videos</h3>
+                                            <p class="text-xs text-gray-600 mb-2">Watch tutorials on managing transparent peer review</p>
+                                            <span class="text-primary-600 text-xs font-medium hover:underline cursor-pointer">Watch videos</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Right Sidebar - Help & Examples -->
+        <aside id="help-sidebar" class="w-80 bg-white border-l border-gray-200 hidden lg:block overflow-y-auto">
+            <div class="p-4 border-b border-gray-200">
+                <h3 class="font-semibold text-gray-800">Help & Examples</h3>
+            </div>
+            <div class="p-4">
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Why use transparent peer review?</h4>
+                    <div class="space-y-3 text-sm text-gray-600">
+                        <p>Transparent peer review improves:</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Research quality and integrity</li>
+                            <li>Reviewer accountability</li>
+                            <li>Author accountability</li>
+                            <li>Educational value for readers</li>
+                            <li>Visibility and recognition for reviewers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Example Articles</h4>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-gray-50 rounded-md border border-gray-200">
+                            <h5 class="text-sm font-medium text-gray-800 mb-1">Genomic analysis of marine bacteria</h5>
+                            <p class="text-xs text-gray-600 mb-2">Published with standard transparency model</p>
+                            <span class="text-primary-600 text-xs font-medium hover:underline cursor-pointer">View example</span>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-md border border-gray-200">
+                            <h5 class="text-sm font-medium text-gray-800 mb-1">Climate change impacts on agriculture</h5>
+                            <p class="text-xs text-gray-600 mb-2">Published with enhanced transparency model</p>
+                            <span class="text-primary-600 text-xs font-medium hover:underline cursor-pointer">View example</span>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-md border border-gray-200">
+                            <h5 class="text-sm font-medium text-gray-800 mb-1">Neural networks in drug discovery</h5>
+                            <p class="text-xs text-gray-600 mb-2">Published with open review model</p>
+                            <span class="text-primary-600 text-xs font-medium hover:underline cursor-pointer">View example</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Common Questions</h4>
+                    <div class="space-y-3">
+                        <div class="border-b border-gray-200 pb-2">
+                            <button class="flex justify-between items-center w-full text-left">
+                                <span class="text-sm text-gray-700">Can reviewers opt out of identification?</span>
+                                <i class="fa-solid fa-chevron-down text-gray-400 text-xs"></i>
+                            </button>
+                        </div>
+                        <div class="border-b border-gray-200 pb-2">
+                            <button class="flex justify-between items-center w-full text-left">
+                                <span class="text-sm text-gray-700">How are review reports moderated?</span>
+                                <i class="fa-solid fa-chevron-down text-gray-400 text-xs"></i>
+                            </button>
+                        </div>
+                        <div class="border-b border-gray-200 pb-2">
+                            <button class="flex justify-between items-center w-full text-left">
+                                <span class="text-sm text-gray-700">Can I change settings after publication?</span>
+                                <i class="fa-solid fa-chevron-down text-gray-400 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Need Help?</h4>
+                    <div class="space-y-2">
+                        <span class="text-sm text-primary-600 hover:text-primary-700 flex items-center cursor-pointer">
+                            <i class="fa-regular fa-envelope mr-2"></i>
+                            <span>Contact Editorial Office</span>
+                        </span>
+                        <span class="text-sm text-primary-600 hover:text-primary-700 flex items-center cursor-pointer">
+                            <i class="fa-regular fa-circle-question mr-2"></i>
+                            <span>Transparency FAQ</span>
+                        </span>
+                        <span class="text-sm text-primary-600 hover:text-primary-700 flex items-center cursor-pointer">
+                            <i class="fa-solid fa-headset mr-2"></i>
+                            <span>Technical Support</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>

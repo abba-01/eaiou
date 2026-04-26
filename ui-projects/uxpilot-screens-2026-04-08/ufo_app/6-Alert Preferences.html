@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C63FF',
+                        secondary: '#2A265F',
+                        accent: '#00F5A0',
+                        dark: '#121212',
+                        darkGray: '#1E1E1E',
+                        lightGray: '#2A2A2A',
+                        success: '#00C853',
+                        warning: '#FFD600',
+                        danger: '#FF3D00',
+                        info: '#00B0FF'
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-white font-sans">
+    <!-- Status Bar -->
+    <div id="status-bar" class="bg-darkGray p-2 flex justify-between items-center text-xs">
+        <div>
+            <span>9:41</span>
+        </div>
+        <div class="flex space-x-2">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-three-quarters"></i>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="bg-darkGray p-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <button id="back-btn" class="h-8 w-8 rounded-full bg-lightGray flex items-center justify-center">
+                <i class="fa-solid fa-chevron-left text-white"></i>
+            </button>
+            <h1 class="text-lg font-bold">Alert Settings</h1>
+        </div>
+        <div>
+            <button id="save-btn" class="bg-primary text-white px-4 py-1.5 rounded-full text-sm">
+                Save
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pb-20">
+        <!-- Settings Introduction -->
+        <section id="settings-intro" class="p-4 bg-darkGray mb-4">
+            <p class="text-sm text-gray-400">Customize how you receive alerts about UFO sightings in your area based on your preferences.</p>
+        </section>
+
+        <!-- Proximity Settings -->
+        <section id="proximity-settings" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3 flex items-center">
+                <i class="fa-solid fa-location-crosshairs text-accent mr-2"></i>
+                Alert Range
+            </h2>
+            
+            <div class="bg-darkGray rounded-xl p-4 mb-3">
+                <div class="flex justify-between items-center mb-3">
+                    <span>Maximum distance</span>
+                    <span class="text-accent font-bold">5 miles</span>
+                </div>
+                <input type="range" min="1" max="50" value="5" class="w-full h-2 bg-lightGray rounded-lg appearance-none cursor-pointer accent-accent" id="distance-range">
+                <div class="flex justify-between text-xs text-gray-400 mt-1">
+                    <span>1 mile</span>
+                    <span>50 miles</span>
+                </div>
+            </div>
+            
+            <div id="proximity-tier-settings" class="bg-darkGray rounded-xl overflow-hidden mb-4">
+                <div class="p-4 border-b border-lightGray">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="h-3 w-3 rounded-full bg-danger mr-2"></div>
+                            <span>Critical (≤ 1 mile)</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="p-4 border-b border-lightGray">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="h-3 w-3 rounded-full bg-warning mr-2"></div>
+                            <span>High (1-2 miles)</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="p-4 border-b border-lightGray">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="h-3 w-3 rounded-full bg-info mr-2"></div>
+                            <span>Medium (2-5 miles)</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="h-3 w-3 rounded-full bg-gray-500 mr-2"></div>
+                            <span>Low (> 5 miles)</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer">
+                            <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Time Windows -->
+        <section id="time-windows" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3 flex items-center">
+                <i class="fa-solid fa-clock text-accent mr-2"></i>
+                Time Windows
+            </h2>
+            
+            <div class="bg-darkGray rounded-xl p-4 mb-3">
+                <div class="flex items-center justify-between mb-4">
+                    <span>Active Hours</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                    </label>
+                </div>
+                
+                <div class="flex justify-between items-center mb-2">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-sun text-warning"></i>
+                        <span>Start</span>
+                    </div>
+                    <select class="bg-lightGray text-white px-3 py-1.5 rounded-lg">
+                        <option>6:00 PM</option>
+                    </select>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-moon text-info"></i>
+                        <span>End</span>
+                    </div>
+                    <select class="bg-lightGray text-white px-3 py-1.5 rounded-lg">
+                        <option>6:00 AM</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="do-not-disturb" class="bg-darkGray rounded-xl p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="font-medium">Do Not Disturb</div>
+                        <div class="text-xs text-gray-400 mt-1">Silence all but critical alerts</div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer">
+                        <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters -->
+        <section id="filters-section" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3 flex items-center">
+                <i class="fa-solid fa-filter text-accent mr-2"></i>
+                Sighting Filters
+            </h2>
+            
+            <div id="shape-filters" class="bg-darkGray rounded-xl p-4 mb-3">
+                <h3 class="font-medium mb-3">Object Shapes</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" checked id="triangle" class="h-4 w-4 accent-primary bg-lightGray rounded">
+                        <label for="triangle">Triangle</label>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" checked id="disc" class="h-4 w-4 accent-primary bg-lightGray rounded">
+                        <label for="disc">Disc/Saucer</label>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" checked id="orb" class="h-4 w-4 accent-primary bg-lightGray rounded">
+                        <label for="orb">Orb/Sphere</label>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" checked id="cigar" class="h-4 w-4 accent-primary bg-lightGray rounded">
+                        <label for="cigar">Cigar/Cylinder</label>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" id="other" class="h-4 w-4 accent-primary bg-lightGray rounded">
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="behavior-filters" class="bg-darkGray rounded-xl p-4 mb-3">
+                <h3 class="font-medium mb-3">Movement Patterns</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" checked id="hovering" class="h-4 w-4 accent-primary bg-lightGray rounded">
+                        <label for="hovering">Hovering</label>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" checked id="zigzag" class="h-4 w-4 accent-primary bg-lightGray rounded">
+                        <label for="zigzag">Zig-zag</label>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" checked id="formation" class="h-4 w-4 accent-primary bg-lightGray rounded">
+                        <label for="formation">Formation</label>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" checked id="acceleration" class="h-4 w-4 accent-primary bg-lightGray rounded">
+                        <label for="acceleration">Sudden acceleration</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="weather-filters" class="bg-darkGray rounded-xl p-4">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-medium">Weather Conditions</h3>
+                    <span class="text-xs text-gray-400">Filter by weather</span>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-cloud text-gray-400"></i>
+                            <span>Clear skies only</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                        </label>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-moon text-gray-400"></i>
+                            <span>Exclude full moon</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer">
+                            <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fatigue Prevention -->
+        <section id="fatigue-prevention" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3 flex items-center">
+                <i class="fa-solid fa-battery-half text-accent mr-2"></i>
+                Fatigue Prevention
+            </h2>
+            
+            <div class="bg-darkGray rounded-xl p-4 mb-3">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <div class="font-medium">Smart Clustering</div>
+                        <div class="text-xs text-gray-400 mt-1">Group multiple similar sightings</div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                    </label>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span>Daily notification cap</span>
+                        <span class="text-accent font-bold">10</span>
+                    </div>
+                    <input type="range" min="1" max="50" value="10" class="w-full h-2 bg-lightGray rounded-lg appearance-none cursor-pointer accent-accent">
+                    <div class="flex justify-between text-xs text-gray-400 mt-1">
+                        <span>1</span>
+                        <span>Unlimited</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="font-medium">Focus Mode</div>
+                        <div class="text-xs text-gray-400 mt-1">Pause all but critical during capture</div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notification Urgency -->
+        <section id="notification-urgency" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3 flex items-center">
+                <i class="fa-solid fa-bell text-accent mr-2"></i>
+                Notification Urgency
+            </h2>
+            
+            <div class="bg-darkGray rounded-xl overflow-hidden">
+                <div class="p-4 border-b border-lightGray">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-medium">Override Silent Mode</div>
+                            <div class="text-xs text-gray-400 mt-1">For critical alerts only</div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="p-4 border-b border-lightGray">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-medium">Vibration</div>
+                        </div>
+                        <select class="bg-lightGray text-white px-3 py-1.5 rounded-lg text-sm">
+                            <option>Strong</option>
+                            <option>Medium</option>
+                            <option>Light</option>
+                            <option>None</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-medium">Sound</div>
+                        </div>
+                        <select class="bg-lightGray text-white px-3 py-1.5 rounded-lg text-sm">
+                            <option>UFO Proximity</option>
+                            <option>Alert Tone</option>
+                            <option>Subtle</option>
+                            <option>None</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Alerts -->
+        <section id="social-alerts" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3 flex items-center">
+                <i class="fa-solid fa-users text-accent mr-2"></i>
+                Social Alerts
+            </h2>
+            
+            <div class="bg-darkGray rounded-xl p-4">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-medium">Local Groups</div>
+                            <div class="text-xs text-gray-400 mt-1">Portland Sky Watchers</div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-medium">Researcher Notifications</div>
+                            <div class="text-xs text-gray-400 mt-1">Get alerts from verified researchers</div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-medium">Trusted Reporter Boosts</div>
+                            <div class="text-xs text-gray-400 mt-1">Priority alerts from high-trust users</div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-lightGray rounded-full peer peer-checked:bg-primary peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reset Section -->
+        <section id="reset-section" class="px-4 mb-10">
+            <div class="flex justify-between">
+                <button class="bg-lightGray text-white px-4 py-2 rounded-lg text-sm flex items-center">
+                    <i class="fa-solid fa-rotate-left mr-2"></i>
+                    Reset to Defaults
+                </button>
+                <button class="bg-danger text-white px-4 py-2 rounded-lg text-sm flex items-center">
+                    <i class="fa-solid fa-bell-slash mr-2"></i>
+                    Disable All Alerts
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-darkGray border-t border-gray-800 px-2 py-2">
+        <div class="flex justify-around items-center">
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-house text-lg"></i>
+                <span class="text-xs mt-1">Home</span>
+            </span>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-map-location-dot text-lg"></i>
+                <span class="text-xs mt-1">Map</span>
+            </span>
+            <div class="relative -mt-8">
+                <button class="bg-primary h-16 w-16 rounded-full flex items-center justify-center shadow-lg">
+                    <i class="fa-solid fa-satellite-dish text-2xl"></i>
+                </button>
+            </div>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-chart-line text-lg"></i>
+                <span class="text-xs mt-1">Activity</span>
+            </span>
+            <span class="flex flex-col items-center text-primary cursor-pointer">
+                <i class="fa-solid fa-gear text-lg"></i>
+                <span class="text-xs mt-1">Settings</span>
+            </span>
+        </div>
+    </nav>
+</body>
+</html>

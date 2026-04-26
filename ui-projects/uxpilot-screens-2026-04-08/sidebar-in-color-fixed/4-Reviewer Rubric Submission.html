@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Left Sidebar -->
+    <div id="sidebar" class="fixed left-0 top-0 bottom-0 w-16 bg-gray-800 flex flex-col items-center">
+        <div class="mt-6 mb-10">
+            <div class="bg-primary-600 h-7 w-7 transform rotate-45 flex items-center justify-center">
+                <div class="bg-white h-2 w-2 transform rotate-45"></div>
+            </div>
+        </div>
+        <div class="flex flex-col items-center space-y-6">
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-home text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-file-lines text-xl"></i></span>
+            <span class="text-white p-2 bg-primary-600 rounded cursor-pointer"><i class="fa-solid fa-pen-to-square text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-magnifying-glass text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-users text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-chart-bar text-xl"></i></span>
+        </div>
+        <div class="mt-auto mb-6">
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-gear text-xl"></i></span>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="ml-16">
+        <!-- Header -->
+        <div id="header" class="flex justify-between items-center p-4 bg-white border-b border-gray-200">
+            <div class="flex items-center space-x-4">
+                <h1 class="text-xl font-semibold text-gray-800">Review Submission</h1>
+                <span class="text-sm px-2 py-1 bg-green-100 text-green-800 rounded">Reviewer</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="flex items-center text-gray-600 hover:text-gray-800">
+                    <i class="fa-solid fa-question-circle mr-2"></i>
+                    <span>Help</span>
+                </button>
+                <div class="relative">
+                    <button class="text-gray-600 hover:text-gray-800">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User" class="w-8 h-8 rounded-full">
+                    <span class="text-sm font-medium">Dr. Robert Chen</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Form Area -->
+        <div id="main-content" class="p-6">
+            <div class="max-w-5xl mx-auto">
+                <!-- Submission Info Card -->
+                <div id="submission-info" class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mr-4">
+                            <div class="w-20 h-20 bg-primary-100 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-file-lines text-primary-600 text-3xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h2 class="text-xl font-semibold text-gray-800">The Impact of Climate Change on Marine Ecosystems</h2>
+                                    <p class="text-sm text-gray-600 mt-1">Submitted by: Dr. Sarah Johnson • Environmental Sciences</p>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">In Review</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded-full">ID: ART-2023-0142</span>
+                                </div>
+                            </div>
+                            <div class="mt-3 flex items-center text-sm text-gray-600">
+                                <span class="flex items-center mr-4">
+                                    <i class="fa-regular fa-calendar mr-1"></i>
+                                    Submitted: June 15, 2023
+                                </span>
+                                <span class="flex items-center mr-4">
+                                    <i class="fa-regular fa-clock mr-1"></i>
+                                    Review Due: August 2, 2023
+                                </span>
+                                <span class="flex items-center text-red-600 font-medium">
+                                    <i class="fa-solid fa-exclamation-circle mr-1"></i>
+                                    5 days remaining
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center border-t border-gray-100 pt-4">
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1.5 bg-primary-50 text-primary-700 rounded text-sm flex items-center">
+                                <i class="fa-solid fa-file-pdf mr-1.5"></i> View Manuscript
+                            </button>
+                            <button class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded text-sm flex items-center">
+                                <i class="fa-solid fa-download mr-1.5"></i> Download Files
+                            </button>
+                        </div>
+                        <div>
+                            <span class="text-sm text-gray-500">Editor: Prof. Michael Thompson</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Form -->
+                <div id="review-form" class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+                    <div class="border-b border-gray-200 p-4 flex justify-between items-center">
+                        <h2 class="text-lg font-semibold text-gray-800">Review Evaluation</h2>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded text-sm flex items-center">
+                                <i class="fa-regular fa-save mr-1"></i> Save Draft
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Rubric Section -->
+                    <div id="rubric-section" class="p-6 border-b border-gray-200">
+                        <h3 class="text-md font-semibold text-gray-700 mb-4">Evaluation Criteria</h3>
+                        <p class="text-sm text-gray-600 mb-6">Please rate the manuscript on the following criteria. Each criterion is weighted according to its importance in the final evaluation.</p>
+                        
+                        <!-- Criterion 1 -->
+                        <div id="criterion-1" class="mb-8">
+                            <div class="flex justify-between items-center mb-2">
+                                <div>
+                                    <h4 class="text-md font-medium">1. Originality and Significance</h4>
+                                    <p class="text-sm text-gray-600">Does the manuscript present novel ideas, methods, or insights? Is the work significant to the field?</p>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <span class="font-medium">Weight: 25%</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="orig-1" name="originality" class="h-4 w-4 text-primary-600">
+                                    <label for="orig-1" class="text-sm">1 - Poor</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="orig-2" name="originality" class="h-4 w-4 text-primary-600">
+                                    <label for="orig-2" class="text-sm">2 - Fair</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="orig-3" name="originality" class="h-4 w-4 text-primary-600">
+                                    <label for="orig-3" class="text-sm">3 - Good</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="orig-4" name="originality" class="h-4 w-4 text-primary-600" checked>
+                                    <label for="orig-4" class="text-sm">4 - Very Good</label>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <input type="radio" id="orig-5" name="originality" class="h-4 w-4 text-primary-600">
+                                    <label for="orig-5" class="text-sm">5 - Excellent</label>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Comments on Originality and Significance</label>
+                                <textarea rows="3" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Provide specific feedback on the originality and significance of the work...">The research presents a relatively novel approach to studying marine ecosystem changes, particularly in the integration of satellite data with on-site observations. While not groundbreaking, it makes a valuable contribution to the field.</textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Criterion 2 -->
+                        <div id="criterion-2" class="mb-8">
+                            <div class="flex justify-between items-center mb-2">
+                                <div>
+                                    <h4 class="text-md font-medium">2. Methodology and Research Design</h4>
+                                    <p class="text-sm text-gray-600">Is the methodology sound, appropriate, and described in sufficient detail?</p>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <span class="font-medium">Weight: 20%</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="method-1" name="methodology" class="h-4 w-4 text-primary-600">
+                                    <label for="method-1" class="text-sm">1 - Poor</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="method-2" name="methodology" class="h-4 w-4 text-primary-600">
+                                    <label for="method-2" class="text-sm">2 - Fair</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="method-3" name="methodology" class="h-4 w-4 text-primary-600" checked>
+                                    <label for="method-3" class="text-sm">3 - Good</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="method-4" name="methodology" class="h-4 w-4 text-primary-600">
+                                    <label for="method-4" class="text-sm">4 - Very Good</label>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <input type="radio" id="method-5" name="methodology" class="h-4 w-4 text-primary-600">
+                                    <label for="method-5" class="text-sm">5 - Excellent</label>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Comments on Methodology</label>
+                                <textarea rows="3" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Provide specific feedback on the methodology and research design...">The methodology is generally sound, but lacks some important details about sampling frequency and data normalization procedures. The statistical analysis approach is appropriate, though additional validation methods would strengthen the findings.</textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Criterion 3 -->
+                        <div id="criterion-3" class="mb-8">
+                            <div class="flex justify-between items-center mb-2">
+                                <div>
+                                    <h4 class="text-md font-medium">3. Literature Review and Citations</h4>
+                                    <p class="text-sm text-gray-600">Is the literature review comprehensive and up-to-date? Are citations appropriate and sufficient?</p>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <span class="font-medium">Weight: 15%</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="lit-1" name="literature" class="h-4 w-4 text-primary-600">
+                                    <label for="lit-1" class="text-sm">1 - Poor</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="lit-2" name="literature" class="h-4 w-4 text-primary-600">
+                                    <label for="lit-2" class="text-sm">2 - Fair</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="lit-3" name="literature" class="h-4 w-4 text-primary-600">
+                                    <label for="lit-3" class="text-sm">3 - Good</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="lit-4" name="literature" class="h-4 w-4 text-primary-600" checked>
+                                    <label for="lit-4" class="text-sm">4 - Very Good</label>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <input type="radio" id="lit-5" name="literature" class="h-4 w-4 text-primary-600">
+                                    <label for="lit-5" class="text-sm">5 - Excellent</label>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Comments on Literature Review</label>
+                                <textarea rows="3" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Provide specific feedback on the literature review and citations...">The literature review is thorough and well-organized, covering most relevant studies in the field. However, some recent work by Alvarez et al. (2022) on thermal resilience in coral ecosystems is notably absent and should be incorporated.</textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Criterion 4 -->
+                        <div id="criterion-4" class="mb-8">
+                            <div class="flex justify-between items-center mb-2">
+                                <div>
+                                    <h4 class="text-md font-medium">4. Results and Data Analysis</h4>
+                                    <p class="text-sm text-gray-600">Are results presented clearly? Is the data analysis appropriate and rigorous?</p>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <span class="font-medium">Weight: 20%</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="results-1" name="results" class="h-4 w-4 text-primary-600">
+                                    <label for="results-1" class="text-sm">1 - Poor</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="results-2" name="results" class="h-4 w-4 text-primary-600">
+                                    <label for="results-2" class="text-sm">2 - Fair</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="results-3" name="results" class="h-4 w-4 text-primary-600">
+                                    <label for="results-3" class="text-sm">3 - Good</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="results-4" name="results" class="h-4 w-4 text-primary-600" checked>
+                                    <label for="results-4" class="text-sm">4 - Very Good</label>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <input type="radio" id="results-5" name="results" class="h-4 w-4 text-primary-600">
+                                    <label for="results-5" class="text-sm">5 - Excellent</label>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Comments on Results</label>
+                                <textarea rows="3" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Provide specific feedback on the results and data analysis...">The results are presented clearly with appropriate figures and tables. The statistical analysis is sound, though I would recommend including confidence intervals for the key measurements. Figure 3 could be improved by using a different color scheme to better highlight the temperature gradients.</textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Criterion 5 -->
+                        <div id="criterion-5" class="mb-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <div>
+                                    <h4 class="text-md font-medium">5. Discussion and Conclusions</h4>
+                                    <p class="text-sm text-gray-600">Are the conclusions supported by the results? Does the discussion address implications and limitations?</p>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <span class="font-medium">Weight: 20%</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="disc-1" name="discussion" class="h-4 w-4 text-primary-600">
+                                    <label for="disc-1" class="text-sm">1 - Poor</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="disc-2" name="discussion" class="h-4 w-4 text-primary-600">
+                                    <label for="disc-2" class="text-sm">2 - Fair</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="disc-3" name="discussion" class="h-4 w-4 text-primary-600">
+                                    <label for="disc-3" class="text-sm">3 - Good</label>
+                                </div>
+                                <div class="flex items-center space-x-1 mr-4">
+                                    <input type="radio" id="disc-4" name="discussion" class="h-4 w-4 text-primary-600" checked>
+                                    <label for="disc-4" class="text-sm">4 - Very Good</label>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <input type="radio" id="disc-5" name="discussion" class="h-4 w-4 text-primary-600">
+                                    <label for="disc-5" class="text-sm">5 - Excellent</label>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Comments on Discussion and Conclusions</label>
+                                <textarea rows="3" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Provide specific feedback on the discussion and conclusions...">The discussion effectively interprets the results within the broader context of climate change impacts. The limitations section is honest but could be expanded to address potential seasonal variations. The conclusions are generally well-supported by the data, though some claims about long-term trends may be slightly overstated.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Detailed Comments Section -->
+                    <div id="comments-section" class="p-6 border-b border-gray-200">
+                        <h3 class="text-md font-semibold text-gray-700 mb-4">Detailed Review Comments</h3>
+                        
+                        <!-- Comments to Author -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Comments to Author</label>
+                            <p class="text-sm text-gray-600 mb-3">These comments will be shared with the author. Provide constructive feedback that helps improve the manuscript.</p>
+                            <textarea rows="6" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Provide detailed feedback to the author...">This manuscript presents a valuable contribution to our understanding of climate change impacts on marine ecosystems. The integration of satellite data with field observations provides a comprehensive view of the changes occurring in the studied regions.
+
+Major strengths:
+- Comprehensive data collection spanning multiple years
+- Innovative approach to data visualization in Figures 4 and 5
+- Clear connection between observed changes and climate models
+
+Areas for improvement:
+1. The methodology section needs more detail on sampling protocols and data normalization procedures.
+2. The literature review should include recent work by Alvarez et al. (2022) on thermal resilience.
+3. Statistical analysis would benefit from inclusion of confidence intervals.
+4. Some claims in the conclusion appear slightly overstated given the temporal limitations of the data.
+
+I recommend addressing these issues before publication, particularly the methodological details which are essential for reproducibility.</textarea>
+                        </div>
+                        
+                        <!-- Confidential Comments to Editor -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Confidential Comments to Editor</label>
+                            <p class="text-sm text-gray-600 mb-3">These comments will only be visible to the editor and other reviewers, not to the author.</p>
+                            <textarea rows="4" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Provide confidential comments to the editor...">This is a solid manuscript that makes a good contribution to the field. With the suggested revisions, particularly to the methodology section and statistical analysis, it should be suitable for publication. The research approach is sound, though not particularly groundbreaking. I believe the author has the expertise to address these concerns adequately in a revision.</textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Overall Recommendation Section -->
+                    <div id="recommendation-section" class="p-6">
+                        <h3 class="text-md font-semibold text-gray-700 mb-4">Overall Recommendation</h3>
+                        
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Select your recommendation for this manuscript</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="border border-gray-200 rounded-lg p-4 flex items-start">
+                                    <input type="radio" id="accept" name="recommendation" class="mt-1 h-4 w-4 text-primary-600">
+                                    <label for="accept" class="ml-2">
+                                        <span class="block font-medium text-gray-800">Accept</span>
+                                        <span class="block text-sm text-gray-600 mt-1">The manuscript is suitable for publication in its current form.</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-lg p-4 flex items-start">
+                                    <input type="radio" id="minor-revision" name="recommendation" class="mt-1 h-4 w-4 text-primary-600" checked>
+                                    <label for="minor-revision" class="ml-2">
+                                        <span class="block font-medium text-gray-800">Minor Revision</span>
+                                        <span class="block text-sm text-gray-600 mt-1">The manuscript requires minor changes before publication.</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-lg p-4 flex items-start">
+                                    <input type="radio" id="major-revision" name="recommendation" class="mt-1 h-4 w-4 text-primary-600">
+                                    <label for="major-revision" class="ml-2">
+                                        <span class="block font-medium text-gray-800">Major Revision</span>
+                                        <span class="block text-sm text-gray-600 mt-1">The manuscript requires substantial changes before it can be considered for publication.</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-lg p-4 flex items-start">
+                                    <input type="radio" id="reject" name="recommendation" class="mt-1 h-4 w-4 text-primary-600">
+                                    <label for="reject" class="ml-2">
+                                        <span class="block font-medium text-gray-800">Reject</span>
+                                        <span class="block text-sm text-gray-600 mt-1">The manuscript is not suitable for publication in this journal.</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Calculated Score -->
+                        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                            <h4 class="font-medium text-gray-700 mb-2">Calculated Score</h4>
+                            <div class="flex items-center">
+                                <div class="w-16 h-16 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold text-xl mr-4">
+                                    3.8
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-700">Weighted average score based on your evaluations</p>
+                                    <p class="text-xs text-gray-500 mt-1">Score range: 1 (Poor) to 5 (Excellent)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="flex justify-end space-x-3">
+                            <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded font-medium">
+                                Save as Draft
+                            </button>
+                            <button class="px-6 py-2 bg-primary-600 text-white rounded font-medium">
+                                Submit Review
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review Guidelines Card -->
+                <div id="review-guidelines" class="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
+                    <h3 class="text-md font-semibold text-gray-700 mb-3">Reviewer Guidelines</h3>
+                    <div class="text-sm text-gray-600 space-y-3">
+                        <p>Please consider the following when completing your review:</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Evaluate the manuscript objectively and constructively</li>
+                            <li>Provide specific, actionable feedback that helps the author improve their work</li>
+                            <li>Consider both the scientific merit and the presentation quality</li>
+                            <li>Maintain confidentiality throughout the review process</li>
+                            <li>Declare any conflicts of interest that may affect your review</li>
+                        </ul>
+                        <p>Your thoughtful evaluation helps maintain the high standards of our journal and contributes to the advancement of scientific knowledge.</p>
+                        <div class="pt-2">
+                            <span class="text-primary-600 hover:text-primary-700 font-medium flex items-center cursor-pointer">
+                                View complete reviewer guidelines
+                                <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer" class="mt-8 border-t border-gray-200 py-4 px-6 text-center text-sm text-gray-500">
+            <p>© 2023 Academic Journal Management System. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

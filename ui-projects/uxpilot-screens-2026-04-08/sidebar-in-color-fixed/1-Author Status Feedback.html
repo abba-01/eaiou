@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Left Sidebar -->
+    <div id="sidebar" class="fixed left-0 top-0 bottom-0 w-16 bg-gray-800 flex flex-col items-center">
+        <div class="mt-6 mb-10">
+            <div class="bg-primary-600 h-7 w-7 transform rotate-45 flex items-center justify-center">
+                <div class="bg-white h-2 w-2 transform rotate-45"></div>
+            </div>
+        </div>
+        <div class="flex flex-col items-center space-y-6">
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-home text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-file-lines text-xl"></i></span>
+            <span class="text-white p-2 bg-primary-600 rounded cursor-pointer"><i class="fa-solid fa-pen-to-square text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-magnifying-glass text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-users text-xl"></i></span>
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-chart-bar text-xl"></i></span>
+        </div>
+        <div class="mt-auto mb-6">
+            <span class="text-white p-2 cursor-pointer"><i class="fa-solid fa-gear text-xl"></i></span>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="ml-16">
+        <!-- Header -->
+        <div id="header" class="flex justify-between items-center p-4 bg-white border-b border-gray-200">
+            <div class="flex items-center space-x-4">
+                <h1 class="text-xl font-semibold text-gray-800">Submission Status</h1>
+                <span class="text-sm px-2 py-1 bg-blue-100 text-blue-800 rounded">Author</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="flex items-center text-gray-600 hover:text-gray-800">
+                    <i class="fa-solid fa-question-circle mr-2"></i>
+                    <span>Help</span>
+                </button>
+                <div class="relative">
+                    <button class="text-gray-600 hover:text-gray-800">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">2</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User" class="w-8 h-8 rounded-full">
+                    <span class="text-sm font-medium">Dr. John Smith</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="p-6">
+            <div class="max-w-5xl mx-auto">
+                <!-- Article Summary Card -->
+                <div id="article-summary" class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+                    <div class="border-b border-gray-200 p-4 flex justify-between items-center">
+                        <h2 class="text-lg font-semibold text-gray-800">Article Submission</h2>
+                        <div class="flex items-center space-x-3">
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm flex items-center">
+                                <i class="fa-solid fa-clock mr-1.5"></i> Revision Requested
+                            </span>
+                            <span class="text-sm text-gray-500">ID: AJMS-2023-0042</span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-medium text-gray-800 mb-2">The Impact of Climate Change on Coastal Ecosystems</h3>
+                        <div class="flex flex-wrap text-sm text-gray-600 mb-4">
+                            <div class="mr-6 mb-2">
+                                <span class="font-medium">Submitted:</span> October 15, 2023
+                            </div>
+                            <div class="mr-6 mb-2">
+                                <span class="font-medium">Last Updated:</span> November 2, 2023
+                            </div>
+                            <div class="mr-6 mb-2">
+                                <span class="font-medium">Current Version:</span> 2.0
+                            </div>
+                            <div class="mb-2">
+                                <span class="font-medium">Decision Due:</span> November 30, 2023
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">Climate Science</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">Marine Biology</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">Environmental Studies</span>
+                            <span class="px-2 py-1 bg-primary-100 text-primary-700 rounded text-xs">Double-Blind Review</span>
+                        </div>
+                        <div class="flex justify-end space-x-3">
+                            <button class="px-3 py-1.5 border border-gray-300 rounded text-sm flex items-center text-gray-700">
+                                <i class="fa-regular fa-eye mr-1.5"></i> Preview
+                            </button>
+                            <button class="px-3 py-1.5 bg-primary-600 text-white rounded text-sm flex items-center">
+                                <i class="fa-solid fa-pen-to-square mr-1.5"></i> Submit Revision
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Timeline -->
+                <div id="status-timeline" class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+                    <div class="border-b border-gray-200 p-4">
+                        <h2 class="text-lg font-semibold text-gray-800">Submission Timeline</h2>
+                    </div>
+                    <div class="p-4">
+                        <div class="relative">
+                            <!-- Timeline Line -->
+                            <div class="absolute left-[19px] top-1 h-full w-0.5 bg-gray-200"></div>
+                            
+                            <!-- Timeline Events -->
+                            <div class="ml-10 space-y-8">
+                                <!-- Event 1 -->
+                                <div id="timeline-item-1" class="relative">
+                                    <div class="absolute -left-10 mt-1.5 h-4 w-4 rounded-full border-2 border-primary-600 bg-white"></div>
+                                    <div class="flex flex-col sm:flex-row sm:items-start">
+                                        <div class="mb-1 sm:mb-0 sm:w-32 text-sm font-medium text-gray-500">Nov 2, 2023</div>
+                                        <div class="flex-1">
+                                            <h3 class="text-base font-medium text-gray-900">Revision Requested</h3>
+                                            <p class="mt-1 text-sm text-gray-600">Editor has requested revisions based on reviewer feedback.</p>
+                                            <div class="mt-2">
+                                                <button class="text-primary-600 text-sm font-medium flex items-center">
+                                                    View Decision Letter <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 sm:mt-0 sm:ml-4 flex-shrink-0">
+                                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
+                                                Major Revision
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Event 2 -->
+                                <div id="timeline-item-2" class="relative">
+                                    <div class="absolute -left-10 mt-1.5 h-4 w-4 rounded-full border-2 border-gray-400 bg-white"></div>
+                                    <div class="flex flex-col sm:flex-row sm:items-start">
+                                        <div class="mb-1 sm:mb-0 sm:w-32 text-sm font-medium text-gray-500">Oct 28, 2023</div>
+                                        <div class="flex-1">
+                                            <h3 class="text-base font-medium text-gray-900">Reviews Completed</h3>
+                                            <p class="mt-1 text-sm text-gray-600">All assigned reviewers have submitted their evaluations.</p>
+                                        </div>
+                                        <div class="mt-2 sm:mt-0 sm:ml-4 flex-shrink-0">
+                                            <span class="text-sm text-gray-500">3 Reviewers</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Event 3 -->
+                                <div id="timeline-item-3" class="relative">
+                                    <div class="absolute -left-10 mt-1.5 h-4 w-4 rounded-full border-2 border-gray-400 bg-white"></div>
+                                    <div class="flex flex-col sm:flex-row sm:items-start">
+                                        <div class="mb-1 sm:mb-0 sm:w-32 text-sm font-medium text-gray-500">Oct 18, 2023</div>
+                                        <div class="flex-1">
+                                            <h3 class="text-base font-medium text-gray-900">Sent for Peer Review</h3>
+                                            <p class="mt-1 text-sm text-gray-600">Your submission has passed initial screening and been assigned to reviewers.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Event 4 -->
+                                <div id="timeline-item-4" class="relative">
+                                    <div class="absolute -left-10 mt-1.5 h-4 w-4 rounded-full border-2 border-gray-400 bg-white"></div>
+                                    <div class="flex flex-col sm:flex-row sm:items-start">
+                                        <div class="mb-1 sm:mb-0 sm:w-32 text-sm font-medium text-gray-500">Oct 16, 2023</div>
+                                        <div class="flex-1">
+                                            <h3 class="text-base font-medium text-gray-900">Editor Assigned</h3>
+                                            <p class="mt-1 text-sm text-gray-600">Dr. Emily Johnson has been assigned as the handling editor.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Event 5 -->
+                                <div id="timeline-item-5" class="relative">
+                                    <div class="absolute -left-10 mt-1.5 h-4 w-4 rounded-full border-2 border-gray-400 bg-white"></div>
+                                    <div class="flex flex-col sm:flex-row sm:items-start">
+                                        <div class="mb-1 sm:mb-0 sm:w-32 text-sm font-medium text-gray-500">Oct 15, 2023</div>
+                                        <div class="flex-1">
+                                            <h3 class="text-base font-medium text-gray-900">Submission Received</h3>
+                                            <p class="mt-1 text-sm text-gray-600">Your article has been successfully submitted and is under initial review.</p>
+                                        </div>
+                                        <div class="mt-2 sm:mt-0 sm:ml-4 flex-shrink-0">
+                                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                                                Version 1.0
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reviewer Feedback -->
+                <div id="reviewer-feedback" class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+                    <div class="border-b border-gray-200 p-4 flex justify-between items-center">
+                        <h2 class="text-lg font-semibold text-gray-800">Reviewer Feedback</h2>
+                        <span class="text-sm text-gray-500">Last Updated: November 2, 2023</span>
+                    </div>
+                    <div class="p-4">
+                        <!-- Reviewer 1 -->
+                        <div id="reviewer-1" class="mb-6 border-b border-gray-200 pb-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-base font-medium text-gray-900">Reviewer #1</h3>
+                                    <p class="text-sm text-gray-500">Specialist in Marine Ecology</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-sm text-gray-500 mr-2">Overall Assessment:</span>
+                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
+                                        Major Revision
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <!-- Rubric Scores -->
+                            <div class="mb-4">
+                                <h4 class="text-sm font-medium text-gray-700 mb-2">Evaluation Criteria</h4>
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Originality</span>
+                                            <div class="flex items-center">
+                                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 70%"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">7/10</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Methodology</span>
+                                            <div class="flex items-center">
+                                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 50%"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">5/10</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Literature Review</span>
+                                            <div class="flex items-center">
+                                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 60%"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">6/10</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Data Analysis</span>
+                                            <div class="flex items-center">
+                                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 40%"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">4/10</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Comments -->
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-700 mb-2">Comments to Author</h4>
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <p class="text-sm text-gray-700 mb-2">The manuscript presents an interesting approach to coastal ecosystem analysis, but several critical issues need to be addressed:</p>
+                                    <ol class="list-decimal pl-5 text-sm text-gray-700 space-y-1">
+                                        <li>The methodology section lacks sufficient detail on sampling procedures.</li>
+                                        <li>Statistical analysis is inadequate for the complexity of the data presented.</li>
+                                        <li>Literature review omits several key recent studies in the field.</li>
+                                        <li>Conclusions extend beyond what the data can reasonably support.</li>
+                                    </ol>
+                                    <p class="text-sm text-gray-700 mt-2">I recommend a major revision with particular attention to strengthening the methodological approach and refining the statistical analysis.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Reviewer 2 -->
+                        <div id="reviewer-2" class="mb-6 border-b border-gray-200 pb-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-base font-medium text-gray-900">Reviewer #2</h3>
+                                    <p class="text-sm text-gray-500">Specialist in Climate Science</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-sm text-gray-500 mr-2">Overall Assessment:</span>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">
+                                        Minor Revision
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <!-- Rubric Scores -->
+                            <div class="mb-4">
+                                <h4 class="text-sm font-medium text-gray-700 mb-2">Evaluation Criteria</h4>
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Originality</span>
+                                            <div class="flex items-center">
+                                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 80%"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">8/10</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Methodology</span>
+                                            <div class="flex items-center">
+                                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 70%"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">7/10</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Literature Review</span>
+                                            <div class="flex items-center">
+                                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 80%"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">8/10</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Data Analysis</span>
+                                            <div class="flex items-center">
+                                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 70%"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">7/10</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Comments -->
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-700 mb-2">Comments to Author</h4>
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <p class="text-sm text-gray-700 mb-2">This is a generally well-written manuscript with valuable insights into coastal ecosystem dynamics. My suggestions for improvement include:</p>
+                                    <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                                        <li>Include more recent climate modeling data to strengthen your projections.</li>
+                                        <li>Clarify the connection between observed changes and anthropogenic factors.</li>
+                                        <li>Consider adding a discussion section on policy implications.</li>
+                                    </ul>
+                                    <p class="text-sm text-gray-700 mt-2">With these minor revisions, the paper will make a significant contribution to the field.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Reviewer 3 -->
+                        <div id="reviewer-3">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-base font-medium text-gray-900">Reviewer #3</h3>
+                                    <p class="text-sm text-gray-500">Specialist in Environmental Policy</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-sm text-gray-500 mr-2">Overall Assessment:</span>
+                                    <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">
+                                        Reject
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <!-- Rubric Scores -->
+                            <div class="mb-4">
+                                <h4 class="text-sm font-medium text-gray-700 mb-2">Evaluation Criteria</h4>
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Originality</span>
+                                            <div class="flex items-center">
+                                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 60%"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">6/10</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Methodology</span>
+                                            <div class="flex items-center">
+                                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 30%"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">3/10</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Literature Review</span>
+                                            <div class="flex items-center">
+                                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 50%"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">5/10</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Data Analysis</span>
+                                            <div class="flex items-center">
+                                                <div class="w-24 bg-gray-200 rounded-full h-2.5 mr-2">
+                                                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 20%"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">2/10</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Comments -->
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-700 mb-2">Comments to Author</h4>
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <p class="text-sm text-gray-700 mb-2">I regret to recommend rejection of this manuscript for the following fundamental reasons:</p>
+                                    <ol class="list-decimal pl-5 text-sm text-gray-700 space-y-1">
+                                        <li>The methodological approach has serious flaws that undermine the validity of the results.</li>
+                                        <li>The data analysis contains statistical errors that lead to incorrect conclusions.</li>
+                                        <li>The paper fails to engage with contrary evidence in the field.</li>
+                                        <li>The research design does not adequately control for confounding variables.</li>
+                                    </ol>
+                                    <p class="text-sm text-gray-700 mt-2">While the topic is important, the manuscript requires substantial reconceptualization and a completely revised research design to be suitable for publication.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Editor's Decision -->
+                <div id="editor-decision" class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+                    <div class="border-b border-gray-200 p-4">
+                        <h2 class="text-lg font-semibold text-gray-800">Editor's Decision</h2>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-start mb-4">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Editor" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <h3 class="text-base font-medium text-gray-900">Dr. Emily Johnson</h3>
+                                <p class="text-sm text-gray-500">Associate Editor, Marine Science Division</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
+                            <div class="flex items-center mb-2">
+                                <i class="fa-solid fa-triangle-exclamation text-yellow-600 mr-2"></i>
+                                <h4 class="text-base font-medium text-yellow-800">Major Revision Required</h4>
+                            </div>
+                            <p class="text-sm text-gray-700 mb-3">Based on the reviewers' comments and my own assessment, I am requesting major revisions to your manuscript before it can be considered for publication.</p>
+                            <p class="text-sm text-gray-700">Please address all the reviewers' concerns, with particular focus on the methodological issues and data analysis weaknesses identified by Reviewers #1 and #3.</p>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="text-sm font-medium text-gray-700 mb-2">Editorial Comments</h4>
+                            <p class="text-sm text-gray-700 mb-3">Your research addresses an important topic with significant potential impact. However, there are several critical areas that need substantial improvement:</p>
+                            <ol class="list-decimal pl-5 text-sm text-gray-700 space-y-2 mb-3">
+                                <li>The methodology section requires more detail and justification, particularly regarding your sampling approach and data collection methods.</li>
+                                <li>The statistical analysis needs to be completely revised using more appropriate techniques for your data structure.</li>
+                                <li>Your literature review should be updated to include recent studies published in the last 2-3 years.</li>
+                                <li>The discussion section should better acknowledge limitations and avoid overstating conclusions.</li>
+                                <li>Consider adding a policy implications section as suggested by Reviewer #2.</li>
+                            </ol>
+                            <p class="text-sm text-gray-700">Please submit your revised manuscript within 60 days, along with a detailed response letter addressing each point raised by the reviewers. I believe with these revisions, your paper has the potential to make a valuable contribution to the field.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Required -->
+                <div id="action-required" class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+                    <div class="border-b border-gray-200 p-4">
+                        <h2 class="text-lg font-semibold text-gray-800">Next Steps</h2>
+                    </div>
+                    <div class="p-4">
+                        <div class="bg-primary-50 border border-primary-200 rounded-lg p-4 mb-4">
+                            <h3 class="text-base font-medium text-primary-800 mb-2">Action Required: Submit Revised Manuscript</h3>
+                            <p class="text-sm text-gray-700 mb-3">Please address all reviewer and editor comments and submit your revised manuscript by <strong>January 2, 2024</strong>.</p>
+                            <div class="flex space-x-3 mt-2">
+                                <button class="px-4 py-2 bg-primary-600 text-white rounded text-sm flex items-center">
+                                    <i class="fa-solid fa-pen-to-square mr-2"></i> Submit Revision
+                                </button>
+                                <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded text-sm flex items-center">
+                                    <i class="fa-solid fa-clock mr-2"></i> Request Extension
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="text-sm font-medium text-gray-700 mb-2">Revision Checklist</h4>
+                            <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                                <li>Revised manuscript addressing all reviewer comments</li>
+                                <li>Point-by-point response to reviewer comments</li>
+                                <li>Cover letter explaining the changes made</li>
+                                <li>Updated figures and tables as needed</li>
+                                <li>Tracked changes version showing revisions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer" class="mt-8 border-t border-gray-200 py-4 px-6 text-center text-sm text-gray-500">
+            <p>© 2023 Academic Journal Management System. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

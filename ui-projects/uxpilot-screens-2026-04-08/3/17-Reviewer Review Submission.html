@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1a56db',
+                        'primary-dark': '#1245b5',
+                        'secondary': '#6b7280',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 flex items-center justify-between px-4 py-2">
+        <div class="flex items-center space-x-4">
+            <button class="text-gray-700 hover:text-gray-900">
+                <i class="fa-solid fa-arrow-left text-xl"></i>
+            </button>
+            <h1 class="text-lg font-semibold text-gray-800">Article Review</h1>
+        </div>
+        <div class="flex items-center space-x-2">
+            <button class="flex items-center justify-center px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                <i class="fa-regular fa-floppy-disk mr-2"></i>
+                Save Draft
+            </button>
+            <button class="px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                Submit Review
+            </button>
+        </div>
+    </div>
+
+    <div id="review-form" class="max-w-5xl mx-auto pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+        <div id="form-header" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">Peer Review Form</h2>
+                        <p class="text-gray-600">Please evaluate the article based on the criteria below. Fields marked with an asterisk (*) are required.</p>
+                    </div>
+                    <div class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+                        Double-blind Review
+                    </div>
+                </div>
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-500">
+                    <div class="flex items-center">
+                        <i class="fa-solid fa-file-lines mr-2 text-primary"></i>
+                        <span>Article ID: <span class="font-medium">ART-2023-0142</span></span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fa-regular fa-calendar mr-2 text-primary"></i>
+                        <span>Due by: <span class="font-medium text-red-600">August 15, 2023</span></span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fa-solid fa-tag mr-2 text-primary"></i>
+                        <span>Keywords: <span class="font-medium">machine learning, neural networks, observer modal</span></span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fa-regular fa-clock mr-2 text-primary"></i>
+                        <span>Estimated completion time: <span class="font-medium">30-45 minutes</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="article-info" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Article Information</h3>
+                
+                <div class="mb-6">
+                    <h4 class="text-base font-semibold text-gray-800">Observer Modal Dynamics in Anomalous Contact</h4>
+                    <p class="text-gray-600 mt-2 italic">Abstract: This study examines the observer effect in anomalous contact scenarios, proposing a novel framework for understanding modal dynamics when consciousness interfaces with non-standard phenomena. Using a mixed-methods approach combining quantitative measurements and qualitative observer reports, we demonstrate statistically significant correlations between observer expectation and phenomenological outcomes. Our results suggest a bidirectional causality model that challenges conventional understanding of observer independence.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h5 class="text-sm font-medium text-gray-700 mb-1">Epistemic Status Flags</h5>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Empirical</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Theoretical</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Speculative</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Observer-bound</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h5 class="text-sm font-medium text-gray-700 mb-1">Article Sections</h5>
+                        <div class="flex flex-col space-y-1">
+                            <button class="text-left text-primary hover:text-primary-dark text-sm">View Abstract</button>
+                            <button class="text-left text-primary hover:text-primary-dark text-sm">View Introduction</button>
+                            <button class="text-left text-primary hover:text-primary-dark text-sm">View Literature Review</button>
+                            <button class="text-left text-primary hover:text-primary-dark text-sm">View Full Article</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="review-rubric" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Evaluation Rubric</h3>
+                <p class="text-sm text-gray-600 mb-6">Please rate each criterion on a scale of 1-5, where 1 is lowest and 5 is highest.</p>
+                
+                <div id="criteria-scholarly-structure" class="mb-8">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-base font-medium text-gray-800">1. Scholarly Structure</h4>
+                        <span class="text-sm text-gray-500">Weight: 15%</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">Evaluate how well the article follows academic structure with clear sections (introduction, literature review, methodology, results, discussion, conclusion).</p>
+                    
+                    <div class="mb-3">
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="text-sm font-medium text-gray-700">Rating *</label>
+                            <span id="scholarly-structure-value" class="text-sm font-medium text-gray-700">Not rated</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="scholarly_structure" value="1" class="mr-1">
+                                <span class="text-sm">1 (Poor)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="scholarly_structure" value="2" class="mr-1">
+                                <span class="text-sm">2</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="scholarly_structure" value="3" class="mr-1">
+                                <span class="text-sm">3</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="scholarly_structure" value="4" class="mr-1">
+                                <span class="text-sm">4</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="scholarly_structure" value="5" class="mr-1">
+                                <span class="text-sm">5 (Excellent)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="scholarly-structure-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                        <textarea id="scholarly-structure-comments" name="scholarly_structure_comments" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Provide specific feedback on the article's structure..."></textarea>
+                    </div>
+                </div>
+                
+                <div id="criteria-originality" class="mb-8">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-base font-medium text-gray-800">2. Originality</h4>
+                        <span class="text-sm text-gray-500">Weight: 20%</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">Assess the novelty of the research question, approach, or findings. Does the article make a unique contribution to the field?</p>
+                    
+                    <div class="mb-3">
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="text-sm font-medium text-gray-700">Rating *</label>
+                            <span id="originality-value" class="text-sm font-medium text-gray-700">Not rated</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="originality" value="1" class="mr-1">
+                                <span class="text-sm">1 (Poor)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="originality" value="2" class="mr-1">
+                                <span class="text-sm">2</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="originality" value="3" class="mr-1">
+                                <span class="text-sm">3</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="originality" value="4" class="mr-1">
+                                <span class="text-sm">4</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="originality" value="5" class="mr-1">
+                                <span class="text-sm">5 (Excellent)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="originality-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                        <textarea id="originality-comments" name="originality_comments" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Provide specific feedback on the article's originality..."></textarea>
+                    </div>
+                </div>
+                
+                <div id="criteria-literature" class="mb-8">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-base font-medium text-gray-800">3. Literature Grounding</h4>
+                        <span class="text-sm text-gray-500">Weight: 15%</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">Evaluate how well the article connects to existing literature and theoretical frameworks.</p>
+                    
+                    <div class="mb-3">
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="text-sm font-medium text-gray-700">Rating *</label>
+                            <span id="literature-value" class="text-sm font-medium text-gray-700">Not rated</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="literature" value="1" class="mr-1">
+                                <span class="text-sm">1 (Poor)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="literature" value="2" class="mr-1">
+                                <span class="text-sm">2</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="literature" value="3" class="mr-1">
+                                <span class="text-sm">3</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="literature" value="4" class="mr-1">
+                                <span class="text-sm">4</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="literature" value="5" class="mr-1">
+                                <span class="text-sm">5 (Excellent)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="literature-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                        <textarea id="literature-comments" name="literature_comments" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Provide specific feedback on the article's literature review..."></textarea>
+                    </div>
+                </div>
+                
+                <div id="criteria-methodology" class="mb-8">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-base font-medium text-gray-800">4. Methodological Rigor</h4>
+                        <span class="text-sm text-gray-500">Weight: 20%</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">Assess the appropriateness and execution of research methods, data collection, and analysis techniques.</p>
+                    
+                    <div class="mb-3">
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="text-sm font-medium text-gray-700">Rating *</label>
+                            <span id="methodology-value" class="text-sm font-medium text-gray-700">Not rated</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="methodology" value="1" class="mr-1">
+                                <span class="text-sm">1 (Poor)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="methodology" value="2" class="mr-1">
+                                <span class="text-sm">2</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="methodology" value="3" class="mr-1">
+                                <span class="text-sm">3</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="methodology" value="4" class="mr-1">
+                                <span class="text-sm">4</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="methodology" value="5" class="mr-1">
+                                <span class="text-sm">5 (Excellent)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="methodology-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                        <textarea id="methodology-comments" name="methodology_comments" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Provide specific feedback on the article's methodology..."></textarea>
+                    </div>
+                </div>
+                
+                <div id="criteria-results" class="mb-8">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-base font-medium text-gray-800">5. Results Evidence</h4>
+                        <span class="text-sm text-gray-500">Weight: 10%</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">Evaluate the quality, presentation, and interpretation of results and supporting evidence.</p>
+                    
+                    <div class="mb-3">
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="text-sm font-medium text-gray-700">Rating *</label>
+                            <span id="results-value" class="text-sm font-medium text-gray-700">Not rated</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="results" value="1" class="mr-1">
+                                <span class="text-sm">1 (Poor)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="results" value="2" class="mr-1">
+                                <span class="text-sm">2</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="results" value="3" class="mr-1">
+                                <span class="text-sm">3</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="results" value="4" class="mr-1">
+                                <span class="text-sm">4</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="results" value="5" class="mr-1">
+                                <span class="text-sm">5 (Excellent)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="results-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                        <textarea id="results-comments" name="results_comments" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Provide specific feedback on the article's results..."></textarea>
+                    </div>
+                </div>
+                
+                <div id="criteria-discussion" class="mb-8">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-base font-medium text-gray-800">6. Discussion Nuance</h4>
+                        <span class="text-sm text-gray-500">Weight: 10%</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">Assess the depth, nuance, and critical thinking in the discussion of findings.</p>
+                    
+                    <div class="mb-3">
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="text-sm font-medium text-gray-700">Rating *</label>
+                            <span id="discussion-value" class="text-sm font-medium text-gray-700">Not rated</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="discussion" value="1" class="mr-1">
+                                <span class="text-sm">1 (Poor)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="discussion" value="2" class="mr-1">
+                                <span class="text-sm">2</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="discussion" value="3" class="mr-1">
+                                <span class="text-sm">3</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="discussion" value="4" class="mr-1">
+                                <span class="text-sm">4</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="discussion" value="5" class="mr-1">
+                                <span class="text-sm">5 (Excellent)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="discussion-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                        <textarea id="discussion-comments" name="discussion_comments" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Provide specific feedback on the article's discussion..."></textarea>
+                    </div>
+                </div>
+                
+                <div id="criteria-citations" class="mb-8">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-base font-medium text-gray-800">7. Citation Accuracy</h4>
+                        <span class="text-sm text-gray-500">Weight: 5%</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">Evaluate the accuracy, completeness, and formatting of citations and references.</p>
+                    
+                    <div class="mb-3">
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="text-sm font-medium text-gray-700">Rating *</label>
+                            <span id="citations-value" class="text-sm font-medium text-gray-700">Not rated</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="citations" value="1" class="mr-1">
+                                <span class="text-sm">1 (Poor)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="citations" value="2" class="mr-1">
+                                <span class="text-sm">2</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="citations" value="3" class="mr-1">
+                                <span class="text-sm">3</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="citations" value="4" class="mr-1">
+                                <span class="text-sm">4</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="citations" value="5" class="mr-1">
+                                <span class="text-sm">5 (Excellent)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="citations-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                        <textarea id="citations-comments" name="citations_comments" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Provide specific feedback on the article's citations..."></textarea>
+                    </div>
+                </div>
+                
+                <div id="criteria-impact" class="mb-8">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-base font-medium text-gray-800">8. Overall Impact</h4>
+                        <span class="text-sm text-gray-500">Weight: 5%</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">Assess the potential significance and contribution of the article to the field.</p>
+                    
+                    <div class="mb-3">
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="text-sm font-medium text-gray-700">Rating *</label>
+                            <span id="impact-value" class="text-sm font-medium text-gray-700">Not rated</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="impact" value="1" class="mr-1">
+                                <span class="text-sm">1 (Poor)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="impact" value="2" class="mr-1">
+                                <span class="text-sm">2</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="impact" value="3" class="mr-1">
+                                <span class="text-sm">3</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="impact" value="4" class="mr-1">
+                                <span class="text-sm">4</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="impact" value="5" class="mr-1">
+                                <span class="text-sm">5 (Excellent)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="impact-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                        <textarea id="impact-comments" name="impact_comments" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Provide specific feedback on the article's overall impact..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="overall-evaluation" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Overall Evaluation</h3>
+                
+                <div class="mb-6">
+                    <label for="summary-feedback" class="block text-sm font-medium text-gray-700 mb-1">Summary Feedback for Author *</label>
+                    <p class="text-xs text-gray-500 mb-2">Provide constructive feedback highlighting strengths and areas for improvement.</p>
+                    <textarea id="summary-feedback" name="summary_feedback" rows="6" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your summary feedback for the author..."></textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="confidential-comments" class="block text-sm font-medium text-gray-700 mb-1">Confidential Comments to Editor (optional)</label>
+                    <p class="text-xs text-gray-500 mb-2">These comments will only be visible to the editor, not the author.</p>
+                    <textarea id="confidential-comments" name="confidential_comments" rows="4" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter any confidential comments for the editor..."></textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Recommendation *</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <label class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="recommendation" value="approve" class="mr-2">
+                            <div>
+                                <span class="font-medium text-green-600">Approve</span>
+                                <p class="text-xs text-gray-500 mt-1">The article is acceptable as is or with minor revisions.</p>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="recommendation" value="minor_revision" class="mr-2">
+                            <div>
+                                <span class="font-medium text-blue-600">Minor Revision</span>
+                                <p class="text-xs text-gray-500 mt-1">The article requires minor changes before publication.</p>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="recommendation" value="major_revision" class="mr-2">
+                            <div>
+                                <span class="font-medium text-orange-600">Major Revision</span>
+                                <p class="text-xs text-gray-500 mt-1">The article requires substantial changes before reconsideration.</p>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-3 border border-gray-300 rounded-md hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="recommendation" value="reject" class="mr-2">
+                            <div>
+                                <span class="font-medium text-red-600">Reject</span>
+                                <p class="text-xs text-gray-500 mt-1">The article is not suitable for publication in this journal.</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Would you be willing to review a revised version? *</label>
+                    <div class="flex space-x-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="willing_to_review_revision" value="yes" class="mr-1">
+                            <span class="text-sm">Yes</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="willing_to_review_revision" value="no" class="mr-1">
+                            <span class="text-sm">No</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="reviewer-info" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Reviewer Information</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="reviewer-expertise" class="block text-sm font-medium text-gray-700 mb-1">Your Expertise in this Subject Area *</label>
+                        <select id="reviewer-expertise" name="reviewer_expertise" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="">Select your level of expertise</option>
+                            <option value="expert">Expert (extensive knowledge)</option>
+                            <option value="knowledgeable">Knowledgeable (solid understanding)</option>
+                            <option value="familiar">Familiar (basic understanding)</option>
+                            <option value="outside">Outside my main area of expertise</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="time-spent" class="block text-sm font-medium text-gray-700 mb-1">Time Spent on Review (hours) *</label>
+                        <input type="number" id="time-spent" name="time_spent" min="0" step="0.5" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="e.g., 2.5">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="form-actions" class="flex justify-between items-center">
+            <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                Save as Draft
+            </button>
+            <div>
+                <button class="mr-3 px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    Preview
+                </button>
+                <button class="px-6 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                    Submit Review
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update rating value displays when radio buttons are clicked
+        const criteriaIds = ['scholarly-structure', 'originality', 'literature', 'methodology', 'results', 'discussion', 'citations', 'impact'];
+        
+        criteriaIds.forEach(id => {
+            const radioButtons = document.querySelectorAll(`input[name="${id.replace('-', '_')}"]`);
+            const valueDisplay = document.getElementById(`${id}-value`);
+            
+            radioButtons.forEach(button => {
+                button.addEventListener('change', function() {
+                    valueDisplay.textContent = `${this.value}/5`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1a56db',
+                        'primary-dark': '#1245b5',
+                        'secondary': '#6b7280',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 flex items-center justify-between px-4 py-2">
+        <div class="flex items-center space-x-4">
+            <button class="text-gray-700 hover:text-gray-900">
+                <i class="fa-solid fa-arrow-left text-xl"></i>
+            </button>
+            <h1 class="text-lg font-semibold text-gray-800">Submission Status</h1>
+        </div>
+        <div class="flex items-center space-x-2">
+            <button class="flex items-center justify-center px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                <i class="fa-regular fa-envelope mr-2"></i>
+                Contact Editor
+            </button>
+            <button class="px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                View Article
+            </button>
+        </div>
+    </div>
+
+    <div id="submission-status" class="max-w-5xl mx-auto pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+        <div id="status-header" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-1">Observer Modal Dynamics in Anomalous Contact</h2>
+                        <p class="text-gray-600 mb-3">Submission #JA-2023-0142</p>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                                <i class="fa-solid fa-clock mr-1.5"></i>
+                                Revision Requested
+                            </span>
+                            <span class="text-sm text-gray-500">Submitted: July 15, 2023</span>
+                            <span class="text-sm text-gray-500">Last Updated: August 2, 2023</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-0">
+                        <button class="w-full md:w-auto px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                            Submit Revision
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="submission-timeline-section" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Submission Timeline</h3>
+                
+                <div id="timeline-chart" class="h-[200px] mb-6"></div>
+                
+                <div id="timeline-events" class="relative pl-8 border-l-2 border-gray-200">
+                    <div id="event-submission" class="mb-8 relative">
+                        <div class="absolute -left-[25px] mt-1 w-4 h-4 rounded-full bg-green-500 border-4 border-white"></div>
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h4 class="text-md font-semibold text-gray-800">Article Submitted</h4>
+                                <p class="text-sm text-gray-600">July 15, 2023 at 10:23 AM</p>
+                            </div>
+                            <span class="mt-2 md:mt-0 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Completed
+                            </span>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-600">Your article was successfully submitted for review.</p>
+                    </div>
+                    
+                    <div id="event-reviewer-assignment" class="mb-8 relative">
+                        <div class="absolute -left-[25px] mt-1 w-4 h-4 rounded-full bg-green-500 border-4 border-white"></div>
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h4 class="text-md font-semibold text-gray-800">Reviewers Assigned</h4>
+                                <p class="text-sm text-gray-600">July 18, 2023 at 2:45 PM</p>
+                            </div>
+                            <span class="mt-2 md:mt-0 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Completed
+                            </span>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-600">2 reviewers have been assigned to evaluate your article.</p>
+                    </div>
+                    
+                    <div id="event-reviews-submitted" class="mb-8 relative">
+                        <div class="absolute -left-[25px] mt-1 w-4 h-4 rounded-full bg-green-500 border-4 border-white"></div>
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h4 class="text-md font-semibold text-gray-800">Reviews Submitted</h4>
+                                <p class="text-sm text-gray-600">July 30, 2023 at 11:15 AM</p>
+                            </div>
+                            <span class="mt-2 md:mt-0 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Completed
+                            </span>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-600">All assigned reviewers have submitted their evaluations.</p>
+                    </div>
+                    
+                    <div id="event-editor-decision" class="mb-8 relative">
+                        <div class="absolute -left-[25px] mt-1 w-4 h-4 rounded-full bg-green-500 border-4 border-white"></div>
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h4 class="text-md font-semibold text-gray-800">Editor Decision</h4>
+                                <p class="text-sm text-gray-600">August 2, 2023 at 9:30 AM</p>
+                            </div>
+                            <span class="mt-2 md:mt-0 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                Major Revision
+                            </span>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-600">The editor has requested major revisions based on reviewer feedback.</p>
+                    </div>
+                    
+                    <div id="event-revision-submission" class="mb-8 relative">
+                        <div class="absolute -left-[25px] mt-1 w-4 h-4 rounded-full bg-gray-300 border-4 border-white"></div>
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h4 class="text-md font-semibold text-gray-800">Revision Submission</h4>
+                                <p class="text-sm text-gray-600">Due by August 23, 2023</p>
+                            </div>
+                            <span class="mt-2 md:mt-0 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                Pending
+                            </span>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-600">Please submit your revised article by the due date.</p>
+                        <div class="mt-3">
+                            <button class="px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                                Submit Revision
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="reviewer-feedback-section" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Reviewer Feedback</h3>
+                
+                <div id="review-summary" class="mb-6 p-4 bg-gray-50 rounded-md">
+                    <h4 class="text-md font-semibold text-gray-800 mb-2">Summary of Reviews</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-700 mb-2">Reviewer Recommendations</h5>
+                            <div id="recommendations-chart" class="h-[150px]"></div>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-700 mb-2">Average Scores by Criteria</h5>
+                            <div id="criteria-chart" class="h-[150px]"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="reviewer-1" class="mb-6 border border-gray-200 rounded-md">
+                    <div class="p-4 bg-gray-50 border-b border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-md font-semibold text-gray-800">Reviewer #1</h4>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Approve
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="mb-4">
+                            <h5 class="text-sm font-medium text-gray-700 mb-2">Comments to Author</h5>
+                            <p class="text-sm text-gray-600">
+                                The article presents an interesting perspective on observer modal dynamics. The methodology is sound and the literature review is comprehensive. However, I suggest strengthening the discussion section by more clearly articulating the implications of your findings for the field. The speculative claims are appropriately flagged, which is appreciated.
+                            </p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="text-sm font-medium text-gray-700 mb-2">Scores by Criteria</h5>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Scholarly Structure:</span>
+                                    <span class="text-gray-600 ml-1">4/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Originality:</span>
+                                    <span class="text-gray-600 ml-1">5/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Literature Grounding:</span>
+                                    <span class="text-gray-600 ml-1">4/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Methodological Rigor:</span>
+                                    <span class="text-gray-600 ml-1">4/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Results Evidence:</span>
+                                    <span class="text-gray-600 ml-1">4/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Discussion Nuance:</span>
+                                    <span class="text-gray-600 ml-1">3/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Citation Accuracy:</span>
+                                    <span class="text-gray-600 ml-1">5/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Overall Impact:</span>
+                                    <span class="text-gray-600 ml-1">4/5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="reviewer-2" class="mb-6 border border-gray-200 rounded-md">
+                    <div class="p-4 bg-gray-50 border-b border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-md font-semibold text-gray-800">Reviewer #2</h4>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                Major Revision
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="mb-4">
+                            <h5 class="text-sm font-medium text-gray-700 mb-2">Comments to Author</h5>
+                            <p class="text-sm text-gray-600">
+                                While the topic of this article is intriguing, there are several major issues that need to be addressed. The methodology section lacks sufficient detail on the analytical approach, and some of the speculative claims are not clearly distinguished from empirically-supported findings. The literature review omits several key recent publications in this area. The results section would benefit from more rigorous statistical analysis and clearer presentation of data.
+                            </p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="text-sm font-medium text-gray-700 mb-2">Scores by Criteria</h5>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Scholarly Structure:</span>
+                                    <span class="text-gray-600 ml-1">3/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Originality:</span>
+                                    <span class="text-gray-600 ml-1">4/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Literature Grounding:</span>
+                                    <span class="text-gray-600 ml-1">2/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Methodological Rigor:</span>
+                                    <span class="text-gray-600 ml-1">2/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Results Evidence:</span>
+                                    <span class="text-gray-600 ml-1">3/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Discussion Nuance:</span>
+                                    <span class="text-gray-600 ml-1">3/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Citation Accuracy:</span>
+                                    <span class="text-gray-600 ml-1">3/5</span>
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-medium text-gray-700">Overall Impact:</span>
+                                    <span class="text-gray-600 ml-1">3/5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="editor-decision-section" class="mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-4">Editor Decision</h3>
+                
+                <div class="p-4 border-l-4 border-yellow-500 bg-yellow-50 mb-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fa-solid fa-exclamation-circle text-yellow-600"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h4 class="text-md font-medium text-yellow-800">Major Revision Required</h4>
+                            <p class="text-sm text-yellow-700 mt-1">
+                                Please address all reviewer comments and submit a revised version by August 23, 2023.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="text-md font-medium text-gray-700 mb-2">Editor Comments</h4>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Thank you for your submission to our journal. After careful consideration of the reviewer feedback, I am requesting major revisions to your manuscript. While Reviewer #1 was generally positive about your work, Reviewer #2 has raised several significant concerns that need to be addressed before we can consider your article for publication.
+                    </p>
+                    <p class="text-sm text-gray-600">
+                        Please pay particular attention to strengthening your methodology section, clarifying the distinction between empirical findings and speculative claims, updating your literature review to include recent relevant publications, and improving the statistical analysis and presentation of your results. A point-by-point response to the reviewers' comments will be required with your resubmission.
+                    </p>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="text-md font-medium text-gray-700 mb-2">Revision Checklist</h4>
+                    <div class="space-y-3 mt-3">
+                        <div class="flex items-start">
+                            <input type="checkbox" id="check-1" class="mt-1 mr-2">
+                            <label for="check-1" class="text-sm text-gray-600">Strengthen methodology section with more detail on analytical approach</label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="checkbox" id="check-2" class="mt-1 mr-2">
+                            <label for="check-2" class="text-sm text-gray-600">Update literature review to include recent publications</label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="checkbox" id="check-3" class="mt-1 mr-2">
+                            <label for="check-3" class="text-sm text-gray-600">Improve statistical analysis and presentation of results</label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="checkbox" id="check-4" class="mt-1 mr-2">
+                            <label for="check-4" class="text-sm text-gray-600">Clearly distinguish between empirical findings and speculative claims</label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="checkbox" id="check-5" class="mt-1 mr-2">
+                            <label for="check-5" class="text-sm text-gray-600">Strengthen discussion section by articulating implications of findings</label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="checkbox" id="check-6" class="mt-1 mr-2">
+                            <label for="check-6" class="text-sm text-gray-600">Prepare point-by-point response to reviewer comments</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <button class="px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                        Submit Revision
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="action-buttons" class="flex justify-between items-center">
+            <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                <i class="fa-regular fa-envelope mr-2"></i>
+                Contact Editor
+            </button>
+            <div>
+                <button class="mr-3 px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    Download Reviews
+                </button>
+                <button class="px-6 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary-dark">
+                    Submit Revision
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Timeline chart
+        Highcharts.chart('timeline-chart', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: null
+            },
+            xAxis: {
+                categories: ['Jul 15', 'Jul 18', 'Jul 30', 'Aug 2', 'Aug 23'],
+                labels: {
+                    style: {
+                        color: '#6b7280'
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: null
+                },
+                labels: {
+                    enabled: false
+                },
+                gridLineWidth: 0,
+                min: 0,
+                max: 1
+            },
+            legend: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                line: {
+                    marker: {
+                        enabled: true,
+                        radius: 6
+                    }
+                }
+            },
+            series: [{
+                name: 'Status',
+                data: [1, 1, 1, 1, 0.5],
+                color: '#1a56db',
+                lineWidth: 2
+            }]
+        });
+        
+        // Recommendations chart
+        Highcharts.chart('recommendations-chart', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: null
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.y}</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.y}'
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Reviewers',
+                colorByPoint: true,
+                data: [{
+                    name: 'Approve',
+                    y: 1,
+                    color: '#10B981'
+                }, {
+                    name: 'Major Revision',
+                    y: 1,
+                    color: '#F59E0B'
+                }, {
+                    name: 'Minor Revision',
+                    y: 0,
+                    color: '#3B82F6'
+                }, {
+                    name: 'Reject',
+                    y: 0,
+                    color: '#EF4444'
+                }]
+            }]
+        });
+        
+        // Criteria chart
+        Highcharts.chart('criteria-chart', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: null
+            },
+            xAxis: {
+                categories: ['Structure', 'Originality', 'Literature', 'Methodology', 'Results', 'Discussion', 'Citations', 'Impact'],
+                labels: {
+                    style: {
+                        fontSize: '10px',
+                        color: '#6b7280'
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                max: 5,
+                title: {
+                    text: null
+                },
+                labels: {
+                    style: {
+                        color: '#6b7280'
+                    }
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: false
+                    }
+                }
+            },
+            series: [{
+                name: 'Average Score',
+                data: [3.5, 4.5, 3, 3, 3.5, 3, 4, 3.5],
+                color: '#1a56db'
+            }]
+        });
+    </script>
+</body>
+</html>

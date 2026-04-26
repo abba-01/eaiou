@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Main Layout -->
+    <div class="flex h-[100vh]">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-gray-900 text-white flex flex-col h-full">
+            <!-- Logo -->
+            <div class="p-4 flex items-center border-b border-gray-700">
+                <div class="h-8 w-8 rounded-md bg-primary-500 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <span class="ml-2 font-bold text-xl">ProjectHub</span>
+            </div>
+            
+            <!-- Admin Menu -->
+            <div class="p-4">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">Admin Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-gauge-high w-6"></i>
+                            <span>Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md bg-primary-700 text-white cursor-pointer">
+                            <i class="fa-solid fa-folder w-6"></i>
+                            <span>Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-flag w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-check-square w-6"></i>
+                            <span>Tasks</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar w-6"></i>
+                            <span>Events</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-file w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Panel -->
+            <div class="p-4 mt-4 border-t border-gray-700">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">User Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-house w-6"></i>
+                            <span>My Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-briefcase w-6"></i>
+                            <span>My Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-tasks w-6"></i>
+                            <span>Task List</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-map-signs w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar-alt w-6"></i>
+                            <span>Calendar</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-paperclip w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Profile -->
+            <div class="mt-auto p-4 border-t border-gray-700 flex items-center">
+                <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium">Admin User</p>
+                    <p class="text-xs text-gray-400">Super Admin</p>
+                </div>
+                <button class="ml-auto text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-cog"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 flex flex-col h-full overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 flex items-center justify-between p-4">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-800">Project Management</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search projects..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                    <button class="relative p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">3</span>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-question-circle"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Project Management Content -->
+            <div class="flex-1 overflow-auto p-6">
+                <!-- Action Bar -->
+                <div id="action-bar" class="flex justify-between items-center mb-6">
+                    <div class="flex items-center space-x-2">
+                        <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md text-sm flex items-center">
+                            <i class="fa-solid fa-plus mr-2"></i> New Project
+                        </button>
+                        <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm flex items-center">
+                            <i class="fa-solid fa-filter mr-2"></i> Filter
+                        </button>
+                        <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm flex items-center">
+                            <i class="fa-solid fa-sort mr-2"></i> Sort
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-500">View:</span>
+                        <button class="bg-primary-500 text-white p-2 rounded">
+                            <i class="fa-solid fa-table-list"></i>
+                        </button>
+                        <button class="bg-gray-100 text-gray-700 p-2 rounded hover:bg-gray-200">
+                            <i class="fa-solid fa-grip"></i>
+                        </button>
+                        <button class="bg-gray-100 text-gray-700 p-2 rounded hover:bg-gray-200">
+                            <i class="fa-solid fa-chart-gantt"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project Table -->
+                <div id="project-table" class="bg-white rounded-lg shadow mb-6">
+                    <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                        <h2 class="text-lg font-semibold">All Projects</h2>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-sm text-gray-500">24 total projects</span>
+                            <div class="relative">
+                                <select class="appearance-none bg-gray-100 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm">
+                                    <option>All Projects</option>
+                                    <option>Active Projects</option>
+                                    <option>Completed Projects</option>
+                                    <option>Archived Projects</option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <div class="flex items-center">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <div class="flex items-center">
+                                            Project Name
+                                            <i class="fa-solid fa-sort ml-1"></i>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <div class="flex items-center">
+                                            Owner
+                                            <i class="fa-solid fa-sort ml-1"></i>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <div class="flex items-center">
+                                            Start Date
+                                            <i class="fa-solid fa-sort ml-1"></i>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <div class="flex items-center">
+                                            End Date
+                                            <i class="fa-solid fa-sort ml-1"></i>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Team</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progress</th>
+                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">Website Redesign</div>
+                                        <div class="text-xs text-gray-500">Marketing department</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User Avatar" class="h-8 w-8 rounded-full">
+                                            <div class="ml-2 text-sm text-gray-900">John Smith</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Apr 15, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Jun 30, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">In Progress</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex -space-x-2">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <div class="h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500 border border-white">+2</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-primary-500 h-2.5 rounded-full" style="width: 65%"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">65%</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <div class="flex justify-end space-x-2">
+                                            <button class="text-primary-500 hover:text-primary-700" title="Edit">
+                                                <i class="fa-solid fa-edit"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700" title="Manage Access">
+                                                <i class="fa-solid fa-user-lock"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700" title="Archive">
+                                                <i class="fa-solid fa-archive"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700" title="Delete">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">Database Migration</div>
+                                        <div class="text-xs text-gray-500">IT department</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="User Avatar" class="h-8 w-8 rounded-full">
+                                            <div class="ml-2 text-sm text-gray-900">Sarah Johnson</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Mar 1, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 15, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex -space-x-2">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 100%"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">100%</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <div class="flex justify-end space-x-2">
+                                            <button class="text-primary-500 hover:text-primary-700" title="Edit">
+                                                <i class="fa-solid fa-edit"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700" title="Manage Access">
+                                                <i class="fa-solid fa-user-lock"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700" title="Archive">
+                                                <i class="fa-solid fa-archive"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700" title="Delete">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">Mobile App Development</div>
+                                        <div class="text-xs text-gray-500">Product department</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="User Avatar" class="h-8 w-8 rounded-full">
+                                            <div class="ml-2 text-sm text-gray-900">Michael Brown</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 1, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sep 30, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Planning</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex -space-x-2">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <div class="h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500 border border-white">+4</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-primary-500 h-2.5 rounded-full" style="width: 15%"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">15%</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <div class="flex justify-end space-x-2">
+                                            <button class="text-primary-500 hover:text-primary-700" title="Edit">
+                                                <i class="fa-solid fa-edit"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700" title="Manage Access">
+                                                <i class="fa-solid fa-user-lock"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700" title="Archive">
+                                                <i class="fa-solid fa-archive"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700" title="Delete">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">API Integration</div>
+                                        <div class="text-xs text-gray-500">Engineering department</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="User Avatar" class="h-8 w-8 rounded-full">
+                                            <div class="ml-2 text-sm text-gray-900">Emily Wilson</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Apr 10, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Jun 15, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">Testing</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex -space-x-2">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-primary-500 h-2.5 rounded-full" style="width: 80%"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">80%</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <div class="flex justify-end space-x-2">
+                                            <button class="text-primary-500 hover:text-primary-700" title="Edit">
+                                                <i class="fa-solid fa-edit"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700" title="Manage Access">
+                                                <i class="fa-solid fa-user-lock"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700" title="Archive">
+                                                <i class="fa-solid fa-archive"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700" title="Delete">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">Security Audit</div>
+                                        <div class="text-xs text-gray-500">Security department</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User Avatar" class="h-8 w-8 rounded-full">
+                                            <div class="ml-2 text-sm text-gray-900">Robert Davis</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 5, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 25, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Delayed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex -space-x-2">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-red-500 h-2.5 rounded-full" style="width: 45%"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">45%</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <div class="flex justify-end space-x-2">
+                                            <button class="text-primary-500 hover:text-primary-700" title="Edit">
+                                                <i class="fa-solid fa-edit"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700" title="Manage Access">
+                                                <i class="fa-solid fa-user-lock"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700" title="Archive">
+                                                <i class="fa-solid fa-archive"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700" title="Delete">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <input type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">Content Marketing Campaign</div>
+                                        <div class="text-xs text-gray-500">Marketing department</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="User Avatar" class="h-8 w-8 rounded-full">
+                                            <div class="ml-2 text-sm text-gray-900">Jessica Lee</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Jun 1, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Aug 31, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">In Progress</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex -space-x-2">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" class="h-6 w-6 rounded-full border border-white" alt="Team Member">
+                                            <div class="h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500 border border-white">+1</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-primary-500 h-2.5 rounded-full" style="width: 35%"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">35%</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <div class="flex justify-end space-x-2">
+                                            <button class="text-primary-500 hover:text-primary-700" title="Edit">
+                                                <i class="fa-solid fa-edit"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700" title="Manage Access">
+                                                <i class="fa-solid fa-user-lock"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700" title="Archive">
+                                                <i class="fa-solid fa-archive"></i>
+                                            </button>
+                                            <button class="text-red-500 hover:text-red-700" title="Delete">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="px-6 py-3 flex justify-between items-center border-t border-gray-200">
+                        <div class="flex items-center">
+                            <span class="text-sm text-gray-500 mr-4">Showing 6 of 24 projects</span>
+                            <select class="text-sm border border-gray-300 rounded-md py-1 px-2">
+                                <option value="10">10 per page</option>
+                                <option value="20">20 per page</option>
+                                <option value="50">50 per page</option>
+                                <option value="100">100 per page</option>
+                            </select>
+                        </div>
+                        <div class="flex space-x-1">
+                            <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200 disabled:opacity-50" disabled>
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button class="px-3 py-1 text-sm bg-primary-500 text-white rounded-md">1</button>
+                            <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">2</button>
+                            <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">3</button>
+                            <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">4</button>
+                            <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bulk Actions and Permissions -->
+                <div id="permission-section" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <!-- Bulk Actions Card -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h2 class="text-lg font-semibold mb-4">Bulk Actions</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">For Selected Projects</label>
+                                <div class="flex flex-wrap gap-2">
+                                    <button class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md text-sm hover:bg-gray-200 flex items-center">
+                                        <i class="fa-solid fa-user-lock mr-2"></i> Change Owner
+                                    </button>
+                                    <button class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md text-sm hover:bg-gray-200 flex items-center">
+                                        <i class="fa-solid fa-users mr-2"></i> Manage Team
+                                    </button>
+                                    <button class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md text-sm hover:bg-gray-200 flex items-center">
+                                        <i class="fa-solid fa-tag mr-2"></i> Change Status
+                                    </button>
+                                    <button class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md text-sm hover:bg-gray-200 flex items-center">
+                                        <i class="fa-solid fa-archive mr-2"></i> Archive
+                                    </button>
+                                    <button class="px-3 py-2 bg-red-100 text-red-700 rounded-md text-sm hover:bg-red-200 flex items-center">
+                                        <i class="fa-solid fa-trash mr-2"></i> Delete
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Quick Actions</label>
+                                <div class="flex flex-wrap gap-2">
+                                    <button class="px-3 py-2 bg-primary-100 text-primary-700 rounded-md text-sm hover:bg-primary-200 flex items-center">
+                                        <i class="fa-solid fa-file-export mr-2"></i> Export Projects
+                                    </button>
+                                    <button class="px-3 py-2 bg-primary-100 text-primary-700 rounded-md text-sm hover:bg-primary-200 flex items-center">
+                                        <i class="fa-solid fa-file-import mr-2"></i> Import Projects
+                                    </button>
+                                    <button class="px-3 py-2 bg-primary-100 text-primary-700 rounded-md text-sm hover:bg-primary-200 flex items-center">
+                                        <i class="fa-solid fa-print mr-2"></i> Print Report
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Permissions Card -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h2 class="text-lg font-semibold mb-4">Access Permissions</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Default Project Permissions</label>
+                                <div class="border border-gray-200 rounded-md divide-y">
+                                    <div class="p-3 flex items-center justify-between">
+                                        <div>
+                                            <span class="font-medium">Super Admin</span>
+                                            <p class="text-xs text-gray-500">Full access to all projects</p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Full Access</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 flex items-center justify-between">
+                                        <div>
+                                            <span class="font-medium">Project Manager</span>
+                                            <p class="text-xs text-gray-500">Can manage assigned projects</p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <select class="text-sm border border-gray-300 rounded-md py-1 px-2">
+                                                <option>Edit</option>
+                                                <option>View Only</option>
+                                                <option>No Access</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 flex items-center justify-between">
+                                        <div>
+                                            <span class="font-medium">Team Member</span>
+                                            <p class="text-xs text-gray-500">Can view and update assigned projects</p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <select class="text-sm border border-gray-300 rounded-md py-1 px-2">
+                                                <option>Edit</option>
+                                                <option selected>View Only</option>
+                                                <option>No Access</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 flex items-center justify-between">
+                                        <div>
+                                            <span class="font-medium">Viewer</span>
+                                            <p class="text-xs text-gray-500">Can only view project details</p>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <select class="text-sm border border-gray-300 rounded-md py-1 px-2">
+                                                <option>Edit</option>
+                                                <option selected>View Only</option>
+                                                <option>No Access</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="px-4 py-2 bg-primary-500 text-white rounded-md text-sm hover:bg-primary-600 flex items-center w-full justify-center">
+                                    <i class="fa-solid fa-save mr-2"></i> Save Permission Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Creation Modal -->
+                <div id="project-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+                    <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl">
+                        <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                            <h2 class="text-xl font-semibold">Create New Project</h2>
+                            <button class="text-gray-500 hover:text-gray-700">
+                                <i class="fa-solid fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="col-span-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Project Name*</label>
+                                    <input type="text" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Enter project name">
+                                </div>
+                                <div class="col-span-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                                    <textarea class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 h-24" placeholder="Enter project description"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Start Date*</label>
+                                    <input type="date" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">End Date*</label>
+                                    <input type="date" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Project Owner*</label>
+                                    <select class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                        <option>Select project owner</option>
+                                        <option>John Smith</option>
+                                        <option>Sarah Johnson</option>
+                                        <option>Michael Brown</option>
+                                        <option>Emily Wilson</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Department</label>
+                                    <select class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                        <option>Select department</option>
+                                        <option>Marketing</option>
+                                        <option>IT</option>
+                                        <option>Engineering</option>
+                                        <option>Product</option>
+                                        <option>Security</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Team Members</label>
+                                    <div class="border border-gray-300 rounded-md p-3">
+                                        <div class="flex flex-wrap gap-2 mb-2">
+                                            <div class="bg-gray-100 rounded-full px-3 py-1 text-sm flex items-center">
+                                                John Smith <button class="ml-2 text-gray-500"><i class="fa-solid fa-times"></i></button>
+                                            </div>
+                                            <div class="bg-gray-100 rounded-full px-3 py-1 text-sm flex items-center">
+                                                Sarah Johnson <button class="ml-2 text-gray-500"><i class="fa-solid fa-times"></i></button>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Search and add team members">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                                    <select class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                        <option>Planning</option>
+                                        <option>In Progress</option>
+                                        <option>Testing</option>
+                                        <option>Completed</option>
+                                        <option>On Hold</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                                    <select class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                        <option>Low</option>
+                                        <option>Medium</option>
+                                        <option>High</option>
+                                        <option>Critical</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 border-t border-gray-200 flex justify-end space-x-3">
+                            <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md text-sm hover:bg-gray-200">Cancel</button>
+                            <button class="px-4 py-2 bg-primary-500 text-white rounded-md text-sm hover:bg-primary-600">Create Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer id="footer" class="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+                <p>&copy; 2023 ProjectHub Admin Panel. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

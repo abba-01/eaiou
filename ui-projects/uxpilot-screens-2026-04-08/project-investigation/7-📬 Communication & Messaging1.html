@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-full">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 h-[100vh] bg-white border-r border-gray-200 fixed top-0 left-0 z-30 overflow-y-auto">
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-layer-group text-primary-600 text-xl"></i>
+                    <span class="text-xl font-semibold text-gray-800">ProjectHub</span>
+                </div>
+            </div>
+            
+            <div aria-label="Admin Dashboard sidebar" class="!relative">
+                <div>
+                    <div>
+                        <div class="space-y-2 py-4 px-3">
+                            <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg bg-primary-100">
+                                <i class="fa-solid fa-chart-pie text-primary-600 w-6 h-6"></i>
+                                <span class="ml-3">Dashboard</span>
+                            </a>
+                            <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
+                                <i class="fa-solid fa-folder text-gray-500 w-6 h-6"></i>
+                                <span class="ml-3">Projects</span>
+                            </a>
+                            <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
+                                <i class="fa-solid fa-flag text-gray-500 w-6 h-6"></i>
+                                <span class="ml-3">Milestones</span>
+                            </a>
+                            <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
+                                <i class="fa-solid fa-clipboard-check text-gray-500 w-6 h-6"></i>
+                                <span class="ml-3">Tasks</span>
+                            </a>
+                            <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
+                                <i class="fa-solid fa-calendar text-gray-500 w-6 h-6"></i>
+                                <span class="ml-3">Events</span>
+                            </a>
+                            <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
+                                <i class="fa-solid fa-file text-gray-500 w-6 h-6"></i>
+                                <span class="ml-3">Documents</span>
+                            </a>
+                            <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
+                                <i class="fa-solid fa-envelope text-gray-500 w-6 h-6"></i>
+                                <span class="ml-3">Messages</span>
+                                <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-white bg-primary-500 rounded-full">12</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pt-4 mt-4 space-y-2 border-t border-gray-200 px-3">
+                            <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
+                                <i class="fa-solid fa-user-group text-gray-500 w-6 h-6"></i>
+                                <span class="ml-3">Team</span>
+                            </a>
+                            <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
+                                <i class="fa-solid fa-gear text-gray-500 w-6 h-6"></i>
+                                <span class="ml-3">Settings</span>
+                            </a>
+                            <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100">
+                                <i class="fa-solid fa-circle-question text-gray-500 w-6 h-6"></i>
+                                <span class="ml-3">Help</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 ml-64">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 p-4 flex justify-between items-center sticky top-0 z-20">
+                <div>
+                    <h1 class="text-xl font-semibold text-gray-800">Project Communications</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 rounded-full hover:bg-gray-100 relative">
+                        <i class="fa-regular fa-bell text-gray-600"></i>
+                        <span class="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full">3</span>
+                    </button>
+                    <div class="relative">
+                        <button id="user-menu-button" class="flex items-center">
+                            <img class="w-8 h-8 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User profile">
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main id="main-content" class="p-6">
+                <!-- Project Selector & Controls -->
+                <section id="project-selector" class="mb-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-full md:w-64">
+                                <label for="project-select" class="sr-only">Select Project</label>
+                                <select id="project-select" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                                    <option selected>Website Redesign (Case #123)</option>
+                                    <option>Mobile App Development (Case #124)</option>
+                                    <option>Marketing Campaign (Case #125)</option>
+                                    <option>Product Launch (Case #126)</option>
+                                    <option>Client Onboarding (Case #127)</option>
+                                </select>
+                            </div>
+                            <span class="hidden md:block text-sm text-gray-500">Project Email: <span class="font-medium">case123@domain.com</span></span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 focus:ring-4 focus:ring-primary-300">
+                                <i class="fa-solid fa-envelope mr-2"></i>
+                                Compose
+                            </button>
+                            <button class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-200">
+                                <i class="fa-solid fa-gear mr-2"></i>
+                                Settings
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Tabs Navigation -->
+                <div id="messaging-tabs" class="border-b border-gray-200 mb-6">
+                    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
+                        <li class="mr-2">
+                            <a href="#" class="inline-flex items-center p-4 border-b-2 border-primary-600 text-primary-600 rounded-t-lg active group">
+                                <i class="fa-solid fa-envelope mr-2"></i>
+                                External Messages
+                                <span class="ml-2 bg-primary-100 text-primary-800 text-xs font-semibold px-2.5 py-0.5 rounded">24</span>
+                            </a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" class="inline-flex items-center p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 rounded-t-lg group">
+                                <i class="fa-solid fa-comment-dots mr-2"></i>
+                                Internal Notes
+                                <span class="ml-2 bg-gray-100 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded">8</span>
+                            </a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" class="inline-flex items-center p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 rounded-t-lg group">
+                                <i class="fa-solid fa-paperclip mr-2"></i>
+                                Attachments
+                                <span class="ml-2 bg-gray-100 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded">12</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Email Messages Section -->
+                <section id="email-messages">
+                    <!-- Filters & Search -->
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
+                        <div class="flex items-center space-x-2">
+                            <button class="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-100">
+                                <i class="fa-solid fa-filter mr-1.5"></i>
+                                Filters
+                            </button>
+                            <div class="flex items-center space-x-3 ml-2">
+                                <label class="inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" value="" class="sr-only peer" checked>
+                                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                    <span class="ml-2 text-sm font-medium text-gray-700">Unread only</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="relative w-full md:w-64">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <i class="fa-solid fa-search text-gray-500"></i>
+                            </div>
+                            <input type="search" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-primary-500 focus:border-primary-500" placeholder="Search messages...">
+                        </div>
+                    </div>
+                    
+                    <!-- Message List -->
+                    <div id="message-list" class="bg-white rounded-lg border border-gray-200 overflow-hidden mb-6">
+                        <!-- Message Item -->
+                        <div class="border-b border-gray-200 hover:bg-gray-50 cursor-pointer p-4 flex">
+                            <div class="flex-shrink-0 mr-4">
+                                <img class="w-10 h-10 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Sarah Johnson">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start">
+                                    <p class="text-sm font-semibold text-gray-900 truncate">Sarah Johnson</p>
+                                    <div class="flex items-center">
+                                        <span class="inline-flex items-center justify-center w-2 h-2 ml-1 bg-primary-600 rounded-full"></span>
+                                        <span class="text-xs text-gray-500 ml-2">10:30 AM</span>
+                                    </div>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900 truncate">Website Design Feedback</p>
+                                <p class="text-sm text-gray-500 truncate">Hi team, I've reviewed the latest designs and I have some feedback on the homepage layout...</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="inline-flex items-center text-xs font-medium text-primary-700 bg-primary-100 rounded px-2 py-0.5">
+                                        <i class="fa-solid fa-paperclip mr-1"></i>
+                                        2 attachments
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Message Item -->
+                        <div class="border-b border-gray-200 hover:bg-gray-50 cursor-pointer p-4 flex">
+                            <div class="flex-shrink-0 mr-4">
+                                <img class="w-10 h-10 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Michael Chen">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start">
+                                    <p class="text-sm font-semibold text-gray-900 truncate">Michael Chen</p>
+                                    <span class="text-xs text-gray-500">Yesterday</span>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900 truncate">RE: Project Timeline Update</p>
+                                <p class="text-sm text-gray-500 truncate">Thank you for the update. I've shared the timeline with my team and we'll adjust our schedule accordingly...</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Message Item -->
+                        <div class="border-b border-gray-200 hover:bg-gray-50 cursor-pointer p-4 flex">
+                            <div class="flex-shrink-0 mr-4">
+                                <img class="w-10 h-10 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Emily Rodriguez">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start">
+                                    <p class="text-sm font-semibold text-gray-900 truncate">Emily Rodriguez</p>
+                                    <div class="flex items-center">
+                                        <span class="inline-flex items-center justify-center w-2 h-2 ml-1 bg-primary-600 rounded-full"></span>
+                                        <span class="text-xs text-gray-500 ml-2">May 16</span>
+                                    </div>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900 truncate">Content Requirements</p>
+                                <p class="text-sm text-gray-500 truncate">Hello, I'm putting together the content requirements for the website. Could you please confirm...</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="inline-flex items-center text-xs font-medium text-primary-700 bg-primary-100 rounded px-2 py-0.5">
+                                        <i class="fa-solid fa-paperclip mr-1"></i>
+                                        1 attachment
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Message Item -->
+                        <div class="border-b border-gray-200 hover:bg-gray-50 cursor-pointer p-4 flex">
+                            <div class="flex-shrink-0 mr-4">
+                                <img class="w-10 h-10 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="John Smith">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start">
+                                    <p class="text-sm font-semibold text-gray-900 truncate">John Smith</p>
+                                    <span class="text-xs text-gray-500">May 15</span>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900 truncate">Contract Questions</p>
+                                <p class="text-sm text-gray-500 truncate">I have a few questions about the contract terms. Specifically regarding the timeline for deliverables...</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Message Item -->
+                        <div class="hover:bg-gray-50 cursor-pointer p-4 flex">
+                            <div class="flex-shrink-0 mr-4">
+                                <img class="w-10 h-10 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="Amanda Wilson">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start">
+                                    <p class="text-sm font-semibold text-gray-900 truncate">Amanda Wilson</p>
+                                    <span class="text-xs text-gray-500">May 12</span>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900 truncate">Introduction and Next Steps</p>
+                                <p class="text-sm text-gray-500 truncate">Hello team, I'm Amanda from Marketing. I'll be working with you on the website redesign project...</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Message Detail View -->
+                <section id="message-detail" class="bg-white rounded-lg border border-gray-200 overflow-hidden mb-6">
+                    <!-- Message Header -->
+                    <div class="border-b border-gray-200 p-4">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex items-start">
+                                <img class="w-10 h-10 rounded-full mr-3" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Sarah Johnson">
+                                <div>
+                                    <h3 class="text-base font-semibold text-gray-900">Sarah Johnson</h3>
+                                    <p class="text-sm text-gray-500">sarah.johnson@example.com</p>
+                                </div>
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                May 17, 2023, 10:30 AM
+                            </div>
+                        </div>
+                        <h2 class="text-lg font-semibold text-gray-900 mb-1">Website Design Feedback</h2>
+                        <div class="flex items-center space-x-2">
+                            <span class="inline-flex items-center text-xs font-medium text-gray-700 bg-gray-100 rounded px-2 py-0.5">
+                                <i class="fa-solid fa-tag mr-1"></i>
+                                Feedback
+                            </span>
+                            <span class="inline-flex items-center text-xs font-medium text-gray-700 bg-gray-100 rounded px-2 py-0.5">
+                                <i class="fa-solid fa-tag mr-1"></i>
+                                Design
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Message Content -->
+                    <div class="p-4 text-gray-700">
+                        <p class="mb-4">Hi team,</p>
+                        <p class="mb-4">I've reviewed the latest designs and I have some feedback on the homepage layout. Overall, I think the direction is great, but I have a few suggestions:</p>
+                        <ol class="list-decimal pl-5 mb-4 space-y-2">
+                            <li>The hero section feels a bit crowded. Could we simplify it and focus on one clear call-to-action?</li>
+                            <li>The color contrast in the navigation menu needs improvement for accessibility.</li>
+                            <li>I love the new product showcase section, but I think we should limit it to 3-4 featured items instead of 6.</li>
+                        </ol>
+                        <p class="mb-4">I've attached some examples of layouts that I think work well, along with some notes on each one.</p>
+                        <p class="mb-4">Let me know your thoughts, and I'm available for a call tomorrow if you'd like to discuss in more detail.</p>
+                        <p class="mb-4">Best regards,<br>Sarah</p>
+                    </div>
+                    
+                    <!-- Attachments -->
+                    <div class="p-4 border-t border-gray-200">
+                        <h4 class="text-sm font-semibold text-gray-900 mb-3">Attachments (2)</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center p-2 border border-gray-200 rounded-lg">
+                                <div class="p-2 bg-red-100 rounded-lg mr-3">
+                                    <i class="fa-solid fa-file-pdf text-red-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Design_Inspiration.pdf</p>
+                                    <p class="text-xs text-gray-500">2.4 MB</p>
+                                </div>
+                                <button class="text-gray-500 hover:text-gray-700 p-1.5">
+                                    <i class="fa-solid fa-download"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center p-2 border border-gray-200 rounded-lg">
+                                <div class="p-2 bg-blue-100 rounded-lg mr-3">
+                                    <i class="fa-solid fa-file-image text-blue-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Layout_Examples.jpg</p>
+                                    <p class="text-xs text-gray-500">1.8 MB</p>
+                                </div>
+                                <button class="text-gray-500 hover:text-gray-700 p-1.5">
+                                    <i class="fa-solid fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <button class="text-primary-600 hover:text-primary-700 text-sm font-medium inline-flex items-center">
+                                <i class="fa-solid fa-file-arrow-down mr-1.5"></i>
+                                Save all to project documents
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Reply Section -->
+                    <div class="p-4 border-t border-gray-200">
+                        <div class="mb-3">
+                            <h4 class="text-sm font-semibold text-gray-900 mb-2">Reply</h4>
+                            <div class="border border-gray-300 rounded-lg">
+                                <div class="bg-gray-50 px-3 py-2 border-b border-gray-300 flex">
+                                    <button class="p-1.5 text-gray-500 hover:text-gray-700 mr-1">
+                                        <i class="fa-solid fa-bold"></i>
+                                    </button>
+                                    <button class="p-1.5 text-gray-500 hover:text-gray-700 mr-1">
+                                        <i class="fa-solid fa-italic"></i>
+                                    </button>
+                                    <button class="p-1.5 text-gray-500 hover:text-gray-700 mr-1">
+                                        <i class="fa-solid fa-list"></i>
+                                    </button>
+                                    <button class="p-1.5 text-gray-500 hover:text-gray-700 mr-1">
+                                        <i class="fa-solid fa-link"></i>
+                                    </button>
+                                    <button class="p-1.5 text-gray-500 hover:text-gray-700">
+                                        <i class="fa-solid fa-paperclip"></i>
+                                    </button>
+                                </div>
+                                <textarea class="w-full p-3 text-sm text-gray-900 border-none focus:ring-0" rows="5" placeholder="Type your reply here..."></textarea>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <button class="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 mr-2">
+                                    <i class="fa-solid fa-paperclip mr-1.5"></i>
+                                    Attach
+                                </button>
+                                <button class="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-100">
+                                    <i class="fa-solid fa-floppy-disk mr-1.5"></i>
+                                    Save Draft
+                                </button>
+                            </div>
+                            <button class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 focus:ring-4 focus:ring-primary-300">
+                                <i class="fa-solid fa-paper-plane mr-1.5"></i>
+                                Send Reply
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Internal Notes Section -->
+                <section id="internal-notes" class="mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold text-gray-900">Internal Team Notes</h2>
+                        <button class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-primary-700 bg-primary-100 rounded-lg hover:bg-primary-200 focus:ring-4 focus:ring-primary-300">
+                            <i class="fa-solid fa-plus mr-1.5"></i>
+                            Add Note
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                        <!-- Note Item -->
+                        <div class="border-b border-gray-200 p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex items-start">
+                                    <img class="w-8 h-8 rounded-full mr-3" src="https://storage.googleapis.com/

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#2563eb',
+                        'primary-dark': '#1d4ed8',
+                        'secondary': '#64748b',
+                        'success': '#10b981',
+                        'warning': '#f59e0b',
+                        'danger': '#ef4444',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <header id="header" class="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fa-solid fa-newspaper text-primary text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-gray-800">Academic Journal</span>
+                    </div>
+                    <nav class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <span class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            Submit Article
+                        </span>
+                        <span class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            My Submissions
+                        </span>
+                        <span class="border-primary text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            Editor Dashboard
+                        </span>
+                        <span class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            Help
+                        </span>
+                    </nav>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fa-solid fa-bell mr-2"></i>
+                            <span class="absolute -top-1 -right-1 bg-danger text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">3</span>
+                            Notifications
+                        </button>
+                    </div>
+                    <div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
+                        <div class="ml-3 relative">
+                            <div class="flex items-center">
+                                <img class="h-8 w-8 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User avatar">
+                                <span class="ml-2 text-sm font-medium text-gray-700">Dr. John Smith</span>
+                                <i class="fa-solid fa-chevron-down ml-1 text-xs text-gray-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="pt-16 pb-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-8">
+            <div id="editor-dashboard" class="mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Editor Dashboard</h1>
+                        <p class="text-gray-600 mt-1">Manage submissions and assign reviewers to articles</p>
+                    </div>
+                    <div class="flex space-x-3">
+                        <button class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fa-solid fa-sliders mr-2"></i> Filters
+                        </button>
+                        <button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fa-solid fa-download mr-2"></i> Export
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="dashboard-stats" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Pending Assignment</p>
+                                <h3 class="text-2xl font-bold text-gray-900 mt-1">12</h3>
+                            </div>
+                            <div class="p-2 bg-blue-100 rounded-md text-primary">
+                                <i class="fa-solid fa-file-circle-plus"></i>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-600">
+                            <span class="text-danger font-medium">+5</span> new since yesterday
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Under Review</p>
+                                <h3 class="text-2xl font-bold text-gray-900 mt-1">24</h3>
+                            </div>
+                            <div class="p-2 bg-yellow-100 rounded-md text-warning">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-600">
+                            <span class="text-success font-medium">8</span> reviews completed
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Awaiting Decision</p>
+                                <h3 class="text-2xl font-bold text-gray-900 mt-1">8</h3>
+                            </div>
+                            <div class="p-2 bg-purple-100 rounded-md text-purple-600">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-600">
+                            <span class="text-warning font-medium">3</span> overdue decisions
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Published</p>
+                                <h3 class="text-2xl font-bold text-gray-900 mt-1">47</h3>
+                            </div>
+                            <div class="p-2 bg-green-100 rounded-md text-success">
+                                <i class="fa-solid fa-check-circle"></i>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-600">
+                            <span class="text-success font-medium">+2</span> this month
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="submissions-tabs" class="border-b border-gray-200 mb-6">
+                    <div class="flex space-x-8">
+                        <button class="border-primary text-primary hover:text-primary-dark py-4 px-1 border-b-2 font-medium text-sm">
+                            Pending Assignment (12)
+                        </button>
+                        <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 py-4 px-1 border-b-2 font-medium text-sm">
+                            Under Review (24)
+                        </button>
+                        <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 py-4 px-1 border-b-2 font-medium text-sm">
+                            Awaiting Decision (8)
+                        </button>
+                        <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 py-4 px-1 border-b-2 font-medium text-sm">
+                            Published (47)
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="submissions-table" class="bg-white shadow-sm rounded-lg border border-gray-200 overflow-hidden">
+                    <div class="flex justify-between p-4 border-b border-gray-200 bg-gray-50">
+                        <h2 class="font-semibold text-gray-800">Pending Assignment</h2>
+                        <div class="relative">
+                            <input type="text" placeholder="Search submissions..." class="pl-9 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary focus:border-primary">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fa-solid fa-search text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Article Title
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Authors
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Submitted
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Category
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr id="article-1" class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-primary hover:text-primary-dark cursor-pointer">Observer Modal Dynamics in Anomalous Contact</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <img class="h-6 w-6 rounded-full mr-2" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="">
+                                        <div class="text-sm text-gray-900">Dr. Robert Chen</div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    May 24, 2023
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                        Physics
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        Pending Assignment
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary hover:text-primary-dark mr-3" id="assign-btn-1">
+                                        <i class="fa-solid fa-user-plus mr-1"></i> Assign
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            
+                            <tr id="article-2" class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-primary hover:text-primary-dark cursor-pointer">Quantum Entanglement in Neural Networks: A Theoretical Framework</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <img class="h-6 w-6 rounded-full mr-2" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="">
+                                        <div class="text-sm text-gray-900">Dr. Emma Williams</div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    May 22, 2023
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
+                                        Computer Science
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        Pending Assignment
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary hover:text-primary-dark mr-3" id="assign-btn-2">
+                                        <i class="fa-solid fa-user-plus mr-1"></i> Assign
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            
+                            <tr id="article-3" class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-primary hover:text-primary-dark cursor-pointer">Climate Change Impact on Marine Biodiversity: A Systematic Review</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <img class="h-6 w-6 rounded-full mr-2" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="">
+                                        <div class="text-sm text-gray-900">Dr. Sarah Johnson</div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    May 21, 2023
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        Environmental Science
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        Pending Assignment
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button class="text-primary hover:text-primary-dark mr-3" id="assign-btn-3">
+                                        <i class="fa-solid fa-user-plus mr-1"></i> Assign
+                                    </button>
+                                    <button class="text-gray-600 hover:text-gray-900">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex-1 flex justify-between sm:hidden">
+                                <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 cursor-pointer">Previous</span>
+                                <span class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 cursor-pointer">Next</span>
+                            </div>
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">
+                                        Showing <span class="font-medium">1</span> to <span class="font-medium">3</span> of <span class="font-medium">12</span> results
+                                    </p>
+                                </div>
+                                <div>
+                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                        <span class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer">
+                                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                                        </span>
+                                        <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-primary text-sm font-medium text-white cursor-pointer">1</span>
+                                        <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">2</span>
+                                        <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">3</span>
+                                        <span class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer">
+                                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                                        </span>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Reviewer Assignment Modal -->
+    <div id="reviewer-assignment-modal" class="fixed inset-0 overflow-y-auto z-50" style="display: block;">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <div class="flex justify-between items-center pb-3 border-b border-gray-200 mb-4">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Assign Reviewers</h3>
+                                <button type="button" class="text-gray-400 hover:text-gray-500">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-md font-semibold text-gray-800 mb-2">Article Details</h4>
+                                <div class="bg-gray-50 p-4 rounded-md">
+                                    <h5 class="font-medium text-primary">Observer Modal Dynamics in Anomalous Contact</h5>
+                                    <p class="text-sm text-gray-600 mt-1">Submitted by Dr. Robert Chen on May 24, 2023</p>
+                                    <div class="mt-2 flex items-center">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 mr-2">
+                                            Physics
+                                        </span>
+                                        <span class="text-xs text-gray-500">Review Type: Double-blind</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between items-center mb-3">
+                                    <h4 class="text-md font-semibold text-gray-800">Selected Reviewers (0/3)</h4>
+                                    <div class="relative">
+                                        <input type="text" placeholder="Search reviewers..." class="pl-9 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <i class="fa-solid fa-search text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 p-3 rounded-md text-center text-gray-500 mb-4">
+                                    <p>No reviewers selected yet</p>
+                                </div>
+                                
+                                <div class="space-y-3">
+                                    <h4 class="text-md font-semibold text-gray-800 mb-2">Recommended Reviewers</h4>
+                                    
+                                    <div class="bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition duration-150 ease-in-out">
+                                        <div class="flex justify-between">
+                                            <div class="flex items-start">
+                                                <img class="h-10 w-10 rounded-full mr-3" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="">
+                                                <div>
+                                                    <h5 class="text-sm font-medium text-gray-900">Prof. Michael Thompson</h5>
+                                                    <p class="text-xs text-gray-500">Stanford University, Physics Department</p>
+                                                    <div class="mt-1 flex items-center">
+                                                        <span class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full mr-2">Quantum Physics</span>
+                                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">Theoretical Physics</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col items-end">
+                                                <div class="flex items-center mb-1">
+                                                    <div class="text-xs text-gray-500 mr-2">Workload: </div>
+                                                    <div class="w-24 bg-gray-200 rounded-full h-2">
+                                                        <div class="bg-green-500 h-2 rounded-full" style="width: 25%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-xs text-gray-500 mb-3">1 active review</div>
+                                                <button class="text-white bg-primary hover:bg-primary-dark px-3 py-1 rounded-md text-sm">
+                                                    <i class="fa-solid fa-plus mr-1"></i> Select
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition duration-150 ease-in-out">
+                                        <div class="flex justify-between">
+                                            <div class="flex items-start">
+                                                <img class="h-10 w-10 rounded-full mr-3" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="">
+                                                <div>
+                                                    <h5 class="text-sm font-medium text-gray-900">Dr. Lisa Wang</h5>
+                                                    <p class="text-xs text-gray-500">MIT, Department of Physics</p>
+                                                    <div class="mt-1 flex items-center">
+                                                        <span class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full mr-2">Quantum Mechanics</span>
+                                                        <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">Particle Physics</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col items-end">
+                                                <div class="flex items-center mb-1">
+                                                    <div class="text-xs text-gray-500 mr-2">Workload: </div>
+                                                    <div class="w-24 bg-gray-200 rounded-full h-2">
+                                                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 50%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-xs text-gray-500 mb-3">2 active reviews</div>
+                                                <button class="text-white bg-primary hover:bg-primary-dark px-3 py-1 rounded-md text-sm">
+                                                    <i class="fa-solid fa-plus mr-1"></i> Select
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition duration-150 ease-in-out">
+                                        <div class="flex justify-between">
+                                            <div class="flex items-start">
+                                                <img class="h-10 w-10 rounded-full mr-3" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" alt="">
+                                                <div>
+                                                    <h5 class="text-sm font-medium text-gray-900">Prof. David Martinez</h5>
+                                                    <p class="text-xs text-gray-500">University of California, Berkeley</p>
+                                                    <div class="mt-1 flex items-center">
+                                                        <span class="text-xs bg-red-100 text-red-800 px-2 py-0.5 rounded-full mr-2">Theoretical Physics</span>
+                                                        <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full">Astrophysics</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col items-end">
+                                                <div class="flex items-center mb-1">
+                                                    <div class="text-xs text-gray-500 mr-2">Workload: </div>
+                                                    <div class="w-24 bg-gray-200 rounded-full h-2">
+                                                        <div class="bg-red-500 h-2 rounded-full" style="width: 75%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-xs text-gray-500 mb-3">3 active reviews</div>
+                                                <button class="text-white bg-primary hover:bg-primary-dark px-3 py-1 rounded-md text-sm">
+                                                    <i class="fa-solid fa-plus mr-1"></i> Select
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h4 class="text-md font-semibold text-gray-800 mb-3">Review Settings</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
+                                        <input type="date" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Review Type</label>
+                                        <select class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                            <option>Double-blind (default)</option>
+                                            <option>Single-blind</option>
+                                            <option>Open review</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Additional Instructions for Reviewers</label>
+                                    <textarea class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" rows="3" placeholder="Enter any specific instructions for the reviewers..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm">
+                        Assign Reviewers
+                    </button>
+                    <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Academic Journal</h3>
+                    <p class="text-gray-400 text-sm">A platform for publishing peer-reviewed academic articles across various disciplines.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><span class="hover:text-white cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Publication Ethics</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Contact Editorial Office</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><span class="hover:text-white cursor-pointer">Help Center</span></li>
+                        <li><span class="hover:text-white cursor-pointer">FAQ</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Privacy Policy</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Terms of Service</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-sm text-gray-400 flex flex-col md:flex-row justify-between items-center">
+                <p>© 2023 Academic Journal. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-twitter"></i></span>
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-facebook"></i></span>
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-linkedin"></i></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+<style>body { padding-bottom: 50px !important; }</style>
+
+<!-- EAIOU NAV BAR -->
+<div id="eaiou-nav" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(15,23,42,0.95);backdrop-filter:blur(10px);padding:8px 12px;display:flex;gap:6px;overflow-x:auto;align-items:center;border-top:2px solid #0ea5e9;"><span style="color:#38bdf8;font-weight:700;font-size:12px;font-family:Inter,sans-serif;margin-right:8px;white-space:nowrap;">EAIOU</span><a href="2-Author Status View.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-house" style="margin-right:4px;font-size:10px;"></i>Dashboard</a><a href="6-Author Submission.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-file-arrow-up" style="margin-right:4px;font-size:10px;"></i>Submit</a><a href="3-Submission Metadata.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-tags" style="margin-right:4px;font-size:10px;"></i>Metadata</a><a href="5-Editor Decision Interface.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-gavel" style="margin-right:4px;font-size:10px;"></i>Editor</a><a href="10-Reviewer Assignment.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;background:#0ea5e9;color:white;color:white;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='#0ea5e9';this.style.color='white';"><i class="fa-solid fa-user-check" style="margin-right:4px;font-size:10px;"></i>Reviewers</a><a href="7-Reviewer Review Submission.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-pen-to-square" style="margin-right:4px;font-size:10px;"></i>Review</a><a href="9-Review Feedback.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-comments" style="margin-right:4px;font-size:10px;"></i>Feedback</a><a href="4-Notification Templates.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-bell" style="margin-right:4px;font-size:10px;"></i>Notifications</a><a href="8-Admin Configuration.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-gear" style="margin-right:4px;font-size:10px;"></i>Admin</a><a href="18-The public facing article for.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-newspaper" style="margin-right:4px;font-size:10px;"></i>Article</a><a href="../uxpilot-export-1775634389622/2-Homepage Dashboard.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-globe" style="margin-right:4px;font-size:10px;"></i>PT: Home</a><a href="../uxpilot-export-1775634389622/1-Article Reading Interface.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-book-open" style="margin-right:4px;font-size:10px;"></i>PT: Read</a><a href="../uxpilot-export-1775634389622/4-Search Results.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-magnifying-glass" style="margin-right:4px;font-size:10px;"></i>PT: Search</a><a href="../uxpilot-export-1775634389622/5-Article Submission Interface.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-paper-plane" style="margin-right:4px;font-size:10px;"></i>PT: Submit</a><a href="../uxpilot-export-1775634389622/6-Review Dashboard.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-clipboard-check" style="margin-right:4px;font-size:10px;"></i>PT: Reviews</a><a href="../uxpilot-export-1775634389622/7-Review Process.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-arrows-spin" style="margin-right:4px;font-size:10px;"></i>PT: Process</a><a href="../uxpilot-export-1775634389622/8-Notification Center.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-tower-broadcast" style="margin-right:4px;font-size:10px;"></i>PT: Alerts</a></div>
+<!-- /EAIOU NAV BAR -->
+</body>
+</html>

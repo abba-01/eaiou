@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Main Layout -->
+    <div class="flex h-[100vh]">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-gray-900 text-white flex flex-col h-full">
+            <!-- Logo -->
+            <div class="p-4 flex items-center border-b border-gray-700">
+                <div class="h-8 w-8 rounded-md bg-primary-500 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <span class="ml-2 font-bold text-xl">ProjectHub</span>
+            </div>
+            
+            <!-- Admin Menu -->
+            <div class="p-4">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">Admin Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-gauge-high w-6"></i>
+                            <span>Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-folder w-6"></i>
+                            <span>Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-flag w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-check-square w-6"></i>
+                            <span>Tasks</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar w-6"></i>
+                            <span>Events</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md bg-primary-700 text-white cursor-pointer">
+                            <i class="fa-solid fa-file w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Panel -->
+            <div class="p-4 mt-4 border-t border-gray-700">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3">User Panel</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-house w-6"></i>
+                            <span>My Dashboard</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-briefcase w-6"></i>
+                            <span>My Projects</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-tasks w-6"></i>
+                            <span>Task List</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-map-signs w-6"></i>
+                            <span>Milestones</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-calendar-alt w-6"></i>
+                            <span>Calendar</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="flex items-center px-2 py-2 rounded-md hover:bg-gray-800 text-gray-300 hover:text-white cursor-pointer">
+                            <i class="fa-solid fa-paperclip w-6"></i>
+                            <span>Documents</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- User Profile -->
+            <div class="mt-auto p-4 border-t border-gray-700 flex items-center">
+                <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-medium">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium">Admin User</p>
+                    <p class="text-xs text-gray-400">Super Admin</p>
+                </div>
+                <button class="ml-auto text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-cog"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 flex flex-col h-full overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 flex items-center justify-between p-4">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-800">Documents</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search documents..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                    <button class="relative p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">3</span>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-question-circle"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Document Management Content -->
+            <div class="flex-1 overflow-auto p-6">
+                <!-- Document Management Header -->
+                <div id="document-management-header" class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Document Repository</h2>
+                        <p class="text-gray-600 mt-1">Manage all documents across projects</p>
+                    </div>
+                    <div class="flex space-x-3">
+                        <button class="flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                            <i class="fa-solid fa-download mr-2"></i>
+                            <span>Download</span>
+                        </button>
+                        <button class="flex items-center px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600">
+                            <i class="fa-solid fa-upload mr-2"></i>
+                            <span>Upload New</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filters Section -->
+                <div id="filters-section" class="bg-white rounded-lg shadow mb-6">
+                    <div class="p-4 border-b border-gray-200">
+                        <h3 class="font-medium text-gray-700">Filter Documents</h3>
+                    </div>
+                    <div class="p-4 grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <!-- Project Filter -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Project</label>
+                            <select class="w-full border border-gray-300 rounded-md p-2 text-sm">
+                                <option value="">All Projects</option>
+                                <option value="1">Website Redesign</option>
+                                <option value="2">Database Migration</option>
+                                <option value="3">Mobile App Development</option>
+                                <option value="4">API Integration</option>
+                                <option value="5">Security Audit</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Document Type Filter -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">File Type</label>
+                            <select class="w-full border border-gray-300 rounded-md p-2 text-sm">
+                                <option value="">All Types</option>
+                                <option value="pdf">PDF Documents</option>
+                                <option value="doc">Word Documents</option>
+                                <option value="xls">Excel Spreadsheets</option>
+                                <option value="img">Images</option>
+                                <option value="zip">Archives</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Date Range Filter -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Date Range</label>
+                            <select class="w-full border border-gray-300 rounded-md p-2 text-sm">
+                                <option value="">Any Time</option>
+                                <option value="today">Today</option>
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                                <option value="quarter">Last 3 Months</option>
+                                <option value="year">This Year</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Uploaded By Filter -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Uploaded By</label>
+                            <select class="w-full border border-gray-300 rounded-md p-2 text-sm">
+                                <option value="">Anyone</option>
+                                <option value="1">John Smith</option>
+                                <option value="2">Sarah Johnson</option>
+                                <option value="3">Michael Brown</option>
+                                <option value="4">Emily Wilson</option>
+                                <option value="5">Robert Davis</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="p-4 border-t border-gray-200 flex justify-between items-center">
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200 text-sm">
+                                <i class="fa-solid fa-tag mr-1"></i> Add Tag Filter
+                            </button>
+                            <button class="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200 text-sm">
+                                <i class="fa-solid fa-filter mr-1"></i> More Filters
+                            </button>
+                        </div>
+                        <div>
+                            <button class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 text-sm">
+                                Apply Filters
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Documents Table -->
+                <div id="documents-table" class="bg-white rounded-lg shadow mb-6">
+                    <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                        <h3 class="font-medium text-gray-700">All Documents (315)</h3>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-2 text-gray-500 hover:text-gray-700">
+                                <i class="fa-solid fa-list"></i>
+                            </button>
+                            <button class="p-2 text-gray-500 hover:text-gray-700">
+                                <i class="fa-solid fa-th-large"></i>
+                            </button>
+                            <div class="relative">
+                                <select class="appearance-none pl-3 pr-8 py-1 border border-gray-300 rounded-md text-sm">
+                                    <option>Sort by: Recent</option>
+                                    <option>Sort by: Name</option>
+                                    <option>Sort by: Size</option>
+                                    <option>Sort by: Type</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down text-gray-400 text-xs absolute right-3 top-2.5"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <div class="flex items-center">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 rounded border-gray-300 mr-2">
+                                            File Name
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Size</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Uploaded By</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <!-- Document 1 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 rounded border-gray-300 mr-2">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 bg-red-100 rounded-md flex items-center justify-center text-red-500">
+                                                    <i class="fa-regular fa-file-pdf"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Q3 Financial Report.pdf</div>
+                                                    <div class="text-sm text-gray-500">Financial analysis for Q3</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Database Migration</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">PDF</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2.4 MB</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                            <div class="ml-2 text-sm text-gray-900">Robert Davis</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 16, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <button class="text-primary-500 hover:text-primary-700 mr-3"><i class="fa-solid fa-download"></i></button>
+                                        <button class="text-gray-500 hover:text-gray-700 mr-3"><i class="fa-solid fa-share-alt"></i></button>
+                                        <button class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-ellipsis-v"></i></button>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Document 2 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 rounded border-gray-300 mr-2">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-md flex items-center justify-center text-blue-500">
+                                                    <i class="fa-regular fa-file-word"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Website Requirements.docx</div>
+                                                    <div class="text-sm text-gray-500">Detailed project requirements</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Website Redesign</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">DOCX</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.8 MB</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                            <div class="ml-2 text-sm text-gray-900">John Smith</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 15, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <button class="text-primary-500 hover:text-primary-700 mr-3"><i class="fa-solid fa-download"></i></button>
+                                        <button class="text-gray-500 hover:text-gray-700 mr-3"><i class="fa-solid fa-share-alt"></i></button>
+                                        <button class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-ellipsis-v"></i></button>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Document 3 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 rounded border-gray-300 mr-2">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 bg-green-100 rounded-md flex items-center justify-center text-green-500">
+                                                    <i class="fa-regular fa-file-excel"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Budget Analysis.xlsx</div>
+                                                    <div class="text-sm text-gray-500">Project budget breakdown</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs rounded-full bg-purple-100 text-purple-800">API Integration</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">XLSX</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">3.2 MB</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                            <div class="ml-2 text-sm text-gray-900">Emily Wilson</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 14, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <button class="text-primary-500 hover:text-primary-700 mr-3"><i class="fa-solid fa-download"></i></button>
+                                        <button class="text-gray-500 hover:text-gray-700 mr-3"><i class="fa-solid fa-share-alt"></i></button>
+                                        <button class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-ellipsis-v"></i></button>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Document 4 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 rounded border-gray-300 mr-2">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 bg-purple-100 rounded-md flex items-center justify-center text-purple-500">
+                                                    <i class="fa-regular fa-file-image"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">App Wireframes.png</div>
+                                                    <div class="text-sm text-gray-500">Mobile app UI mockups</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs rounded-full bg-indigo-100 text-indigo-800">Mobile App Development</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">PNG</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">4.7 MB</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                            <div class="ml-2 text-sm text-gray-900">Michael Brown</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 12, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <button class="text-primary-500 hover:text-primary-700 mr-3"><i class="fa-solid fa-download"></i></button>
+                                        <button class="text-gray-500 hover:text-gray-700 mr-3"><i class="fa-solid fa-share-alt"></i></button>
+                                        <button class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-ellipsis-v"></i></button>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Document 5 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 rounded border-gray-300 mr-2">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 bg-gray-100 rounded-md flex items-center justify-center text-gray-500">
+                                                    <i class="fa-solid fa-file-zipper"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Security Audit Results.zip</div>
+                                                    <div class="text-sm text-gray-500">Vulnerability assessment</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">Security Audit</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">ZIP</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">8.1 MB</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                            <div class="ml-2 text-sm text-gray-900">Robert Davis</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 10, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <button class="text-primary-500 hover:text-primary-700 mr-3"><i class="fa-solid fa-download"></i></button>
+                                        <button class="text-gray-500 hover:text-gray-700 mr-3"><i class="fa-solid fa-share-alt"></i></button>
+                                        <button class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-ellipsis-v"></i></button>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Document 6 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <input type="checkbox" class="h-4 w-4 text-primary-600 rounded border-gray-300 mr-2">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 bg-red-100 rounded-md flex items-center justify-center text-red-500">
+                                                    <i class="fa-regular fa-file-pdf"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">User Research.pdf</div>
+                                                    <div class="text-sm text-gray-500">User interviews and findings</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Website Redesign</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">PDF</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">5.3 MB</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="User Avatar" class="h-6 w-6 rounded-full">
+                                            <div class="ml-2 text-sm text-gray-900">Sarah Johnson</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 8, 2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <button class="text-primary-500 hover:text-primary-700 mr-3"><i class="fa-solid fa-download"></i></button>
+                                        <button class="text-gray-500 hover:text-gray-700 mr-3"><i class="fa-solid fa-share-alt"></i></button>
+                                        <button class="text-gray-500 hover:text-gray-700"><i class="fa-solid fa-ellipsis-v"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="px-6 py-4 flex justify-between items-center border-t border-gray-200">
+                        <div class="flex items-center">
+                            <span class="text-sm text-gray-700">
+                                Showing <span class="font-medium">1</span> to <span class="font-medium">6</span> of <span class="font-medium">315</span> documents
+                            </span>
+                        </div>
+                        <div class="flex space-x-1">
+                            <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">&lt;</button>
+                            <button class="px-3 py-1 text-sm bg-primary-500 text-white rounded-md">1</button>
+                            <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">2</button>
+                            <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">3</button>
+                            <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">4</button>
+                            <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">5</button>
+                            <button class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">&gt;</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recently Viewed Documents -->
+                <div id="recent-documents" class="bg-white rounded-lg shadow mb-6">
+                    <div class="p-4 border-b border-gray-200">
+                        <h3 class="font-medium text-gray-700">Recently Viewed Documents</h3>
+                    </div>
+                    <div class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Recent Document 1 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="h-10 w-10 bg-red-100 rounded-md flex items-center justify-center text-red-500">
+                                    <i class="fa-regular fa-file-pdf"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <div class="text-sm font-medium text-gray-900 truncate">Q3 Financial Report.pdf</div>
+                                    <div class="text-xs text-gray-500">2.4 MB • PDF</div>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500">Last opened: Today at 10:30 AM</div>
+                        </div>
+                        
+                        <!-- Recent Document 2 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="h-10 w-10 bg-blue-100 rounded-md flex items-center justify-center text-blue-500">
+                                    <i class="fa-regular fa-file-word"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <div class="text-sm font-medium text-gray-900 truncate">Website Requirements.docx</div>
+                                    <div class="text-xs text-gray-500">1.8 MB • DOCX</div>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500">Last opened: Yesterday at 3:45 PM</div>
+                        </div>
+                        
+                        <!-- Recent Document 3 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="h-10 w-10 bg-green-100 rounded-md flex items-center justify-center text-green-500">
+                                    <i class="fa-regular fa-file-excel"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <div class="text-sm font-medium text-gray-900 truncate">Budget Analysis.xlsx</div>
+                                    <div class="text-xs text-gray-500">3.2 MB • XLSX</div>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500">Last opened: May 15, 2023 at 1:20 PM</div>
+                        </div>
+                        
+                        <!-- Recent Document 4 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="h-10 w-10 bg-purple-100 rounded-md flex items-center justify-center text-purple-500">
+                                    <i class="fa-regular fa-file-image"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <div class="text-sm font-medium text-gray-900 truncate">App Wireframes.png</div>
+                                    <div class="text-xs text-gray-500">4.7 MB • PNG</div>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500">Last opened: May 14, 2023 at 9:15 AM</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Storage Usage -->
+                <div id="storage-usage" class="bg-white rounded-lg shadow">
+                    <div class="p-4 border-b border-gray-200">
+                        <h3 class="font-medium text-gray-700">Storage Usage</h3>
+                    </div>
+                    <div class="p-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Total Storage -->
+                        <div class="col-span-1">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-gray-800">1.2 GB</div>
+                                <div class="text-sm text-gray-500 mt-1">of 5 GB used</div>
+                                <div class="mt-4 w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-primary-500 h-2.5 rounded-full" style="width: 24%"></div>
+                                </div>
+                                <div class="mt-2 text-xs text-gray-500">24% of storage used</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Storage by File Type -->
+                        <div class="col-span-2">
+                            <h4 class="text-sm font-medium text-gray-700 mb-3">Storage by File Type</h4>
+                            <div class="space-y-3">
+                                <!-- PDF -->
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-700">PDF Documents</span>
+                                        <span class="text-gray-500">450 MB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-red-500 h-2 rounded-full" style="width: 37.5%"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Word -->
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-700">Word Documents</span>
+                                        <span class="text-gray-500">280 MB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full" style="width: 23.3%"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Excel -->
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-700">Excel Spreadsheets</span>
+                                        <span class="text-gray-500">150 MB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 12.5%"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Images -->
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-700">Images</span>
+                                        <span class="text-gray-500">220 MB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full" style="width: 18.3%"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Other -->
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-700">Other Files</span>
+                                        <span class="text-gray-500">100 MB</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-gray-500 h-2 rounded-full" style="width: 8.3%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer id="footer" class="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+                <p>&copy; 2023 ProjectHub Admin Panel. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

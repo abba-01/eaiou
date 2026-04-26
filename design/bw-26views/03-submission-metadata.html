@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    
+        // B&W override
+        tailwind.config.theme.extend.colors.primary = {
+          50: '#F7F6F3', 100: '#EDECE9', 200: '#E2E0DB',
+          300: '#CAC8C2', 400: '#9A9895', 500: '#5A5856',
+          600: '#18171A', 700: '#18171A', 800: '#18171A', 900: '#0A090B'
+        };
+        tailwind.config.theme.extend.fontFamily = { sans: ['DM Sans', 'system-ui', 'sans-serif'] };
+
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F7F6F3;
+        }
+    </style>
+
+<style id="eaiou-ds">
+/* ── eaiou Design System — Monochrome ── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+:root {
+  --ds-bg:       #F7F6F3;
+  --ds-surface:  #FFFFFF;
+  --ds-border:   #E2E0DB;
+  --ds-ink-1:    #18171A;
+  --ds-ink-2:    #5A5856;
+  --ds-ink-3:    #9A9895;
+  --ds-accent:   #18171A;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-full: 9999px;
+}
+
+/* Font override */
+body, button, input, select, textarea { font-family: 'DM Sans', system-ui, sans-serif !important; }
+h1, h2 { letter-spacing: -0.02em; }
+h1 { font-size: 1.5rem; font-weight: 600; }
+h2 { font-size: 1.25rem; font-weight: 600; }
+h3 { font-size: 1.0625rem; font-weight: 600; }
+
+/* Radius standardisation */
+.rounded-sm  { border-radius: 4px !important; }
+.rounded     { border-radius: 6px !important; }
+.rounded-md  { border-radius: 6px !important; }
+.rounded-lg  { border-radius: 10px !important; }
+.rounded-xl  { border-radius: 14px !important; }
+.rounded-2xl { border-radius: 20px !important; }
+.rounded-full { border-radius: 9999px !important; }
+
+/* Background neutralise */
+body { background-color: #F7F6F3 !important; }
+.bg-\[\#f8fafc\], .bg-gray-50 { background-color: #F7F6F3 !important; }
+
+/* Primary button polish */
+.bg-gray-900 { background-color: #18171A !important; }
+.hover\:bg-gray-800:hover { background-color: #2E2D30 !important; }
+.text-gray-900 { color: #18171A !important; }
+
+/* Card polish */
+.shadow, .shadow-sm { box-shadow: 0 1px 4px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04) !important; }
+.shadow-md { box-shadow: 0 4px 12px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.05) !important; }
+.shadow-lg { box-shadow: 0 8px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06) !important; }
+
+/* Brand accent → near-black */
+[class*="text-primary"], [class*="text-blue"] { color: #18171A !important; }
+[class*="bg-primary-6"], [class*="bg-primary-7"], [class*="bg-primary-8"],
+[class*="bg-primary-9"], [class*="bg-gray-100"], [class*="bg-gray-100"] {
+  background-color: #18171A !important; color: #fff !important;
+}
+[class*="bg-primary-5"]:not([class*="50"]) { background-color: #5A5856 !important; }
+[class*="bg-primary-50"], [class*="bg-primary-100"],
+[class*="bg-gray-100"], [class*="bg-gray-100"] { background-color: #F0EFEB !important; }
+[class*="border-primary"], [class*="border-blue"] { border-color: #CAC8C2 !important; }
+[class*="ring-primary"], [class*="focus\:ring-primary"] { --tw-ring-color: #9A9895 !important; }
+
+/* Badge colour fix: blue badges → neutral */
+.bg-gray-100.text-gray-900, .bg-primary-100.text-primary-700 {
+  background: #EDECE9 !important; color: #18171A !important;
+}
+
+/* Active / selected states */
+[class*="border-b-2"][class*="border-primary"],
+[class*="border-b-2"][class*="border-blue"] { border-color: #18171A !important; }
+
+/* Nav brand */
+.text-primary-700.font-bold, .text-primary-600.font-bold { color: #18171A !important; font-family: 'DM Serif Display', Georgia, serif !important; font-style: italic; }
+
+/* Sidebar active */
+[class*="bg-primary-50"][class*="text-primary-7"] { background: #EDECE9 !important; color: #18171A !important; border-left: 2px solid #18171A; }
+[class*="bg-primary-50"][class*="text-primary-6"] { background: #EDECE9 !important; color: #18171A !important; }
+
+/* Tailwind config primary override (for runtime) */
+</style>
+</head>
+<body>
+    <div id="header" class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="text-gray-800 font-bold text-xl">eaiou</div>
+                <div class="hidden md:flex space-x-6 ml-10">
+                    <span class="text-gray-600 hover:text-gray-700 cursor-pointer">Dashboard</span>
+                    <span class="text-gray-700 font-medium cursor-pointer">My Articles</span>
+                    <span class="text-gray-600 hover:text-gray-700 cursor-pointer">Submit Article</span>
+                    <span class="text-gray-600 hover:text-gray-700 cursor-pointer">Reviews</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-500 hover:text-gray-700">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center">
+                        <span class="text-sm font-medium">JD</span>
+                    </div>
+                    <span class="text-gray-700 hidden md:inline-block">John Doe</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content" class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row">
+            <!-- Left sidebar with article info -->
+            <div id="sidebar" class="w-full lg:w-64 mb-6 lg:mb-0">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sticky top-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Article Information</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-500 mb-1">Article Title</h4>
+                            <p class="text-gray-800 font-medium">Observer Modal Dynamics in Anomalous Contact</p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-500 mb-1">Authors</h4>
+                            <div class="flex items-center">
+                                <div class="w-6 h-6 rounded-full bg-gray-900 text-white flex items-center justify-center text-xs mr-2">
+                                    JD
+                                </div>
+                                <span class="text-gray-800">John Doe (Primary)</span>
+                            </div>
+                            <div class="flex items-center mt-2">
+                                <div class="w-6 h-6 rounded-full bg-gray-500 text-white flex items-center justify-center text-xs mr-2">
+                                    JS
+                                </div>
+                                <span class="text-gray-800">Jane Smith</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-500 mb-1">Current Status</h4>
+                            <div class="flex items-center">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-900">
+                                    <i class="fa-solid fa-circle-check mr-1 text-gray-600"></i>
+                                    Published
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-gray-200">
+                            <h4 class="text-sm font-medium text-gray-500 mb-1">Actions</h4>
+                            <div class="space-y-2">
+                                <button class="w-full py-2 px-3 bg-gray-100 text-gray-800 rounded-md text-sm font-medium hover:bg-gray-200 flex items-center justify-center">
+                                    <i class="fa-solid fa-download mr-2"></i>
+                                    Download PDF
+                                </button>
+                                <button class="w-full py-2 px-3 bg-secondary-100 text-secondary-700 rounded-md text-sm font-medium hover:bg-secondary-200 flex items-center justify-center">
+                                    <i class="fa-solid fa-share-nodes mr-2"></i>
+                                    Share Article
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main metadata area -->
+            <div id="article-metadata" class="flex-1 lg:ml-8">
+                <div id="metadata-card" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800">Article Metadata</h2>
+                        <div class="flex items-center">
+                            <span class="text-xs bg-green-100 text-green-800 px-2.5 py-1 rounded-full flex items-center">
+                                <i class="fa-solid fa-check-circle mr-1"></i>
+                                Verified
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- DOI Information -->
+                    <div id="doi-section" class="mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-medium text-gray-800">Digital Object Identifier</h3>
+                            <div class="flex items-center">
+                                <span class="text-xs bg-gray-100 text-gray-900 px-2.5 py-1 rounded-full mr-2">
+                                    Permanent
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row md:items-center mb-4">
+                            <div class="md:w-1/3 text-gray-600 font-medium mb-1 md:mb-0">DOI</div>
+                            <div class="md:w-2/3 flex items-center">
+                                <code class="bg-white px-3 py-1.5 rounded border border-gray-300 text-gray-800 font-mono text-sm flex-1">10.1234/joomla.acad.2023.07.0042</code>
+                                <button class="ml-2 text-gray-500 hover:text-gray-700 p-1.5">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row md:items-center mb-4">
+                            <div class="md:w-1/3 text-gray-600 font-medium mb-1 md:mb-0">Resolver URL</div>
+                            <div class="md:w-2/3 flex items-center">
+                                <code class="bg-white px-3 py-1.5 rounded border border-gray-300 text-gray-800 font-mono text-sm flex-1">https://doi.org/10.1234/joomla.acad.2023.07.0042</code>
+                                <button class="ml-2 text-gray-500 hover:text-gray-700 p-1.5">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="text-sm text-gray-500 italic">
+                            DOI registration date: July 15, 2023
+                        </div>
+                    </div>
+                    
+                    <!-- Version Information -->
+                    <div id="version-section" class="mb-8">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Version Information</h3>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Version</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Changes</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">v1.0</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">May 12, 2023</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">Initial submission</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                Under Review
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">v1.1</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">June 23, 2023</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">Major revision based on reviewer feedback</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                Under Review
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">v2.0</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">July 15, 2023</td>
+                                        <td class="px-6 py-4 text-sm text-gray-800">Final version with all reviewer comments addressed</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                Published
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Submission Information -->
+                    <div id="submission-section" class="mb-8">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Submission Information</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-500 mb-1">Initial Submission Date</h4>
+                                    <p class="text-gray-800">May 12, 2023 at 14:23 UTC</p>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-500 mb-1">Last Updated</h4>
+                                    <p class="text-gray-800">July 15, 2023 at 09:47 UTC</p>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-500 mb-1">Publication Date</h4>
+                                    <p class="text-gray-800">July 15, 2023</p>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-500 mb-1">Review Anonymity</h4>
+                                    <p class="text-gray-800">Double-blind</p>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-500 mb-1">Review Completion Date</h4>
+                                    <p class="text-gray-800">June 18, 2023</p>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-500 mb-1">Editor Decision Date</h4>
+                                    <p class="text-gray-800">June 20, 2023</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Citation Information -->
+                    <div id="citation-section" class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-medium text-gray-800">Citation Information</h3>
+                            <button class="text-gray-700 hover:text-gray-800 text-sm font-medium flex items-center">
+                                <i class="fa-regular fa-copy mr-1.5"></i>
+                                Copy Citation
+                            </button>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                            <h4 class="text-sm font-medium text-gray-600 mb-2">APA Format</h4>
+                            <p class="text-gray-800 text-sm">Doe, J., & Smith, J. (2023). Observer Modal Dynamics in Anomalous Contact. <em>eaiou Journal, 14</em>(2), 128-142. https://doi.org/10.1234/joomla.acad.2023.07.0042</p>
+                        </div>
+                        
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <button class="px-3 py-1.5 bg-white border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50 flex items-center">
+                                <i class="fa-solid fa-quote-right mr-1.5 text-gray-500"></i>
+                                MLA
+                            </button>
+                            <button class="px-3 py-1.5 bg-white border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50 flex items-center">
+                                <i class="fa-solid fa-quote-right mr-1.5 text-gray-500"></i>
+                                Chicago
+                            </button>
+                            <button class="px-3 py-1.5 bg-white border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50 flex items-center">
+                                <i class="fa-solid fa-quote-right mr-1.5 text-gray-500"></i>
+                                Harvard
+                            </button>
+                            <button class="px-3 py-1.5 bg-white border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50 flex items-center">
+                                <i class="fa-brands fa-mendeley mr-1.5 text-gray-500"></i>
+                                Mendeley
+                            </button>
+                            <button class="px-3 py-1.5 bg-white border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50 flex items-center">
+                                <i class="fa-solid fa-book mr-1.5 text-gray-500"></i>
+                                EndNote
+                            </button>
+                            <button class="px-3 py-1.5 bg-white border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50 flex items-center">
+                                <i class="fa-solid fa-file-export mr-1.5 text-gray-500"></i>
+                                BibTeX
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Metadata -->
+                    <div id="additional-section">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Additional Metadata</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-500 mb-1">Keywords</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-gray-100 text-gray-800">
+                                            Observer dynamics
+                                        </span>
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-gray-100 text-gray-800">
+                                            Modal analysis
+                                        </span>
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-gray-100 text-gray-800">
+                                            Anomalous contact
+                                        </span>
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-gray-100 text-gray-800">
+                                            Theoretical physics
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-500 mb-1">Academic Field</h4>
+                                    <p class="text-gray-800">Theoretical Physics</p>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-500 mb-1">Article Type</h4>
+                                    <p class="text-gray-800">Original Research</p>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-500 mb-1">License</h4>
+                                    <div class="flex items-center">
+                                        <i class="fa-brands fa-creative-commons text-gray-600 mr-1.5"></i>
+                                        <span class="text-gray-800">CC BY-NC-SA 4.0</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-500 mb-1">Funding Information</h4>
+                                    <p class="text-gray-800">National Science Foundation, Grant #NSF-2023-45678</p>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-500 mb-1">Competing Interests</h4>
+                                    <p class="text-gray-800">The authors declare no competing interests</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between mt-8 pt-6 border-t border-gray-200">
+                        <button class="py-2 px-4 bg-white border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50 flex items-center">
+                            <i class="fa-solid fa-arrow-left mr-2"></i>
+                            Back to Article
+                        </button>
+                        <button class="py-2 px-4 bg-gray-900 text-white rounded-md font-medium hover:bg-gray-900 flex items-center">
+                            View Review History
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right sidebar with help -->
+            <div id="help-sidebar" class="hidden xl:block w-72 ml-8">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sticky top-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">About Metadata</h3>
+                    <div class="space-y-4 text-sm text-gray-600">
+                        <p>Metadata provides essential information about your article that helps with discoverability, citation, and tracking.</p>
+                        
+                        <div class="border-l-4 border-gray-400 pl-3">
+                            <h4 class="text-gray-800 font-medium mb-1">DOI Information</h4>
+                            <p>A Digital Object Identifier (DOI) is a permanent identifier assigned to your article. It ensures your work remains findable even if URLs change.</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-gray-400 pl-3">
+                            <h4 class="text-gray-800 font-medium mb-1">Version History</h4>
+                            <p>Tracks all versions of your article from initial submission through publication, including major revisions.</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-gray-400 pl-3">
+                            <h4 class="text-gray-800 font-medium mb-1">Citation Information</h4>
+                            <p>Properly formatted citations help others reference your work correctly in their publications.</p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <button class="w-full flex items-center justify-center py-2 px-4 bg-secondary-100 text-secondary-700 rounded-md text-sm font-medium hover:bg-secondary-200">
+                            <i class="fa-regular fa-circle-question mr-2"></i>
+                            Metadata Guidelines
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="footer" class="bg-white border-t border-gray-200 mt-8">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 eaiou. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Help</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Contact</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

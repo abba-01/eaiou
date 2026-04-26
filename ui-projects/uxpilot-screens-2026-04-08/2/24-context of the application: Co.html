@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="bg-white shadow-sm border-b">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center">
+      <i class="fa-solid fa-brain text-neutral-800 text-2xl mr-3"></i>
+      <h1 class="text-xl text-neutral-800">AI Research Assistant</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-bell mr-2"></i>
+        <span class="relative">
+          Notifications
+          <span class="absolute -top-1 -right-2 bg-neutral-800 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+        </span>
+      </button>
+      <button class="px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-100 rounded-md flex items-center">
+        <i class="fa-solid fa-question-circle mr-2"></i>
+        Help
+      </button>
+      <div class="relative">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full cursor-pointer"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="flex h-[800px] bg-neutral-50">
+  <div id="sidebar" class="w-64 bg-white border-r">
+    <div class="p-4">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-sm text-neutral-500">WORKSPACE</h2>
+        <button class="text-neutral-400 hover:text-neutral-600">
+          <i class="fa-solid fa-cog"></i>
+        </button>
+      </div>
+      
+      <nav class="space-y-1">
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tachometer-alt mr-3 text-neutral-400"></i>
+          Dashboard
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm bg-neutral-100 text-neutral-900 rounded-md cursor-pointer">
+          <i class="fa-solid fa-folder mr-3 text-neutral-700"></i>
+          Projects
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-file-alt mr-3 text-neutral-400"></i>
+          Articles
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-tasks mr-3 text-neutral-400"></i>
+          Tasks
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-cogs mr-3 text-neutral-400"></i>
+          Settings
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-users mr-3 text-neutral-400"></i>
+          User Management
+        </span>
+        <span class="flex items-center px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 cursor-pointer">
+          <i class="fa-solid fa-chart-bar mr-3 text-neutral-400"></i>
+          Analytics
+        </span>
+      </nav>
+    </div>
+  </div>
+
+  <div id="content" class="flex-1 overflow-auto p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl text-neutral-800">Project Management</h1>
+      <button class="px-4 py-2 bg-neutral-800 text-white rounded-md hover:bg-neutral-700 flex items-center">
+        <i class="fa-solid fa-plus mr-2"></i>
+        New Project
+      </button>
+    </div>
+
+    <div id="project-tabs" class="mb-6 border-b border-neutral-200">
+      <div class="flex space-x-4">
+        <button class="px-4 py-2 text-neutral-800 border-b-2 border-neutral-800">
+          All Projects
+        </button>
+        <button class="px-4 py-2 text-neutral-500 hover:text-neutral-700">
+          In Progress
+        </button>
+        <button class="px-4 py-2 text-neutral-500 hover:text-neutral-700">
+          Completed
+        </button>
+        <button class="px-4 py-2 text-neutral-500 hover:text-neutral-700">
+          Archived
+        </button>
+      </div>
+    </div>
+
+    <div id="project-filters" class="flex justify-between items-center mb-6">
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <input type="text" placeholder="Search projects..." class="pl-9 pr-4 py-2 border border-neutral-300 rounded-md w-64 text-sm"/>
+          <i class="fa-solid fa-search absolute left-3 top-2.5 text-neutral-400"></i>
+        </div>
+        <select class="border border-neutral-300 rounded-md px-3 py-2 text-sm">
+          <option>Filter by AI Model</option>
+          <option>UX Pilot Opus</option>
+          <option>UX Pilot Sonnet</option>
+          <option>GPT-4o</option>
+        </select>
+        <select class="border border-neutral-300 rounded-md px-3 py-2 text-sm">
+          <option>Sort by Date</option>
+          <option>Recently Updated</option>
+          <option>Oldest First</option>
+          <option>Alphabetical</option>
+        </select>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+          <i class="fa-solid fa-th-large"></i>
+        </button>
+        <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+          <i class="fa-solid fa-list"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="kanban-board" class="grid grid-cols-3 gap-6">
+      <!-- To Do Column -->
+      <div id="todo-column" class="bg-white rounded-lg shadow-sm p-4 border border-neutral-200">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-neutral-800">To Do</h3>
+          <span class="bg-neutral-100 text-neutral-800 text-xs px-2 py-1 rounded-full">3</span>
+        </div>
+        
+        <div class="space-y-3">
+          <div class="bg-white border border-neutral-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex justify-between items-center mb-2">
+              <span class="bg-neutral-100 text-neutral-600 text-xs px-2 py-1 rounded-full">Biology</span>
+              <div class="flex space-x-1">
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </div>
+            </div>
+            <h4 class="text-neutral-800 mb-2">Genetic Engineering Ethics Review</h4>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Comprehensive literature review on ethical implications of CRISPR technology in human embryos.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-6 h-6 rounded-full"/>
+                <span class="text-xs text-neutral-500 ml-2">Due July 15, 2025</span>
+              </div>
+              <span class="text-xs bg-neutral-100 text-neutral-700 px-2 py-1 rounded">UX Pilot Opus</span>
+            </div>
+          </div>
+          
+          <div class="bg-white border border-neutral-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex justify-between items-center mb-2">
+              <span class="bg-neutral-100 text-neutral-600 text-xs px-2 py-1 rounded-full">Physics</span>
+              <div class="flex space-x-1">
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </div>
+            </div>
+            <h4 class="text-neutral-800 mb-2">Quantum Computing Applications</h4>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Exploring practical applications of quantum computing in cryptography and database systems.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-6 h-6 rounded-full"/>
+                <span class="text-xs text-neutral-500 ml-2">Due July 25, 2025</span>
+              </div>
+              <span class="text-xs bg-neutral-100 text-neutral-700 px-2 py-1 rounded">GPT-4o</span>
+            </div>
+          </div>
+          
+          <div class="bg-white border border-neutral-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex justify-between items-center mb-2">
+              <span class="bg-neutral-100 text-neutral-600 text-xs px-2 py-1 rounded-full">Psychology</span>
+              <div class="flex space-x-1">
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </div>
+            </div>
+            <h4 class="text-neutral-800 mb-2">Digital Media Effects on Cognition</h4>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Meta-analysis of recent studies on social media usage and cognitive development in adolescents.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User avatar" class="w-6 h-6 rounded-full"/>
+                <span class="text-xs text-neutral-500 ml-2">Due Aug 2, 2025</span>
+              </div>
+              <span class="text-xs bg-neutral-100 text-neutral-700 px-2 py-1 rounded">UX Pilot Sonnet</span>
+            </div>
+          </div>
+          
+          <div class="border border-dashed border-neutral-300 rounded-lg p-3 flex items-center justify-center hover:bg-neutral-50 cursor-pointer">
+            <i class="fa-solid fa-plus text-neutral-400 mr-2"></i>
+            <span class="text-neutral-500 text-sm">Add New Project</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- In Progress Column -->
+      <div id="in-progress-column" class="bg-white rounded-lg shadow-sm p-4 border border-neutral-200">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-neutral-800">In Progress</h3>
+          <span class="bg-neutral-100 text-neutral-800 text-xs px-2 py-1 rounded-full">2</span>
+        </div>
+        
+        <div class="space-y-3">
+          <div class="bg-white border border-neutral-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex justify-between items-center mb-2">
+              <span class="bg-neutral-100 text-neutral-600 text-xs px-2 py-1 rounded-full">Medicine</span>
+              <div class="flex space-x-1">
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </div>
+            </div>
+            <h4 class="text-neutral-800 mb-2">COVID-19 Vaccine Efficacy Analysis</h4>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Comparative study of mRNA vaccine effectiveness against emerging variants with statistical analysis.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <div class="flex -space-x-2">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User avatar" class="w-6 h-6 rounded-full border border-white"/>
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-6 h-6 rounded-full border border-white"/>
+                </div>
+                <span class="text-xs text-neutral-500 ml-2">Due June 30, 2025</span>
+              </div>
+              <span class="text-xs bg-neutral-100 text-neutral-700 px-2 py-1 rounded">UX Pilot Opus</span>
+            </div>
+          </div>
+          
+          <div class="bg-white border border-neutral-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex justify-between items-center mb-2">
+              <span class="bg-neutral-100 text-neutral-600 text-xs px-2 py-1 rounded-full">Economics</span>
+              <div class="flex space-x-1">
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </div>
+            </div>
+            <h4 class="text-neutral-800 mb-2">Cryptocurrency Market Analysis</h4>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Detailed analysis of cryptocurrency market trends and regulatory impacts on global financial systems.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-6 h-6 rounded-full"/>
+                <span class="text-xs text-neutral-500 ml-2">Due July 10, 2025</span>
+              </div>
+              <span class="text-xs bg-neutral-100 text-neutral-700 px-2 py-1 rounded">GPT-4o</span>
+            </div>
+          </div>
+          
+          <div class="border border-dashed border-neutral-300 rounded-lg p-3 flex items-center justify-center hover:bg-neutral-50 cursor-pointer">
+            <i class="fa-solid fa-plus text-neutral-400 mr-2"></i>
+            <span class="text-neutral-500 text-sm">Add New Project</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Completed Column -->
+      <div id="completed-column" class="bg-white rounded-lg shadow-sm p-4 border border-neutral-200">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-neutral-800">Completed</h3>
+          <span class="bg-neutral-100 text-neutral-800 text-xs px-2 py-1 rounded-full">2</span>
+        </div>
+        
+        <div class="space-y-3">
+          <div class="bg-white border border-neutral-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex justify-between items-center mb-2">
+              <span class="bg-neutral-100 text-neutral-600 text-xs px-2 py-1 rounded-full">Computer Science</span>
+              <div class="flex space-x-1">
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </div>
+            </div>
+            <h4 class="text-neutral-800 mb-2">Machine Learning in Healthcare</h4>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Systematic review of machine learning applications in diagnostic medicine and patient outcomes.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User avatar" class="w-6 h-6 rounded-full"/>
+                <span class="text-xs text-neutral-500 ml-2">Completed June 5, 2025</span>
+              </div>
+              <span class="text-xs bg-neutral-100 text-neutral-700 px-2 py-1 rounded">UX Pilot Sonnet</span>
+            </div>
+          </div>
+          
+          <div class="bg-white border border-neutral-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+            <div class="flex justify-between items-center mb-2">
+              <span class="bg-neutral-100 text-neutral-600 text-xs px-2 py-1 rounded-full">Environmental Science</span>
+              <div class="flex space-x-1">
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-v"></i>
+                </button>
+              </div>
+            </div>
+            <h4 class="text-neutral-800 mb-2">Climate Change Mitigation Strategies</h4>
+            <p class="text-sm text-neutral-600 mb-3 line-clamp-2">Analysis of policy effectiveness and technological solutions for carbon emission reduction.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <div class="flex -space-x-2">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-6 h-6 rounded-full border border-white"/>
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-6 h-6 rounded-full border border-white"/>
+                </div>
+                <span class="text-xs text-neutral-500 ml-2">Completed May 28, 2025</span>
+              </div>
+              <span class="text-xs bg-neutral-100 text-neutral-700 px-2 py-1 rounded">UX Pilot Opus</span>
+            </div>
+          </div>
+          
+          <div class="border border-dashed border-neutral-300 rounded-lg p-3 flex items-center justify-center hover:bg-neutral-50 cursor-pointer">
+            <i class="fa-solid fa-plus text-neutral-400 mr-2"></i>
+            <span class="text-neutral-500 text-sm">Add New Project</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="project-detail-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+    <div class="p-6 border-b border-neutral-200 flex justify-between items-center">
+      <h2 class="text-xl text-neutral-800">Genetic Engineering Ethics Review</h2>
+      <div class="flex items-center space-x-2">
+        <button class="p-2 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded-md">
+          <i class="fa-solid fa-external-link-alt"></i>
+        </button>
+        <button class="p-2 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded-md">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="flex-1 overflow-auto p-6">
+      <div class="grid grid-cols-3 gap-6">
+        <div class="col-span-2 space-y-6">
+          <div>
+            <h3 class="text-sm text-neutral-500 uppercase mb-2">Description</h3>
+            <p class="text-neutral-700">Comprehensive literature review on ethical implications of CRISPR technology in human embryos. The project will analyze current research, regulatory frameworks, and ethical considerations from multiple perspectives.</p>
+          </div>
+          
+          <div>
+            <h3 class="text-sm text-neutral-500 uppercase mb-2">Articles</h3>
+            <div class="space-y-3">
+              <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
+                <div class="flex justify-between items-center mb-2">
+                  <h4 class="text-neutral-800">Literature Review: CRISPR Ethics</h4>
+                  <span class="bg-neutral-100 text-neutral-700 text-xs px-2 py-1 rounded-full">Completed</span>
+                </div>
+                <p class="text-sm text-neutral-600 mb-3">Systematic review of peer-reviewed publications on CRISPR ethics from 2020-2025.</p>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-neutral-500">Last updated: June 10, 2025</span>
+                  <div class="flex space-x-2">
+                    <button class="text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button class="text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-download"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="border border-neutral-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
+                <div class="flex justify-between items-center mb-2">
+                  <h4 class="text-neutral-800">Regulatory Framework Analysis</h4>
+                  <span class="bg-neutral-100 text-neutral-700 text-xs px-2 py-1 rounded-full">In Progress</span>
+                </div>
+                <p class="text-sm text-neutral-600 mb-3">Comparative analysis of international regulatory approaches to germline editing.</p>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-neutral-500">Last updated: June 15, 2025</span>
+                  <div class="flex space-x-2">
+                    <button class="text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button class="text-neutral-500 hover:text-neutral-700">
+                      <i class="fa-solid fa-download"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="border border-dashed border-neutral-300 rounded-lg p-3 flex items-center justify-center hover:bg-neutral-50 cursor-pointer">
+                <i class="fa-solid fa-plus text-neutral-400 mr-2"></i>
+                <span class="text-neutral-500 text-sm">Add New Article</span>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-sm text-neutral-500 uppercase mb-2">Activity</h3>
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="User avatar" class="w-8 h-8 rounded-full mr-3"/>
+                <div>
+                  <div class="flex items-center">
+                    <span class="text-neutral-800 mr-2">John Doe</span>
+                    <span class="text-xs text-neutral-500">June 15, 2025 at 14:32</span>
+                  </div>
+                  <p class="text-sm text-neutral-700 mt-1">Generated new article draft using UX Pilot Opus with 87 citations from peer-reviewed sources.</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="User avatar" class="w-8 h-8 rounded-full mr-3"/>
+                <div>
+                  <div class="flex items-center">
+                    <span class="text-neutral-800 mr-2">Jane Smith</span>
+                    <span class="text-xs text-neutral-500">June 12, 2025 at 09:15</span>
+                  </div>
+                  <p class="text-sm text-neutral-700 mt-1">Updated project parameters to include recent WHO guidelines on human genome editing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-span-1 space-y-6">
+          <div class="bg-neutral-50 rounded-lg p-4">
+            <h3 class="text-sm text-neutral-500 uppercase mb-3">Project Details</h3>
+            
+            <div class="space-y-3">
+              <div>
+                <h4 class="text-xs text-neutral-500 mb-1">STATUS</h4>
+                <select class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+                  <option>To Do</option>
+                  <option>In Progress</option>
+                  <option>Completed</option>
+                </select>
+              </div>
+              
+              <div>
+                <h4 class="text-xs text-neutral-500 mb-1">ASSIGNED TO</h4>
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="User avatar" class="w-6 h-6 rounded-full mr-2"/>
+                  <span class="text-sm text-neutral-700">Dr. Michael Brown</span>
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="text-xs text-neutral-500 mb-1">DUE DATE</h4>
+                <div class="flex items-center">
+                  <i class="fa-solid fa-calendar-alt text-neutral-400 mr-2"></i>
+                  <span class="text-sm text-neutral-700">July 15, 2025</span>
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="text-xs text-neutral-500 mb-1">CATEGORY</h4>
+                <div class="flex items-center">
+                  <span class="bg-neutral-100 text-neutral-600 text-xs px-2 py-1 rounded-full">Biology</span>
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="text-xs text-neutral-500 mb-1">AI MODEL</h4>
+                <div class="flex items-center">
+                  <i class="fa-solid fa-robot text-neutral-400 mr-2"></i>
+                  <span class="text-sm text-neutral-700">UX Pilot Opus</span>
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="text-xs text-neutral-500 mb-1">CITATION STYLE</h4>
+                <div class="flex items-center">
+                  <i class="fa-solid fa-quote-right text-neutral-400 mr-2"></i>
+                  <span class="text-sm text-neutral-700">APA 7th Edition</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-sm text-neutral-500 uppercase mb-3">AI Processing</h3>
+            <div class="border border-neutral-200 rounded-lg p-4">
+              <div class="flex justify-between items-center mb-3">
+                <h4 class="text-neutral-800">Next Scheduled Run</h4>
+                <span class="bg-neutral-100 text-neutral-700 text-xs px-2 py-1 rounded-full">Automated</span>
+              </div>
+              <div class="flex items-center mb-3">
+                <i class="fa-solid fa-clock text-neutral-400 mr-2"></i>
+                <span class="text-sm text-neutral-700">June 20, 2025 at 02:00 UTC</span>
+              </div>
+              <button class="w-full bg-neutral-800 text-white rounded-md py-2 text-sm hover:bg-neutral-700">Run Now</button>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-sm text-neutral-500 uppercase mb-3">Actions</h3>
+            <div class="space-y-2">
+              <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 flex items-center">
+                <i class="fa-solid fa-share-alt mr-2"></i>
+                Share Project
+              </button>
+              <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 flex items-center">
+                <i class="fa-solid fa-copy mr-2"></i>
+                Duplicate Project
+              </button>
+              <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-100 flex items-center">
+                <i class="fa-solid fa-archive mr-2"></i>
+                Archive Project
+              </button>
+              <button class="w-full text-left px-3 py-2 text-sm text-neutral-600 rounded-md hover:bg-neutral-50 flex items-center">
+                <i class="fa-solid fa-trash-alt mr-2"></i>
+                Delete Project
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-white border-t mt-auto">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="text-sm text-neutral-500">
+        © 2025 AI Research Assistant | Joomla 5.3 Component
+      </div>
+      <div class="flex space-x-4 mt-2 md:mt-0">
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Privacy Policy</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Terms of Service</span>
+        <span class="text-sm text-neutral-500 hover:text-neutral-700 cursor-pointer">Contact Support</span>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

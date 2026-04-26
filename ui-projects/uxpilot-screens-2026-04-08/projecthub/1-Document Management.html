@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-full">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 h-[100vh] bg-white border-r border-gray-200 fixed top-0 left-0 z-30 overflow-y-auto">
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-layer-group text-primary-600 text-xl"></i>
+                    <span class="text-xl font-semibold text-gray-800">ProjectHub</span>
+                </div>
+            </div>
+            
+            <div class="py-4">
+                <ul class="space-y-2 px-3">
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-600 rounded-lg hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-pie w-5 h-5 text-gray-500"></i>
+                            <span class="ml-3">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-600 rounded-lg hover:bg-gray-100">
+                            <i class="fa-solid fa-folder w-5 h-5 text-gray-500"></i>
+                            <span class="ml-3">Projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-600 rounded-lg hover:bg-gray-100">
+                            <i class="fa-solid fa-flag w-5 h-5 text-gray-500"></i>
+                            <span class="ml-3">Milestones</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-600 rounded-lg hover:bg-gray-100">
+                            <i class="fa-solid fa-clipboard-check w-5 h-5 text-gray-500"></i>
+                            <span class="ml-3">Tasks</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-600 rounded-lg hover:bg-gray-100">
+                            <i class="fa-solid fa-calendar w-5 h-5 text-gray-500"></i>
+                            <span class="ml-3">Events</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-primary-600 bg-primary-50 rounded-lg font-medium">
+                            <i class="fa-solid fa-file-lines w-5 h-5 text-primary-600"></i>
+                            <span class="ml-3">Documents</span>
+                        </a>
+                    </li>
+                    <li class="pt-5 mt-5 border-t border-gray-200">
+                        <a href="#" class="flex items-center p-2 text-gray-600 rounded-lg hover:bg-gray-100">
+                            <i class="fa-solid fa-users w-5 h-5 text-gray-500"></i>
+                            <span class="ml-3">Team</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-600 rounded-lg hover:bg-gray-100">
+                            <i class="fa-solid fa-gear w-5 h-5 text-gray-500"></i>
+                            <span class="ml-3">Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-600 rounded-lg hover:bg-gray-100">
+                            <i class="fa-solid fa-circle-question w-5 h-5 text-gray-500"></i>
+                            <span class="ml-3">Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 ml-64">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 p-4 flex justify-between items-center sticky top-0 z-20">
+                <div>
+                    <h1 class="text-xl font-semibold text-gray-800">Document Management</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 rounded-full hover:bg-gray-100">
+                        <i class="fa-regular fa-bell text-gray-600"></i>
+                    </button>
+                    <div class="relative">
+                        <button class="flex items-center">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" class="w-8 h-8 rounded-full" alt="User avatar" />
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main id="main-content" class="p-6">
+                <!-- Document Management Header -->
+                <section id="document-header" class="mb-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Document Repository</h2>
+                            <p class="text-gray-500 mt-1">Upload, tag, and organize files for your projects and tasks</p>
+                        </div>
+                        <div class="mt-4 md:mt-0 flex space-x-3">
+                            <button class="px-4 py-2 bg-primary-600 text-white rounded-lg flex items-center hover:bg-primary-700 transition">
+                                <i class="fa-solid fa-upload mr-2"></i>
+                                Upload Document
+                            </button>
+                            <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg flex items-center hover:bg-gray-50 transition">
+                                <i class="fa-solid fa-filter mr-2"></i>
+                                Filters
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Search and Filter Bar -->
+                <section id="search-filter" class="mb-6">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                        <div class="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-4">
+                            <div class="flex-1 relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-solid fa-search text-gray-400"></i>
+                                </div>
+                                <input type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" placeholder="Search documents by name, tag, or content...">
+                            </div>
+                            <div class="flex space-x-4">
+                                <div class="w-48">
+                                    <select class="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md">
+                                        <option>All Projects</option>
+                                        <option>Website Redesign</option>
+                                        <option>Mobile App Development</option>
+                                        <option>Marketing Campaign</option>
+                                        <option>Product Launch</option>
+                                    </select>
+                                </div>
+                                <div class="w-48">
+                                    <select class="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md">
+                                        <option>All File Types</option>
+                                        <option>PDF Documents</option>
+                                        <option>Word Documents</option>
+                                        <option>Excel Spreadsheets</option>
+                                        <option>Images</option>
+                                        <option>Videos</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                Design Files
+                                <button type="button" class="ml-1 inline-flex text-blue-500 hover:text-blue-700">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                Marketing
+                                <button type="button" class="ml-1 inline-flex text-green-500 hover:text-green-700">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                                Client Approved
+                                <button type="button" class="ml-1 inline-flex text-purple-500 hover:text-purple-700">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </span>
+                            <button class="text-primary-600 hover:text-primary-800 text-sm font-medium">
+                                Clear All Filters
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Documents Grid -->
+                <section id="documents-grid" class="mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Document Card 1 -->
+                        <div id="document-1" class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                            <div class="p-5">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="p-2 bg-blue-100 rounded-lg">
+                                        <i class="fa-solid fa-file-pdf text-blue-600 text-lg"></i>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Public
+                                        </span>
+                                        <button class="text-gray-400 hover:text-gray-500">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-1">Website Design Specifications</h3>
+                                <p class="text-sm text-gray-500 mb-3">Comprehensive design guidelines and UI components for the website redesign project.</p>
+                                <div class="flex items-center text-sm text-gray-500 mb-3">
+                                    <i class="fa-solid fa-folder-open mr-1.5"></i>
+                                    <span>Website Redesign</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        Design
+                                    </span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                        UI/UX
+                                    </span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                        Guidelines
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between border-t border-gray-200 pt-3">
+                                    <div class="flex items-center">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" class="w-6 h-6 rounded-full mr-2" alt="Uploader" />
+                                        <span class="text-xs text-gray-500">Sarah Johnson</span>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Today, 10:30 AM</span>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-5 py-3 flex justify-between items-center">
+                                <span class="text-sm text-gray-500">4.2 MB</span>
+                                <div class="flex space-x-2">
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-share-nodes"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Document Card 2 -->
+                        <div id="document-2" class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                            <div class="p-5">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="p-2 bg-green-100 rounded-lg">
+                                        <i class="fa-solid fa-file-excel text-green-600 text-lg"></i>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                            Limited
+                                        </span>
+                                        <button class="text-gray-400 hover:text-gray-500">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-1">Marketing Campaign Budget</h3>
+                                <p class="text-sm text-gray-500 mb-3">Quarterly budget allocation for digital marketing campaigns and advertising spend.</p>
+                                <div class="flex items-center text-sm text-gray-500 mb-3">
+                                    <i class="fa-solid fa-folder-open mr-1.5"></i>
+                                    <span>Marketing Campaign</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Finance
+                                    </span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Budget
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between border-t border-gray-200 pt-3">
+                                    <div class="flex items-center">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" class="w-6 h-6 rounded-full mr-2" alt="Uploader" />
+                                        <span class="text-xs text-gray-500">Emily Rodriguez</span>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Yesterday, 2:15 PM</span>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-5 py-3 flex justify-between items-center">
+                                <span class="text-sm text-gray-500">1.8 MB</span>
+                                <div class="flex space-x-2">
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-share-nodes"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Document Card 3 -->
+                        <div id="document-3" class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                            <div class="p-5">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="p-2 bg-indigo-100 rounded-lg">
+                                        <i class="fa-solid fa-file-word text-indigo-600 text-lg"></i>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                            Private
+                                        </span>
+                                        <button class="text-gray-400 hover:text-gray-500">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-1">API Documentation</h3>
+                                <p class="text-sm text-gray-500 mb-3">Technical documentation for the mobile app API endpoints and integration guidelines.</p>
+                                <div class="flex items-center text-sm text-gray-500 mb-3">
+                                    <i class="fa-solid fa-folder-open mr-1.5"></i>
+                                    <span>Mobile App Development</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                                        Technical
+                                    </span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        Development
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between border-t border-gray-200 pt-3">
+                                    <div class="flex items-center">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" class="w-6 h-6 rounded-full mr-2" alt="Uploader" />
+                                        <span class="text-xs text-gray-500">Michael Chen</span>
+                                    </div>
+                                    <span class="text-xs text-gray-500">Yesterday, 4:23 PM</span>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-5 py-3 flex justify-between items-center">
+                                <span class="text-sm text-gray-500">2.5 MB</span>
+                                <div class="flex space-x-2">
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-share-nodes"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Document Card 4 -->
+                        <div id="document-4" class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                            <div class="p-5">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="p-2 bg-purple-100 rounded-lg">
+                                        <i class="fa-solid fa-file-image text-purple-600 text-lg"></i>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Public
+                                        </span>
+                                        <button class="text-gray-400 hover:text-gray-500">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-1">Product Launch Visuals</h3>
+                                <p class="text-sm text-gray-500 mb-3">Marketing visuals and product photography for the upcoming product launch campaign.</p>
+                                <div class="flex items-center text-sm text-gray-500 mb-3">
+                                    <i class="fa-solid fa-folder-open mr-1.5"></i>
+                                    <span>Product Launch</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                        Marketing
+                                    </span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-pink-100 text-pink-800">
+                                        Creative
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between border-t border-gray-200 pt-3">
+                                    <div class="flex items-center">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" class="w-6 h-6 rounded-full mr-2" alt="Uploader" />
+                                        <span class="text-xs text-gray-500">David Kim</span>
+                                    </div>
+                                    <span class="text-xs text-gray-500">May 15, 2023</span>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-5 py-3 flex justify-between items-center">
+                                <span class="text-sm text-gray-500">8.7 MB</span>
+                                <div class="flex space-x-2">
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-share-nodes"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Document Card 5 -->
+                        <div id="document-5" class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                            <div class="p-5">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="p-2 bg-red-100 rounded-lg">
+                                        <i class="fa-solid fa-file-pdf text-red-600 text-lg"></i>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                            Limited
+                                        </span>
+                                        <button class="text-gray-400 hover:text-gray-500">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-1">Client Onboarding Guide</h3>
+                                <p class="text-sm text-gray-500 mb-3">Comprehensive guide for new client onboarding process and procedures.</p>
+                                <div class="flex items-center text-sm text-gray-500 mb-3">
+                                    <i class="fa-solid fa-folder-open mr-1.5"></i>
+                                    <span>Client Onboarding</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                        Process
+                                    </span>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-teal-100 text-teal-800">
+                                        Client
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between border-t border-gray-200 pt-3">
+                                    <div class="flex items-center">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" class="w-6 h-6 rounded-full mr-2" alt="Uploader" />
+                                        <span class="text-xs text-gray-500">Jessica Lee</span>
+                                    </div>
+                                    <span class="text-xs text-gray-500">May 14, 2023</span>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-5 py-3 flex justify-between items-center">
+                                <span class="text-sm text-gray-500">3.1 MB</span>
+                                <div class="flex space-x-2">
+                                    <button class="p-1.5 rounded-md hover:bg-gray-200 text-gray-600">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="p-1.5 rounded-

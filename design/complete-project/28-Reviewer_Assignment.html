@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <div id="header" class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="text-primary-700 font-bold text-xl">Joomla Academic</div>
+                <div class="hidden md:flex space-x-6 ml-10">
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Dashboard</span>
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">My Articles</span>
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Submit Article</span>
+                    <span class="text-primary-600 font-medium cursor-pointer">Reviews</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-500 hover:text-gray-700">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center">
+                        <span class="text-sm font-medium">ED</span>
+                    </div>
+                    <span class="text-gray-700 hidden md:inline-block">Editor Dashboard</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content" class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row">
+            <!-- Left sidebar with editor navigation -->
+            <div id="editor-sidebar" class="w-full md:w-64 mb-6 md:mb-0">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sticky top-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Editor Tools</h3>
+                    <div class="space-y-2">
+                        <span class="flex items-center text-gray-600 hover:text-primary-600 py-2 px-3 rounded-md hover:bg-gray-50 cursor-pointer">
+                            <i class="fa-solid fa-inbox mr-3 w-5 text-center"></i>
+                            <span>Submission Queue</span>
+                        </span>
+                        <span class="flex items-center text-gray-600 hover:text-primary-600 py-2 px-3 rounded-md hover:bg-gray-50 cursor-pointer">
+                            <i class="fa-solid fa-hourglass-half mr-3 w-5 text-center"></i>
+                            <span>In Review</span>
+                        </span>
+                        <span class="flex items-center bg-primary-50 text-primary-700 py-2 px-3 rounded-md cursor-pointer">
+                            <i class="fa-solid fa-user-plus mr-3 w-5 text-center"></i>
+                            <span>Assign Reviewers</span>
+                        </span>
+                        <span class="flex items-center text-gray-600 hover:text-primary-600 py-2 px-3 rounded-md hover:bg-gray-50 cursor-pointer">
+                            <i class="fa-solid fa-check-to-slot mr-3 w-5 text-center"></i>
+                            <span>Final Decisions</span>
+                        </span>
+                        <span class="flex items-center text-gray-600 hover:text-primary-600 py-2 px-3 rounded-md hover:bg-gray-50 cursor-pointer">
+                            <i class="fa-solid fa-calendar-days mr-3 w-5 text-center"></i>
+                            <span>Publication Schedule</span>
+                        </span>
+                        <span class="flex items-center text-gray-600 hover:text-primary-600 py-2 px-3 rounded-md hover:bg-gray-50 cursor-pointer">
+                            <i class="fa-solid fa-chart-line mr-3 w-5 text-center"></i>
+                            <span>Review Analytics</span>
+                        </span>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <h4 class="font-medium text-gray-800 mb-3">Quick Stats</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Pending Assignments</span>
+                                <span class="text-sm font-medium bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">12</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Reviews Due This Week</span>
+                                <span class="text-sm font-medium bg-red-100 text-red-800 px-2 py-1 rounded-full">5</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Decisions Pending</span>
+                                <span class="text-sm font-medium bg-green-100 text-green-800 px-2 py-1 rounded-full">8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content area -->
+            <div id="assignment-panel" class="flex-1 md:ml-8">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800">Reviewer Assignment</h2>
+                        <div class="flex items-center">
+                            <div class="relative mr-4">
+                                <input type="text" placeholder="Search articles or reviewers" class="pl-9 pr-3 py-2 border border-gray-300 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <i class="fa-solid fa-search absolute left-3 top-3 text-gray-400"></i>
+                            </div>
+                            <div class="dropdown">
+                                <button class="flex items-center space-x-1 border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-700 hover:bg-gray-50">
+                                    <i class="fa-solid fa-filter"></i>
+                                    <span>Filter</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="article-details" class="mb-8 pb-6 border-b border-gray-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full mr-2">Pending Assignment</span>
+                                <h3 class="text-lg font-medium text-gray-800">Observer Modal Dynamics in Anomalous Contact</h3>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-sm text-gray-500 mr-3">Submitted: June 15, 2023</span>
+                                <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">ID: JA-2023-0042</span>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+                            <div class="bg-gray-50 p-4 rounded-md">
+                                <h4 class="text-sm font-medium text-gray-700 mb-2">Authors</h4>
+                                <div class="flex items-center mb-2">
+                                    <div class="w-8 h-8 rounded-full bg-secondary-600 text-white flex items-center justify-center mr-2">
+                                        <span class="text-xs">JD</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Jonathan Doe, PhD</p>
+                                        <p class="text-xs text-gray-500">University of Science</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-secondary-600 text-white flex items-center justify-center mr-2">
+                                        <span class="text-xs">AS</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Alice Smith, PhD</p>
+                                        <p class="text-xs text-gray-500">Institute of Research</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-50 p-4 rounded-md">
+                                <h4 class="text-sm font-medium text-gray-700 mb-2">Keywords</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-xs">quantum mechanics</span>
+                                    <span class="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-xs">observer effects</span>
+                                    <span class="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-xs">modal realism</span>
+                                    <span class="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-xs">theoretical physics</span>
+                                    <span class="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-xs">anomalous phenomena</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-50 p-4 rounded-md">
+                                <h4 class="text-sm font-medium text-gray-700 mb-2">Abstract</h4>
+                                <p class="text-sm text-gray-600 line-clamp-4">This paper explores the theoretical framework for understanding observer effects in anomalous contact scenarios, with particular emphasis on modal dynamics and quantum mechanical interpretations...</p>
+                                <button class="text-primary-600 text-sm mt-1 hover:underline">Read more</button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <button class="flex items-center text-gray-700 hover:text-primary-600">
+                                    <i class="fa-regular fa-file-pdf mr-1"></i>
+                                    <span class="text-sm">View Full Manuscript</span>
+                                </button>
+                                <button class="flex items-center text-gray-700 hover:text-primary-600">
+                                    <i class="fa-solid fa-tags mr-1"></i>
+                                    <span class="text-sm">Manage Metadata</span>
+                                </button>
+                            </div>
+                            <div>
+                                <span class="text-sm text-gray-500">Epistemic Status: <span class="font-medium text-purple-600">Speculative (Partial)</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="reviewer-selection" class="mb-8">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Assign Reviewers</h3>
+                        <p class="text-gray-600 mb-6">Select reviewers for this article based on expertise and workload. A minimum of 2 reviewers is required.</p>
+                        
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-medium text-gray-700">Selected Reviewers (0/3)</h4>
+                            <div class="flex items-center">
+                                <span class="text-sm text-gray-500 mr-2">Sort by:</span>
+                                <select class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                    <option>Expertise Match</option>
+                                    <option>Availability</option>
+                                    <option>Response Time</option>
+                                    <option>Alphabetical</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div id="reviewer-cards" class="space-y-4">
+                            <!-- Reviewer 1 -->
+                            <div id="reviewer-1" class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex justify-between">
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center mr-3">
+                                            <span class="text-sm font-medium">RP</span>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-medium text-gray-800">Dr. Robert Phillips</h5>
+                                            <p class="text-sm text-gray-500">Quantum Physics Department, University of Technology</p>
+                                            <div class="flex items-center mt-1">
+                                                <span class="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full mr-2">
+                                                    <i class="fa-solid fa-circle-check text-xs mr-1"></i>
+                                                    High expertise match
+                                                </span>
+                                                <span class="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">
+                                                    <i class="fa-solid fa-bolt text-xs mr-1"></i>
+                                                    Fast response time
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <div class="flex space-x-1 mb-2">
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">4.2/5 Rating</span>
+                                        <button class="mt-3 px-3 py-1 bg-primary-600 text-white rounded-md text-sm hover:bg-primary-700">
+                                            Assign
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mt-3 text-sm">
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <div>
+                                            <p class="text-gray-500">Current Workload</p>
+                                            <p class="font-medium text-gray-800">1 active review</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-500">Expertise</p>
+                                            <p class="font-medium text-gray-800">Quantum mechanics, Observer effects</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-500">Completed Reviews</p>
+                                            <p class="font-medium text-gray-800">15 (avg. 12 days)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Reviewer 2 -->
+                            <div id="reviewer-2" class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex justify-between">
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center mr-3">
+                                            <span class="text-sm font-medium">ML</span>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-medium text-gray-800">Dr. Maria Lee</h5>
+                                            <p class="text-sm text-gray-500">Theoretical Physics, Institute of Advanced Studies</p>
+                                            <div class="flex items-center mt-1">
+                                                <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded-full mr-2">
+                                                    <i class="fa-solid fa-circle-half-stroke text-xs mr-1"></i>
+                                                    Medium expertise match
+                                                </span>
+                                                <span class="bg-red-100 text-red-800 text-xs px-2 py-0.5 rounded-full">
+                                                    <i class="fa-solid fa-triangle-exclamation text-xs mr-1"></i>
+                                                    High workload
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <div class="flex space-x-1 mb-2">
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">4.9/5 Rating</span>
+                                        <button class="mt-3 px-3 py-1 bg-primary-600 text-white rounded-md text-sm hover:bg-primary-700">
+                                            Assign
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mt-3 text-sm">
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <div>
+                                            <p class="text-gray-500">Current Workload</p>
+                                            <p class="font-medium text-gray-800">3 active reviews</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-500">Expertise</p>
+                                            <p class="font-medium text-gray-800">Modal realism, Theoretical physics</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-500">Completed Reviews</p>
+                                            <p class="font-medium text-gray-800">24 (avg. 9 days)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Reviewer 3 -->
+                            <div id="reviewer-3" class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex justify-between">
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center mr-3">
+                                            <span class="text-sm font-medium">DK</span>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-medium text-gray-800">Dr. David Kim</h5>
+                                            <p class="text-sm text-gray-500">Anomalous Phenomena Research, National Science Academy</p>
+                                            <div class="flex items-center mt-1">
+                                                <span class="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full mr-2">
+                                                    <i class="fa-solid fa-circle-check text-xs mr-1"></i>
+                                                    High expertise match
+                                                </span>
+                                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-full">
+                                                    <i class="fa-solid fa-clock text-xs mr-1"></i>
+                                                    Available now
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <div class="flex space-x-1 mb-2">
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                                            <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">3.1/5 Rating</span>
+                                        <button class="mt-3 px-3 py-1 bg-primary-600 text-white rounded-md text-sm hover:bg-primary-700">
+                                            Assign
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mt-3 text-sm">
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <div>
+                                            <p class="text-gray-500">Current Workload</p>
+                                            <p class="font-medium text-gray-800">0 active reviews</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-500">Expertise</p>
+                                            <p class="font-medium text-gray-800">Anomalous phenomena, Parapsychology</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-500">Completed Reviews</p>
+                                            <p class="font-medium text-gray-800">7 (avg. 15 days)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Reviewer 4 -->
+                            <div id="reviewer-4" class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex justify-between">
+                                    <div class="flex items-start">
+                                        <div class="w-10 h-10 rounded-full bg-orange-600 text-white flex items-center justify-center mr-3">
+                                            <span class="text-sm font-medium">JW</span>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-medium text-gray-800">Dr. James Wilson</h5>
+                                            <p class="text-sm text-gray-500">Department of Philosophy, Metropolitan University</p>
+                                            <div class="flex items-center mt-1">
+                                                <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded-full mr-2">
+                                                    <i class="fa-solid fa-circle-half-stroke text-xs mr-1"></i>
+                                                    Medium expertise match
+                                                </span>
+                                                <span class="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">
+                                                    <i class="fa-solid fa-bolt text-xs mr-1"></i>
+                                                    Fast response time
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <div class="flex space-x-1 mb-2">
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">4.0/5 Rating</span>
+                                        <button class="mt-3 px-3 py-1 bg-primary-600 text-white rounded-md text-sm hover:bg-primary-700">
+                                            Assign
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mt-3 text-sm">
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <div>
+                                            <p class="text-gray-500">Current Workload</p>
+                                            <p class="font-medium text-gray-800">1 active review</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-500">Expertise</p>
+                                            <p class="font-medium text-gray-800">Modal realism, Philosophy of science</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-500">Completed Reviews</p>
+                                            <p class="font-medium text-gray-800">19 (avg. 8 days)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <button class="text-primary-600 hover:text-primary-700 text-sm">
+                                <i class="fa-solid fa-plus mr-1"></i> Show more reviewers
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="review-settings" class="bg-gray-50 rounded-lg p-5 mb-6">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Review Settings</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Review Type</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="reviewType" class="h-4 w-4 text-primary-600 border-gray-300 focus:ring-primary-500" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Double-blind (recommended)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="reviewType" class="h-4 w-4 text-primary-600 border-gray-300 focus:ring-primary-500">
+                                        <span class="ml-2 text-sm text-gray-700">Single-blind (reviewers anonymous)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="reviewType" class="h-4 w-4 text-primary-600 border-gray-300 focus:ring-primary-500">
+                                        <span class="ml-2 text-sm text-gray-700">Open review (no anonymity)</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Review Timeline</label>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm text-gray-600 mb-1">Due Date</label>
+                                        <input type="date" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" value="2023-07-15">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-600 mb-1">Send Reminder</label>
+                                        <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                            <option>3 days before due date</option>
+                                            <option>5 days before due date</option>
+                                            <option>7 days before due date</option>
+                                            <option>10 days before due date</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Additional Instructions for Reviewers</label>
+                            <textarea class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" rows="3" placeholder="Enter any specific instructions for the reviewers..."></textarea>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                <span class="ml-2 text-sm text-gray-700">Request reviewers to pay special attention to the speculative claims</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
+                        <button class="py-2 px-4 bg-white border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50">
+                            Back to Queue
+                        </button>
+                        <div class="flex space-x-3">
+                            <button class="py-2 px-4 bg-white border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50">
+                                Save Draft
+                            </button>
+                            <button class="py-2 px-4 bg-primary-600 text-white rounded-md font-medium hover:bg-primary-700">
+                                Send Review Invitations
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right sidebar with workload overview -->
+            <div id="workload-sidebar" class="hidden lg:block w-72 ml-8">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sticky top-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Reviewer Workload</h3>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-gray-700">Dr. Robert Phillips</span>
+                            <div class="w-32 bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-green-500 h-2.5 rounded-full" style="width: 20%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-gray-700">Dr. Maria Lee</span>
+                            <div class="w-32 bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-gray-700">Dr. David Kim</span>
+                            <div class="w-32 bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-green-500 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-gray-700">Dr. James Wilson</span>
+                            <div class="w-32 bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-green-500 h-2.5 rounded-full" style="width: 20%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-gray-200">
+                        <h4 class="font-medium text-gray-800 mb-3">Expertise Match</h4>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center">
+                                <span class="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                                <span class="text-sm text-gray-600">High match (80-100%)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
+                                <span class="text-sm text-gray-600">Medium match (50-79%)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+                                <span class="text-sm text-gray-600">Low match (0-49%)</span>
+                            </div>
+                        </div>
+                        
+                        <h4 class="font-medium text-gray-800 mb-3">Workload Scale</h4>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <span class="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                                <span class="text-sm text-gray-600">Available (0-1 reviews)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
+                                <span class="text-sm text-gray-600">Moderate (2-3 reviews)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+                                <span class="text-sm text-gray-600">Heavy (4+ reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <button class="w-full flex items-center justify-center py-2 px-4 bg-secondary-100 text-secondary-700 rounded-md text-sm font-medium hover:bg-secondary-200">
+                            <i class="fa-solid fa-user-plus mr-2"></i>
+                            Invite New Reviewer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="footer" class="bg-white border-t border-gray-200 mt-8">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 Joomla Academic. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Help</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Contact</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

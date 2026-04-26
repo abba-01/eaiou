@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer">
+        // B&W override
+        tailwind.config.theme.extend.colors.primary = {
+          50: '#F7F6F3', 100: '#EDECE9', 200: '#E2E0DB',
+          300: '#CAC8C2', 400: '#9A9895', 500: '#5A5856',
+          600: '#18171A', 700: '#18171A', 800: '#18171A', 900: '#0A090B'
+        };
+        tailwind.config.theme.extend.fontFamily = { sans: ['DM Sans', 'system-ui', 'sans-serif'] };
+
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+<style id="eaiou-ds">
+/* ── eaiou Design System — Monochrome ── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+:root {
+  --ds-bg:       #F7F6F3;
+  --ds-surface:  #FFFFFF;
+  --ds-border:   #E2E0DB;
+  --ds-ink-1:    #18171A;
+  --ds-ink-2:    #5A5856;
+  --ds-ink-3:    #9A9895;
+  --ds-accent:   #18171A;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-full: 9999px;
+}
+
+/* Font override */
+body, button, input, select, textarea { font-family: 'DM Sans', system-ui, sans-serif !important; }
+h1, h2 { letter-spacing: -0.02em; }
+h1 { font-size: 1.5rem; font-weight: 600; }
+h2 { font-size: 1.25rem; font-weight: 600; }
+h3 { font-size: 1.0625rem; font-weight: 600; }
+
+/* Radius standardisation */
+.rounded-sm  { border-radius: 4px !important; }
+.rounded     { border-radius: 6px !important; }
+.rounded-md  { border-radius: 6px !important; }
+.rounded-lg  { border-radius: 10px !important; }
+.rounded-xl  { border-radius: 14px !important; }
+.rounded-2xl { border-radius: 20px !important; }
+.rounded-full { border-radius: 9999px !important; }
+
+/* Background neutralise */
+body { background-color: #F7F6F3 !important; }
+.bg-\[\#f8fafc\], .bg-gray-50 { background-color: #F7F6F3 !important; }
+
+/* Primary button polish */
+.bg-gray-900 { background-color: #18171A !important; }
+.hover\:bg-gray-800:hover { background-color: #2E2D30 !important; }
+.text-gray-900 { color: #18171A !important; }
+
+/* Card polish */
+.shadow, .shadow-sm { box-shadow: 0 1px 4px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04) !important; }
+.shadow-md { box-shadow: 0 4px 12px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.05) !important; }
+.shadow-lg { box-shadow: 0 8px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06) !important; }
+
+/* Brand accent → near-black */
+[class*="text-primary"], [class*="text-blue"] { color: #18171A !important; }
+[class*="bg-primary-6"], [class*="bg-primary-7"], [class*="bg-primary-8"],
+[class*="bg-primary-9"], [class*="bg-blue-5"], [class*="bg-blue-6"] {
+  background-color: #18171A !important; color: #fff !important;
+}
+[class*="bg-primary-5"]:not([class*="50"]) { background-color: #5A5856 !important; }
+[class*="bg-primary-50"], [class*="bg-primary-100"],
+[class*="bg-blue-50"], [class*="bg-blue-100"] { background-color: #F0EFEB !important; }
+[class*="border-primary"], [class*="border-blue"] { border-color: #CAC8C2 !important; }
+[class*="ring-primary"], [class*="focus\:ring-primary"] { --tw-ring-color: #9A9895 !important; }
+
+/* Badge colour fix: blue badges → neutral */
+.bg-blue-100.text-blue-800, .bg-primary-100.text-primary-700 {
+  background: #EDECE9 !important; color: #18171A !important;
+}
+
+/* Active / selected states */
+[class*="border-b-2"][class*="border-primary"],
+[class*="border-b-2"][class*="border-blue"] { border-color: #18171A !important; }
+
+/* Nav brand */
+.text-primary-700.font-bold, .text-primary-600.font-bold { color: #18171A !important; font-family: 'DM Serif Display', Georgia, serif !important; font-style: italic; }
+
+/* Sidebar active */
+[class*="bg-primary-50"][class*="text-primary-7"] { background: #EDECE9 !important; color: #18171A !important; border-left: 2px solid #18171A; }
+[class*="bg-primary-50"][class*="text-primary-6"] { background: #EDECE9 !important; color: #18171A !important; }
+
+/* Tailwind config primary override (for runtime) */
+</style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 hidden md:block">
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-gray-900 rounded-md flex items-center justify-center text-white mr-2">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <h1 class="text-lg font-bold text-gray-800">eaiou</h1>
+                </div>
+            </div>
+            <nav class="p-4">
+                <div class="mb-4">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Main Menu</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-house w-5 h-5 mr-2"></i>
+                                Dashboard
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md bg-gray-50 text-gray-800 cursor-pointer">
+                                <i class="fa-solid fa-file-lines w-5 h-5 mr-2"></i>
+                                My Manuscripts
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-user-check w-5 h-5 mr-2"></i>
+                                Review Requests
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-bell w-5 h-5 mr-2"></i>
+                                Notifications
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mb-4">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Author Tools</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-plus w-5 h-5 mr-2"></i>
+                                New Submission
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-clock-rotate-left w-5 h-5 mr-2"></i>
+                                Submission History
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-book w-5 h-5 mr-2"></i>
+                                Author Guidelines
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Account</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-user w-5 h-5 mr-2"></i>
+                                Profile
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-gear w-5 h-5 mr-2"></i>
+                                Settings
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-sign-out-alt w-5 h-5 mr-2"></i>
+                                Sign Out
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200">
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center">
+                        <button class="md:hidden mr-2 text-gray-600">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <h2 class="text-lg font-semibold text-gray-800">Manuscript Versions</h2>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-600 hover:text-gray-900">
+                            <i class="fa-solid fa-bell"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-gray-900">
+                            <i class="fa-solid fa-question-circle"></i>
+                        </button>
+                        <div class="flex items-center">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-8 h-8 rounded-full mr-2">
+                            <span class="text-sm font-medium text-gray-700">Dr. James Wilson</span>
+                            <i class="fa-solid fa-chevron-down ml-1 text-gray-500 text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-4">
+                <div id="manuscript-versions-section" class="max-w-5xl mx-auto">
+                    <div class="mb-6 flex items-center justify-between">
+                        <div>
+                            <div class="flex items-center">
+                                <span class="text-gray-700 hover:text-gray-800 mr-2 cursor-pointer">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                </span>
+                                <h1 class="text-2xl font-bold text-gray-900">Novel Approach to Quantum Computing</h1>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">Manuscript ID: QC-2023-078</p>
+                        </div>
+                        <div>
+                            <button class="bg-gray-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-900">
+                                <i class="fa-solid fa-plus mr-1"></i> Upload New Version
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Manuscript Info Card -->
+                    <div id="manuscript-info" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                        <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                            <h2 class="text-lg font-semibold text-gray-800">Manuscript Information</h2>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-500 mb-1">Current Status</h3>
+                                <div class="flex items-center">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 mr-2">
+                                        Under Review
+                                    </span>
+                                    <span class="text-sm text-gray-700">Round 2</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-500 mb-1">Submission Date</h3>
+                                <p class="text-sm text-gray-900">May 15, 2023</p>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-500 mb-1">Journal</h3>
+                                <p class="text-sm text-gray-900">Journal of Advanced Research in Quantum Physics</p>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-500 mb-1">Latest Update</h3>
+                                <p class="text-sm text-gray-900">August 3, 2023</p>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-500 mb-1">Handling Editor</h3>
+                                <p class="text-sm text-gray-900">Dr. Sarah Thompson</p>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-500 mb-1">Total Versions</h3>
+                                <p class="text-sm text-gray-900">3 versions</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Version Timeline -->
+                    <div id="version-timeline" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                        <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                            <h2 class="text-lg font-semibold text-gray-800">Version Timeline</h2>
+                            <div class="flex items-center">
+                                <span class="text-sm text-gray-500 mr-2">View:</span>
+                                <select class="text-sm border border-gray-300 rounded-md px-2 py-1">
+                                    <option>All Versions</option>
+                                    <option>Major Revisions Only</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <!-- Current Version -->
+                            <div id="current-version" class="border-l-4 border-gray-400 pl-4 pb-8 relative">
+                                <div class="absolute w-4 h-4 bg-gray-700 rounded-full -left-[10px] top-0"></div>
+                                <div class="flex items-start justify-between mb-2">
+                                    <div>
+                                        <h3 class="text-md font-semibold text-gray-800">Version 3.0 (Current)</h3>
+                                        <p class="text-sm text-gray-500">Uploaded on August 3, 2023</p>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                        Under Review
+                                    </span>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 mb-4">
+                                    <div class="flex items-center mb-3">
+                                        <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-100 text-gray-900 mr-3">
+                                            <i class="fa-solid fa-file-pdf"></i>
+                                        </span>
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between">
+                                                <p class="text-sm font-medium text-gray-900">quantum_computing_approach_v3.0.pdf</p>
+                                                <p class="text-xs text-gray-500">3.2 MB</p>
+                                            </div>
+                                            <div class="w-full bg-gray-200 rounded-full h-1.5 mt-1">
+                                                <div class="bg-gray-900 h-1.5 rounded-full" style="width: 100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-4 flex space-x-2">
+                                            <button class="text-gray-500 hover:text-gray-700 p-1">
+                                                <i class="fa-solid fa-download"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700 p-1">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="border-t border-gray-200 pt-3 mt-2">
+                                        <h4 class="text-sm font-medium text-gray-700 mb-2">Version Notes:</h4>
+                                        <p class="text-sm text-gray-600">Addressed all reviewer comments from round 1. Added new experimental data in Section 4. Revised the discussion section and updated references as suggested.</p>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-3 mb-4">
+                                    <div class="flex-1 bg-gray-50 rounded-lg p-4 border border-gray-200">
+                                        <h4 class="text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                            <i class="fa-solid fa-comment-dots text-gray-600 mr-2"></i>
+                                            Review Comments (Round 1)
+                                        </h4>
+                                        <div class="max-h-32 overflow-y-auto">
+                                            <div class="border-l-2 border-gray-300 pl-3 mb-2">
+                                                <p class="text-xs text-gray-500 mb-1">Reviewer #1:</p>
+                                                <p class="text-sm text-gray-600">The methodology needs further clarification. Please expand on the experimental setup in Section 3.</p>
+                                            </div>
+                                            <div class="border-l-2 border-gray-300 pl-3">
+                                                <p class="text-xs text-gray-500 mb-1">Reviewer #2:</p>
+                                                <p class="text-sm text-gray-600">The discussion should better contextualize findings within recent literature. Consider adding references from 2022-2023.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 bg-gray-50 rounded-lg p-4 border border-gray-200">
+                                        <h4 class="text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                            <i class="fa-solid fa-reply text-gray-600 mr-2"></i>
+                                            Author Response
+                                        </h4>
+                                        <div class="max-h-32 overflow-y-auto">
+                                            <p class="text-sm text-gray-600 mb-2">We thank the reviewers for their valuable feedback. We have addressed all comments as requested:</p>
+                                            <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+                                                <li>Expanded methodology section with detailed experimental setup</li>
+                                                <li>Added 8 new references from 2022-2023</li>
+                                                <li>Revised discussion to better contextualize our findings</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="text-sm text-gray-700 hover:text-gray-800 flex items-center">
+                                        <i class="fa-solid fa-file-lines mr-1"></i>
+                                        View Detailed Changes
+                                    </button>
+                                    <span class="text-gray-300">|</span>
+                                    <button class="text-sm text-gray-700 hover:text-gray-800 flex items-center">
+                                        <i class="fa-solid fa-check-circle mr-1"></i>
+                                        View Similarity Report
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Version 2.0 -->
+                            <div id="version-2" class="border-l-4 border-gray-300 pl-4 pb-8 relative">
+                                <div class="absolute w-4 h-4 bg-gray-300 rounded-full -left-[10px] top-0"></div>
+                                <div class="flex items-start justify-between mb-2">
+                                    <div>
+                                        <h3 class="text-md font-semibold text-gray-800">Version 2.0</h3>
+                                        <p class="text-sm text-gray-500">Uploaded on July 10, 2023</p>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Revision Requested
+                                    </span>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 mb-4">
+                                    <div class="flex items-center">
+                                        <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-200 text-gray-600 mr-3">
+                                            <i class="fa-solid fa-file-pdf"></i>
+                                        </span>
+                                        <div>
+                                            <p class="text-sm font-medium text-gray-700">quantum_computing_approach_v2.0.pdf</p>
+                                            <p class="text-xs text-gray-500">3.0 MB</p>
+                                        </div>
+                                        <div class="ml-auto flex space-x-2">
+                                            <button class="text-gray-500 hover:text-gray-700 p-1">
+                                                <i class="fa-solid fa-download"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700 p-1">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="text-sm text-gray-600 hover:text-gray-800 flex items-center">
+                                    <i class="fa-solid fa-chevron-down mr-1"></i>
+                                    Show Details
+                                </button>
+                            </div>
+                            
+                            <!-- Version 1.0 -->
+                            <div id="version-1" class="border-l-4 border-gray-300 pl-4 relative">
+                                <div class="absolute w-4 h-4 bg-gray-300 rounded-full -left-[10px] top-0"></div>
+                                <div class="flex items-start justify-between mb-2">
+                                    <div>
+                                        <h3 class="text-md font-semibold text-gray-800">Version 1.0 (Initial Submission)</h3>
+                                        <p class="text-sm text-gray-500">Uploaded on May 15, 2023</p>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-900">
+                                        Initial Review
+                                    </span>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 mb-4">
+                                    <div class="flex items-center">
+                                        <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-200 text-gray-600 mr-3">
+                                            <i class="fa-solid fa-file-pdf"></i>
+                                        </span>
+                                        <div>
+                                            <p class="text-sm font-medium text-gray-700">quantum_computing_approach_v1.0.pdf</p>
+                                            <p class="text-xs text-gray-500">2.8 MB</p>
+                                        </div>
+                                        <div class="ml-auto flex space-x-2">
+                                            <button class="text-gray-500 hover:text-gray-700 p-1">
+                                                <i class="fa-solid fa-download"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700 p-1">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="text-sm text-gray-600 hover:text-gray-800 flex items-center">
+                                    <i class="fa-solid fa-chevron-down mr-1"></i>
+                                    Show Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Supplementary Files -->
+                    <div id="supplementary-files" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                        <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                            <h2 class="text-lg font-semibold text-gray-800">Supplementary Files</h2>
+                            <button class="text-gray-700 text-sm font-medium flex items-center">
+                                <i class="fa-solid fa-plus mr-1"></i> Add File
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="flex items-center p-3 border border-gray-200 rounded-lg">
+                                    <span class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-100 text-gray-800 mr-3">
+                                        <i class="fa-solid fa-table"></i>
+                                    </span>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-gray-800">experimental_data.xlsx</p>
+                                        <p class="text-xs text-gray-500">Updated on August 3, 2023 • 1.4 MB</p>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="text-gray-500 hover:text-gray-700 p-1">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-500 hover:text-gray-700 p-1">
+                                            <i class="fa-solid fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-3 border border-gray-200 rounded-lg">
+                                    <span class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-green-100 text-green-700 mr-3">
+                                        <i class="fa-solid fa-image"></i>
+                                    </span>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-gray-800">high_res_figures.zip</p>
+                                        <p class="text-xs text-gray-500">Updated on August 3, 2023 • 5.7 MB</p>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="text-gray-500 hover:text-gray-700 p-1">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-500 hover:text-gray-700 p-1">
+                                            <i class="fa-solid fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-3 border border-gray-200 rounded-lg">
+                                    <span class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-purple-100 text-purple-700 mr-3">
+                                        <i class="fa-solid fa-code"></i>
+                                    </span>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-gray-800">simulation_code.zip</p>
+                                        <p class="text-xs text-gray-500">Updated on July 10, 2023 • 2.2 MB</p>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="text-gray-500 hover:text-gray-700 p-1">
+                                            <i class="fa-solid fa-download"></i>
+                                        </button>
+                                        <button class="text-gray-500 hover:text-gray-700 p-1">
+                                            <i class="fa-solid fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Compare Versions -->
+                    <div id="compare-versions" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                            <h2 class="text-lg font-semibold text-gray-800">Compare Versions</h2>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">From Version</label>
+                                    <select class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
+                                        <option>Version 2.0 (July 10, 2023)</option>
+                                        <option>Version 1.0 (May 15, 2023)</option>
+                                    </select>
+                                </div>
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">To Version</label>
+                                    <select class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
+                                        <option>Version 3.0 (August 3, 2023)</option>
+                                        <option>Version 2.0 (July 10, 2023)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="bg-gray-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-900">
+                                Compare Selected Versions
+                            </button>
+                            
+                            <div class="mt-6 border-t border-gray-200 pt-4">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="text-md font-medium text-gray-800">Version Comparison Summary</h3>
+                                    <span class="text-xs text-gray-500">Version 2.0 → Version 3.0</span>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                                    <div class="space-y-3">
+                                        <div class="flex items-start">
+                                            <div class="mt-1 mr-3 text-green-500">
+                                                <i class="fa-solid fa-plus-circle"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700">Added Content</p>
+                                                <p class="text-sm text-gray-600">New experimental data in Section 4 (+450 words)</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <div class="mt-1 mr-3 text-gray-600">
+                                                <i class="fa-solid fa-edit"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700">Modified Content</p>
+                                                <p class="text-sm text-gray-600">Revised methodology section (30% changes)</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <div class="mt-1 mr-3 text-amber-500">
+                                                <i class="fa-solid fa-book"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700">References</p>
+                                                <p class="text-sm text-gray-600">Added 8 new references, removed 2 outdated ones</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <div class="mt-1 mr-3 text-gray-500">
+                                                <i class="fa-solid fa-chart-line"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700">Overall Changes</p>
+                                                <p class="text-sm text-gray-600">Approximately 15% of content modified</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Right Sidebar - Manuscript Status -->
+        <aside id="status-sidebar" class="w-80 bg-white border-l border-gray-200 hidden lg:block overflow-y-auto">
+            <div class="p-4 border-b border-gray-200">
+                <h3 class="font-semibold text-gray-800">Review Status</h3>
+            </div>
+            <div class="p-4">
+                <div class="mb-4">
+                    <div class="flex items-center mb-2">
+                        <div class="w-3 h-3 bg-yellow-400 rounded-full mr-2"></div>
+                        <span class="text-sm font-medium">Current Status: Under Review</span>
+                    </div>
+                    <p class="text-xs text-gray-600 ml-5">Round 2 of review in progress</p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-3">Review Timeline</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex flex-col items-center mr-3">
+                                <div class="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center text-white text-xs">
+                                    <i class="fa-solid fa-hourglass-half"></i>
+                                </div>
+                                <div class="w-0.5 h-16 bg-gray-200 mt-1"></div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-800">Round 2 Review</p>
+                                <p class="text-xs text-gray-500">Started on August 5, 2023</p>
+                                <div class="mt-1 flex items-center">
+                                    <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                        <div class="bg-yellow-400 h-1.5 rounded-full" style="width: 40%"></div>
+                                    </div>
+                                    <span class="ml-2 text-xs text-gray-500">40%</span>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">2 of 3 reviewers responded</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex flex-col items-center mr-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <div class="w-0.5 h-16 bg-gray-200 mt-1"></div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-800">Revision Submitted</p>
+                                <p class="text-xs text-gray-500">August 3, 2023</p>
+                                <p class="text-xs text-gray-600 mt-1">Version 3.0 uploaded with all requested changes</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex flex-col items-center mr-3">
+                                <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs">
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+                                <div class="w-0.5 h-16 bg-gray-200 mt-1"></div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-800">Revision Requested</p>
+                                <p class="text-xs text-gray-500">July 20, 2023</p>
+                                <p class="text-xs text-gray-600 mt-1">Editor requested revisions based on reviewer feedback</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex flex-col items-center mr-3">
+                                <div class="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center text-white text-xs">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-800">Initial Submission</p>
+                                <p class="text-xs text-gray-500">May 15, 2023</p>
+                                <p class="text-xs text-gray-600 mt-1">Manuscript submitted for first round of review</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Reviewer Information</h4>
+                    <div class="bg-gray-50 p-3 rounded-md border border-gray-200">
+                        <div class="mb-3">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-gray-800">Reviewer #1</p>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                                    Completed
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-500">Expert in Quantum Algorithms</p>
+                        </div>
+                        <div class="mb-3">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-gray-800">Reviewer #2</p>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                                    Completed
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-500">Expert in Quantum Hardware</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-gray-800">Reviewer #3</p>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    In Progress
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-500">Expert in Theoretical Physics</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Need Help?</h4>
+                    <div class="space-y-2">
+                        <span class="text-sm text-gray-700 hover:text-gray-800 flex items-center cursor-pointer">
+                            <i class="fa-regular fa-envelope mr-2"></i>
+                            <span>Contact Editor</span>
+                        </span>
+                        <span class="text-sm text-gray-700 hover:text-gray-800 flex items-center cursor-pointer">
+                            <i class="fa-regular fa-circle-question mr-2"></i>
+                            <span>Revision Guidelines</span>
+                        </span>
+                        <span class="text-sm text-gray-700 hover:text-gray-800 flex items-center cursor-pointer">
+                            <i class="fa-regular fa-life-ring mr-2"></i>
+                            <span>Technical Support</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>

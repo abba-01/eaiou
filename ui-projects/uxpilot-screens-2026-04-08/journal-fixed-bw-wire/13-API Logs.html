@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+    <div id="header" class="bg-white border-b border-neutral-200 fixed w-full top-0 z-10">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between py-3">
+      <div class="flex items-center">
+        <span class="flex items-center cursor-pointer">
+          <div class="h-8 w-8 bg-neutral-800 rounded-md flex items-center justify-center text-white">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <span class="ml-2 text-lg">AIEOU Journal</span>
+        </span>
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <span class="text-neutral-900 cursor-pointer">Dashboard</span>
+        <span class="text-neutral-900 cursor-pointer">Papers</span>
+        <span class="text-neutral-900 cursor-pointer">Reviews</span>
+        <span class="text-neutral-900 cursor-pointer">Discover</span>
+        <span class="text-neutral-900 cursor-pointer">API</span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <div class="relative">
+          <button class="p-2 rounded-full bg-neutral-100 text-neutral-600">
+            <i class="fa-solid fa-bell"></i>
+          </button>
+          <div class="absolute top-0 right-0 w-2 h-2 bg-neutral-700 rounded-full"></div>
+        </div>
+        <div class="relative">
+          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full border border-neutral-200" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="container mx-auto px-4 pt-16 pb-8">
+  <div class="mb-6 mt-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl text-neutral-800">API Logs</h1>
+        <p class="text-neutral-600">Immutable record of all API access and actions</p>
+      </div>
+      <div class="flex space-x-2">
+        <button class="px-4 py-2 text-sm rounded-md bg-neutral-800 text-white flex items-center">
+          <i class="fa-solid fa-download mr-2"></i>
+          Export Logs
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters Section -->
+  <div id="api-log-filters" class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4 mb-6">
+    <div class="flex flex-wrap items-center gap-4">
+      <div class="w-full md:w-auto">
+        <label class="block text-xs text-neutral-500 mb-1">Time Range</label>
+        <div class="relative">
+          <select class="w-full appearance-none bg-neutral-100 border border-neutral-200 rounded-md px-3 py-2 pr-8 text-sm text-neutral-800 focus:outline-none">
+            <option>Last 24 hours</option>
+            <option>Last 7 days</option>
+            <option>Last 30 days</option>
+            <option>Custom range</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+            <i class="fa-solid fa-chevron-down text-neutral-500 text-xs"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="w-full md:w-auto">
+        <label class="block text-xs text-neutral-500 mb-1">Endpoint</label>
+        <div class="relative">
+          <select class="w-full appearance-none bg-neutral-100 border border-neutral-200 rounded-md px-3 py-2 pr-8 text-sm text-neutral-800 focus:outline-none">
+            <option>All endpoints</option>
+            <option>/api/v1/aieou/papers</option>
+            <option>/api/v1/aieou/versions</option>
+            <option>/api/v1/aieou/ai_sessions</option>
+            <option>/api/v1/aieou/review_logs</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+            <i class="fa-solid fa-chevron-down text-neutral-500 text-xs"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="w-full md:w-auto">
+        <label class="block text-xs text-neutral-500 mb-1">Status Code</label>
+        <div class="relative">
+          <select class="w-full appearance-none bg-neutral-100 border border-neutral-200 rounded-md px-3 py-2 pr-8 text-sm text-neutral-800 focus:outline-none">
+            <option>All status codes</option>
+            <option>200 (OK)</option>
+            <option>201 (Created)</option>
+            <option>400 (Bad Request)</option>
+            <option>401 (Unauthorized)</option>
+            <option>403 (Forbidden)</option>
+            <option>404 (Not Found)</option>
+            <option>500 (Server Error)</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+            <i class="fa-solid fa-chevron-down text-neutral-500 text-xs"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="w-full md:w-auto">
+        <label class="block text-xs text-neutral-500 mb-1">API Key</label>
+        <div class="relative">
+          <select class="w-full appearance-none bg-neutral-100 border border-neutral-200 rounded-md px-3 py-2 pr-8 text-sm text-neutral-800 focus:outline-none">
+            <option>All API keys</option>
+            <option>j.smith@university.edu</option>
+            <option>research_team_alpha</option>
+            <option>data_harvester_bot</option>
+            <option>integration_service</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+            <i class="fa-solid fa-chevron-down text-neutral-500 text-xs"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="w-full md:w-auto md:ml-auto">
+        <label class="block text-xs text-neutral-500 mb-1">Search</label>
+        <div class="relative">
+          <input type="text" placeholder="Search logs..." class="w-full bg-neutral-100 border border-neutral-200 rounded-md px-3 py-2 pl-9 text-sm text-neutral-800 focus:outline-none" />
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <i class="fa-solid fa-search text-neutral-500 text-xs"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Cards Section -->
+  <div id="api-log-stats" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+    <div class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-sm text-neutral-500">TOTAL REQUESTS</h3>
+        <div class="bg-neutral-100 rounded-full p-2">
+          <i class="fa-solid fa-server text-neutral-700"></i>
+        </div>
+      </div>
+      <div class="flex items-end">
+        <span class="text-3xl text-neutral-800">32,847</span>
+      </div>
+      <div class="flex items-center mt-2">
+        <span class="text-sm text-neutral-600">+18% from last month</span>
+        <i class="fa-solid fa-arrow-trend-up ml-1 text-neutral-700"></i>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-sm text-neutral-500">SUCCESS RATE</h3>
+        <div class="bg-neutral-100 rounded-full p-2">
+          <i class="fa-solid fa-check text-neutral-700"></i>
+        </div>
+      </div>
+      <div class="flex items-end">
+        <span class="text-3xl text-neutral-800">98.7%</span>
+      </div>
+      <div class="flex items-center mt-2">
+        <span class="text-sm text-neutral-600">+0.3% from last month</span>
+        <i class="fa-solid fa-arrow-trend-up ml-1 text-neutral-700"></i>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-sm text-neutral-500">AVG RESPONSE TIME</h3>
+        <div class="bg-neutral-100 rounded-full p-2">
+          <i class="fa-solid fa-clock text-neutral-700"></i>
+        </div>
+      </div>
+      <div class="flex items-end">
+        <span class="text-3xl text-neutral-800">247</span>
+        <span class="ml-1 text-neutral-600 text-lg">ms</span>
+      </div>
+      <div class="flex items-center mt-2">
+        <span class="text-sm text-neutral-600">-12ms from last month</span>
+        <i class="fa-solid fa-arrow-trend-down ml-1 text-neutral-700"></i>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-sm text-neutral-500">ACTIVE API KEYS</h3>
+        <div class="bg-neutral-100 rounded-full p-2">
+          <i class="fa-solid fa-key text-neutral-700"></i>
+        </div>
+      </div>
+      <div class="flex items-end">
+        <span class="text-3xl text-neutral-800">42</span>
+      </div>
+      <div class="flex items-center mt-2">
+        <span class="text-sm text-neutral-600">+5 from last month</span>
+        <i class="fa-solid fa-arrow-trend-up ml-1 text-neutral-700"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- API Logs Table -->
+  <div id="api-logs-table" class="bg-white rounded-lg shadow-sm border border-neutral-200 mb-6">
+    <div class="px-4 py-3 border-b border-neutral-200 flex justify-between items-center">
+      <h2 class="text-lg text-neutral-800">API Request Logs</h2>
+      <div class="text-sm text-neutral-600">
+        Showing <span>1-100</span> of <span>32,847</span> logs
+      </div>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-neutral-200">
+        <thead>
+          <tr class="bg-neutral-50">
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              Timestamp
+              <i class="fa-solid fa-sort ml-1"></i>
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              API Key ID
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              Endpoint
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              Method
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              Status
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              Response Time
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-neutral-200">
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">
+              2025-08-19 16:23:58
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              api_5f2e9b1c
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              /api/v1/aieou/papers
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">GET</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">200</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              183ms
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm">
+              <button class="text-neutral-600 hover:text-neutral-900">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">
+              2025-08-19 16:22:47
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              api_7a3d8e2f
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              /api/v1/aieou/papers/1094
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">GET</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">200</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              212ms
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm">
+              <button class="text-neutral-600 hover:text-neutral-900">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">
+              2025-08-19 16:21:33
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              api_3c1f6d9e
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              /api/v1/aieou/versions
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">POST</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">201</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              356ms
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm">
+              <button class="text-neutral-600 hover:text-neutral-900">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">
+              2025-08-19 16:20:15
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              api_8b2e4f7d
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              /api/v1/aieou/ai_sessions
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">GET</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">200</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              198ms
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm">
+              <button class="text-neutral-600 hover:text-neutral-900">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">
+              2025-08-19 16:19:42
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              api_4d7c2a9b
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              /api/v1/aieou/papers
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">POST</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-800 text-white">400</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              145ms
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm">
+              <button class="text-neutral-600 hover:text-neutral-900">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">
+              2025-08-19 16:18:29
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              api_9e6b3d1a
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              /api/v1/aieou/review_logs/1082
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">PUT</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">200</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              287ms
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm">
+              <button class="text-neutral-600 hover:text-neutral-900">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">
+              2025-08-19 16:17:14
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              api_2f5a8c3e
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              /api/v1/aieou/papers/1088/versions
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">GET</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-800 text-white">403</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              132ms
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm">
+              <button class="text-neutral-600 hover:text-neutral-900">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">
+              2025-08-19 16:16:58
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              api_1b4d7e9c
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              /api/v1/aieou/didntmakeit
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">GET</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">200</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              243ms
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm">
+              <button class="text-neutral-600 hover:text-neutral-900">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">
+              2025-08-19 16:15:41
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              api_6c9a2e5d
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              /api/v1/aieou/papers/search
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">GET</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">200</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              329ms
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm">
+              <button class="text-neutral-600 hover:text-neutral-900">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-800">
+              2025-08-19 16:14:27
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              api_8d3f1a7b
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              /api/v1/aieou/ideas
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">GET</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">200</span>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm text-neutral-600">
+              276ms
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap text-sm">
+              <button class="text-neutral-600 hover:text-neutral-900">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="px-4 py-3 border-t border-neutral-200 flex items-center justify-between">
+      <div class="flex items-center">
+        <span class="text-sm text-neutral-600 mr-2">Rows per page:</span>
+        <select class="bg-neutral-100 border border-neutral-200 rounded-md px-2 py-1 text-sm text-neutral-800">
+          <option>10</option>
+          <option selected>100</option>
+          <option>250</option>
+          <option>500</option>
+        </select>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button class="p-2 rounded-md bg-neutral-100 text-neutral-600 disabled:opacity-50">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <span class="text-sm text-neutral-600">Page 1 of 329</span>
+        <button class="p-2 rounded-md bg-neutral-100 text-neutral-600">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Log Detail Modal -->
+  <div id="log-detail-modal" class="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-20">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-3xl p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl text-neutral-800">API Log Details</h2>
+        <button class="text-neutral-500 hover:text-neutral-700">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-2 gap-8">
+        <!-- Information Section -->
+        <div>
+          <h3 class="text-sm text-neutral-500 uppercase mb-4">REQUEST INFORMATION</h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-neutral-600">Timestamp</span>
+              <span class="text-neutral-800">2025-08-19 16:23:58</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-neutral-600">API Key ID</span>
+              <span class="text-neutral-800">api_5f2e9b1c</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-neutral-600">User</span>
+              <span class="text-neutral-800">j.smith@university.edu</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-neutral-600">Endpoint</span>
+              <span class="text-neutral-800">/api/v1/aieou/papers</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-neutral-600">Method</span>
+              <span class="bg-neutral-100 text-neutral-800 rounded-full px-3 py-1 text-sm">GET</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-neutral-600">Status Code</span>
+              <span class="bg-neutral-100 text-neutral-800 rounded-full px-3 py-1 text-sm">200</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-neutral-600">Response Time</span>
+              <span class="text-neutral-800">183ms</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-neutral-600">IP Address</span>
+              <span class="text-neutral-800">192.168.1.105</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Request Details Section -->
+        <div>
+          <h3 class="text-sm text-neutral-500 uppercase mb-4">REQUEST DETAILS</h3>
+          <div class="space-y-4">
+            <div>
+              <span class="text-neutral-600 block mb-1">Query Parameters</span>
+              <div class="bg-neutral-100 rounded-md p-3 text-sm text-neutral-800">
+                status=published&author=ramirez&limit=10
+              </div>
+            </div>
+            <div>
+              <span class="text-neutral-600 block mb-1">Headers</span>
+              <div class="bg-neutral-100 rounded-md p-3 text-sm text-neutral-800">
+                Content-Type: application/json<br>
+                Authorization: Bearer [REDACTED]<br>
+                User-Agent: PostmanRuntime/7.32.3
+              </div>
+            </div>
+            <div>
+              <span class="text-neutral-600 block mb-1">Response Body</span>
+              <div class="bg-neutral-100 rounded-md p-3 text-sm text-neutral-800 h-48 overflow-y-auto">
+                {<br>
+                &nbsp;&nbsp;"data": [<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": 1082,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"title": "Neural mechanisms of attention in corvids",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": "published",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"authors": [{"name": "A. Ramirez", "orcid": "0000-0002-1825-0097"}]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": 1075,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"title": "Comparative studies of tool use in corvids and primates",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": "published",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"authors": [{"name": "A. Ramirez", "orcid": "0000-0002-1825-0097"}]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;],<br>
+                &nbsp;&nbsp;"meta": {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"total": 2,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"per_page": 10,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"current_page": 1<br>
+                &nbsp;&nbsp;}<br>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-6 flex justify-end">
+        <button class="px-4 py-2 bg-neutral-100 text-neutral-800 rounded-md mr-2">
+          Download Raw Log
+        </button>
+        <button class="px-4 py-2 bg-neutral-800 text-white rounded-md">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Access Patterns Section -->
+  <div id="access-patterns" class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4 mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg text-neutral-800">API Access Patterns</h2>
+      <div class="flex space-x-2">
+        <button class="px-3 py-1 text-xs rounded-md bg-neutral-800 text-white">Last 24 hours</button>
+        <button class="px-3 py-1 text-xs rounded-md bg-neutral-100 text-neutral-700">Last 7 days</button>
+        <button class="px-3 py-1 text-xs rounded-md bg-neutral-100 text-neutral-700">Last 30 days</button>
+      </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Requests by Endpoint -->
+      <div>
+        <h3 class="text-sm text-neutral-500 mb-3">REQUESTS BY ENDPOINT</h3>
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span class="text-neutral-600">/api/v1/aieou/papers</span>
+              <span class="text-neutral-800">14,782 (45%)</span>
+            </div>
+            <div class="w-full bg-neutral-200 rounded-full h-2">
+              <div class="bg-neutral-700 h-2 rounded-full" style="width: 45%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span class="text-neutral-600">/api/v1/aieou/versions</span>
+              <span class="text-neutral-800">6,241 (19%)</span>
+            </div>
+            <div class="w-full bg-neutral-200 rounded-full h-2">
+              <div class="bg-neutral-700 h-2 rounded-full" style="width: 19%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span class="text-neutral-600">/api/v1/aieou/ai_sessions</span>
+              <span class="text-neutral-800">4,927 (15%)</span>
+            </div>
+            <div class="w-full bg-neutral-200 rounded-full h-2">
+              <div class="bg-neutral-700 h-2 rounded-full" style="width: 15%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span class="text-neutral-600">/api/v1/aieou/review_logs</span>
+              <span class="text-neutral-800">3,942 (12%)</span>
+            </div>
+            <div class="w-full bg-neutral-200 rounded-full h-2">
+              <div class="bg-neutral-700 h-2 rounded-full" style="width: 12%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span class="text-neutral-600">Other endpoints</span>
+              <span class="text-neutral-800">2,955 (9%)</span>
+            </div>
+            <div class="w-full bg-neutral-200 rounded-full h-2">
+              <div class="bg-neutral-700 h-2 rounded-full" style="width: 9%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Requests by HTTP Method -->
+      <div>
+        <h3 class="text-sm text-neutral-500 mb-3">REQUESTS BY HTTP METHOD</h3>
+        <div class="h-64 relative">
+          <!-- Requests by Method Chart -->
+          <div class="absolute inset-0 flex items-end justify-around">
+            <!-- GET -->
+            <div class="flex flex-col items-center">
+              <div class="h-52 w-16 bg-neutral-200 rounded-md relative overflow-hidden">
+                <div class="absolute bottom-0 w-full bg-neutral-700 h-[70%]"></div>
+              </div>
+              <div class="mt-2 text-center">
+                <span class="text-sm text-neutral-800">GET</span>
+                <div class="text-xs text-neutral-600">70%</div>
+              </div>
+            </div>
+            
+            <!-- POST -->
+            <div class="flex flex-col items-center">
+              <div class="h-52 w-16 bg-neutral-200 rounded-md relative overflow-hidden">
+                <div class="absolute bottom-0 w-full bg-neutral-700 h-[18%]"></div>
+              </div>
+              <div class="mt-2 text-center">
+                <span class="text-sm text-neutral-800">POST</span>
+                <div class="text-xs text-neutral-600">18%</div>
+              </div>
+            </div>
+            
+            <!-- PUT -->
+            <div class="flex flex-col items-center">
+              <div class="h-52 w-16 bg-neutral-200 rounded-md relative overflow-hidden">
+                <div class="absolute bottom-0 w-full bg-neutral-700 h-[10%]"></div>
+              </div>
+              <div class="mt-2 text-center">
+                <span class="text-sm text-neutral-800">PUT</span>
+                <div class="text-xs text-neutral-600">10%</div>
+              </div>
+            </div>
+            
+            <!-- DELETE -->
+            <div class="flex flex-col items-center">
+              <div class="h-52 w-16 bg-neutral-200 rounded-md relative overflow-hidden">
+                <div class="absolute bottom-0 w-full bg-neutral-700 h-[2%]"></div>
+              </div>
+              <div class="mt-2 text-center">
+                <span class="text-sm text-neutral-800">DELETE</span>
+                <div class="text-xs text-neutral-600">2%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Top API Users -->
+  <div id="top-api-users" class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg text-neutral-800">Top API Users</h2>
+      <button class="text-sm text-neutral-700 flex items-center">
+        <span>View all users</span>
+        <i class="fa-solid fa-arrow-right ml-1"></i>
+      </button>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-neutral-200">
+        <thead>
+          <tr>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              API Key
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              User
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              Total Requests
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              Success Rate
+            </th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">
+              Most Used Endpoint
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-neutral-200">
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">api_5f2e9b1c</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=111" alt="User" class="w-6 h-6 rounded-full mr-2" />
+                <div class="text-sm text-neutral-600">j.smith@university.edu</div>
+              </div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">5,283</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">99.8%</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">/api/v1/aieou/papers</div>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">api_3c1f6d9e</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=222" alt="User" class="w-6 h-6 rounded-full mr-2" />
+                <div class="text-sm text-neutral-600">research_team_alpha</div>
+              </div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">4,721</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">97.3%</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">/api/v1/aieou/versions</div>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">api_7a3d8e2f</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=333" alt="User" class="w-6 h-6 rounded-full mr-2" />
+                <div class="text-sm text-neutral-600">data_harvester_bot</div>
+              </div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">3,964</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">98.5%</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">/api/v1/aieou/papers</div>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">api_8b2e4f7d</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=444" alt="User" class="w-6 h-6 rounded-full mr-2" />
+                <div class="text-sm text-neutral-600">integration_service</div>
+              </div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">3,128</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">99.1%</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">/api/v1/aieou/ai_sessions</div>
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">api_9e6b3d1a</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="flex items-center">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=555" alt="User" class="w-6 h-6 rounded-full mr-2" />
+                <div class="text-sm text-neutral-600">k.williams@university.edu</div>
+              </div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">2,845</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">98.9%</div>
+            </td>
+            <td class="px-4 py-3 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">/api/v1/aieou/review_logs</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-neutral-100 border-t border-neutral-200 mt-8">
+  <div class="container mx-auto px-4 py-6">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0">
+        <div class="flex items-center">
+          <div class="h-8 w-8 bg-neutral-800 rounded-md flex items-center justify-center text-white mr-2">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <span class="text-sm text-neutral-600">AIEOU Journal Platform v5.3</span>
+        </div>
+      </div>
+      <div class="flex space-x-6">
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Documentation</span>
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Support</span>
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Privacy Policy</span>
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Terms of Service</span>
+      </div>
+    </div>
+  </div>
+</div>
+  </body>
+</html>

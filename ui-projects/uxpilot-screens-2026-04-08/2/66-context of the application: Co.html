@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="bg-neutral-100 border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+  <div class="flex items-center">
+    <div class="w-10 h-10 rounded-md bg-neutral-800 flex items-center justify-center text-white">
+      <i class="fa-solid fa-brain"></i>
+    </div>
+    <span class="ml-3 text-xl">AI Project Hub</span>
+  </div>
+  <div class="flex items-center space-x-4">
+    <div class="relative">
+      <input type="text" placeholder="Search projects..." class="pl-9 pr-4 py-2 rounded-md border border-neutral-300 w-64 focus:outline-none focus:ring-2 focus:ring-neutral-400 text-sm">
+      <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-neutral-400"></i>
+    </div>
+    <button class="p-2 text-neutral-600 hover:bg-neutral-200 rounded-full">
+      <i class="fa-solid fa-bell"></i>
+    </button>
+    <div class="flex items-center">
+      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full border border-neutral-300">
+      <span class="ml-2 text-sm">Alex Morgan</span>
+      <i class="fa-solid fa-chevron-down ml-2 text-xs text-neutral-500"></i>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="flex min-h-[calc(100vh-72px)]">
+  <div id="sidebar" class="w-64 border-r border-neutral-200 bg-white">
+    <div class="p-4">
+      <h2 class="text-lg mb-4">Project Settings</h2>
+      <div class="space-y-1">
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-sliders mr-3 text-neutral-500"></i>
+          <span>General</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-800 bg-neutral-100 rounded-md">
+          <i class="fa-solid fa-microchip mr-3 text-neutral-600"></i>
+          <span>AI Models</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-folder-tree mr-3 text-neutral-500"></i>
+          <span>Projects</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-users mr-3 text-neutral-500"></i>
+          <span>Team Members</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-shield-halved mr-3 text-neutral-500"></i>
+          <span>Security</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-credit-card mr-3 text-neutral-500"></i>
+          <span>Billing</span>
+        </div>
+        <div class="flex items-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <i class="fa-solid fa-plug mr-3 text-neutral-500"></i>
+          <span>Integrations</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="p-4 border-t border-neutral-200">
+      <h3 class="text-sm text-neutral-500 mb-3">ACTIVE PROJECTS</h3>
+      <div class="space-y-1">
+        <div class="flex items-center justify-between px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <div class="flex items-center">
+            <i class="fa-solid fa-flask mr-3 text-neutral-500"></i>
+            <span>Scientific Research</span>
+          </div>
+          <span class="text-xs bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded-full">3 AIs</span>
+        </div>
+        <div class="flex items-center justify-between px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <div class="flex items-center">
+            <i class="fa-solid fa-book mr-3 text-neutral-500"></i>
+            <span>Academic Papers</span>
+          </div>
+          <span class="text-xs bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded-full">2 AIs</span>
+        </div>
+        <div class="flex items-center justify-between px-3 py-2 text-neutral-600 hover:bg-neutral-50 rounded-md">
+          <div class="flex items-center">
+            <i class="fa-solid fa-chart-line mr-3 text-neutral-500"></i>
+            <span>Data Analysis</span>
+          </div>
+          <span class="text-xs bg-neutral-100 text-neutral-800 px-2 py-0.5 rounded-full">1 AI</span>
+        </div>
+      </div>
+      <button class="mt-3 w-full flex items-center justify-center px-3 py-2 text-neutral-600 hover:bg-neutral-50 border border-neutral-300 rounded-md text-sm">
+        <i class="fa-solid fa-plus mr-2"></i>
+        <span>New Project</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="content" class="flex-1 bg-neutral-50 p-6 overflow-auto">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl text-neutral-800">AI Model Management</h1>
+        <button class="px-4 py-2 bg-neutral-800 text-white rounded-md flex items-center">
+          <i class="fa-solid fa-plus mr-2"></i>
+          <span>Connect New AI Model</span>
+        </button>
+      </div>
+
+      <div id="notification-section" class="mb-6 bg-neutral-50 border border-neutral-200 rounded-lg p-4 flex items-start">
+        <i class="fa-solid fa-circle-info text-neutral-500 mt-0.5 mr-3 text-lg"></i>
+        <div>
+          <h3 class="text-neutral-800 mb-1">Multi-AI Collaboration Now Available</h3>
+          <p class="text-neutral-600 text-sm">You can now assign multiple AI models to the same project and enable them to collaborate on tasks. Try swapping between models mid-stream for improved results.</p>
+          <button class="mt-2 text-sm text-neutral-600 hover:text-neutral-700">
+            Learn More
+          </button>
+        </div>
+      </div>
+
+      <div id="project-selector" class="mb-6">
+        <label class="block text-sm text-neutral-600 mb-2">Select Project to Configure AI Models</label>
+        <div class="relative">
+          <select class="w-full pl-3 pr-10 py-2 border border-neutral-300 rounded-md appearance-none bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+            <option>Scientific Research</option>
+            <option>Academic Papers</option>
+            <option>Data Analysis</option>
+          </select>
+          <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-neutral-400 pointer-events-none"></i>
+        </div>
+      </div>
+
+      <div id="active-models" class="mb-8">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg text-neutral-800">Active AI Models in Project</h2>
+          <div class="flex items-center space-x-2">
+            <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded-md bg-white text-neutral-700 flex items-center hover:bg-neutral-50">
+              <i class="fa-solid fa-sort mr-2"></i>
+              <span>Sort</span>
+            </button>
+            <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded-md bg-white text-neutral-700 flex items-center hover:bg-neutral-50">
+              <i class="fa-solid fa-filter mr-2"></i>
+              <span>Filter</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="models-list" class="space-y-4">
+          <!-- Model 1 -->
+          <div class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden">
+            <div class="p-5">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                  <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center text-white">
+                    <i class="fa-brands fa-UX Pilot AI"></i>
+                  </div>
+                  <div class="ml-3">
+                    <h3 class="text-neutral-800">UX Pilot-4o</h3>
+                    <span class="text-xs text-neutral-500">UX Pilot AI • Connected on June 12, 2025</span>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <span class="px-2.5 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-2">Primary</span>
+                  <div class="relative inline-block">
+                    <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <span class="text-xs text-neutral-500 block">Role in Project</span>
+                  <span class="text-sm">Content Generation, Research</span>
+                </div>
+                <div>
+                  <span class="text-xs text-neutral-500 block">Status</span>
+                  <span class="text-sm flex items-center">
+                    <i class="fa-solid fa-circle text-neutral-500 text-xs mr-1"></i> Active
+                  </span>
+                </div>
+              </div>
+              
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded">High Context</span>
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded">Multilingual</span>
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded">Code Generation</span>
+              </div>
+              
+              <div class="flex items-center justify-between">
+                <div class="flex space-x-2">
+                  <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50 flex items-center">
+                    <i class="fa-solid fa-sliders mr-2"></i>
+                    <span>Parameters</span>
+                  </button>
+                  <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50 flex items-center">
+                    <i class="fa-solid fa-key mr-2"></i>
+                    <span>API Key</span>
+                  </button>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </button>
+                  <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-chart-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Model 2 -->
+          <div class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden">
+            <div class="p-5">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                  <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-c"></i>
+                  </div>
+                  <div class="ml-3">
+                    <h3 class="text-neutral-800">UX Pilot 3 Opus</h3>
+                    <span class="text-xs text-neutral-500">UX Pilot AI • Connected on May 28, 2025</span>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <span class="px-2.5 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-2">Secondary</span>
+                  <div class="relative inline-block">
+                    <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <span class="text-xs text-neutral-500 block">Role in Project</span>
+                  <span class="text-sm">Document Analysis, Citations</span>
+                </div>
+                <div>
+                  <span class="text-xs text-neutral-500 block">Status</span>
+                  <span class="text-sm flex items-center">
+                    <i class="fa-solid fa-circle text-neutral-500 text-xs mr-1"></i> Active
+                  </span>
+                </div>
+              </div>
+              
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded">Document Analysis</span>
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded">High Accuracy</span>
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded">Citation Support</span>
+              </div>
+              
+              <div class="flex items-center justify-between">
+                <div class="flex space-x-2">
+                  <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50 flex items-center">
+                    <i class="fa-solid fa-sliders mr-2"></i>
+                    <span>Parameters</span>
+                  </button>
+                  <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50 flex items-center">
+                    <i class="fa-solid fa-key mr-2"></i>
+                    <span>API Key</span>
+                  </button>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </button>
+                  <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-chart-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Model 3 -->
+          <div class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden">
+            <div class="p-5">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                  <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-database"></i>
+                  </div>
+                  <div class="ml-3">
+                    <h3 class="text-neutral-800">Llama 3</h3>
+                    <span class="text-xs text-neutral-500">Meta • Connected on July 1, 2025</span>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <span class="px-2.5 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full mr-2">Tertiary</span>
+                  <div class="relative inline-block">
+                    <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                      <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <span class="text-xs text-neutral-500 block">Role in Project</span>
+                  <span class="text-sm">Data Processing, Visualization</span>
+                </div>
+                <div>
+                  <span class="text-xs text-neutral-500 block">Status</span>
+                  <span class="text-sm flex items-center">
+                    <i class="fa-solid fa-circle text-neutral-500 text-xs mr-1"></i> Active
+                  </span>
+                </div>
+              </div>
+              
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded">Open Source</span>
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded">Local Processing</span>
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded">Low Latency</span>
+              </div>
+              
+              <div class="flex items-center justify-between">
+                <div class="flex space-x-2">
+                  <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50 flex items-center">
+                    <i class="fa-solid fa-sliders mr-2"></i>
+                    <span>Parameters</span>
+                  </button>
+                  <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50 flex items-center">
+                    <i class="fa-solid fa-microchip mr-2"></i>
+                    <span>Runtime</span>
+                  </button>
+                </div>
+                <div class="flex space-x-2">
+                  <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </button>
+                  <button class="p-1.5 text-neutral-500 hover:bg-neutral-100 rounded">
+                    <i class="fa-solid fa-chart-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="collaboration-settings" class="bg-white rounded-lg border border-neutral-200 shadow-sm p-6 mb-6">
+        <h2 class="text-lg text-neutral-800 mb-4">AI Collaboration Settings</h2>
+        <p class="text-sm text-neutral-600 mb-4">Configure how multiple AI models interact and collaborate within your project.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-neutral-700 mb-3">Interaction Mode</h3>
+            <div class="space-y-3">
+              <div class="flex items-center">
+                <input id="mode-sequential" name="interaction" type="radio" checked class="h-4 w-4 border-neutral-300 text-neutral-800 focus:ring-neutral-500">
+                <label for="mode-sequential" class="ml-2 text-sm text-neutral-700">Sequential (chain of thought)</label>
+              </div>
+              <div class="flex items-center">
+                <input id="mode-parallel" name="interaction" type="radio" class="h-4 w-4 border-neutral-300 text-neutral-800 focus:ring-neutral-500">
+                <label for="mode-parallel" class="ml-2 text-sm text-neutral-700">Parallel (independent responses)</label>
+              </div>
+              <div class="flex items-center">
+                <input id="mode-debate" name="interaction" type="radio" class="h-4 w-4 border-neutral-300 text-neutral-800 focus:ring-neutral-500">
+                <label for="mode-debate" class="ml-2 text-sm text-neutral-700">Debate (collaborative reasoning)</label>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-neutral-700 mb-3">Switching Behavior</h3>
+            <div class="space-y-3">
+              <div class="flex items-center">
+                <input id="switch-manual" name="switching" type="radio" checked class="h-4 w-4 border-neutral-300 text-neutral-800 focus:ring-neutral-500">
+                <label for="switch-manual" class="ml-2 text-sm text-neutral-700">Manual (user controls)</label>
+              </div>
+              <div class="flex items-center">
+                <input id="switch-auto" name="switching" type="radio" class="h-4 w-4 border-neutral-300 text-neutral-800 focus:ring-neutral-500">
+                <label for="switch-auto" class="ml-2 text-sm text-neutral-700">Automatic (based on task type)</label>
+              </div>
+              <div class="flex items-center">
+                <input id="switch-hybrid" name="switching" type="radio" class="h-4 w-4 border-neutral-300 text-neutral-800 focus:ring-neutral-500">
+                <label for="switch-hybrid" class="ml-2 text-sm text-neutral-700">Hybrid (suggests switches)</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-6">
+          <h3 class="text-neutral-700 mb-3">Context Sharing</h3>
+          <div class="flex flex-wrap gap-3">
+            <div class="flex items-center">
+              <input id="share-full" type="checkbox" checked class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+              <label for="share-full" class="ml-2 text-sm text-neutral-700">Full conversation history</label>
+            </div>
+            <div class="flex items-center">
+              <input id="share-summary" type="checkbox" checked class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+              <label for="share-summary" class="ml-2 text-sm text-neutral-700">AI-generated summaries</label>
+            </div>
+            <div class="flex items-center">
+              <input id="share-files" type="checkbox" checked class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+              <label for="share-files" class="ml-2 text-sm text-neutral-700">Uploaded files/references</label>
+            </div>
+            <div class="flex items-center">
+              <input id="share-metadata" type="checkbox" class="h-4 w-4 border-neutral-300 rounded text-neutral-800 focus:ring-neutral-500">
+              <label for="share-metadata" class="ml-2 text-sm text-neutral-700">Model metadata</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-6">
+          <h3 class="text-neutral-700 mb-3">Memory Management</h3>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-sm text-neutral-600">Context window shared across models</span>
+            <div class="w-12 text-right text-sm text-neutral-700">75%</div>
+          </div>
+          <input type="range" class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer" min="0" max="100" value="75">
+          <p class="mt-2 text-xs text-neutral-500">Higher values allow more conversation context to be shared between models but may reduce performance.</p>
+        </div>
+        
+        <div class="mt-6 flex justify-end">
+          <button class="px-4 py-2 bg-neutral-800 text-white rounded-md">Save Collaboration Settings</button>
+        </div>
+      </div>
+
+      <div id="available-models" class="mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg text-neutral-800">Available AI Models</h2>
+          <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded-md bg-white text-neutral-700 flex items-center hover:bg-neutral-50">
+            <i class="fa-solid fa-refresh mr-2"></i>
+            <span>Refresh</span>
+          </button>
+        </div>
+        
+        <div class="bg-white rounded-lg border border-neutral-200 shadow-sm overflow-hidden">
+          <table class="min-w-full divide-y divide-neutral-200">
+            <thead class="bg-neutral-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Model</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Provider</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Specialization</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Context</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Status</th>
+                <th scope="col" class="px-6 py-3 text-right text-xs text-neutral-500 uppercase tracking-wider">Action</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-neutral-200">
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center text-white">
+                      <i class="fa-solid fa-g"></i>
+                    </div>
+                    <div class="ml-3">
+                      <div class="text-sm text-neutral-900">Gemini 1.5 Pro</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-neutral-700">Google</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-neutral-700">Multimodal, Research</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-neutral-700">1M tokens</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 py-1 inline-flex text-xs leading-5 rounded-full bg-neutral-100 text-neutral-800">Available</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
+                  <button class="px-3 py-1 border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50">Add to Project</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center text-white">
+                      <i class="fa-solid fa-m"></i>
+                    </div>
+                    <div class="ml-3">
+                      <div class="text-sm text-neutral-900">Mistral Large</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-neutral-700">Mistral AI</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-neutral-700">Scientific Writing</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-neutral-700">32K tokens</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 py-1 inline-flex text-xs leading-5 rounded-full bg-neutral-100 text-neutral-800">Available</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
+                  <button class="px-3 py-1 border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50">Add to Project</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center text-white">
+                      <i class="fa-solid fa-a"></i>
+                    </div>
+                    <div class="ml-3">
+                      <div class="text-sm text-neutral-900">UX Pilot 3 Haiku</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-neutral-700">UX Pilot AI</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-neutral-700">Fast Responses</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-neutral-700">200K tokens</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 py-1 inline-flex text-xs leading-5 rounded-full bg-neutral-100 text-neutral-800">Needs API Key</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
+                  <button class="px-3 py-1 border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-50">Configure</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="usage-stats" class="bg-white rounded-lg border border-neutral-200 shadow-sm p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg text-neutral-800">Model Usage Statistics</h2>
+          <div class="flex items-center space-x-2">
+            <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded-md text-neutral-700 hover:bg-neutral-50">
+              Last 7 days
+            </button>
+            <button class="px-3 py-1.5 text-sm border border-neutral-300 rounded-md text-neutral-700 hover:bg-neutral-50">
+              <i class="fa-solid fa-download mr-1"></i>
+              Export
+            </button>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div class="bg-neutral-50 p-4 rounded-lg">
+            <div class="text-sm text-neutral-500 mb-1">Model Switches</div>
+            <div class="text-2xl">137</div>
+            <div class="text-xs text-neutral-600 mt-1">
+              <i class="fa-solid fa-arrow-up mr-1"></i>
+              24% from last week
+            </div>
+          </div>
+          <div class="bg-neutral-50 p-4 rounded-lg">
+            <div class="text-sm text-neutral-500 mb-1">Primary Model Usage</div>
+            <div class="text-2xl">68%</div>
+            <div class="text-xs text-neutral-600 mt-1">
+              <i class="fa-solid fa-arrow-down mr-1"></i>
+              7% from last week
+            </div>
+          </div>
+          <div class="bg-neutral-50 p-4 rounded-lg">
+            <div class="text-sm text-neutral-500 mb-1">Collaboration Efficiency</div>
+            <div class="text-2xl">92%</div>
+            <div class="text-xs text-neutral-600 mt-1">
+              <i class="fa-solid fa-arrow-up mr-1"></i>
+              11% from last week
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-neutral-700 text-neutral-200 w-full h-64 rounded-lg flex items-center justify-center">
+          <div class="text-center">
+            <i class="fa-solid fa-chart-line text-4xl mb-3"></i>
+            <p class="text-sm">Usage graph showing model performance and switching patterns over time</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-white border-t border-neutral-200 py-4 px-6 text-center text-sm text-neutral-500">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <div>© 2025 AI Project Hub. All rights reserved.</div>
+    <div class="flex space-x-4">
+      <span class="hover:text-neutral-700 cursor-pointer">Terms</span>
+      <span class="hover:text-neutral-700 cursor-pointer">Privacy</span>
+      <span class="hover:text-neutral-700 cursor-pointer">Help</span>
+      <span class="hover:text-neutral-700 cursor-pointer">Contact</span>
+    </div>
+  </div>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

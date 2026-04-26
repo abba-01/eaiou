@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#2563eb',
+                        'primary-dark': '#1d4ed8',
+                        'secondary': '#64748b',
+                        'success': '#10b981',
+                        'warning': '#f59e0b',
+                        'danger': '#ef4444',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <header id="header" class="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fa-solid fa-newspaper text-primary text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-gray-800">Academic Journal</span>
+                    </div>
+                    <nav class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <span class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            Submit Article
+                        </span>
+                        <span class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            My Submissions
+                        </span>
+                        <span class="border-primary text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            Reviews
+                        </span>
+                        <span class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            Help
+                        </span>
+                    </nav>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fa-regular fa-floppy-disk mr-2"></i>
+                            Save Review
+                        </button>
+                    </div>
+                    <div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
+                        <button class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fa-regular fa-bell text-xl"></i>
+                        </button>
+                        <div class="ml-3 relative">
+                            <div class="flex items-center">
+                                <img class="h-8 w-8 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User avatar">
+                                <span class="ml-2 text-sm font-medium text-gray-700">Dr. John Smith</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="pt-16 pb-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-8">
+            <div class="bg-white shadow-sm rounded-lg p-6 md:p-8">
+                <div id="review-header" class="mb-8">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900 mb-2">Article Review Form</h1>
+                            <p class="text-gray-600">Please evaluate the article based on the criteria below and provide your feedback.</p>
+                        </div>
+                        <div class="mt-4 md:mt-0 flex items-center bg-blue-50 text-blue-800 px-4 py-2 rounded-md">
+                            <i class="fa-regular fa-clock mr-2"></i>
+                            <span>Review due: <strong>August 15, 2023</strong></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="article-info-section" class="mb-8 p-5 bg-gray-50 rounded-lg border border-gray-200">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Article Information</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm text-gray-500">Manuscript ID</p>
+                            <p class="font-medium">AJ-2023-0142</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Submission Date</p>
+                            <p class="font-medium">July 28, 2023</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <p class="text-sm text-gray-500">Article Title</p>
+                            <p class="font-medium">Observer Modal Dynamics in Anomalous Contact</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <p class="text-sm text-gray-500">Research Area</p>
+                            <p class="font-medium">Physical Sciences</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <p class="text-sm text-gray-500">Abstract</p>
+                            <p class="text-sm italic">This study explores the dynamics of observer modality in contexts of anomalous contact phenomena. Through a series of controlled experiments, we demonstrate that observer expectations significantly influence measurement outcomes in ways that challenge conventional understanding of objective reality...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 flex justify-end">
+                        <button id="view-full-article" class="text-primary hover:text-primary-dark text-sm font-medium flex items-center">
+                            <i class="fa-regular fa-file-lines mr-1"></i> View Full Article
+                        </button>
+                    </div>
+                </div>
+                
+                <form id="review-form">
+                    <div id="evaluation-criteria-section" class="mb-10">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4 pb-2 border-b border-gray-200">Evaluation Criteria</h2>
+                        <p class="text-sm text-gray-600 mb-6">Please rate each criterion on a scale of 1-5, where 1 is poor and 5 is excellent.</p>
+                        
+                        <div id="criteria-scholarly-structure" class="mb-6 p-4 border border-gray-200 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                <div>
+                                    <h3 class="font-medium text-gray-900">Scholarly Structure</h3>
+                                    <p class="text-sm text-gray-600">Evaluate the organization, coherence, and completeness of the article's structure</p>
+                                </div>
+                                <div class="mt-3 md:mt-0">
+                                    <div class="flex items-center">
+                                        <div class="flex space-x-1">
+                                            <div class="flex items-center">
+                                                <input type="radio" id="structure-1" name="structure-score" value="1" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="structure-1" class="ml-1 text-sm text-gray-700">1</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="structure-2" name="structure-score" value="2" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="structure-2" class="ml-1 text-sm text-gray-700">2</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="structure-3" name="structure-score" value="3" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="structure-3" class="ml-1 text-sm text-gray-700">3</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="structure-4" name="structure-score" value="4" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="structure-4" class="ml-1 text-sm text-gray-700">4</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="structure-5" name="structure-score" value="5" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary" checked>
+                                                <label for="structure-5" class="ml-1 text-sm text-gray-700">5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="structure-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                                <textarea id="structure-comments" name="structure-comments" rows="2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="Provide specific feedback on the article's structure"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div id="criteria-originality" class="mb-6 p-4 border border-gray-200 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                <div>
+                                    <h3 class="font-medium text-gray-900">Originality</h3>
+                                    <p class="text-sm text-gray-600">Assess the novelty and originality of the research contribution</p>
+                                </div>
+                                <div class="mt-3 md:mt-0">
+                                    <div class="flex items-center">
+                                        <div class="flex space-x-1">
+                                            <div class="flex items-center">
+                                                <input type="radio" id="originality-1" name="originality-score" value="1" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="originality-1" class="ml-1 text-sm text-gray-700">1</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="originality-2" name="originality-score" value="2" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="originality-2" class="ml-1 text-sm text-gray-700">2</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="originality-3" name="originality-score" value="3" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary" checked>
+                                                <label for="originality-3" class="ml-1 text-sm text-gray-700">3</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="originality-4" name="originality-score" value="4" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="originality-4" class="ml-1 text-sm text-gray-700">4</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="originality-5" name="originality-score" value="5" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="originality-5" class="ml-1 text-sm text-gray-700">5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="originality-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                                <textarea id="originality-comments" name="originality-comments" rows="2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="Provide specific feedback on the article's originality">The concept of observer modal dynamics is interesting, but similar concepts have been explored in previous literature. The author should more clearly articulate what is novel about their specific approach.</textarea>
+                            </div>
+                        </div>
+                        
+                        <div id="criteria-literature" class="mb-6 p-4 border border-gray-200 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                <div>
+                                    <h3 class="font-medium text-gray-900">Literature Grounding</h3>
+                                    <p class="text-sm text-gray-600">Evaluate how well the research is situated within existing literature</p>
+                                </div>
+                                <div class="mt-3 md:mt-0">
+                                    <div class="flex items-center">
+                                        <div class="flex space-x-1">
+                                            <div class="flex items-center">
+                                                <input type="radio" id="literature-1" name="literature-score" value="1" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="literature-1" class="ml-1 text-sm text-gray-700">1</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="literature-2" name="literature-score" value="2" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="literature-2" class="ml-1 text-sm text-gray-700">2</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="literature-3" name="literature-score" value="3" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="literature-3" class="ml-1 text-sm text-gray-700">3</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="literature-4" name="literature-score" value="4" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary" checked>
+                                                <label for="literature-4" class="ml-1 text-sm text-gray-700">4</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="literature-5" name="literature-score" value="5" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="literature-5" class="ml-1 text-sm text-gray-700">5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="literature-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                                <textarea id="literature-comments" name="literature-comments" rows="2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="Provide specific feedback on the article's literature review"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div id="criteria-methodology" class="mb-6 p-4 border border-gray-200 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                <div>
+                                    <h3 class="font-medium text-gray-900">Methodological Rigor</h3>
+                                    <p class="text-sm text-gray-600">Assess the appropriateness and execution of research methods</p>
+                                </div>
+                                <div class="mt-3 md:mt-0">
+                                    <div class="flex items-center">
+                                        <div class="flex space-x-1">
+                                            <div class="flex items-center">
+                                                <input type="radio" id="methodology-1" name="methodology-score" value="1" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="methodology-1" class="ml-1 text-sm text-gray-700">1</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="methodology-2" name="methodology-score" value="2" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary" checked>
+                                                <label for="methodology-2" class="ml-1 text-sm text-gray-700">2</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="methodology-3" name="methodology-score" value="3" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="methodology-3" class="ml-1 text-sm text-gray-700">3</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="methodology-4" name="methodology-score" value="4" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="methodology-4" class="ml-1 text-sm text-gray-700">4</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="methodology-5" name="methodology-score" value="5" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="methodology-5" class="ml-1 text-sm text-gray-700">5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="methodology-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                                <textarea id="methodology-comments" name="methodology-comments" rows="2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="Provide specific feedback on the article's methodology">The sample size is too small to support the broad claims made. Additionally, the control conditions are not adequately described, making it difficult to evaluate the validity of the experimental design.</textarea>
+                            </div>
+                        </div>
+                        
+                        <div id="criteria-results" class="mb-6 p-4 border border-gray-200 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                <div>
+                                    <h3 class="font-medium text-gray-900">Results Evidence</h3>
+                                    <p class="text-sm text-gray-600">Evaluate the quality and presentation of results and evidence</p>
+                                </div>
+                                <div class="mt-3 md:mt-0">
+                                    <div class="flex items-center">
+                                        <div class="flex space-x-1">
+                                            <div class="flex items-center">
+                                                <input type="radio" id="results-1" name="results-score" value="1" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="results-1" class="ml-1 text-sm text-gray-700">1</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="results-2" name="results-score" value="2" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="results-2" class="ml-1 text-sm text-gray-700">2</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="results-3" name="results-score" value="3" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary" checked>
+                                                <label for="results-3" class="ml-1 text-sm text-gray-700">3</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="results-4" name="results-score" value="4" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="results-4" class="ml-1 text-sm text-gray-700">4</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="results-5" name="results-score" value="5" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="results-5" class="ml-1 text-sm text-gray-700">5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="results-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                                <textarea id="results-comments" name="results-comments" rows="2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="Provide specific feedback on the article's results"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div id="criteria-discussion" class="mb-6 p-4 border border-gray-200 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                <div>
+                                    <h3 class="font-medium text-gray-900">Discussion Nuance</h3>
+                                    <p class="text-sm text-gray-600">Evaluate the depth, nuance, and insights in the discussion</p>
+                                </div>
+                                <div class="mt-3 md:mt-0">
+                                    <div class="flex items-center">
+                                        <div class="flex space-x-1">
+                                            <div class="flex items-center">
+                                                <input type="radio" id="discussion-1" name="discussion-score" value="1" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="discussion-1" class="ml-1 text-sm text-gray-700">1</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="discussion-2" name="discussion-score" value="2" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="discussion-2" class="ml-1 text-sm text-gray-700">2</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="discussion-3" name="discussion-score" value="3" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="discussion-3" class="ml-1 text-sm text-gray-700">3</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="discussion-4" name="discussion-score" value="4" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary" checked>
+                                                <label for="discussion-4" class="ml-1 text-sm text-gray-700">4</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="discussion-5" name="discussion-score" value="5" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="discussion-5" class="ml-1 text-sm text-gray-700">5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="discussion-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                                <textarea id="discussion-comments" name="discussion-comments" rows="2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="Provide specific feedback on the article's discussion"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div id="criteria-citations" class="mb-6 p-4 border border-gray-200 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                <div>
+                                    <h3 class="font-medium text-gray-900">Citation Accuracy</h3>
+                                    <p class="text-sm text-gray-600">Assess the accuracy, completeness, and formatting of citations</p>
+                                </div>
+                                <div class="mt-3 md:mt-0">
+                                    <div class="flex items-center">
+                                        <div class="flex space-x-1">
+                                            <div class="flex items-center">
+                                                <input type="radio" id="citations-1" name="citations-score" value="1" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="citations-1" class="ml-1 text-sm text-gray-700">1</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="citations-2" name="citations-score" value="2" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="citations-2" class="ml-1 text-sm text-gray-700">2</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="citations-3" name="citations-score" value="3" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="citations-3" class="ml-1 text-sm text-gray-700">3</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="citations-4" name="citations-score" value="4" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="citations-4" class="ml-1 text-sm text-gray-700">4</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="citations-5" name="citations-score" value="5" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary" checked>
+                                                <label for="citations-5" class="ml-1 text-sm text-gray-700">5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="citations-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                                <textarea id="citations-comments" name="citations-comments" rows="2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="Provide specific feedback on the article's citations"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div id="criteria-attribution" class="mb-6 p-4 border border-gray-200 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                <div>
+                                    <h3 class="font-medium text-gray-900">Author Attribution Clarity</h3>
+                                    <p class="text-sm text-gray-600">Evaluate how clearly authors' contributions and any AI assistance are attributed</p>
+                                </div>
+                                <div class="mt-3 md:mt-0">
+                                    <div class="flex items-center">
+                                        <div class="flex space-x-1">
+                                            <div class="flex items-center">
+                                                <input type="radio" id="attribution-1" name="attribution-score" value="1" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="attribution-1" class="ml-1 text-sm text-gray-700">1</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="attribution-2" name="attribution-score" value="2" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="attribution-2" class="ml-1 text-sm text-gray-700">2</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="attribution-3" name="attribution-score" value="3" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="attribution-3" class="ml-1 text-sm text-gray-700">3</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="attribution-4" name="attribution-score" value="4" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary" checked>
+                                                <label for="attribution-4" class="ml-1 text-sm text-gray-700">4</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="attribution-5" name="attribution-score" value="5" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="attribution-5" class="ml-1 text-sm text-gray-700">5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="attribution-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                                <textarea id="attribution-comments" name="attribution-comments" rows="2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="Provide specific feedback on the article's attribution clarity"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div id="criteria-impact" class="mb-6 p-4 border border-gray-200 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                <div>
+                                    <h3 class="font-medium text-gray-900">Overall Impact</h3>
+                                    <p class="text-sm text-gray-600">Assess the significance and potential impact of the research</p>
+                                </div>
+                                <div class="mt-3 md:mt-0">
+                                    <div class="flex items-center">
+                                        <div class="flex space-x-1">
+                                            <div class="flex items-center">
+                                                <input type="radio" id="impact-1" name="impact-score" value="1" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="impact-1" class="ml-1 text-sm text-gray-700">1</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="impact-2" name="impact-score" value="2" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="impact-2" class="ml-1 text-sm text-gray-700">2</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="impact-3" name="impact-score" value="3" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary" checked>
+                                                <label for="impact-3" class="ml-1 text-sm text-gray-700">3</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="impact-4" name="impact-score" value="4" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="impact-4" class="ml-1 text-sm text-gray-700">4</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="impact-5" name="impact-score" value="5" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                                <label for="impact-5" class="ml-1 text-sm text-gray-700">5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="impact-comments" class="block text-sm font-medium text-gray-700 mb-1">Comments</label>
+                                <textarea id="impact-comments" name="impact-comments" rows="2" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border" placeholder="Provide specific feedback on the article's potential impact"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="overall-assessment-section" class="mb-10">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4 pb-2 border-b border-gray-200">Overall Assessment</h2>
+                        
+                        <div class="mb-6">
+                            <label for="overall-comments" class="block text-sm font-medium text-gray-700 mb-1">General Comments to Author <span class="text-danger">*</span></label>
+                            <p class="text-xs text-gray-500 mb-2">Provide comprehensive feedback that will help the author improve their manuscript</p>
+                            <textarea id="overall-comments" name="overall-comments" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border" placeholder="Provide your overall assessment of the article, including strengths and areas for improvement">The article presents an interesting perspective on observer modal dynamics, but has several methodological weaknesses that need to be addressed before publication. The literature review is thorough and well-organized, but the experimental design lacks sufficient controls and the sample size is inadequate to support the broad claims made. 
+
+I recommend addressing the following specific issues:
+1. Increase sample size to improve statistical power
+2. Clarify the control conditions in the methodology section
+3. More clearly articulate the novel contribution of this work compared to previous studies
+4. Strengthen the connection between the results and the discussion points
+
+With these revisions, the article could make a valuable contribution to the field.</textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="confidential-editor-notes" class="block text-sm font-medium text-gray-700 mb-1">Confidential Notes to Editor</label>
+                            <p class="text-xs text-gray-500 mb-2">These comments will not be shared with the author</p>
+                            <textarea id="confidential-editor-notes" name="confidential-editor-notes" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border" placeholder="Include any confidential comments for the editor only">While the topic has merit, I have concerns about the methodological rigor of this study. The speculative claims exceed what the data can support. With substantial revisions to the methodology and a more modest interpretation of results, this could be acceptable.</textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Recommendation <span class="text-danger">*</span></label>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <input id="accept" name="recommendation" type="radio" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                    <label for="accept" class="ml-3 block text-sm font-medium text-gray-700">
+                                        Accept (No revisions needed)
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="minor-revisions" name="recommendation" type="radio" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                    <label for="minor-revisions" class="ml-3 block text-sm font-medium text-gray-700">
+                                        Minor Revisions (Accept with minor changes)
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="major-revisions" name="recommendation" type="radio" checked class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                    <label for="major-revisions" class="ml-3 block text-sm font-medium text-gray-700">
+                                        Major Revisions (Reconsider after substantial changes)
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="reject" name="recommendation" type="radio" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                    <label for="reject" class="ml-3 block text-sm font-medium text-gray-700">
+                                        Reject (Not suitable for publication)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="submit-section" class="flex justify-between items-center pt-6 border-t border-gray-200">
+                        <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fa-regular fa-floppy-disk mr-2"></i> Save Draft
+                        </button>
+                        
+                        <div>
+                            <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary mr-3">
+                                <i class="fa-solid fa-eye mr-2"></i> Preview
+                            </button>
+                            <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                Submit Review <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer" class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Academic Journal</h3>
+                    <p class="text-gray-400 text-sm">A platform for publishing peer-reviewed academic articles across various disciplines.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><span class="hover:text-white cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Publication Ethics</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Contact Editorial Office</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><span class="hover:text-white cursor-pointer">Help Center</span></li>
+                        <li><span class="hover:text-white cursor-pointer">FAQ</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Privacy Policy</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Terms of Service</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-sm text-gray-400 flex flex-col md:flex-row justify-between items-center">
+                <p>© 2023 Academic Journal. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-twitter"></i></span>
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-facebook"></i></span>
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-linkedin"></i></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+<style>body { padding-bottom: 50px !important; }</style>
+
+<!-- EAIOU NAV BAR -->
+<div id="eaiou-nav" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(15,23,42,0.95);backdrop-filter:blur(10px);padding:8px 12px;display:flex;gap:6px;overflow-x:auto;align-items:center;border-top:2px solid #0ea5e9;"><span style="color:#38bdf8;font-weight:700;font-size:12px;font-family:Inter,sans-serif;margin-right:8px;white-space:nowrap;">EAIOU</span><a href="2-Author Status View.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-house" style="margin-right:4px;font-size:10px;"></i>Dashboard</a><a href="6-Author Submission.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-file-arrow-up" style="margin-right:4px;font-size:10px;"></i>Submit</a><a href="3-Submission Metadata.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-tags" style="margin-right:4px;font-size:10px;"></i>Metadata</a><a href="5-Editor Decision Interface.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-gavel" style="margin-right:4px;font-size:10px;"></i>Editor</a><a href="10-Reviewer Assignment.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-user-check" style="margin-right:4px;font-size:10px;"></i>Reviewers</a><a href="7-Reviewer Review Submission.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;background:#0ea5e9;color:white;color:white;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='#0ea5e9';this.style.color='white';"><i class="fa-solid fa-pen-to-square" style="margin-right:4px;font-size:10px;"></i>Review</a><a href="9-Review Feedback.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-comments" style="margin-right:4px;font-size:10px;"></i>Feedback</a><a href="4-Notification Templates.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-bell" style="margin-right:4px;font-size:10px;"></i>Notifications</a><a href="8-Admin Configuration.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-gear" style="margin-right:4px;font-size:10px;"></i>Admin</a><a href="18-The public facing article for.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-newspaper" style="margin-right:4px;font-size:10px;"></i>Article</a><a href="../uxpilot-export-1775634389622/2-Homepage Dashboard.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-globe" style="margin-right:4px;font-size:10px;"></i>PT: Home</a><a href="../uxpilot-export-1775634389622/1-Article Reading Interface.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-book-open" style="margin-right:4px;font-size:10px;"></i>PT: Read</a><a href="../uxpilot-export-1775634389622/4-Search Results.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-magnifying-glass" style="margin-right:4px;font-size:10px;"></i>PT: Search</a><a href="../uxpilot-export-1775634389622/5-Article Submission Interface.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-paper-plane" style="margin-right:4px;font-size:10px;"></i>PT: Submit</a><a href="../uxpilot-export-1775634389622/6-Review Dashboard.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-clipboard-check" style="margin-right:4px;font-size:10px;"></i>PT: Reviews</a><a href="../uxpilot-export-1775634389622/7-Review Process.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-arrows-spin" style="margin-right:4px;font-size:10px;"></i>PT: Process</a><a href="../uxpilot-export-1775634389622/8-Notification Center.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-tower-broadcast" style="margin-right:4px;font-size:10px;"></i>PT: Alerts</a></div>
+<!-- /EAIOU NAV BAR -->
+</body>
+</html>

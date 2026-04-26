@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 hidden md:block">
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-primary-600 rounded-md flex items-center justify-center text-white mr-2">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <h1 class="text-lg font-bold text-gray-800">SciReview</h1>
+                </div>
+            </div>
+            <nav class="p-4">
+                <div class="mb-4">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Main Menu</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-house w-5 h-5 mr-2"></i>
+                                Dashboard
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-file-lines w-5 h-5 mr-2"></i>
+                                Manuscripts
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md bg-primary-50 text-primary-700 cursor-pointer">
+                                <i class="fa-solid fa-users w-5 h-5 mr-2"></i>
+                                Reviewers
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-bell w-5 h-5 mr-2"></i>
+                                Notifications
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mb-4">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Editor Tools</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-clipboard-check w-5 h-5 mr-2"></i>
+                                Review Assignments
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-chart-line w-5 h-5 mr-2"></i>
+                                Performance Metrics
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-book w-5 h-5 mr-2"></i>
+                                Editorial Guidelines
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Account</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-user w-5 h-5 mr-2"></i>
+                                Profile
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-gear w-5 h-5 mr-2"></i>
+                                Settings
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-sign-out-alt w-5 h-5 mr-2"></i>
+                                Sign Out
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200">
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center">
+                        <button class="md:hidden mr-2 text-gray-600">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <h2 class="text-lg font-semibold text-gray-800">Reviewer Management</h2>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-600 hover:text-gray-900">
+                            <i class="fa-solid fa-bell"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-gray-900">
+                            <i class="fa-solid fa-question-circle"></i>
+                        </button>
+                        <div class="flex items-center">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Profile" class="w-8 h-8 rounded-full mr-2">
+                            <span class="text-sm font-medium text-gray-700">Dr. Sarah Chen</span>
+                            <i class="fa-solid fa-chevron-down ml-1 text-gray-500 text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-4">
+                <div id="reviewer-management-section" class="max-w-7xl mx-auto">
+                    <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                        <h1 class="text-2xl font-bold text-gray-900 mb-2 md:mb-0">Reviewer Database</h1>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-50">
+                                <i class="fa-solid fa-file-export mr-1"></i> Export List
+                            </button>
+                            <button class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-50">
+                                <i class="fa-solid fa-envelope mr-1"></i> Invite Reviewers
+                            </button>
+                            <button class="bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-700">
+                                <i class="fa-solid fa-plus mr-1"></i> Add New Reviewer
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Stats Cards -->
+                    <div id="reviewer-stats" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium text-gray-500">Active Reviewers</h3>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">+12% ↑</span>
+                            </div>
+                            <p class="text-2xl font-bold text-gray-900">248</p>
+                            <p class="text-xs text-gray-500 mt-1">Last updated today</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium text-gray-500">Average Response Time</h3>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">-8% ↓</span>
+                            </div>
+                            <p class="text-2xl font-bold text-gray-900">3.2 days</p>
+                            <p class="text-xs text-gray-500 mt-1">Last 30 days</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium text-gray-500">Completion Rate</h3>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">+5% ↑</span>
+                            </div>
+                            <p class="text-2xl font-bold text-gray-900">87.4%</p>
+                            <p class="text-xs text-gray-500 mt-1">Last 30 days</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium text-gray-500">Pending Reviews</h3>
+                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">+3% ↑</span>
+                            </div>
+                            <p class="text-2xl font-bold text-gray-900">42</p>
+                            <p class="text-xs text-gray-500 mt-1">Across 18 manuscripts</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Search and Filter -->
+                    <div id="search-filter-section" class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 mb-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:space-x-4">
+                            <div class="w-full md:w-1/3 mb-3 md:mb-0">
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fa-solid fa-search text-gray-400"></i>
+                                    </div>
+                                    <input type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500" placeholder="Search reviewers by name, expertise, or institution...">
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <div class="relative">
+                                    <select class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 pr-8">
+                                        <option selected>All Expertise</option>
+                                        <option>Biochemistry</option>
+                                        <option>Molecular Biology</option>
+                                        <option>Genetics</option>
+                                        <option>Immunology</option>
+                                        <option>Neuroscience</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <select class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 pr-8">
+                                        <option selected>All Status</option>
+                                        <option>Available</option>
+                                        <option>Busy</option>
+                                        <option>On Leave</option>
+                                        <option>Inactive</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <select class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 pr-8">
+                                        <option selected>Performance</option>
+                                        <option>High Performers</option>
+                                        <option>Average</option>
+                                        <option>Needs Attention</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                                    </div>
+                                </div>
+                                <button class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                    <i class="fa-solid fa-filter mr-1"></i> More Filters
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reviewer Table -->
+                    <div id="reviewer-table" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <div class="flex items-center">
+                                                Reviewer
+                                                <button class="ml-1 text-gray-400 hover:text-gray-500">
+                                                    <i class="fa-solid fa-sort"></i>
+                                                </button>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <div class="flex items-center">
+                                                Expertise
+                                                <button class="ml-1 text-gray-400 hover:text-gray-500">
+                                                    <i class="fa-solid fa-sort"></i>
+                                                </button>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <div class="flex items-center">
+                                                Reviews
+                                                <button class="ml-1 text-gray-400 hover:text-gray-500">
+                                                    <i class="fa-solid fa-sort"></i>
+                                                </button>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <div class="flex items-center">
+                                                Avg. Time
+                                                <button class="ml-1 text-gray-400 hover:text-gray-500">
+                                                    <i class="fa-solid fa-sort"></i>
+                                                </button>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <div class="flex items-center">
+                                                Rating
+                                                <button class="ml-1 text-gray-400 hover:text-gray-500">
+                                                    <i class="fa-solid fa-sort"></i>
+                                                </button>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Status
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Dr. Michael Thompson</div>
+                                                    <div class="text-sm text-gray-500">Stanford University</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">Molecular Biology, Genetics</div>
+                                            <div class="text-xs text-gray-500">ORCID: 0000-0002-1234-5678</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">32 completed</div>
+                                            <div class="text-xs text-gray-500">2 in progress</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">4.2 days</div>
+                                            <div class="text-xs text-green-500">Faster than avg.</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="text-sm font-medium text-gray-900 mr-2">4.8/5</div>
+                                                <div class="flex text-yellow-400">
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star-half-alt text-xs"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Available
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-2">View</button>
+                                            <button class="text-primary-600 hover:text-primary-900">Assign</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Dr. Emily Rodriguez</div>
+                                                    <div class="text-sm text-gray-500">UCLA</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">Immunology, Cell Biology</div>
+                                            <div class="text-xs text-gray-500">ORCID: 0000-0003-4567-8901</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">27 completed</div>
+                                            <div class="text-xs text-gray-500">0 in progress</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">5.7 days</div>
+                                            <div class="text-xs text-gray-500">Average</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="text-sm font-medium text-gray-900 mr-2">4.5/5</div>
+                                                <div class="flex text-yellow-400">
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star-half-alt text-xs"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                Busy
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-2">View</button>
+                                            <button class="text-primary-600 hover:text-primary-900">Assign</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Dr. David Kim</div>
+                                                    <div class="text-sm text-gray-500">Johns Hopkins University</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">Neuroscience, Biochemistry</div>
+                                            <div class="text-xs text-gray-500">ORCID: 0000-0001-8765-4321</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">41 completed</div>
+                                            <div class="text-xs text-gray-500">3 in progress</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">2.8 days</div>
+                                            <div class="text-xs text-green-500">Faster than avg.</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="text-sm font-medium text-gray-900 mr-2">4.9/5</div>
+                                                <div class="flex text-yellow-400">
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Available
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-2">View</button>
+                                            <button class="text-primary-600 hover:text-primary-900">Assign</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Dr. Jessica Parker</div>
+                                                    <div class="text-sm text-gray-500">University of Cambridge</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">Genetics, Bioinformatics</div>
+                                            <div class="text-xs text-gray-500">ORCID: 0000-0004-5678-9012</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">19 completed</div>
+                                            <div class="text-xs text-gray-500">1 in progress</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">8.2 days</div>
+                                            <div class="text-xs text-red-500">Slower than avg.</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="text-sm font-medium text-gray-900 mr-2">4.2/5</div>
+                                                <div class="flex text-yellow-400">
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-regular fa-star text-xs"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                Busy
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-2">View</button>
+                                            <button class="text-primary-600 hover:text-primary-900">Assign</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Dr. Robert Chen</div>
+                                                    <div class="text-sm text-gray-500">MIT</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">Biophysics, Structural Biology</div>
+                                            <div class="text-xs text-gray-500">ORCID: 0000-0005-1234-5678</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">23 completed</div>
+                                            <div class="text-xs text-gray-500">0 in progress</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">3.5 days</div>
+                                            <div class="text-xs text-green-500">Faster than avg.</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="text-sm font-medium text-gray-900 mr-2">4.7/5</div>
+                                                <div class="flex text-yellow-400">
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star text-xs"></i>
+                                                    <i class="fa-solid fa-star-half-alt text-xs"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                On Leave
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-2">View</button>
+                                            <button class="text-gray-400 cursor-not-allowed">Assign</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">
+                                        Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">248</span> reviewers
+                                    </p>
+                                </div>
+                                <div>
+                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                        <span class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer">
+                                            <span class="sr-only">Previous</span>
+                                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                                        </span>
+                                        <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-primary-50 text-sm font-medium text-primary-600 hover:bg-primary-100 cursor-pointer">
+                                            1
+                                        </span>
+                                        <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">
+                                            2
+                                        </span>
+                                        <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">
+                                            3
+                                        </span>
+                                        <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
+                                            ...
+                                        </span>
+                                        <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">
+                                            50
+                                        </span>
+                                        <span class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 cursor-pointer">
+                                            <span class="sr-only">Next</span>
+                                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                                        </span>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Performance Metrics -->
+                    <div id="performance-metrics" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-medium text-gray-800">Reviewer Performance Metrics</h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <div id="response-time-chart" class="h-80"></div>
+                                <div id="completion-rate-chart" class="h-80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Right Sidebar - Reviewer Details -->
+        <aside id="reviewer-details-sidebar" class="w-80 bg-white border-l border-gray-200 hidden lg:block overflow-y-auto">
+            <div class="p-4 border-b border-gray-200">
+                <h3 class="font-semibold text-gray-800">Reviewer Details</h3>
+            </div>
+            <div class="p-4">
+                <div class="flex items-center mb-4">
+                    <img class="h-16 w-16 rounded-full mr-4" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="">
+                    <div>
+                        <h4 class="text-lg font-medium text-gray-900">Dr. Michael Thompson</h4>
+                        <p class="text-sm text-gray-500">Stanford University</p>
+                        <div class="flex items-center mt-1">
+                            <div class="flex text-yellow-400 mr-1">
+                                <i class="fa-solid fa-star text-xs"></i>
+                                <i class="fa-solid fa-star text-xs"></i>
+                                <i class="fa-solid fa-star text-xs"></i>
+                                <i class="fa-solid fa-star text-xs"></i>
+                                <i class="fa-solid fa-star-half-alt text-xs"></i>
+                            </div>
+                            <span class="text-xs text-gray-500">4.8/5 (32 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-sm font-semibold text-gray-700">Contact Information</h4>
+                        <button class="text-xs text-primary-600">Edit</button>
+                    </div>
+                    <div class="bg-gray-50 rounded-md p-3 text-sm">
+                        <div class="flex items-start mb-2">
+                            <i class="fa-solid fa-envelope text-gray-400 mt-1 mr-2 w-4"></i>
+                            <span class="text-gray-800">m.thompson@stanford.edu</span>
+                        </div>
+                        <div class="flex items-start mb-2">
+                            <i class="fa-solid fa-phone text-gray-400 mt-1 mr-2 w-4"></i>
+                            <span class="text-gray-800">+1 (650) 123-4567</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fa-solid fa-location-dot text-gray-400 mt-1 mr-2 w-4"></i>
+                            <span class="text-gray-800">Department of Molecular Biology, Stanford University, CA, USA</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Expertise & Keywords</h4>
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="px-2 py-1 bg-primary-100 text-primary-800 text-xs rounded-full">Molecular Biology</span>
+                        <span class="px-2 py-1 bg-primary-100 text-primary-800 text-xs rounded-full">Genetics</span>
+                        <span class="px-2 py-1 bg-primary-100 text-primary-800 text-xs rounded-full">Gene Expression</span>
+                        <span class="px-2 py-1 bg-primary-100 text-primary-800 text-xs rounded-full">CRISPR</span>
+                        <span class="px-2 py-1 bg-primary-100 text-primary-800 text-xs rounded-full">DNA Sequencing</span>
+                        <span class="px-2 py-1 bg-primary-100 text-primary-800 text-xs rounded-full">Epigenetics</span>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Performance Metrics</h4>
+                    <div class="space-y-3">
+                        <div class="bg-gray-50 p-3 rounded-md">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-xs text-gray-500">Average Response Time</span>
+                                <span class="text-xs font-medium text-gray-800">4.2 days</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                <div class="bg-green-500 h-1.5 rounded-full" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-md">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-xs text-gray-500">Completion Rate</span>
+                                <span class="text-xs font-medium text-gray-800">94%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                <div class="bg-green-500 h-1.5 rounded-full" style="width: 94%"></div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-md">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-xs text-gray-500">Review Quality</span>
+                                <span class="text-xs font-medium text-gray-800">4.8/5</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                <div class="bg-green-500 h-1.5 rounded-full" style="width: 96%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Recent Activity</h4>
+                    <div class="space-y-3">
+                        <div class="border-l-2 border-green-500 pl-3">
+                            <p class="text-sm text-gray-800">Completed review for manuscript ID: MS-2023-156</p>
+                            <p class="text-xs text-gray-500">2 days ago</p>
+                        </div>
+                        <div class="border-l-2 border-yellow-500 pl-3">
+                            <p class="text-sm text-gray-800">Accepted review invitation for manuscript ID: MS-2023-189</p>
+                            <p class="text-xs text-gray-500">5 days ago</p>
+                        </div>
+                        <div class="border-l-2 border-green-500 pl-3">
+                            <p class="text-sm text-gray-800">Completed review for manuscript ID: MS-2023-142</p>
+                            <p class="text-xs text-gray-500">2 weeks ago</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Notes</h4>
+                    <textarea class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm" rows="3" placeholder="Add private notes about this reviewer...">Excellent reviewer for molecular biology papers. Provides detailed and constructive feedback. Consider for associate editor role in the future.</textarea>
+                </div>
+                
+                <div class="flex space-x-2">
+                    <button class="flex-1 bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-700">
+                        Assign to Manuscript
+                    </button>
+                    <button class="flex-1 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-50">
+                        Send Message
+                    </button>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Response Time Chart
+            Highcharts.chart('response-time-chart', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Average Response Time by Month',
+                    style: {
+                        fontSize: '16px',
+                        fontWeight: 'bold',
+                        color: '#374151'
+                    }
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Days'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} days</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Response Time',
+                    data: [4.8, 5.2, 4.5, 3.9, 3.5, 3.2, 3.1, 3.0],
+                    color: '#0ea5e9'
+                }]
+            });
+            
+            // Completion Rate Chart
+            Highcharts.chart('completion-rate-chart', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Review Completion Rate',
+                    style: {
+                        fontSize: '16px',
+                        fontWeight: 'bold',
+                        color: '#374151'
+                    }
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Completion Rate (%)'
+                    },
+                    min: 70,
+                    max: 100
+                },
+                tooltip: {
+                    valueSuffix: '%'
+                },
+                series: [{
+                    name: 'Completion Rate',
+                    data: [82.4, 80.8, 81.2, 83.5, 85.1, 86.4, 87.2, 87.4],
+                    color: '#10b981'
+                }]
+            });
+        });
+    </script>
+</body>
+</html>

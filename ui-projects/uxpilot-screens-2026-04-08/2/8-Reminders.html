@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div class="flex items-center space-x-4">
+    <button class="w-10 h-10 flex items-center justify-center rounded-md bg-neutral-200 text-neutral-800">
+      <span>PM</span>
+    </button>
+    <nav class="flex items-center space-x-4">
+      <span class="text-neutral-800 cursor-pointer">Dashboard</span>
+      <span class="text-neutral-800 cursor-pointer">Projects</span>
+      <span class="text-neutral-800 cursor-pointer">Articles</span>
+      <span class="text-neutral-700 cursor-pointer">Settings</span>
+    </nav>
+  </div>
+  <div class="flex items-center space-x-4">
+    <button class="text-neutral-700 relative">
+      <i class="fa-regular fa-bell text-xl"></i>
+      <span class="absolute -top-1 -right-1 w-4 h-4 bg-neutral-700 rounded-full flex items-center justify-center text-white text-xs">3</span>
+    </button>
+    <div class="relative">
+      <button class="w-10 h-10 bg-neutral-200 rounded-full flex items-center justify-center">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-full h-full rounded-full" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<div id="main-content" class="flex">
+  <!-- Sidebar Navigation -->
+  <aside id="sidebar" class="w-64 bg-white border-r border-neutral-200 h-[800px]">
+    <div class="p-4">
+      <h2 class="text-lg text-neutral-800 mb-4">Settings</h2>
+      <nav class="space-y-1">
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-robot mr-3 w-5"></i>
+          <span>AI Models</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-project-diagram mr-3 w-5"></i>
+          <span>Project Settings</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-file-alt mr-3 w-5"></i>
+          <span>Article Templates</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-key mr-3 w-5"></i>
+          <span>API Keys</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-users mr-3 w-5"></i>
+          <span>User Management</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-shield-alt mr-3 w-5"></i>
+          <span>Security Settings</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 hover:bg-neutral-100 rounded-md cursor-pointer">
+          <i class="fa-solid fa-database mr-3 w-5"></i>
+          <span>Data Storage</span>
+        </span>
+        <span class="flex items-center px-3 py-2 text-neutral-700 bg-neutral-50 rounded-md cursor-pointer">
+          <i class="fa-solid fa-bell mr-3 w-5"></i>
+          <span>Notifications</span>
+        </span>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main id="settings-content" class="flex-1 p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl text-neutral-800">Notification Settings</h1>
+      <button class="px-4 py-2 bg-neutral-700 text-white rounded-md shadow-sm hover:bg-neutral-800 flex items-center">
+        <i class="fa-solid fa-plus mr-2"></i>
+        <span>Add New Reminder</span>
+      </button>
+    </div>
+
+    <!-- Info Card -->
+    <div id="info-card" class="bg-white p-4 rounded-md shadow-sm mb-6 border-l-4 border-neutral-500">
+      <div class="flex items-start">
+        <i class="fa-solid fa-info-circle text-neutral-500 mt-1 mr-3"></i>
+        <div>
+          <h3 class="text-neutral-800">Managing Reminders & Notifications</h3>
+          <p class="text-neutral-600 mt-1">Configure reminders for project deadlines, submission dates, and other important events. Notifications can be sent via email, browser, or mobile app.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Preferences -->
+    <div id="notification-preferences" class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden mb-6">
+      <div class="p-4 border-b border-neutral-200">
+        <h3 class="text-neutral-800">Notification Preferences</h3>
+        <p class="text-sm text-neutral-600 mt-1">Set your default notification preferences for all projects and reminders.</p>
+      </div>
+      
+      <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm text-neutral-700 mb-2">Notification Channels</label>
+          <div class="space-y-2">
+            <div class="flex items-center">
+              <input id="email-notifications" name="email-notifications" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              <label for="email-notifications" class="ml-2 block text-sm text-neutral-700">Email Notifications</label>
+            </div>
+            <div class="flex items-center">
+              <input id="browser-notifications" name="browser-notifications" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              <label for="browser-notifications" class="ml-2 block text-sm text-neutral-700">Browser Notifications</label>
+            </div>
+            <div class="flex items-center">
+              <input id="mobile-notifications" name="mobile-notifications" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+              <label for="mobile-notifications" class="ml-2 block text-sm text-neutral-700">Mobile App Notifications</label>
+            </div>
+            <div class="flex items-center">
+              <input id="sms-notifications" name="sms-notifications" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+              <label for="sms-notifications" class="ml-2 block text-sm text-neutral-700">SMS Notifications (Premium)</label>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <label class="block text-sm text-neutral-700 mb-2">Default Reminder Timing</label>
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <input id="timing-1day" name="default-timing" type="radio" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300">
+              <label for="timing-1day" class="ml-2 block text-sm text-neutral-700">1 day before deadline</label>
+            </div>
+            <div class="flex items-center">
+              <input id="timing-3days" name="default-timing" type="radio" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300" checked>
+              <label for="timing-3days" class="ml-2 block text-sm text-neutral-700">3 days before deadline</label>
+            </div>
+            <div class="flex items-center">
+              <input id="timing-1week" name="default-timing" type="radio" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300">
+              <label for="timing-1week" class="ml-2 block text-sm text-neutral-700">1 week before deadline</label>
+            </div>
+            <div class="flex items-center">
+              <input id="timing-custom" name="default-timing" type="radio" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300">
+              <label for="timing-custom" class="ml-2 block text-sm text-neutral-700">Custom timing per project</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="p-4 border-t border-neutral-200 bg-neutral-50 flex justify-end space-x-3">
+        <button class="px-4 py-2 bg-neutral-700 text-white rounded-md hover:bg-neutral-800">
+          Save Preferences
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Reminders Section -->
+    <div id="active-reminders" class="mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl text-neutral-800">Active Reminders</h2>
+        <div class="flex items-center space-x-2">
+          <div class="relative">
+            <input type="text" placeholder="Search reminders" class="pl-8 pr-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
+            <i class="fa-solid fa-search absolute left-3 top-2.5 text-neutral-400"></i>
+          </div>
+          <div class="relative">
+            <select class="border border-neutral-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm appearance-none pr-8">
+              <option>All Projects</option>
+              <option>Academic Papers</option>
+              <option>Research Projects</option>
+              <option>Scientific Articles</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-neutral-500 text-xs"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Reminder Card 1 -->
+        <div class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden transition-all hover:shadow-md">
+          <div class="p-3 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-md bg-neutral-700 flex items-center justify-center text-white mr-3">
+                <i class="fa-solid fa-file-alt"></i>
+              </div>
+              <h3 class="text-neutral-800 text-sm">Final Paper Submission</h3>
+            </div>
+            <div class="flex items-center">
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+                <i class="fa-solid fa-clock text-xs mr-1"></i> 2 days left
+              </span>
+            </div>
+          </div>
+          <div class="p-3">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs text-neutral-500">Project</span>
+              <span class="text-xs">Quantum Computing Research</span>
+            </div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs text-neutral-500">Due Date</span>
+              <span class="text-xs">July 8, 2025 - 11:59 PM</span>
+            </div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs text-neutral-500">Reminder</span>
+              <span class="text-xs">Email, Browser</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-neutral-500">Status</span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+                <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full mr-1"></span> Pending
+              </span>
+            </div>
+          </div>
+          <div class="p-3 border-t border-neutral-200 bg-neutral-50 flex justify-between">
+            <button class="text-neutral-600 hover:text-neutral-800 text-xs">
+              <i class="fa-solid fa-edit mr-1"></i> Edit
+            </button>
+            <button class="text-neutral-600 hover:text-neutral-800 text-xs">
+              <i class="fa-solid fa-bell-slash mr-1"></i> Mute
+            </button>
+            <button class="text-neutral-600 hover:text-neutral-800 text-xs">
+              <i class="fa-solid fa-trash-alt mr-1"></i> Remove
+            </button>
+          </div>
+        </div>
+
+        <!-- Reminder Card 2 -->
+        <div class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden transition-all hover:shadow-md">
+          <div class="p-3 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-md bg-neutral-700 flex items-center justify-center text-white mr-3">
+                <i class="fa-solid fa-flask"></i>
+              </div>
+              <h3 class="text-neutral-800 text-sm">Research Review Meeting</h3>
+            </div>
+            <div class="flex items-center">
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+                <i class="fa-solid fa-clock text-xs mr-1"></i> Today
+              </span>
+            </div>
+          </div>
+          <div class="p-3">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs text-neutral-500">Project</span>
+              <span class="text-xs">Neural Network Applications</span>
+            </div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs text-neutral-500">Due Date</span>
+              <span class="text-xs">July 6, 2025 - 2:30 PM</span>
+            </div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs text-neutral-500">Reminder</span>
+              <span class="text-xs">Email, Browser, Mobile</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-neutral-500">Status</span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+                <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full mr-1"></span> Urgent
+              </span>
+            </div>
+          </div>
+          <div class="p-3 border-t border-neutral-200 bg-neutral-50 flex justify-between">
+            <button class="text-neutral-600 hover:text-neutral-800 text-xs">
+              <i class="fa-solid fa-edit mr-1"></i> Edit
+            </button>
+            <button class="text-neutral-600 hover:text-neutral-800 text-xs">
+              <i class="fa-solid fa-bell-slash mr-1"></i> Mute
+            </button>
+            <button class="text-neutral-600 hover:text-neutral-800 text-xs">
+              <i class="fa-solid fa-trash-alt mr-1"></i> Remove
+            </button>
+          </div>
+        </div>
+
+        <!-- Reminder Card 3 -->
+        <div class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden transition-all hover:shadow-md">
+          <div class="p-3 border-b border-neutral-200 flex justify-between items-center bg-neutral-50">
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-md bg-neutral-700 flex items-center justify-center text-white mr-3">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <h3 class="text-neutral-800 text-sm">Data Analysis Checkpoint</h3>
+            </div>
+            <div class="flex items-center">
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+                <i class="fa-solid fa-clock text-xs mr-1"></i> 1 week left
+              </span>
+            </div>
+          </div>
+          <div class="p-3">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs text-neutral-500">Project</span>
+              <span class="text-xs">Climate Change Research</span>
+            </div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs text-neutral-500">Due Date</span>
+              <span class="text-xs">July 13, 2025 - 9:00 AM</span>
+            </div>
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-xs text-neutral-500">Reminder</span>
+              <span class="text-xs">Email only</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-neutral-500">Status</span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800">
+                <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full mr-1"></span> On Track
+              </span>
+            </div>
+          </div>
+          <div class="p-3 border-t border-neutral-200 bg-neutral-50 flex justify-between">
+            <button class="text-neutral-600 hover:text-neutral-800 text-xs">
+              <i class="fa-solid fa-edit mr-1"></i> Edit
+            </button>
+            <button class="text-neutral-600 hover:text-neutral-800 text-xs">
+              <i class="fa-solid fa-bell-slash mr-1"></i> Mute
+            </button>
+            <button class="text-neutral-600 hover:text-neutral-800 text-xs">
+              <i class="fa-solid fa-trash-alt mr-1"></i> Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Reminder Modal -->
+    <div id="add-reminder-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg shadow-lg w-full max-w-md">
+        <div class="p-4 border-b border-neutral-200 flex items-center justify-between">
+          <h3 class="text-lg text-neutral-800">Add New Reminder</h3>
+          <button class="text-neutral-500 hover:text-neutral-700">
+            <i class="fa-solid fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="p-6 space-y-4">
+          <div>
+            <label class="block text-sm text-neutral-700 mb-1">Reminder Title</label>
+            <input type="text" class="w-full border border-neutral-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500" placeholder="e.g., Final Paper Submission">
+          </div>
+          
+          <div>
+            <label class="block text-sm text-neutral-700 mb-1">Project</label>
+            <select class="w-full border border-neutral-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500">
+              <option>Select a project</option>
+              <option>Quantum Computing Research</option>
+              <option>Neural Network Applications</option>
+              <option>Climate Change Research</option>
+              <option>Biomedical Engineering Study</option>
+            </select>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Due Date</label>
+              <input type="date" class="w-full border border-neutral-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500" value="2025-07-15">
+            </div>
+            <div>
+              <label class="block text-sm text-neutral-700 mb-1">Due Time</label>
+              <input type="time" class="w-full border border-neutral-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500" value="23:59">
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm text-neutral-700 mb-1">Reminder Type</label>
+            <div class="grid grid-cols-2 gap-2 mt-1">
+              <div class="flex items-center">
+                <input id="reminder-deadline" name="reminder-type" type="radio" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300" checked>
+                <label for="reminder-deadline" class="ml-2 block text-sm text-neutral-700">Deadline</label>
+              </div>
+              <div class="flex items-center">
+                <input id="reminder-meeting" name="reminder-type" type="radio" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300">
+                <label for="reminder-meeting" class="ml-2 block text-sm text-neutral-700">Meeting</label>
+              </div>
+              <div class="flex items-center">
+                <input id="reminder-checkpoint" name="reminder-type" type="radio" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300">
+                <label for="reminder-checkpoint" class="ml-2 block text-sm text-neutral-700">Checkpoint</label>
+              </div>
+              <div class="flex items-center">
+                <input id="reminder-custom" name="reminder-type" type="radio" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300">
+                <label for="reminder-custom" class="ml-2 block text-sm text-neutral-700">Custom</label>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm text-neutral-700 mb-1">Reminder Timing</label>
+            <div class="grid grid-cols-2 gap-4">
+              <select class="border border-neutral-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500">
+                <option>30 minutes</option>
+                <option>1 hour</option>
+                <option>3 hours</option>
+                <option>12 hours</option>
+                <option selected>1 day</option>
+                <option>3 days</option>
+                <option>1 week</option>
+              </select>
+              <select class="border border-neutral-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500">
+                <option selected>before</option>
+                <option>after</option>
+              </select>
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm text-neutral-700 mb-1">Notification Channels</label>
+            <div class="space-y-2 mt-1">
+              <div class="flex items-center">
+                <input id="modal-email" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+                <label for="modal-email" class="ml-2 block text-sm text-neutral-700">Email</label>
+              </div>
+              <div class="flex items-center">
+                <input id="modal-browser" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+                <label for="modal-browser" class="ml-2 block text-sm text-neutral-700">Browser</label>
+              </div>
+              <div class="flex items-center">
+                <input id="modal-mobile" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded" checked>
+                <label for="modal-mobile" class="ml-2 block text-sm text-neutral-700">Mobile App</label>
+              </div>
+              <div class="flex items-center">
+                <input id="modal-sms" type="checkbox" class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded">
+                <label for="modal-sms" class="ml-2 block text-sm text-neutral-700">SMS (Premium)</label>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm text-neutral-700 mb-1">Notes (Optional)</label>
+            <textarea class="w-full border border-neutral-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500" rows="2" placeholder="Add any additional details or instructions"></textarea>
+          </div>
+        </div>
+        
+        <div class="p-4 border-t border-neutral-200 bg-neutral-50 flex justify-end space-x-3">
+          <button class="px-4 py-2 border border-neutral-300 rounded-md text-neutral-700 hover:bg-neutral-100">
+            Cancel
+          </button>
+          <button class="px-4 py-2 bg-neutral-700 text-white rounded-md hover:bg-neutral-800">
+            Add Reminder
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calendar View Section -->
+    <div id="calendar-view" class="bg-white rounded-md shadow-sm border border-neutral-200 overflow-hidden">
+      <div class="p-4 border-b border-neutral-200 flex justify-between items-center">
+        <h3 class="text-neutral-800">Upcoming Deadlines Calendar</h3>
+        <div class="flex items-center space-x-2">
+          <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <span class="text-neutral-700">July 2025</span>
+          <button class="p-2 text-neutral-600 hover:bg-neutral-100 rounded-md">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="p-4">
+        <div class="grid grid-cols-7 gap-1 text-center text-sm mb-2">
+          <div class="text-neutral-500">Mon</div>
+          <div class="text-neutral-500">Tue</div>
+          <div class="text-neutral-500">Wed</div>
+          <div class="text-neutral-500">Thu</div>
+          <div class="text-neutral-500">Fri</div>
+          <div class="text-neutral-500">Sat</div>
+          <div class="text-neutral-500">Sun</div>
+        </div>
+        
+        <div class="grid grid-cols-7 gap-1">
+          <div class="h-24 p-1 border border-neutral-200 text-neutral-400">30</div>
+          <div class="h-24 p-1 border border-neutral-200 text-neutral-400">1</div>
+          <div class="h-24 p-1 border border-neutral-200 text-neutral-400">2</div>
+          <div class="h-24 p-1 border border-neutral-200 text-neutral-400">3</div>
+          <div class="h-24 p-1 border border-neutral-200 text-neutral-400">4</div>
+          <div class="h-24 p-1 border border-neutral-200 text-neutral-400">5</div>
+          
+          <div class="h-24 p-1 border border-neutral-200 bg-neutral-50">
+            <span>6</span>
+            <div class="mt-1 text-xs bg-neutral-700 text-white p-1 rounded">
+              <span class="block truncate">Research Review</span>
+            </div>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>7</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200 bg-neutral-50">
+            <span>8</span>
+            <div class="mt-1 text-xs bg-neutral-700 text-white p-1 rounded">
+              <span class="block truncate">Final Paper Due</span>
+            </div>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>9</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>10</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>11</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>12</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200 bg-neutral-50">
+            <span>13</span>
+            <div class="mt-1 text-xs bg-neutral-700 text-white p-1 rounded">
+              <span class="block truncate">Data Analysis</span>
+            </div>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>14</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>15</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>16</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>17</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>18</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>19</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>20</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200 bg-neutral-50">
+            <span>21</span>
+            <div class="mt-1 text-xs bg-neutral-700 text-white p-1 rounded">
+              <span class="block truncate">Literature Review</span>
+            </div>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>22</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>23</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>24</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>25</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>26</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>27</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>28</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200 bg-neutral-50">
+            <span>29</span>
+            <div class="mt-1 text-xs bg-neutral-700 text-white p-1 rounded">
+              <span class="block truncate">Project Meeting</span>
+            </div>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>30</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200">
+            <span>31</span>
+          </div>
+          
+          <div class="h-24 p-1 border border-neutral-200 text-neutral-400">1</div>
+          <div class="h-24 p-1 border border-neutral-200 text-neutral-400">2</div>
+          <div class="h-24 p-1 border border-neutral-200 text-neutral-400">3</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer id="footer" class="bg-white border-t border-neutral-200 p-4 text-center text-neutral-600 text-sm">
+  <p>© 2025 Academic AI Project Management System - Joomla 5.3 Component</p>
+</footer>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

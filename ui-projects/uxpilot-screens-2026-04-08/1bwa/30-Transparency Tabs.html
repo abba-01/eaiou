@@ -1,0 +1,1135 @@
+
+              <html class="">
+                
+  <head>
+    
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest', // Options: 'nest', 'remove', 'replace'
+      };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+<style>
+  * {
+    font-family: "{{font}}", sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+    
+<style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+</style>
+
+    
+<style>
+   :root {
+          /* Base colors */
+          --color-base: #ffffff;
+          --color-base-50: #f9fafb;
+          --color-base-100: #f3f4f6;
+          --color-base-200: #e5e7eb;
+          --color-base-300: #d1d5db;
+          --color-base-400: #9ca3af;
+          --color-base-500: #6b7280;
+          --color-base-600: #4b5563;  
+          --color-base-700: #374151;
+          --color-base-800: #1f2937;  
+          --color-base-900: #111827;
+          --color-base-content: #1f2937;
+
+          /* Primary colors */
+          --color-primary: #3b82f6;
+          --color-primary-50: #eff6ff;
+          --color-primary-100: #dbeafe;
+          --color-primary-200: #bfdbfe;
+          --color-primary-300: #93c5fd;
+          --color-primary-400: #60a5fa;
+          --color-primary-500: #3b82f6;
+          --color-primary-600: #2563eb;
+          --color-primary-700: #1d4ed8;
+          --color-primary-800: #1e40af;
+          --color-primary-900: #1e3a8a;
+          --color-primary-focus: #2563eb;
+          --color-primary-content: #ffffff;
+
+          /* Secondary colors */
+          --color-secondary: #8b5cf6;
+          --color-secondary-50: #f5f3ff;
+          --color-secondary-100: #ede9fe;
+          --color-secondary-200: #ddd6fe;
+          --color-secondary-300: #c4b5fd;
+          --color-secondary-400: #a78bfa;
+          --color-secondary-500: #8b5cf6;
+          --color-secondary-600: #7c3aed;
+          --color-secondary-700: #6d28d9;
+          --color-secondary-800: #5b21b6;
+          --color-secondary-900: #4c1d95;
+          --color-secondary-focus: #7c3aed;
+          --color-secondary-content: #ffffff;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #fdf2f8;
+          --color-accent-100: #fce7f3;
+          --color-accent-200: #fbcfe8;
+          --color-accent-300: #f9a8d4;
+          --color-accent-400: #f472b6;
+          --color-accent-500: #ec4899;
+          --color-accent-600: #db2777;
+          --color-accent-700: #be185d;
+          --color-accent-800: #9d174d;
+          --color-accent-900: #831843;
+          --color-accent-focus: #db2777;
+          --color-accent-content: #ffffff;
+
+          /* Neutral colors */
+          --color-neutral: #6b7280;
+          --color-neutral-50: #f9fafb;
+          --color-neutral-100: #f3f4f6;
+          --color-neutral-200: #e5e7eb;
+          --color-neutral-300: #d1d5db;
+          --color-neutral-400: #9ca3af;
+          --color-neutral-500: #6b7280;
+          --color-neutral-600: #4b5563;
+          --color-neutral-700: #374151;
+          --color-neutral-800: #1f2937;
+          --color-neutral-900: #111827;
+          --color-neutral-focus: #4b5563;
+          --color-neutral-content: #ffffff;
+
+          /* Info colors */
+          --color-info: #3b82f6;
+          --color-info-50: #eff6ff;
+          --color-info-100: #dbeafe;
+          --color-info-200: #bfdbfe;
+          --color-info-300: #93c5fd;
+          --color-info-400: #60a5fa;
+          --color-info-500: #3b82f6;
+          --color-info-600: #2563eb;
+          --color-info-700: #1d4ed8;
+          --color-info-800: #1e40af;
+          --color-info-900: #1e3a8a;
+          --color-info-focus: #2563eb;
+          --color-info-content: #ffffff;
+
+          /* Success colors */
+          --color-success: #10b981;
+          --color-success-50: #ecfdf5;
+          --color-success-100: #d1fae5;
+          --color-success-200: #a7f3d0;
+          --color-success-300: #6ee7b7;
+          --color-success-400: #34d399;
+          --color-success-500: #10b981;
+          --color-success-600: #059669;
+          --color-success-700: #047857;
+          --color-success-800: #065f46;
+          --color-success-900: #064e3b;
+          --color-success-focus: #059669;
+          --color-success-content: #ffffff;
+
+          /* Warning colors */
+          --color-warning: #f59e0b;
+          --color-warning-50: #fffbeb;
+          --color-warning-100: #fef3c7;
+          --color-warning-200: #fde68a;
+          --color-warning-300: #fcd34d;
+          --color-warning-400: #fbbf24;
+          --color-warning-500: #f59e0b;
+          --color-warning-600: #d97706;
+          --color-warning-700: #b45309;
+          --color-warning-800: #92400e;
+          --color-warning-900: #78350f;
+          --color-warning-focus: #d97706;
+          --color-warning-content: #ffffff;
+
+          /* Error colors */
+          --color-error: #ef4444;
+          --color-error-50: #fef2f2;
+          --color-error-100: #fee2e2;
+          --color-error-200: #fecaca;
+          --color-error-300: #fca5a5;
+          --color-error-400: #f87171;
+          --color-error-500: #ef4444;
+          --color-error-600: #dc2626;
+          --color-error-700: #b91c1c;
+          --color-error-800: #991b1b;
+          --color-error-900: #7f1d1d;
+          --color-error-focus: #dc2626;
+          --color-error-content: #ffffff;
+        }
+</style>
+
+    
+<style>
+/* Dark theme */
+        .dark {
+          /* Base colors */
+          --color-base: #1f2937;
+          --color-base-50: #111827;
+          --color-base-100: #1f2937;
+          --color-base-200: #374151;
+          --color-base-300: #4b5563;
+          --color-base-400: #6b7280;
+          --color-base-500: #9ca3af;
+          --color-base-600: #d1d5db;
+          --color-base-700: #e5e7eb;
+          --color-base-800: #f3f4f6;
+          --color-base-900: #f9fafb;
+          --color-base-content: #f9fafb;
+
+          /* Primary colors */
+          --color-primary: #60a5fa;
+          --color-primary-50: #1e3a8a;
+          --color-primary-100: #1e40af;
+          --color-primary-200: #1d4ed8;
+          --color-primary-300: #2563eb;
+          --color-primary-400: #3b82f6;
+          --color-primary-500: #60a5fa;
+          --color-primary-600: #93c5fd;
+          --color-primary-700: #bfdbfe;
+          --color-primary-800: #dbeafe;
+          --color-primary-900: #eff6ff;
+          --color-primary-focus: #3b82f6;
+          --color-primary-content: #1f2937;
+
+          /* Secondary colors */
+          --color-secondary: #a78bfa;
+          --color-secondary-50: #4c1d95;
+          --color-secondary-100: #5b21b6;
+          --color-secondary-200: #6d28d9;
+          --color-secondary-300: #7c3aed;
+          --color-secondary-400: #8b5cf6;
+          --color-secondary-500: #a78bfa;
+          --color-secondary-600: #c4b5fd;
+          --color-secondary-700: #ddd6fe;
+          --color-secondary-800: #ede9fe;
+          --color-secondary-900: #f5f3ff;
+          --color-secondary-focus: #8b5cf6;
+          --color-secondary-content: #1f2937;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #831843;
+          --color-accent-100: #9d174d;
+          --color-accent-200: #be185d;
+          --color-accent-300: #db2777;
+          --color-accent-400: #ec4899;
+          --color-accent-500: #f472b6;
+          --color-accent-600: #f9a8d4;
+          --color-accent-700: #fbcfe8;
+          --color-accent-800: #fce7f3;
+          --color-accent-900: #fdf2f8;
+          --color-accent-focus: #ec4899;
+          --color-accent-content: #1f2937;
+
+          /* Neutral colors remain the same as light theme */
+
+          /* Info colors */
+          --color-info: #60a5fa;
+          --color-info-50: #1e3a8a;
+          --color-info-100: #1e40af;
+          --color-info-200: #1d4ed8;
+          --color-info-300: #2563eb;
+          --color-info-400: #3b82f6;
+          --color-info-500: #60a5fa;
+          --color-info-600: #93c5fd;
+          --color-info-700: #bfdbfe;
+          --color-info-800: #dbeafe;
+          --color-info-900: #eff6ff;
+          --color-info-focus: #3b82f6;
+          --color-info-content: #1f2937;
+
+          /* Success colors */
+          --color-success: #34d399;
+          --color-success-50: #064e3b;
+          --color-success-100: #065f46;
+          --color-success-200: #047857;
+          --color-success-300: #059669;
+          --color-success-400: #10b981;
+          --color-success-500: #34d399;
+          --color-success-600: #6ee7b7;
+          --color-success-700: #a7f3d0;
+          --color-success-800: #d1fae5;
+          --color-success-900: #ecfdf5;
+          --color-success-focus: #10b981;
+          --color-success-content: #1f2937;
+
+          /* Warning colors */
+          --color-warning: #fbbf24;
+          --color-warning-50: #78350f;
+          --color-warning-100: #92400e;
+          --color-warning-200: #b45309;
+          --color-warning-300: #d97706;
+          --color-warning-400: #f59e0b;
+          --color-warning-500: #fbbf24;
+          --color-warning-600: #fcd34d;
+          --color-warning-700: #fde68a;
+          --color-warning-800: #fef3c7;
+          --color-warning-900: #fffbeb;
+          --color-warning-focus: #f59e0b;
+          --color-warning-content: #1f2937;
+
+          /* Error colors */
+          --color-error: #f87171;
+          --color-error-50: #7f1d1d;
+          --color-error-100: #991b1b;
+          --color-error-200: #b91c1c;
+          --color-error-300: #dc2626;
+          --color-error-400: #ef4444;
+          --color-error-500: #f87171;
+          --color-error-600: #fca5a5;
+          --color-error-700: #fecaca;
+          --color-error-800: #fee2e2;
+          --color-error-900: #fef2f2;
+          --color-error-focus: #ef4444;
+          --color-error-content: #1f2937;
+        }
+</style>
+
+    
+  <script>
+        tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                ...{"transparent":"transparent","current":"currentColor","black":"#000000","white":"#ffffff","gray":{"50":"#f9fafb","100":"#f3f4f6","200":"#e5e7eb","300":"#d1d5db","400":"#9ca3af","500":"#6b7280","600":"#4b5563","700":"#374151","800":"#1f2937","900":"#111827"},"red":{"50":"#fef2f2","100":"#fee2e2","200":"#fecaca","300":"#fca5a5","400":"#f87171","500":"#ef4444","600":"#dc2626","700":"#b91c1c","800":"#991b1b","900":"#7f1d1d"},"yellow":{"50":"#fffbeb","100":"#fef3c7","200":"#fde68a","300":"#fcd34d","400":"#fbbf24","500":"#f59e0b","600":"#d97706","700":"#b45309","800":"#92400e","900":"#78350f"},"green":{"50":"#ecfdf5","100":"#d1fae5","200":"#a7f3d0","300":"#6ee7b7","400":"#34d399","500":"#10b981","600":"#059669","700":"#047857","800":"#065f46","900":"#064e3b"},"blue":{"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a"},"indigo":{"50":"#eef2ff","100":"#e0e7ff","200":"#c7d2fe","300":"#a5b4fc","400":"#818cf8","500":"#6366f1","600":"#4f46e5","700":"#4338ca","800":"#3730a3","900":"#312e81"},"purple":{"50":"#f5f3ff","100":"#ede9fe","200":"#ddd6fe","300":"#c4b5fd","400":"#a78bfa","500":"#8b5cf6","600":"#7c3aed","700":"#6d28d9","800":"#5b21b6","900":"#4c1d95"},"pink":{"50":"#fdf2f8","100":"#fce7f3","200":"#fbcfe8","300":"#f9a8d4","400":"#f472b6","500":"#ec4899","600":"#db2777","700":"#be185d","800":"#9d174d","900":"#831843"}},
+                ...{"primary":{"50":"var(--color-primary-50)","100":"var(--color-primary-100)","200":"var(--color-primary-200)","300":"var(--color-primary-300)","400":"var(--color-primary-400)","500":"var(--color-primary-500)","600":"var(--color-primary-600)","700":"var(--color-primary-700)","800":"var(--color-primary-800)","900":"var(--color-primary-900)","DEFAULT":"var(--color-primary)","focus":"var(--color-primary-focus)","content":"var(--color-primary-content)"},"secondary":{"50":"var(--color-secondary-50)","100":"var(--color-secondary-100)","200":"var(--color-secondary-200)","300":"var(--color-secondary-300)","400":"var(--color-secondary-400)","500":"var(--color-secondary-500)","600":"var(--color-secondary-600)","700":"var(--color-secondary-700)","800":"var(--color-secondary-800)","900":"var(--color-secondary-900)","DEFAULT":"var(--color-secondary)","focus":"var(--color-secondary-focus)","content":"var(--color-secondary-content)"},"accent":{"50":"var(--color-accent-50)","100":"var(--color-accent-100)","200":"var(--color-accent-200)","300":"var(--color-accent-300)","400":"var(--color-accent-400)","500":"var(--color-accent-500)","600":"var(--color-accent-600)","700":"var(--color-accent-700)","800":"var(--color-accent-800)","900":"var(--color-accent-900)","DEFAULT":"var(--color-accent)","focus":"var(--color-accent-focus)","content":"var(--color-accent-content)"},"neutral":{"50":"var(--color-neutral-50)","100":"var(--color-neutral-100)","200":"var(--color-neutral-200)","300":"var(--color-neutral-300)","400":"var(--color-neutral-400)","500":"var(--color-neutral-500)","600":"var(--color-neutral-600)","700":"var(--color-neutral-700)","800":"var(--color-neutral-800)","900":"var(--color-neutral-900)","DEFAULT":"var(--color-neutral)","focus":"var(--color-neutral-focus)","content":"var(--color-neutral-content)"},"info":{"50":"var(--color-info-50)","100":"var(--color-info-100)","200":"var(--color-info-200)","300":"var(--color-info-300)","400":"var(--color-info-400)","500":"var(--color-info-500)","600":"var(--color-info-600)","700":"var(--color-info-700)","800":"var(--color-info-800)","900":"var(--color-info-900)","DEFAULT":"var(--color-info)","focus":"var(--color-info-focus)","content":"var(--color-info-content)"},"success":{"50":"var(--color-success-50)","100":"var(--color-success-100)","200":"var(--color-success-200)","300":"var(--color-success-300)","400":"var(--color-success-400)","500":"var(--color-success-500)","600":"var(--color-success-600)","700":"var(--color-success-700)","800":"var(--color-success-800)","900":"var(--color-success-900)","DEFAULT":"var(--color-success)","focus":"var(--color-success-focus)","content":"var(--color-success-content)"},"warning":{"50":"var(--color-warning-50)","100":"var(--color-warning-100)","200":"var(--color-warning-200)","300":"var(--color-warning-300)","400":"var(--color-warning-400)","500":"var(--color-warning-500)","600":"var(--color-warning-600)","700":"var(--color-warning-700)","800":"var(--color-warning-800)","900":"var(--color-warning-900)","DEFAULT":"var(--color-warning)","focus":"var(--color-warning-focus)","content":"var(--color-warning-content)"},"error":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"danger":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"failure":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"}},
+                },
+              },
+            },
+            variants: {
+              extend: {
+                backgroundColor: ['active', 'group-hover'],
+                textColor: ['active', 'group-hover'],
+              },
+            },
+            plugins: [],
+          };
+  </script>
+
+  </head>
+
+                <body class="h-full text-base-content">
+                  <header id="header" class="bg-neutral-900 py-4 px-6 flex items-center justify-between">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <div class="flex items-center space-x-8">
+    <div class="flex items-center">
+      <span class="text-white text-xl flex items-center cursor-pointer">
+        <span>EAIOU</span>
+        <span class="text-neutral-400 text-sm ml-2">| Research Platform</span>
+      </span>
+    </div>
+    <div class="hidden md:flex space-x-6">
+      <div class="relative group">
+        <span class="text-neutral-300 hover:text-white flex items-center cursor-pointer">
+          Articles
+          <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+        </span>
+      </div>
+      <div class="relative group">
+        <span class="text-neutral-300 hover:text-white flex items-center cursor-pointer">
+          Submissions
+          <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+        </span>
+      </div>
+      <span class="text-neutral-300 hover:text-white cursor-pointer">
+        Reviews
+      </span>
+      <div class="relative group">
+        <span class="text-neutral-300 hover:text-white flex items-center cursor-pointer">
+          Collaboration
+          <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+        </span>
+      </div>
+      <span class="text-neutral-300 hover:text-white cursor-pointer">
+        Guidelines
+      </span>
+      <div class="relative group">
+        <span class="text-neutral-300 hover:text-white flex items-center cursor-pointer">
+          About
+          <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="flex items-center space-x-4">
+    <button class="text-neutral-300 hover:text-white">
+      <i class="fa-solid fa-magnifying-glass text-xl"></i>
+    </button>
+    <span class="bg-neutral-700 text-white px-4 py-2 rounded-md hover:bg-neutral-600 cursor-pointer">
+      Log In
+    </span>
+    <span class="bg-neutral-600 text-white px-4 py-2 rounded-md hover:bg-neutral-500 cursor-pointer">
+      Register
+    </span>
+  </div>
+</header>
+
+<!-- Submission Metadata Section -->
+<section id="submission-metadata" class="bg-neutral-800 py-12 px-6 relative h-[400px]">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row">
+      <div class="w-full md:w-2/3">
+        <div class="flex items-center text-neutral-400 text-sm mb-4">
+          <span class="hover:text-white cursor-pointer">Home</span>
+          <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+          <span class="hover:text-white cursor-pointer">Articles</span>
+          <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+          <span class="hover:text-white cursor-pointer">Quantum Physics</span>
+          <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+          <span>Quantum Entanglement in Neural Networks</span>
+        </div>
+        <h1 class="text-white text-3xl md:text-4xl mb-4">
+          Quantum Entanglement in Neural Networks
+        </h1>
+        <div class="flex items-center mb-6">
+          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="Author avatar" class="w-10 h-10 rounded-full mr-3">
+          <div>
+            <div class="text-white">Dr. Sarah Chen</div>
+            <div class="text-neutral-400">Lead Researcher, Quantum AI Institute</div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3 mb-6">
+          <span class="bg-neutral-700 text-neutral-200 px-3 py-1 rounded-full text-sm">Quantum Physics</span>
+          <span class="bg-neutral-700 text-neutral-200 px-3 py-1 rounded-full text-sm">Neural Networks</span>
+          <span class="bg-neutral-700 text-neutral-200 px-3 py-1 rounded-full text-sm">AI Research</span>
+        </div>
+        <p class="text-neutral-300 mb-6">
+          A groundbreaking study on the application of quantum entanglement principles to improve neural network performance and efficiency.
+        </p>
+      </div>
+      <div class="w-full md:w-1/3 flex justify-end items-start">
+        <div class="bg-neutral-700 p-6 rounded-lg w-full max-w-sm">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-white text-lg">Article Status</span>
+            <span class="bg-neutral-700 text-white px-3 py-1 rounded-full text-xs">Published</span>
+          </div>
+          <div class="space-y-3 text-neutral-300">
+            <div class="flex justify-between">
+              <span>Submitted:</span>
+              <span>March 15, 2025</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Published:</span>
+              <span>May 22, 2025</span>
+            </div>
+            <div class="flex justify-between">
+              <span>DOI:</span>
+              <span>10.1234/eaiou.2025.0123</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Version:</span>
+              <span>1.2 (Current)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Transparency Tabs Section -->
+<section id="transparency-tabs" class="bg-white py-6 px-6 border-b border-neutral-200">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex overflow-x-auto">
+      <div class="flex space-x-1">
+        <span class="whitespace-nowrap px-5 py-3 text-neutral-600 hover:text-neutral-800 border-b-2 border-transparent hover:border-neutral-300 cursor-pointer">
+          Article
+        </span>
+        <span class="whitespace-nowrap px-5 py-3 text-neutral-600 hover:text-neutral-800 border-b-2 border-transparent hover:border-neutral-300 cursor-pointer">
+          Abstract
+        </span>
+        <span class="whitespace-nowrap px-5 py-3 text-neutral-800 border-b-2 border-neutral-800 cursor-pointer">
+          Metadata
+        </span>
+        <span class="whitespace-nowrap px-5 py-3 text-neutral-600 hover:text-neutral-800 border-b-2 border-transparent hover:border-neutral-300 cursor-pointer">
+          Versions
+        </span>
+        <span class="whitespace-nowrap px-5 py-3 text-neutral-600 hover:text-neutral-800 border-b-2 border-transparent hover:border-neutral-300 cursor-pointer">
+          Reviews
+        </span>
+        <span class="whitespace-nowrap px-5 py-3 text-neutral-600 hover:text-neutral-800 border-b-2 border-transparent hover:border-neutral-300 cursor-pointer">
+          Attribution
+        </span>
+        <span class="whitespace-nowrap px-5 py-3 text-neutral-600 hover:text-neutral-800 border-b-2 border-transparent hover:border-neutral-300 cursor-pointer">
+          Data & Code
+        </span>
+        <span class="whitespace-nowrap px-5 py-3 text-neutral-600 hover:text-neutral-800 border-b-2 border-transparent hover:border-neutral-300 cursor-pointer">
+          Discussion
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Metadata Content Section -->
+<section id="metadata-content" class="py-12 px-6 bg-neutral-50">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <!-- Main Content -->
+      <div class="md:col-span-8">
+        <div class="bg-white rounded-xl shadow-sm p-8 mb-8">
+          <h2 class="text-2xl text-neutral-800 mb-6">Public Metadata</h2>
+          
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-lg mb-3">Article Information</h3>
+              <div class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <span class="text-neutral-500 text-sm">Title</span>
+                    <p class="text-neutral-800">Quantum Entanglement in Neural Networks</p>
+                  </div>
+                  <div>
+                    <span class="text-neutral-500 text-sm">Type</span>
+                    <p class="text-neutral-800">Original Research</p>
+                  </div>
+                  <div>
+                    <span class="text-neutral-500 text-sm">Field</span>
+                    <p class="text-neutral-800">Quantum Physics, Computer Science</p>
+                  </div>
+                </div>
+                
+                <div>
+                  <span class="text-neutral-500 text-sm">Abstract</span>
+                  <p class="text-neutral-800 mt-1">
+                    This research explores the application of quantum entanglement principles to neural network architectures, demonstrating a 37% improvement in computational efficiency while maintaining accuracy. We introduce a novel quantum-classical hybrid approach that leverages entangled qubits for feature extraction in deep learning models.
+                  </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <span class="text-neutral-500 text-sm">DOI</span>
+                    <p class="text-neutral-800">10.1234/eaiou.2025.0123</p>
+                  </div>
+                  <div>
+                    <span class="text-neutral-500 text-sm">License</span>
+                    <p class="text-neutral-800">CC BY 4.0</p>
+                  </div>
+                  <div>
+                    <span class="text-neutral-500 text-sm">Language</span>
+                    <p class="text-neutral-800">English</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border-t border-neutral-200 pt-6">
+              <h3 class="text-lg mb-3">Authors & Contributors</h3>
+              <div class="space-y-4">
+                <div class="flex items-start space-x-4">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="Author avatar" class="w-12 h-12 rounded-full">
+                  <div>
+                    <p class="text-neutral-800">Dr. Sarah Chen</p>
+                    <p class="text-neutral-600">Lead Researcher, Quantum AI Institute</p>
+                    <p class="text-neutral-500 text-sm">ORCID: 0000-0001-2345-6789</p>
+                    <p class="text-neutral-500 text-sm">Contribution: Research design, Methodology, Writing</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="Author avatar" class="w-12 h-12 rounded-full">
+                  <div>
+                    <p class="text-neutral-800">Dr. Michael Torres</p>
+                    <p class="text-neutral-600">Senior Researcher, Quantum AI Institute</p>
+                    <p class="text-neutral-500 text-sm">ORCID: 0000-0002-3456-7890</p>
+                    <p class="text-neutral-500 text-sm">Contribution: Data analysis, Validation, Writing - review & editing</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="Author avatar" class="w-12 h-12 rounded-full">
+                  <div>
+                    <p class="text-neutral-800">Dr. Aisha Johnson</p>
+                    <p class="text-neutral-600">Assistant Professor, University of Technology</p>
+                    <p class="text-neutral-500 text-sm">ORCID: 0000-0003-4567-8901</p>
+                    <p class="text-neutral-500 text-sm">Contribution: Conceptualization, Software, Visualization</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border-t border-neutral-200 pt-6">
+              <h3 class="text-lg mb-3">Keywords</h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm">Quantum Entanglement</span>
+                <span class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm">Neural Networks</span>
+                <span class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm">Quantum Computing</span>
+                <span class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm">Artificial Intelligence</span>
+                <span class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                <span class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm">Quantum-Classical Hybrid</span>
+              </div>
+            </div>
+            
+            <div class="border-t border-neutral-200 pt-6">
+              <h3 class="text-lg mb-3">Funding & Acknowledgments</h3>
+              <div class="space-y-3">
+                <div>
+                  <span class="text-neutral-500 text-sm">Funding</span>
+                  <p class="text-neutral-800">National Science Foundation (Grant #NSF-2025-QC-1234)</p>
+                  <p class="text-neutral-800">Quantum AI Institute Research Fund</p>
+                </div>
+                <div>
+                  <span class="text-neutral-500 text-sm">Acknowledgments</span>
+                  <p class="text-neutral-800">The authors would like to thank the Quantum Computing Laboratory at the University of Technology for providing access to their quantum processors. Special thanks to Dr. Robert Kim for his valuable feedback during the early stages of this research.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm p-8 mb-8">
+          <h2 class="text-2xl text-neutral-800 mb-6">Version History</h2>
+          
+          <div class="space-y-6">
+            <div class="flex items-center justify-between pb-4 border-b border-neutral-200">
+              <div class="flex items-center">
+                <span class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm mr-3">Current</span>
+                <span class="text-neutral-800">Version 1.2</span>
+              </div>
+              <div class="text-neutral-500">May 22, 2025</div>
+            </div>
+            
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <i class="fa-solid fa-file-alt text-neutral-500"></i>
+                </div>
+                <div>
+                  <p class="text-neutral-800">Published Version</p>
+                  <p class="text-neutral-600 text-sm">Final version after incorporating reviewer feedback and editorial changes.</p>
+                  <div class="flex items-center mt-2">
+                    <button class="flex items-center text-neutral-600 hover:text-neutral-800 mr-4">
+                      <i class="fa-solid fa-download mr-1"></i>
+                      <span>Download PDF</span>
+                    </button>
+                    <button class="flex items-center text-neutral-600 hover:text-neutral-800">
+                      <i class="fa-solid fa-eye mr-1"></i>
+                      <span>View</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <i class="fa-regular fa-file-lines text-neutral-500"></i>
+                </div>
+                <div>
+                  <p class="text-neutral-800">Change Log</p>
+                  <ul class="text-neutral-600 text-sm list-disc pl-5 mt-1 space-y-1">
+                    <li>Updated Figure 3 with higher resolution visualization</li>
+                    <li>Corrected minor typographical errors</li>
+                    <li>Added additional references in Section 4.2</li>
+                    <li>Enhanced discussion of limitations in Section 5</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="pt-4 border-t border-neutral-200">
+              <div class="flex items-center justify-between pb-4 border-b border-neutral-200">
+                <span class="text-neutral-800">Version 1.1</span>
+                <div class="text-neutral-500">April 18, 2025</div>
+              </div>
+              
+              <div class="space-y-4 mt-4">
+                <div class="flex items-start">
+                  <div class="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                    <i class="fa-regular fa-file-lines text-neutral-500"></i>
+                  </div>
+                  <div>
+                    <p class="text-neutral-800">Revised Manuscript</p>
+                    <p class="text-neutral-600 text-sm">Post-review revision with major improvements to methodology section.</p>
+                    <div class="flex items-center mt-2">
+                      <button class="flex items-center text-neutral-600 hover:text-neutral-800 mr-4">
+                        <i class="fa-solid fa-download mr-1"></i>
+                        <span>Download PDF</span>
+                      </button>
+                      <button class="flex items-center text-neutral-600 hover:text-neutral-800">
+                        <i class="fa-solid fa-eye mr-1"></i>
+                        <span>View</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                    <i class="fa-regular fa-file-lines text-neutral-500"></i>
+                  </div>
+                  <div>
+                    <p class="text-neutral-800">Change Log</p>
+                    <ul class="text-neutral-600 text-sm list-disc pl-5 mt-1 space-y-1">
+                      <li>Expanded methodology section with detailed quantum circuit descriptions</li>
+                      <li>Added new experimental results based on reviewer feedback</li>
+                      <li>Improved clarity of mathematical notations throughout</li>
+                      <li>Restructured discussion section for better flow</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="pt-4 border-t border-neutral-200">
+              <div class="flex items-center justify-between pb-4 border-b border-neutral-200">
+                <span class="text-neutral-800">Version 1.0</span>
+                <div class="text-neutral-500">March 15, 2025</div>
+              </div>
+              
+              <div class="space-y-4 mt-4">
+                <div class="flex items-start">
+                  <div class="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                    <i class="fa-regular fa-file-lines text-neutral-500"></i>
+                  </div>
+                  <div>
+                    <p class="text-neutral-800">Initial Submission</p>
+                    <p class="text-neutral-600 text-sm">Original manuscript submitted for peer review.</p>
+                    <div class="flex items-center mt-2">
+                      <button class="flex items-center text-neutral-600 hover:text-neutral-800 mr-4">
+                        <i class="fa-solid fa-download mr-1"></i>
+                        <span>Download PDF</span>
+                      </button>
+                      <button class="flex items-center text-neutral-600 hover:text-neutral-800">
+                        <i class="fa-solid fa-eye mr-1"></i>
+                        <span>View</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm p-8">
+          <h2 class="text-2xl text-neutral-800 mb-6">Peer Reviews</h2>
+          
+          <div class="space-y-8">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=111" alt="Reviewer avatar" class="w-10 h-10 rounded-full mr-3">
+                  <div>
+                    <p class="text-neutral-800">Dr. James Wilson</p>
+                    <p class="text-neutral-500 text-sm">Quantum Computing Specialist</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <div class="flex text-neutral-400 mr-2">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-alt"></i>
+                  </div>
+                  <span class="text-neutral-600">4.5/5</span>
+                </div>
+              </div>
+              
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <div class="mb-4">
+                  <h4 class="text-neutral-800 mb-2">Summary</h4>
+                  <p class="text-neutral-700">
+                    This paper presents a novel approach to integrating quantum entanglement principles into neural network architectures. The methodology is sound, and the results demonstrate significant improvements in computational efficiency.
+                  </p>
+                </div>
+                
+                <div class="mb-4">
+                  <h4 class="text-neutral-800 mb-2">Strengths</h4>
+                  <ul class="text-neutral-700 list-disc pl-5 space-y-1">
+                    <li>Innovative integration of quantum concepts with classical neural networks</li>
+                    <li>Rigorous experimental design and statistical analysis</li>
+                    <li>Clear presentation of complex quantum principles</li>
+                    <li>Practical applications well articulated</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 class="text-neutral-800 mb-2">Areas for Improvement</h4>
+                  <ul class="text-neutral-700 list-disc pl-5 space-y-1">
+                    <li>Consider expanding on scalability challenges in Section 3.2</li>
+                    <li>Additional comparison with recent work by Kim et al. (2024) would strengthen the discussion</li>
+                    <li>Some mathematical notations could be more consistent throughout</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="mt-4 flex items-center justify-between">
+                <div class="text-neutral-500 text-sm">Reviewed on April 10, 2025</div>
+                <button class="text-neutral-600 hover:text-neutral-800 flex items-center">
+                  <i class="fa-solid fa-file-pdf mr-1"></i>
+                  <span>Download Full Review</span>
+                </button>
+              </div>
+            </div>
+            
+            <div class="border-t border-neutral-200 pt-8">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=222" alt="Reviewer avatar" class="w-10 h-10 rounded-full mr-3">
+                  <div>
+                    <p class="text-neutral-800">Dr. Elena Rodriguez</p>
+                    <p class="text-neutral-500 text-sm">Neural Network Researcher</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <div class="flex text-neutral-400 mr-2">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                  </div>
+                  <span class="text-neutral-600">4/5</span>
+                </div>
+              </div>
+              
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <div class="mb-4">
+                  <h4 class="text-neutral-800 mb-2">Summary</h4>
+                  <p class="text-neutral-700">
+                    The authors present an interesting approach to enhancing neural networks with quantum entanglement. The work is technically sound with promising results, though some aspects of the methodology could be clarified further.
+                  </p>
+                </div>
+                
+                <div class="mb-4">
+                  <h4 class="text-neutral-800 mb-2">Strengths</h4>
+                  <ul class="text-neutral-700 list-disc pl-5 space-y-1">
+                    <li>Novel hybrid architecture that effectively bridges quantum and classical domains</li>
+                    <li>Comprehensive benchmarking against state-of-the-art methods</li>
+                    <li>Excellent visualization of complex quantum states</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 class="text-neutral-800 mb-2">Areas for Improvement</h4>
+                  <ul class="text-neutral-700 list-disc pl-5 space-y-1">
+                    <li>The quantum circuit initialization procedure needs more detailed explanation</li>
+                    <li>Hardware requirements should be discussed more thoroughly</li>
+                    <li>Consider addressing potential decoherence issues in real-world implementations</li>
+                    <li>The limitations section could be expanded</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="mt-4 flex items-center justify-between">
+                <div class="text-neutral-500 text-sm">Reviewed on April 5, 2025</div>
+                <button class="text-neutral-600 hover:text-neutral-800 flex items-center">
+                  <i class="fa-solid fa-file-pdf mr-1"></i>
+                  <span>Download Full Review</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-8 pt-6 border-t border-neutral-200">
+            <h3 class="text-lg mb-4">Author Response to Reviews</h3>
+            
+            <div class="bg-neutral-50 p-6 rounded-lg">
+              <p class="text-neutral-700 mb-4">
+                We thank the reviewers for their thoughtful comments and valuable suggestions. We have addressed the feedback as follows:
+              </p>
+              
+              <ul class="text-neutral-700 list-disc pl-5 space-y-2">
+                <li>
+                  <p><span>Scalability challenges:</span> We have expanded Section 3.2 to include a more detailed discussion of scalability issues and potential solutions.</p>
+                </li>
+                <li>
+                  <p><span>Comparison with Kim et al. (2024):</span> We've added a new paragraph in the discussion section comparing our approach with their recent work.</p>
+                </li>
+                <li>
+                  <p><span>Mathematical notation:</span> We've standardized all mathematical notations throughout the manuscript for better consistency.</p>
+                </li>
+                <li>
+                  <p><span>Quantum circuit initialization:</span> Section 3.3 now includes a step-by-step explanation of the initialization procedure with an accompanying diagram.</p>
+                </li>
+                <li>
+                  <p><span>Hardware requirements and decoherence:</span> We've added a new subsection (4.3) specifically addressing hardware considerations and decoherence mitigation strategies.</p>
+                </li>
+                <li>
+                  <p><span>Limitations:</span> The limitations section has been expanded to include additional discussion of current constraints and future research directions.</p>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="mt-4 text-right">
+              <span class="text-neutral-500 text-sm">Response submitted on April 15, 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sidebar -->
+      <div class="md:col-span-4">
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+          <h3 class="text-lg mb-4">Article Metrics</h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-eye text-neutral-500"></i>
+                </div>
+                <span class="text-neutral-700">Views</span>
+              </div>
+              <span class="text-neutral-800">1,567</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-download text-neutral-500"></i>
+                </div>
+                <span class="text-neutral-700">Downloads</span>
+              </div>
+              <span class="text-neutral-800">423</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-quote-right text-neutral-500"></i>
+                </div>
+                <span class="text-neutral-700">Citations</span>
+              </div>
+              <span class="text-neutral-800">8</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-share-alt text-neutral-500"></i>
+                </div>
+                <span class="text-neutral-700">Shares</span>
+              </div>
+              <span class="text-neutral-800">56</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+          <h3 class="text-lg mb-4">Review Timeline</h3>
+          
+          <div class="relative pl-6 border-l border-neutral-200">
+            <div class="mb-6 relative">
+              <div class="absolute -left-[25px] w-5 h-5 bg-neutral-500 rounded-full border-2 border-white"></div>
+              <div>
+                <p class="text-neutral-800">Published</p>
+                <p class="text-neutral-500 text-sm">May 22, 2025</p>
+              </div>
+            </div>
+            
+            <div class="mb-6 relative">
+              <div class="absolute -left-[25px] w-5 h-5 bg-neutral-500 rounded-full border-2 border-white"></div>
+              <div>
+                <p class="text-neutral-800">Accepted</p>
+                <p class="text-neutral-500 text-sm">May 10, 2025</p>
+              </div>
+            </div>
+            
+            <div class="mb-6 relative">
+              <div class="absolute -left-[25px] w-5 h-5 bg-neutral-500 rounded-full border-2 border-white"></div>
+              <div>
+                <p class="text-neutral-800">Revision Submitted</p>
+                <p class="text-neutral-500 text-sm">April 18, 2025</p>
+              </div>
+            </div>
+            
+            <div class="mb-6 relative">
+              <div class="absolute -left-[25px] w-5 h-5 bg-neutral-500 rounded-full border-2 border-white"></div>
+              <div>
+                <p class="text-neutral-800">Reviews Completed</p>
+                <p class="text-neutral-500 text-sm">April 10, 2025</p>
+              </div>
+            </div>
+            
+            <div class="mb-6 relative">
+              <div class="absolute -left-[25px] w-5 h-5 bg-neutral-500 rounded-full border-2 border-white"></div>
+              <div>
+                <p class="text-neutral-800">Under Review</p>
+                <p class="text-neutral-500 text-sm">March 20, 2025</p>
+              </div>
+            </div>
+            
+            <div class="relative">
+              <div class="absolute -left-[25px] w-5 h-5 bg-neutral-500 rounded-full border-2 border-white"></div>
+              <div>
+                <p class="text-neutral-800">Submitted</p>
+                <p class="text-neutral-500 text-sm">March 15, 2025</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+          <h3 class="text-lg mb-4">Related Articles</h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="w-16 h-16 bg-neutral-200 flex items-center justify-center rounded mr-3 flex-shrink-0">
+                <span class="text-neutral-500 text-xs text-center">Article</span>
+              </div>
+              <div>
+                <p class="text-neutral-800 hover:text-neutral-600 cursor-pointer">Quantum Machine Learning: Current Status and Future Prospects</p>
+                <p class="text-neutral-500 text-sm">Dr. Robert Kim, April 2025</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="w-16 h-16 bg-neutral-200 flex items-center justify-center rounded mr-3 flex-shrink-0">
+                <span class="text-neutral-500 text-xs text-center">Article</span>
+              </div>
+              <div>
+                <p class="text-neutral-800 hover:text-neutral-600 cursor-pointer">Entanglement-Enhanced Deep Learning for Computer Vision</p>
+                <p class="text-neutral-500 text-sm">Dr. Lisa Zhang, March 2025</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="w-16 h-16 bg-neutral-200 flex items-center justify-center rounded mr-3 flex-shrink-0">
+                <span class="text-neutral-500 text-xs text-center">Article</span>
+              </div>
+              <div>
+                <p class="text-neutral-800 hover:text-neutral-600 cursor-pointer">Quantum Advantage in Neural Network Training</p>
+                <p class="text-neutral-500 text-sm">Dr. David Patel, February 2025</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-4 text-center">
+            <button class="text-neutral-600 hover:text-neutral-800">
+              View More
+            </button>
+          </div>
+        </div>
+        
+        <div class="bg-neutral-800 rounded-xl shadow-sm p-6">
+          <h3 class="text-lg mb-4 text-white">Share This Article</h3>
+          
+          <div class="flex space-x-3 mb-6">
+            <button class="w-10 h-10 bg-neutral-700 rounded-full flex items-center justify-center text-white hover:bg-neutral-600">
+              <i class="fa-brands fa-twitter"></i>
+            </button>
+            <button class="w-10 h-10 bg-neutral-700 rounded-full flex items-center justify-center text-white hover:bg-neutral-600">
+              <i class="fa-brands fa-linkedin"></i>
+            </button>
+            <button class="w-10 h-10 bg-neutral-700 rounded-full flex items-center justify-center text-white hover:bg-neutral-600">
+              <i class="fa-brands fa-facebook"></i>
+            </button>
+            <button class="w-10 h-10 bg-neutral-700 rounded-full flex items-center justify-center text-white hover:bg-neutral-600">
+              <i class="fa-solid fa-envelope"></i>
+            </button>
+            <button class="w-10 h-10 bg-neutral-700 rounded-full flex items-center justify-center text-white hover:bg-neutral-600">
+              <i class="fa-solid fa-link"></i>
+            </button>
+          </div>
+          
+          <div>
+            <input type="text" value="https://eaiou.org/articles/10.1234/eaiou.2025.0123" class="w-full px-3 py-2 bg-neutral-700 border border-neutral-600 rounded text-white text-sm mb-2" readonly>
+            <button class="w-full bg-neutral-600 hover:bg-neutral-500 text-white py-2 rounded text-sm">
+              Copy Citation
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer" class="bg-neutral-900 text-neutral-300 py-12 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div>
+        <h3 class="text-white text-xl mb-4">EAIOU.org</h3>
+        <p class="text-neutral-400 mb-4">
+          A transparent research platform supporting peer review, structured attribution, and academic collaboration.
+        </p>
+        <div class="flex space-x-4">
+          <span class="text-neutral-400 hover:text-white cursor-pointer">
+            <i class="fa-brands fa-twitter"></i>
+          </span>
+          <span class="text-neutral-400 hover:text-white cursor-pointer">
+            <i class="fa-brands fa-linkedin"></i>
+          </span>
+          <span class="text-neutral-400 hover:text-white cursor-pointer">
+            <i class="fa-brands fa-github"></i>
+          </span>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="text-white mb-4">Platform</h4>
+        <ul class="space-y-2">
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Articles</span></li>
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Submissions</span></li>
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Reviews</span></li>
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Collaboration Hub</span></li>
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Entropy Maps</span></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="text-white mb-4">Resources</h4>
+        <ul class="space-y-2">
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Guidelines</span></li>
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">FAQs</span></li>
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Documentation</span></li>
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">API</span></li>
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Support</span></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="text-white mb-4">About</h4>
+        <ul class="space-y-2">
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Our Mission</span></li>
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Team</span></li>
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Ethics</span></li>
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Privacy Policy</span></li>
+          <li><span class="text-neutral-400 hover:text-white cursor-pointer">Terms of Service</span></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="border-t border-neutral-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-neutral-500 mb-4 md:mb-0">
+        © 2025 EAIOU.org. All rights reserved.
+      </p>
+      <div class="flex items-center">
+        <span class="text-neutral-500 mr-2">Powered by:</span>
+        <span class="text-neutral-400">Joomla</span>
+        <span class="mx-2 text-neutral-600">|</span>
+        <div class="flex items-center">
+          <span class="text-neutral-400 mr-1">Human-AI Collaboration</span>
+          <i class="fa-solid fa-robot text-neutral-500"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+                </body>
+              </html>
+            

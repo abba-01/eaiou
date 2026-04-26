@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div class="flex items-center space-x-4">
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <span class="flex items-center cursor-pointer">
+      <img alt="AcademiAI Logo" class="h-6" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/default-placeholder.png"/>
+      <span class="ml-1">AcademiAI Manager</span>
+    </span>
+    <div class="flex items-center space-x-4">
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded">
+          Dashboard
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded flex items-center">
+          Projects
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-600 hover:bg-neutral-100 rounded flex items-center">
+          Settings
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded flex items-center">
+          Analytics
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <button class="bg-neutral-600 text-white px-4 py-1.5 rounded">
+        New Project
+      </button>
+    </div>
+  </div>
+  <div class="ml-auto flex items-center space-x-3">
+    <div class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm flex items-center">
+      <i class="fa-solid fa-gem mr-1 text-xs"></i>
+      Academic License
+    </div>
+    <div class="relative">
+      <div class="relative">
+        <i class="fa-solid fa-search text-neutral-400 absolute left-3 top-2.5"></i>
+        <input class="pl-9 pr-4 py-2 bg-neutral-100 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-neutral-500" placeholder="Search projects or articles" type="text"/>
+      </div>
+    </div>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-regular fa-bell"></i>
+    </button>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-regular fa-circle-question"></i>
+    </button>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-solid fa-cog"></i>
+    </button>
+    <button class="w-8 h-8 rounded-full bg-neutral-600 text-white flex items-center justify-center text-sm">
+      AD
+    </button>
+  </div>
+</header>
+
+<div id="main-content" class="flex h-[800px]">
+  <div id="sidebar" class="w-56 bg-white p-4 border-r">
+    <h2 class="text-lg mb-4">
+      Settings
+    </h2>
+    <div class="space-y-1">
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-robot w-5 text-center mr-2"></i>
+        <span class="text-sm">AI Models</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-key w-5 text-center mr-2"></i>
+        <span class="text-sm">API Keys</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-lock w-5 text-center mr-2"></i>
+        <span class="text-sm">Security</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-users w-5 text-center mr-2"></i>
+        <span class="text-sm">User Access</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-database w-5 text-center mr-2"></i>
+        <span class="text-sm">Data Storage</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded bg-neutral-50 text-neutral-700 cursor-pointer">
+        <i class="fa-solid fa-folder w-5 text-center mr-2"></i>
+        <span class="text-sm">Project Resources</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-bell w-5 text-center mr-2"></i>
+        <span class="text-sm">Notifications</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-file-export w-5 text-center mr-2"></i>
+        <span class="text-sm">Export Settings</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-sliders w-5 text-center mr-2"></i>
+        <span class="text-sm">Preferences</span>
+      </span>
+    </div>
+    <div class="mt-6 pt-6 border-t">
+      <div class="text-xs text-neutral-500 mb-3">
+        Joomla 5.3 Component v2.1.4
+      </div>
+      <button class="flex items-center text-sm text-neutral-600 hover:underline">
+        <i class="fa-regular fa-life-ring mr-2"></i>
+        Get Support
+      </button>
+    </div>
+  </div>
+  
+  <div id="content" class="flex-1 bg-neutral-50 overflow-auto">
+    <div class="p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl">Project Resources</h1>
+        <button class="bg-neutral-600 text-white px-4 py-2 rounded shadow-md hover:bg-neutral-700 flex items-center">
+          <i class="fa-solid fa-plus mr-2"></i>
+          Add New Resource
+        </button>
+      </div>
+      
+      <div class="mb-6">
+        <div class="bg-white p-4 rounded-lg shadow-md border border-neutral-200">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg">Resource Management</h2>
+            <div class="flex space-x-2">
+              <button class="px-3 py-1.5 bg-neutral-100 rounded text-neutral-700 text-sm flex items-center">
+                <i class="fa-solid fa-download mr-1"></i>
+                Export
+              </button>
+              <button class="px-3 py-1.5 bg-neutral-100 rounded text-neutral-700 text-sm flex items-center">
+                <i class="fa-solid fa-upload mr-1"></i>
+                Import
+              </button>
+            </div>
+          </div>
+          
+          <p class="text-neutral-600 mb-4">Manage resources that can be attached to any project. All resources are securely stored and STIG compliant.</p>
+          
+          <div class="flex items-center space-x-3 mb-4">
+            <button class="px-3 py-1.5 bg-neutral-50 text-neutral-700 rounded-full text-sm">All Resources</button>
+            <button class="px-3 py-1.5 bg-neutral-100 text-neutral-700 rounded-full text-sm">Credentials</button>
+            <button class="px-3 py-1.5 bg-neutral-100 text-neutral-700 rounded-full text-sm">Videos</button>
+            <button class="px-3 py-1.5 bg-neutral-100 text-neutral-700 rounded-full text-sm">Documents</button>
+            <button class="px-3 py-1.5 bg-neutral-100 text-neutral-700 rounded-full text-sm">Contacts</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="resource-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Credentials Card -->
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 hover:shadow-lg transition-shadow duration-200">
+          <div class="p-4 border-b">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-key text-white"></i>
+                </div>
+                <div>
+                  <h3>Credentials</h3>
+                  <div class="text-sm text-neutral-500">Shared access & logins</div>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800 mr-2">
+                  12 items
+                </span>
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-neutral-600 mb-3">Securely store and share access credentials across projects with full audit trail.</p>
+            <div class="space-y-3">
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Encryption:</span>
+                <span class="text-neutral-900">AES-256</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Access Level:</span>
+                <span class="text-neutral-900">Restricted</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Last Updated:</span>
+                <span class="text-neutral-900">July 4, 2025</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">STIG Compliance:</span>
+                <span class="text-neutral-600 flex items-center">
+                  <i class="fa-solid fa-check-circle mr-1"></i>
+                  Compliant
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 border-t bg-neutral-50 flex justify-between">
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-pen-to-square mr-1"></i>
+              Manage
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-shield-alt mr-1"></i>
+              Security
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-history mr-1"></i>
+              Audit Log
+            </button>
+          </div>
+        </div>
+        
+        <!-- Videos Card -->
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 hover:shadow-lg transition-shadow duration-200">
+          <div class="p-4 border-b">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-video text-white"></i>
+                </div>
+                <div>
+                  <h3>Videos</h3>
+                  <div class="text-sm text-neutral-500">Recorded media</div>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800 mr-2">
+                  8 items
+                </span>
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-neutral-600 mb-3">Store and manage video resources including call recordings with Twilio integration.</p>
+            <div class="space-y-3">
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Total Size:</span>
+                <span class="text-neutral-900">2.4 GB</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Format:</span>
+                <span class="text-neutral-900">MP4, WebM</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Call Recording:</span>
+                <span class="text-neutral-900">Enabled</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Forensic Ready:</span>
+                <span class="text-neutral-600 flex items-center">
+                  <i class="fa-solid fa-check-circle mr-1"></i>
+                  Yes
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 border-t bg-neutral-50 flex justify-between">
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-pen-to-square mr-1"></i>
+              Manage
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-phone mr-1"></i>
+              Twilio
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-file-export mr-1"></i>
+              Export
+            </button>
+          </div>
+        </div>
+        
+        <!-- Documents Card -->
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 hover:shadow-lg transition-shadow duration-200">
+          <div class="p-4 border-b">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-file-alt text-white"></i>
+                </div>
+                <div>
+                  <h3>Documents</h3>
+                  <div class="text-sm text-neutral-500">Files & references</div>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800 mr-2">
+                  24 items
+                </span>
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-neutral-600 mb-3">Manage academic papers, research materials, and project documentation.</p>
+            <div class="space-y-3">
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Total Size:</span>
+                <span class="text-neutral-900">145 MB</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Types:</span>
+                <span class="text-neutral-900">PDF, DOCX, LaTeX</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Last Updated:</span>
+                <span class="text-neutral-900">July 5, 2025</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Versioning:</span>
+                <span class="text-neutral-600 flex items-center">
+                  <i class="fa-solid fa-check-circle mr-1"></i>
+                  Enabled
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 border-t bg-neutral-50 flex justify-between">
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-pen-to-square mr-1"></i>
+              Manage
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-history mr-1"></i>
+              Versions
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-share-alt mr-1"></i>
+              Share
+            </button>
+          </div>
+        </div>
+        
+        <!-- Contacts Card -->
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 hover:shadow-lg transition-shadow duration-200">
+          <div class="p-4 border-b">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-address-book text-white"></i>
+                </div>
+                <div>
+                  <h3>Contacts</h3>
+                  <div class="text-sm text-neutral-500">People & organizations</div>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800 mr-2">
+                  36 items
+                </span>
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-neutral-600 mb-3">Manage contacts with comprehensive interaction history and project associations.</p>
+            <div class="space-y-3">
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Categories:</span>
+                <span class="text-neutral-900">Academic, Industry</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Interactions:</span>
+                <span class="text-neutral-900">152 recorded</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Last Contact:</span>
+                <span class="text-neutral-900">July 6, 2025</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Forensic Tracking:</span>
+                <span class="text-neutral-600 flex items-center">
+                  <i class="fa-solid fa-check-circle mr-1"></i>
+                  Enabled
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 border-t bg-neutral-50 flex justify-between">
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-pen-to-square mr-1"></i>
+              Manage
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-phone mr-1"></i>
+              Call Log
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-project-diagram mr-1"></i>
+              Projects
+            </button>
+          </div>
+        </div>
+        
+        <!-- Financial Records Card -->
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 hover:shadow-lg transition-shadow duration-200">
+          <div class="p-4 border-b">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-money-bill-wave text-white"></i>
+                </div>
+                <div>
+                  <h3>Financial Records</h3>
+                  <div class="text-sm text-neutral-500">Statements & transactions</div>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800 mr-2">
+                  18 items
+                </span>
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-neutral-600 mb-3">Track financial data with Plaid integration for secure statement access.</p>
+            <div class="space-y-3">
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Integration:</span>
+                <span class="text-neutral-900">Plaid API</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Statements:</span>
+                <span class="text-neutral-900">12 months</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Last Sync:</span>
+                <span class="text-neutral-900">July 6, 2025</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Encryption:</span>
+                <span class="text-neutral-600 flex items-center">
+                  <i class="fa-solid fa-check-circle mr-1"></i>
+                  End-to-end
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 border-t bg-neutral-50 flex justify-between">
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-pen-to-square mr-1"></i>
+              Manage
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-sync mr-1"></i>
+              Sync
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-file-export mr-1"></i>
+              Export
+            </button>
+          </div>
+        </div>
+        
+        <!-- Add New Resource Card -->
+        <div class="border-2 border-dashed border-neutral-300 rounded-lg flex items-center justify-center p-6 hover:border-neutral-500 hover:bg-neutral-50 transition-colors duration-200 cursor-pointer">
+          <div class="text-center">
+            <div class="w-12 h-12 rounded-full bg-neutral-100 flex items-center justify-center mx-auto mb-3">
+              <i class="fa-solid fa-plus text-neutral-500"></i>
+            </div>
+            <h3 class="text-neutral-700">Add New Resource</h3>
+            <p class="text-sm text-neutral-500 mt-1">Create a new resource type for your projects</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-8">
+        <div class="bg-white p-4 rounded-lg shadow-md border border-neutral-200">
+          <h2 class="text-lg mb-4">Resource Configuration</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-sm text-neutral-700 mb-3">Integration Settings</h3>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-sm text-neutral-700 mb-1">Twilio Integration</label>
+                  <div class="flex items-center">
+                    <div class="relative inline-block w-10 mr-2 align-middle">
+                      <input id="twilio-toggle" type="checkbox" checked class="absolute w-5 h-5 bg-white rounded-full appearance-none cursor-pointer checked:translate-x-full checked:bg-neutral-600 border border-neutral-300 transition-transform duration-200 ease-in-out"/>
+                      <label for="twilio-toggle" class="block h-5 overflow-hidden bg-neutral-200 rounded-full cursor-pointer"></label>
+                    </div>
+                    <span class="text-sm text-neutral-700">Enabled</span>
+                  </div>
+                  <p class="text-xs text-neutral-500 mt-1">Enable call tracking and recording for investigation interactions</p>
+                </div>
+                
+                <div>
+                  <label class="block text-sm text-neutral-700 mb-1">Plaid Integration</label>
+                  <div class="flex items-center">
+                    <div class="relative inline-block w-10 mr-2 align-middle">
+                      <input id="plaid-toggle" type="checkbox" checked class="absolute w-5 h-5 bg-white rounded-full appearance-none cursor-pointer checked:translate-x-full checked:bg-neutral-600 border border-neutral-300 transition-transform duration-200 ease-in-out"/>
+                      <label for="plaid-toggle" class="block h-5 overflow-hidden bg-neutral-200 rounded-full cursor-pointer"></label>
+                    </div>
+                    <span class="text-sm text-neutral-700">Enabled</span>
+                  </div>
+                  <p class="text-xs text-neutral-500 mt-1">Connect to financial institutions for secure statement access</p>
+                </div>
+                
+                <div>
+                  <label class="block text-sm text-neutral-700 mb-1">Default Storage Location</label>
+                  <select class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-neutral-300 focus:outline-none focus:ring-neutral-500 focus:border-neutral-500 sm:text-sm rounded-md">
+                    <option>Local Encrypted Storage</option>
+                    <option selected>Secure Cloud Storage</option>
+                    <option>Hybrid Storage</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-sm text-neutral-700 mb-3">Security & Compliance</h3>
+              <div class="space-y-4">
+                <div class="flex items-center">
+                  <input id="forensic-tracking" name="forensic-tracking" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                  <label for="forensic-tracking" class="ml-2 block text-sm text-neutral-700">Enable forensic tracking for all resources</label>
+                </div>
+                
+                <div class="flex items-center">
+                  <input id="stig-compliance" name="stig-compliance" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                  <label for="stig-compliance" class="ml-2 block text-sm text-neutral-700">Enforce STIG compliance standards</label>
+                </div>
+                
+                <div class="flex items-center">
+                  <input id="encrypt-all" name="encrypt-all" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                  <label for="encrypt-all" class="ml-2 block text-sm text-neutral-700">Encrypt all resource data</label>
+                </div>
+                
+                <div class="flex items-center">
+                  <input id="audit-trail" name="audit-trail" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                  <label for="audit-trail" class="ml-2 block text-sm text-neutral-700">Maintain comprehensive audit trail</label>
+                </div>
+                
+                <div>
+                  <label class="block text-sm text-neutral-700 mb-1">Retention Policy</label>
+                  <select class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-neutral-300 focus:outline-none focus:ring-neutral-500 focus:border-neutral-500 sm:text-sm rounded-md">
+                    <option>30 days</option>
+                    <option>90 days</option>
+                    <option selected>1 year</option>
+                    <option>7 years</option>
+                    <option>Indefinite</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6 flex justify-end space-x-3">
+            <button class="px-4 py-2 border border-neutral-300 rounded-md shadow-sm text-sm text-neutral-700 bg-white hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500">
+              Cancel
+            </button>
+            <button class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm text-white bg-neutral-600 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500">
+              Save Settings
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="border-t bg-white p-4 text-center text-neutral-500 text-sm">
+  <p>AcademiAI Manager © 2025 | Joomla 5.3 Component | Version 2.1.4</p>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

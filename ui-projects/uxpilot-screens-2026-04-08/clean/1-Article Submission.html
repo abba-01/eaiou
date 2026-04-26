@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-900">
+    <!-- Header -->
+    <header id="header" class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="flex items-center cursor-pointer">
+                        <i class="fa-solid fa-microscope text-primary-600 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-gray-900">SciReview</span>
+                    </span>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Home</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Articles</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Categories</span>
+                    <span class="text-primary-700 font-medium cursor-pointer">Submit</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">About</span>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-primary-700">
+                        <i class="fa-solid fa-search text-lg"></i>
+                    </button>
+                    <button class="hidden md:block text-gray-600 hover:text-primary-700">
+                        <i class="fa-solid fa-bell text-lg"></i>
+                    </button>
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="User profile" class="w-8 h-8 rounded-full object-cover border border-gray-200">
+                    </div>
+                    <button class="md:hidden text-gray-600">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Progress Header -->
+        <div id="submission-progress" class="bg-white shadow-sm rounded-lg mb-8">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center text-white">
+                        <span class="text-sm font-medium">AR</span>
+                    </div>
+                    <h1 class="text-gray-800 font-medium">Submitting Article for Peer Review</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-teal-600">
+                        <i class="fa-regular fa-circle-check mr-1"></i>
+                        Saved draft
+                    </span>
+                    <button class="text-gray-500">
+                        <i class="fa-regular fa-clock"></i>
+                    </button>
+                    <button class="text-gray-500">
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submission Content -->
+        <div id="submission-content" class="flex w-full">
+            <!-- Progress Sidebar -->
+            <div id="submission-sidebar" class="w-64 p-6 border-r border-gray-200 bg-white rounded-l-lg shadow-sm">
+                <div class="space-y-6">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-teal-500 flex items-center justify-center text-white mr-4">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div class="text-teal-500">Basic Information</div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-teal-500 flex items-center justify-center text-white mr-4">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div class="text-teal-500">Authors & Affiliations</div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-teal-500 flex items-center justify-center text-white mr-4">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div class="text-teal-500">Abstract & Keywords</div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center text-white mr-4">
+                            <span class="text-sm font-medium">4</span>
+                        </div>
+                        <div class="text-teal-600">Upload Manuscript</div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white mr-4">
+                            <span class="text-sm font-medium">5</span>
+                        </div>
+                        <div class="text-gray-500">Review & Submit</div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 pt-6 border-t border-gray-200">
+                    <h3 class="text-sm font-medium text-gray-700 mb-3">Submission Guidelines</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-info text-primary-500 mt-0.5 mr-2"></i>
+                            <span>Accepted file formats: PDF, DOCX</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-info text-primary-500 mt-0.5 mr-2"></i>
+                            <span>Maximum file size: 20MB</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-info text-primary-500 mt-0.5 mr-2"></i>
+                            <span>Figures should be high resolution</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Main Form Area -->
+            <div id="submission-form" class="flex-1 bg-white rounded-r-lg shadow-sm p-6">
+                <h2 class="text-xl font-medium text-gray-800 mb-6">Upload Manuscript Files</h2>
+                
+                <!-- Main Manuscript Upload -->
+                <div id="main-manuscript" class="mb-8">
+                    <h3 class="text-gray-700 mb-4 font-medium">Main Manuscript Document</h3>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 bg-gray-50 flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-cloud-arrow-up text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-600 mb-2 text-center">Drag and drop your manuscript file here</p>
+                        <p class="text-gray-500 text-sm mb-4 text-center">or</p>
+                        <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition duration-200">
+                            Browse Files
+                        </button>
+                        <p class="text-xs text-gray-500 mt-4">PDF or DOCX (Max. 20MB)</p>
+                    </div>
+                </div>
+                
+                <!-- Supplementary Files -->
+                <div id="supplementary-files" class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-gray-700 font-medium">Supplementary Files</h3>
+                        <button class="text-primary-600 hover:text-primary-700 text-sm font-medium flex items-center">
+                            <i class="fa-solid fa-plus mr-1"></i> Add More Files
+                        </button>
+                    </div>
+                    
+                    <!-- Uploaded Files List -->
+                    <div class="space-y-4">
+                        <!-- File 1 -->
+                        <div class="bg-white border border-gray-200 rounded-md p-4 flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-100 rounded-md flex items-center justify-center mr-4">
+                                    <i class="fa-regular fa-file-lines text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium">Figure1_QuantumResults.pdf</h4>
+                                    <p class="text-xs text-gray-500">2.4 MB • Uploaded 2 minutes ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button class="text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button class="text-gray-500 hover:text-red-600">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- File 2 -->
+                        <div class="bg-white border border-gray-200 rounded-md p-4 flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-green-100 rounded-md flex items-center justify-center mr-4">
+                                    <i class="fa-regular fa-file-excel text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium">DataSet_ExperimentalResults.xlsx</h4>
+                                    <p class="text-xs text-gray-500">1.8 MB • Uploaded 5 minutes ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button class="text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button class="text-gray-500 hover:text-red-600">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Upload More Area -->
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-5 bg-gray-50 flex items-center justify-center">
+                            <button class="text-primary-600 hover:text-primary-700 flex items-center">
+                                <i class="fa-solid fa-plus mr-2"></i>
+                                <span>Upload Additional Supplementary File</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cover Letter -->
+                <div id="cover-letter" class="mb-8">
+                    <h3 class="text-gray-700 mb-4 font-medium">Cover Letter</h3>
+                    <div class="border border-gray-200 rounded-md overflow-hidden">
+                        <div class="flex border-b border-gray-200 p-2 bg-gray-50">
+                            <button class="mr-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-bold"></i>
+                            </button>
+                            <button class="mr-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-italic"></i>
+                            </button>
+                            <button class="mr-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-underline"></i>
+                            </button>
+                            <span class="mx-2 text-gray-300">|</span>
+                            <button class="mr-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-list-ul"></i>
+                            </button>
+                            <button class="mr-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-list-ol"></i>
+                            </button>
+                            <span class="mx-2 text-gray-300">|</span>
+                            <button class="mr-2 text-gray-600 hover:text-gray-900">
+                                <i class="fa-solid fa-link"></i>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <textarea class="w-full h-32 border-0 focus:ring-0 focus:outline-none text-gray-800 resize-none" placeholder="Write your cover letter here. Explain why your manuscript is suitable for this journal and highlight its novel contributions to the field..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Information -->
+                <div id="additional-info" class="mb-8">
+                    <h3 class="text-gray-700 mb-4 font-medium">Additional Information</h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Suggested Reviewers -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Suggested Reviewers (Optional)</label>
+                            <div class="space-y-3">
+                                <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0">
+                                    <div class="w-full sm:w-1/2">
+                                        <input type="text" placeholder="Reviewer Name" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
+                                    </div>
+                                    <div class="w-full sm:w-1/2">
+                                        <input type="email" placeholder="Email Address" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <button class="text-primary-600 hover:text-primary-700 text-sm font-medium flex items-center">
+                                        <i class="fa-solid fa-plus mr-1"></i> Add Another Reviewer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Excluded Reviewers -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Excluded Reviewers (Optional)</label>
+                            <div class="space-y-3">
+                                <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0">
+                                    <div class="w-full sm:w-1/2">
+                                        <input type="text" placeholder="Reviewer Name" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
+                                    </div>
+                                    <div class="w-full sm:w-1/2">
+                                        <input type="text" placeholder="Reason for Exclusion" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <button class="text-primary-600 hover:text-primary-700 text-sm font-medium flex items-center">
+                                        <i class="fa-solid fa-plus mr-1"></i> Add Another Exclusion
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Funding Information -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Funding Information</label>
+                            <textarea class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 h-24" placeholder="Enter details about any funding sources for this research..."></textarea>
+                        </div>
+                        
+                        <!-- Conflicts of Interest -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Conflicts of Interest</label>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input id="no-conflicts" name="conflicts" type="radio" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300">
+                                    <label for="no-conflicts" class="ml-2 block text-sm text-gray-700">The authors declare no conflicts of interest</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="has-conflicts" name="conflicts" type="radio" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300">
+                                    <label for="has-conflicts" class="ml-2 block text-sm text-gray-700">The authors declare the following conflicts of interest</label>
+                                </div>
+                                <textarea class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 h-24 mt-2" placeholder="Describe any conflicts of interest..." disabled></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between pt-4 border-t border-gray-200">
+                    <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                        <i class="fa-solid fa-arrow-left mr-2"></i>
+                        Previous: Abstract & Keywords
+                    </button>
+                    <div class="flex space-x-3">
+                        <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                            Save Draft
+                        </button>
+                        <button class="px-6 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+                            Next: Review & Submit
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Sidebar -->
+            <div id="submission-help" class="w-64 p-6 border-l border-gray-200 bg-white rounded-r-lg shadow-sm">
+                <div class="mb-8">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Helpful Tips</h3>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-md">
+                            <h4 class="font-medium text-blue-800 text-sm mb-2">About Manuscript Format</h4>
+                            <p class="text-blue-700 text-xs">Ensure your manuscript follows the journal's formatting guidelines. Check the template for specific requirements.</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-md">
+                            <h4 class="font-medium text-green-800 text-sm mb-2">Cover Letter Advice</h4>
+                            <p class="text-green-700 text-xs">Your cover letter should highlight the significance of your work and why it's appropriate for this journal.</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-md">
+                            <h4 class="font-medium text-yellow-800 text-sm mb-2">Supplementary Materials</h4>
+                            <p class="text-yellow-700 text-xs">Include any data, code, or additional figures that support your research but aren't essential to the main narrative.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Submission Status</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-sm">
+                            <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                            <span class="text-gray-700">Basic Information</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                            <span class="text-gray-700">Authors & Affiliations</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fa-solid fa-check-circle text-green-500 mr-2"></i>
+                            <span class="text-gray-700">Abstract & Keywords</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fa-solid fa-circle-half-stroke text-yellow-500 mr-2"></i>
+                            <span class="text-gray-700">Upload Manuscript</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fa-regular fa-circle text-gray-400 mr-2"></i>
+                            <span class="text-gray-500">Review & Submit</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Need Help?</h3>
+                    <p class="text-sm text-gray-600 mb-4">Have questions about the submission process?</p>
+                    <button class="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-primary-600 hover:bg-gray-50">
+                        <i class="fa-regular fa-life-ring mr-2"></i>
+                        Contact Support
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-gray-900 text-white mt-16">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa-solid fa-microscope text-primary-400 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl">SciReview</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Advancing scientific knowledge through rigorous peer review and open access publishing.</p>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-400 hover:text-white cursor-pointer">
+                            <i class="fa-brands fa-twitter"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white cursor-pointer">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white cursor-pointer">
+                            <i class="fa-brands fa-github"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Home</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Browse Articles</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Submit Research</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Peer Review Process</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Editorial Board</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Ethics Statement</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Open Access Policy</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">FAQs</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-envelope mr-2"></i>
+                            contact@scireview.org
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-phone mr-2"></i>
+                            +1 (555) 123-4567
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-location-dot mr-2"></i>
+                            123 Science Way, Research Park
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">© 2023 SciReview. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <span class="text-gray-400 hover:text-white text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-400 hover:text-white text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-400 hover:text-white text-sm cursor-pointer">Cookie Policy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Help Button -->
+    <div class="fixed bottom-6 right-6">
+        <button class="w-12 h-12 rounded-full bg-primary-600 text-white flex items-center justify-center shadow-lg hover:bg-primary-700">
+            <i class="fa-regular fa-comment-dots text-xl"></i>
+        </button>
+    </div>
+</body>
+</html>

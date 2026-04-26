@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    
+        // B&W override
+        tailwind.config.theme.extend.colors.primary = {
+          50: '#F7F6F3', 100: '#EDECE9', 200: '#E2E0DB',
+          300: '#CAC8C2', 400: '#9A9895', 500: '#5A5856',
+          600: '#18171A', 700: '#18171A', 800: '#18171A', 900: '#0A090B'
+        };
+        tailwind.config.theme.extend.fontFamily = { sans: ['DM Sans', 'system-ui', 'sans-serif'] };
+
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F7F6F3;
+        }
+    </style>
+
+<style id="eaiou-ds">
+/* ── eaiou Design System — Monochrome ── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+:root {
+  --ds-bg:       #F7F6F3;
+  --ds-surface:  #FFFFFF;
+  --ds-border:   #E2E0DB;
+  --ds-ink-1:    #18171A;
+  --ds-ink-2:    #5A5856;
+  --ds-ink-3:    #9A9895;
+  --ds-accent:   #18171A;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-full: 9999px;
+}
+
+/* Font override */
+body, button, input, select, textarea { font-family: 'DM Sans', system-ui, sans-serif !important; }
+h1, h2 { letter-spacing: -0.02em; }
+h1 { font-size: 1.5rem; font-weight: 600; }
+h2 { font-size: 1.25rem; font-weight: 600; }
+h3 { font-size: 1.0625rem; font-weight: 600; }
+
+/* Radius standardisation */
+.rounded-sm  { border-radius: 4px !important; }
+.rounded     { border-radius: 6px !important; }
+.rounded-md  { border-radius: 6px !important; }
+.rounded-lg  { border-radius: 10px !important; }
+.rounded-xl  { border-radius: 14px !important; }
+.rounded-2xl { border-radius: 20px !important; }
+.rounded-full { border-radius: 9999px !important; }
+
+/* Background neutralise */
+body { background-color: #F7F6F3 !important; }
+.bg-\[\#f8fafc\], .bg-gray-50 { background-color: #F7F6F3 !important; }
+
+/* Primary button polish */
+.bg-gray-900 { background-color: #18171A !important; }
+.hover\:bg-gray-800:hover { background-color: #2E2D30 !important; }
+.text-gray-900 { color: #18171A !important; }
+
+/* Card polish */
+.shadow, .shadow-sm { box-shadow: 0 1px 4px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04) !important; }
+.shadow-md { box-shadow: 0 4px 12px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.05) !important; }
+.shadow-lg { box-shadow: 0 8px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06) !important; }
+
+/* Brand accent → near-black */
+[class*="text-primary"], [class*="text-blue"] { color: #18171A !important; }
+[class*="bg-primary-6"], [class*="bg-primary-7"], [class*="bg-primary-8"],
+[class*="bg-primary-9"], [class*="bg-blue-5"], [class*="bg-blue-6"] {
+  background-color: #18171A !important; color: #fff !important;
+}
+[class*="bg-primary-5"]:not([class*="50"]) { background-color: #5A5856 !important; }
+[class*="bg-primary-50"], [class*="bg-primary-100"],
+[class*="bg-blue-50"], [class*="bg-blue-100"] { background-color: #F0EFEB !important; }
+[class*="border-primary"], [class*="border-blue"] { border-color: #CAC8C2 !important; }
+[class*="ring-primary"], [class*="focus\:ring-primary"] { --tw-ring-color: #9A9895 !important; }
+
+/* Badge colour fix: blue badges → neutral */
+.bg-blue-100.text-blue-800, .bg-primary-100.text-primary-700 {
+  background: #EDECE9 !important; color: #18171A !important;
+}
+
+/* Active / selected states */
+[class*="border-b-2"][class*="border-primary"],
+[class*="border-b-2"][class*="border-blue"] { border-color: #18171A !important; }
+
+/* Nav brand */
+.text-primary-700.font-bold, .text-primary-600.font-bold { color: #18171A !important; font-family: 'DM Serif Display', Georgia, serif !important; font-style: italic; }
+
+/* Sidebar active */
+[class*="bg-primary-50"][class*="text-primary-7"] { background: #EDECE9 !important; color: #18171A !important; border-left: 2px solid #18171A; }
+[class*="bg-primary-50"][class*="text-primary-6"] { background: #EDECE9 !important; color: #18171A !important; }
+
+/* Tailwind config primary override (for runtime) */
+</style>
+</head>
+<body>
+    <div id="header" class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="text-gray-800 font-bold text-xl">eaiou</div>
+                <div class="hidden md:flex space-x-6 ml-10">
+                    <span class="text-gray-600 hover:text-gray-700 cursor-pointer">Dashboard</span>
+                    <span class="text-gray-600 hover:text-gray-700 cursor-pointer">My Articles</span>
+                    <span class="text-gray-600 hover:text-gray-700 cursor-pointer">Submit Article</span>
+                    <span class="text-gray-700 font-medium cursor-pointer">Reviews</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-500 hover:text-gray-700">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center">
+                        <span class="text-sm font-medium">JD</span>
+                    </div>
+                    <span class="text-gray-700 hidden md:inline-block">John Doe</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content" class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row">
+            <!-- Left sidebar with article info -->
+            <div id="article-sidebar" class="w-full md:w-64 mb-6 md:mb-0">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sticky top-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Article Information</h3>
+                    
+                    <div class="mb-4">
+                        <div class="text-sm text-gray-500 mb-1">Article ID</div>
+                        <div class="font-medium text-gray-800">ART-2023-0142</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-sm text-gray-500 mb-1">Title</div>
+                        <div class="font-medium text-gray-800">Observer Modal Dynamics in Anomalous Contact</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-sm text-gray-500 mb-1">Authors</div>
+                        <div class="font-medium text-gray-800">J. Smith, K. Johnson, L. Zhang</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-sm text-gray-500 mb-1">Submission Date</div>
+                        <div class="font-medium text-gray-800">July 15, 2023</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-sm text-gray-500 mb-1">Current Status</div>
+                        <div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                            Under Review
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-sm text-gray-500 mb-1">Review Due</div>
+                        <div class="font-medium text-gray-800">August 12, 2023</div>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-gray-200">
+                        <button id="download-article-btn" class="w-full flex items-center justify-center py-2 px-4 bg-gray-100 text-gray-800 rounded-md text-sm font-medium hover:bg-gray-200">
+                            <i class="fa-solid fa-download mr-2"></i>
+                            Download Full Article
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main review form area -->
+            <div id="review-form" class="flex-1 md:ml-8">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800">Article Review Form</h2>
+                        <div class="text-sm text-gray-500">
+                            Review #: <span class="font-medium">R-0142-02</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Review instructions -->
+                    <div id="review-instructions" class="bg-gray-50 border border-gray-300 rounded-md p-4 mb-6">
+                        <div class="flex items-start">
+                            <i class="fa-solid fa-circle-info text-gray-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="text-gray-900 font-medium mb-1">Reviewer Instructions</h4>
+                                <p class="text-gray-800 text-sm">Please evaluate the article based on the criteria below. Provide constructive feedback to help the authors improve their work. Your review will remain anonymous to the authors unless you choose to disclose your identity.</p>
+                                <p class="text-gray-800 text-sm mt-2">For each criterion, provide a score from 1 (poor) to 5 (excellent) and detailed comments to justify your evaluation.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Evaluation criteria section -->
+                    <div id="evaluation-criteria" class="mb-8">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Evaluation Criteria</h3>
+                        
+                        <!-- Criterion 1: Scholarly Structure -->
+                        <div id="criterion-structure" class="mb-6 border border-gray-200 rounded-md p-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
+                                <h4 class="text-gray-800 font-medium">1. Scholarly Structure</h4>
+                                <div class="flex items-center mt-2 md:mt-0">
+                                    <div class="text-sm text-gray-600 mr-3">Score:</div>
+                                    <div class="flex space-x-1">
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">1</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">2</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">3</button>
+                                        <button class="w-8 h-8 rounded-md bg-gray-900 text-white flex items-center justify-center hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400">4</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">5</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Evaluate how well the article follows academic structure with clear sections (abstract, introduction, methods, results, discussion, conclusion).</p>
+                            <textarea class="w-full border border-gray-300 rounded-md p-3 text-sm" rows="3" placeholder="Provide your comments on the scholarly structure...">The article follows the standard academic structure well. All required sections are present and logically organized. The abstract could be more concise and the conclusion could better summarize the key findings.</textarea>
+                        </div>
+                        
+                        <!-- Criterion 2: Originality -->
+                        <div id="criterion-originality" class="mb-6 border border-gray-200 rounded-md p-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
+                                <h4 class="text-gray-800 font-medium">2. Originality</h4>
+                                <div class="flex items-center mt-2 md:mt-0">
+                                    <div class="text-sm text-gray-600 mr-3">Score:</div>
+                                    <div class="flex space-x-1">
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">1</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">2</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">3</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">4</button>
+                                        <button class="w-8 h-8 rounded-md bg-gray-900 text-white flex items-center justify-center hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400">5</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Assess the originality of the research question, approach, and contribution to the field.</p>
+                            <textarea class="w-full border border-gray-300 rounded-md p-3 text-sm" rows="3" placeholder="Provide your comments on originality...">The research presents a novel approach to observer modal dynamics that I haven't seen elsewhere in the literature. The integration of anomalous contact theory with observer effects is particularly innovative and opens new avenues for research.</textarea>
+                        </div>
+                        
+                        <!-- Criterion 3: Literature Grounding -->
+                        <div id="criterion-literature" class="mb-6 border border-gray-200 rounded-md p-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
+                                <h4 class="text-gray-800 font-medium">3. Literature Grounding</h4>
+                                <div class="flex items-center mt-2 md:mt-0">
+                                    <div class="text-sm text-gray-600 mr-3">Score:</div>
+                                    <div class="flex space-x-1">
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">1</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">2</button>
+                                        <button class="w-8 h-8 rounded-md bg-gray-900 text-white flex items-center justify-center hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400">3</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">4</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">5</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Evaluate how well the research is situated within existing literature and builds upon previous work.</p>
+                            <textarea class="w-full border border-gray-300 rounded-md p-3 text-sm" rows="3" placeholder="Provide your comments on literature grounding...">The literature review is adequate but could be more comprehensive. Several key papers in the field of observer effects are not cited (e.g., Chen et al. 2021, Rodriguez 2022). The authors should strengthen the connections between their work and existing research.</textarea>
+                        </div>
+                        
+                        <!-- Criterion 4: Methodological Rigor -->
+                        <div id="criterion-methodology" class="mb-6 border border-gray-200 rounded-md p-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
+                                <h4 class="text-gray-800 font-medium">4. Methodological Rigor</h4>
+                                <div class="flex items-center mt-2 md:mt-0">
+                                    <div class="text-sm text-gray-600 mr-3">Score:</div>
+                                    <div class="flex space-x-1">
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">1</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">2</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">3</button>
+                                        <button class="w-8 h-8 rounded-md bg-gray-900 text-white flex items-center justify-center hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400">4</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">5</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Assess the appropriateness, execution, and documentation of the research methodology.</p>
+                            <textarea class="w-full border border-gray-300 rounded-md p-3 text-sm" rows="3" placeholder="Provide your comments on methodological rigor..."></textarea>
+                        </div>
+                        
+                        <!-- Criterion 5: Results Evidence -->
+                        <div id="criterion-results" class="mb-6 border border-gray-200 rounded-md p-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
+                                <h4 class="text-gray-800 font-medium">5. Results Evidence</h4>
+                                <div class="flex items-center mt-2 md:mt-0">
+                                    <div class="text-sm text-gray-600 mr-3">Score:</div>
+                                    <div class="flex space-x-1">
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">1</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">2</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">3</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">4</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">5</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Evaluate the quality, presentation, and interpretation of research results.</p>
+                            <textarea class="w-full border border-gray-300 rounded-md p-3 text-sm" rows="3" placeholder="Provide your comments on results evidence..."></textarea>
+                        </div>
+                        
+                        <!-- Criterion 6: Discussion Nuance -->
+                        <div id="criterion-discussion" class="mb-6 border border-gray-200 rounded-md p-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
+                                <h4 class="text-gray-800 font-medium">6. Discussion Nuance</h4>
+                                <div class="flex items-center mt-2 md:mt-0">
+                                    <div class="text-sm text-gray-600 mr-3">Score:</div>
+                                    <div class="flex space-x-1">
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">1</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">2</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">3</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">4</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">5</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Assess the depth, balance, and insight of the discussion section.</p>
+                            <textarea class="w-full border border-gray-300 rounded-md p-3 text-sm" rows="3" placeholder="Provide your comments on discussion nuance..."></textarea>
+                        </div>
+                        
+                        <!-- Criterion 7: Citation Accuracy -->
+                        <div id="criterion-citation" class="mb-6 border border-gray-200 rounded-md p-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
+                                <h4 class="text-gray-800 font-medium">7. Citation Accuracy</h4>
+                                <div class="flex items-center mt-2 md:mt-0">
+                                    <div class="text-sm text-gray-600 mr-3">Score:</div>
+                                    <div class="flex space-x-1">
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">1</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">2</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">3</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">4</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">5</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Evaluate the accuracy, formatting, and completeness of citations and references.</p>
+                            <textarea class="w-full border border-gray-300 rounded-md p-3 text-sm" rows="3" placeholder="Provide your comments on citation accuracy..."></textarea>
+                        </div>
+                        
+                        <!-- Criterion 8: Overall Impact -->
+                        <div id="criterion-impact" class="mb-6 border border-gray-200 rounded-md p-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
+                                <h4 class="text-gray-800 font-medium">8. Overall Impact</h4>
+                                <div class="flex items-center mt-2 md:mt-0">
+                                    <div class="text-sm text-gray-600 mr-3">Score:</div>
+                                    <div class="flex space-x-1">
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">1</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">2</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">3</button>
+                                        <button class="w-8 h-8 rounded-md bg-gray-900 text-white flex items-center justify-center hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400">4</button>
+                                        <button class="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400">5</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Assess the potential significance and contribution of the research to the field.</p>
+                            <textarea class="w-full border border-gray-300 rounded-md p-3 text-sm" rows="3" placeholder="Provide your comments on overall impact...">This research makes a valuable contribution to the field by connecting previously separate theoretical frameworks. If the methodological concerns are addressed, this could be a significant paper that influences future research directions.</textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Summary and recommendation section -->
+                    <div id="review-summary" class="mb-8">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Summary and Recommendation</h3>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Overall Assessment</label>
+                            <textarea class="w-full border border-gray-300 rounded-md p-3" rows="5" placeholder="Provide a summary of the article's strengths and weaknesses...">The article presents an innovative approach to observer modal dynamics with potential significant impact on the field. Strengths include originality of the research question and solid methodological approach. Weaknesses include incomplete literature review and some unclear explanations in the results section. With revisions to address these issues, this could be a valuable contribution to the literature.</textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Confidential Comments to Editor <span class="text-sm font-normal text-gray-500">(not shared with authors)</span></label>
+                            <textarea class="w-full border border-gray-300 rounded-md p-3" rows="3" placeholder="Provide any confidential comments for the editor...">I believe this paper has strong potential but requires revision before publication. The authors need to address the literature gaps and clarify their methodology. I would be willing to review a revised version.</textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Recommendation</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="border border-gray-200 rounded-md p-4 bg-white hover:bg-gray-50 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <input type="radio" name="recommendation" id="accept" class="h-4 w-4 text-gray-700 focus:ring-gray-400">
+                                        <label for="accept" class="ml-2 block text-gray-800 font-medium">Accept</label>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mt-2 ml-6">The article can be published as is or with minor copyediting.</p>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-md p-4 bg-white hover:bg-gray-50 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <input type="radio" name="recommendation" id="minor-revision" class="h-4 w-4 text-gray-700 focus:ring-gray-400">
+                                        <label for="minor-revision" class="ml-2 block text-gray-800 font-medium">Minor Revision</label>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mt-2 ml-6">The article requires minor changes before publication.</p>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-md p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <input type="radio" name="recommendation" id="major-revision" class="h-4 w-4 text-gray-700 focus:ring-gray-400" checked>
+                                        <label for="major-revision" class="ml-2 block text-gray-800 font-medium">Major Revision</label>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mt-2 ml-6">The article requires substantial changes before it can be considered for publication.</p>
+                                </div>
+                                
+                                <div class="border border-gray-200 rounded-md p-4 bg-white hover:bg-gray-50 cursor-pointer">
+                                    <div class="flex items-center">
+                                        <input type="radio" name="recommendation" id="reject" class="h-4 w-4 text-gray-700 focus:ring-gray-400">
+                                        <label for="reject" class="ml-2 block text-gray-800 font-medium">Reject</label>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mt-2 ml-6">The article is not suitable for publication in this journal.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Reviewer information section -->
+                    <div id="reviewer-info" class="mb-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-lg font-medium text-gray-800 mb-4">Reviewer Information</h3>
+                        
+                        <div class="flex flex-col md:flex-row md:space-x-4">
+                            <div class="w-full md:w-1/2 mb-4 md:mb-0">
+                                <label class="block text-gray-700 text-sm font-medium mb-2">Your Expertise in this Subject Area</label>
+                                <select class="w-full border border-gray-300 rounded-md py-2 px-3">
+                                    <option>High - This is my primary research area</option>
+                                    <option>Medium - I am knowledgeable in this area</option>
+                                    <option>Low - I have basic familiarity with this topic</option>
+                                </select>
+                            </div>
+                            
+                            <div class="w-full md:w-1/2">
+                                <label class="block text-gray-700 text-sm font-medium mb-2">Disclose Identity to Authors?</label>
+                                <div class="flex items-center space-x-4 mt-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="radio" name="identity" class="h-4 w-4 text-gray-700 focus:ring-gray-400">
+                                        <span class="ml-2 text-gray-700">Yes</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="radio" name="identity" class="h-4 w-4 text-gray-700 focus:ring-gray-400" checked>
+                                        <span class="ml-2 text-gray-700">No (Anonymous Review)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between border-t border-gray-200 pt-6">
+                        <button class="py-2 px-4 bg-white border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50">
+                            Save Draft
+                        </button>
+                        <div class="flex space-x-3">
+                            <button class="py-2 px-4 bg-white border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50">
+                                Preview
+                            </button>
+                            <button class="py-2 px-4 bg-gray-900 text-white rounded-md font-medium hover:bg-gray-900">
+                                Submit Review
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right sidebar with rubric guide -->
+            <div id="rubric-sidebar" class="hidden lg:block w-72 ml-8">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sticky top-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Scoring Guide</h3>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center text-gray-800 font-medium mr-3">1</div>
+                            <div>
+                                <h4 class="text-gray-800 font-medium">Poor</h4>
+                                <p class="text-xs text-gray-600">Significant deficiencies</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center text-gray-800 font-medium mr-3">2</div>
+                            <div>
+                                <h4 class="text-gray-800 font-medium">Fair</h4>
+                                <p class="text-xs text-gray-600">Major improvements needed</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center text-gray-800 font-medium mr-3">3</div>
+                            <div>
+                                <h4 class="text-gray-800 font-medium">Good</h4>
+                                <p class="text-xs text-gray-600">Acceptable with revisions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center text-gray-900 font-medium mr-3">4</div>
+                            <div>
+                                <h4 class="text-gray-800 font-medium">Very Good</h4>
+                                <p class="text-xs text-gray-600">Minor revisions needed</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center text-gray-800 font-medium mr-3">5</div>
+                            <div>
+                                <h4 class="text-gray-800 font-medium">Excellent</h4>
+                                <p class="text-xs text-gray-600">Publishable as is</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-200 pt-4">
+                        <h4 class="font-medium text-gray-800 mb-2">Criteria Weights</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Scholarly Structure</span>
+                                <span class="text-gray-800">10%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Originality</span>
+                                <span class="text-gray-800">20%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Literature Grounding</span>
+                                <span class="text-gray-800">15%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Methodological Rigor</span>
+                                <span class="text-gray-800">20%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Results Evidence</span>
+                                <span class="text-gray-800">15%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Discussion Nuance</span>
+                                <span class="text-gray-800">10%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Citation Accuracy</span>
+                                <span class="text-gray-800">5%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Overall Impact</span>
+                                <span class="text-gray-800">5%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <button class="w-full flex items-center justify-center py-2 px-4 bg-secondary-100 text-secondary-700 rounded-md text-sm font-medium hover:bg-secondary-200">
+                            <i class="fa-regular fa-circle-question mr-2"></i>
+                            View Review Guidelines
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="footer" class="bg-white border-t border-gray-200 mt-8">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 eaiou. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Help</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Contact</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-full">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 h-[100vh] bg-white border-r border-gray-200 fixed top-0 left-0 z-30 overflow-y-auto">
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-layer-group text-primary-600 text-xl"></i>
+                    <span class="text-xl font-semibold text-gray-800">ProjectHub</span>
+                </div>
+            </div>
+            
+            <Sidebar aria-label="Admin Dashboard sidebar" className="!relative">
+                <Sidebar.Items>
+                    <Sidebar.ItemGroup>
+                        <Sidebar.Item href="#" icon={HiChartPie}>
+                            Dashboard
+                        </Sidebar.Item>
+                        <Sidebar.Item href="#" icon={HiFolder}>
+                            Projects
+                        </Sidebar.Item>
+                        <Sidebar.Item href="#" icon={HiFlag}>
+                            Milestones
+                        </Sidebar.Item>
+                        <Sidebar.Item href="#" icon={HiClipboardCheck}>
+                            Tasks
+                        </Sidebar.Item>
+                        <Sidebar.Item href="#" icon={HiCalendar}>
+                            Events
+                        </Sidebar.Item>
+                        <Sidebar.Item href="#" icon={HiDocument}>
+                            Documents
+                        </Sidebar.Item>
+                        <Sidebar.Item href="#" icon={HiUserGroup} active>
+                            Contacts
+                        </Sidebar.Item>
+                    </Sidebar.ItemGroup>
+                    <Sidebar.ItemGroup>
+                        <Sidebar.Item href="#" icon={HiUserGroup}>
+                            Team
+                        </Sidebar.Item>
+                        <Sidebar.Item href="#" icon={HiCog}>
+                            Settings
+                        </Sidebar.Item>
+                        <Sidebar.Item href="#" icon={HiQuestionMarkCircle}>
+                            Help
+                        </Sidebar.Item>
+                    </Sidebar.ItemGroup>
+                </Sidebar.Items>
+            </Sidebar>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 ml-64">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200 p-4 flex justify-between items-center sticky top-0 z-20">
+                <div>
+                    <div class="flex items-center">
+                        <button class="mr-3 text-gray-500 hover:text-gray-700">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <h1 class="text-xl font-semibold text-gray-800">Contact Details</h1>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 rounded-full hover:bg-gray-100">
+                        <i class="fa-regular fa-bell text-gray-600"></i>
+                    </button>
+                    <Dropdown label="" dismissOnClick={false} renderTrigger={() => <Avatar alt="User settings" img="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" rounded />}>
+                        <Dropdown.Item>Profile</Dropdown.Item>
+                        <Dropdown.Item>Settings</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item>Sign out</Dropdown.Item>
+                    </Dropdown>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main id="main-content" class="p-6">
+                <!-- Contact Profile Header -->
+                <section id="contact-profile-header" class="mb-6">
+                    <Card id="contact-profile-card">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                            <div class="flex items-center gap-4">
+                                <Avatar size="xl" img="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" rounded />
+                                <div>
+                                    <H2>Sarah Mendoza</H2>
+                                    <div class="flex items-center mt-1">
+                                        <Badge color="info" className="mr-2">Witness</Badge>
+                                        <Paragraph class="text-gray-500">Added on May 12, 2023</Paragraph>
+                                    </div>
+                                    <div class="flex items-center mt-2 gap-4">
+                                        <div class="flex items-center">
+                                            <i class="fa-solid fa-envelope text-gray-500 mr-2"></i>
+                                            <Paragraph>sarah.mendoza@example.com</Paragraph>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fa-solid fa-phone text-gray-500 mr-2"></i>
+                                            <Paragraph>(555) 123-4567</Paragraph>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <Button variant="primary">
+                                    <i class="fa-solid fa-plus mr-2"></i> Add to Project
+                                </Button>
+                                <Button variant="outline">
+                                    <i class="fa-solid fa-pencil mr-2"></i> Edit
+                                </Button>
+                                <Dropdown label="" dismissOnClick={false} renderTrigger={() => 
+                                    <Button variant="ghost" className="!p-2 !w-min">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </Button>
+                                }>
+                                    <Dropdown.Item>Export Data</Dropdown.Item>
+                                    <Dropdown.Item>Print Profile</Dropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item>Archive Contact</Dropdown.Item>
+                                </Dropdown>
+                            </div>
+                        </div>
+                    </Card>
+                </section>
+
+                <!-- Tabs Navigation -->
+                <div id="contact-tabs" class="mb-6 border-b border-gray-200">
+                    <div class="flex flex-wrap -mb-px">
+                        <button class="inline-block p-4 border-b-2 border-primary-600 text-primary-600 font-medium">
+                            Profile Info
+                        </button>
+                        <button class="inline-block p-4 text-gray-500 hover:text-gray-700 font-medium">
+                            Associated Projects
+                        </button>
+                        <button class="inline-block p-4 text-gray-500 hover:text-gray-700 font-medium">
+                            Uploaded Files
+                        </button>
+                        <button class="inline-block p-4 text-gray-500 hover:text-gray-700 font-medium">
+                            Contact Logs
+                        </button>
+                        <button class="inline-block p-4 text-gray-500 hover:text-gray-700 font-medium">
+                            Investigation Notes
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Profile Info Section -->
+                <section id="profile-info-section" class="mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Personal Details -->
+                        <Card id="personal-details">
+                            <div class="flex justify-between items-start mb-4">
+                                <H4>Personal Details</H4>
+                                <Button variant="ghost" className="!p-2 !w-min">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </Button>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <Paragraph class="text-sm text-gray-500">Full Name</Paragraph>
+                                    <Paragraph class="font-medium">Sarah Mendoza</Paragraph>
+                                </div>
+                                <div>
+                                    <Paragraph class="text-sm text-gray-500">Date of Birth</Paragraph>
+                                    <Paragraph class="font-medium">March 15, 1985</Paragraph>
+                                </div>
+                                <div>
+                                    <Paragraph class="text-sm text-gray-500">Address</Paragraph>
+                                    <Paragraph class="font-medium">123 Main Street, Apt 4B</Paragraph>
+                                    <Paragraph class="font-medium">San Francisco, CA 94107</Paragraph>
+                                </div>
+                                <div>
+                                    <Paragraph class="text-sm text-gray-500">Occupation</Paragraph>
+                                    <Paragraph class="font-medium">Software Engineer</Paragraph>
+                                </div>
+                            </div>
+                        </Card>
+
+                        <!-- Contact Information -->
+                        <Card id="contact-information">
+                            <div class="flex justify-between items-start mb-4">
+                                <H4>Contact Information</H4>
+                                <Button variant="ghost" className="!p-2 !w-min">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </Button>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <Paragraph class="text-sm text-gray-500">Email</Paragraph>
+                                    <Paragraph class="font-medium">sarah.mendoza@example.com</Paragraph>
+                                </div>
+                                <div>
+                                    <Paragraph class="text-sm text-gray-500">Phone (Primary)</Paragraph>
+                                    <Paragraph class="font-medium">(555) 123-4567</Paragraph>
+                                </div>
+                                <div>
+                                    <Paragraph class="text-sm text-gray-500">Phone (Secondary)</Paragraph>
+                                    <Paragraph class="font-medium">(555) 987-6543</Paragraph>
+                                </div>
+                                <div>
+                                    <Paragraph class="text-sm text-gray-500">Preferred Contact Method</Paragraph>
+                                    <Paragraph class="font-medium">Email</Paragraph>
+                                </div>
+                            </div>
+                        </Card>
+
+                        <!-- Case Information -->
+                        <Card id="case-information">
+                            <div class="flex justify-between items-start mb-4">
+                                <H4>Case Information</H4>
+                                <Button variant="ghost" className="!p-2 !w-min">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </Button>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <Paragraph class="text-sm text-gray-500">Contact Type</Paragraph>
+                                    <Paragraph class="font-medium">Witness</Paragraph>
+                                </div>
+                                <div>
+                                    <Paragraph class="text-sm text-gray-500">Primary Case</Paragraph>
+                                    <Paragraph class="font-medium">Mobile App Development</Paragraph>
+                                </div>
+                                <div>
+                                    <Paragraph class="text-sm text-gray-500">Assigned Investigator</Paragraph>
+                                    <div class="flex items-center mt-1">
+                                        <Avatar size="xs" img="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" rounded />
+                                        <span class="ml-2 font-medium">Michael Chen</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <Paragraph class="text-sm text-gray-500">Status</Paragraph>
+                                    <Badge color="success">Active</Badge>
+                                </div>
+                            </div>
+                        </Card>
+                    </div>
+                </section>
+
+                <!-- Associated Projects Section -->
+                <section id="associated-projects-section" class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <H3>Associated Projects</H3>
+                        <Button variant="outline" size="sm">
+                            <i class="fa-solid fa-plus mr-2"></i> Link to Project
+                        </Button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <Card id="project-card-1">
+                            <div class="p-2 bg-primary-100 rounded-lg w-fit mb-3">
+                                <i class="fa-solid fa-folder text-primary-600 text-xl"></i>
+                            </div>
+                            <H4>Mobile App Development</H4>
+                            <div class="mt-2">
+                                <Badge color="info">Primary Witness</Badge>
+                            </div>
+                            <Paragraph class="text-gray-500 mt-3">
+                                Development of a new mobile application for client tracking and management.
+                            </Paragraph>
+                            <div class="flex justify-between items-center mt-4">
+                                <Paragraph class="text-sm text-gray-500">Added: May 12, 2023</Paragraph>
+                                <Button variant="ghost" className="!p-2 !w-min">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </Button>
+                            </div>
+                        </Card>
+
+                        <Card id="project-card-2">
+                            <div class="p-2 bg-green-100 rounded-lg w-fit mb-3">
+                                <i class="fa-solid fa-folder text-green-600 text-xl"></i>
+                            </div>
+                            <H4>Website Redesign</H4>
+                            <div class="mt-2">
+                                <Badge color="warning">Technical Consultant</Badge>
+                            </div>
+                            <Paragraph class="text-gray-500 mt-3">
+                                Complete overhaul of company website with new branding and improved UX.
+                            </Paragraph>
+                            <div class="flex justify-between items-center mt-4">
+                                <Paragraph class="text-sm text-gray-500">Added: June 3, 2023</Paragraph>
+                                <Button variant="ghost" className="!p-2 !w-min">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </Button>
+                            </div>
+                        </Card>
+                    </div>
+                </section>
+
+                <!-- Uploaded Files Section -->
+                <section id="uploaded-files-section" class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <H3>Uploaded Files</H3>
+                        <Button variant="primary" size="sm">
+                            <i class="fa-solid fa-upload mr-2"></i> Upload File
+                        </Button>
+                    </div>
+                    
+                    <Card id="files-table-card">
+                        <div class="overflow-x-auto">
+                            <Table>
+                                <Table.Head>
+                                    <Table.HeadCell>File Name</Table.HeadCell>
+                                    <Table.HeadCell>Project</Table.HeadCell>
+                                    <Table.HeadCell>Type</Table.HeadCell>
+                                    <Table.HeadCell>Uploaded By</Table.HeadCell>
+                                    <Table.HeadCell>Date</Table.HeadCell>
+                                    <Table.HeadCell>
+                                        <span class="sr-only">Actions</span>
+                                    </Table.HeadCell>
+                                </Table.Head>
+                                <Table.Body className="divide-y">
+                                    <Table.Row className="bg-white">
+                                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900">
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-file-audio text-blue-600 mr-2"></i>
+                                                Initial Interview Recording
+                                            </div>
+                                        </Table.Cell>
+                                        <Table.Cell>Mobile App Development</Table.Cell>
+                                        <Table.Cell>Audio</Table.Cell>
+                                        <Table.Cell>
+                                            <div class="flex items-center">
+                                                <Avatar size="xs" img="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" rounded />
+                                                <span class="ml-2">Michael Chen</span>
+                                            </div>
+                                        </Table.Cell>
+                                        <Table.Cell>May 12, 2023</Table.Cell>
+                                        <Table.Cell>
+                                            <div class="flex items-center space-x-2">
+                                                <Button variant="ghost" className="!p-2 !w-min">
+                                                    <i class="fa-solid fa-download"></i>
+                                                </Button>
+                                                <Button variant="ghost" className="!p-2 !w-min">
+                                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                </Button>
+                                            </div>
+                                        </Table.Cell>
+                                    </Table.Row>
+
+                                    <Table.Row className="bg-white">
+                                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900">
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-file-pdf text-red-600 mr-2"></i>
+                                                Interview Transcript
+                                            </div>
+                                        </Table.Cell>
+                                        <Table.Cell>Mobile App Development</Table.Cell>
+                                        <Table.Cell>PDF</Table.Cell>
+                                        <Table.Cell>
+                                            <div class="flex items-center">
+                                                <Avatar size="xs" img="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" rounded />
+                                                <span class="ml-2">Sarah Johnson</span>
+                                            </div>
+                                        </Table.Cell>
+                                        <Table.Cell>May 15, 2023</Table.Cell>
+                                        <Table.Cell>
+                                            <div class="flex items-center space-x-2">
+                                                <Button variant="ghost" className="!p-2 !w-min">
+                                                    <i class="fa-solid fa-download"></i>
+                                                </Button>
+                                                <Button variant="ghost" className="!p-2 !w-min">
+                                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                </Button>
+                                            </div>
+                                        </Table.Cell>
+                                    </Table.Row>
+
+                                    <Table.Row className="bg-white">
+                                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900">
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-file-image text-green-600 mr-2"></i>
+                                                Supporting Evidence Photos
+                                            </div>
+                                        </Table.Cell>
+                                        <Table.Cell>Website Redesign</Table.Cell>
+                                        <Table.Cell>ZIP</Table.Cell>
+                                        <Table.Cell>
+                                            <div class="flex items-center">
+                                                <Avatar size="xs" img="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" rounded />
+                                                <span class="ml-2">Michael Chen</span>
+                                            </div>
+                                        </Table.Cell>
+                                        <Table.Cell>June 5, 2023</Table.Cell>
+                                        <Table.Cell>
+                                            <div class="flex items-center space-x-2">
+                                                <Button variant="ghost" className="!p-2 !w-min">
+                                                    <i class="fa-solid fa-download"></i>
+                                                </Button>
+                                                <Button variant="ghost" className="!p-2 !w-min">
+                                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                </Button>
+                                            </div>
+                                        </Table.Cell>
+                                    </Table.Row>
+
+                                    <Table.Row className="bg-white">
+                                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900">
+                                            <div class="flex items-center">
+                                                <i class="fa-solid fa-file-word text-blue-600 mr-2"></i>
+                                                Follow-up Questions
+                                            </div>
+                                        </Table.Cell>
+                                        <Table.Cell>Mobile App Development</Table.Cell>
+                                        <Table.Cell>DOCX</Table.Cell>
+                                        <Table.Cell>
+                                            <div class="flex items-center">
+                                                <Avatar size="xs" img="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" rounded />
+                                                <span class="ml-2">Jessica Lee</span>
+                                            </div>
+                                        </Table.Cell>
+                                        <Table.Cell>June 10, 2023</Table.Cell>
+                                        <Table.Cell>
+                                            <div class="flex items-center space-x-2">
+                                                <Button variant="ghost" className="!p-2 !w-min">
+                                                    <i class="fa-solid fa-download"></i>
+                                                </Button>
+                                                <Button variant="ghost" className="!p-2 !w-min">
+                                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                </Button>
+                                            </div>
+                                        </Table.Cell>
+                                    </Table.Row>
+                                </Table.Body>
+                            </Table>
+                        </div>
+                    </Card>
+                </section>
+
+                <!-- Contact Logs Section -->
+                <section id="contact-logs-section" class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <H3>Contact Logs</H3>
+                        <Button variant="primary" size="sm">
+                            <i class="fa-solid fa-plus mr-2"></i> Log Interaction
+                        </Button>
+                    </div>
+                    
+                    <Card id="contact-logs-timeline">
+                        <div class="flow-root">
+                            <ul class="divide-y divide-gray-200">
+                                <li class="py-4">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="p-2 bg-primary-100 rounded-full">
+                                                <i class="fa-solid fa-phone text-primary-600"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex justify-between">
+                                                <H5>Phone Call</H5>
+                                                <Paragraph class="text-sm text-gray-500">Today, 10:30 AM</Paragraph>
+                                            </div>
+                                            <Paragraph class="mt-1">Follow-up on previous interview questions and clarification about technical details.</Paragraph>
+                                            <div class="mt-2 flex items-center">
+                                                <Badge color="info" className="mr-2">Mobile App Development</Badge>
+                                                <Paragraph class="text-sm text-gray-500">
+                                                    Logged by:
+                                                    <span class="font-medium ml-1">Michael Chen</span>
+                                                </Paragraph>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-4">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="p-2 bg-blue-100 rounded-full">
+                                                <i class="fa-solid fa-envelope text-blue-600"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex justify-between">
+                                                <H5>Email</H5>
+                                                <Paragraph class="text-sm text-gray-500">June 10, 2023</Paragraph>
+                                            </div>
+                                            <Paragraph class="mt-1">Sent additional questions regarding the user interface design preferences.</Paragraph>
+                                            <div class="mt-2 flex items-center">
+                                                <Badge color="info" className="mr-2">Website Redesign</Badge>
+                                                <Paragraph class="text-sm text-gray-500">
+                                                    Logged by:
+                                                    <span class="font-medium ml-1">Sarah Johnson</span>
+                                                </Paragraph>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-4">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="p-2 bg-green-100 rounded-full">
+                                                <i class="fa-solid fa-user text-green-600"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex justify-between">
+                                                <H5>In-person Meeting</H5>
+                                                <Paragraph class="text-sm text-gray-500">May 12, 2023</Paragraph>
+                                            </div>
+                                            <Paragraph class="mt-1">Initial interview conducted at headquarters office. Gathered preliminary information about witness account.</Paragraph>
+                                            <div class="mt-2 flex items-center">
+                                                <Badge color="info" className="mr-2">Mobile App Development</Badge>
+                                                <Paragraph class="text-sm text-gray-500">
+                                                    Logged by:
+                                                    <span class="font-medium ml-1">Michael Chen</span>
+                                                </Paragraph>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </Card>
+                </section>
+
+                <!-- Investigation Notes Section -->
+                <section id="investigation-notes-section">
+                    <div class="flex justify-between items-center mb-4">
+                        <H3>Investigation Notes</H3>
+                        <Button variant="primary" size="sm">
+                            <i class="fa-solid fa-plus mr-2"></i> Add Note
+                        </Button>
+                    </div>
+                    
+                    <Card id="investigation-notes-list">
+                        <div class="space-y-6">
+                            <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                                <div class="flex justify-between items-start">
+                                    <H4>Key Technical Insights</H4>
+                                    <Button variant="ghost" className="!p-2 !w-min">
+                                        <i class="fa-solid fa-pencil"></i>
+                                    </Button>
+                                </div>
+                                <Paragraph class="mt-2">
+                                    Sarah provided critical insights about the backend architecture that could significantly impact our approach to the mobile app development. Her experience with similar systems makes her testimony particularly valuable.
+                                </Paragraph>
+                                <div class="flex justify-between mt-4">
+                                    <div class="flex items-center">
+                                        <Avatar size="xs" img="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" rounded />
+                                        <Paragraph class="text-sm ml-2">
+                                            Added by Michael Chen
+                                        </Paragraph>
+                                    </div>
+                                    <Paragraph class="text-sm text-gray-500">June 10, 2023</Paragraph>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                                <div class="flex justify-between items-start">
+                                    <H4>Credibility Assessment</H4>
+                                    <Button variant="ghost" className="!p-2 !w-min">
+                                        <i class="fa-solid fa-pencil"></i>
+                                    </Button>
+                                </div>
+                                <Paragraph class="mt-2">
+                                    Based on cross-referencing with other testimonies and technical documentation, Sarah's account appears highly credible. Her technical expertise is evident and her timeline aligns with other evidence collected.
+                                </Paragraph>
+                                <div class="flex justify-between mt-4">
+                                    <div class="

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#007cba',
+                        emerald: '#00b894',
+                        coral: '#fd79a8',
+                        orange: '#fdcb6e',
+                        purple: '#6c5ce7',
+                        charcoal: '#2d3436',
+                        mediumgray: '#636e72',
+                        success: '#00b894',
+                        warning: '#fdcb6e',
+                        error: '#e17055',
+                        info: '#007cba',
+                        offwhite: '#FAFAF8'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                        'mono': ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-offwhite text-charcoal">
+    <header id="header" class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                        PR
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-lg">PeerTrail</span>
+                        <span class="text-xs text-mediumgray">Transparent Scientific Publishing</span>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Submit Article</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">Browse Articles</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Reviews</span>
+                    <span class="font-medium hover:text-primary transition cursor-pointer">My Submissions</span>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="search-toggle" class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-highlighter"></i>
+                    </button>
+                    <button class="text-charcoal hover:text-primary transition relative">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-coral text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                    </button>
+                    <div class="w-8 h-8 rounded-full overflow-hidden">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User profile" class="w-full h-full object-cover">
+                    </div>
+                    <button class="md:hidden text-charcoal hover:text-primary transition">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="global-search-results" class="bg-white shadow-md py-4 border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="relative mb-6">
+                <input type="text" value="CRISPR gene therapy" placeholder="Search articles, authors, audit trails, annotations..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <button class="absolute right-3 top-3 text-primary">
+                    <i class="fa-solid fa-search"></i>
+                </button>
+            </div>
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex space-x-2 text-sm">
+                    <span class="font-medium">Active filters:</span>
+                    <div class="bg-primary/10 text-primary px-2 py-1 rounded-full flex items-center">
+                        CRISPR <button class="ml-1 text-xs"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="bg-primary/10 text-primary px-2 py-1 rounded-full flex items-center">
+                        gene therapy <button class="ml-1 text-xs"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2 text-sm">
+                    <span class="text-mediumgray">Sort by:</span>
+                    <select class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-primary">
+                        <option>Relevance</option>
+                        <option>Date (newest)</option>
+                        <option>Most annotated</option>
+                        <option>Most cited</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex space-x-2 text-sm mb-4">
+                <button class="bg-primary text-white px-3 py-1 rounded-md">All Results (124)</button>
+                <button class="text-mediumgray hover:text-primary px-3 py-1 rounded-md">Articles (78)</button>
+                <button class="text-mediumgray hover:text-primary px-3 py-1 rounded-md">Authors (12)</button>
+                <button class="text-mediumgray hover:text-primary px-3 py-1 rounded-md">Audit Trails (18)</button>
+                <button class="text-mediumgray hover:text-primary px-3 py-1 rounded-md">Annotations (16)</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="search-results" class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex">
+                <div id="filters-sidebar" class="hidden md:block w-64 pr-6">
+                    <div class="bg-white rounded-xl shadow-sm p-4 mb-4">
+                        <h3 class="font-semibold mb-3">Publication Date</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="date-all" class="mr-2">
+                                <label for="date-all">All time</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="date-month" class="mr-2" checked>
+                                <label for="date-month">Last month</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="date-year" class="mr-2">
+                                <label for="date-year">Last year</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="date-custom" class="mr-2">
+                                <label for="date-custom">Custom range</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-4 mb-4">
+                        <h3 class="font-semibold mb-3">Research Fields</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="field-genetics" class="mr-2" checked>
+                                <label for="field-genetics">Genetics</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="field-medicine" class="mr-2" checked>
+                                <label for="field-medicine">Medicine</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="field-biotech" class="mr-2">
+                                <label for="field-biotech">Biotechnology</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="field-biochem" class="mr-2">
+                                <label for="field-biochem">Biochemistry</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="field-more" class="mr-2">
+                                <label for="field-more">Show more...</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-4 mb-4">
+                        <h3 class="font-semibold mb-3">Content Type</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="type-original" class="mr-2" checked>
+                                <label for="type-original">Original Research</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="type-review" class="mr-2">
+                                <label for="type-review">Review Articles</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="type-method" class="mr-2" checked>
+                                <label for="type-method">Methodology</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="type-case" class="mr-2">
+                                <label for="type-case">Case Studies</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-4">
+                        <h3 class="font-semibold mb-3">Audit Trail Status</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="audit-all" class="mr-2">
+                                <label for="audit-all">All articles</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="audit-comprehensive" class="mr-2" checked>
+                                <label for="audit-comprehensive">Comprehensive audit</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="audit-partial" class="mr-2">
+                                <label for="audit-partial">Partial audit</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="audit-none" class="mr-2">
+                                <label for="audit-none">No audit trail</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="results-content" class="flex-1">
+                    <div class="mb-4 md:hidden">
+                        <button class="flex items-center text-primary border border-primary rounded-md px-3 py-2 w-full justify-center">
+                            <i class="fa-solid fa-filter mr-2"></i> Show Filters
+                        </button>
+                    </div>
+                    
+                    <div id="results-stats" class="text-sm text-mediumgray mb-6">
+                        Showing <span class="font-semibold text-charcoal">1-10</span> of <span class="font-semibold text-charcoal">124</span> results for "<span class="font-semibold text-charcoal">CRISPR gene therapy</span>"
+                    </div>
+                    
+                    <div id="articles-section" class="mb-8">
+                        <h2 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fa-solid fa-file-lines text-primary mr-2"></i> Articles
+                            <span class="text-sm font-normal text-mediumgray ml-2">(Top 3 of 78)</span>
+                            <span class="ml-auto text-sm text-primary hover:underline cursor-pointer">View all articles</span>
+                        </h2>
+                        
+                        <div class="space-y-4">
+                            <div id="article-result-1" class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition">
+                                <div class="flex items-start">
+                                    <div class="flex-1">
+                                        <div class="flex space-x-2 mb-2">
+                                            <span class="bg-coral/10 text-coral text-xs px-2 py-1 rounded">Genetics</span>
+                                            <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded">Featured</span>
+                                            <span class="bg-emerald/10 text-emerald text-xs px-2 py-1 rounded">Published</span>
+                                        </div>
+                                        <h3 class="text-lg font-bold mb-2">CRISPR-Cas9 Modifications for Targeted Gene Therapy Applications</h3>
+                                        <p class="text-mediumgray text-sm mb-3">Exploring novel modifications to the CRISPR-Cas9 system to enhance specificity and reduce off-target effects in gene therapy. This study presents a comprehensive analysis of various modifications and their impacts on therapeutic outcomes.</p>
+                                        <div class="flex flex-wrap items-center text-xs text-mediumgray">
+                                            <span class="mr-4"><i class="fa-regular fa-user mr-1"></i> Dr. Emily Rodriguez et al.</span>
+                                            <span class="mr-4"><i class="fa-regular fa-calendar mr-1"></i> Published Mar 15, 2023</span>
+                                            <span class="mr-4"><i class="fa-solid fa-quote-left mr-1"></i> 43 citations</span>
+                                            <span class="mr-4"><i class="fa-solid fa-comment mr-1"></i> 32 annotations</span>
+                                            <span><i class="fa-solid fa-magnifying-glass-chart mr-1"></i> 15 audit items</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0">
+                                        <span class="text-primary hover:text-primary/80 cursor-pointer">
+                                            <i class="fa-regular fa-bookmark text-xl"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 pt-3 border-t border-gray-100 flex justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">CRISPR-Cas9</span>
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">gene therapy</span>
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">off-target effects</span>
+                                    </div>
+                                    <button class="text-primary text-sm hover:underline">View article</button>
+                                </div>
+                            </div>
+                            
+                            <div id="article-result-2" class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition">
+                                <div class="flex items-start">
+                                    <div class="flex-1">
+                                        <div class="flex space-x-2 mb-2">
+                                            <span class="bg-coral/10 text-coral text-xs px-2 py-1 rounded">Genetics</span>
+                                            <span class="bg-orange/10 text-orange text-xs px-2 py-1 rounded">In Review</span>
+                                        </div>
+                                        <h3 class="text-lg font-bold mb-2">Advancements in CRISPR-Based Gene Therapy for Inherited Retinal Diseases</h3>
+                                        <p class="text-mediumgray text-sm mb-3">A review of recent progress in applying CRISPR-Cas9 gene editing technology to treat inherited retinal diseases, with focus on delivery methods and clinical outcomes from recent trials.</p>
+                                        <div class="flex flex-wrap items-center text-xs text-mediumgray">
+                                            <span class="mr-4"><i class="fa-regular fa-user mr-1"></i> Dr. Michael Chang et al.</span>
+                                            <span class="mr-4"><i class="fa-regular fa-calendar mr-1"></i> Submitted Jan 28, 2023</span>
+                                            <span class="mr-4"><i class="fa-solid fa-comment mr-1"></i> 18 annotations</span>
+                                            <span><i class="fa-solid fa-magnifying-glass-chart mr-1"></i> 7 audit items</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0">
+                                        <span class="text-mediumgray hover:text-primary cursor-pointer">
+                                            <i class="fa-regular fa-bookmark text-xl"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 pt-3 border-t border-gray-100 flex justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">CRISPR</span>
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">retinal diseases</span>
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">gene therapy</span>
+                                    </div>
+                                    <button class="text-primary text-sm hover:underline">View article</button>
+                                </div>
+                            </div>
+                            
+                            <div id="article-result-3" class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition">
+                                <div class="flex items-start">
+                                    <div class="flex-1">
+                                        <div class="flex space-x-2 mb-2">
+                                            <span class="bg-purple/10 text-purple text-xs px-2 py-1 rounded">Biotechnology</span>
+                                            <span class="bg-emerald/10 text-emerald text-xs px-2 py-1 rounded">Published</span>
+                                        </div>
+                                        <h3 class="text-lg font-bold mb-2">Optimizing Delivery Vectors for CRISPR-Mediated Gene Therapy</h3>
+                                        <p class="text-mediumgray text-sm mb-3">Investigation of novel viral and non-viral delivery systems for CRISPR-Cas9 components to improve efficiency and safety in therapeutic applications across different tissue types.</p>
+                                        <div class="flex flex-wrap items-center text-xs text-mediumgray">
+                                            <span class="mr-4"><i class="fa-regular fa-user mr-1"></i> Prof. Sarah Williams et al.</span>
+                                            <span class="mr-4"><i class="fa-regular fa-calendar mr-1"></i> Published Nov 12, 2022</span>
+                                            <span class="mr-4"><i class="fa-solid fa-quote-left mr-1"></i> 28 citations</span>
+                                            <span class="mr-4"><i class="fa-solid fa-comment mr-1"></i> 24 annotations</span>
+                                            <span><i class="fa-solid fa-magnifying-glass-chart mr-1"></i> 12 audit items</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0">
+                                        <span class="text-mediumgray hover:text-primary cursor-pointer">
+                                            <i class="fa-regular fa-bookmark text-xl"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 pt-3 border-t border-gray-100 flex justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">delivery vectors</span>
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">CRISPR</span>
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">gene therapy</span>
+                                    </div>
+                                    <button class="text-primary text-sm hover:underline">View article</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="authors-section" class="mb-8">
+                        <h2 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fa-solid fa-users text-purple mr-2"></i> Authors
+                            <span class="text-sm font-normal text-mediumgray ml-2">(Top 3 of 12)</span>
+                            <span class="ml-auto text-sm text-primary hover:underline cursor-pointer">View all authors</span>
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div id="author-result-1" class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-3">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Author" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold">Dr. Emily Rodriguez</h3>
+                                        <p class="text-xs text-mediumgray">Stanford University</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-mediumgray mb-3">
+                                    <p>CRISPR specialist with focus on therapeutic applications for genetic disorders.</p>
+                                </div>
+                                <div class="flex justify-between text-xs">
+                                    <span><i class="fa-solid fa-file-lines mr-1"></i> 18 articles</span>
+                                    <span><i class="fa-solid fa-quote-left mr-1"></i> 342 citations</span>
+                                    <button class="text-primary hover:underline">View profile</button>
+                                </div>
+                            </div>
+                            
+                            <div id="author-result-2" class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-3">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Author" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold">Prof. James Wilson</h3>
+                                        <p class="text-xs text-mediumgray">University of Pennsylvania</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-mediumgray mb-3">
+                                    <p>Pioneer in gene therapy and viral vector development for genetic disease treatment.</p>
+                                </div>
+                                <div class="flex justify-between text-xs">
+                                    <span><i class="fa-solid fa-file-lines mr-1"></i> 32 articles</span>
+                                    <span><i class="fa-solid fa-quote-left mr-1"></i> 587 citations</span>
+                                    <button class="text-primary hover:underline">View profile</button>
+                                </div>
+                            </div>
+                            
+                            <div id="author-result-3" class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-3">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="Author" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold">Dr. Michael Chang</h3>
+                                        <p class="text-xs text-mediumgray">Harvard Medical School</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-mediumgray mb-3">
+                                    <p>Specialist in ophthalmic applications of CRISPR gene therapy technologies.</p>
+                                </div>
+                                <div class="flex justify-between text-xs">
+                                    <span><i class="fa-solid fa-file-lines mr-1"></i> 14 articles</span>
+                                    <span><i class="fa-solid fa-quote-left mr-1"></i> 215 citations</span>
+                                    <button class="text-primary hover:underline">View profile</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="audit-trails-section" class="mb-8">
+                        <h2 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fa-solid fa-magnifying-glass-chart text-emerald mr-2"></i> Audit Trails
+                            <span class="text-sm font-normal text-mediumgray ml-2">(Top 2 of 18)</span>
+                            <span class="ml-auto text-sm text-primary hover:underline cursor-pointer">View all audit trails</span>
+                        </h2>
+                        
+                        <div class="space-y-4">
+                            <div id="audit-result-1" class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition">
+                                <div class="flex items-start">
+                                    <div class="flex-1">
+                                        <div class="flex space-x-2 mb-2">
+                                            <span class="bg-emerald/10 text-emerald text-xs px-2 py-1 rounded">Comprehensive</span>
+                                            <span class="bg-coral/10 text-coral text-xs px-2 py-1 rounded">Methodology</span>
+                                        </div>
+                                        <h3 class="text-lg font-bold mb-2">Failed Delivery Approaches in CRISPR-Cas9 Gene Therapy for Cystic Fibrosis</h3>
+                                        <p class="text-mediumgray text-sm mb-3">Detailed documentation of unsuccessful viral and lipid nanoparticle delivery methods for CRISPR components targeting the CFTR gene in lung epithelial cells.</p>
+                                        <div class="flex items-center text-xs text-mediumgray">
+                                            <span class="mr-4"><i class="fa-regular fa-file-lines mr-1"></i> From: "Novel Delivery Methods for CRISPR-Based Gene Therapy"</span>
+                                            <span><i class="fa-regular fa-calendar mr-1"></i> Documented Feb 2023</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 pt-3 border-t border-gray-100 flex justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">delivery methods</span>
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">CRISPR</span>
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">cystic fibrosis</span>
+                                    </div>
+                                    <button class="text-primary text-sm hover:underline">View audit trail</button>
+                                </div>
+                            </div>
+                            
+                            <div id="audit-result-2" class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition">
+                                <div class="flex items-start">
+                                    <div class="flex-1">
+                                        <div class="flex space-x-2 mb-2">
+                                            <span class="bg-emerald/10 text-emerald text-xs px-2 py-1 rounded">Comprehensive</span>
+                                            <span class="bg-purple/10 text-purple text-xs px-2 py-1 rounded">Analysis</span>
+                                        </div>
+                                        <h3 class="text-lg font-bold mb-2">Discarded Guide RNA Designs for CRISPR-Mediated Targeting of DMD Gene</h3>
+                                        <p class="text-mediumgray text-sm mb-3">Collection of abandoned guide RNA sequences that showed high off-target effects or low efficiency in targeting the dystrophin gene for Duchenne muscular dystrophy treatment.</p>
+                                        <div class="flex items-center text-xs text-mediumgray">
+                                            <span class="mr-4"><i class="fa-regular fa-file-lines mr-1"></i> From: "CRISPR-Cas9 Modifications for DMD Gene Therapy"</span>
+                                            <span><i class="fa-regular fa-calendar mr-1"></i> Documented Oct 2022</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 pt-3 border-t border-gray-100 flex justify-between">
+                                    <div class="flex space-x-2">
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">guide RNA</span>
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">CRISPR</span>
+                                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-full">DMD</span>
+                                    </div>
+                                    <button class="text-primary text-sm hover:underline">View audit trail</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="annotations-section">
+                        <h2 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fa-solid fa-comment text-orange mr-2"></i> Annotations
+                            <span class="text-sm font-normal text-mediumgray ml-2">(Top 2 of 16)</span>
+                            <span class="ml-auto text-sm text-primary hover:underline cursor-pointer">View all annotations</span>
+                        </h2>
+                        
+                        <div class="space-y-4">
+                            <div id="annotation-result-1" class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition">
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 rounded-full overflow-hidden mr-3 flex-shrink-0">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Reviewer" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between mb-1">
+                                            <div class="flex items-center">
+                                                <h3 class="font-bold text-sm">Dr. Robert Johnson</h3>
+                                                <span class="text-xs text-mediumgray ml-2">• Reviewer • Mar 10, 2023</span>
+                                            </div>
+                                            <span class="bg-purple/10 text-purple text-xs px-2 py-1 rounded">Methodology</span>
+                                        </div>
+                                        <div class="bg-orange/5 border-l-2 border-orange p-3 mb-2 text-sm">
+                                            <p class="italic text-mediumgray">"...the AAV9 vector showed significant tropism for cardiac tissue, but limited penetration of the blood-brain barrier compared to AAV-PHP.B..."</p>
+                                        </div>
+                                        <div class="text-sm mb-2">
+                                            <p>The comparison between AAV serotypes is valuable, but I would suggest including quantitative biodistribution data to strengthen this conclusion. The PHP.B variant has shown variable results across different mouse strains.</p>
+                                        </div>
+                                        <div class="flex justify-between text-xs">
+                                            <div class="text-mediumgray">
+                                                <span class="mr-3"><i class="fa-regular fa-thumbs-up mr-1"></i> 4 agrees</span>
+                                                <span><i class="fa-regular fa-comment mr-1"></i> 2 replies</span>
+                                            </div>
+                                            <div>
+                                                <span class="text-mediumgray mr-2">From:</span>
+                                                <span class="text-primary hover:underline cursor-pointer">CRISPR-Cas9 Modifications for Targeted Gene Therapy Applications</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="annotation-result-2" class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition">
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 rounded-full overflow-hidden mr-3 flex-shrink-0">
+                                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" alt="Reviewer" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between mb-1">
+                                            <div class="flex items-center">
+                                                <h3 class="font-bold text-sm">Prof. David Kim</h3>
+                                                <span class="text-xs text-mediumgray ml-2">• Researcher • Jan 15, 2023</span>
+                                            </div>
+                                            <span class="bg-coral/10 text-coral text-xs px-2 py-1 rounded">Discussion</span>
+                                        </div>
+                                        <div class="bg-orange/5 border-l-2 border-orange p-3 mb-2 text-sm">
+                                            <p class="italic text-mediumgray">"...our results demonstrate that the high-fidelity Cas9 variant (SpCas9-HF1) reduced off-target effects by approximately 70% compared to wild-type SpCas9..."</p>
+                                        </div>
+                                        <div class="text-sm mb-2">
+                                            <p>This finding aligns with our recent work on eSpCas9(1.1), though we observed variable efficiency depending on the target sequence. Have you tested this across multiple genomic loci? The reduction in off-target effects might be locus-dependent.</p>
+                                        </div>
+                                        <div class="flex justify-between text-xs">
+                                            <div class="text-mediumgray">
+                                                <span class="mr-3"><i class="fa-regular fa-thumbs-up mr-1"></i> 7 agrees</span>
+                                                <span><i class="fa-regular fa-comment mr-1"></i> 5 replies</span>
+                                            </div>
+                                            <div>
+                                                <span class="text-mediumgray mr-2">From:</span>
+                                                <span class="text-primary hover:underline cursor-pointer">Optimizing Delivery Vectors for CRISPR-Mediated Gene Therapy</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 flex justify-center">
+                        <nav class="inline-flex rounded-md shadow-sm">
+                            <button class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-mediumgray hover:bg-gray-50">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button class="px-3 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-primary">1</button>
+                            <button class="px-3 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-mediumgray hover:text-primary">2</button>
+                            <button class="px-3 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-mediumgray hover:text-primary">3</button>
+                            <button class="px-3 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-mediumgray hover:text-primary">4</button>
+                            <button class="px-3 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-mediumgray hover:text-primary">5</button>
+                            <button class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-mediumgray hover:bg-gray-50">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer" class="bg-charcoal text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-primary via-purple to-emerald flex items-center justify-center text-white font-bold">
+                            PR
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-lg">PeerTrail</span>
+                            <span class="text-xs text-gray-400">Transparent Scientific Publishing</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4">The world's first comprehensive audit trail system for transparent scientific publishing.</p>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-twitter"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-github"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white transition cursor-pointer">
+                            <i class="fa-brands fa-researchgate"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Platform</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Browse Articles</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Submit Research</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Peer Review Process</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Audit Trail System</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Annotation Tools</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">API Documentation</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">FAQs</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Support Center</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">About Us</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Our Mission</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Partners</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Contact Us</span></li>
+                        <li><span class="text-gray-400 hover:text-white transition cursor-pointer">Careers</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 PeerTrail. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-400 hover:text-white transition text-sm cursor-pointer">Cookie Policy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle global search
+        document.getElementById('search-toggle').addEventListener('click', function() {
+            const searchBar = document.getElementById('global-search-results');
+            searchBar.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

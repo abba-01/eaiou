@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 hidden md:block">
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-primary-600 rounded-md flex items-center justify-center text-white mr-2">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <h1 class="text-lg font-bold text-gray-800">SciReview</h1>
+                </div>
+            </div>
+            <nav class="p-4">
+                <div class="mb-4">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Main Menu</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-house w-5 h-5 mr-2"></i>
+                                Dashboard
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-file-lines w-5 h-5 mr-2"></i>
+                                My Manuscripts
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-user-check w-5 h-5 mr-2"></i>
+                                Review Requests
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-bell w-5 h-5 mr-2"></i>
+                                Notifications
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mb-4">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Editor Tools</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md bg-primary-50 text-primary-700 cursor-pointer">
+                                <i class="fa-solid fa-magnifying-glass w-5 h-5 mr-2"></i>
+                                Conflict Checker
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-users w-5 h-5 mr-2"></i>
+                                Reviewer Database
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-clock-rotate-left w-5 h-5 mr-2"></i>
+                                Review History
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Account</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-user w-5 h-5 mr-2"></i>
+                                Profile
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-gear w-5 h-5 mr-2"></i>
+                                Settings
+                            </span>
+                        </li>
+                        <li>
+                            <span class="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="fa-solid fa-sign-out-alt w-5 h-5 mr-2"></i>
+                                Sign Out
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header id="header" class="bg-white border-b border-gray-200">
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center">
+                        <button class="md:hidden mr-2 text-gray-600">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <h2 class="text-lg font-semibold text-gray-800">Conflict of Interest Checker</h2>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="text-gray-600 hover:text-gray-900">
+                            <i class="fa-solid fa-bell"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-gray-900">
+                            <i class="fa-solid fa-question-circle"></i>
+                        </button>
+                        <div class="flex items-center">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-8 h-8 rounded-full mr-2">
+                            <span class="text-sm font-medium text-gray-700">Dr. James Wilson</span>
+                            <i class="fa-solid fa-chevron-down ml-1 text-gray-500 text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-4">
+                <div id="conflict-checker-section" class="max-w-7xl mx-auto">
+                    <div class="mb-6 flex items-center justify-between">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">Conflict of Interest Detection</h1>
+                            <p class="text-gray-600 mt-1">Identify potential conflicts between manuscript authors, reviewers, and editors</p>
+                        </div>
+                        <div>
+                            <button class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium mr-2 hover:bg-gray-50">
+                                <i class="fa-solid fa-download mr-1"></i> Export Report
+                            </button>
+                            <button class="bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-700">
+                                <i class="fa-solid fa-plus mr-1"></i> New Check
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Manuscript Selection -->
+                    <div id="manuscript-selection" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                        <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                            <h2 class="text-lg font-semibold text-gray-800">Select Manuscript</h2>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex flex-col md:flex-row md:space-x-4">
+                                <div class="w-full md:w-2/3 mb-4 md:mb-0">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Manuscript ID or Title</label>
+                                    <div class="relative">
+                                        <input type="text" class="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2 text-sm" placeholder="Search manuscripts..." value="MS-2023-0142: Neural Network Approaches to Climate Modeling" />
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <i class="fa-solid fa-search text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-1/3">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Journal</label>
+                                    <select class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm bg-white">
+                                        <option>Journal of Advanced Research</option>
+                                        <option>Climate Science Review</option>
+                                        <option>Computational Methods in Science</option>
+                                        <option>All Journals</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conflict Detection Dashboard -->
+                    <div id="conflict-dashboard" class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                        <!-- Conflict Summary Card -->
+                        <div id="conflict-summary" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                            <div class="bg-gray-50 px-6 py-3 border-b border-gray-200">
+                                <h3 class="font-semibold text-gray-800">Conflict Summary</h3>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="text-4xl font-bold text-red-600">7</div>
+                                    <div class="text-sm text-gray-500">Potential conflicts found</div>
+                                </div>
+                                <div id="conflict-chart" class="h-48 mb-4"></div>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Co-authorship</span>
+                                        <span class="font-medium">3</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Same Institution</span>
+                                        <span class="font-medium">2</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Funding Relationship</span>
+                                        <span class="font-medium">1</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Competing Interest</span>
+                                        <span class="font-medium">1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Authors & Editors Card -->
+                        <div id="authors-editors" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                            <div class="bg-gray-50 px-6 py-3 border-b border-gray-200">
+                                <h3 class="font-semibold text-gray-800">Authors & Editors</h3>
+                            </div>
+                            <div class="p-6">
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-700 mb-2">Authors</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Author" class="w-8 h-8 rounded-full mr-3">
+                                            <div>
+                                                <p class="text-sm font-medium">Dr. Michael Chen</p>
+                                                <p class="text-xs text-gray-500">Stanford University</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Author" class="w-8 h-8 rounded-full mr-3">
+                                            <div>
+                                                <p class="text-sm font-medium">Dr. Sarah Johnson</p>
+                                                <p class="text-xs text-gray-500">MIT</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="Author" class="w-8 h-8 rounded-full mr-3">
+                                            <div>
+                                                <p class="text-sm font-medium">Dr. Robert Williams</p>
+                                                <p class="text-xs text-gray-500">University of Washington</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pt-3 border-t border-gray-200">
+                                    <h4 class="text-sm font-medium text-gray-700 mb-2">Assigned Editors</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Editor" class="w-8 h-8 rounded-full mr-3">
+                                            <div>
+                                                <p class="text-sm font-medium">Dr. James Wilson</p>
+                                                <p class="text-xs text-gray-500">Senior Editor</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Editor" class="w-8 h-8 rounded-full mr-3">
+                                            <div>
+                                                <p class="text-sm font-medium">Dr. David Thompson</p>
+                                                <p class="text-xs text-gray-500">Associate Editor</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Potential Reviewers Card -->
+                        <div id="potential-reviewers" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                            <div class="bg-gray-50 px-6 py-3 border-b border-gray-200">
+                                <h3 class="font-semibold text-gray-800">Potential Reviewers</h3>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-center mb-3">
+                                    <h4 class="text-sm font-medium text-gray-700">Suggested Reviewers</h4>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">12 Available</span>
+                                </div>
+                                <div class="space-y-3 mb-4">
+                                    <div class="flex items-center justify-between bg-green-50 p-2 rounded-md border border-green-100">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" alt="Reviewer" class="w-8 h-8 rounded-full mr-3">
+                                            <div>
+                                                <p class="text-sm font-medium">Dr. Alex Patel</p>
+                                                <p class="text-xs text-gray-500">UC Berkeley</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                <i class="fa-solid fa-check mr-1"></i> No Conflicts
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between bg-green-50 p-2 rounded-md border border-green-100">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Reviewer" class="w-8 h-8 rounded-full mr-3">
+                                            <div>
+                                                <p class="text-sm font-medium">Dr. Emily Rivera</p>
+                                                <p class="text-xs text-gray-500">UCLA</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                <i class="fa-solid fa-check mr-1"></i> No Conflicts
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between bg-red-50 p-2 rounded-md border border-red-100">
+                                        <div class="flex items-center">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="Reviewer" class="w-8 h-8 rounded-full mr-3">
+                                            <div>
+                                                <p class="text-sm font-medium">Dr. Lisa Zhang</p>
+                                                <p class="text-xs text-gray-500">Stanford University</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                                <i class="fa-solid fa-exclamation-triangle mr-1"></i> Conflict
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="w-full bg-primary-50 text-primary-700 border border-primary-100 px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-100">
+                                    View All Suggested Reviewers
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detected Conflicts Table -->
+                    <div id="conflicts-table" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                        <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                            <h2 class="text-lg font-semibold text-gray-800">Detected Conflicts</h2>
+                            <div class="flex items-center">
+                                <div class="relative mr-2">
+                                    <select class="border border-gray-300 rounded-md pl-3 pr-8 py-1 text-sm bg-white appearance-none">
+                                        <option>All Conflict Types</option>
+                                        <option>Co-authorship</option>
+                                        <option>Same Institution</option>
+                                        <option>Funding Relationship</option>
+                                        <option>Competing Interest</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <input type="text" class="border border-gray-300 rounded-md pl-8 pr-3 py-1 text-sm" placeholder="Search conflicts...">
+                                    <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                        <i class="fa-solid fa-search text-gray-400 text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Conflict Type</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Person A</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Person B</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Severity</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Co-authorship</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Michael Chen</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Author</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Lisa Zhang</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Reviewer</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">High</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">3 co-authored papers in last 5 years</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <button class="text-primary-600 hover:text-primary-800 font-medium">Replace</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Same Institution</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Sarah Johnson</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Author</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Thomas Brown</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Reviewer</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Medium</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Same department at MIT</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <button class="text-primary-600 hover:text-primary-800 font-medium">Replace</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Funding Relationship</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Robert Williams</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Author</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. David Thompson</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Editor</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">High</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Shared grant from NSF (2022-2023)</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <button class="text-primary-600 hover:text-primary-800 font-medium">Reassign</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Co-authorship</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Michael Chen</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Author</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Jennifer Lee</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Reviewer</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Medium</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1 co-authored paper 6 years ago</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <button class="text-primary-600 hover:text-primary-800 font-medium">Replace</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Same Institution</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Michael Chen</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Author</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Richard Wong</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Reviewer</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Medium</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Different departments at Stanford</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <button class="text-primary-600 hover:text-primary-800 font-medium">Replace</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Competing Interest</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Sarah Johnson</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Author</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Karen Martinez</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Reviewer</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">High</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Competing patent applications</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <button class="text-primary-600 hover:text-primary-800 font-medium">Replace</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Co-authorship</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Robert Williams</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Author</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dr. Mark Anderson</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Reviewer</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Medium</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Co-authors on review paper only</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <button class="text-primary-600 hover:text-primary-800 font-medium">Replace</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-3 border-t border-gray-200 flex items-center justify-between">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <span>Showing 7 of 7 conflicts</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white disabled:opacity-50" disabled>
+                                    Previous
+                                </button>
+                                <button class="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white disabled:opacity-50" disabled>
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conflict Network Visualization -->
+                    <div id="conflict-network" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                        <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                            <h2 class="text-lg font-semibold text-gray-800">Relationship Network</h2>
+                        </div>
+                        <div class="p-6">
+                            <div class="h-[400px] bg-gray-50 rounded-lg border border-gray-200 flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="text-gray-400 mb-2">
+                                        <i class="fa-solid fa-project-diagram text-4xl"></i>
+                                    </div>
+                                    <p class="text-gray-600 mb-3">Interactive network visualization would appear here</p>
+                                    <p class="text-sm text-gray-500">Showing connections between authors, editors, and reviewers</p>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-sm text-gray-600">
+                                <p>This visualization shows relationships between all parties involved in the review process. Thicker lines indicate stronger relationships that may constitute conflicts of interest.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions and Recommendations -->
+                    <div id="recommendations" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+                        <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                            <h2 class="text-lg font-semibold text-gray-800">Recommendations</h2>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-6">
+                                <h3 class="text-md font-semibold text-gray-700 mb-3">Suggested Actions</h3>
+                                <div class="space-y-3">
+                                    <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                                        <div class="flex">
+                                            <div class="flex-shrink-0">
+                                                <i class="fa-solid fa-exclamation-circle text-red-500"></i>
+                                            </div>
+                                            <div class="ml-3">
+                                                <p class="text-sm font-medium text-red-800">High-priority Action Required</p>
+                                                <p class="text-sm text-red-700 mt-1">Replace Dr. Lisa Zhang as reviewer due to significant co-authorship history with Dr. Michael Chen.</p>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <button class="bg-red-600 text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-red-700">
+                                                    Replace
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                                        <div class="flex">
+                                            <div class="flex-shrink-0">
+                                                <i class="fa-solid fa-exclamation-circle text-red-500"></i>
+                                            </div>
+                                            <div class="ml-3">
+                                                <p class="text-sm font-medium text-red-800">High-priority Action Required</p>
+                                                <p class="text-sm text-red-700 mt-1">Reassign editor Dr. David Thompson due to funding relationship with author Dr. Robert Williams.</p>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <button class="bg-red-600 text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-red-700">
+                                                    Reassign
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4">
+                                        <div class="flex">
+                                            <div class="flex-shrink-0">
+                                                <i class="fa-solid fa-exclamation-triangle text-yellow-500"></i>
+                                            </div>
+                                            <div class="ml-3">
+                                                <p class="text-sm font-medium text-yellow-800">Medium-priority Action</p>
+                                                <p class="text-sm text-yellow-700 mt-1">Consider replacing Dr. Thomas Brown as reviewer due to same department affiliation with author Dr. Sarah Johnson.</p>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <button class="bg-yellow-600 text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-yellow-700">
+                                                    Consider
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-md font-semibold text-gray-700 mb-3">Alternative Reviewer Suggestions</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="border border-gray-200 rounded-md p-4">
+                                        <div class="flex items-center mb-2">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg" alt="Reviewer" class="w-8 h-8 rounded-full mr-3">
+                                            <div>
+                                                <p class="text-sm font-medium">Dr. Alex Patel</p>
+                                                <p class="text-xs text-gray-500">UC Berkeley</p>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                    <i class="fa-solid fa-check mr-1"></i> No Conflicts
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="text-xs text-gray-600">
+                                            <p>Expertise: Neural Networks, Climate Modeling</p>
+                                            <p>Published: 24 papers in related field</p>
+                                            <p>Review History: 4.8/5 (15 reviews)</p>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button class="w-full bg-primary-600 text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-primary-700">
+                                                Invite as Reviewer
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="border border-gray-200 rounded-md p-4">
+                                        <div class="flex items-center mb-2">
+                                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Reviewer" class="w-8 h-8 rounded-full mr-3">
+                                            <div>
+                                                <p class="text-sm font-medium">Dr. Emily Rivera</p>
+                                                <p class="text-xs text-gray-500">UCLA</p>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                    <i class="fa-solid fa-check mr-1"></i> No Conflicts
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="text-xs text-gray-600">
+                                            <p>Expertise: Computational Science, Climate Change</p>
+                                            <p>Published: 18 papers in related field</p>
+                                            <p>Review History: 4.6/5 (12 reviews)</p>
+                                        </div>
+                                        <div class="mt-2">
+                                            <button class="w-full bg-primary-600 text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-primary-700">
+                                                Invite as Reviewer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Initialize the conflict chart
+        Highcharts.chart('conflict-chart', {
+            chart: {
+                type: 'pie',
+                backgroundColor: 'transparent'
+            },
+            title: {
+                text: null
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: false
+                }
+            },
+            series: [{
+                name: 'Conflicts',
+                colorByPoint: true,
+                data: [{
+                    name: 'Co-authorship',
+                    y: 3,
+                    color: '#ef4444'
+                }, {
+                    name: 'Same Institution',
+                    y: 2,
+                    color: '#f59e0b'
+                }, {
+                    name: 'Funding Relationship',
+                    y: 1,
+                    color: '#3b82f6'
+                }, {
+                    name: 'Competing Interest',
+                    y: 1,
+                    color: '#8b5cf6'
+                }]
+            }],
+            credits: {
+                enabled: false
+            }
+        });
+    </script>
+</body>
+</html>

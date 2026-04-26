@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <div id="header" class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="text-primary-700 font-bold text-xl">Joomla Academic</div>
+                <div class="hidden md:flex space-x-6 ml-10">
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Dashboard</span>
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">My Articles</span>
+                    <span class="text-primary-600 font-medium cursor-pointer">Submit Article</span>
+                    <span class="text-gray-600 hover:text-primary-600 cursor-pointer">Reviews</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-500 hover:text-gray-700">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center">
+                        <span class="text-sm font-medium">JD</span>
+                    </div>
+                    <span class="text-gray-700 hidden md:inline-block">John Doe</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content" class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row">
+            <!-- Left sidebar with progress -->
+            <div id="sidebar" class="w-full md:w-64 mb-6 md:mb-0">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sticky top-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Submission Progress</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center text-white mr-3">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div class="border-l-2 border-dashed border-gray-300 h-10 absolute ml-4 mt-16"></div>
+                            <span class="text-primary-700 font-medium">Basic Information</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center text-white mr-3">
+                                <span class="text-sm font-medium">2</span>
+                            </div>
+                            <div class="border-l-2 border-dashed border-gray-300 h-10 absolute ml-4 mt-16"></div>
+                            <span class="text-primary-700 font-medium">Article Content</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mr-3">
+                                <span class="text-sm font-medium">3</span>
+                            </div>
+                            <div class="border-l-2 border-dashed border-gray-300 h-10 absolute ml-4 mt-16"></div>
+                            <span class="text-gray-500">References</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mr-3">
+                                <span class="text-sm font-medium">4</span>
+                            </div>
+                            <div class="border-l-2 border-dashed border-gray-300 h-10 absolute ml-4 mt-16"></div>
+                            <span class="text-gray-500">Metadata</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mr-3">
+                                <span class="text-sm font-medium">5</span>
+                            </div>
+                            <span class="text-gray-500">Review & Submit</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <div class="flex items-center text-gray-600 mb-2">
+                            <i class="fa-regular fa-clock mr-2"></i>
+                            <span class="text-sm">Last saved: 10 mins ago</span>
+                        </div>
+                        <button class="w-full py-2 px-4 bg-secondary-100 text-secondary-700 rounded-md text-sm font-medium hover:bg-secondary-200">
+                            Save Draft
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main form area -->
+            <div id="article-form" class="flex-1 md:ml-8">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6">Article Content</h2>
+                    
+                    <!-- Article sections -->
+                    <div id="section-methodology" class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-medium text-gray-800">Methodology</h3>
+                            <div class="flex items-center">
+                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full mr-2">Required</span>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Rich text editor toolbar -->
+                        <div class="border border-gray-300 rounded-md mb-1">
+                            <div class="flex flex-wrap items-center border-b border-gray-200 p-2 gap-1">
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-bold"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-italic"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-underline"></i>
+                                </button>
+                                <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-heading"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-list-ul"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-list-ol"></i>
+                                </button>
+                                <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-link"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-image"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-table"></i>
+                                </button>
+                                <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-quote-right"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-code"></i>
+                                </button>
+                                <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-superscript"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-subscript"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 min-h-[200px]">
+                                <p class="text-gray-700">Describe your research methodology in detail. Include information about participants, materials, procedures, and data analysis techniques. For empirical studies, provide sufficient detail to allow replication.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mt-2">
+                            <i class="fa-solid fa-tag mr-2"></i>
+                            <div class="flex items-center">
+                                <span>Mark as:</span>
+                                <div class="ml-2 flex space-x-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" class="form-checkbox h-4 w-4 text-primary-600">
+                                        <span class="ml-1">Speculative</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" class="form-checkbox h-4 w-4 text-primary-600">
+                                        <span class="ml-1">Observer-bound</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="section-results" class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-medium text-gray-800">Results</h3>
+                            <div class="flex items-center">
+                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full mr-2">Required</span>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-300 rounded-md mb-1">
+                            <div class="flex flex-wrap items-center border-b border-gray-200 p-2 gap-1">
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-bold"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-italic"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-underline"></i>
+                                </button>
+                                <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-heading"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-list-ul"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-list-ol"></i>
+                                </button>
+                                <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-link"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-image"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-table"></i>
+                                </button>
+                                <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-chart-bar"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 min-h-[200px]">
+                                <p class="text-gray-700">Present your findings clearly without interpretation. Include statistical analyses, tables, figures, and any other relevant data. Make sure to include all results that are relevant to your research questions or hypotheses.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mt-2">
+                            <i class="fa-solid fa-tag mr-2"></i>
+                            <div class="flex items-center">
+                                <span>Mark as:</span>
+                                <div class="ml-2 flex space-x-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" class="form-checkbox h-4 w-4 text-primary-600">
+                                        <span class="ml-1">Speculative</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" class="form-checkbox h-4 w-4 text-primary-600">
+                                        <span class="ml-1">Observer-bound</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="section-discussion" class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-medium text-gray-800">Discussion</h3>
+                            <div class="flex items-center">
+                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full mr-2">Required</span>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-300 rounded-md mb-1">
+                            <div class="flex flex-wrap items-center border-b border-gray-200 p-2 gap-1">
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-bold"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-italic"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-underline"></i>
+                                </button>
+                                <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-heading"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-list-ul"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-list-ol"></i>
+                                </button>
+                                <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-link"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 min-h-[200px]">
+                                <p class="text-gray-700">Interpret your results in the context of your research questions and the existing literature. Discuss the implications of your findings, any limitations of your study, and suggestions for future research.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mt-2">
+                            <i class="fa-solid fa-tag mr-2"></i>
+                            <div class="flex items-center">
+                                <span>Mark as:</span>
+                                <div class="ml-2 flex space-x-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" class="form-checkbox h-4 w-4 text-primary-600" checked>
+                                        <span class="ml-1">Speculative</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" class="form-checkbox h-4 w-4 text-primary-600">
+                                        <span class="ml-1">Observer-bound</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="section-conclusion" class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-medium text-gray-800">Conclusion</h3>
+                            <div class="flex items-center">
+                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full mr-2">Required</span>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-300 rounded-md mb-1">
+                            <div class="flex flex-wrap items-center border-b border-gray-200 p-2 gap-1">
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-bold"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-italic"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-underline"></i>
+                                </button>
+                                <div class="h-5 border-l border-gray-300 mx-1"></div>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-heading"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-list-ul"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-list-ol"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 min-h-[150px]">
+                                <p class="text-gray-700">Summarize the main findings of your study and their significance. Emphasize the contribution your research makes to the field and any practical implications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="section-contribution" class="mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-medium text-gray-800">Contribution Statement</h3>
+                            <div class="flex items-center">
+                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full mr-2">Required</span>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-300 rounded-md mb-3">
+                            <div class="flex flex-wrap items-center border-b border-gray-200 p-2 gap-1">
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-bold"></i>
+                                </button>
+                                <button class="p-1.5 text-gray-500 hover:bg-gray-100 rounded">
+                                    <i class="fa-solid fa-italic"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 min-h-[100px]">
+                                <p class="text-gray-700">Detail the contributions of each author to the research and manuscript preparation. Include any acknowledgments for technical assistance or financial support.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                            <div class="flex items-start">
+                                <i class="fa-solid fa-circle-info text-blue-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="text-blue-800 font-medium mb-1">AI Assistance Disclosure</h4>
+                                    <p class="text-blue-700 text-sm">If you used AI tools like UX Pilot in preparing your manuscript, please disclose this below:</p>
+                                    <div class="mt-3">
+                                        <label class="inline-flex items-center">
+                                            <input type="checkbox" class="form-checkbox h-4 w-4 text-primary-600">
+                                            <span class="ml-2 text-blue-700">I used AI assistance in preparing this manuscript</span>
+                                        </label>
+                                    </div>
+                                    <div class="mt-2">
+                                        <textarea class="w-full border border-blue-300 rounded-md p-2 text-sm" placeholder="Describe how AI tools were used (e.g., drafting, editing, data analysis)" rows="2"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between mt-8 pt-6 border-t border-gray-200">
+                        <button class="py-2 px-4 bg-white border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50">
+                            Previous: Basic Information
+                        </button>
+                        <button class="py-2 px-4 bg-primary-600 text-white rounded-md font-medium hover:bg-primary-700">
+                            Next: References
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right sidebar with help -->
+            <div id="help-sidebar" class="hidden lg:block w-72 ml-8">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sticky top-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Article Structure Guide</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-primary-500 pl-3">
+                            <h4 class="text-primary-700 font-medium mb-1">Methodology</h4>
+                            <p class="text-sm text-gray-600">Describe your research methods in sufficient detail to allow replication. Include information about participants, materials, procedures, and data analysis.</p>
+                        </div>
+                        <div class="border-l-4 border-primary-500 pl-3">
+                            <h4 class="text-primary-700 font-medium mb-1">Results</h4>
+                            <p class="text-sm text-gray-600">Present your findings without interpretation. Include statistical analyses, tables, figures, and any other relevant data.</p>
+                        </div>
+                        <div class="border-l-4 border-primary-500 pl-3">
+                            <h4 class="text-primary-700 font-medium mb-1">Discussion</h4>
+                            <p class="text-sm text-gray-600">Interpret your results in context. Discuss implications, limitations, and future research directions.</p>
+                        </div>
+                        <div class="border-l-4 border-primary-500 pl-3">
+                            <h4 class="text-primary-700 font-medium mb-1">Conclusion</h4>
+                            <p class="text-sm text-gray-600">Summarize main findings and their significance. Emphasize your contribution to the field.</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <h4 class="font-medium text-gray-800 mb-2">Epistemic Status Tags</h4>
+                        <div class="space-y-2 text-sm text-gray-600">
+                            <div>
+                                <span class="font-medium">Speculative:</span> Claims based on theoretical reasoning without strong empirical evidence
+                            </div>
+                            <div>
+                                <span class="font-medium">Observer-bound:</span> Findings that may be influenced by the researcher's perspective
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <button class="w-full flex items-center justify-center py-2 px-4 bg-secondary-100 text-secondary-700 rounded-md text-sm font-medium hover:bg-secondary-200">
+                            <i class="fa-regular fa-circle-question mr-2"></i>
+                            View Full Guidelines
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="footer" class="bg-white border-t border-gray-200 mt-8">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 Joomla Academic. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Help</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-500 hover:text-gray-700 text-sm cursor-pointer">Contact</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

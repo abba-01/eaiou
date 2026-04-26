@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C63FF',
+                        secondary: '#2A265F',
+                        accent: '#00F5A0',
+                        dark: '#121212',
+                        darkGray: '#1E1E1E',
+                        lightGray: '#2A2A2A',
+                        success: '#00C853',
+                        warning: '#FFD600',
+                        danger: '#FF3D00',
+                        info: '#00B0FF'
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-white font-sans">
+    <!-- Status Bar -->
+    <div id="status-bar" class="bg-darkGray p-2 flex justify-between items-center text-xs">
+        <div>
+            <span>9:41</span>
+        </div>
+        <div class="flex space-x-2">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-three-quarters"></i>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="bg-darkGray p-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <button id="back-btn" class="h-8 w-8 rounded-full bg-secondary flex items-center justify-center">
+                <i class="fa-solid fa-chevron-left text-white"></i>
+            </button>
+            <h1 class="text-lg font-bold">Notification Settings</h1>
+        </div>
+        <div>
+            <button id="help-btn" class="h-8 w-8 rounded-full bg-secondary flex items-center justify-center">
+                <i class="fa-solid fa-question text-white"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pb-20">
+        <!-- Proximity Alert Settings -->
+        <section id="proximity-alerts" class="p-4 bg-darkGray mb-4">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-lg font-bold">Proximity Alerts</h2>
+                <div class="relative">
+                    <input type="checkbox" id="proximity-toggle" class="sr-only" checked>
+                    <label for="proximity-toggle" class="flex w-12 h-6 bg-gray-700 rounded-full cursor-pointer items-center">
+                        <div class="w-5 h-5 bg-accent rounded-full transform translate-x-6 transition-transform"></div>
+                    </label>
+                </div>
+            </div>
+            <p class="text-sm text-gray-400 mb-3">Receive instant notifications about sightings within one mile of your current location.</p>
+            
+            <div id="alert-radius" class="mt-4">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm">Alert Radius</span>
+                    <span class="text-accent font-medium">1.0 mile</span>
+                </div>
+                <input type="range" min="0.1" max="5" step="0.1" value="1" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-accent">
+                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>0.1 mi</span>
+                    <span>5 mi</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notification Types -->
+        <section id="notification-types" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3">Notification Types</h2>
+            
+            <div class="space-y-4">
+                <!-- Critical Alerts -->
+                <div id="critical-alerts" class="bg-darkGray rounded-xl p-4 border-l-4 border-danger">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-danger h-10 w-10 rounded-full flex items-center justify-center">
+                                <i class="fa-solid fa-exclamation-triangle"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Critical Alerts</h3>
+                                <p class="text-xs text-gray-400">Multiple witnesses, clear evidence</p>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <input type="checkbox" id="critical-toggle" class="sr-only" checked>
+                            <label for="critical-toggle" class="flex w-12 h-6 bg-gray-700 rounded-full cursor-pointer items-center">
+                                <div class="w-5 h-5 bg-accent rounded-full transform translate-x-6 transition-transform"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- High Priority -->
+                <div id="high-alerts" class="bg-darkGray rounded-xl p-4 border-l-4 border-warning">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-warning h-10 w-10 rounded-full flex items-center justify-center">
+                                <i class="fa-solid fa-bolt text-dark"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">High Priority</h3>
+                                <p class="text-xs text-gray-400">Verified by trusted witnesses</p>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <input type="checkbox" id="high-toggle" class="sr-only" checked>
+                            <label for="high-toggle" class="flex w-12 h-6 bg-gray-700 rounded-full cursor-pointer items-center">
+                                <div class="w-5 h-5 bg-accent rounded-full transform translate-x-6 transition-transform"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Medium Priority -->
+                <div id="medium-alerts" class="bg-darkGray rounded-xl p-4 border-l-4 border-info">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-info h-10 w-10 rounded-full flex items-center justify-center">
+                                <i class="fa-solid fa-bell"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Medium Priority</h3>
+                                <p class="text-xs text-gray-400">Single witness reports</p>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <input type="checkbox" id="medium-toggle" class="sr-only" checked>
+                            <label for="medium-toggle" class="flex w-12 h-6 bg-gray-700 rounded-full cursor-pointer items-center">
+                                <div class="w-5 h-5 bg-accent rounded-full transform translate-x-6 transition-transform"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Low Priority -->
+                <div id="low-alerts" class="bg-darkGray rounded-xl p-4 border-l-4 border-gray-500">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-gray-600 h-10 w-10 rounded-full flex items-center justify-center">
+                                <i class="fa-solid fa-info"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Low Priority</h3>
+                                <p class="text-xs text-gray-400">Unverified or distant sightings</p>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <input type="checkbox" id="low-toggle" class="sr-only">
+                            <label for="low-toggle" class="flex w-12 h-6 bg-gray-700 rounded-full cursor-pointer items-center">
+                                <div class="w-5 h-5 bg-gray-500 rounded-full transform transition-transform"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notification Sounds -->
+        <section id="notification-sounds" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3">Sound Settings</h2>
+            
+            <div class="bg-darkGray rounded-xl p-4">
+                <!-- Override Silent Mode -->
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h3 class="font-medium">Override Silent Mode</h3>
+                        <p class="text-xs text-gray-400">For critical alerts only</p>
+                    </div>
+                    <div class="relative">
+                        <input type="checkbox" id="override-toggle" class="sr-only" checked>
+                        <label for="override-toggle" class="flex w-12 h-6 bg-gray-700 rounded-full cursor-pointer items-center">
+                            <div class="w-5 h-5 bg-accent rounded-full transform translate-x-6 transition-transform"></div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Vibration -->
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h3 class="font-medium">Vibration</h3>
+                        <p class="text-xs text-gray-400">Haptic feedback for alerts</p>
+                    </div>
+                    <div class="relative">
+                        <input type="checkbox" id="vibration-toggle" class="sr-only" checked>
+                        <label for="vibration-toggle" class="flex w-12 h-6 bg-gray-700 rounded-full cursor-pointer items-center">
+                            <div class="w-5 h-5 bg-accent rounded-full transform translate-x-6 transition-transform"></div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Alert Sound -->
+                <div class="mb-4">
+                    <h3 class="font-medium mb-2">Alert Sound</h3>
+                    <div class="bg-secondary rounded-lg p-3 flex justify-between items-center">
+                        <span class="text-sm">Cosmic Ping</span>
+                        <button class="text-accent">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Volume -->
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-medium">Volume</h3>
+                        <span class="text-accent">75%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="75" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-accent">
+                </div>
+            </div>
+        </section>
+
+        <!-- Time Windows -->
+        <section id="time-windows" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3">Time Windows</h2>
+            
+            <div class="bg-darkGray rounded-xl p-4">
+                <!-- Do Not Disturb -->
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h3 class="font-medium">Do Not Disturb</h3>
+                        <p class="text-xs text-gray-400">Silence non-critical alerts</p>
+                    </div>
+                    <div class="relative">
+                        <input type="checkbox" id="dnd-toggle" class="sr-only">
+                        <label for="dnd-toggle" class="flex w-12 h-6 bg-gray-700 rounded-full cursor-pointer items-center">
+                            <div class="w-5 h-5 bg-gray-500 rounded-full transform transition-transform"></div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Time Window -->
+                <div class="mb-4">
+                    <h3 class="font-medium mb-2">Quiet Hours</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-secondary rounded-lg p-3">
+                            <p class="text-xs text-gray-400">From</p>
+                            <p class="text-sm font-medium">11:00 PM</p>
+                        </div>
+                        <div class="bg-secondary rounded-lg p-3">
+                            <p class="text-xs text-gray-400">To</p>
+                            <p class="text-sm font-medium">7:00 AM</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Days -->
+                <div>
+                    <h3 class="font-medium mb-2">Active Days</h3>
+                    <div class="flex justify-between">
+                        <div class="h-8 w-8 rounded-full bg-accent flex items-center justify-center text-xs font-medium">M</div>
+                        <div class="h-8 w-8 rounded-full bg-accent flex items-center justify-center text-xs font-medium">T</div>
+                        <div class="h-8 w-8 rounded-full bg-accent flex items-center justify-center text-xs font-medium">W</div>
+                        <div class="h-8 w-8 rounded-full bg-accent flex items-center justify-center text-xs font-medium">T</div>
+                        <div class="h-8 w-8 rounded-full bg-accent flex items-center justify-center text-xs font-medium">F</div>
+                        <div class="h-8 w-8 rounded-full bg-gray-700 flex items-center justify-center text-xs font-medium">S</div>
+                        <div class="h-8 w-8 rounded-full bg-gray-700 flex items-center justify-center text-xs font-medium">S</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fatigue Prevention -->
+        <section id="fatigue-prevention" class="px-4 mb-6">
+            <h2 class="text-lg font-bold mb-3">Fatigue Prevention</h2>
+            
+            <div class="bg-darkGray rounded-xl p-4">
+                <!-- Smart Clustering -->
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h3 class="font-medium">Smart Clustering</h3>
+                        <p class="text-xs text-gray-400">Group multiple related alerts</p>
+                    </div>
+                    <div class="relative">
+                        <input type="checkbox" id="clustering-toggle" class="sr-only" checked>
+                        <label for="clustering-toggle" class="flex w-12 h-6 bg-gray-700 rounded-full cursor-pointer items-center">
+                            <div class="w-5 h-5 bg-accent rounded-full transform translate-x-6 transition-transform"></div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Daily Cap -->
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-medium">Daily Alert Cap</h3>
+                        <span class="text-accent">15 alerts</span>
+                    </div>
+                    <input type="range" min="0" max="50" value="15" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-accent">
+                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>No limit</span>
+                        <span>50</span>
+                    </div>
+                </div>
+                
+                <!-- Cooldown Period -->
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-medium">Cooldown Period</h3>
+                        <span class="text-accent">5 minutes</span>
+                    </div>
+                    <input type="range" min="0" max="30" value="5" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-accent">
+                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>None</span>
+                        <span>30 min</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Save Button -->
+        <section id="save-section" class="px-4 mb-6">
+            <button class="bg-accent hover:bg-opacity-90 transition w-full py-4 rounded-2xl flex items-center justify-center space-x-3 shadow-lg text-dark font-bold">
+                <i class="fa-solid fa-save"></i>
+                <span>Save Settings</span>
+            </button>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-darkGray border-t border-gray-800 px-2 py-2">
+        <div class="flex justify-around items-center">
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-house text-lg"></i>
+                <span class="text-xs mt-1">Home</span>
+            </span>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-map-location-dot text-lg"></i>
+                <span class="text-xs mt-1">Map</span>
+            </span>
+            <div class="relative -mt-8">
+                <button class="bg-primary h-16 w-16 rounded-full flex items-center justify-center shadow-lg">
+                    <i class="fa-solid fa-satellite-dish text-2xl"></i>
+                </button>
+            </div>
+            <span class="flex flex-col items-center text-gray-500 cursor-pointer">
+                <i class="fa-solid fa-chart-line text-lg"></i>
+                <span class="text-xs mt-1">Activity</span>
+            </span>
+            <span class="flex flex-col items-center text-primary cursor-pointer">
+                <i class="fa-solid fa-gear text-lg"></i>
+                <span class="text-xs mt-1">Settings</span>
+            </span>
+        </div>
+    </nav>
+
+    <script>
+        // Toggle switch functionality
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const label = this.nextElementSibling;
+                const toggle = label.querySelector('div');
+                
+                if (this.checked) {
+                    toggle.classList.add('translate-x-6', 'bg-accent');
+                    toggle.classList.remove('bg-gray-500');
+                } else {
+                    toggle.classList.remove('translate-x-6', 'bg-accent');
+                    toggle.classList.add('bg-gray-500');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

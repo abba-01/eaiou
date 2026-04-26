@@ -1,0 +1,805 @@
+
+              <html class="">
+                
+  <head>
+    
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest', // Options: 'nest', 'remove', 'replace'
+      };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+<style>
+  * {
+    font-family: "{{font}}", sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+    
+<style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+</style>
+
+    
+<style>
+   :root {
+          /* Base colors */
+          --color-base: #ffffff;
+          --color-base-50: #f9fafb;
+          --color-base-100: #f3f4f6;
+          --color-base-200: #e5e7eb;
+          --color-base-300: #d1d5db;
+          --color-base-400: #9ca3af;
+          --color-base-500: #6b7280;
+          --color-base-600: #4b5563;  
+          --color-base-700: #374151;
+          --color-base-800: #1f2937;  
+          --color-base-900: #111827;
+          --color-base-content: #1f2937;
+
+          /* Primary colors */
+          --color-primary: #3b82f6;
+          --color-primary-50: #eff6ff;
+          --color-primary-100: #dbeafe;
+          --color-primary-200: #bfdbfe;
+          --color-primary-300: #93c5fd;
+          --color-primary-400: #60a5fa;
+          --color-primary-500: #3b82f6;
+          --color-primary-600: #2563eb;
+          --color-primary-700: #1d4ed8;
+          --color-primary-800: #1e40af;
+          --color-primary-900: #1e3a8a;
+          --color-primary-focus: #2563eb;
+          --color-primary-content: #ffffff;
+
+          /* Secondary colors */
+          --color-secondary: #8b5cf6;
+          --color-secondary-50: #f5f3ff;
+          --color-secondary-100: #ede9fe;
+          --color-secondary-200: #ddd6fe;
+          --color-secondary-300: #c4b5fd;
+          --color-secondary-400: #a78bfa;
+          --color-secondary-500: #8b5cf6;
+          --color-secondary-600: #7c3aed;
+          --color-secondary-700: #6d28d9;
+          --color-secondary-800: #5b21b6;
+          --color-secondary-900: #4c1d95;
+          --color-secondary-focus: #7c3aed;
+          --color-secondary-content: #ffffff;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #fdf2f8;
+          --color-accent-100: #fce7f3;
+          --color-accent-200: #fbcfe8;
+          --color-accent-300: #f9a8d4;
+          --color-accent-400: #f472b6;
+          --color-accent-500: #ec4899;
+          --color-accent-600: #db2777;
+          --color-accent-700: #be185d;
+          --color-accent-800: #9d174d;
+          --color-accent-900: #831843;
+          --color-accent-focus: #db2777;
+          --color-accent-content: #ffffff;
+
+          /* Neutral colors */
+          --color-neutral: #6b7280;
+          --color-neutral-50: #f9fafb;
+          --color-neutral-100: #f3f4f6;
+          --color-neutral-200: #e5e7eb;
+          --color-neutral-300: #d1d5db;
+          --color-neutral-400: #9ca3af;
+          --color-neutral-500: #6b7280;
+          --color-neutral-600: #4b5563;
+          --color-neutral-700: #374151;
+          --color-neutral-800: #1f2937;
+          --color-neutral-900: #111827;
+          --color-neutral-focus: #4b5563;
+          --color-neutral-content: #ffffff;
+
+          /* Info colors */
+          --color-info: #3b82f6;
+          --color-info-50: #eff6ff;
+          --color-info-100: #dbeafe;
+          --color-info-200: #bfdbfe;
+          --color-info-300: #93c5fd;
+          --color-info-400: #60a5fa;
+          --color-info-500: #3b82f6;
+          --color-info-600: #2563eb;
+          --color-info-700: #1d4ed8;
+          --color-info-800: #1e40af;
+          --color-info-900: #1e3a8a;
+          --color-info-focus: #2563eb;
+          --color-info-content: #ffffff;
+
+          /* Success colors */
+          --color-success: #10b981;
+          --color-success-50: #ecfdf5;
+          --color-success-100: #d1fae5;
+          --color-success-200: #a7f3d0;
+          --color-success-300: #6ee7b7;
+          --color-success-400: #34d399;
+          --color-success-500: #10b981;
+          --color-success-600: #059669;
+          --color-success-700: #047857;
+          --color-success-800: #065f46;
+          --color-success-900: #064e3b;
+          --color-success-focus: #059669;
+          --color-success-content: #ffffff;
+
+          /* Warning colors */
+          --color-warning: #f59e0b;
+          --color-warning-50: #fffbeb;
+          --color-warning-100: #fef3c7;
+          --color-warning-200: #fde68a;
+          --color-warning-300: #fcd34d;
+          --color-warning-400: #fbbf24;
+          --color-warning-500: #f59e0b;
+          --color-warning-600: #d97706;
+          --color-warning-700: #b45309;
+          --color-warning-800: #92400e;
+          --color-warning-900: #78350f;
+          --color-warning-focus: #d97706;
+          --color-warning-content: #ffffff;
+
+          /* Error colors */
+          --color-error: #ef4444;
+          --color-error-50: #fef2f2;
+          --color-error-100: #fee2e2;
+          --color-error-200: #fecaca;
+          --color-error-300: #fca5a5;
+          --color-error-400: #f87171;
+          --color-error-500: #ef4444;
+          --color-error-600: #dc2626;
+          --color-error-700: #b91c1c;
+          --color-error-800: #991b1b;
+          --color-error-900: #7f1d1d;
+          --color-error-focus: #dc2626;
+          --color-error-content: #ffffff;
+        }
+</style>
+
+    
+<style>
+/* Dark theme */
+        .dark {
+          /* Base colors */
+          --color-base: #1f2937;
+          --color-base-50: #111827;
+          --color-base-100: #1f2937;
+          --color-base-200: #374151;
+          --color-base-300: #4b5563;
+          --color-base-400: #6b7280;
+          --color-base-500: #9ca3af;
+          --color-base-600: #d1d5db;
+          --color-base-700: #e5e7eb;
+          --color-base-800: #f3f4f6;
+          --color-base-900: #f9fafb;
+          --color-base-content: #f9fafb;
+
+          /* Primary colors */
+          --color-primary: #60a5fa;
+          --color-primary-50: #1e3a8a;
+          --color-primary-100: #1e40af;
+          --color-primary-200: #1d4ed8;
+          --color-primary-300: #2563eb;
+          --color-primary-400: #3b82f6;
+          --color-primary-500: #60a5fa;
+          --color-primary-600: #93c5fd;
+          --color-primary-700: #bfdbfe;
+          --color-primary-800: #dbeafe;
+          --color-primary-900: #eff6ff;
+          --color-primary-focus: #3b82f6;
+          --color-primary-content: #1f2937;
+
+          /* Secondary colors */
+          --color-secondary: #a78bfa;
+          --color-secondary-50: #4c1d95;
+          --color-secondary-100: #5b21b6;
+          --color-secondary-200: #6d28d9;
+          --color-secondary-300: #7c3aed;
+          --color-secondary-400: #8b5cf6;
+          --color-secondary-500: #a78bfa;
+          --color-secondary-600: #c4b5fd;
+          --color-secondary-700: #ddd6fe;
+          --color-secondary-800: #ede9fe;
+          --color-secondary-900: #f5f3ff;
+          --color-secondary-focus: #8b5cf6;
+          --color-secondary-content: #1f2937;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #831843;
+          --color-accent-100: #9d174d;
+          --color-accent-200: #be185d;
+          --color-accent-300: #db2777;
+          --color-accent-400: #ec4899;
+          --color-accent-500: #f472b6;
+          --color-accent-600: #f9a8d4;
+          --color-accent-700: #fbcfe8;
+          --color-accent-800: #fce7f3;
+          --color-accent-900: #fdf2f8;
+          --color-accent-focus: #ec4899;
+          --color-accent-content: #1f2937;
+
+          /* Neutral colors remain the same as light theme */
+
+          /* Info colors */
+          --color-info: #60a5fa;
+          --color-info-50: #1e3a8a;
+          --color-info-100: #1e40af;
+          --color-info-200: #1d4ed8;
+          --color-info-300: #2563eb;
+          --color-info-400: #3b82f6;
+          --color-info-500: #60a5fa;
+          --color-info-600: #93c5fd;
+          --color-info-700: #bfdbfe;
+          --color-info-800: #dbeafe;
+          --color-info-900: #eff6ff;
+          --color-info-focus: #3b82f6;
+          --color-info-content: #1f2937;
+
+          /* Success colors */
+          --color-success: #34d399;
+          --color-success-50: #064e3b;
+          --color-success-100: #065f46;
+          --color-success-200: #047857;
+          --color-success-300: #059669;
+          --color-success-400: #10b981;
+          --color-success-500: #34d399;
+          --color-success-600: #6ee7b7;
+          --color-success-700: #a7f3d0;
+          --color-success-800: #d1fae5;
+          --color-success-900: #ecfdf5;
+          --color-success-focus: #10b981;
+          --color-success-content: #1f2937;
+
+          /* Warning colors */
+          --color-warning: #fbbf24;
+          --color-warning-50: #78350f;
+          --color-warning-100: #92400e;
+          --color-warning-200: #b45309;
+          --color-warning-300: #d97706;
+          --color-warning-400: #f59e0b;
+          --color-warning-500: #fbbf24;
+          --color-warning-600: #fcd34d;
+          --color-warning-700: #fde68a;
+          --color-warning-800: #fef3c7;
+          --color-warning-900: #fffbeb;
+          --color-warning-focus: #f59e0b;
+          --color-warning-content: #1f2937;
+
+          /* Error colors */
+          --color-error: #f87171;
+          --color-error-50: #7f1d1d;
+          --color-error-100: #991b1b;
+          --color-error-200: #b91c1c;
+          --color-error-300: #dc2626;
+          --color-error-400: #ef4444;
+          --color-error-500: #f87171;
+          --color-error-600: #fca5a5;
+          --color-error-700: #fecaca;
+          --color-error-800: #fee2e2;
+          --color-error-900: #fef2f2;
+          --color-error-focus: #ef4444;
+          --color-error-content: #1f2937;
+        }
+</style>
+
+    
+  <script>
+        tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                ...{"transparent":"transparent","current":"currentColor","black":"#000000","white":"#ffffff","gray":{"50":"#f9fafb","100":"#f3f4f6","200":"#e5e7eb","300":"#d1d5db","400":"#9ca3af","500":"#6b7280","600":"#4b5563","700":"#374151","800":"#1f2937","900":"#111827"},"red":{"50":"#fef2f2","100":"#fee2e2","200":"#fecaca","300":"#fca5a5","400":"#f87171","500":"#ef4444","600":"#dc2626","700":"#b91c1c","800":"#991b1b","900":"#7f1d1d"},"yellow":{"50":"#fffbeb","100":"#fef3c7","200":"#fde68a","300":"#fcd34d","400":"#fbbf24","500":"#f59e0b","600":"#d97706","700":"#b45309","800":"#92400e","900":"#78350f"},"green":{"50":"#ecfdf5","100":"#d1fae5","200":"#a7f3d0","300":"#6ee7b7","400":"#34d399","500":"#10b981","600":"#059669","700":"#047857","800":"#065f46","900":"#064e3b"},"blue":{"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a"},"indigo":{"50":"#eef2ff","100":"#e0e7ff","200":"#c7d2fe","300":"#a5b4fc","400":"#818cf8","500":"#6366f1","600":"#4f46e5","700":"#4338ca","800":"#3730a3","900":"#312e81"},"purple":{"50":"#f5f3ff","100":"#ede9fe","200":"#ddd6fe","300":"#c4b5fd","400":"#a78bfa","500":"#8b5cf6","600":"#7c3aed","700":"#6d28d9","800":"#5b21b6","900":"#4c1d95"},"pink":{"50":"#fdf2f8","100":"#fce7f3","200":"#fbcfe8","300":"#f9a8d4","400":"#f472b6","500":"#ec4899","600":"#db2777","700":"#be185d","800":"#9d174d","900":"#831843"}},
+                ...{"primary":{"50":"var(--color-primary-50)","100":"var(--color-primary-100)","200":"var(--color-primary-200)","300":"var(--color-primary-300)","400":"var(--color-primary-400)","500":"var(--color-primary-500)","600":"var(--color-primary-600)","700":"var(--color-primary-700)","800":"var(--color-primary-800)","900":"var(--color-primary-900)","DEFAULT":"var(--color-primary)","focus":"var(--color-primary-focus)","content":"var(--color-primary-content)"},"secondary":{"50":"var(--color-secondary-50)","100":"var(--color-secondary-100)","200":"var(--color-secondary-200)","300":"var(--color-secondary-300)","400":"var(--color-secondary-400)","500":"var(--color-secondary-500)","600":"var(--color-secondary-600)","700":"var(--color-secondary-700)","800":"var(--color-secondary-800)","900":"var(--color-secondary-900)","DEFAULT":"var(--color-secondary)","focus":"var(--color-secondary-focus)","content":"var(--color-secondary-content)"},"accent":{"50":"var(--color-accent-50)","100":"var(--color-accent-100)","200":"var(--color-accent-200)","300":"var(--color-accent-300)","400":"var(--color-accent-400)","500":"var(--color-accent-500)","600":"var(--color-accent-600)","700":"var(--color-accent-700)","800":"var(--color-accent-800)","900":"var(--color-accent-900)","DEFAULT":"var(--color-accent)","focus":"var(--color-accent-focus)","content":"var(--color-accent-content)"},"neutral":{"50":"var(--color-neutral-50)","100":"var(--color-neutral-100)","200":"var(--color-neutral-200)","300":"var(--color-neutral-300)","400":"var(--color-neutral-400)","500":"var(--color-neutral-500)","600":"var(--color-neutral-600)","700":"var(--color-neutral-700)","800":"var(--color-neutral-800)","900":"var(--color-neutral-900)","DEFAULT":"var(--color-neutral)","focus":"var(--color-neutral-focus)","content":"var(--color-neutral-content)"},"info":{"50":"var(--color-info-50)","100":"var(--color-info-100)","200":"var(--color-info-200)","300":"var(--color-info-300)","400":"var(--color-info-400)","500":"var(--color-info-500)","600":"var(--color-info-600)","700":"var(--color-info-700)","800":"var(--color-info-800)","900":"var(--color-info-900)","DEFAULT":"var(--color-info)","focus":"var(--color-info-focus)","content":"var(--color-info-content)"},"success":{"50":"var(--color-success-50)","100":"var(--color-success-100)","200":"var(--color-success-200)","300":"var(--color-success-300)","400":"var(--color-success-400)","500":"var(--color-success-500)","600":"var(--color-success-600)","700":"var(--color-success-700)","800":"var(--color-success-800)","900":"var(--color-success-900)","DEFAULT":"var(--color-success)","focus":"var(--color-success-focus)","content":"var(--color-success-content)"},"warning":{"50":"var(--color-warning-50)","100":"var(--color-warning-100)","200":"var(--color-warning-200)","300":"var(--color-warning-300)","400":"var(--color-warning-400)","500":"var(--color-warning-500)","600":"var(--color-warning-600)","700":"var(--color-warning-700)","800":"var(--color-warning-800)","900":"var(--color-warning-900)","DEFAULT":"var(--color-warning)","focus":"var(--color-warning-focus)","content":"var(--color-warning-content)"},"error":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"danger":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"failure":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"}},
+                },
+              },
+            },
+            variants: {
+              extend: {
+                backgroundColor: ['active', 'group-hover'],
+                textColor: ['active', 'group-hover'],
+              },
+            },
+            plugins: [],
+          };
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+                <body class="h-full text-base-content">
+                  <div id="model-management-page" class="min-h-[800px] bg-neutral-100">
+  <!-- Header -->
+  <header id="header" class="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <div class="flex items-center space-x-4">
+      <div class="w-10 h-10 bg-neutral-800 rounded-md flex items-center justify-center text-white">
+        <i class="fa-solid fa-robot"></i>
+      </div>
+      <div>
+        <h1 class="text-xl">AI Research Assistant</h1>
+        <p class="text-sm text-neutral-500">Joomla 5.3 Component</p>
+      </div>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="p-2 rounded-full hover:bg-neutral-100">
+        <i class="fa-solid fa-bell text-neutral-600"></i>
+      </button>
+      <button class="p-2 rounded-full hover:bg-neutral-100">
+        <i class="fa-solid fa-gear text-neutral-600"></i>
+      </button>
+      <div class="flex items-center space-x-2">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full">
+        <span class="text-sm">Admin User</span>
+        <i class="fa-solid fa-chevron-down text-neutral-500 text-xs"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div id="main-content" class="container mx-auto px-6 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h2 class="text-2xl">AI Model Management</h2>
+        <p class="text-sm text-neutral-500">Configure and manage AI models for academic content generation</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button class="px-4 py-2 bg-white border border-neutral-300 rounded-md text-sm flex items-center">
+          <i class="fa-solid fa-arrow-left text-neutral-500 mr-2"></i>
+          Back to Settings
+        </button>
+        <button class="px-4 py-2 bg-neutral-800 text-white rounded-md text-sm flex items-center">
+          <i class="fa-solid fa-plus mr-2"></i>
+          Add New Model
+        </button>
+      </div>
+    </div>
+
+    <!-- Model List -->
+    <div id="model-list" class="bg-white rounded-lg shadow-sm p-6 mb-6">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-lg">Available AI Models</h3>
+        <div class="flex items-center space-x-2">
+          <div class="relative">
+            <input type="text" placeholder="Search models..." class="pl-8 pr-4 py-2 border border-neutral-300 rounded-md text-sm w-64">
+            <i class="fa-solid fa-search absolute left-3 top-2.5 text-neutral-400"></i>
+          </div>
+          <div class="flex items-center space-x-1">
+            <span class="text-sm text-neutral-500">Sort by:</span>
+            <select class="border border-neutral-300 rounded-md text-sm py-2 pl-3 pr-8">
+              <option>Name</option>
+              <option>Date Added</option>
+              <option>Status</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="min-w-full">
+          <thead>
+            <tr class="border-b border-neutral-200">
+              <th class="pb-3 text-left text-sm text-neutral-500">Model Name</th>
+              <th class="pb-3 text-left text-sm text-neutral-500">Provider</th>
+              <th class="pb-3 text-left text-sm text-neutral-500">Status</th>
+              <th class="pb-3 text-left text-sm text-neutral-500">API Key</th>
+              <th class="pb-3 text-left text-sm text-neutral-500">Last Used</th>
+              <th class="pb-3 text-left text-sm text-neutral-500">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-neutral-100 hover:bg-neutral-50">
+              <td class="py-4">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 bg-neutral-700 rounded-md flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-brain"></i>
+                  </div>
+                  <div>
+                    <div>UX Pilot Opus</div>
+                    <div class="text-xs text-neutral-500">Advanced reasoning</div>
+                  </div>
+                </div>
+              </td>
+              <td class="py-4 text-sm">UX Pilot AI</td>
+              <td class="py-4">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Active</span>
+              </td>
+              <td class="py-4 text-sm">
+                <span class="text-neutral-600">••••••••</span>
+                <span class="text-neutral-400">7a9b</span>
+              </td>
+              <td class="py-4 text-sm">July 6, 2025</td>
+              <td class="py-4">
+                <div class="flex space-x-2">
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700" title="Edit">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700" title="Configure">
+                    <i class="fa-solid fa-sliders"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700" title="Delete">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr class="border-b border-neutral-100 hover:bg-neutral-50">
+              <td class="py-4">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 bg-neutral-700 rounded-md flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-brain"></i>
+                  </div>
+                  <div>
+                    <div>UX Pilot Sonnet</div>
+                    <div class="text-xs text-neutral-500">Balanced performance</div>
+                  </div>
+                </div>
+              </td>
+              <td class="py-4 text-sm">UX Pilot AI</td>
+              <td class="py-4">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Active</span>
+              </td>
+              <td class="py-4 text-sm">
+                <span class="text-neutral-600">••••••••</span>
+                <span class="text-neutral-400">3c4d</span>
+              </td>
+              <td class="py-4 text-sm">July 5, 2025</td>
+              <td class="py-4">
+                <div class="flex space-x-2">
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700" title="Edit">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700" title="Configure">
+                    <i class="fa-solid fa-sliders"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700" title="Delete">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr class="border-b border-neutral-100 hover:bg-neutral-50">
+              <td class="py-4">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 bg-neutral-700 rounded-md flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-microchip"></i>
+                  </div>
+                  <div>
+                    <div>GPT-4o</div>
+                    <div class="text-xs text-neutral-500">Multimodal capabilities</div>
+                  </div>
+                </div>
+              </td>
+              <td class="py-4 text-sm">UX Pilot AI</td>
+              <td class="py-4">
+                <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Active</span>
+              </td>
+              <td class="py-4 text-sm">
+                <span class="text-neutral-600">••••••••</span>
+                <span class="text-neutral-400">5e6f</span>
+              </td>
+              <td class="py-4 text-sm">July 4, 2025</td>
+              <td class="py-4">
+                <div class="flex space-x-2">
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700" title="Edit">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700" title="Configure">
+                    <i class="fa-solid fa-sliders"></i>
+                  </button>
+                  <button class="p-1 text-neutral-500 hover:text-neutral-700" title="Delete">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-neutral-50">
+              <td class="py-4">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 bg-neutral-200 rounded-md flex items-center justify-center text-neutral-500 mr-3">
+                    <i class="fa-solid fa-plus"></i>
+                  </div>
+                  <div class="text-neutral-500">Add new model</div>
+                </div>
+              </td>
+              <td class="py-4"></td>
+              <td class="py-4"></td>
+              <td class="py-4"></td>
+              <td class="py-4"></td>
+              <td class="py-4"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Model Edit Form -->
+    <div id="model-edit-form" class="bg-white rounded-lg shadow-sm p-6 mb-6">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h3 class="text-lg">Edit Model: UX Pilot Opus</h3>
+          <p class="text-sm text-neutral-500">Configure model settings and parameters</p>
+        </div>
+        <button class="p-2 text-neutral-500 hover:text-neutral-700 rounded-full hover:bg-neutral-100">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">Model Name</label>
+            <input type="text" value="UX Pilot Opus" class="w-full border border-neutral-300 rounded-md px-3 py-2">
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">Provider</label>
+            <select class="w-full border border-neutral-300 rounded-md px-3 py-2">
+              <option>UX Pilot AI</option>
+              <option>UX Pilot AI</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">API Key</label>
+            <div class="flex">
+              <input type="password" value="••••••••••••••••" class="w-full border border-neutral-300 rounded-l-md px-3 py-2">
+              <button class="bg-neutral-100 border border-neutral-300 border-l-0 rounded-r-md px-3 text-neutral-600">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+            <p class="text-xs text-neutral-500 mt-1">API keys are encrypted and stored securely</p>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">Status</label>
+            <div class="flex items-center space-x-4">
+              <div class="flex items-center">
+                <input type="radio" id="status-active" name="status" checked class="h-4 w-4 border-neutral-300 text-neutral-800 focus:ring-neutral-800">
+                <label for="status-active" class="ml-2 text-sm text-neutral-700">Active</label>
+              </div>
+              <div class="flex items-center">
+                <input type="radio" id="status-inactive" name="status" class="h-4 w-4 border-neutral-300 text-neutral-800 focus:ring-neutral-800">
+                <label for="status-inactive" class="ml-2 text-sm text-neutral-700">Inactive</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">Model Version</label>
+            <input type="text" value="1.0" class="w-full border border-neutral-300 rounded-md px-3 py-2">
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">Context Window</label>
+            <select class="w-full border border-neutral-300 rounded-md px-3 py-2">
+              <option>200,000 tokens</option>
+              <option>100,000 tokens</option>
+              <option>32,000 tokens</option>
+              <option>16,000 tokens</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">API Endpoint</label>
+            <input type="text" value="https://api.UX Pilot AI.com/v1/messages" class="w-full border border-neutral-300 rounded-md px-3 py-2">
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm text-neutral-700 mb-1">Usage Limits</label>
+            <div class="flex items-center space-x-2">
+              <input type="number" value="50000" class="w-full border border-neutral-300 rounded-md px-3 py-2">
+              <span class="text-sm text-neutral-500 whitespace-nowrap">tokens/day</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-neutral-200 pt-6 mb-6">
+        <h4 class="text-md mb-4">Model Parameters</h4>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">Temperature</label>
+              <div class="flex items-center">
+                <input type="range" min="0" max="1" step="0.1" value="0.7" class="w-full mr-3">
+                <span class="text-sm">0.7</span>
+              </div>
+              <p class="text-xs text-neutral-500 mt-1">Controls randomness: Lower values are more deterministic, higher values more creative</p>
+            </div>
+            
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">Max Tokens</label>
+              <input type="number" value="4000" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">
+              <p class="text-xs text-neutral-500 mt-1">Maximum number of tokens to generate per response</p>
+            </div>
+          </div>
+          
+          <div>
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">Top P</label>
+              <div class="flex items-center">
+                <input type="range" min="0" max="1" step="0.1" value="0.9" class="w-full mr-3">
+                <span class="text-sm">0.9</span>
+              </div>
+              <p class="text-xs text-neutral-500 mt-1">Controls diversity via nucleus sampling</p>
+            </div>
+            
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">Frequency Penalty</label>
+              <div class="flex items-center">
+                <input type="range" min="0" max="2" step="0.1" value="0.5" class="w-full mr-3">
+                <span class="text-sm">0.5</span>
+              </div>
+              <p class="text-xs text-neutral-500 mt-1">Reduces repetition of token sequences</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-neutral-200 pt-6 mb-6">
+        <h4 class="text-md mb-4">Academic Settings</h4>
+        
+        <div class="mb-4">
+          <label class="block text-sm text-neutral-700 mb-1">System Prompt Template</label>
+          <textarea rows="4" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm">You are an academic research assistant tasked with generating scientifically accurate, peer-reviewable content. Ensure all outputs adhere to academic standards, include proper citations, and maintain scholarly integrity.</textarea>
+          <p class="text-xs text-neutral-500 mt-1">Default system instructions for academic content generation</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">Citation Style</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2">
+                <option>APA 7th Edition</option>
+                <option>MLA 9th Edition</option>
+                <option>Chicago 17th Edition</option>
+                <option>IEEE</option>
+                <option>Harvard</option>
+              </select>
+            </div>
+          </div>
+          
+          <div>
+            <div class="mb-4">
+              <label class="block text-sm text-neutral-700 mb-1">Academic Domain Focus</label>
+              <select class="w-full border border-neutral-300 rounded-md px-3 py-2">
+                <option>General Academic</option>
+                <option>Natural Sciences</option>
+                <option>Social Sciences</option>
+                <option>Humanities</option>
+                <option>Engineering & Technology</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end space-x-3">
+        <button class="px-4 py-2 border border-neutral-300 rounded-md text-sm text-neutral-700">Cancel</button>
+        <button class="px-4 py-2 bg-neutral-800 text-white rounded-md text-sm">Save Changes</button>
+      </div>
+    </div>
+
+    <!-- Model Test Console -->
+    <div id="model-test-console" class="bg-white rounded-lg shadow-sm p-6">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h3 class="text-lg">Model Test Console</h3>
+          <p class="text-sm text-neutral-500">Test model configuration with sample prompts</p>
+        </div>
+        <div class="flex items-center space-x-2">
+          <select class="border border-neutral-300 rounded-md text-sm py-2 px-3">
+            <option>UX Pilot Opus</option>
+            <option>UX Pilot Sonnet</option>
+            <option>GPT-4o</option>
+          </select>
+          <button class="px-4 py-2 bg-neutral-800 text-white rounded-md text-sm">
+            Run Test
+          </button>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-sm text-neutral-700 mb-1">Test Prompt</label>
+        <textarea rows="3" class="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm" placeholder="Enter a test prompt to evaluate model performance...">Generate a brief introduction for an academic paper on the effects of climate change on marine ecosystems. Include at least 3 potential citations.</textarea>
+      </div>
+
+      <div class="border border-neutral-200 rounded-md p-4 bg-neutral-50 mb-4">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center">
+            <div class="w-6 h-6 bg-neutral-700 rounded-md flex items-center justify-center text-white mr-2">
+              <i class="fa-solid fa-brain text-xs"></i>
+            </div>
+            <span class="text-sm">Model Response</span>
+          </div>
+          <div class="text-xs text-neutral-500">
+            Response time: 2.3s | Tokens: 312
+          </div>
+        </div>
+        <div class="text-sm text-neutral-700 whitespace-pre-line">
+          # Introduction: Climate Change and Marine Ecosystems
+
+The accelerating pace of anthropogenic climate change presents unprecedented challenges to marine ecosystems worldwide. Ocean temperatures have increased by approximately 0.13°C per decade since the mid-20th century, triggering cascading effects throughout marine food webs and habitat structures (Hoegh-Guldberg & Bruno, 2010). Rising sea levels, ocean acidification, and changing circulation patterns further compound these stressors, threatening biodiversity and ecosystem services upon which human communities depend (Bindoff et al., 2019). This paper examines recent evidence documenting these impacts, with particular attention to coral reef systems, pelagic communities, and coastal habitats that serve as critical interfaces between terrestrial and marine environments (Hughes et al., 2018).
+
+**References:**
+
+Bindoff, N.L., et al. (2019). Changing Ocean, Marine Ecosystems, and Dependent Communities. In: IPCC Special Report on the Ocean and Cryosphere in a Changing Climate.
+
+Hoegh-Guldberg, O., & Bruno, J.F. (2010). The impact of climate change on the world's marine ecosystems. Science, 328(5985), 1523-1528.
+
+Hughes, T.P., et al. (2018). Spatial and temporal patterns of mass bleaching of corals in the Anthropocene. Science, 359(6371), 80-83.
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <button class="px-3 py-1.5 border border-neutral-300 rounded-md text-sm text-neutral-700 flex items-center">
+            <i class="fa-regular fa-copy mr-2"></i>
+            Copy Response
+          </button>
+          <button class="px-3 py-1.5 border border-neutral-300 rounded-md text-sm text-neutral-700 flex items-center">
+            <i class="fa-solid fa-download mr-2"></i>
+            Export
+          </button>
+        </div>
+        <div class="flex items-center space-x-2">
+          <span class="text-sm text-neutral-500">Model performance:</span>
+          <div class="flex items-center">
+            <i class="fa-solid fa-star text-neutral-700"></i>
+            <i class="fa-solid fa-star text-neutral-700"></i>
+            <i class="fa-solid fa-star text-neutral-700"></i>
+            <i class="fa-solid fa-star text-neutral-700"></i>
+            <i class="fa-regular fa-star text-neutral-700"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer id="footer" class="bg-white border-t border-neutral-200 mt-8 py-6">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="text-center md:text-left mb-4 md:mb-0">
+          <p class="text-sm text-neutral-600">AI Research Assistant v1.0.2 | Joomla 5.3 Component</p>
+          <p class="text-xs text-neutral-500">© 2025 All Rights Reserved</p>
+        </div>
+        <div class="flex space-x-4">
+          <button class="text-sm text-neutral-600 hover:text-neutral-800">Documentation</button>
+          <button class="text-sm text-neutral-600 hover:text-neutral-800">Support</button>
+          <button class="text-sm text-neutral-600 hover:text-neutral-800">Privacy Policy</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+                <script src="theme-switcher.js"></script>
+</body>
+              </html>
+            

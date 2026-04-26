@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div id="header" class="flex items-center p-3 bg-white border-b">
+  <div class="flex items-center space-x-4">
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <span class="flex items-center cursor-pointer">
+      <img alt="AcademiAI Logo" class="h-6" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/default-placeholder.png"/>
+      <span class="ml-1">AcademiAI Manager</span>
+    </span>
+    <div class="flex items-center space-x-4">
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded">
+          Dashboard
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded flex items-center">
+          Projects
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-600 hover:bg-neutral-100 rounded flex items-center">
+          Settings
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <div class="relative group">
+        <button class="px-3 py-1 text-neutral-700 hover:bg-neutral-100 rounded flex items-center">
+          Analytics
+          <i class="fa-solid fa-angle-down ml-1 text-xs"></i>
+        </button>
+      </div>
+      <button class="bg-neutral-600 text-white px-4 py-1.5 rounded">
+        New Project
+      </button>
+    </div>
+  </div>
+  <div class="ml-auto flex items-center space-x-3">
+    <div class="bg-neutral-100 text-neutral-800 px-3 py-1 rounded-full text-sm flex items-center">
+      <i class="fa-solid fa-gem mr-1 text-xs"></i>
+      Academic License
+    </div>
+    <div class="relative">
+      <div class="relative">
+        <i class="fa-solid fa-search text-neutral-400 absolute left-3 top-2.5"></i>
+        <input class="pl-9 pr-4 py-2 bg-neutral-100 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-neutral-500" placeholder="Search projects or articles" type="text"/>
+      </div>
+    </div>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-regular fa-bell"></i>
+    </button>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-regular fa-circle-question"></i>
+    </button>
+    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full">
+      <i class="fa-solid fa-cog"></i>
+    </button>
+    <button class="w-8 h-8 rounded-full bg-neutral-600 text-white flex items-center justify-center text-sm">
+      AD
+    </button>
+  </div>
+</div>
+
+<div id="main-content" class="flex h-[800px]">
+  <div id="sidebar" class="w-56 bg-white p-4 border-r">
+    <h2 class="text-lg mb-4">
+      Settings
+    </h2>
+    <div class="space-y-1">
+      <span class="flex items-center py-1.5 px-2 rounded bg-neutral-50 text-neutral-700 cursor-pointer">
+        <i class="fa-solid fa-robot w-5 text-center mr-2"></i>
+        <span class="text-sm">AI Models</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-key w-5 text-center mr-2"></i>
+        <span class="text-sm">API Keys</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-lock w-5 text-center mr-2"></i>
+        <span class="text-sm">Security</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-users w-5 text-center mr-2"></i>
+        <span class="text-sm">User Access</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-database w-5 text-center mr-2"></i>
+        <span class="text-sm">Data Storage</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-bell w-5 text-center mr-2"></i>
+        <span class="text-sm">Notifications</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-file-export w-5 text-center mr-2"></i>
+        <span class="text-sm">Export Settings</span>
+      </span>
+      <span class="flex items-center py-1.5 px-2 rounded text-neutral-700 hover:bg-neutral-50 cursor-pointer">
+        <i class="fa-solid fa-sliders w-5 text-center mr-2"></i>
+        <span class="text-sm">Preferences</span>
+      </span>
+    </div>
+    <div class="mt-6 pt-6 border-t">
+      <div class="text-xs text-neutral-500 mb-3">
+        Joomla 5.3 Component v2.1.4
+      </div>
+      <button class="flex items-center text-sm text-neutral-600 hover:underline">
+        <i class="fa-regular fa-life-ring mr-2"></i>
+        Get Support
+      </button>
+    </div>
+  </div>
+  
+  <div id="content" class="flex-1 bg-neutral-50 overflow-auto">
+    <div class="p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl">AI Model Configuration</h1>
+        <button class="bg-neutral-600 text-white px-4 py-2 rounded shadow-md hover:bg-neutral-700 flex items-center">
+          <i class="fa-solid fa-plus mr-2"></i>
+          Add New Model
+        </button>
+      </div>
+      
+      <div class="mb-6">
+        <div class="bg-white p-4 rounded-lg shadow-md border border-neutral-200">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg">Model Pool Configuration</h2>
+            <div class="flex space-x-2">
+              <button class="px-3 py-1.5 bg-neutral-100 rounded text-neutral-700 text-sm flex items-center">
+                <i class="fa-solid fa-download mr-1"></i>
+                Export
+              </button>
+              <button class="px-3 py-1.5 bg-neutral-100 rounded text-neutral-700 text-sm flex items-center">
+                <i class="fa-solid fa-upload mr-1"></i>
+                Import
+              </button>
+            </div>
+          </div>
+          
+          <p class="text-neutral-600 mb-4">Configure the AI models used for generating academic and scientific peer-reviewed content. All API keys are encrypted and stored securely.</p>
+          
+          <div class="flex items-center space-x-3 mb-4">
+            <button class="px-3 py-1.5 bg-neutral-50 text-neutral-700 rounded-full text-sm">All Models</button>
+            <button class="px-3 py-1.5 bg-neutral-100 text-neutral-700 rounded-full text-sm">Active</button>
+            <button class="px-3 py-1.5 bg-neutral-100 text-neutral-700 rounded-full text-sm">Inactive</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="models-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- UX Pilot Opus Model Card -->
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 hover:shadow-lg transition-shadow duration-200">
+          <div class="p-4 border-b">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-robot text-white"></i>
+                </div>
+                <div>
+                  <h3>UX Pilot Opus</h3>
+                  <div class="text-sm text-neutral-500">UX Pilot AI</div>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800 mr-2">
+                  Active
+                </span>
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <div class="space-y-3">
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">API Version:</span>
+                <span class="text-neutral-900">2023-11-28</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Max Tokens:</span>
+                <span class="text-neutral-900">200,000</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Temperature:</span>
+                <span class="text-neutral-900">0.7</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Usage Priority:</span>
+                <span class="text-neutral-900">High</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 border-t bg-neutral-50 flex justify-between">
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-pen-to-square mr-1"></i>
+              Edit
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-key mr-1"></i>
+              API Key
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-trash mr-1"></i>
+              Delete
+            </button>
+          </div>
+        </div>
+        
+        <!-- UX Pilot Sonnet Model Card -->
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 hover:shadow-lg transition-shadow duration-200">
+          <div class="p-4 border-b">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-robot text-white"></i>
+                </div>
+                <div>
+                  <h3>UX Pilot Sonnet</h3>
+                  <div class="text-sm text-neutral-500">UX Pilot AI</div>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800 mr-2">
+                  Active
+                </span>
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <div class="space-y-3">
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">API Version:</span>
+                <span class="text-neutral-900">2023-11-28</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Max Tokens:</span>
+                <span class="text-neutral-900">180,000</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Temperature:</span>
+                <span class="text-neutral-900">0.5</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Usage Priority:</span>
+                <span class="text-neutral-900">Medium</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 border-t bg-neutral-50 flex justify-between">
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-pen-to-square mr-1"></i>
+              Edit
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-key mr-1"></i>
+              API Key
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-trash mr-1"></i>
+              Delete
+            </button>
+          </div>
+        </div>
+        
+        <!-- GPT-4o Model Card -->
+        <div class="bg-white rounded-lg shadow-md border border-neutral-200 hover:shadow-lg transition-shadow duration-200">
+          <div class="p-4 border-b">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center mr-3">
+                  <i class="fa-solid fa-robot text-white"></i>
+                </div>
+                <div>
+                  <h3>GPT-4o</h3>
+                  <div class="text-sm text-neutral-500">UX Pilot AI</div>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs bg-neutral-100 text-neutral-800 mr-2">
+                  Active
+                </span>
+                <button class="text-neutral-400 hover:text-neutral-600">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <div class="space-y-3">
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">API Version:</span>
+                <span class="text-neutral-900">2025-03-01</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Max Tokens:</span>
+                <span class="text-neutral-900">128,000</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Temperature:</span>
+                <span class="text-neutral-900">0.3</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-neutral-500">Usage Priority:</span>
+                <span class="text-neutral-900">High</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 border-t bg-neutral-50 flex justify-between">
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-pen-to-square mr-1"></i>
+              Edit
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-key mr-1"></i>
+              API Key
+            </button>
+            <button class="text-neutral-700 hover:text-neutral-900 text-sm flex items-center">
+              <i class="fa-solid fa-trash mr-1"></i>
+              Delete
+            </button>
+          </div>
+        </div>
+        
+        <!-- Add New Model Card -->
+        <div class="border-2 border-dashed border-neutral-300 rounded-lg flex items-center justify-center p-6 hover:border-neutral-500 hover:bg-neutral-50 transition-colors duration-200 cursor-pointer">
+          <div class="text-center">
+            <div class="w-12 h-12 rounded-full bg-neutral-100 flex items-center justify-center mx-auto mb-3">
+              <i class="fa-solid fa-plus text-neutral-500"></i>
+            </div>
+            <h3 class="text-neutral-700">Add New AI Model</h3>
+            <p class="text-sm text-neutral-500 mt-1">Configure a new model for your projects</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-8">
+        <div class="bg-white p-4 rounded-lg shadow-md border border-neutral-200">
+          <h2 class="text-lg mb-4">Global AI Settings</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-sm text-neutral-700 mb-3">Default Parameters</h3>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-sm text-neutral-700 mb-1">Default Temperature</label>
+                  <div class="flex items-center">
+                    <input type="range" min="0" max="1" step="0.1" value="0.7" class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer"/>
+                    <span class="ml-2 text-neutral-700">0.7</span>
+                  </div>
+                </div>
+                
+                <div>
+                  <label class="block text-sm text-neutral-700 mb-1">Top-p Sampling</label>
+                  <div class="flex items-center">
+                    <input type="range" min="0" max="1" step="0.1" value="0.9" class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer"/>
+                    <span class="ml-2 text-neutral-700">0.9</span>
+                  </div>
+                </div>
+                
+                <div>
+                  <label class="block text-sm text-neutral-700 mb-1">Default Max Tokens</label>
+                  <input type="text" value="8000" class="mt-1 block w-full px-3 py-2 bg-white border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-neutral-500 focus:border-neutral-500 sm:text-sm"/>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-sm text-neutral-700 mb-3">Security & Compliance</h3>
+              <div class="space-y-4">
+                <div class="flex items-center">
+                  <input id="encrypt-data" name="encrypt-data" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                  <label for="encrypt-data" class="ml-2 block text-sm text-neutral-700">Encrypt all API keys and sensitive data</label>
+                </div>
+                
+                <div class="flex items-center">
+                  <input id="log-usage" name="log-usage" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                  <label for="log-usage" class="ml-2 block text-sm text-neutral-700">Log all API usage for auditing</label>
+                </div>
+                
+                <div class="flex items-center">
+                  <input id="content-filter" name="content-filter" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                  <label for="content-filter" class="ml-2 block text-sm text-neutral-700">Enable content filtering</label>
+                </div>
+                
+                <div class="flex items-center">
+                  <input id="academic-standards" name="academic-standards" type="checkbox" checked class="h-4 w-4 text-neutral-600 focus:ring-neutral-500 border-neutral-300 rounded"/>
+                  <label for="academic-standards" class="ml-2 block text-sm text-neutral-700">Enforce academic citation standards</label>
+                </div>
+                
+                <div>
+                  <label class="block text-sm text-neutral-700 mb-1">Data Retention Period</label>
+                  <select class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-neutral-300 focus:outline-none focus:ring-neutral-500 focus:border-neutral-500 sm:text-sm rounded-md">
+                    <option>30 days</option>
+                    <option>60 days</option>
+                    <option selected>90 days</option>
+                    <option>180 days</option>
+                    <option>1 year</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6 flex justify-end space-x-3">
+            <button class="px-4 py-2 border border-neutral-300 rounded-md shadow-sm text-sm text-neutral-700 bg-white hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500">
+              Cancel
+            </button>
+            <button class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm text-white bg-neutral-600 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500">
+              Save Settings
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="border-t bg-white p-4 text-center text-neutral-500 text-sm">
+  <p>AcademiAI Manager © 2025 | Joomla 5.3 Component | Version 2.1.4</p>
+</div>
+  <script src="theme-switcher.js"></script>
+</body>
+</html>

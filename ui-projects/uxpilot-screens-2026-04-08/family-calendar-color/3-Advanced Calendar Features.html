@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style>::-webkit-scrollbar { display: none;}</style>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Nunito', 'sans-serif'],
+                        },
+                        colors: {
+                            primary: {
+                                50: '#f0f9ff',
+                                100: '#e0f2fe',
+                                200: '#bae6fd',
+                                300: '#7dd3fc',
+                                400: '#38bdf8',
+                                500: '#0ea5e9',
+                                600: '#0284c7',
+                                700: '#0369a1',
+                                800: '#075985',
+                                900: '#0c4a6e',
+                            },
+                            family: {
+                                blue: '#4285F4',
+                                green: '#34A853',
+                                yellow: '#FBBC05',
+                                red: '#EA4335',
+                                purple: '#9C27B0',
+                                teal: '#009688',
+                                orange: '#FF9800',
+                                pink: '#E91E63',
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="font-sans bg-gray-100">
+        <!-- Header -->
+        <header id="header" class="bg-white border-b shadow-sm">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-people-roof text-family-blue text-2xl"></i>
+                        <h1 class="text-xl font-bold text-gray-800">FamilyWall</h1>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-bell"></i>
+                        </button>
+                        <button class="text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <div class="h-8 w-8 rounded-full bg-family-blue text-white flex items-center justify-center">
+                            <span class="font-semibold">JS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex h-[calc(100vh-64px)]">
+            <!-- Sidebar -->
+            <div id="sidebar" class="w-64 bg-white border-r hidden md:block">
+                <div class="p-4">
+                    <div class="mb-6">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-3">My Family</h2>
+                        <div class="flex -space-x-2 mb-4">
+                            <div class="h-10 w-10 rounded-full bg-family-blue text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">JS</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-green text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">LS</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-purple text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">ES</span>
+                            </div>
+                            <div class="h-10 w-10 rounded-full bg-family-orange text-white flex items-center justify-center border-2 border-white">
+                                <span class="font-semibold">MS</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <nav>
+                        <ul class="space-y-2">
+                            <li class="bg-blue-50 rounded-lg text-family-blue">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-calendar-days w-6"></i>
+                                    <span>Calendar</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-list-check w-6"></i>
+                                    <span>Tasks</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-cart-shopping w-6"></i>
+                                    <span>Shopping Lists</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-utensils w-6"></i>
+                                    <span>Meal Planner</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-book w-6"></i>
+                                    <span>Recipes</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-message w-6"></i>
+                                    <span>Messages</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-folder w-6"></i>
+                                    <span>Documents</span>
+                                </span>
+                            </li>
+                            <li class="text-gray-700 hover:bg-gray-100 rounded-lg">
+                                <span class="flex items-center px-4 py-2 cursor-pointer">
+                                    <i class="fa-solid fa-address-book w-6"></i>
+                                    <span>Contacts</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div id="main-content" class="flex-1 overflow-auto">
+                <!-- Calendar Settings Header -->
+                <div id="calendar-settings-header" class="bg-white p-4 border-b flex justify-between items-center">
+                    <div class="flex items-center">
+                        <button class="mr-3 text-gray-600 hover:text-family-blue">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <h1 class="text-xl font-semibold text-gray-800">Calendar Settings</h1>
+                    </div>
+                    <button class="px-4 py-2 bg-family-blue text-white rounded-md hover:bg-blue-600 flex items-center">
+                        <i class="fa-solid fa-check mr-2"></i> Save Changes
+                    </button>
+                </div>
+
+                <!-- Calendar Sync Settings -->
+                <div id="calendar-sync-container" class="p-6">
+                    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-sm border">
+                        <!-- Connected Calendars Section -->
+                        <div id="connected-calendars" class="p-6 border-b">
+                            <h2 class="text-lg font-semibold text-gray-800 mb-4">Connected Calendars</h2>
+                            <p class="text-gray-600 mb-6">Manage your external calendar connections. Changes made in these calendars will sync automatically.</p>
+                            
+                            <div class="space-y-4">
+                                <!-- Google Calendar -->
+                                <div class="flex items-center justify-between p-4 border rounded-lg bg-gray-50">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 rounded-full bg-white border flex items-center justify-center mr-3">
+                                            <i class="fa-brands fa-google text-family-red text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-800">Google Calendar</h3>
+                                            <p class="text-sm text-gray-600">john.smith@gmail.com</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="text-green-500 flex items-center mr-4">
+                                            <i class="fa-solid fa-circle-check mr-1"></i> Connected
+                                        </span>
+                                        <div class="relative">
+                                            <button class="text-gray-500 hover:bg-gray-200 p-2 rounded-full">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Outlook Calendar -->
+                                <div class="flex items-center justify-between p-4 border rounded-lg bg-gray-50">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 rounded-full bg-white border flex items-center justify-center mr-3">
+                                            <i class="fa-brands fa-microsoft text-family-teal text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-800">Outlook Calendar</h3>
+                                            <p class="text-sm text-gray-600">john.smith@outlook.com</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="text-green-500 flex items-center mr-4">
+                                            <i class="fa-solid fa-circle-check mr-1"></i> Connected
+                                        </span>
+                                        <div class="relative">
+                                            <button class="text-gray-500 hover:bg-gray-200 p-2 rounded-full">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button id="add-calendar-btn" class="mt-4 flex items-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                                <i class="fa-solid fa-plus mr-2"></i> Connect Another Calendar
+                            </button>
+                        </div>
+                        
+                        <!-- Subscribed Calendars Section -->
+                        <div id="subscribed-calendars" class="p-6 border-b">
+                            <h2 class="text-lg font-semibold text-gray-800 mb-4">Subscribed Calendars</h2>
+                            <p class="text-gray-600 mb-6">Subscribe to public or shared calendars using their URL. These are read-only calendars.</p>
+                            
+                            <div class="space-y-4">
+                                <!-- School Calendar -->
+                                <div class="flex items-center justify-between p-4 border rounded-lg bg-gray-50">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 rounded-full bg-white border flex items-center justify-center mr-3">
+                                            <i class="fa-solid fa-graduation-cap text-family-yellow text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-800">Lincoln High School</h3>
+                                            <p class="text-sm text-gray-600">School events and holidays</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="text-green-500 flex items-center mr-4">
+                                            <i class="fa-solid fa-circle-check mr-1"></i> Subscribed
+                                        </span>
+                                        <div class="relative">
+                                            <button class="text-gray-500 hover:bg-gray-200 p-2 rounded-full">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Sports Team Calendar -->
+                                <div class="flex items-center justify-between p-4 border rounded-lg bg-gray-50">
+                                    <div class="flex items-center">
+                                        <div class="h-10 w-10 rounded-full bg-white border flex items-center justify-center mr-3">
+                                            <i class="fa-solid fa-baseball text-family-orange text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-800">Eagles Baseball Team</h3>
+                                            <p class="text-sm text-gray-600">Practice and game schedule</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="text-green-500 flex items-center mr-4">
+                                            <i class="fa-solid fa-circle-check mr-1"></i> Subscribed
+                                        </span>
+                                        <div class="relative">
+                                            <button class="text-gray-500 hover:bg-gray-200 p-2 rounded-full">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Add Calendar URL Form -->
+                            <div id="add-calendar-url" class="mt-6 border rounded-lg p-4 bg-gray-50">
+                                <h3 class="font-medium text-gray-800 mb-3">Subscribe to a Calendar</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Calendar URL (iCal, ICS)</label>
+                                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-family-blue" 
+                                            placeholder="https://example.com/calendar.ics">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Calendar Name</label>
+                                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-family-blue" 
+                                            placeholder="e.g. School Calendar">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Color</label>
+                                        <div class="flex items-center space-x-2">
+                                            <div class="h-6 w-6 rounded-full bg-family-blue cursor-pointer ring-2 ring-offset-2 ring-family-blue"></div>
+                                            <div class="h-6 w-6 rounded-full bg-family-green cursor-pointer"></div>
+                                            <div class="h-6 w-6 rounded-full bg-family-red cursor-pointer"></div>
+                                            <div class="h-6 w-6 rounded-full bg-family-yellow cursor-pointer"></div>
+                                            <div class="h-6 w-6 rounded-full bg-family-purple cursor-pointer"></div>
+                                            <div class="h-6 w-6 rounded-full bg-family-teal cursor-pointer"></div>
+                                            <div class="h-6 w-6 rounded-full bg-family-orange cursor-pointer"></div>
+                                            <div class="h-6 w-6 rounded-full bg-family-pink cursor-pointer"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-3">
+                                        <button class="px-4 py-2 bg-family-blue text-white rounded-md hover:bg-blue-600">
+                                            Subscribe
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Calendar Settings Section -->
+                        <div id="calendar-display-settings" class="p-6">
+                            <h2 class="text-lg font-semibold text-gray-800 mb-4">Calendar Display Settings</h2>
+                            
+                            <div class="space-y-6">
+                                <!-- Default View -->
+                                <div>
+                                    <h3 class="font-medium text-gray-800 mb-2">Default View</h3>
+                                    <div class="flex space-x-2">
+                                        <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                                            Day
+                                        </button>
+                                        <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                                            Week
+                                        </button>
+                                        <button class="px-4 py-2 bg-family-blue text-white rounded-md hover:bg-blue-600">
+                                            Month
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- First Day of Week -->
+                                <div>
+                                    <h3 class="font-medium text-gray-800 mb-2">First Day of Week</h3>
+                                    <div class="inline-block relative w-64">
+                                        <select class="block appearance-none w-full bg-white border border-gray-300 px-4 py-2 pr-8 rounded-md focus:outline-none">
+                                            <option>Sunday</option>
+                                            <option>Monday</option>
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <i class="fa-solid fa-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Default Reminder -->
+                                <div>
+                                    <h3 class="font-medium text-gray-800 mb-2">Default Reminder</h3>
+                                    <div class="inline-block relative w-64">
+                                        <select class="block appearance-none w-full bg-white border border-gray-300 px-4 py-2 pr-8 rounded-md focus:outline-none">
+                                            <option>15 minutes before</option>
+                                            <option>30 minutes before</option>
+                                            <option>1 hour before</option>
+                                            <option>2 hours before</option>
+                                            <option>1 day before</option>
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <i class="fa-solid fa-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Time Format -->
+                                <div>
+                                    <h3 class="font-medium text-gray-800 mb-2">Time Format</h3>
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex items-center">
+                                            <input type="radio" id="12hour" name="timeFormat" class="h-4 w-4 text-family-blue" checked>
+                                            <label for="12hour" class="ml-2 text-gray-700">12-hour (1:00 PM)</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="radio" id="24hour" name="timeFormat" class="h-4 w-4 text-family-blue">
+                                            <label for="24hour" class="ml-2 text-gray-700">24-hour (13:00)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Calendar Refresh Rate -->
+                                <div>
+                                    <h3 class="font-medium text-gray-800 mb-2">Calendar Refresh Rate</h3>
+                                    <div class="inline-block relative w-64">
+                                        <select class="block appearance-none w-full bg-white border border-gray-300 px-4 py-2 pr-8 rounded-md focus:outline-none">
+                                            <option>Every 5 minutes</option>
+                                            <option>Every 15 minutes</option>
+                                            <option>Every 30 minutes</option>
+                                            <option>Every hour</option>
+                                            <option>Manual refresh only</option>
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <i class="fa-solid fa-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Export/Import Section -->
+                    <div id="export-import" class="max-w-4xl mx-auto mt-6 bg-white rounded-lg shadow-sm border">
+                        <div class="p-6">
+                            <h2 class="text-lg font-semibold text-gray-800 mb-4">Export & Import</h2>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Export -->
+                                <div class="border rounded-lg p-4">
+                                    <h3 class="font-medium text-gray-800 mb-2">Export Calendar</h3>
+                                    <p class="text-sm text-gray-600 mb-4">Download your family calendar as an ICS file that can be imported into other calendar applications.</p>
+                                    <button class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 flex items-center">
+                                        <i class="fa-solid fa-download mr-2"></i> Export Calendar
+                                    </button>
+                                </div>
+                                
+                                <!-- Import -->
+                                <div class="border rounded-lg p-4">
+                                    <h3 class="font-medium text-gray-800 mb-2">Import Calendar</h3>
+                                    <p class="text-sm text-gray-600 mb-4">Import events from an ICS file into your family calendar.</p>
+                                    <button class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 flex items-center">
+                                        <i class="fa-solid fa-upload mr-2"></i> Import Calendar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Help -->
+            <div id="sidebar-help" class="w-80 bg-white border-l hidden md:block">
+                <div class="p-4 border-b">
+                    <h2 class="text-lg font-semibold text-gray-700">Help & Tips</h2>
+                </div>
+                
+                <div class="p-4 space-y-6">
+                    <div class="border rounded-lg p-4 bg-blue-50">
+                        <h3 class="font-medium text-gray-800 mb-2 flex items-center">
+                            <i class="fa-solid fa-lightbulb text-family-yellow mr-2"></i> Calendar Sync Tips
+                        </h3>
+                        <ul class="text-sm text-gray-700 space-y-2 ml-6 list-disc">
+                            <li>Changes made in Google or Outlook will automatically sync with FamilyWall</li>
+                            <li>Subscribed calendars (like school calendars) are read-only</li>
+                            <li>You can customize the color for each calendar to easily identify events</li>
+                            <li>All family members can see shared calendars</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-medium text-gray-800 mb-3">How to Connect Calendars</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-gray-200 rounded-full h-6 w-6 flex items-center justify-center text-gray-700 font-medium mr-3 mt-0.5">1</div>
+                                <div>
+                                    <h4 class="font-medium text-gray-700">Connect Google Calendar</h4>
+                                    <p class="text-sm text-gray-600">Click "Connect Another Calendar" and select Google. Sign in with your Google account and authorize FamilyWall.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-gray-200 rounded-full h-6 w-6 flex items-center justify-center text-gray-700 font-medium mr-3 mt-0.5">2</div>
+                                <div>
+                                    <h4 class="font-medium text-gray-700">Subscribe to Public Calendars</h4>
+                                    <p class="text-sm text-gray-600">Paste the calendar URL (ending in .ics) in the "Subscribe to a Calendar" section. Name your calendar and choose a color.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-gray-200 rounded-full h-6 w-6 flex items-center justify-center text-gray-700 font-medium mr-3 mt-0.5">3</div>
+                                <div>
+                                    <h4 class="font-medium text-gray-700">Import School Schedules</h4>
+                                    <p class="text-sm text-gray-600">Many schools provide calendar URLs. Ask your school administrator for the calendar URL and add it as a subscribed calendar.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t pt-4">
+                        <h3 class="font-medium text-gray-800 mb-2">Common Questions</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="cursor-pointer hover:text-family-blue flex items-center">
+                                <i class="fa-solid fa-circle-question mr-2 text-gray-500"></i>
+                                <span>How do I manage calendar permissions?</span>
+                            </div>
+                            <div class="cursor-pointer hover:text-family-blue flex items-center">
+                                <i class="fa-solid fa-circle-question mr-2 text-gray-500"></i>
+                                <span>Can I share my calendar with people outside my family?</span>
+                            </div>
+                            <div class="cursor-pointer hover:text-family-blue flex items-center">
+                                <i class="fa-solid fa-circle-question mr-2 text-gray-500"></i>
+                                <span>How often do calendars sync?</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="absolute bottom-4 left-4 right-4">
+                    <button class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 flex items-center justify-center">
+                        <i class="fa-solid fa-circle-question mr-2"></i> Contact Support
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation (visible on small screens) -->
+        <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg">
+            <div class="flex justify-around items-center py-2">
+                <span class="flex flex-col items-center p-2 text-family-blue cursor-pointer">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span class="text-xs mt-1">Calendar</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span class="text-xs mt-1">Tasks</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="text-xs mt-1">Shopping</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span class="text-xs mt-1">Meals</span>
+                </span>
+                <span class="flex flex-col items-center p-2 text-gray-600 cursor-pointer">
+                    <i class="fa-solid fa-ellipsis"></i>
+                    <span class="text-xs mt-1">More</span>
+                </span>
+            </div>
+        </div>
+    </body>
+<html>

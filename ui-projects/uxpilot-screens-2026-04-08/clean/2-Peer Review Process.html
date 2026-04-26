@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-900">
+    <!-- Header -->
+    <header id="header" class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="flex items-center cursor-pointer">
+                        <i class="fa-solid fa-microscope text-primary-600 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-gray-900">SciReview</span>
+                    </span>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Home</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Articles</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Categories</span>
+                    <span class="text-gray-600 hover:text-primary-700 cursor-pointer">Submit</span>
+                    <span class="text-primary-700 font-medium cursor-pointer">Peer Review</span>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-primary-700">
+                        <i class="fa-solid fa-search text-lg"></i>
+                    </button>
+                    <button class="hidden md:block text-gray-600 hover:text-primary-700">
+                        <i class="fa-solid fa-bell text-lg"></i>
+                    </button>
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="User profile" class="w-8 h-8 rounded-full object-cover border border-gray-200">
+                    </div>
+                    <button class="md:hidden text-gray-600">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <section id="page-header" class="mb-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">Peer Review Process</h1>
+                    <p class="text-gray-600">Track your assigned reviews and contribute to scientific rigor</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-3">
+                    <button class="flex items-center space-x-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-50">
+                        <i class="fa-solid fa-filter"></i>
+                        <span>Filter</span>
+                    </button>
+                    <button class="flex items-center space-x-2 bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>New Review</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabs -->
+        <section id="review-tabs" class="mb-6">
+            <div class="border-b border-gray-200">
+                <nav class="flex -mb-px">
+                    <span class="py-4 px-6 border-b-2 border-primary-500 text-primary-600 font-medium cursor-pointer">
+                        Assigned to Me (4)
+                    </span>
+                    <span class="py-4 px-6 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 cursor-pointer">
+                        Completed (12)
+                    </span>
+                    <span class="py-4 px-6 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 cursor-pointer">
+                        All Reviews
+                    </span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Stats Cards -->
+        <section id="review-stats" class="mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div id="stat-pending" class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Pending Reviews</p>
+                            <h3 class="text-3xl font-bold text-gray-900 mt-1">4</h3>
+                        </div>
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-hourglass-half text-yellow-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-yellow-500 h-2 rounded-full w-1/2"></div>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-2">2 due this week</p>
+                    </div>
+                </div>
+                
+                <div id="stat-completed" class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Completed This Month</p>
+                            <h3 class="text-3xl font-bold text-gray-900 mt-1">7</h3>
+                        </div>
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-check text-green-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full w-3/4"></div>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-2">+3 from last month</p>
+                    </div>
+                </div>
+                
+                <div id="stat-expertise" class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Expertise Areas</p>
+                            <h3 class="text-3xl font-bold text-gray-900 mt-1">3</h3>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-brain text-blue-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex space-x-2">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Neuroscience</span>
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Genetics</span>
+                        <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Biochemistry</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Current Reviews -->
+        <section id="current-reviews" class="mb-12">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Assigned Reviews</h2>
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-gray-200">
+                                <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Article</th>
+                                <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                                <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Assigned</th>
+                                <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Due Date</th>
+                                <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr id="review-1" class="hover:bg-gray-50">
+                                <td class="px-6 py-4">
+                                    <div>
+                                        <p class="text-primary-600 font-medium cursor-pointer hover:text-primary-800">Neural Correlates of Consciousness in Coma Patients</p>
+                                        <p class="text-gray-500 text-sm">Dr. Sarah Chen et al.</p>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">Neuroscience</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">
+                                    May 10, 2023
+                                </td>
+                                <td class="px-6 py-4 text-sm">
+                                    <span class="text-red-600 font-medium">May 24, 2023 (2 days)</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">In Progress</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm">
+                                    <div class="flex space-x-2">
+                                        <button class="text-primary-600 hover:text-primary-800">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <button class="text-primary-600 hover:text-primary-800">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="review-2" class="hover:bg-gray-50">
+                                <td class="px-6 py-4">
+                                    <div>
+                                        <p class="text-primary-600 font-medium cursor-pointer hover:text-primary-800">CRISPR-Cas9 Applications in Treating Genetic Disorders</p>
+                                        <p class="text-gray-500 text-sm">Dr. Michael Rodriguez et al.</p>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Genetics</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">
+                                    May 12, 2023
+                                </td>
+                                <td class="px-6 py-4 text-sm">
+                                    <span class="text-amber-600 font-medium">May 26, 2023 (4 days)</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">Not Started</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm">
+                                    <div class="flex space-x-2">
+                                        <button class="text-primary-600 hover:text-primary-800">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <button class="text-primary-600 hover:text-primary-800">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="review-3" class="hover:bg-gray-50">
+                                <td class="px-6 py-4">
+                                    <div>
+                                        <p class="text-primary-600 font-medium cursor-pointer hover:text-primary-800">Protein Folding Mechanisms in Neurodegenerative Diseases</p>
+                                        <p class="text-gray-500 text-sm">Dr. James Wilson et al.</p>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">Biochemistry</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">
+                                    May 15, 2023
+                                </td>
+                                <td class="px-6 py-4 text-sm">
+                                    <span class="text-gray-600">May 29, 2023 (7 days)</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">Draft Saved</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm">
+                                    <div class="flex space-x-2">
+                                        <button class="text-primary-600 hover:text-primary-800">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <button class="text-primary-600 hover:text-primary-800">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="review-4" class="hover:bg-gray-50">
+                                <td class="px-6 py-4">
+                                    <div>
+                                        <p class="text-primary-600 font-medium cursor-pointer hover:text-primary-800">Epigenetic Changes in Response to Environmental Factors</p>
+                                        <p class="text-gray-500 text-sm">Dr. Emma Thompson et al.</p>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Genetics</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">
+                                    May 18, 2023
+                                </td>
+                                <td class="px-6 py-4 text-sm">
+                                    <span class="text-gray-600">June 1, 2023 (10 days)</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">Not Started</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm">
+                                    <div class="flex space-x-2">
+                                        <button class="text-primary-600 hover:text-primary-800">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <button class="text-primary-600 hover:text-primary-800">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Review Process -->
+        <section id="review-process" class="mb-12">
+            <h2 class="text-xl font-bold text-gray-900 mb-6">Peer Review Process</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div id="process-step-1" class="bg-white rounded-lg shadow-sm p-6 border-t-4 border-primary-500">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center mr-3">
+                            <span class="text-primary-600 font-semibold">1</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900">Initial Assessment</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Review the manuscript's methodology, data quality, and relevance to determine if it meets the basic criteria for publication.</p>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2"></i>
+                            <span>Assess methodological soundness</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2"></i>
+                            <span>Evaluate data quality and analysis</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2"></i>
+                            <span>Check relevance to the field</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="process-step-2" class="bg-white rounded-lg shadow-sm p-6 border-t-4 border-primary-500">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center mr-3">
+                            <span class="text-primary-600 font-semibold">2</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900">Detailed Evaluation</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Conduct a thorough analysis of the manuscript, examining its scientific merit, originality, and potential impact.</p>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2"></i>
+                            <span>Evaluate scientific accuracy</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2"></i>
+                            <span>Assess originality and innovation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2"></i>
+                            <span>Consider potential impact on the field</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="process-step-3" class="bg-white rounded-lg shadow-sm p-6 border-t-4 border-primary-500">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center mr-3">
+                            <span class="text-primary-600 font-semibold">3</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900">Feedback Submission</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Provide constructive feedback and recommendations for improvement, along with your publication decision.</p>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2"></i>
+                            <span>Offer constructive criticism</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2"></i>
+                            <span>Suggest specific improvements</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2"></i>
+                            <span>Make a recommendation decision</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Review Form Example -->
+        <section id="review-form-example" class="mb-12">
+            <h2 class="text-xl font-bold text-gray-900 mb-6">Review Form Example</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                <div class="border-b border-gray-200 pb-6 mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Article Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-sm text-gray-500 mb-1">Title</p>
+                            <p class="font-medium text-gray-900">Neural Correlates of Consciousness in Coma Patients</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 mb-1">Authors</p>
+                            <p class="font-medium text-gray-900">Dr. Sarah Chen, Dr. Michael Rodriguez, et al.</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 mb-1">Journal</p>
+                            <p class="font-medium text-gray-900">Neuroscience Advances</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 mb-1">Manuscript ID</p>
+                            <p class="font-medium text-gray-900">NA-2023-0157</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Evaluation Criteria</h3>
+                    <div class="space-y-6">
+                        <div id="criteria-originality">
+                            <p class="font-medium text-gray-900 mb-2">Originality and Significance</p>
+                            <div class="flex items-center mb-2">
+                                <div class="flex items-center space-x-1 text-amber-400">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-sm text-gray-600">4/5 - Very Good</span>
+                            </div>
+                            <div class="border border-gray-200 rounded-md p-3 bg-gray-50">
+                                <p class="text-gray-600 text-sm">The study presents a novel approach to detecting consciousness in coma patients using advanced neuroimaging techniques. While the methodology is innovative, similar approaches have been explored in recent literature.</p>
+                            </div>
+                        </div>
+                        
+                        <div id="criteria-methodology">
+                            <p class="font-medium text-gray-900 mb-2">Methodology and Data Analysis</p>
+                            <div class="flex items-center mb-2">
+                                <div class="flex items-center space-x-1 text-amber-400">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-sm text-gray-600">3/5 - Good</span>
+                            </div>
+                            <div class="border border-gray-200 rounded-md p-3 bg-gray-50">
+                                <p class="text-gray-600 text-sm">The methodology is generally sound, but there are some concerns regarding the statistical analysis of the neuroimaging data. The sample size is relatively small (n=24), which limits the generalizability of the findings.</p>
+                            </div>
+                        </div>
+                        
+                        <div id="criteria-presentation">
+                            <p class="font-medium text-gray-900 mb-2">Clarity and Presentation</p>
+                            <div class="flex items-center mb-2">
+                                <div class="flex items-center space-x-1 text-amber-400">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-sm text-gray-600">5/5 - Excellent</span>
+                            </div>
+                            <div class="border border-gray-200 rounded-md p-3 bg-gray-50">
+                                <p class="text-gray-600 text-sm">The manuscript is exceptionally well-written and organized. The figures are clear and effectively illustrate the key findings. The discussion section provides a comprehensive interpretation of the results in the context of existing literature.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Recommendations</h3>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-4 h-4 rounded-full bg-green-500"></div>
+                        <span class="font-medium text-gray-900">Accept with Minor Revisions</span>
+                    </div>
+                    <div class="border border-gray-200 rounded-md p-4 bg-gray-50">
+                        <p class="text-gray-600 mb-3">The manuscript presents valuable findings that contribute to our understanding of consciousness in coma patients. However, several issues need to be addressed before publication:</p>
+                        <ol class="list-decimal pl-5 space-y-2 text-gray-600">
+                            <li>Expand the sample size or provide a power analysis to justify the current sample.</li>
+                            <li>Revise the statistical analysis section to address the concerns regarding multiple comparisons.</li>
+                            <li>Include a more detailed discussion of the limitations of the study.</li>
+                            <li>Consider adding a supplementary analysis of individual patient data to strengthen the findings.</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-50">
+                        Save Draft
+                    </button>
+                    <button class="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700">
+                        Submit Review
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Reviewer Guidelines -->
+        <section id="reviewer-guidelines">
+            <h2 class="text-xl font-bold text-gray-900 mb-6">Reviewer Guidelines</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div id="guidelines-dos">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                            <i class="fa-solid fa-circle-check text-green-500 mr-2"></i>
+                            Best Practices
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Provide specific, constructive feedback that helps authors improve their work</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Assess methodological rigor and statistical validity objectively</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Evaluate the manuscript based on its scientific merit, not personal preferences</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Complete reviews within the requested timeframe</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Declare any potential conflicts of interest</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Maintain confidentiality of the manuscript and review process</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div id="guidelines-donts">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                            <i class="fa-solid fa-circle-xmark text-red-500 mr-2"></i>
+                            Practices to Avoid
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-xmark text-red-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Using dismissive or hostile language in your review</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-xmark text-red-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Requesting unnecessary additional experiments that would significantly delay publication</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-xmark text-red-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Focusing exclusively on grammar and formatting issues</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-xmark text-red-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Suggesting citations primarily to increase your own citation count</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-xmark text-red-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Delaying reviews without justification</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-xmark text-red-500 mt-1 mr-2"></i>
+                                <span class="text-gray-700">Sharing manuscript contents with colleagues or using the data for your own research</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-8 p-4 bg-primary-50 border border-primary-200 rounded-md">
+                    <h4 class="font-medium text-primary-800 mb-2">Need Additional Resources?</h4>
+                    <p class="text-primary-700 mb-3">Access our comprehensive reviewer training materials and webinars to enhance your reviewing skills.</p>
+                    <button class="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700 inline-flex items-center">
+                        <i class="fa-solid fa-graduation-cap mr-2"></i>
+                        <span>Access Reviewer Resources</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-gray-900 text-white mt-16">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa-solid fa-microscope text-primary-400 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl">SciReview</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Advancing scientific knowledge through rigorous peer review and open access publishing.</p>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-400 hover:text-white cursor-pointer">
+                            <i class="fa-brands fa-twitter"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white cursor-pointer">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </span>
+                        <span class="text-gray-400 hover:text-white cursor-pointer">
+                            <i class="fa-brands fa-github"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Home</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Browse Articles</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Submit Research</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Peer Review Process</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Editorial Board</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Ethics Statement</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">Open Access Policy</span></li>
+                        <li><span class="text-gray-400 hover:text-white cursor-pointer">FAQs</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-envelope mr-2"></i>
+                            contact@scireview.org
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-phone mr-2"></i>
+                            +1 (555) 123-4567
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-solid fa-location-dot mr-2"></i>
+                            123 Science Way, Research Park
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">© 2023 SciReview. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <span class="text-gray-400 hover:text-white text-sm cursor-pointer">Privacy Policy</span>
+                    <span class="text-gray-400 hover:text-white text-sm cursor-pointer">Terms of Service</span>
+                    <span class="text-gray-400 hover:text-white text-sm cursor-pointer">Cookie Policy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

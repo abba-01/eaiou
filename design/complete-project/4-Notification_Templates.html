@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#2563eb',
+                        'primary-dark': '#1d4ed8',
+                        'secondary': '#64748b',
+                        'success': '#10b981',
+                        'warning': '#f59e0b',
+                        'danger': '#ef4444',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <header id="header" class="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fa-solid fa-newspaper text-primary text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-gray-800">Academic Journal</span>
+                    </div>
+                    <nav class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <span class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            Submit Article
+                        </span>
+                        <span class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            My Submissions
+                        </span>
+                        <span class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            Reviews
+                        </span>
+                        <span class="border-primary text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer">
+                            Settings
+                        </span>
+                    </nav>
+                </div>
+                <div class="flex items-center">
+                    <div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
+                        <button class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fa-regular fa-bell text-xl"></i>
+                        </button>
+                        <div class="ml-3 relative">
+                            <div class="flex items-center">
+                                <img class="h-8 w-8 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User avatar">
+                                <span class="ml-2 text-sm font-medium text-gray-700">Dr. John Smith</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="pt-16 pb-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-8">
+            <div class="bg-white shadow-sm rounded-lg p-6 md:p-8">
+                <div id="settings-header" class="mb-8">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900 mb-2">Notification Templates</h1>
+                            <p class="text-gray-600">Customize notification messages for each workflow state in the peer-review process.</p>
+                        </div>
+                        <div>
+                            <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                <i class="fa-regular fa-floppy-disk mr-2"></i>
+                                Save All Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="notification-settings-tabs" class="mb-6 border-b border-gray-200">
+                    <div class="flex space-x-8">
+                        <button class="border-primary text-primary font-medium pb-3 px-1 border-b-2">Email Templates</button>
+                        <button class="text-gray-500 hover:text-gray-700 pb-3 px-1">System Notifications</button>
+                        <button class="text-gray-500 hover:text-gray-700 pb-3 px-1">Delivery Settings</button>
+                    </div>
+                </div>
+                
+                <div id="notification-instructions" class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded mb-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fa-solid fa-circle-info text-blue-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-blue-800">Template Variables</h3>
+                            <div class="mt-1 text-sm text-blue-700">
+                                <p>Use these variables in your templates: <code class="bg-blue-100 px-1 rounded">{article_title}</code>, <code class="bg-blue-100 px-1 rounded">{author_name}</code>, <code class="bg-blue-100 px-1 rounded">{reviewer_name}</code>, <code class="bg-blue-100 px-1 rounded">{editor_name}</code>, <code class="bg-blue-100 px-1 rounded">{submission_date}</code>, <code class="bg-blue-100 px-1 rounded">{decision_date}</code>, <code class="bg-blue-100 px-1 rounded">{feedback_summary}</code></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="notification-templates-container">
+                    <!-- Author Notifications -->
+                    <div id="author-notifications-section" class="mb-8">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4 pb-2 border-b border-gray-200 flex items-center">
+                            <i class="fa-solid fa-user-pen text-primary mr-2"></i>
+                            Author Notifications
+                        </h2>
+                        
+                        <!-- Submission Received Template -->
+                        <div id="submission-received-template" class="border border-gray-200 rounded-md mb-4">
+                            <div class="flex items-center justify-between px-5 py-4 cursor-pointer bg-gray-50 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <span class="font-medium">Submission Received</span>
+                                    <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                </div>
+                                <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <label for="submission-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                                    <input type="text" id="submission-subject" name="submission-subject" value="Confirmation: Your Article '{article_title}' Has Been Received" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                </div>
+                                <div>
+                                    <label for="submission-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                                    <textarea id="submission-body" name="submission-body" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border">Dear {author_name},
+
+Thank you for submitting your article "{article_title}" to Academic Journal. Your submission has been received on {submission_date}.
+
+Your submission will now be reviewed by our editorial team to ensure it meets our basic requirements before being sent for peer review. You will be notified once this initial screening is complete.
+
+You can check the status of your submission at any time by logging into your account.
+
+Sincerely,
+The Editorial Team
+Academic Journal</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Under Review Template -->
+                        <div id="under-review-template" class="border border-gray-200 rounded-md mb-4">
+                            <div class="flex items-center justify-between px-5 py-4 cursor-pointer bg-gray-50 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <span class="font-medium">Under Review</span>
+                                    <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                </div>
+                                <i class="fa-solid fa-chevron-up text-gray-400"></i>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <label for="review-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                                    <input type="text" id="review-subject" name="review-subject" value="Update: Your Article '{article_title}' Is Now Under Review" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                </div>
+                                <div>
+                                    <label for="review-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                                    <textarea id="review-body" name="review-body" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border">Dear {author_name},
+
+We're pleased to inform you that your article "{article_title}" has passed our initial screening and has now been assigned to reviewers for peer evaluation.
+
+The review process typically takes 4-6 weeks to complete. You will be notified once all reviews have been submitted and the editor has made a decision.
+
+Thank you for your patience during this process.
+
+Sincerely,
+The Editorial Team
+Academic Journal</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Revision Requested Template -->
+                        <div id="revision-requested-template" class="border border-gray-200 rounded-md mb-4">
+                            <div class="flex items-center justify-between px-5 py-4 cursor-pointer bg-gray-50 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <span class="font-medium">Revision Requested</span>
+                                    <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                </div>
+                                <i class="fa-solid fa-chevron-up text-gray-400"></i>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <label for="revision-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                                    <input type="text" id="revision-subject" name="revision-subject" value="Action Required: Revisions Requested for '{article_title}'" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                </div>
+                                <div>
+                                    <label for="revision-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                                    <textarea id="revision-body" name="revision-body" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border">Dear {author_name},
+
+Thank you for your submission "{article_title}" to Academic Journal. 
+
+After careful review, our editorial team has determined that revisions are needed before your article can be considered for publication. Please log in to your account to view the detailed feedback from our reviewers and editor.
+
+Key points requiring revision:
+{feedback_summary}
+
+Please submit your revised manuscript within 30 days. If you need additional time, please contact us as soon as possible.
+
+Sincerely,
+{editor_name}
+Editor, Academic Journal</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Article Accepted Template -->
+                        <div id="article-accepted-template" class="border border-gray-200 rounded-md mb-4">
+                            <div class="flex items-center justify-between px-5 py-4 cursor-pointer bg-gray-50 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <span class="font-medium">Article Accepted</span>
+                                    <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                </div>
+                                <i class="fa-solid fa-chevron-up text-gray-400"></i>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <label for="accepted-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                                    <input type="text" id="accepted-subject" name="accepted-subject" value="Congratulations! Your Article '{article_title}' Has Been Accepted" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                </div>
+                                <div>
+                                    <label for="accepted-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                                    <textarea id="accepted-body" name="accepted-body" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border">Dear {author_name},
+
+We are pleased to inform you that your article "{article_title}" has been accepted for publication in Academic Journal. Congratulations!
+
+The editor has made this decision based on the recommendations of our peer reviewers and their own evaluation. You can view the complete feedback by logging into your account.
+
+Next steps:
+1. Our editorial team will contact you shortly with information about the publication process
+2. You will receive proofs to review before final publication
+3. Upon publication, your article will be assigned a DOI and made available online
+
+Thank you for choosing to publish with Academic Journal.
+
+Sincerely,
+{editor_name}
+Editor, Academic Journal</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Article Rejected Template -->
+                        <div id="article-rejected-template" class="border border-gray-200 rounded-md">
+                            <div class="flex items-center justify-between px-5 py-4 cursor-pointer bg-gray-50 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <span class="font-medium">Article Rejected</span>
+                                    <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                </div>
+                                <i class="fa-solid fa-chevron-up text-gray-400"></i>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <label for="rejected-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                                    <input type="text" id="rejected-subject" name="rejected-subject" value="Decision on Your Submission '{article_title}'" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                </div>
+                                <div>
+                                    <label for="rejected-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                                    <textarea id="rejected-body" name="rejected-body" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border">Dear {author_name},
+
+Thank you for submitting your article "{article_title}" to Academic Journal.
+
+After careful consideration and thorough peer review, we regret to inform you that we are unable to accept your manuscript for publication in its current form.
+
+The detailed feedback from our reviewers is available when you log into your account. We hope these comments will be helpful for your future work.
+
+We appreciate your interest in our journal and hope you will consider us for future submissions.
+
+Sincerely,
+{editor_name}
+Editor, Academic Journal</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Reviewer Notifications -->
+                    <div id="reviewer-notifications-section" class="mb-8">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4 pb-2 border-b border-gray-200 flex items-center">
+                            <i class="fa-solid fa-magnifying-glass text-primary mr-2"></i>
+                            Reviewer Notifications
+                        </h2>
+                        
+                        <!-- Review Invitation Template -->
+                        <div id="review-invitation-template" class="border border-gray-200 rounded-md mb-4">
+                            <div class="flex items-center justify-between px-5 py-4 cursor-pointer bg-gray-50 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <span class="font-medium">Review Invitation</span>
+                                    <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                </div>
+                                <i class="fa-solid fa-chevron-up text-gray-400"></i>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <label for="invitation-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                                    <input type="text" id="invitation-subject" name="invitation-subject" value="Invitation to Review for Academic Journal" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                </div>
+                                <div>
+                                    <label for="invitation-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                                    <textarea id="invitation-body" name="invitation-body" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border">Dear {reviewer_name},
+
+We would like to invite you to review a manuscript for Academic Journal entitled "{article_title}".
+
+The abstract is provided below for your consideration:
+[Abstract will be inserted here]
+
+If you are able to review this manuscript, please respond within 7 days. The full review would be due within 21 days of acceptance.
+
+To accept or decline this invitation, please log in to your account and select the appropriate option.
+
+Thank you for considering this request.
+
+Sincerely,
+{editor_name}
+Editor, Academic Journal</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Review Reminder Template -->
+                        <div id="review-reminder-template" class="border border-gray-200 rounded-md mb-4">
+                            <div class="flex items-center justify-between px-5 py-4 cursor-pointer bg-gray-50 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <span class="font-medium">Review Reminder</span>
+                                    <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                </div>
+                                <i class="fa-solid fa-chevron-up text-gray-400"></i>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <label for="reminder-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                                    <input type="text" id="reminder-subject" name="reminder-subject" value="Reminder: Review Due for '{article_title}'" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                </div>
+                                <div>
+                                    <label for="reminder-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                                    <textarea id="reminder-body" name="reminder-body" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border">Dear {reviewer_name},
+
+This is a friendly reminder that your review of the manuscript "{article_title}" is due in 7 days.
+
+We understand that you have many demands on your time, but your expert evaluation is crucial to our peer review process. If you need an extension, please contact us as soon as possible.
+
+To submit your review, please log in to your account and complete the review form.
+
+Thank you for your valuable contribution to Academic Journal.
+
+Sincerely,
+{editor_name}
+Editor, Academic Journal</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Review Completed Thank You Template -->
+                        <div id="review-thank-you-template" class="border border-gray-200 rounded-md">
+                            <div class="flex items-center justify-between px-5 py-4 cursor-pointer bg-gray-50 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <span class="font-medium">Review Completed Thank You</span>
+                                    <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                </div>
+                                <i class="fa-solid fa-chevron-up text-gray-400"></i>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <label for="thankyou-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                                    <input type="text" id="thankyou-subject" name="thankyou-subject" value="Thank You for Completing Your Review" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                </div>
+                                <div>
+                                    <label for="thankyou-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                                    <textarea id="thankyou-body" name="thankyou-body" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border">Dear {reviewer_name},
+
+Thank you for completing your review of the manuscript "{article_title}". We greatly appreciate the time and expertise you have contributed to our peer review process.
+
+Your thoughtful evaluation will help the editor make an informed decision and provide valuable feedback to the authors.
+
+We look forward to working with you again in the future.
+
+Sincerely,
+{editor_name}
+Editor, Academic Journal</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Editor Notifications -->
+                    <div id="editor-notifications-section">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4 pb-2 border-b border-gray-200 flex items-center">
+                            <i class="fa-solid fa-user-gear text-primary mr-2"></i>
+                            Editor Notifications
+                        </h2>
+                        
+                        <!-- New Submission Alert Template -->
+                        <div id="new-submission-template" class="border border-gray-200 rounded-md mb-4">
+                            <div class="flex items-center justify-between px-5 py-4 cursor-pointer bg-gray-50 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <span class="font-medium">New Submission Alert</span>
+                                    <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                </div>
+                                <i class="fa-solid fa-chevron-up text-gray-400"></i>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <label for="new-submission-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                                    <input type="text" id="new-submission-subject" name="new-submission-subject" value="New Submission Received: '{article_title}'" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                </div>
+                                <div>
+                                    <label for="new-submission-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                                    <textarea id="new-submission-body" name="new-submission-body" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border">Dear {editor_name},
+
+A new manuscript titled "{article_title}" has been submitted to Academic Journal on {submission_date}.
+
+Author: {author_name}
+Research Area: [Research Area]
+Article Type: [Article Type]
+
+Please log in to your editor dashboard to review this submission and assign reviewers if appropriate.
+
+System Message
+Academic Journal</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Review Completed Alert Template -->
+                        <div id="review-completed-template" class="border border-gray-200 rounded-md mb-4">
+                            <div class="flex items-center justify-between px-5 py-4 cursor-pointer bg-gray-50 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <span class="font-medium">Review Completed Alert</span>
+                                    <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                </div>
+                                <i class="fa-solid fa-chevron-up text-gray-400"></i>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <label for="review-completed-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                                    <input type="text" id="review-completed-subject" name="review-completed-subject" value="Review Completed for '{article_title}'" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                </div>
+                                <div>
+                                    <label for="review-completed-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                                    <textarea id="review-completed-body" name="review-completed-body" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border">Dear {editor_name},
+
+A review has been completed for the manuscript "{article_title}" by {reviewer_name}.
+
+Recommendation: [Recommendation]
+Overall Score: [Score]
+
+To view the complete review and make a decision, please log in to your editor dashboard.
+
+System Message
+Academic Journal</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- All Reviews Completed Template -->
+                        <div id="all-reviews-completed-template" class="border border-gray-200 rounded-md">
+                            <div class="flex items-center justify-between px-5 py-4 cursor-pointer bg-gray-50 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <span class="font-medium">All Reviews Completed</span>
+                                    <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Active
+                                    </span>
+                                </div>
+                                <i class="fa-solid fa-chevron-up text-gray-400"></i>
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <label for="all-reviews-subject" class="block text-sm font-medium text-gray-700 mb-1">Email Subject</label>
+                                    <input type="text" id="all-reviews-subject" name="all-reviews-subject" value="Action Required: All Reviews Completed for '{article_title}'" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 border">
+                                </div>
+                                <div>
+                                    <label for="all-reviews-body" class="block text-sm font-medium text-gray-700 mb-1">Email Body</label>
+                                    <textarea id="all-reviews-body" name="all-reviews-body" rows="6" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-3 border">Dear {editor_name},
+
+All reviews have been completed for the manuscript "{article_title}" by {author_name}.
+
+Review Summary:
+- Number of Reviews: [Number]
+- Average Score: [Average Score]
+- Recommendations: [Summary of Recommendations]
+
+A decision is now required. Please log in to your editor dashboard to review all feedback and make your decision.
+
+System Message
+Academic Journal</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="notification-actions" class="mt-8 pt-6 border-t border-gray-200 flex justify-between">
+                    <div>
+                        <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fa-solid fa-rotate-left mr-2"></i> Restore Defaults
+                        </button>
+                    </div>
+                    <div>
+                        <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary mr-3">
+                            <i class="fa-solid fa-eye mr-2"></i> Preview
+                        </button>
+                        <button type="button" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fa-regular fa-floppy-disk mr-2"></i> Save All Changes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer" class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Academic Journal</h3>
+                    <p class="text-gray-400 text-sm">A platform for publishing peer-reviewed academic articles across various disciplines.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><span class="hover:text-white cursor-pointer">Author Guidelines</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Reviewer Guidelines</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Publication Ethics</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Contact Editorial Office</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><span class="hover:text-white cursor-pointer">Help Center</span></li>
+                        <li><span class="hover:text-white cursor-pointer">FAQ</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Privacy Policy</span></li>
+                        <li><span class="hover:text-white cursor-pointer">Terms of Service</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-sm text-gray-400 flex flex-col md:flex-row justify-between items-center">
+                <p>© 2023 Academic Journal. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-twitter"></i></span>
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-facebook"></i></span>
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-linkedin"></i></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <div id="success-toast" class="fixed bottom-4 right-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-lg z-50">
+        <div class="flex items-center">
+            <i class="fa-solid fa-circle-check mr-2"></i>
+            <span>Template changes saved successfully!</span>
+            <button class="ml-4 text-green-500 hover:text-green-700">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </div>
+<style>body { padding-bottom: 50px !important; }</style>
+
+<!-- EAIOU NAV BAR -->
+<div id="eaiou-nav" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(15,23,42,0.95);backdrop-filter:blur(10px);padding:8px 12px;display:flex;gap:6px;overflow-x:auto;align-items:center;border-top:2px solid #0ea5e9;"><span style="color:#38bdf8;font-weight:700;font-size:12px;font-family:Inter,sans-serif;margin-right:8px;white-space:nowrap;">EAIOU</span><a href="2-Author Status View.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-house" style="margin-right:4px;font-size:10px;"></i>Dashboard</a><a href="6-Author Submission.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-file-arrow-up" style="margin-right:4px;font-size:10px;"></i>Submit</a><a href="3-Submission Metadata.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-tags" style="margin-right:4px;font-size:10px;"></i>Metadata</a><a href="5-Editor Decision Interface.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-gavel" style="margin-right:4px;font-size:10px;"></i>Editor</a><a href="10-Reviewer Assignment.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-user-check" style="margin-right:4px;font-size:10px;"></i>Reviewers</a><a href="7-Reviewer Review Submission.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-pen-to-square" style="margin-right:4px;font-size:10px;"></i>Review</a><a href="9-Review Feedback.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-comments" style="margin-right:4px;font-size:10px;"></i>Feedback</a><a href="4-Notification Templates.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;background:#0ea5e9;color:white;color:white;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='#0ea5e9';this.style.color='white';"><i class="fa-solid fa-bell" style="margin-right:4px;font-size:10px;"></i>Notifications</a><a href="8-Admin Configuration.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-gear" style="margin-right:4px;font-size:10px;"></i>Admin</a><a href="18-The public facing article for.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #0ea5e922;color:#0ea5e9;transition:all 0.15s;" onmouseover="this.style.background='#0ea5e9';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#0ea5e9';"><i class="fa-solid fa-newspaper" style="margin-right:4px;font-size:10px;"></i>Article</a><a href="../uxpilot-export-1775634389622/2-Homepage Dashboard.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-globe" style="margin-right:4px;font-size:10px;"></i>PT: Home</a><a href="../uxpilot-export-1775634389622/1-Article Reading Interface.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-book-open" style="margin-right:4px;font-size:10px;"></i>PT: Read</a><a href="../uxpilot-export-1775634389622/4-Search Results.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-magnifying-glass" style="margin-right:4px;font-size:10px;"></i>PT: Search</a><a href="../uxpilot-export-1775634389622/5-Article Submission Interface.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-paper-plane" style="margin-right:4px;font-size:10px;"></i>PT: Submit</a><a href="../uxpilot-export-1775634389622/6-Review Dashboard.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-clipboard-check" style="margin-right:4px;font-size:10px;"></i>PT: Reviews</a><a href="../uxpilot-export-1775634389622/7-Review Process.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-arrows-spin" style="margin-right:4px;font-size:10px;"></i>PT: Process</a><a href="../uxpilot-export-1775634389622/8-Notification Center.html" style="text-decoration:none;padding:4px 10px;border-radius:6px;font-size:11px;font-family:Inter,sans-serif;white-space:nowrap;border:1px solid #6c5ce722;color:#6c5ce7;transition:all 0.15s;" onmouseover="this.style.background='#6c5ce7';this.style.color='white'" onmouseout="this.style.background='';this.style.color='#6c5ce7';"><i class="fa-solid fa-tower-broadcast" style="margin-right:4px;font-size:10px;"></i>PT: Alerts</a></div>
+<!-- /EAIOU NAV BAR -->
+</body>
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+    <div id="header" class="bg-white border-b border-neutral-200 fixed w-full top-0 z-10">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between py-3">
+      <div class="flex items-center">
+        <span class="flex items-center cursor-pointer">
+          <div class="h-8 w-8 bg-neutral-800 rounded-md flex items-center justify-center text-white">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <span class="ml-2 text-lg">AIEOU Journal</span>
+        </span>
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <span class="text-neutral-900 cursor-pointer">Dashboard</span>
+        <span class="text-neutral-900 cursor-pointer">Papers</span>
+        <span class="text-neutral-900 cursor-pointer">Reviews</span>
+        <span class="text-neutral-900 cursor-pointer">Discover</span>
+        <span class="text-neutral-900 cursor-pointer">API</span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <div class="relative">
+          <button class="p-2 rounded-full bg-neutral-100 text-neutral-600">
+            <i class="fa-solid fa-bell"></i>
+          </button>
+          <div class="absolute top-0 right-0 w-2 h-2 bg-neutral-700 rounded-full"></div>
+        </div>
+        <div class="relative">
+          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=423" alt="User avatar" class="w-8 h-8 rounded-full border border-neutral-200" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-content" class="container mx-auto px-4 pt-16 pb-8">
+  <div class="mb-6 mt-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl text-neutral-800">Paper Versions</h1>
+        <p class="text-neutral-600">Manage different versions of submitted papers</p>
+      </div>
+      <div class="flex space-x-3">
+        <button class="px-4 py-2 bg-neutral-100 text-neutral-700 rounded-md text-sm flex items-center">
+          <i class="fa-solid fa-filter mr-2"></i>
+          Filter
+        </button>
+        <button class="px-4 py-2 bg-neutral-800 text-white rounded-md text-sm flex items-center">
+          <i class="fa-solid fa-plus mr-2"></i>
+          Add Version
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paper Info Section -->
+  <div id="paper-info" class="bg-white rounded-lg shadow-sm border border-neutral-200 p-4 mb-6">
+    <div class="flex items-start">
+      <div class="flex-shrink-0 mr-4">
+        <div class="h-16 w-16 bg-neutral-100 rounded-md flex items-center justify-center">
+          <i class="fa-solid fa-file-lines text-neutral-400 text-2xl"></i>
+        </div>
+      </div>
+      <div class="flex-1">
+        <div class="flex items-center">
+          <h2 class="text-xl text-neutral-800">Neural mechanisms of attention in corvids</h2>
+          <span class="ml-3 px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-700">ID: 1094</span>
+          <span class="ml-2 px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-700">In Review</span>
+        </div>
+        <div class="flex mt-1 text-sm text-neutral-600">
+          <span>A. Ramirez, J. Patel, S. Kim, L. Martinez</span>
+          <span class="mx-2">•</span>
+          <span>Submitted: Jun 12, 2025</span>
+        </div>
+        <div class="mt-3 flex space-x-4">
+          <button class="text-sm text-neutral-700 flex items-center">
+            <i class="fa-regular fa-file-lines mr-1"></i>
+            View Paper
+          </button>
+          <button class="text-sm text-neutral-700 flex items-center">
+            <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>
+            Open Bundle
+          </button>
+          <button class="text-sm text-neutral-700 flex items-center">
+            <i class="fa-regular fa-comment mr-1"></i>
+            Reviews (2)
+          </button>
+        </div>
+      </div>
+      <div class="flex-shrink-0">
+        <div class="flex items-center space-x-2">
+          <span class="text-sm text-neutral-600">Authorship:</span>
+          <span class="px-2 py-1 text-xs rounded-full bg-neutral-700 text-white">Human</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Versions List -->
+  <div id="versions-list" class="bg-white rounded-lg shadow-sm border border-neutral-200 mb-6">
+    <div class="border-b border-neutral-200 px-4 py-3 flex items-center justify-between">
+      <h3 class="text-lg text-neutral-800">Versions</h3>
+      <div class="flex items-center space-x-2">
+        <span class="text-sm text-neutral-600">Sort by:</span>
+        <select class="text-sm border border-neutral-200 rounded-md px-2 py-1">
+          <option>Latest first</option>
+          <option>Oldest first</option>
+          <option>AI generated</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-neutral-200">
+        <thead>
+          <tr>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Version</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Date</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Type</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">AI Model</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Status</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Notes</th>
+            <th class="px-4 py-3 text-right text-xs text-neutral-500 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-neutral-200">
+          <tr class="bg-neutral-50">
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <span class="text-sm text-neutral-800">v3</span>
+                <span class="ml-2 px-2 py-0.5 text-xs rounded-full bg-neutral-700 text-white">Current</span>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">Jun 18, 2025</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">Revision</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">—</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">In Review</span>
+            </td>
+            <td class="px-4 py-4">
+              <div class="text-sm text-neutral-600 max-w-xs truncate">Revised based on reviewer feedback, expanded methods section</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap text-right text-sm">
+              <button class="text-neutral-700 hover:text-neutral-900 mr-3">
+                <i class="fa-solid fa-download"></i>
+              </button>
+              <button class="text-neutral-700 hover:text-neutral-900 mr-3">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button class="text-neutral-700 hover:text-neutral-900">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <span class="text-sm text-neutral-800">v2</span>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">Jun 14, 2025</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">Revision</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">—</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Reviewed</span>
+            </td>
+            <td class="px-4 py-4">
+              <div class="text-sm text-neutral-600 max-w-xs truncate">Fixed figures and citations as requested</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap text-right text-sm">
+              <button class="text-neutral-700 hover:text-neutral-900 mr-3">
+                <i class="fa-solid fa-download"></i>
+              </button>
+              <button class="text-neutral-700 hover:text-neutral-900 mr-3">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button class="text-neutral-700 hover:text-neutral-900">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <span class="text-sm text-neutral-800">v1</span>
+                <span class="ml-2 px-2 py-0.5 text-xs rounded-full bg-neutral-200 text-neutral-700">Original</span>
+              </div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">Jun 12, 2025</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">Submission</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">—</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-100 text-neutral-800">Reviewed</span>
+            </td>
+            <td class="px-4 py-4">
+              <div class="text-sm text-neutral-600 max-w-xs truncate">Initial submission</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap text-right text-sm">
+              <button class="text-neutral-700 hover:text-neutral-900 mr-3">
+                <i class="fa-solid fa-download"></i>
+              </button>
+              <button class="text-neutral-700 hover:text-neutral-900 mr-3">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button class="text-neutral-700 hover:text-neutral-900">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- AI Generated Content -->
+  <div id="ai-content" class="bg-white rounded-lg shadow-sm border border-neutral-200 mb-6">
+    <div class="border-b border-neutral-200 px-4 py-3">
+      <h3 class="text-lg text-neutral-800">AI Generated Content</h3>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-neutral-200">
+        <thead>
+          <tr>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Version</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Date</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">AI Model</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Section</th>
+            <th class="px-4 py-3 text-left text-xs text-neutral-500 uppercase tracking-wider">Used in Paper</th>
+            <th class="px-4 py-3 text-right text-xs text-neutral-500 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-neutral-200">
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">Draft 2.1</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">Jun 13, 2025</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">GPT-4o</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">Literature Review</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-700 text-white">Yes (v2)</span>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap text-right text-sm">
+              <button class="text-neutral-700 hover:text-neutral-900 mr-3">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button class="text-neutral-700 hover:text-neutral-900">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">Draft 1.3</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">Jun 11, 2025</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">GPT-4o</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">Abstract</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-200 text-neutral-700">No</span>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap text-right text-sm">
+              <button class="text-neutral-700 hover:text-neutral-900 mr-3">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button class="text-neutral-700 hover:text-neutral-900">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-800">Draft 1.2</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">Jun 10, 2025</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">UX Pilot 3 Opus</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <div class="text-sm text-neutral-600">Discussion</div>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap">
+              <span class="px-2 py-1 text-xs rounded-full bg-neutral-200 text-neutral-700">No</span>
+            </td>
+            <td class="px-4 py-4 whitespace-nowrap text-right text-sm">
+              <button class="text-neutral-700 hover:text-neutral-900 mr-3">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button class="text-neutral-700 hover:text-neutral-900">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Version Comparison Tool -->
+  <div id="version-comparison" class="bg-white rounded-lg shadow-sm border border-neutral-200 mb-6">
+    <div class="border-b border-neutral-200 px-4 py-3">
+      <h3 class="text-lg text-neutral-800">Version Comparison</h3>
+    </div>
+    
+    <div class="p-4">
+      <div class="flex space-x-4 mb-4">
+        <div class="flex-1">
+          <label class="block text-sm text-neutral-600 mb-2">Original Version</label>
+          <div class="relative">
+            <select class="w-full border border-neutral-200 rounded-md px-3 py-2 appearance-none">
+              <option>v1 (Jun 12, 2025)</option>
+              <option>v2 (Jun 14, 2025)</option>
+              <option>v3 (Jun 18, 2025)</option>
+            </select>
+            <div class="absolute right-3 top-2.5 pointer-events-none">
+              <i class="fa-solid fa-chevron-down text-neutral-500"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex-1">
+          <label class="block text-sm text-neutral-600 mb-2">Compare With</label>
+          <div class="relative">
+            <select class="w-full border border-neutral-200 rounded-md px-3 py-2 appearance-none">
+              <option>v3 (Jun 18, 2025)</option>
+              <option>v2 (Jun 14, 2025)</option>
+              <option>v1 (Jun 12, 2025)</option>
+            </select>
+            <div class="absolute right-3 top-2.5 pointer-events-none">
+              <i class="fa-solid fa-chevron-down text-neutral-500"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex items-end">
+          <button class="px-4 py-2 bg-neutral-800 text-white rounded-md text-sm">
+            Compare
+          </button>
+        </div>
+      </div>
+      
+      <div class="border border-neutral-200 rounded-md p-6 flex items-center justify-center h-64 bg-neutral-50">
+        <div class="text-center">
+          <div class="text-neutral-400 mb-2">
+            <i class="fa-solid fa-code-compare text-3xl"></i>
+          </div>
+          <p class="text-neutral-600">Select two versions to compare differences</p>
+          <p class="text-sm text-neutral-500 mt-1">Changes will be highlighted with additions and deletions</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Version Management Actions -->
+  <div id="version-actions" class="bg-white rounded-lg shadow-sm border border-neutral-200 mb-6">
+    <div class="border-b border-neutral-200 px-4 py-3">
+      <h3 class="text-lg text-neutral-800">Version Management</h3>
+    </div>
+    
+    <div class="p-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="border border-neutral-200 rounded-md p-4">
+          <div class="flex items-center mb-3">
+            <i class="fa-solid fa-upload text-neutral-700 mr-2"></i>
+            <h4 class="text-neutral-800">Upload New Version</h4>
+          </div>
+          <p class="text-sm text-neutral-600 mb-3">Upload a new version of this paper with revisions or changes</p>
+          <button class="w-full px-3 py-2 bg-neutral-800 text-white rounded-md text-sm">Upload Files</button>
+        </div>
+        
+        <div class="border border-neutral-200 rounded-md p-4">
+          <div class="flex items-center mb-3">
+            <i class="fa-solid fa-code-branch text-neutral-700 mr-2"></i>
+            <h4 class="text-neutral-800">Create Branch</h4>
+          </div>
+          <p class="text-sm text-neutral-600 mb-3">Create an alternate version branch for experimental changes</p>
+          <button class="w-full px-3 py-2 bg-neutral-100 text-neutral-700 rounded-md text-sm">Create Branch</button>
+        </div>
+        
+        <div class="border border-neutral-200 rounded-md p-4">
+          <div class="flex items-center mb-3">
+            <i class="fa-solid fa-tag text-neutral-700 mr-2"></i>
+            <h4 class="text-neutral-800">Manage Labels</h4>
+          </div>
+          <p class="text-sm text-neutral-600 mb-3">Add or edit labels for versions to improve organization</p>
+          <button class="w-full px-3 py-2 bg-neutral-100 text-neutral-700 rounded-md text-sm">Manage Labels</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Version History Timeline -->
+  <div id="version-timeline" class="bg-white rounded-lg shadow-sm border border-neutral-200">
+    <div class="border-b border-neutral-200 px-4 py-3 flex items-center justify-between">
+      <h3 class="text-lg text-neutral-800">Version History Timeline</h3>
+      <button class="text-sm text-neutral-700">
+        <i class="fa-solid fa-expand mr-1"></i>
+        Expand
+      </button>
+    </div>
+    
+    <div class="p-4">
+      <div class="relative">
+        <!-- Timeline line -->
+        <div class="absolute left-4 top-0 bottom-0 w-px bg-neutral-200"></div>
+        
+        <!-- Timeline events -->
+        <div class="ml-12 space-y-8">
+          <!-- Event 1 -->
+          <div class="relative">
+            <!-- Timeline dot -->
+            <div class="absolute -left-12 mt-1 w-4 h-4 rounded-full bg-neutral-800 border-2 border-white"></div>
+            
+            <div class="flex items-start">
+              <div class="flex-1">
+                <h4 class="text-neutral-800">Version 3 Submitted</h4>
+                <p class="text-sm text-neutral-600 mt-1">Revised based on reviewer feedback, expanded methods section</p>
+                <div class="flex items-center mt-2 text-sm text-neutral-500">
+                  <span>Jun 18, 2025, 10:23 AM</span>
+                  <span class="mx-2">•</span>
+                  <span>A. Ramirez</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0 ml-4">
+                <button class="px-3 py-1 text-xs bg-neutral-100 text-neutral-700 rounded-md">Details</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Event 2 -->
+          <div class="relative">
+            <!-- Timeline dot -->
+            <div class="absolute -left-12 mt-1 w-4 h-4 rounded-full bg-neutral-400 border-2 border-white"></div>
+            
+            <div class="flex items-start">
+              <div class="flex-1">
+                <h4 class="text-neutral-800">Review Completed</h4>
+                <p class="text-sm text-neutral-600 mt-1">Reviewer #2 submitted review with revisions requested</p>
+                <div class="flex items-center mt-2 text-sm text-neutral-500">
+                  <span>Jun 16, 2025, 3:45 PM</span>
+                  <span class="mx-2">•</span>
+                  <span>M. Johnson</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0 ml-4">
+                <button class="px-3 py-1 text-xs bg-neutral-100 text-neutral-700 rounded-md">View Review</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Event 3 -->
+          <div class="relative">
+            <!-- Timeline dot -->
+            <div class="absolute -left-12 mt-1 w-4 h-4 rounded-full bg-neutral-400 border-2 border-white"></div>
+            
+            <div class="flex items-start">
+              <div class="flex-1">
+                <h4 class="text-neutral-800">Version 2 Submitted</h4>
+                <p class="text-sm text-neutral-600 mt-1">Fixed figures and citations as requested</p>
+                <div class="flex items-center mt-2 text-sm text-neutral-500">
+                  <span>Jun 14, 2025, 11:17 AM</span>
+                  <span class="mx-2">•</span>
+                  <span>A. Ramirez</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0 ml-4">
+                <button class="px-3 py-1 text-xs bg-neutral-100 text-neutral-700 rounded-md">Details</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Event 4 -->
+          <div class="relative">
+            <!-- Timeline dot -->
+            <div class="absolute -left-12 mt-1 w-4 h-4 rounded-full bg-neutral-400 border-2 border-white"></div>
+            
+            <div class="flex items-start">
+              <div class="flex-1">
+                <h4 class="text-neutral-800">Review Completed</h4>
+                <p class="text-sm text-neutral-600 mt-1">Reviewer #1 submitted review with minor revisions</p>
+                <div class="flex items-center mt-2 text-sm text-neutral-500">
+                  <span>Jun 13, 2025, 2:30 PM</span>
+                  <span class="mx-2">•</span>
+                  <span>S. Thompson</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0 ml-4">
+                <button class="px-3 py-1 text-xs bg-neutral-100 text-neutral-700 rounded-md">View Review</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Event 5 -->
+          <div class="relative">
+            <!-- Timeline dot -->
+            <div class="absolute -left-12 mt-1 w-4 h-4 rounded-full bg-neutral-400 border-2 border-white"></div>
+            
+            <div class="flex items-start">
+              <div class="flex-1">
+                <h4 class="text-neutral-800">Version 1 Submitted</h4>
+                <p class="text-sm text-neutral-600 mt-1">Initial submission</p>
+                <div class="flex items-center mt-2 text-sm text-neutral-500">
+                  <span>Jun 12, 2025, 9:05 AM</span>
+                  <span class="mx-2">•</span>
+                  <span>A. Ramirez</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0 ml-4">
+                <button class="px-3 py-1 text-xs bg-neutral-100 text-neutral-700 rounded-md">Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="bg-neutral-100 border-t border-neutral-200 mt-8">
+  <div class="container mx-auto px-4 py-6">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0">
+        <div class="flex items-center">
+          <div class="h-8 w-8 bg-neutral-800 rounded-md flex items-center justify-center text-white mr-2">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <span class="text-sm text-neutral-600">AIEOU Journal Platform v5.3</span>
+        </div>
+      </div>
+      <div class="flex space-x-6">
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Documentation</span>
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Support</span>
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Privacy Policy</span>
+        <span class="text-sm text-neutral-600 hover:text-neutral-900 cursor-pointer">Terms of Service</span>
+      </div>
+    </div>
+  </div>
+</div>
+  </body>
+</html>
