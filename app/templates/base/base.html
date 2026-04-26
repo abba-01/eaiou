@@ -1,0 +1,398 @@
+{# ============================================================================
+   TOMBSTONED DESIGN EXPLORATION — NOT PRODUCTION SHELL
+
+   This shell uses Spectral + JetBrains Mono fonts and colored tokens
+   (ink/paper/river/amber/sage/coral/violet). No active routes use layout_a/b/c.
+
+   Production shell: app/templates/base.html (DM Sans, SSOT monochrome)
+   See SSOT.md §0.4 — "Tombstone, don't purge"
+   ============================================================================ #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}eaiou — observer-preserving journal{% endblock %}</title>
+
+    <!-- eaiou Design System Fonts: Spectral (serif body) + JetBrains Mono (UI/labels) -->
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest' };</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Tailwind (utility layer only — design tokens override via CSS vars) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Spectral', 'Georgia', 'serif'],
+                        mono:  ['JetBrains Mono', 'monospace'],
+                        sans:  ['Spectral', 'Georgia', 'serif'], // body defaults to serif
+                    },
+                    colors: {
+                        ink:    { DEFAULT: '#0e0d0b', 2: '#3a3832', 3: '#7a7670' },
+                        paper:  { DEFAULT: '#f7f4ef', 2: '#ede9e1', 3: '#e0dbd0' },
+                        river:  { DEFAULT: '#1a4a6b', l: '#2d6e9e', ll: '#e8f1f7' },
+                        amber:  { DEFAULT: '#c47c0a', l: '#fdf0d0' },
+                        sage:   { DEFAULT: '#3a6b4a', l: '#e8f2ec' },
+                        coral:  { DEFAULT: '#b84832', l: '#faeae6' },
+                        violet: { DEFAULT: '#4a3278', l: '#ede8f7' },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- eaiou Design System CSS vars + component classes -->
+    <style>
+        /* ── Core design tokens ─────────────────────────────────────────── */
+        :root {
+            --ink:       #0e0d0b;
+            --ink2:      #3a3832;
+            --ink3:      #7a7670;
+            --paper:     #f7f4ef;
+            --paper2:    #ede9e1;
+            --paper3:    #e0dbd0;
+            --river:     #1a4a6b;
+            --river-l:   #2d6e9e;
+            --river-ll:  #e8f1f7;
+            --amber:     #c47c0a;
+            --amber-l:   #fdf0d0;
+            --sage:      #3a6b4a;
+            --sage-l:    #e8f2ec;
+            --coral:     #b84832;
+            --coral-l:   #faeae6;
+            --violet:    #4a3278;
+            --violet-l:  #ede8f7;
+            --mono:      'JetBrains Mono', monospace;
+            --serif:     'Spectral', Georgia, serif;
+
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--serif);
+            background: var(--paper);
+            color: var(--ink);
+            font-size: 15px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Typography helpers ─────────────────────────────────────────── */
+        .eaiou-brand {
+            font-family: var(--serif);
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            font-style: italic;
+        }
+
+        .label-mono {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink3);
+        }
+
+        /* ── Scrollbar: hidden for clean look ───────────────────────────── */
+        ::-webkit-scrollbar { display: none; }
+
+        /* ── Nav ────────────────────────────────────────────────────────── */
+        .eaiou-nav {
+            background: var(--ink);
+            color: #fff;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            height: 52px;
+            gap: 32px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .eaiou-nav-brand {
+            font-family: var(--serif);
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            color: #fff;
+            text-decoration: none;
+            flex-shrink: 0;
+            font-style: italic;
+        }
+        .eaiou-nav-brand span { color: #8ab4d4; }
+        .eaiou-nav-links {
+            display: flex;
+            gap: 24px;
+            flex: 1;
+        }
+        .eaiou-nav-link {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            transition: color 0.15s;
+            text-transform: uppercase;
+        }
+        .eaiou-nav-link:hover,
+        .eaiou-nav-link.active { color: #fff; }
+        .eaiou-nav-right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .eaiou-nav-badge {
+            font-family: var(--mono);
+            font-size: 10px;
+            padding: 3px 8px;
+            border: 0.5px solid rgba(255,255,255,0.2);
+            border-radius: 3px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: border-color 0.15s;
+        }
+        .eaiou-nav-badge:hover { border-color: rgba(255,255,255,0.5); }
+        .eaiou-nav-badge.primary {
+            background: var(--river-l);
+            border-color: var(--river-l);
+            color: #fff;
+        }
+
+        /* ── Buttons ────────────────────────────────────────────────────── */
+        .btn {
+            font-family: var(--mono);
+            font-size: 12px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            border: 0.5px solid;
+            transition: all 0.15s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-primary {
+            background: var(--river-l);
+            border-color: var(--river-l);
+            color: #fff;
+        }
+        .btn-primary:hover { background: var(--river); border-color: var(--river); }
+        .btn-dark {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: #fff;
+        }
+        .btn-dark:hover { background: var(--ink2); }
+        .btn-ghost {
+            background: transparent;
+            border-color: var(--paper3);
+            color: var(--ink2);
+        }
+        .btn-ghost:hover { border-color: var(--ink3); color: var(--ink); }
+        .btn-ghost-white {
+            background: transparent;
+            border-color: rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.8);
+        }
+        .btn-ghost-white:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+
+        /* ── Cards ──────────────────────────────────────────────────────── */
+        .card {
+            background: var(--paper2);
+            border: 0.5px solid var(--paper3);
+            border-radius: 4px;
+            padding: 24px;
+        }
+        .card-white {
+            background: #fff;
+            border: 0.5px solid var(--paper3);
+            border-radius: 4px;
+        }
+
+        /* ── Status badges ──────────────────────────────────────────────── */
+        .badge {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 2px;
+            border: 0.5px solid;
+        }
+        .badge-submitted  { background: var(--paper2);    color: var(--ink2);   border-color: var(--paper3); }
+        .badge-review     { background: var(--amber-l);   color: var(--amber);  border-color: #e9c06a; }
+        .badge-revision   { background: #fff7ed;          color: #9a3412;       border-color: #fed7aa; }
+        .badge-accepted   { background: var(--sage-l);    color: var(--sage);   border-color: #a8d5b5; }
+        .badge-rejected   { background: var(--paper2);    color: var(--ink3);   border-color: var(--paper3); }
+        .badge-published  { background: var(--ink);       color: #fff;          border-color: var(--ink); }
+        .badge-draft      { background: var(--paper3);    color: var(--ink3);   border-color: var(--paper3); }
+        .badge-ai         { background: var(--violet-l);  color: var(--violet); border-color: #c4b8e8; }
+
+        /* ── Section divider ────────────────────────────────────────────── */
+        .section-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink3);
+            padding-bottom: 6px;
+            border-bottom: 0.5px solid var(--paper3);
+            margin-bottom: 18px;
+        }
+
+        /* ── Form fields ────────────────────────────────────────────────── */
+        .field-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink3);
+            display: block;
+            margin-bottom: 5px;
+        }
+        .field-input {
+            width: 100%;
+            background: #fff;
+            border: 0.5px solid var(--paper3);
+            border-radius: 3px;
+            padding: 8px 10px;
+            font-family: var(--serif);
+            font-size: 14px;
+            color: var(--ink);
+            transition: border-color 0.15s;
+        }
+        .field-input:focus {
+            outline: none;
+            border-color: var(--river-l);
+            box-shadow: 0 0 0 2px var(--river-ll);
+        }
+        select.field-input { font-family: var(--mono); font-size: 12px; }
+
+        /* ── Blockquote / doctrine ──────────────────────────────────────── */
+        .doctrine {
+            padding: 16px 20px;
+            border: 0.5px solid rgba(255,255,255,0.1);
+            border-left: 2px solid #8ab4d4;
+            background: rgba(255,255,255,0.04);
+            border-radius: 0 4px 4px 0;
+        }
+        .doctrine p {
+            font-family: var(--serif);
+            font-size: 14px;
+            font-style: italic;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.7;
+        }
+        .doctrine cite {
+            display: block;
+            margin-top: 8px;
+            font-style: normal;
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* ── Hash / integrity ───────────────────────────────────────────── */
+        .hash-val {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ink2);
+            word-break: break-all;
+        }
+
+        /* ── Footer ─────────────────────────────────────────────────────── */
+        .eaiou-footer {
+            background: var(--ink);
+            color: rgba(255,255,255,0.4);
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .eaiou-footer-brand {
+            font-family: var(--serif);
+            font-size: 18px;
+            font-weight: 300;
+            color: #fff;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+        .eaiou-footer-sub {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* ── Grid helper ────────────────────────────────────────────────── */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+
+        /* ── Utilities ──────────────────────────────────────────────────── */
+        .text-river  { color: var(--river-l); }
+        .text-amber  { color: var(--amber); }
+        .text-sage   { color: var(--sage); }
+        .text-coral  { color: var(--coral); }
+        .border-river { border-color: var(--river-l); }
+    </style>
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+<!-- ── Global nav (public pages) ──────────────────────────────────── -->
+{% block global_nav %}
+<nav class="eaiou-nav">
+    <a href="/" class="eaiou-nav-brand">eaiou<span>.</span></a>
+    <div class="eaiou-nav-links">
+        <a href="/papers/" class="eaiou-nav-link {% block nav_papers_active %}{% endblock %}">Papers</a>
+        <a href="/about"   class="eaiou-nav-link {% block nav_about_active %}{% endblock %}">About</a>
+        <a href="/policy/temporal-blindness" class="eaiou-nav-link">Policies</a>
+    </div>
+    <div class="eaiou-nav-right">
+        {% if current_user is defined and current_user %}
+            <a href="/author/"     class="eaiou-nav-badge">Workspace</a>
+            <a href="/auth/logout" class="eaiou-nav-badge">Sign Out</a>
+        {% else %}
+            <a href="/author/submit" class="eaiou-nav-badge">Submit</a>
+            <a href="/auth/login"   class="eaiou-nav-badge primary">Sign In</a>
+        {% endif %}
+    </div>
+</nav>
+{% endblock %}
+
+{% block body %}{% endblock %}
+
+<!-- ── Global footer ────────────────────────────────────────────────── -->
+{% block global_footer %}
+<footer class="eaiou-footer">
+    <div>
+        <div class="eaiou-footer-brand">eaiou.org</div>
+        <div class="eaiou-footer-sub">OMMP LAYER 5 · OBSERVER-PRESERVING PEER REVIEW</div>
+    </div>
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-align:right">
+        <div>ORCID 0009-0006-5944-1742</div>
+        <div>Eric D. Martin · 2026</div>
+        <div style="color:rgba(255,255,255,0.25);margin-top:4px">SSOT v2.0</div>
+    </div>
+</footer>
+{% endblock %}
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

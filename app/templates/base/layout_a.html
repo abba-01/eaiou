@@ -1,0 +1,17 @@
+{# TOMBSTONED: No active routes. Design exploration using base/base.html shell.
+   Production extends base.html. See SSOT.md §0.4. #}
+{% extends 'base/base.html' %}
+
+{% block body_class %}bg-gray-50 font-sans{% endblock %}
+
+{% block body %}
+<div class="flex h-screen overflow-hidden">
+    {% block sidebar %}{% endblock %}
+    <div class="flex-1 flex flex-col overflow-hidden">
+        {% block page_header %}{% endblock %}
+        <main class="flex-1 overflow-y-auto">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</div>
+{% endblock %}

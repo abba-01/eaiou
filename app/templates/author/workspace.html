@@ -224,7 +224,7 @@
             <span id="interrog-count-badge" class="ml-2 text-xs font-mono" style="color:#9A9895;">0 exchanges</span>
             <i id="interrog-chevron" class="fa-solid fa-chevron-down ml-auto" style="color:#9A9895;"></i>
         </button>
-        <div id="interrog-body" class="border-t" style="border-color: #2E2D30;">
+        <div id="interrog-body" class="border-t" style="border-color: #E2E0DB;">
 
             <!-- Question input -->
             <div class="p-4 border-b" style="border-color: var(--ds-border);">
@@ -460,6 +460,70 @@
         </div>
     </div>
 
+    <!-- RS: Research State Tags -->
+    <div id="rs-tags-panel" style="border: 0.5px solid var(--ds-border); border-radius: 3px; overflow: hidden;">
+        <div style="padding: 12px 18px; display: flex; align-items: center; gap: 12px; background: #F7F6F3; border-bottom: 1px solid var(--ds-border);">
+            <i class="fa-solid fa-tags" style="color: var(--ds-ink-2);"></i>
+            <span style="font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ds-ink-2);">Research State</span>
+            <span id="rs-tag-count" class="ml-auto text-xs font-mono px-2 py-0.5 rounded" style="background: var(--primary-100); color: var(--ds-ink-2);">0</span>
+        </div>
+
+        <!-- Active tags list -->
+        <div id="rs-tags-list" class="divide-y" style="border-color: var(--ds-border);">
+            <div class="px-5 py-3 text-xs" style="color: var(--ds-ink-3);">Loading tags…</div>
+        </div>
+
+        <!-- Add tag form -->
+        <div class="px-5 py-4 border-t" style="border-color: var(--ds-border);">
+            <form method="post" action="/tags/paper/{{ paper.id }}/add" class="flex flex-wrap items-end gap-3">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <div>
+                    <label class="block text-xs mb-1" style="color: var(--ds-ink-3);">Tag</label>
+                    <select name="tag" id="rs-tag-select" required
+                        style="font-family: 'DM Sans', sans-serif; font-size: 11px; padding: 5px 8px; border: 0.5px solid var(--ds-border); border-radius: 3px; background: var(--ds-surface); color: var(--ds-ink-1);">
+                        <option value="">Select…</option>
+                        <option value="rs:LookCollab">Seeking collaboration</option>
+                        <option value="rs:Stalled">Work blocked</option>
+                        <option value="rs:OpenQuestion">Open question</option>
+                        <option value="rs:NotTopic">Not on topic</option>
+                        <option value="rs:ForLater">For later</option>
+                        <option value="rs:NullResult">Null result</option>
+                        <option value="rs:Replication">Replication</option>
+                        <option value="rs:CrossDomain">Cross-domain</option>
+                        <option value="rs:Exploratory">Exploratory</option>
+                        <option value="rs:Contradiction">Contradiction</option>
+                        <option value="rs:UnderReconsideration">Reconsidering</option>
+                    </select>
+                </div>
+                <div id="rs-subtype-wrap" class="hidden">
+                    <label class="block text-xs mb-1" style="color: var(--ds-ink-3);">Subtype</label>
+                    <select name="subtype" id="rs-subtype-select"
+                        style="font-family: 'DM Sans', sans-serif; font-size: 11px; padding: 5px 8px; border: 0.5px solid var(--ds-border); border-radius: 3px; background: var(--ds-surface); color: var(--ds-ink-1);">
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs mb-1" style="color: var(--ds-ink-3);">Visibility</label>
+                    <select name="visibility"
+                        style="font-family: 'DM Sans', sans-serif; font-size: 11px; padding: 5px 8px; border: 0.5px solid var(--ds-border); border-radius: 3px; background: var(--ds-surface); color: var(--ds-ink-1);">
+                        <option value="public">Public</option>
+                        <option value="reviewers">Reviewers</option>
+                        <option value="editorial">Editorial</option>
+                        <option value="private">Private</option>
+                    </select>
+                </div>
+                <div class="flex-1" style="min-width: 120px;">
+                    <label class="block text-xs mb-1" style="color: var(--ds-ink-3);">Notes</label>
+                    <input type="text" name="notes" placeholder="Optional note…"
+                        style="width: 100%; font-family: 'DM Sans', sans-serif; font-size: 11px; padding: 5px 8px; border: 0.5px solid var(--ds-border); border-radius: 3px; background: var(--ds-surface); color: var(--ds-ink-1);">
+                </div>
+                <button type="submit"
+                    style="padding: 5px 14px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; border-radius: 3px; border: none; background: var(--ds-ink-1); color: #fff; cursor: pointer;">
+                    Add Tag
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Submission Gate -->
     <div id="gate-panel" style="border: 0.5px solid var(--ds-border); border-radius: 3px; overflow: hidden;">
         <div style="padding: 12px 18px; display: flex; align-items: center; gap: 12px; background: var(--ds-ink-1);">
@@ -649,18 +713,18 @@
 <!-- Bottom terminal drawer -->
 <div id="terminal-drawer"
      style="flex-shrink:0; height:0; overflow:hidden; transition:height .18s ease;
-            border-top:1px solid #2d2d2d; background:#1e1e1e; display:flex; flex-direction:column;">
+            border-top:1px solid #E2E0DB; background:#18171A; display:flex; flex-direction:column;">
   <!-- Drawer header bar -->
   <div style="display:flex; align-items:center; gap:8px; padding:5px 12px;
-              background:#2d2d2d; border-bottom:1px solid #404040; flex-shrink:0; cursor:row-resize;"
+              background:#18171A; border-bottom:1px solid #E2E0DB; flex-shrink:0; cursor:row-resize;"
        id="term-drag-handle">
     <i class="fa-solid fa-terminal" style="color:#9A9895; font-size:11px;"></i>
     <span style="font-size:10px; font-weight:600; color:#9A9895; text-transform:uppercase; letter-spacing:.08em;">Terminal</span>
-    <span id="term-cwd" style="font-size:10px; color:#5a5a5a; font-family:monospace; margin-left:4px;"></span>
+    <span id="term-cwd" style="font-size:10px; color:#5A5856; font-family:monospace; margin-left:4px;"></span>
     <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
-      <span id="term-status" style="font-size:10px; color:#5a5a5a;"></span>
+      <span id="term-status" style="font-size:10px; color:#5A5856;"></span>
       <button onclick="closeTerminal()"
-              style="color:#5a5a5a; background:none; border:none; cursor:pointer; font-size:13px; line-height:1; padding:2px 4px;"
+              style="color:#5A5856; background:none; border:none; cursor:pointer; font-size:13px; line-height:1; padding:2px 4px;"
               title="Close terminal">✕</button>
     </div>
   </div>
@@ -694,8 +758,8 @@
     term = new Terminal({
       cursorBlink: true, fontSize: 13,
       fontFamily: '"JetBrains Mono","Fira Code",monospace',
-      theme: { background:'#1e1e1e', foreground:'#d4d4d4', cursor:'#aeafad',
-               selectionBackground:'#264f78' },
+      theme: { background:'#18171A', foreground:'#E2E0DB', cursor:'#9A9895',
+               selectionBackground:'#CAC8C2' },
       scrollback: 5000, convertEol: false,
     });
     fitAddon = new FitAddon.FitAddon();
@@ -814,7 +878,7 @@
                   placeholder="Ask about this section&#8230;"></textarea>
         <button onclick="sfmAsk()"
                 class="w-full py-1.5 text-xs font-medium rounded text-white"
-                style="background:var(--ep-primary, #0284c7);">Ask &#8594;</button>
+                style="background:var(--ep-primary, #18171A);">Ask &#8594;</button>
         <div id="sfm-response-wrap" class="hidden flex-col gap-2 overflow-y-auto flex-1">
           <p class="text-xs font-semibold uppercase tracking-wider" style="color:var(--ds-ink-3);">Response</p>
           <div id="sfm-response-text"
@@ -1284,7 +1348,7 @@ async function runCoverage() {
         const data = await resp.json();
 
         if (data.error) {
-            claimsEl.innerHTML = `<div class="px-5 py-4 text-xs" style="color:#B45309;">${data.error}</div>`;
+            claimsEl.innerHTML = `<div class="px-5 py-4 text-xs" style="color: var(--ds-ink-2);">${data.error}</div>`;
             return;
         }
 
@@ -1301,9 +1365,9 @@ async function runCoverage() {
 
         // Claims
         const STATUS_STYLE = {
-            covered:    { bg: '#F0F9F0', border: '#86EFAC', label: 'covered',    dot: '#22C55E' },
-            novel:      { bg: '#F7F6F3', border: '#D1D5DB', label: 'novel fill', dot: '#6B7280' },
-            needs_work: { bg: '#FFFBEB', border: '#FCD34D', label: 'needs work', dot: '#F59E0B' },
+            covered:    { bg: '#F0EFEB', border: '#CAC8C2', label: 'covered',    dot: '#18171A' },
+            novel:      { bg: '#F7F6F3', border: '#E2E0DB', label: 'novel fill', dot: '#5A5856' },
+            needs_work: { bg: '#EDECE9', border: '#CAC8C2', label: 'needs work', dot: '#5A5856' },
         };
 
         claimsEl.innerHTML = data.claims.map(c => {
@@ -1339,7 +1403,7 @@ async function runCoverage() {
         }).join('');
 
     } catch(e) {
-        claimsEl.innerHTML = `<div class="px-5 py-4 text-xs" style="color:#B45309;">Analysis failed: ${e.message}</div>`;
+        claimsEl.innerHTML = `<div class="px-5 py-4 text-xs" style="color: var(--ds-ink-2);">Analysis failed: ${e.message}</div>`;
     } finally {
         btn.disabled = false;
         btn.textContent = 'Re-analyze';
@@ -1478,6 +1542,75 @@ scorchStrip();
       }
     });
   });
+})();
+</script>
+
+<!-- RS Tag management -->
+<script>
+(function() {
+  const RS_SUBTYPES = {
+    'rs:NotTopic': ['AnotherField','FutureWork','Tangent','AbandonedHypothesis','Contradiction','NullResult'],
+    'rs:Stalled': ['Literature','Data','Analysis','Writing','Funding','Equipment','Methodology','Collaboration','Ethics','Compute','Reproducibility'],
+  };
+
+  const tagSelect = document.getElementById('rs-tag-select');
+  const subtypeWrap = document.getElementById('rs-subtype-wrap');
+  const subtypeSelect = document.getElementById('rs-subtype-select');
+
+  if (tagSelect) {
+    tagSelect.addEventListener('change', function() {
+      const subs = RS_SUBTYPES[this.value];
+      if (subs && subs.length) {
+        subtypeSelect.innerHTML = '<option value="">Any</option>' +
+          subs.map(s => '<option value="'+s+'">'+s+'</option>').join('');
+        subtypeWrap.classList.remove('hidden');
+      } else {
+        subtypeWrap.classList.add('hidden');
+        subtypeSelect.innerHTML = '';
+      }
+    });
+  }
+
+  async function loadTags() {
+    try {
+      const resp = await fetch('/tags/paper/' + PAPER_ID);
+      if (!resp.ok) return;
+      const data = await resp.json();
+      const tags = data.tags || [];
+      const listEl = document.getElementById('rs-tags-list');
+      const countEl = document.getElementById('rs-tag-count');
+      const active = tags.filter(t => !t.tag_resolved);
+      countEl.textContent = active.length;
+
+      if (!tags.length) {
+        listEl.innerHTML = '<div class="px-5 py-3 text-xs" style="color: var(--ds-ink-3);">No tags yet. Use the form below to signal research state.</div>';
+        return;
+      }
+
+      listEl.innerHTML = tags.map(function(t) {
+        const resolved = t.tag_resolved ? ' (resolved)' : '';
+        const sub = t.subtype ? ':' + t.subtype : '';
+        const vis = t.visibility !== 'public' ? ' <span style="color:var(--ds-ink-3);">['+t.visibility+']</span>' : '';
+        const notes = t.notes ? '<p class="mt-1" style="color:var(--ds-ink-3);">'+t.notes+'</p>' : '';
+        const actions = !t.tag_resolved
+          ? '<form method="post" action="/tags/'+t.id+'/resolve" class="inline"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button type="submit" class="text-xs underline" style="color:var(--ds-ink-3);background:none;border:none;cursor:pointer;">resolve</button></form> '
+            + '<form method="post" action="/tags/'+t.id+'/delete" class="inline"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button type="submit" class="text-xs underline" style="color:var(--ds-ink-3);background:none;border:none;cursor:pointer;">remove</button></form>'
+          : '<span class="text-xs" style="color:var(--ds-ink-3);">resolved '+((t.resolved_at||'').substring(0,10))+'</span>';
+        return '<div class="px-5 py-3 flex items-start justify-between gap-3">'
+          + '<div>'
+          + '<span class="text-xs font-medium" style="color:var(--ds-ink-1);">'+t.tag+sub+'</span>'+vis+resolved
+          + notes
+          + '</div>'
+          + '<div class="flex gap-3 flex-shrink-0">'+actions+'</div>'
+          + '</div>';
+      }).join('');
+    } catch(e) {
+      document.getElementById('rs-tags-list').innerHTML =
+        '<div class="px-5 py-3 text-xs" style="color: var(--ds-ink-3);">Could not load tags.</div>';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadTags);
 })();
 </script>
 {% endblock %}

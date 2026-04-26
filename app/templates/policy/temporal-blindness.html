@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Temporal Blindness — eaiou Policy{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-6 py-12">
+    <div class="text-xs mb-5" style="color: var(--ds-ink-3);">
+        <a href="/about" class="hover:underline" style="color: var(--ds-ink-3);">About</a>
+        <span class="mx-1.5">/</span>Policy
+    </div>
+    <h1 class="eaiou-title text-3xl font-bold mb-2" style="color: var(--ds-ink-1);">Temporal Blindness</h1>
+    <p class="text-sm mb-10" style="color: var(--ds-ink-3);">Core eaiou policy — enforced at infrastructure level.</p>
+
+    <div class="space-y-8">
+
+        <section>
+            <h2 class="eaiou-title text-xl font-bold mb-3" style="color: var(--ds-ink-1);">The policy</h2>
+            <p class="leading-relaxed" style="color: var(--ds-ink-2);">Submission dates in eaiou are cryptographically sealed at the moment of receipt. They are never displayed to reviewers, editors, or the public during evaluation. Papers are sorted and discovered by quality signal (Q score) only.</p>
+        </section>
+
+        <section>
+            <h2 class="eaiou-title text-xl font-bold mb-3" style="color: var(--ds-ink-1);">What is sealed</h2>
+            <ul class="space-y-2 mb-4" style="color: var(--ds-ink-2);">
+                <li class="flex items-start gap-2"><i class="fa-solid fa-lock text-xs mt-1.5" style="color: var(--ds-ink-3);"></i>The exact timestamp of submission receipt</li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-lock text-xs mt-1.5" style="color: var(--ds-ink-3);"></i>The acceptance timestamp</li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-lock text-xs mt-1.5" style="color: var(--ds-ink-3);"></i>The publication timestamp</li>
+            </ul>
+            <p class="leading-relaxed text-sm" style="color: var(--ds-ink-2);">Sealed fields carry no database index by design. Indexing temporal fields creates a timing side-channel that allows bias to infer submission order. The schema enforces this structurally, not by policy alone.</p>
+        </section>
+
+        <section>
+            <h2 class="eaiou-title text-xl font-bold mb-3" style="color: var(--ds-ink-1);">What is not sealed</h2>
+            <p class="leading-relaxed" style="color: var(--ds-ink-2);">The author's identity (name, ORCID), the paper content, AI disclosure, and keywords are all visible to reviewers. eaiou is full-context, not double-blind. The only thing withheld is timing.</p>
+        </section>
+
+        <section>
+            <h2 class="eaiou-title text-xl font-bold mb-3" style="color: var(--ds-ink-1);">Why</h2>
+            <p class="leading-relaxed mb-4" style="color: var(--ds-ink-2);">Recency bias is one of the most structurally embedded biases in academic publishing. A paper that arrives first is more likely to be cited, indexed, and discovered — not because it is better, but because it arrived first. eaiou treats this as a system design problem, not a reviewer attitude problem. The fix is in the infrastructure.</p>
+            <blockquote class="border-l-4 pl-5 py-1 italic" style="border-left-color: #18171A; color: var(--ds-ink-2);">Bias can see time. Justice cannot.</blockquote>
+        </section>
+
+    </div>
+</div>
+{% endblock %}

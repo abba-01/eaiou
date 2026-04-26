@@ -1,0 +1,44 @@
+{# TOMBSTONED: No active routes. Design exploration using base/base.html shell.
+   Production extends base.html. See SSOT.md §0.4. #}
+{% extends 'base/base.html' %}
+
+{% block body_class %}font-sans bg-gray-50{% endblock %}
+
+{% block body %}
+    <!-- Header Navigation — shared frame; nav links are per-page -->
+    <nav id="header" class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 flex items-center justify-between px-4 py-3 z-50">
+        <div class="flex items-center">
+            <a href="/" class="flex items-center mr-10">
+                <span class="eaiou-brand text-xl text-gray-900">eaiou</span>
+            </a>
+            <div class="hidden md:flex space-x-6">
+                {% block topnav_links %}{% endblock %}
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span class="hidden md:inline-block text-gray-600 mr-2">
+                <i class="fa-regular fa-bell"></i>
+                <span class="text-xs rounded-full h-4 w-4 flex items-center justify-center absolute -mt-8 ml-3" style="background: #18171A; color: #FFFFFF;">{{ notification_count | default(0) }}</span>
+            </span>
+            <button class="hidden md:flex items-center text-gray-600 hover:text-gray-800">
+                <i class="fa-regular fa-question-circle mr-1"></i>
+                <span>Help</span>
+            </button>
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-full h-full object-cover" />
+                </div>
+                <span class="hidden md:inline-block text-gray-700 font-medium">{{ current_user.display if current_user else 'Guest' }}</span>
+                <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="pt-16 flex min-h-screen bg-gray-50">
+        {% block sidebar %}{% endblock %}
+        <div id="main-content" class="flex-1 ml-0 md:ml-64 p-6">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{# TOMBSTONED: No active routes. Design exploration using base/base.html shell.
+   Production extends base.html. See SSOT.md §0.4. #}
+{% extends 'base/base.html' %}
+
+{% block body_class %}bg-gray-50 font-sans{% endblock %}
+
+{% block body %}
+    {% block topnav %}{% endblock %}
+
+    <div class="flex" style="margin-top: {% block nav_height %}96px{% endblock %};">
+        {% block sidebar %}{% endblock %}
+        <div class="flex-1 ml-64 p-6">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
