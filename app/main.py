@@ -18,7 +18,7 @@ from contextlib import asynccontextmanager
 
 from .database import Base, get_db
 from .deps import get_current_user, get_user_from_session
-from .routers import papers, auth, author, editor, intelligence, api, intellid, report, admin, oauth, api_core, api_review, api_authorship, api_transparency, api_discover, api_gaps, api_versioning, api_admin, api_logging, api_notifications, api_system, api_keys
+from .routers import papers, auth, author, editor, intelligence, api, intellid, report, admin, oauth, api_core, api_review, api_authorship, api_transparency, api_discover, api_gaps, api_versioning, api_admin, api_logging, api_notifications, api_system, api_keys, tags
 from .middleware.temporal_blindness import TemporalBlindnessMiddleware
 
 
@@ -199,6 +199,26 @@ async def lifespan(app: FastAPI):
                 PRIMARY KEY (gap_id, paper_id)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
         """))
+        # M-006: RS (Research State) paper tags
+        conn.execute(text("""
+            CREATE TABLE IF NOT EXISTS `#__eaiou_paper_tags` (
+                id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                paper_id     INT UNSIGNED NOT NULL,
+                tag          VARCHAR(64)  NOT NULL,
+                subtype      VARCHAR(64)  DEFAULT NULL,
+                visibility   ENUM('public','reviewers','editorial','private') NOT NULL DEFAULT 'public',
+                tag_resolved TINYINT(1)   NOT NULL DEFAULT 0,
+                notes        TEXT         DEFAULT NULL,
+                created_at   DATETIME     NOT NULL,
+                created_by   INT UNSIGNED DEFAULT NULL,
+                resolved_at  DATETIME     DEFAULT NULL,
+                FOREIGN KEY (paper_id) REFERENCES `#__eaiou_papers`(id) ON DELETE CASCADE,
+                INDEX idx_tag (tag),
+                INDEX idx_paper_id (paper_id),
+                INDEX idx_resolved (tag_resolved),
+                INDEX idx_visibility (visibility)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+        """))
     yield
 
 
@@ -295,6 +315,7 @@ app.include_router(api_logging.router)
 app.include_router(api_notifications.router)
 app.include_router(api_system.router)
 app.include_router(api_keys.router)
+app.include_router(tags.router)
 
 
 # ── Page routes ───────────────────────────────────────────────────────────────

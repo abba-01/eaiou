@@ -168,6 +168,13 @@ async def paper_detail(
     except Exception:
         trajectory, has_rewrite, has_branch = [], False, False
 
+    # RS tags (editors see all visibility levels)
+    rs_tags = db.execute(text(
+        "SELECT id, tag, subtype, visibility, tag_resolved, notes, created_at, resolved_at "
+        "FROM `#__eaiou_paper_tags` WHERE paper_id = :pid "
+        "ORDER BY tag_resolved ASC, created_at DESC"
+    ), {"pid": paper_id}).mappings().all()
+
     return templates.TemplateResponse(request, "editor/paper_detail.html", {
         "current_user":  current_user,
         "paper":         paper,
@@ -179,6 +186,7 @@ async def paper_detail(
         "trajectory":    trajectory,
         "has_rewrite":   has_rewrite,
         "has_branch":    has_branch,
+        "rs_tags":       [dict(t) for t in rs_tags],
     })
 
 

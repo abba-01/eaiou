@@ -132,12 +132,21 @@ async def view_paper(
         except Exception:
             pass
 
+    # RS tags (public visibility only for public view)
+    rs_tags = db.execute(text(
+        "SELECT tag, subtype, notes, created_at "
+        "FROM `#__eaiou_paper_tags` "
+        "WHERE paper_id = :pid AND tag_resolved = 0 AND visibility = 'public' "
+        "ORDER BY created_at DESC"
+    ), {"pid": paper_id}).mappings().all()
+
     return templates.TemplateResponse(request, "views/22_the_article.html", {
         "paper":         row,
         "current_user":  current_user,
         "seal":          seal,
         "contributions": [dict(c) for c in contributions],
         "caught_gap":    caught_gap,
+        "rs_tags":       [dict(t) for t in rs_tags],
         "notification_count": 0,
     })
 

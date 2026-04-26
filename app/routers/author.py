@@ -755,7 +755,7 @@ async def dashboard(
         "ORDER BY n.created_at DESC LIMIT 10"
     )).mappings().all()
 
-    return templates.TemplateResponse(request, "author/dashboard.html", {
+    return templates.TemplateResponse(request, "views/30_submission_dashboard.html", {
         "current_user": current_user,
         "papers": papers,
         "stats": counts,
@@ -765,6 +765,7 @@ async def dashboard(
         "intake_complete": intake_complete,
         "unread_count": unread_count,
         "notifications": [dict(n) for n in notifications],
+        "notification_count": unread_count,
     })
 
 
@@ -978,11 +979,12 @@ async def intake_get(
         return RedirectResponse("/author/dashboard", status_code=302)
 
     step_def = _INTAKE_STEPS[current_step - 1]
-    return templates.TemplateResponse(request, "author/intake.html", {
+    return templates.TemplateResponse(request, "views/28_submission_form.html", {
         "current_user": current_user,
         "step_def": step_def,
         "total_steps": len(_INTAKE_STEPS),
         "intake": intake,
+        "notification_count": 0,
     })
 
 
@@ -1887,6 +1889,7 @@ async def workspace(
         "volley_round":    volley_round,
         "latest_revision": dict(latest_rev) if latest_rev else None,
         "unread_count":    unread_count,
+        "csrf_token":      get_csrf_token(request),
     })
 
 
@@ -1951,6 +1954,62 @@ async def notifications_read_all(
     ), {"now": datetime.now(timezone.utc)})
     db.commit()
     return RedirectResponse(url="/author/", status_code=303)
+
+
+# ── Wireframe stub routes ─────────────────────────────────────────────────────
+
+@router.get("/notifications", response_class=HTMLResponse)
+async def notifications_page(request: Request, current_user=Depends(get_current_user)):
+    redirect = _require_login(request, current_user)
+    if redirect:
+        return redirect
+    return templates.TemplateResponse(request, "views/14_notifications.html", {
+        "current_user": current_user, "notification_count": 0,
+    })
+
+
+@router.get("/messages", response_class=HTMLResponse)
+async def messages_page(request: Request, current_user=Depends(get_current_user)):
+    redirect = _require_login(request, current_user)
+    if redirect:
+        return redirect
+    return templates.TemplateResponse(request, "views/01_communication_center.html", {
+        "current_user": current_user, "notification_count": 0,
+    })
+
+
+@router.get("/messages-v2", response_class=HTMLResponse)
+async def messages_v2_page(request: Request, current_user=Depends(get_current_user)):
+    redirect = _require_login(request, current_user)
+    if redirect:
+        return redirect
+    return templates.TemplateResponse(request, "views/17_communication_center.html", {
+        "current_user": current_user, "notification_count": 0,
+    })
+
+
+@router.get("/papers/{paper_id}/versions", response_class=HTMLResponse)
+async def paper_versions_page(
+    request: Request, paper_id: int, current_user=Depends(get_current_user),
+):
+    redirect = _require_login(request, current_user)
+    if redirect:
+        return redirect
+    return templates.TemplateResponse(request, "views/29_version_control.html", {
+        "current_user": current_user, "paper_id": paper_id, "notification_count": 0,
+    })
+
+
+@router.get("/papers/{paper_id}/transparency", response_class=HTMLResponse)
+async def paper_transparency_page(
+    request: Request, paper_id: int, current_user=Depends(get_current_user),
+):
+    redirect = _require_login(request, current_user)
+    if redirect:
+        return redirect
+    return templates.TemplateResponse(request, "views/24_transparency.html", {
+        "current_user": current_user, "paper_id": paper_id, "notification_count": 0,
+    })
 
 
 # ── F4-B: Author Withdrawal ────────────────────────────────────────────────────
@@ -2049,3 +2108,4 @@ async def author_drawer_delete(
     )
     db.commit()
     return RedirectResponse(url="/author/drawer", status_code=303)
+

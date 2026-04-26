@@ -198,11 +198,11 @@ async def discover_ideas(
     offset: int = Query(0, ge=0),
     db: Session = Depends(get_db),
 ):
-    total = db.execute(text(
-        "SELECT COUNT(*) FROM `#__eaiou_remsearch` WHERE used = 0"
-    )).scalar() or 0
+    """Cross-domain discovery: unused refs + papers tagged rs:CrossDomain,
+    rs:OpenQuestion, rs:NotTopic (the three discovery-signal tags)."""
 
-    rows = db.execute(text(
+    # Source 1: unused references (existing)
+    ref_rows = db.execute(text(
         "SELECT r.id, r.paper_id, r.citation_title, r.citation_source, "
         "r.fulltext_notes, p.title AS source_paper_title "
         "FROM `#__eaiou_remsearch` r "
@@ -213,38 +213,82 @@ async def discover_ideas(
     ), {"limit": limit, "offset": offset}).mappings().all()
 
     ideas = []
-    for r in rows:
+    for r in ref_rows:
         ideas.append({
             "source_paper_id":    r["paper_id"],
             "source_paper_title": r["source_paper_title"],
             "idea_title":         r["citation_title"],
             "idea_notes":         r["fulltext_notes"],
-            "entropy_score":      1.0,
-            "origin_type":        "nottopic",
+            "origin_type":        "remsearch",
         })
 
-    return {"ideas": ideas, "total": total}
+    # Source 2: RS-tagged discovery signals
+    tag_rows = db.execute(text(
+        "SELECT t.id, t.paper_id, t.tag, t.subtype, t.notes, "
+        "p.title AS paper_title "
+        "FROM `#__eaiou_paper_tags` t "
+        "JOIN `#__eaiou_papers` p ON p.id = t.paper_id "
+        "WHERE t.tag IN ('rs:CrossDomain', 'rs:OpenQuestion', 'rs:NotTopic') "
+        "AND t.tag_resolved = 0 AND t.visibility = 'public' "
+        "AND p.tombstone_state IS NULL "
+        "ORDER BY t.created_at DESC "
+        "LIMIT :limit OFFSET :offset"
+    ), {"limit": limit, "offset": offset}).mappings().all()
+
+    for r in tag_rows:
+        ideas.append({
+            "source_paper_id":    r["paper_id"],
+            "source_paper_title": r["paper_title"],
+            "idea_title":         f"{r['tag']}" + (f":{r['subtype']}" if r["subtype"] else ""),
+            "idea_notes":         r["notes"],
+            "origin_type":        r["tag"],
+        })
+
+    total_refs = db.execute(text(
+        "SELECT COUNT(*) FROM `#__eaiou_remsearch` WHERE used = 0"
+    )).scalar() or 0
+    total_tags = db.execute(text(
+        "SELECT COUNT(*) FROM `#__eaiou_paper_tags` t "
+        "JOIN `#__eaiou_papers` p ON p.id = t.paper_id "
+        "WHERE t.tag IN ('rs:CrossDomain', 'rs:OpenQuestion', 'rs:NotTopic') "
+        "AND t.tag_resolved = 0 AND t.visibility = 'public' "
+        "AND p.tombstone_state IS NULL"
+    )).scalar() or 0
+
+    return {"ideas": ideas, "total": total_refs + total_tags}
 
 
 # ── 5. GET /discover/gaps — discover.gaps (PUBLIC) ────────────────────────────
 
 @router.get("/discover/gaps")
 async def discover_gaps(
+    tag: Optional[str] = Query(None, description="Filter by RS tag (e.g. rs:Stalled)"),
     db: Session = Depends(get_db),
 ):
-    # Group stalled papers by ai_disclosure_level as domain proxy
-    # (no category column on papers in live schema)
-    rows = db.execute(text(
-        "SELECT "
-        "  COALESCE(ai_disclosure_level, 'none') AS domain, "
-        "  COUNT(*) AS stall_count "
-        "FROM `#__eaiou_papers` "
-        "WHERE status IN ('rejected', 'under_review') "
-        "GROUP BY domain "
-        "ORDER BY stall_count DESC"
-    )).mappings().all()
+    """Gap map: active RS tags grouped by tag + subtype, with stall counts."""
+    where = [
+        "t.tag_resolved = 0",
+        "t.visibility = 'public'",
+        "p.tombstone_state IS NULL",
+    ]
+    params: dict = {}
 
-    return {"domains": [dict(r) for r in rows]}
+    if tag:
+        where.append("t.tag = :tag")
+        params["tag"] = tag
+
+    where_sql = " AND ".join(where)
+
+    rows = db.execute(text(
+        f"SELECT t.tag, t.subtype, COUNT(*) AS count "
+        f"FROM `#__eaiou_paper_tags` t "
+        f"JOIN `#__eaiou_papers` p ON p.id = t.paper_id "
+        f"WHERE {where_sql} "
+        f"GROUP BY t.tag, t.subtype "
+        f"ORDER BY count DESC"
+    ), params).mappings().all()
+
+    return {"gaps": [dict(r) for r in rows]}
 
 
 # ── 6. GET /discover/trends — discover.trends (PUBLIC) ───────────────────────
@@ -279,13 +323,27 @@ async def discover_trends(
 
 @router.get("/discover/collaboration")
 async def discover_collaboration(
-    collab_type: Optional[str] = Query(None),
-    interest_level: Optional[str] = Query(None),
+    limit: int = Query(20, ge=1, le=100),
+    offset: int = Query(0, ge=0),
     db: Session = Depends(get_db),
 ):
-    # collab_open column does not exist in live schema — return empty gracefully
-    # with a note for future migration
-    return {
-        "papers": [],
-        "note": "Collaboration matching not yet configured. collab_open column pending schema migration.",
-    }
+    """Papers whose authors are seeking collaboration (rs:LookCollab tag)."""
+    rows = db.execute(text(
+        "SELECT t.id AS tag_id, t.paper_id, t.notes, t.created_at, "
+        "p.title AS paper_title, p.author_name, p.orcid "
+        "FROM `#__eaiou_paper_tags` t "
+        "JOIN `#__eaiou_papers` p ON p.id = t.paper_id "
+        "WHERE t.tag = 'rs:LookCollab' AND t.tag_resolved = 0 "
+        "AND t.visibility = 'public' AND p.tombstone_state IS NULL "
+        "ORDER BY t.created_at DESC "
+        "LIMIT :limit OFFSET :offset"
+    ), {"limit": limit, "offset": offset}).mappings().all()
+
+    total = db.execute(text(
+        "SELECT COUNT(*) FROM `#__eaiou_paper_tags` t "
+        "JOIN `#__eaiou_papers` p ON p.id = t.paper_id "
+        "WHERE t.tag = 'rs:LookCollab' AND t.tag_resolved = 0 "
+        "AND t.visibility = 'public' AND p.tombstone_state IS NULL"
+    )).scalar() or 0
+
+    return {"papers": [dict(r) for r in rows], "total": total}
