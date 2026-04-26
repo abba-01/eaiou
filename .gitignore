@@ -1,0 +1,46 @@
+# ── Environment ──────────────────────────────────────────────────────────────
+.env
+.venv/
+*.pyc
+__pycache__/
+.DS_Store
+*.egg-info/
+dist/
+build/
+
+# ── Runtime logs ─────────────────────────────────────────────────────────────
+logs/
+*.log
+
+# ── USO Transparency Tiers ───────────────────────────────────────────────────
+# Tier 3 (unedited logs) — local only until rendered to Tier 2 or Tier 1
+# Pattern: provenance/<repo>/sessions/ holds raw; rendered/ holds Tier 2
+provenance/sessions/
+provenance/raw/
+sessions/
+transcripts/unedited/
+*.session.json
+*.session.jsonl
+*.raw.md
+
+# ── Database ─────────────────────────────────────────────────────────────────
+# SQLite (dev/test only — production is MariaDB)
+*.db
+*.sqlite
+*.sqlite3
+
+# ── IDE / OS ─────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*~
+
+# ── Deployment bundles ──────────────────────────────────────────────────────
+# Zip archives + extracted snapshots are not source — keep them off the tree.
+*.zip
+eaiou_current_app/
+
+# ── Orchestrator runtime logs (named exceptions to *.log absent extension) ──
+scorch_log.txt
+mira_log.txt
+seal_log.txt
