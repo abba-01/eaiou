@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eaiou DS · 02 · Modules</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================ SHARED TOKENS */
+[data-theme="light"] {
+  --ink:#0e0d0b;--ink2:#3a3832;--ink3:#7a7670;--paper:#f7f4ef;--paper2:#ede9e1;--paper3:#e0dbd0;--surface:#ffffff;
+  --river:#1a4a6b;--river-l:#2d6e9e;--river-ll:#e8f1f7;--amber:#c47c0a;--amber-l:#fdf0d0;
+  --sage:#3a6b4a;--sage-l:#e8f2ec;--coral:#b84832;--coral-l:#faeae6;--violet:#4a3278;--violet-l:#ede8f7;
+  --orcid:#a6ce39;--accent:#8ab4d4;--nav-bg:#0e0d0b;--nav-text:rgba(255,255,255,0.55);--nav-active:#ffffff;
+}
+[data-theme="dark"] {
+  --ink:#f2efe8;--ink2:#c8c4bb;--ink3:#7a7670;--paper:#141210;--paper2:#1e1c1a;--paper3:#2e2b28;--surface:#1e1c1a;
+  --river:#4a8abf;--river-l:#6aaad8;--river-ll:#1a3550;--amber:#d4920e;--amber-l:#2a2010;
+  --sage:#4a8a5e;--sage-l:#1a2a1e;--coral:#d45a40;--coral-l:#2a1510;--violet:#7060b0;--violet-l:#1e1830;
+  --orcid:#a6ce39;--accent:#8ab4d4;--nav-bg:#0a0908;--nav-text:rgba(255,255,255,0.45);--nav-active:#ffffff;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Spectral',Georgia,serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.6;transition:background 0.25s,color 0.25s;}
+.atlas-bar{position:sticky;top:0;z-index:100;background:var(--paper2);border-bottom:0.5px solid var(--paper3);display:flex;align-items:center;gap:0;height:36px;overflow-x:auto;scrollbar-width:none;}
+.atlas-bar::-webkit-scrollbar{display:none;}
+.atlas-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);padding:0 14px;white-space:nowrap;border-right:0.5px solid var(--paper3);height:100%;display:flex;align-items:center;}
+.atlas-link{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);text-decoration:none;padding:0 14px;height:100%;display:flex;align-items:center;white-space:nowrap;border-right:0.5px solid var(--paper3);transition:color 0.15s,background 0.15s;}
+.atlas-link:hover{color:var(--ink);background:var(--paper3);}
+.atlas-link.current{color:var(--river-l);background:var(--river-ll);}
+.atlas-controls{margin-left:auto;display:flex;align-items:center;gap:0;height:100%;border-left:0.5px solid var(--paper3);}
+.atlas-btn{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);padding:0 14px;height:100%;display:flex;align-items:center;cursor:pointer;border:none;background:none;border-right:0.5px solid var(--paper3);transition:color 0.15s,background 0.15s;white-space:nowrap;}
+.atlas-btn:hover{color:var(--ink);background:var(--paper3);}
+.nav{background:var(--nav-bg);color:#fff;padding:0 32px;display:flex;align-items:center;height:52px;gap:32px;}
+.nav-brand{font-family:'Spectral',serif;font-size:22px;font-weight:300;letter-spacing:-0.02em;color:#fff;flex-shrink:0;text-decoration:none;}
+.nav-brand span{color:var(--accent);}
+.nav-links{display:flex;gap:24px;flex:1;}
+.nav-link{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--nav-text);text-decoration:none;cursor:pointer;transition:color 0.15s;text-transform:uppercase;}
+.nav-link:hover,.nav-link.active{color:var(--nav-active);}
+.nav-right{display:flex;gap:10px;align-items:center;}
+.nav-badge{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border:0.5px solid rgba(255,255,255,0.2);border-radius:3px;color:rgba(255,255,255,0.7);cursor:pointer;text-decoration:none;}
+.nav-badge.primary{background:var(--river-l);border-color:var(--river-l);color:#fff;}
+.section-divider{background:var(--paper2);border-top:0.5px solid var(--paper3);border-bottom:0.5px solid var(--paper3);padding:10px 32px;display:flex;align-items:center;gap:16px;}
+.divider-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);white-space:nowrap;}
+.divider-rule{flex:1;height:0.5px;background:var(--paper3);}
+.divider-anchor{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;color:var(--river-l);text-transform:uppercase;}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);padding:0 0 8px;border-bottom:0.5px solid var(--paper3);margin-bottom:20px;}
+.badge{display:inline-flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;padding:3px 7px;border-radius:2px;text-transform:uppercase;font-weight:500;white-space:nowrap;}
+.badge-transparency{background:var(--river-ll);color:var(--river);}
+.badge-ai{background:var(--violet-l);color:var(--violet);}
+.badge-unsci{background:var(--coral-l);color:var(--coral);}
+.badge-collab{background:var(--sage-l);color:var(--sage);}
+.badge-sealed{background:var(--paper3);color:var(--ink3);}
+.badge-tag{background:transparent;border:0.5px solid var(--paper3);color:var(--ink3);}
+.rs-tag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;border-radius:2px;letter-spacing:0.04em;display:inline-block;}
+.rs-collab{background:var(--sage-l);color:var(--sage);}
+.rs-stalled{background:var(--amber-l);color:var(--amber);}
+.rs-nottopic{background:var(--violet-l);color:var(--violet);}
+.orcid-badge{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#a6ce39;background:rgba(166,206,57,0.1);border:0.5px solid rgba(166,206,57,0.3);padding:3px 8px;border-radius:2px;}
+.orcid-dot{width:14px;height:14px;border-radius:50%;background:#a6ce39;display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:700;flex-shrink:0;}
+.due-pill{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;border-radius:2px;white-space:nowrap;}
+.due-ok{background:var(--sage-l);color:var(--sage);}
+.due-warn{background:var(--amber-l);color:var(--amber);}
+.due-late{background:var(--coral-l);color:var(--coral);}
+.btn{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;padding:9px 20px;border-radius:3px;cursor:pointer;border:0.5px solid;transition:all 0.15s;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+.btn-primary{background:var(--river-l);border-color:var(--river-l);color:#fff;}
+.btn-primary:hover{background:var(--river);border-color:var(--river);}
+.btn-secondary{background:transparent;border-color:var(--paper3);color:var(--ink2);}
+.btn-sm{font-size:10px;padding:5px 12px;}
+.module-panel{background:var(--surface);border:0.5px solid var(--paper3);border-radius:4px;overflow:hidden;}
+.module-header{padding:12px 16px;border-bottom:0.5px solid var(--paper3);display:flex;align-items:center;justify-content:space-between;background:var(--paper);}
+.module-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2);font-weight:500;}
+.module-body{padding:16px;}
+.module-extra .module-body{display:none;}
+.module-extra.open .module-body{display:block;}
+.module-toggle{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink3);cursor:pointer;background:none;border:none;padding:2px 4px;transition:color 0.15s;}
+.module-toggle:hover{color:var(--river);}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+.kpi-card{padding:14px 16px;background:var(--paper);border-radius:3px;border:0.5px solid var(--paper3);}
+.kpi-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px;}
+.kpi-value{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:500;color:var(--ink);line-height:1;}
+.kpi-trend{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sage);margin-top:2px;}
+.queue-item{display:grid;grid-template-columns:1fr auto;gap:8px;padding:12px 0;border-bottom:0.5px solid var(--paper3);align-items:start;}
+.queue-item:last-child{border-bottom:none;}
+.queue-item-title{font-family:'Spectral',serif;font-size:14px;line-height:1.4;color:var(--ink);margin-bottom:4px;}
+.queue-item-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.05em;}
+.gap-map{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
+.gap-map-cell{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;background:var(--paper2);border-radius:3px;cursor:pointer;border:0.5px solid var(--paper3);transition:all 0.15s;}
+.gap-map-cell:hover{border-color:var(--coral);}
+.gap-bar{width:28px;border-radius:2px 2px 0 0;background:var(--coral);opacity:0.7;}
+.gap-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3);text-align:center;line-height:1.3;}
+.ai-heatmap{display:flex;height:20px;border-radius:3px;overflow:hidden;}
+.ai-heatmap-seg{display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.9);letter-spacing:0.05em;}
+.ai-seg-claude{background:var(--river-l);}
+.ai-seg-gpt{background:var(--sage);}
+.ai-seg-gemini{background:var(--amber);}
+.ai-seg-none{background:var(--paper3);color:var(--ink3);}
+.page-wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+.pad{padding:24px 32px;}
+.pad-sm{padding:16px;}
+.mb-16{margin-bottom:16px;}
+.mb-24{margin-bottom:24px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.ds-footer{background:var(--paper2);border-top:0.5px solid var(--paper3);padding:20px 32px;display:flex;align-items:center;justify-content:space-between;margin-top:48px;}
+.ds-footer-brand{font-family:'Spectral',serif;font-size:18px;font-weight:300;color:var(--ink);}
+.ds-footer-brand span{color:var(--river-l);}
+.ds-footer-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.06em;text-align:right;line-height:1.8;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.animate-in{animation:fadeIn 0.4s ease both;}
+/* ============================================================ END SHARED */
+
+/* Module catalog layout */
+.module-catalog { display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+.module-catalog-wide { display:grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px; }
+
+/* Sparklines inline SVG */
+.sparkline-wrap { margin-top: 8px; }
+
+/* Collaboration item */
+.collab-item { padding: 10px 0; border-bottom: 0.5px solid var(--paper3); }
+.collab-item:last-child { border-bottom: none; }
+.collab-title { font-family: 'Spectral', serif; font-size: 13px; color: var(--ink); margin-bottom: 4px; }
+.collab-meta { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink3); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 5px; }
+
+/* Trend item */
+.trend-item { padding: 9px 0; border-bottom: 0.5px solid var(--paper3); display: flex; justify-content: space-between; align-items: center; }
+.trend-item:last-child { border-bottom: none; }
+.trend-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink2); }
+.trend-score { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--river); font-weight: 500; }
+
+/* IntelliD graph */
+.intellid-entry { padding: 8px 0; border-bottom: 0.5px solid var(--paper3); }
+.intellid-entry:last-child { border-bottom: none; }
+.intellid-id { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--river-l); margin-bottom: 4px; }
+.intellid-bar-wrap { display: flex; height: 12px; border-radius: 2px; overflow: hidden; gap: 1px; }
+.intellid-seg { border-radius: 1px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 7px; color: rgba(255,255,255,0.8); }
+
+/* Scroll area */
+.scroll-area { max-height: 220px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--paper3) transparent; }
+</style>
+</head>
+<body class="layout-fixed" data-theme="light">
+
+<!-- ATLAS NAV -->
+<div class="atlas-bar">
+  <span class="atlas-label">eaiou ds</span>
+  <a class="atlas-link" href="eaiou_ds_01_typography.html">01 · Tokens</a>
+  <a class="atlas-link current" href="eaiou_ds_02_modules.html">02 · Modules</a>
+  <a class="atlas-link" href="eaiou_ds_03_menus.html">03 · Menus</a>
+  <a class="atlas-link" href="eaiou_ds_04_article.html">04 · Article</a>
+  <a class="atlas-link" href="eaiou_ds_05_authoring.html">05 · Authoring</a>
+  <a class="atlas-link" href="eaiou_ds_06_admin.html">06 · Admin</a>
+  <div class="atlas-controls">
+    <button class="atlas-btn" onclick="toggleLayout()" id="layout-btn">⇔ Wide</button>
+    <button class="atlas-btn" onclick="toggleTheme()" id="theme-btn">◐ Dark</button>
+  </div>
+</div>
+
+<nav class="nav animate-in">
+  <a class="nav-brand" href="#">e<span>a</span>iou</a>
+  <div class="nav-links">
+    <a class="nav-link active" href="#">Discover</a>
+    <a class="nav-link" href="#">Submit</a>
+    <a class="nav-link" href="#">Review</a>
+    <a class="nav-link" href="#">Ideas</a>
+    <a class="nav-link" href="#">Gaps</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-badge" href="#">Log in</a>
+    <a class="nav-badge primary" href="#">Submit Paper</a>
+  </div>
+</nav>
+
+<!-- PERMANENT MODULES -->
+<div class="section-divider animate-in" id="permanent">
+  <div class="divider-title">01 · Permanent Sidebar Modules (always visible)</div>
+  <div class="divider-rule"></div>
+</div>
+
+<div class="pad">
+  <div class="module-catalog">
+
+    <!-- mod_reviewer_queue -->
+    <div>
+      <div class="section-label">mod_reviewer_queue</div>
+      <div class="module-panel">
+        <div class="module-header">
+          <div class="module-title">Reviewer Queue</div>
+          <span class="due-pill due-warn">3 active</span>
+        </div>
+        <div class="module-body">
+          <div class="queue-item">
+            <div>
+              <div class="queue-item-title">Hubble Tension as Measurement Artifact</div>
+              <div class="queue-item-meta">COSMOLOGY · E. MARTIN · Q 8.74</div>
+            </div>
+            <span class="due-pill due-warn">Due +3d</span>
+          </div>
+          <div class="queue-item">
+            <div>
+              <div class="queue-item-title">Partition of Cosmological Tensions</div>
+              <div class="queue-item-meta">PHYSICS · ANON · Q 7.21</div>
+            </div>
+            <span class="due-pill due-ok">Due +14d</span>
+          </div>
+          <div class="queue-item">
+            <div>
+              <div class="queue-item-title">Sterile Neutrino Mass Bounds from BBN</div>
+              <div class="queue-item-meta">PARTICLE · J. WELLS · Q 6.80</div>
+            </div>
+            <span class="due-pill due-late">−2d</span>
+          </div>
+          <div style="margin-top:12px">
+            <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center">Open Review Console</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- mod_latest_papers -->
+    <div>
+      <div class="section-label">mod_latest_papers (q_signal sorted — no dates)</div>
+      <div class="module-panel">
+        <div class="module-header">
+          <div class="module-title">Top Papers by Q</div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em">q_signal ↓</span>
+        </div>
+        <div class="module-body">
+          <div class="queue-item">
+            <div>
+              <div class="queue-item-title">Hubble Tension as Measurement Artifact</div>
+              <div class="queue-item-meta">COSMOLOGY</div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--river)">9.24</div>
+          </div>
+          <div class="queue-item">
+            <div>
+              <div class="queue-item-title">Unitary Hubble Assumption: Framework</div>
+              <div class="queue-item-meta">PHYSICS</div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--river)">8.74</div>
+          </div>
+          <div class="queue-item">
+            <div>
+              <div class="queue-item-title">Multi-Resolution Cosmology: Methods</div>
+              <div class="queue-item-meta">ASTROPHYSICS</div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--river)">7.91</div>
+          </div>
+          <div class="queue-item">
+            <div>
+              <div class="queue-item-title">EBIOS Risk Framework for AI Systems</div>
+              <div class="queue-item-meta">COMPUTING</div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--river)">7.43</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- mod_open_collaborate -->
+    <div>
+      <div class="section-label">mod_open_collaborate</div>
+      <div class="module-panel">
+        <div class="module-header">
+          <div class="module-title">Open to Collaborate</div>
+          <span class="badge" style="background:var(--sage-l);color:var(--sage)">⊕ 8 open</span>
+        </div>
+        <div class="module-body">
+          <div class="collab-item">
+            <div class="collab-title">Seeking: data analyst for CMB residuals study</div>
+            <div class="collab-meta">Cosmology · E. Martin · ORCID verified</div>
+            <span class="rs-tag rs-collab">rs:LookCollab:DataAnalyst</span>
+          </div>
+          <div class="collab-item">
+            <div class="collab-title">Cross-domain: statistics + particle physics review</div>
+            <div class="collab-meta">Multi-domain · Anon · Q 7.21</div>
+            <span class="rs-tag rs-stalled">rs:Stalled:Methods</span>
+            <span class="rs-tag" style="background:var(--river-ll);color:var(--river)">rs:CrossDomain</span>
+          </div>
+          <div class="collab-item">
+            <div class="collab-title">Looking for co-author: ORCID-verified physicist</div>
+            <div class="collab-meta">Astrophysics · Open access · 2 interested</div>
+            <span class="rs-tag rs-collab">rs:LookCollab:CoAuthor</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- EDITOR-SPECIFIC -->
+<div class="section-divider" id="editor">
+  <div class="divider-title">02 · Editor Dashboard Module (KPI + sparklines)</div>
+  <div class="divider-rule"></div>
+</div>
+
+<div class="pad">
+  <div class="module-catalog-wide">
+
+    <div>
+      <div class="section-label">mod_editor_dashboard — compact KPI panel</div>
+      <div class="module-panel">
+        <div class="module-header">
+          <div class="module-title">Editorial Dashboard</div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3)">LIVE</span>
+        </div>
+        <div class="module-body">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">Under Review</div>
+              <div class="kpi-value">47</div>
+              <div class="kpi-trend">↑ +3 this cycle</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Overdue</div>
+              <div class="kpi-value" style="color:var(--coral)">12</div>
+              <div class="kpi-trend" style="color:var(--coral)">↑ +2 overdue</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Median TTFD</div>
+              <div class="kpi-value">18d</div>
+              <div class="kpi-trend">↓ −2d vs last</div>
+            </div>
+          </div>
+
+          <!-- Inline sparkline (SVG) -->
+          <div style="margin-bottom:12px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Submissions — Last 8 Cycles</div>
+            <svg width="100%" height="40" viewBox="0 0 240 40" preserveAspectRatio="none">
+              <polyline points="0,35 30,28 60,32 90,20 120,24 150,16 180,18 210,12 240,8" fill="none" stroke="var(--river-l)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="0,35 30,28 60,32 90,20 120,24 150,16 180,18 210,12 240,8" fill="none" stroke="var(--river-ll)" stroke-width="6" opacity="0.5"/>
+              <!-- dots -->
+              <circle cx="240" cy="8" r="3" fill="var(--river-l)"/>
+            </svg>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);font-style:italic;margin-top:2px">r = 0.91, p &lt; 0.05 — submission trend positively correlated with Q signal improvement</div>
+          </div>
+
+          <!-- Status breakdown -->
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">State Breakdown</div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <div style="display:flex;gap:8px;align-items:center">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);width:80px;text-transform:uppercase">Submitted</div>
+                <div style="flex:1;height:6px;background:var(--paper3);border-radius:3px;overflow:hidden"><div style="height:100%;width:45%;background:var(--amber)"></div></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);width:24px;text-align:right">21</div>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);width:80px;text-transform:uppercase">Reviewing</div>
+                <div style="flex:1;height:6px;background:var(--paper3);border-radius:3px;overflow:hidden"><div style="height:100%;width:35%;background:var(--river-l)"></div></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);width:24px;text-align:right">17</div>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);width:80px;text-transform:uppercase">Revision</div>
+                <div style="flex:1;height:6px;background:var(--paper3);border-radius:3px;overflow:hidden"><div style="height:100%;width:18%;background:var(--violet)"></div></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);width:24px;text-align:right">9</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- mod_editor_dashboard full KPI -->
+    <div>
+      <div class="section-label">mod_editor_dashboard — full 4-tab view</div>
+      <div class="module-panel">
+        <div class="module-header">
+          <div class="module-title">Editorial KPIs</div>
+        </div>
+        <div style="display:flex;border-bottom:0.5px solid var(--paper3)">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:8px 14px;color:var(--river);border-bottom:2px solid var(--river-l);margin-bottom:-0.5px;cursor:pointer;text-transform:uppercase;letter-spacing:0.06em">Overview</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:8px 14px;color:var(--ink3);cursor:pointer;text-transform:uppercase;letter-spacing:0.06em">Overdue</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:8px 14px;color:var(--ink3);cursor:pointer;text-transform:uppercase;letter-spacing:0.06em">Reviewers</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:8px 14px;color:var(--ink3);cursor:pointer;text-transform:uppercase;letter-spacing:0.06em">Flags</div>
+        </div>
+        <div class="module-body">
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px">
+            <div class="kpi-card">
+              <div class="kpi-label">Acceptance Rate</div>
+              <div class="kpi-value">34<span style="font-size:14px;font-weight:400">%</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">TTFD P90</div>
+              <div class="kpi-value">31<span style="font-size:14px;font-weight:400">d</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Avg Reviews/Paper</div>
+              <div class="kpi-value">2.4</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Active Reviewers</div>
+              <div class="kpi-value">18</div>
+              <div class="kpi-trend">↑ +3 this cycle</div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);font-style:italic">r = 0.94 (acceptance rate × Q signal) — p &lt; 0.001 — may not be spurious</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DATA VIZ MODULES -->
+<div class="section-divider" id="dataviz">
+  <div class="divider-title">03 · Data Visualization Modules</div>
+  <div class="divider-rule"></div>
+</div>
+
+<div class="pad">
+  <div class="module-catalog">
+
+    <!-- mod_gap_map -->
+    <div>
+      <div class="section-label">mod_gap_map — domain stall density</div>
+      <div class="module-panel">
+        <div class="module-header">
+          <div class="module-title">Gap Map</div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--coral);text-transform:uppercase;letter-spacing:0.06em">stall density →</span>
+        </div>
+        <div class="module-body">
+          <div class="gap-map" style="margin-bottom:12px">
+            <div class="gap-map-cell">
+              <div class="gap-bar" style="height:52px"></div>
+              <div class="gap-label">Cosmo-<br>logy</div>
+            </div>
+            <div class="gap-map-cell">
+              <div class="gap-bar" style="height:34px;background:var(--amber)"></div>
+              <div class="gap-label">Com-<br>puting</div>
+            </div>
+            <div class="gap-map-cell">
+              <div class="gap-bar" style="height:44px;background:var(--violet)"></div>
+              <div class="gap-label">Math</div>
+            </div>
+            <div class="gap-map-cell">
+              <div class="gap-bar" style="height:28px;background:var(--sage)"></div>
+              <div class="gap-label">Bio-<br>physics</div>
+            </div>
+            <div class="gap-map-cell">
+              <div class="gap-bar" style="height:38px;background:var(--river-l)"></div>
+              <div class="gap-label">Stats</div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);font-style:italic">5 domains · stall density correlated with underfunded gap age (r = 0.88)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- mod_ai_usage_heatmap -->
+    <div>
+      <div class="section-label">mod_ai_usage_heatmap — vendor distribution</div>
+      <div class="module-panel">
+        <div class="module-header">
+          <div class="module-title">AI Usage Heatmap</div>
+          <span class="badge" style="background:var(--violet-l);color:var(--violet)">⬡ 73% AI-logged</span>
+        </div>
+        <div class="module-body">
+          <!-- Segmented bar -->
+          <div style="margin-bottom:12px">
+            <div class="ai-heatmap" style="height:24px;margin-bottom:6px">
+              <div class="ai-heatmap-seg ai-seg-claude" style="width:42%">Claude</div>
+              <div class="ai-heatmap-seg ai-seg-gpt" style="width:28%">GPT-4</div>
+              <div class="ai-heatmap-seg ai-seg-gemini" style="width:12%">Gem.</div>
+              <div class="ai-heatmap-seg ai-seg-none" style="width:18%">None</div>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              <div style="display:flex;gap:4px;align-items:center"><div style="width:8px;height:8px;background:var(--river-l);border-radius:1px"></div><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3)">Claude 42%</span></div>
+              <div style="display:flex;gap:4px;align-items:center"><div style="width:8px;height:8px;background:var(--sage);border-radius:1px"></div><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3)">GPT-4 28%</span></div>
+              <div style="display:flex;gap:4px;align-items:center"><div style="width:8px;height:8px;background:var(--amber);border-radius:1px"></div><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3)">Gemini 12%</span></div>
+              <div style="display:flex;gap:4px;align-items:center"><div style="width:8px;height:8px;background:var(--paper3);border-radius:1px"></div><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3)">None 18%</span></div>
+            </div>
+          </div>
+          <!-- Breakdown by mode -->
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;gap:8px;align-items:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);text-transform:uppercase;width:64px">Generated</span>
+              <div style="flex:1;height:5px;background:var(--paper3);border-radius:2px;overflow:hidden"><div style="height:100%;width:28%;background:var(--violet)"></div></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--violet)">28%</span>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);text-transform:uppercase;width:64px">Assisted</span>
+              <div style="flex:1;height:5px;background:var(--paper3);border-radius:2px;overflow:hidden"><div style="height:100%;width:45%;background:var(--river-l)"></div></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--river)">45%</span>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);text-transform:uppercase;width:64px">None</span>
+              <div style="flex:1;height:5px;background:var(--paper3);border-radius:2px;overflow:hidden"><div style="height:100%;width:27%;background:var(--sage)"></div></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--sage)">27%</span>
+            </div>
+          </div>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);font-style:italic">AI usage positively correlated with Q signal (r = 0.74) — disclosure is not penalty</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- mod_trending_ideas -->
+    <div>
+      <div class="section-label">mod_trending_ideas</div>
+      <div class="module-panel">
+        <div class="module-header">
+          <div class="module-title">Trending Ideas</div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em">entropy ↓</span>
+        </div>
+        <div class="module-body">
+          <div class="trend-item">
+            <span class="trend-label">Spatial encoding bias in CMB</span>
+            <span class="trend-score">E 9.4</span>
+          </div>
+          <div class="trend-item">
+            <span class="trend-label">Null results in dark matter search</span>
+            <span class="trend-score">E 8.9</span>
+          </div>
+          <div class="trend-item">
+            <span class="trend-label">AI attribution in multi-author papers</span>
+            <span class="trend-score">E 8.7</span>
+          </div>
+          <div class="trend-item">
+            <span class="trend-label">Statistical power in small n astro studies</span>
+            <span class="trend-score">E 8.2</span>
+          </div>
+          <div class="trend-item">
+            <span class="trend-label">Cross-domain: ML + particle detection</span>
+            <span class="trend-score">E 7.8</span>
+          </div>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);font-style:italic">E = entropy novelty score — not peer-reviewed</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WIDE-MODE ONLY MODULES -->
+<div class="section-divider" id="wide-only">
+  <div class="divider-title">04 · Wide-Mode Accordion Modules (hidden in fixed layout)</div>
+  <div class="divider-rule"></div>
+  <div class="divider-anchor">module-extra class</div>
+</div>
+
+<div class="pad">
+  <div class="module-catalog-wide">
+
+    <!-- mod_intellid_graph -->
+    <div>
+      <div class="section-label">mod_intellid_graph — contributor attribution</div>
+      <div class="module-panel module-extra" id="intellid-mod">
+        <div class="module-header" onclick="toggleModule(this)" style="cursor:pointer">
+          <div class="module-title">IntelliD Contributions</div>
+          <button class="module-toggle">▸</button>
+        </div>
+        <div class="module-body">
+          <div class="intellid-entry">
+            <div class="intellid-id">HUMAN · 9f3c2a7b · E. Martin</div>
+            <div class="intellid-bar-wrap">
+              <div class="intellid-seg" style="width:65%;background:var(--river)">authored 0.65</div>
+              <div class="intellid-seg" style="width:25%;background:var(--sage)">edited 0.25</div>
+              <div class="intellid-seg" style="width:10%;background:var(--paper3);color:var(--ink3)">rev 0.10</div>
+            </div>
+          </div>
+          <div class="intellid-entry">
+            <div class="intellid-id">AI · Claude · claude-opus-4-7</div>
+            <div class="intellid-bar-wrap">
+              <div class="intellid-seg" style="width:30%;background:var(--violet)">assisted 0.30</div>
+              <div class="intellid-seg" style="width:20%;background:var(--violet-l);color:var(--violet)">edited</div>
+              <div style="flex:1"></div>
+            </div>
+          </div>
+          <div class="intellid-entry">
+            <div class="intellid-id">AI · GPT-4 · claude-code</div>
+            <div class="intellid-bar-wrap">
+              <div class="intellid-seg" style="width:15%;background:var(--amber)">asst 0.15</div>
+              <div style="flex:1"></div>
+            </div>
+          </div>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);font-style:italic">IntelliD ≠ CosmoID — tracks intelligence instances, not artifacts</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- mod_appreciated_scale -->
+    <div>
+      <div class="section-label">mod_appreciated_scale — gap opportunity display</div>
+      <div class="module-panel module-extra" id="appreciated-mod">
+        <div class="module-header" onclick="toggleModule(this)" style="cursor:pointer">
+          <div class="module-title">Appreciated Opportunities</div>
+          <button class="module-toggle">▸</button>
+        </div>
+        <div class="module-body">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="background:var(--sage-l);border:0.5px solid var(--sage);border-left:3px solid var(--sage);border-radius:0 3px 3px 0;padding:10px 12px">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sage);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px">×1.80 — 15 yr unresolved</div>
+              <div style="font-family:'Spectral',serif;font-size:13px;color:var(--ink)">Hubble constant tension origins</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--sage);margin-top:4px">Appreciated opportunity · not obsolescence</div>
+            </div>
+            <div style="background:var(--river-ll);border:0.5px solid var(--river);border-left:3px solid var(--river-l);border-radius:0 3px 3px 0;padding:10px 12px">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--river);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px">×1.47 — 7 yr unresolved</div>
+              <div style="font-family:'Spectral',serif;font-size:13px;color:var(--ink)">AI contribution attribution in peer review</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--river);margin-top:4px">Growing urgency · gitgap:2017-astro-C4</div>
+            </div>
+            <div style="background:var(--amber-l);border:0.5px solid var(--amber);border-left:3px solid var(--amber);border-radius:0 3px 3px 0;padding:10px 12px">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--amber);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px">×1.20 — 3 yr unresolved</div>
+              <div style="font-family:'Spectral',serif;font-size:13px;color:var(--ink)">Sterile neutrino mass constraints from BBN</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--amber);margin-top:4px">Early appreciation · gitgap:2022-particle-B7</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:20px;background:var(--river-ll);border:0.5px solid var(--river);border-radius:4px;padding:16px 20px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--river);margin-bottom:8px">Wide Mode Behavior</div>
+    <div style="font-family:'Spectral',serif;font-size:14px;color:var(--ink2);line-height:1.6">When the user switches to <strong>wide layout</strong>, the right sidebar expands and reveals additional module panels marked <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--paper3);padding:1px 5px;border-radius:2px">.module-extra</code>. These panels are collapsed by default (accordion) — click the <strong>▸</strong> header toggle to expand them. Preference persisted in <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--paper3);padding:1px 5px;border-radius:2px">localStorage</code>.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="ds-footer">
+  <div class="ds-footer-brand">e<span>a</span>iou design system</div>
+  <div class="ds-footer-meta">02 · Modules · v1.0<br>ORCID 0009-0006-5944-1742 · eaiou.org</div>
+</div>
+
+<script>
+const savedLayout = localStorage.getItem('eaiou_layout') || 'layout-fixed';
+document.body.classList.add(savedLayout);
+document.getElementById('layout-btn').textContent = savedLayout === 'layout-wide' ? '⇔ Fixed' : '⇔ Wide';
+const savedTheme = localStorage.getItem('eaiou_theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? '◑ Light' : '◐ Dark';
+
+function toggleLayout() {
+  const isWide = document.body.classList.contains('layout-wide');
+  document.body.classList.remove('layout-fixed','layout-wide');
+  const next = isWide ? 'layout-fixed' : 'layout-wide';
+  document.body.classList.add(next);
+  localStorage.setItem('eaiou_layout', next);
+  document.getElementById('layout-btn').textContent = next === 'layout-wide' ? '⇔ Fixed' : '⇔ Wide';
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('eaiou_theme', next);
+  document.getElementById('theme-btn').textContent = next === 'dark' ? '◑ Light' : '◐ Dark';
+}
+function toggleModule(header) {
+  const panel = header.closest('.module-extra');
+  panel.classList.toggle('open');
+  header.querySelector('.module-toggle').textContent = panel.classList.contains('open') ? '▾' : '▸';
+}
+</script>
+</body>
+</html>

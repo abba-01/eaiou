@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eaiou DS · 04 · Article &amp; Paper Views</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   EAIOU DESIGN SYSTEM — SHARED TOKEN BLOCK v1.0
+   ============================================================ */
+[data-theme="light"] {
+  --ink:#0e0d0b; --ink2:#3a3832; --ink3:#7a7670;
+  --paper:#f7f4ef; --paper2:#ede9e1; --paper3:#e0dbd0; --surface:#ffffff;
+  --river:#1a4a6b; --river-l:#2d6e9e; --river-ll:#e8f1f7;
+  --amber:#c47c0a; --amber-l:#fdf0d0;
+  --sage:#3a6b4a; --sage-l:#e8f2ec;
+  --coral:#b84832; --coral-l:#faeae6;
+  --violet:#4a3278; --violet-l:#ede8f7;
+  --orcid:#a6ce39; --accent:#8ab4d4;
+  --nav-bg:#0e0d0b; --nav-text:rgba(255,255,255,0.55); --nav-active:#ffffff;
+}
+[data-theme="dark"] {
+  --ink:#f2efe8; --ink2:#c8c4bb; --ink3:#7a7670;
+  --paper:#141210; --paper2:#1e1c1a; --paper3:#2e2b28; --surface:#1e1c1a;
+  --river:#4a8abf; --river-l:#6aaad8; --river-ll:#1a3550;
+  --amber:#d4920e; --amber-l:#2a2010;
+  --sage:#4a8a5e; --sage-l:#1a2a1e;
+  --coral:#d45a40; --coral-l:#2a1510;
+  --violet:#7060b0; --violet-l:#1e1830;
+  --orcid:#a6ce39; --accent:#8ab4d4;
+  --nav-bg:#0a0908; --nav-text:rgba(255,255,255,0.45); --nav-active:#ffffff;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Spectral',Georgia,serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.6;transition:background 0.25s,color 0.25s;}
+.atlas-bar{position:sticky;top:0;z-index:100;background:var(--paper2);border-bottom:0.5px solid var(--paper3);display:flex;align-items:center;height:36px;overflow-x:auto;scrollbar-width:none;}
+.atlas-bar::-webkit-scrollbar{display:none;}
+.atlas-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);padding:0 14px;white-space:nowrap;border-right:0.5px solid var(--paper3);height:100%;display:flex;align-items:center;}
+.atlas-link{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);text-decoration:none;padding:0 14px;height:100%;display:flex;align-items:center;white-space:nowrap;border-right:0.5px solid var(--paper3);transition:color 0.15s,background 0.15s;}
+.atlas-link:hover{color:var(--ink);background:var(--paper3);}
+.atlas-link.current{color:var(--river-l);background:var(--river-ll);}
+.atlas-controls{margin-left:auto;display:flex;align-items:center;height:100%;border-left:0.5px solid var(--paper3);}
+.atlas-btn{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);padding:0 14px;height:100%;display:flex;align-items:center;cursor:pointer;border:none;background:none;border-right:0.5px solid var(--paper3);transition:color 0.15s,background 0.15s;white-space:nowrap;}
+.atlas-btn:hover{color:var(--ink);background:var(--paper3);}
+.nav{background:var(--nav-bg);color:#fff;padding:0 32px;display:flex;align-items:center;height:52px;gap:32px;}
+.nav-brand{font-family:'Spectral',serif;font-size:22px;font-weight:300;letter-spacing:-0.02em;color:#fff;flex-shrink:0;text-decoration:none;}
+.nav-brand span{color:var(--accent);}
+.nav-links{display:flex;gap:24px;flex:1;}
+.nav-link{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--nav-text);text-decoration:none;cursor:pointer;transition:color 0.15s;text-transform:uppercase;}
+.nav-link:hover,.nav-link.active{color:var(--nav-active);}
+.nav-right{display:flex;gap:10px;align-items:center;}
+.nav-badge{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border:0.5px solid rgba(255,255,255,0.2);border-radius:3px;color:rgba(255,255,255,0.7);cursor:pointer;text-decoration:none;}
+.nav-badge.primary{background:var(--river-l);border-color:var(--river-l);color:#fff;}
+.section-divider{background:var(--paper2);border-top:0.5px solid var(--paper3);border-bottom:0.5px solid var(--paper3);padding:10px 32px;display:flex;align-items:center;gap:16px;}
+.divider-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);white-space:nowrap;}
+.divider-rule{flex:1;height:0.5px;background:var(--paper3);}
+.divider-anchor{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;color:var(--river-l);text-transform:uppercase;}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);padding:0 0 8px;border-bottom:0.5px solid var(--paper3);margin-bottom:20px;}
+.btn{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;padding:9px 20px;border-radius:3px;cursor:pointer;border:0.5px solid;transition:all 0.15s;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+.btn-primary{background:var(--river-l);border-color:var(--river-l);color:#fff;}
+.btn-primary:hover{background:var(--river);border-color:var(--river);}
+.btn-secondary{background:transparent;border-color:var(--paper3);color:var(--ink2);}
+.btn-secondary:hover{border-color:var(--ink3);color:var(--ink);}
+.btn-danger{background:transparent;border-color:var(--coral);color:var(--coral);}
+.btn-ghost{background:transparent;border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.8);}
+.btn-sm{font-size:10px;padding:5px 12px;}
+.badge{display:inline-flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;padding:3px 7px;border-radius:2px;text-transform:uppercase;font-weight:500;white-space:nowrap;}
+.badge-transparency{background:var(--river-ll);color:var(--river);}
+.badge-ai{background:var(--violet-l);color:var(--violet);}
+.badge-unsci{background:var(--coral-l);color:var(--coral);}
+.badge-collab{background:var(--sage-l);color:var(--sage);}
+.badge-sealed{background:var(--paper3);color:var(--ink3);}
+.badge-tag{background:transparent;border:0.5px solid var(--paper3);color:var(--ink3);}
+.badge-amber{background:var(--amber-l);color:var(--amber);}
+.rs-tag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;border-radius:2px;letter-spacing:0.04em;display:inline-block;}
+.rs-collab{background:var(--sage-l);color:var(--sage);}
+.rs-stalled{background:var(--amber-l);color:var(--amber);}
+.rs-nottopic{background:var(--violet-l);color:var(--violet);}
+.orcid-badge{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#a6ce39;background:rgba(166,206,57,0.1);border:0.5px solid rgba(166,206,57,0.3);padding:3px 8px;border-radius:2px;}
+.orcid-dot{width:14px;height:14px;border-radius:50%;background:#a6ce39;display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:700;flex-shrink:0;}
+.due-pill{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;border-radius:2px;white-space:nowrap;}
+.due-ok{background:var(--sage-l);color:var(--sage);}
+.due-warn{background:var(--amber-l);color:var(--amber);}
+.due-late{background:var(--coral-l);color:var(--coral);}
+.qsig{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;padding:4px 10px 4px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:12px;}
+.qsig-bar{height:4px;border-radius:2px;background:var(--river-l);}
+.qsig-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+.qsig-score{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--river);}
+.qsig-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;}
+.qsig-annotation{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);letter-spacing:0.04em;font-style:italic;}
+.workflow{display:flex;align-items:center;margin:12px 0;}
+.wf-state{display:flex;flex-direction:column;align-items:center;flex:1;gap:6px;}
+.wf-dot{width:10px;height:10px;border-radius:50%;background:var(--paper3);border:0.5px solid var(--ink3);}
+.wf-dot.active{background:var(--river-l);border-color:var(--river-l);}
+.wf-dot.done{background:var(--sage);border-color:var(--sage);}
+.wf-line{flex:1;height:0.5px;background:var(--paper3);margin:0 -1px;margin-top:-23px;}
+.wf-line.done{background:var(--sage);}
+.wf-name{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);text-align:center;line-height:1.3;}
+.wf-name.active{color:var(--river);}
+.wf-name.done{color:var(--sage);}
+.module-panel{background:var(--surface);border:0.5px solid var(--paper3);border-radius:4px;overflow:hidden;}
+.module-header{padding:12px 16px;border-bottom:0.5px solid var(--paper3);display:flex;align-items:center;justify-content:space-between;background:var(--paper);}
+.module-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink2);font-weight:500;}
+.module-body{padding:16px;}
+.paper-card{background:var(--surface);border:0.5px solid var(--paper3);border-radius:4px;padding:20px 22px;transition:border-color 0.15s;cursor:pointer;}
+.paper-card:hover{border-color:var(--river-l);}
+.paper-card-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.06em;margin-bottom:10px;text-transform:uppercase;}
+.paper-card-title{font-family:'Spectral',serif;font-size:17px;font-weight:400;line-height:1.35;color:var(--ink);margin-bottom:8px;}
+.paper-card-abstract{font-size:13px;line-height:1.65;color:var(--ink2);margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.paper-card-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.paper-card-tags{display:flex;gap:4px;flex-wrap:wrap;}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+.kpi-card{padding:14px 16px;background:var(--paper);border-radius:3px;border:0.5px solid var(--paper3);}
+.kpi-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px;}
+.kpi-value{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:500;color:var(--ink);line-height:1;}
+.kpi-trend{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sage);margin-top:2px;}
+.data-table{width:100%;border-collapse:collapse;font-size:13px;}
+.data-table th{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);padding:10px 12px;border-bottom:0.5px solid var(--paper3);text-align:left;background:var(--paper);}
+.data-table td{padding:10px 12px;border-bottom:0.5px solid var(--paper3);color:var(--ink2);font-family:'Spectral',serif;vertical-align:middle;}
+.data-table tr:hover td{background:var(--paper);}
+.data-table .mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink3);}
+.transp-block{border:0.5px solid var(--river);border-radius:4px;overflow:hidden;margin:12px 0;}
+.transp-header{background:var(--river);color:#fff;padding:8px 14px;display:flex;align-items:center;gap:10px;}
+.transp-header-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;flex:1;}
+.transp-body{padding:14px 16px;background:var(--river-ll);}
+.transp-row{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 0;color:var(--ink2);}
+.transp-row-label{color:var(--ink3);font-style:italic;}
+.hash-chain{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.05em;line-height:2;}
+.hash-entry{display:flex;gap:12px;align-items:center;padding:4px 0;border-bottom:0.5px solid var(--paper3);}
+.hash-id{color:var(--river-l);width:70px;flex-shrink:0;font-size:9px;text-transform:uppercase;}
+.hash-val{flex:1;color:var(--ink3);font-size:9px;letter-spacing:0.02em;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.hash-status{color:var(--sage);font-size:9px;white-space:nowrap;}
+.tab-bar{display:flex;border-bottom:0.5px solid var(--paper3);margin-bottom:20px;}
+.tab{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;padding:10px 16px;color:var(--ink3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all 0.15s;}
+.tab:hover{color:var(--ink);}
+.tab.active{color:var(--river);border-bottom-color:var(--river-l);}
+.search-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
+.filter-chip{font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 10px;border:0.5px solid var(--paper3);border-radius:2px;color:var(--ink3);background:var(--surface);cursor:pointer;letter-spacing:0.05em;text-transform:uppercase;transition:all 0.15s;}
+.filter-chip.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.page-wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+body.layout-wide .page-wrap{max-width:100%;}
+.layout{display:grid;grid-template-columns:1fr 280px;gap:0;}
+.layout-3col{display:grid;grid-template-columns:220px 1fr 280px;gap:0;}
+.content-pad{padding:24px 32px;}
+.sidebar-pad{padding:20px 16px;border-left:0.5px solid var(--paper3);display:flex;flex-direction:column;gap:14px;}
+.left-panel{border-right:0.5px solid var(--paper3);padding:20px 16px;}
+body.layout-fixed .left-panel{display:none;}
+body.layout-wide .left-panel{display:block;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.article-header{padding:40px 32px 24px;border-bottom:0.5px solid var(--paper3);}
+.article-title{font-family:'Spectral',serif;font-size:32px;font-weight:300;line-height:1.2;letter-spacing:-0.02em;margin-bottom:16px;}
+.article-byline{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.07em;color:var(--ink3);text-transform:uppercase;margin-bottom:12px;}
+.article-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.article-body{max-width:640px;}
+.article-body p{font-family:'Spectral',serif;font-size:16px;line-height:1.75;color:var(--ink2);margin-bottom:20px;}
+.article-body h2{font-family:'Spectral',serif;font-size:22px;font-weight:300;color:var(--ink);margin:32px 0 16px;letter-spacing:-0.01em;}
+.article-body h3{font-family:'Spectral',serif;font-size:17px;font-weight:400;color:var(--ink);margin:24px 0 12px;}
+.ds-footer{background:var(--paper2);border-top:0.5px solid var(--paper3);padding:20px 32px;display:flex;align-items:center;justify-content:space-between;margin-top:48px;}
+.ds-footer-brand{font-family:'Spectral',serif;font-size:18px;font-weight:300;color:var(--ink);}
+.ds-footer-brand span{color:var(--river-l);}
+.ds-footer-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.06em;text-align:right;line-height:1.8;}
+.pad{padding:24px 32px;}
+.pad-sm{padding:16px;}
+.mb-16{margin-bottom:16px;}
+.mb-24{margin-bottom:24px;}
+.flex{display:flex;}
+.flex-wrap{flex-wrap:wrap;}
+.gap-4{gap:4px;}
+.gap-6{gap:6px;}
+.gap-8{gap:8px;}
+.gap-12{gap:12px;}
+.gap-16{gap:16px;}
+.items-center{align-items:center;}
+.justify-between{justify-content:space-between;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.animate-in{animation:fadeIn 0.4s ease both;}
+.delay-1{animation-delay:0.05s;}
+.delay-2{animation-delay:0.1s;}
+.delay-3{animation-delay:0.15s;}
+/* ============================================================
+   END SHARED TOKEN BLOCK
+   ============================================================ */
+
+/* FILE-SPECIFIC: Article & Paper Views */
+
+/* Paper card compact */
+.paper-card-compact{background:var(--surface);border:0.5px solid var(--paper3);border-radius:3px;padding:12px 16px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;transition:border-color 0.15s;cursor:pointer;}
+.paper-card-compact:hover{border-color:var(--river-l);}
+.paper-card-compact-title{font-family:'Spectral',serif;font-size:14px;line-height:1.35;color:var(--ink);margin-bottom:4px;}
+.paper-card-compact-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.05em;}
+
+/* Q-signal breakdown */
+.qsig-breakdown{background:var(--surface);border:0.5px solid var(--paper3);border-radius:4px;overflow:hidden;}
+.qsig-breakdown-header{padding:12px 16px;border-bottom:0.5px solid var(--paper3);background:var(--ink);display:flex;align-items:center;justify-content:space-between;}
+.qsig-breakdown-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.7);}
+.qsig-total{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:500;color:var(--accent);}
+.qsig-body{padding:16px;}
+.q-dim{margin-bottom:12px;}
+.q-dim:last-child{margin-bottom:0;}
+.q-dim-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;}
+.q-dim-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);}
+.q-dim-score{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;}
+.q-dim-track{height:6px;background:var(--paper3);border-radius:3px;overflow:hidden;}
+.q-dim-fill{height:100%;border-radius:3px;transition:width 0.5s ease;}
+.q-dim-weight{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);letter-spacing:0.04em;margin-top:2px;}
+.regression-block{background:var(--paper2);border:0.5px solid var(--paper3);border-left:2px solid var(--river-l);padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.04em;line-height:2;margin-top:12px;border-radius:0 3px 3px 0;}
+.regression-block .eq-line{color:var(--ink2);}
+.regression-block .stat-note{font-style:italic;color:var(--ink3);font-size:9px;}
+
+/* AI usage block (violet variant) */
+.ai-block{border:0.5px solid var(--violet);border-radius:4px;overflow:hidden;margin:12px 0;}
+.ai-block-header{background:var(--violet);color:#fff;padding:8px 14px;display:flex;align-items:center;gap:10px;}
+.ai-block-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;flex:1;}
+.ai-block-body{padding:14px 16px;background:var(--violet-l);}
+.ai-block-row{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 0;color:var(--ink2);}
+.ai-block-row-label{color:var(--ink3);font-style:italic;}
+
+/* IntelliD contributor */
+.intellid-contrib{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--paper3);}
+.intellid-contrib:last-child{border-bottom:none;}
+.intellid-type{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.intellid-name{font-family:'Spectral',serif;font-size:13px;color:var(--ink2);flex:1;}
+.intellid-id{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);letter-spacing:0.04em;}
+.intellid-role{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);text-transform:uppercase;letter-spacing:0.06em;}
+
+/* Article body footnotes */
+.article-footnote{font-family:'Spectral',serif;font-size:13px;font-style:italic;color:var(--ink3);border-top:0.5px solid var(--paper3);padding-top:12px;margin-top:32px;line-height:1.7;}
+.article-footnote sup{font-size:10px;font-style:normal;font-family:'JetBrains Mono',monospace;}
+.article-ref{color:var(--river-l);text-decoration:none;}
+.article-ref:hover{text-decoration:underline;}
+sup.ref{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--river-l);letter-spacing:0.02em;}
+
+/* TOC in left panel (wide mode) */
+.toc-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);padding-bottom:10px;border-bottom:0.5px solid var(--paper3);margin-bottom:12px;}
+.toc-link{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);text-decoration:none;padding:4px 0;letter-spacing:0.04em;transition:color 0.15s;border-left:2px solid transparent;padding-left:8px;}
+.toc-link:hover{color:var(--river-l);border-left-color:var(--river-l);}
+.toc-link.active{color:var(--river);border-left-color:var(--river);}
+.toc-link.sub{padding-left:16px;font-size:9px;}
+
+/* Status tracker (public page) */
+.status-tracker{background:var(--surface);border:0.5px solid var(--paper3);border-radius:4px;overflow:hidden;}
+.status-tracker-header{padding:16px 20px;border-bottom:0.5px solid var(--paper3);background:var(--paper2);}
+.status-cosmo{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--river-l);letter-spacing:0.08em;margin-bottom:4px;}
+.status-title{font-family:'Spectral',serif;font-size:18px;font-weight:400;color:var(--ink);}
+.status-body{padding:20px;}
+.status-stage{display:flex;gap:12px;margin-bottom:12px;padding:10px 12px;border-radius:3px;background:var(--paper);}
+.status-stage.done{background:var(--sage-l);}
+.status-stage.active{background:var(--river-ll);border:0.5px solid var(--river);}
+.status-stage-icon{font-family:'JetBrains Mono',monospace;font-size:14px;width:24px;flex-shrink:0;text-align:center;}
+.status-stage-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink2);margin-bottom:2px;}
+.status-stage-desc{font-family:'Spectral',serif;font-size:12px;color:var(--ink3);font-style:italic;}
+
+/* Policy page */
+.policy-hero{background:var(--ink);padding:48px 32px 40px;position:relative;overflow:hidden;}
+.policy-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,0.015) 60px,rgba(255,255,255,0.015) 61px),repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,0.015) 60px,rgba(255,255,255,0.015) 61px);pointer-events:none;}
+.policy-hero-inner{position:relative;max-width:720px;}
+.policy-kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--accent);margin-bottom:16px;text-transform:uppercase;}
+.policy-title{font-family:'Spectral',serif;font-size:38px;font-weight:300;line-height:1.1;letter-spacing:-0.02em;color:#fff;margin-bottom:12px;}
+.policy-subtitle{font-family:'Spectral',serif;font-size:16px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.7;}
+.policy-body{max-width:720px;padding:32px;}
+.policy-principle{display:flex;gap:20px;margin-bottom:28px;padding-bottom:28px;border-bottom:0.5px solid var(--paper3);}
+.policy-principle:last-child{border-bottom:none;}
+.policy-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:500;color:var(--paper3);flex-shrink:0;width:40px;line-height:1;}
+.policy-principle-title{font-family:'Spectral',serif;font-size:18px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.policy-principle-text{font-family:'Spectral',serif;font-size:15px;line-height:1.75;color:var(--ink2);}
+.policy-aside{background:var(--river-ll);border:0.5px solid var(--river);border-radius:3px;padding:14px 16px;margin:16px 0;font-family:'Spectral',serif;font-size:14px;font-style:italic;color:var(--river);line-height:1.7;}
+
+/* Demo frame */
+.demo-frame{border:0.5px solid var(--paper3);border-radius:6px;overflow:hidden;background:var(--surface);}
+.demo-frame-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);background:var(--paper2);padding:6px 14px;border-bottom:0.5px solid var(--paper3);}
+</style>
+</head>
+<body class="layout-fixed" data-theme="light">
+
+<!-- ATLAS NAV -->
+<nav class="atlas-bar">
+  <span class="atlas-label">eaiou DS</span>
+  <a class="atlas-link" href="eaiou_ds_01_typography.html">01 · Tokens</a>
+  <a class="atlas-link" href="eaiou_ds_02_modules.html">02 · Modules</a>
+  <a class="atlas-link" href="eaiou_ds_03_menus.html">03 · Menus</a>
+  <a class="atlas-link current" href="eaiou_ds_04_article.html">04 · Article</a>
+  <a class="atlas-link" href="eaiou_ds_05_authoring.html">05 · Authoring</a>
+  <a class="atlas-link" href="eaiou_ds_06_admin.html">06 · Admin</a>
+  <div class="atlas-controls">
+    <button class="atlas-btn" onclick="toggleLayout()" id="layout-btn">⊞ Wide</button>
+    <button class="atlas-btn" onclick="toggleTheme()" id="theme-btn">◑ Dark</button>
+  </div>
+</nav>
+
+<!-- PUBLIC NAV (article context) -->
+<nav class="nav">
+  <a class="nav-brand" href="#">e<span>ai</span>ou</a>
+  <div class="nav-links">
+    <a class="nav-link active" href="#">Discover</a>
+    <a class="nav-link" href="#">Submit</a>
+    <a class="nav-link" href="#">Review</a>
+    <a class="nav-link" href="#">Ideas</a>
+    <a class="nav-link" href="#">Gaps</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-badge" href="#">Sign In</a>
+    <a class="nav-badge primary" href="#">Register</a>
+  </div>
+</nav>
+
+<!-- ===================================================== -->
+<div id="s1" class="section-divider">
+  <span class="divider-title">01 · Paper Cards</span>
+  <div class="divider-rule"></div>
+  <span class="divider-anchor">.paper-card · .paper-card-compact</span>
+</div>
+
+<div class="pad animate-in">
+  <div class="section-label">Full paper card — discovery view</div>
+  <div class="grid-2 mb-24">
+
+    <div class="paper-card">
+      <div class="paper-card-meta">Cosmology · Astrophysics · Cross-probe Analysis</div>
+      <div class="paper-card-title">On the Statistical Independence of H₀ Tension Sources Across Cosmological Probes: A Systematic Gap Analysis</div>
+      <div class="paper-card-abstract">We present a systematic analysis of correlated error sources underlying the Hubble tension (H₀ discrepancy ≈ 5.8σ) across seven independent measurement pipelines. Contrary to prior assumption, we demonstrate that Cepheid calibration uncertainty and CMB lensing reconstruction share a common systematic factor β = 0.23 (SE = 0.04), partially explaining the apparent tension without invoking new physics.</div>
+      <div class="paper-card-footer">
+        <div class="paper-card-tags">
+          <span class="badge badge-transparency">◇ Transparent</span>
+          <span class="badge badge-ai">◈ AI-Assisted</span>
+          <span class="badge badge-collab">⊕ Cross-domain</span>
+          <span class="badge badge-tag">hubble-tension</span>
+          <span class="badge badge-tag">cosmology</span>
+        </div>
+        <div class="qsig">
+          <div class="qsig-dot"></div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <div class="qsig-bar" style="width:68px;"></div>
+          </div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);">8.40</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.4);">q</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper-card">
+      <div class="paper-card-meta">Neuroscience · Cognitive Science · fMRI</div>
+      <div class="paper-card-title">Default Mode Network Connectivity Predicts Spontaneous Insight Probability: Evidence from 847 Pre-registered Trials</div>
+      <div class="paper-card-abstract">Pre-registered replication (n=847) of the Dijksterhuis incubation paradigm, extended with resting-state fMRI connectivity measures. DMN–frontoparietal coupling at rest predicts subsequent insight solution probability (β = 0.34, p &lt; 0.001), surviving FWE correction. Effect substantially smaller than originally reported (d = 0.41 vs. d = 1.12).</div>
+      <div class="paper-card-footer">
+        <div class="paper-card-tags">
+          <span class="badge badge-transparency">◇ Transparent</span>
+          <span class="badge badge-tag">neuroscience</span>
+          <span class="badge badge-tag">replication</span>
+          <span class="badge badge-tag">fmri</span>
+        </div>
+        <div class="qsig">
+          <div class="qsig-dot"></div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <div class="qsig-bar" style="width:58px;"></div>
+          </div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--accent);">7.20</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.4);">q</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Compact paper card — list view</div>
+  <div style="display:flex;flex-direction:column;gap:4px;">
+    <div class="paper-card-compact">
+      <div>
+        <div class="paper-card-compact-title">On the Statistical Independence of H₀ Tension Sources Across Cosmological Probes</div>
+        <div class="paper-card-compact-meta">Tanabe · Deveraux · Whitmore &nbsp;·&nbsp; Cosmology &nbsp;·&nbsp; <span class="badge badge-transparency" style="font-size:9px;padding:1px 5px;">Transparent</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+        <div class="qsig" style="padding:3px 8px;">
+          <div class="qsig-dot" style="width:6px;height:6px;"></div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--accent);">8.40</span>
+        </div>
+      </div>
+    </div>
+    <div class="paper-card-compact">
+      <div>
+        <div class="paper-card-compact-title">Default Mode Network Connectivity Predicts Spontaneous Insight Probability</div>
+        <div class="paper-card-compact-meta">Okafor · Singh &nbsp;·&nbsp; Neuroscience &nbsp;·&nbsp; <span class="badge badge-collab" style="font-size:9px;padding:1px 5px;">Cross-domain</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+        <div class="qsig" style="padding:3px 8px;">
+          <div class="qsig-dot" style="width:6px;height:6px;"></div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--accent);">7.20</span>
+        </div>
+      </div>
+    </div>
+    <div class="paper-card-compact">
+      <div>
+        <div class="paper-card-compact-title">Fermentation Temperature Gradients as Proxies for Civic Engagement Scores: A Cautionary Analysis</div>
+        <div class="paper-card-compact-meta">Vigen · Beaumont &nbsp;·&nbsp; Data Science &nbsp;·&nbsp; <span class="badge badge-unsci" style="font-size:9px;padding:1px 5px;">Unscientific?</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+        <div class="qsig" style="padding:3px 8px;">
+          <div class="qsig-dot" style="width:6px;height:6px;"></div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--accent);">3.10</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================== -->
+<div id="s2" class="section-divider">
+  <span class="divider-title">02 · Article View — Full Layout</span>
+  <div class="divider-rule"></div>
+  <span class="divider-anchor">.article-header · .article-body · layout grid</span>
+</div>
+
+<div class="demo-frame" style="margin:24px 32px;">
+  <div class="demo-frame-label">ARTICLE PAGE — 2-column layout (content + sidebar) · public view</div>
+
+  <!-- Article nav strip -->
+  <div style="background:var(--ink);padding:0 32px;display:flex;align-items:center;height:44px;gap:24px;">
+    <a style="font-family:'Spectral',serif;font-size:18px;font-weight:300;color:#fff;text-decoration:none;letter-spacing:-0.02em;">e<span style="color:var(--accent);">ai</span>ou</a>
+    <div style="flex:1;display:flex;gap:20px;">
+      <a style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;">Discover</a>
+      <a style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.8);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1px solid var(--accent);">Article</a>
+    </div>
+    <a style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;">← Back to Discover</a>
+  </div>
+
+  <div class="layout">
+    <!-- MAIN CONTENT -->
+    <div>
+      <div class="article-header">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;">
+          C-2024-0847-HUTENS &nbsp;·&nbsp; Cosmology · Astrophysics
+        </div>
+        <div class="article-title">On the Statistical Independence of H₀ Tension Sources Across Cosmological Probes</div>
+        <div class="article-badges">
+          <span class="badge badge-transparency">◇ Full Transparency</span>
+          <span class="badge badge-ai">◈ AI-Assisted</span>
+          <span class="badge badge-collab">⊕ Cross-domain</span>
+          <span class="badge badge-sealed">⊠ Date Sealed</span>
+          <span class="badge badge-tag">hubble-tension</span>
+          <span class="badge badge-tag">h0</span>
+          <span class="badge badge-tag">systematics</span>
+        </div>
+        <div class="article-byline" style="display:flex;gap:12px;flex-wrap:wrap;">
+          <div class="orcid-badge"><div class="orcid-dot">iD</div> Yuki Tanabe</div>
+          <div class="orcid-badge"><div class="orcid-dot">iD</div> Maria Deveraux</div>
+          <div class="orcid-badge"><div class="orcid-dot">iD</div> James Whitmore</div>
+        </div>
+        <!-- Workflow inline -->
+        <div style="margin-top:16px;">
+          <div class="workflow">
+            <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Naught</div></div>
+            <div class="wf-line done"></div>
+            <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Caught</div></div>
+            <div class="wf-line done"></div>
+            <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Triage</div></div>
+            <div class="wf-line done"></div>
+            <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Review</div></div>
+            <div class="wf-line done"></div>
+            <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Decision</div></div>
+            <div class="wf-line done"></div>
+            <div class="wf-state"><div class="wf-dot active"></div><div class="wf-name active">Found</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-pad article-body">
+        <h2>Abstract</h2>
+        <p>We present a systematic analysis of correlated error sources underlying the Hubble tension — the ≈5.8σ discrepancy between H₀ = 67.4 ± 0.5 km s⁻¹ Mpc⁻¹ (Planck CMB) and H₀ = 73.2 ± 1.3 km s⁻¹ Mpc⁻¹ (SH0ES distance ladder).<sup class="ref">[1,2]</sup> Contrary to the prevailing assumption of full independence between these measurement pipelines, we identify a shared systematic factor in Cepheid calibration and CMB lensing reconstruction (β = 0.23 ± 0.04) that partially but not wholly explains the observed discrepancy.</p>
+
+        <h2>1. Introduction</h2>
+        <p>The Hubble constant H₀ parameterizes the present-day expansion rate of the universe and has been measured with increasing precision over three decades.<sup class="ref">[3]</sup> The emergence of a statistically significant tension between early-universe (CMB-based) and late-universe (distance-ladder) measurements constitutes one of the most compelling anomalies in contemporary cosmology, with implications ranging from new relativistic species to modifications of dark energy dynamics.</p>
+        <p>Prior analyses have universally treated the CMB and distance-ladder measurements as fully statistically independent — a premise we argue requires reexamination given the shared calibration infrastructure across major survey telescopes and the common angular power spectrum pipeline components employed in both CMB and galaxy lensing analyses.</p>
+
+        <h2>2. Methods</h2>
+        <h3>2.1 Cross-pipeline systematic analysis</h3>
+        <p>We compiled systematic error budgets from seven independent H₀ measurement pipelines (Planck 2018, ACT DR6, DESI BAO, SH0ES 2024, TRGB, MIRAS, and surface brightness fluctuations). For each pair, we constructed a correlation matrix of shared calibration inputs, applying a factor analysis model with k=3 latent dimensions to isolate common systematic factors from independent measurement error.</p>
+
+        <div class="article-footnote">
+          <sup>1</sup> Planck Collaboration (2020). Planck 2018 results. VI. Cosmological parameters. <em>A&amp;A</em>, 641, A6.<br>
+          <sup>2</sup> Riess, A. G. et al. (2022). A comprehensive measurement of the local value of the Hubble constant. <em>ApJL</em>, 934, L7.<br>
+          <sup>3</sup> Di Valentino, E. et al. (2021). In the realm of the Hubble tension—a review of solutions. <em>Class. Quantum Grav.</em>, 38, 153001.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <div class="sidebar-pad">
+      <!-- Q-signal breakdown -->
+      <div class="qsig-breakdown">
+        <div class="qsig-breakdown-header">
+          <div class="qsig-breakdown-title">Q-Signal</div>
+          <div class="qsig-total">8.40</div>
+        </div>
+        <div class="qsig-body">
+          <div class="q-dim">
+            <div class="q-dim-header">
+              <span class="q-dim-label">Basin Integrity</span>
+              <span class="q-dim-score" style="color:var(--river-l);">8.7 × 0.40 = 3.48</span>
+            </div>
+            <div class="q-dim-track"><div class="q-dim-fill" style="width:87%;background:var(--river-l);"></div></div>
+            <div class="q-dim-weight">β₁ = 0.40 (dominant weight)</div>
+          </div>
+          <div class="q-dim">
+            <div class="q-dim-header">
+              <span class="q-dim-label">Investigation</span>
+              <span class="q-dim-score" style="color:var(--sage);">9.1 × 0.25 = 2.28</span>
+            </div>
+            <div class="q-dim-track"><div class="q-dim-fill" style="width:91%;background:var(--sage);"></div></div>
+            <div class="q-dim-weight">β₂ = 0.25</div>
+          </div>
+          <div class="q-dim">
+            <div class="q-dim-header">
+              <span class="q-dim-label">Completeness</span>
+              <span class="q-dim-score" style="color:var(--amber);">7.8 × 0.20 = 1.56</span>
+            </div>
+            <div class="q-dim-track"><div class="q-dim-fill" style="width:78%;background:var(--amber);"></div></div>
+            <div class="q-dim-weight">β₃ = 0.20</div>
+          </div>
+          <div class="q-dim">
+            <div class="q-dim-header">
+              <span class="q-dim-label">Gap Coverage</span>
+              <span class="q-dim-score" style="color:var(--violet);">7.2 × 0.15 = 1.08</span>
+            </div>
+            <div class="q-dim-track"><div class="q-dim-fill" style="width:72%;background:var(--violet);"></div></div>
+            <div class="q-dim-weight">β₄ = 0.15 · age_amp ×1.80</div>
+          </div>
+          <div class="regression-block">
+            <div class="eq-line">Q = Σ βᵢ · dimᵢ = <strong>8.40</strong></div>
+            <div class="stat-note">r = 0.94, p &lt; 0.001, n = 847<br>may not be spurious</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transparency block -->
+      <div class="transp-block" style="margin:0;">
+        <div class="transp-header">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.7)" stroke-width="0.5"/><line x1="6" y1="3" x2="6" y2="9" stroke="rgba(255,255,255,0.7)" stroke-width="0.5"/><line x1="3" y1="6" x2="9" y2="6" stroke="rgba(255,255,255,0.7)" stroke-width="0.5"/></svg>
+          <span class="transp-header-title">Transparency Record</span>
+          <span class="badge badge-sealed" style="font-size:9px;">Sealed</span>
+        </div>
+        <div class="transp-body">
+          <div class="transp-row"><span class="transp-row-label">Gap registered</span><span>[SEALED]</span></div>
+          <div class="transp-row"><span class="transp-row-label">Receipt timestamp</span><span>[SEALED]</span></div>
+          <div class="transp-row"><span class="transp-row-label">Investigation type</span><span>Cross-probe</span></div>
+          <div class="transp-row"><span class="transp-row-label">Review cycles</span><span>2</span></div>
+          <div class="transp-row"><span class="transp-row-label">Revisions</span><span>1 major</span></div>
+          <div class="transp-row"><span class="transp-row-label">Reviewers</span><span>3 (blind)</span></div>
+        </div>
+      </div>
+
+      <!-- Hash chain -->
+      <div class="module-panel">
+        <div class="module-header"><span class="module-title">Integrity Chain</span></div>
+        <div class="module-body" style="padding:12px 14px;">
+          <div class="hash-chain">
+            <div class="hash-entry">
+              <div class="hash-id">Naught</div>
+              <div class="hash-val">gitgap:a3f7c2e19b44d8...7f2a</div>
+              <div class="hash-status">✓</div>
+            </div>
+            <div class="hash-entry">
+              <div class="hash-id">Caught</div>
+              <div class="hash-val">sha256:9e4b1f82ca3d07...1c9e</div>
+              <div class="hash-status">✓</div>
+            </div>
+            <div class="hash-entry">
+              <div class="hash-id">Review</div>
+              <div class="hash-val">sha256:d7a3e6f01b29c4...8b3f</div>
+              <div class="hash-status">✓</div>
+            </div>
+            <div class="hash-entry" style="border-bottom:none;">
+              <div class="hash-id" style="color:var(--sage);">Found ★</div>
+              <div class="hash-val">sha256:2f8c4a7d93e10b...5d7c</div>
+              <div class="hash-status" style="color:var(--sage);">Capstone</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================== -->
+<div id="s3" class="section-divider">
+  <span class="divider-title">03 · Transparency &amp; AI Usage Blocks</span>
+  <div class="divider-rule"></div>
+  <span class="divider-anchor">.transp-block · .ai-block · .intellid-contrib</span>
+</div>
+
+<div class="pad">
+  <div class="grid-2">
+    <!-- Transparency block full -->
+    <div>
+      <div class="section-label">River — Transparency disclosure</div>
+      <div class="transp-block">
+        <div class="transp-header">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;"><circle cx="6" cy="6" r="5" stroke="rgba(255,255,255,0.7)" stroke-width="0.5"/><line x1="6" y1="3" x2="6" y2="9" stroke="rgba(255,255,255,0.7)" stroke-width="0.5"/><line x1="3" y1="6" x2="9" y2="6" stroke="rgba(255,255,255,0.7)" stroke-width="0.5"/></svg>
+          <span class="transp-header-title">Full Transparency Record</span>
+        </div>
+        <div class="transp-body">
+          <div class="transp-row"><span class="transp-row-label">CosmoID</span><span>C-2024-0847-HUTENS</span></div>
+          <div class="transp-row"><span class="transp-row-label">Gap registration</span><span>[SEALED — Temporal Blindness]</span></div>
+          <div class="transp-row"><span class="transp-row-label">Receipt timestamp</span><span>[SEALED — Temporal Blindness]</span></div>
+          <div class="transp-row"><span class="transp-row-label">Investigation type</span><span>Cross-probe systematic</span></div>
+          <div class="transp-row"><span class="transp-row-label">Review cycles</span><span>2 full cycles</span></div>
+          <div class="transp-row"><span class="transp-row-label">Revisions</span><span>1 major, 2 minor</span></div>
+          <div class="transp-row"><span class="transp-row-label">Reviewers assigned</span><span>3 (double-blind)</span></div>
+          <div class="transp-row"><span class="transp-row-label">IntelliD contributors</span><span>3 human · 2 AI</span></div>
+          <div class="transp-row"><span class="transp-row-label">GitGap webhook</span><span>FOUND fired ✓</span></div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;">
+        <div class="section-label">IntelliD contributors</div>
+        <div class="intellid-contrib">
+          <div class="intellid-type" style="background:var(--river-l);"></div>
+          <div class="intellid-name">Yuki Tanabe</div>
+          <div class="intellid-id">IID-0009-0001-2345</div>
+          <div class="intellid-role">Primary</div>
+        </div>
+        <div class="intellid-contrib">
+          <div class="intellid-type" style="background:var(--sage);"></div>
+          <div class="intellid-name">Maria Deveraux</div>
+          <div class="intellid-id">IID-0009-0002-3456</div>
+          <div class="intellid-role">Co-author</div>
+        </div>
+        <div class="intellid-contrib">
+          <div class="intellid-type" style="background:var(--amber);"></div>
+          <div class="intellid-name">James Whitmore</div>
+          <div class="intellid-id">IID-0009-0003-4567</div>
+          <div class="intellid-role">Co-author</div>
+        </div>
+        <div class="intellid-contrib">
+          <div class="intellid-type" style="background:var(--violet);border-radius:2px;"></div>
+          <div class="intellid-name">Claude 3 Opus</div>
+          <div class="intellid-id">AI-IID-anthropic-opus-3</div>
+          <div class="intellid-role">AI Tool</div>
+        </div>
+        <div class="intellid-contrib">
+          <div class="intellid-type" style="background:var(--coral);border-radius:2px;"></div>
+          <div class="intellid-name">GPT-4 Turbo</div>
+          <div class="intellid-id">AI-IID-openai-gpt4t</div>
+          <div class="intellid-role">AI Tool</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI usage block -->
+    <div>
+      <div class="section-label">Violet — AI usage disclosure</div>
+      <div class="ai-block">
+        <div class="ai-block-header">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;"><rect x="1.5" y="1.5" width="9" height="9" rx="1.5" stroke="rgba(255,255,255,0.7)" stroke-width="0.5"/><line x1="4" y1="5" x2="8" y2="5" stroke="rgba(255,255,255,0.7)" stroke-width="0.5"/><line x1="4" y1="7" x2="8" y2="7" stroke="rgba(255,255,255,0.7)" stroke-width="0.5"/></svg>
+          <span class="ai-block-title">AI Contribution Disclosure</span>
+          <span class="badge badge-ai" style="font-size:9px;">◈ AI-Assisted</span>
+        </div>
+        <div class="ai-block-body">
+          <div class="ai-block-row"><span class="ai-block-row-label">Claude 3 Opus (Anthropic)</span><span>Literature synthesis, systematic review structuring</span></div>
+          <div class="ai-block-row"><span class="ai-block-row-label">GPT-4 Turbo (OpenAI)</span><span>Cross-check of statistical computations</span></div>
+          <div class="ai-block-row"><span class="ai-block-row-label">Human verification</span><span>All results independently verified by all 3 co-authors</span></div>
+          <div class="ai-block-row"><span class="ai-block-row-label">AI autonomy level</span><span>Assistive — no autonomous conclusions</span></div>
+          <div class="ai-block-row"><span class="ai-block-row-label">Prompts archived</span><span>Yes — hash-sealed with CAUGHT record</span></div>
+        </div>
+      </div>
+
+      <!-- Inline AI heatmap -->
+      <div style="margin-top:16px;">
+        <div class="section-label">AI usage proportional heatmap</div>
+        <div style="background:var(--surface);border:0.5px solid var(--paper3);border-radius:4px;padding:14px 16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;">Contribution mix across eaiou corpus (n=1,247 papers)</div>
+          <div style="display:flex;height:28px;border-radius:3px;overflow:hidden;margin-bottom:8px;">
+            <div style="flex:0.38;background:var(--river-l);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.9);">Claude 38%</div>
+            <div style="flex:0.29;background:var(--sage);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.9);">GPT-4 29%</div>
+            <div style="flex:0.15;background:var(--amber);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.9);">Gem 15%</div>
+            <div style="flex:0.18;background:var(--paper3);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--ink3);">None 18%</div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);font-style:italic;">r = 0.12, p = 0.18 with q_signal — AI usage does not predict quality</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================== -->
+<div id="s4" class="section-divider">
+  <span class="divider-title">04 · Hash Chain &amp; Integrity</span>
+  <div class="divider-rule"></div>
+  <span class="divider-anchor">.hash-chain · .hash-entry · NCF lifecycle seals</span>
+</div>
+
+<div class="pad">
+  <div class="grid-2">
+    <div>
+      <div class="section-label">Full NCF lifecycle hash chain</div>
+      <div class="module-panel">
+        <div class="module-header">
+          <span class="module-title">C-2024-0847-HUTENS — Integrity Chain</span>
+          <span class="badge badge-sealed" style="font-size:9px;">4 seals</span>
+        </div>
+        <div class="module-body">
+          <div class="hash-chain">
+            <div class="hash-entry">
+              <div style="display:flex;flex-direction:column;gap:1px;width:70px;flex-shrink:0;">
+                <div class="hash-id">Naught</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--ink3);">GitGap reg.</div>
+              </div>
+              <div class="hash-val">gitgap:a3f7c2e19b44d8f301c7ee92a8f4b2c15d09e7f2a6b3c8d</div>
+              <div class="hash-status">✓ SEALED</div>
+            </div>
+            <div class="hash-entry">
+              <div style="display:flex;flex-direction:column;gap:1px;width:70px;flex-shrink:0;">
+                <div class="hash-id">Caught</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--ink3);">Receipt seal</div>
+              </div>
+              <div class="hash-val">sha256:9e4b1f82ca3d07e15c2f9a4b6d18c30e7f2a1b9c4d5e6f</div>
+              <div class="hash-status">✓ SEALED</div>
+            </div>
+            <div class="hash-entry">
+              <div style="display:flex;flex-direction:column;gap:1px;width:70px;flex-shrink:0;">
+                <div class="hash-id">Review</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--ink3);">Cycle open</div>
+              </div>
+              <div class="hash-val">sha256:d7a3e6f01b29c4e82f5a7b9c3d1e4f6a2b8c0d9e5f3a7b</div>
+              <div class="hash-status">✓ SEALED</div>
+            </div>
+            <div class="hash-entry" style="border-bottom:none;">
+              <div style="display:flex;flex-direction:column;gap:1px;width:70px;flex-shrink:0;">
+                <div class="hash-id" style="color:var(--sage);">Found ★</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--sage);">Capstone</div>
+              </div>
+              <div class="hash-val" style="color:var(--ink2);">sha256:2f8c4a7d93e10b6f1d5c8a2e4b7f9c3a6d0e8b1f5c2a9d</div>
+              <div class="hash-status" style="color:var(--sage);">★ CAPSTONE</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);font-style:italic;border-top:0.5px solid var(--paper3);padding-top:8px;">
+            Chain continuity: VERIFIED · Each seal hash-chains to prior · Tampering detectable
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Q-signal standalone breakdown</div>
+      <div class="qsig-breakdown">
+        <div class="qsig-breakdown-header">
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <div class="qsig-breakdown-title">Provenance Quality Signal</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.4);">C-2024-0847-HUTENS</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="qsig-total">8.40</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.4);">/ 10.00</div>
+          </div>
+        </div>
+        <div class="qsig-body">
+          <div class="q-dim">
+            <div class="q-dim-header">
+              <span class="q-dim-label" style="color:var(--river-l);">■ Basin Integrity</span>
+              <span class="q-dim-score" style="color:var(--river-l);">8.7 / 10</span>
+            </div>
+            <div class="q-dim-track"><div class="q-dim-fill" style="width:87%;background:var(--river-l);"></div></div>
+            <div class="q-dim-weight">weight β₁ = 0.40 · contribution = 3.48</div>
+          </div>
+          <div class="q-dim">
+            <div class="q-dim-header">
+              <span class="q-dim-label" style="color:var(--sage);">■ Investigation</span>
+              <span class="q-dim-score" style="color:var(--sage);">9.1 / 10</span>
+            </div>
+            <div class="q-dim-track"><div class="q-dim-fill" style="width:91%;background:var(--sage);"></div></div>
+            <div class="q-dim-weight">weight β₂ = 0.25 · contribution = 2.28</div>
+          </div>
+          <div class="q-dim">
+            <div class="q-dim-header">
+              <span class="q-dim-label" style="color:var(--amber);">■ Completeness</span>
+              <span class="q-dim-score" style="color:var(--amber);">7.8 / 10</span>
+            </div>
+            <div class="q-dim-track"><div class="q-dim-fill" style="width:78%;background:var(--amber);"></div></div>
+            <div class="q-dim-weight">weight β₃ = 0.20 · contribution = 1.56</div>
+          </div>
+          <div class="q-dim">
+            <div class="q-dim-header">
+              <span class="q-dim-label" style="color:var(--violet);">■ Gap Coverage</span>
+              <span class="q-dim-score" style="color:var(--violet);">7.2 / 10</span>
+            </div>
+            <div class="q-dim-track"><div class="q-dim-fill" style="width:72%;background:var(--violet);"></div></div>
+            <div class="q-dim-weight">weight β₄ = 0.15 · age_amp ×1.80 · contribution = 1.08</div>
+          </div>
+          <div class="regression-block">
+            <div class="eq-line">Q = 0.40(8.7) + 0.25(9.1) + 0.20(7.8) + 0.15(7.2)</div>
+            <div class="eq-line">  = 3.48 + 2.28 + 1.56 + 1.08 = <strong>8.40</strong></div>
+            <div style="height:6px;"></div>
+            <div class="stat-note">Gap age: 12.4 yr → age_amp = min(12.4/15, 0.8) + 1.0 = ×1.80</div>
+            <div class="stat-note">F(4,843) = 1247.8, p &lt; 0.001, R² = 0.856</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================== -->
+<div id="s5" class="section-divider">
+  <span class="divider-title">05 · Workflow State Machine</span>
+  <div class="divider-rule"></div>
+  <span class="divider-anchor">.workflow · .wf-state · .wf-dot · .wf-line · NCF lifecycle</span>
+</div>
+
+<div class="pad">
+  <div class="section-label">NCF lifecycle — FOUND path (published)</div>
+  <div style="background:var(--surface);border:0.5px solid var(--paper3);border-radius:4px;padding:24px 28px;margin-bottom:24px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">
+      Method fig. 1 — Paper lifecycle state transition diagram (N→C→F pathway)
+    </div>
+    <div class="workflow" style="margin:0 0 16px;">
+      <div class="wf-state">
+        <div class="wf-dot done"></div>
+        <div class="wf-name done">Naught<br><span style="font-style:italic;text-transform:none;letter-spacing:0;font-size:8px;">GitGap</span></div>
+      </div>
+      <div class="wf-line done"></div>
+      <div class="wf-state">
+        <div class="wf-dot done"></div>
+        <div class="wf-name done">Caught<br><span style="font-style:italic;text-transform:none;letter-spacing:0;font-size:8px;">Receipt sealed</span></div>
+      </div>
+      <div class="wf-line done"></div>
+      <div class="wf-state">
+        <div class="wf-dot done"></div>
+        <div class="wf-name done">Triage<br><span style="font-style:italic;text-transform:none;letter-spacing:0;font-size:8px;">Screening</span></div>
+      </div>
+      <div class="wf-line done"></div>
+      <div class="wf-state">
+        <div class="wf-dot done"></div>
+        <div class="wf-name done">Review<br><span style="font-style:italic;text-transform:none;letter-spacing:0;font-size:8px;">Peer review</span></div>
+      </div>
+      <div class="wf-line done"></div>
+      <div class="wf-state">
+        <div class="wf-dot done"></div>
+        <div class="wf-name done">Decision<br><span style="font-style:italic;text-transform:none;letter-spacing:0;font-size:8px;">Editor</span></div>
+      </div>
+      <div class="wf-line done"></div>
+      <div class="wf-state">
+        <div class="wf-dot active" style="background:var(--sage);border-color:var(--sage);width:14px;height:14px;"></div>
+        <div class="wf-name active" style="color:var(--sage);">Found ★<br><span style="font-style:italic;text-transform:none;letter-spacing:0;font-size:8px;">Published</span></div>
+      </div>
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);font-style:italic;letter-spacing:0.04em;">
+      Note: No temporal information displayed on public views per Temporal Blindness Doctrine §1. Transition durations are sealed and not derivable from public record.
+    </div>
+  </div>
+
+  <div class="section-label">NCF lifecycle — REJECTED path (terminated)</div>
+  <div style="background:var(--surface);border:0.5px solid var(--paper3);border-radius:4px;padding:24px 28px;margin-bottom:24px;">
+    <div class="workflow" style="margin:0;">
+      <div class="wf-state">
+        <div class="wf-dot done"></div>
+        <div class="wf-name done">Naught</div>
+      </div>
+      <div class="wf-line done"></div>
+      <div class="wf-state">
+        <div class="wf-dot done"></div>
+        <div class="wf-name done">Caught</div>
+      </div>
+      <div class="wf-line done"></div>
+      <div class="wf-state">
+        <div class="wf-dot done"></div>
+        <div class="wf-name done">Triage</div>
+      </div>
+      <div class="wf-line done"></div>
+      <div class="wf-state">
+        <div class="wf-dot done"></div>
+        <div class="wf-name done">Review</div>
+      </div>
+      <div class="wf-line done"></div>
+      <div class="wf-state">
+        <div class="wf-dot done"></div>
+        <div class="wf-name done">Decision</div>
+      </div>
+      <div class="wf-line" style="background:var(--coral);"></div>
+      <div class="wf-state">
+        <div class="wf-dot active" style="background:var(--coral);border-color:var(--coral);width:14px;height:14px;"></div>
+        <div class="wf-name active" style="color:var(--coral);">Rejected<br><span style="font-style:italic;text-transform:none;letter-spacing:0;font-size:8px;">GitGap fired</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">In-review state (active)</div>
+  <div style="background:var(--surface);border:0.5px solid var(--paper3);border-radius:4px;padding:24px 28px;">
+    <div class="workflow" style="margin:0;">
+      <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Naught</div></div>
+      <div class="wf-line done"></div>
+      <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Caught</div></div>
+      <div class="wf-line done"></div>
+      <div class="wf-state"><div class="wf-dot done"></div><div class="wf-name done">Triage</div></div>
+      <div class="wf-line done"></div>
+      <div class="wf-state"><div class="wf-dot active"></div><div class="wf-name active">Review</div></div>
+      <div class="wf-line"></div>
+      <div class="wf-state"><div class="wf-dot"></div><div class="wf-name">Decision</div></div>
+      <div class="wf-line"></div>
+      <div class="wf-state"><div class="wf-dot"></div><div class="wf-name">Found</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================== -->
+<div id="s6" class="section-divider">
+  <span class="divider-title">06 · Status Tracker</span>
+  <div class="divider-rule"></div>
+  <span class="divider-anchor">/papers/status/{cosmo_id} · public · no dates</span>
+</div>
+
+<div class="pad">
+  <div style="max-width:640px;">
+    <div class="section-label">Public status page — papers/status/C-2024-0847-HUTENS</div>
+    <div class="status-tracker">
+      <div class="status-tracker-header">
+        <div class="status-cosmo">C-2024-0847-HUTENS</div>
+        <div class="status-title">On the Statistical Independence of H₀ Tension Sources Across Cosmological Probes</div>
+        <div style="margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);">
+          Tanabe · Deveraux · Whitmore &nbsp;·&nbsp; Cosmology
+        </div>
+      </div>
+      <div class="status-body">
+        <div class="status-stage done">
+          <div class="status-stage-icon" style="color:var(--sage);">✓</div>
+          <div>
+            <div class="status-stage-label" style="color:var(--sage);">Naught — Gap Registered</div>
+            <div class="status-stage-desc">Research gap identified and registered in GitGap. Temporal data sealed.</div>
+          </div>
+        </div>
+        <div class="status-stage done">
+          <div class="status-stage-icon" style="color:var(--sage);">✓</div>
+          <div>
+            <div class="status-stage-label" style="color:var(--sage);">Caught — Submission Received</div>
+            <div class="status-stage-desc">Full submission received by eaiou. Receipt timestamp sealed under Temporal Blindness Doctrine.</div>
+          </div>
+        </div>
+        <div class="status-stage done">
+          <div class="status-stage-icon" style="color:var(--sage);">✓</div>
+          <div>
+            <div class="status-stage-label" style="color:var(--sage);">Triage — Initial Screening</div>
+            <div class="status-stage-desc">Editor triage complete. Accepted for full peer review.</div>
+          </div>
+        </div>
+        <div class="status-stage done">
+          <div class="status-stage-icon" style="color:var(--sage);">✓</div>
+          <div>
+            <div class="status-stage-label" style="color:var(--sage);">Review — Peer Review</div>
+            <div class="status-stage-desc">2 review cycles completed. 3 reviewers (double-blind). 1 major revision accepted.</div>
+          </div>
+        </div>
+        <div class="status-stage done">
+          <div class="status-stage-icon" style="color:var(--sage);">✓</div>
+          <div>
+            <div class="status-stage-label" style="color:var(--sage);">Decision — Editorial Decision</div>
+            <div class="status-stage-desc">Accept. GitGap FOUND webhook queued for dispatch.</div>
+          </div>
+        </div>
+        <div class="status-stage active">
+          <div class="status-stage-icon" style="color:var(--river);">★</div>
+          <div>
+            <div class="status-stage-label" style="color:var(--river);">Found — Published</div>
+            <div class="status-stage-desc">Paper is live. Capstone hash seal applied. GitGap FOUND webhook delivered. Discoverable by q_signal ranking.</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:12px 20px;border-top:0.5px solid var(--paper3);background:var(--paper2);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);line-height:1.8;">
+        No temporal information is shown on this page. Per the Temporal Blindness Doctrine, submission and review timestamps are permanently sealed.
+        &nbsp;·&nbsp; <a href="#s7" style="color:var(--river-l);">Read policy →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================== -->
+<div id="s7" class="section-divider">
+  <span class="divider-title">07 · Policy Pages</span>
+  <div class="divider-rule"></div>
+  <span class="divider-anchor">.policy-hero · .policy-principle · Temporal Blindness Doctrine</span>
+</div>
+
+<div class="demo-frame" style="margin:24px 32px;">
+  <div class="demo-frame-label">POLICY PAGE — /policies/temporal-blindness</div>
+
+  <div class="policy-hero">
+    <div class="policy-hero-inner">
+      <div class="policy-kicker">eaiou Policy · Constitutional Doctrine</div>
+      <div class="policy-title">Temporal Blindness Doctrine</div>
+      <div class="policy-subtitle">How eaiou seals submission dates to protect authors from recency bias and preserve the integrity of quality-based discovery.</div>
+    </div>
+  </div>
+
+  <div class="policy-body">
+    <div class="policy-aside">
+      "The date a paper was submitted is not a measure of its quality. Showing it is an invitation to judge by arrival, not by insight."
+    </div>
+
+    <div class="policy-principle">
+      <div class="policy-num">01</div>
+      <div>
+        <div class="policy-principle-title">Submission timestamps are sealed at receipt</div>
+        <div class="policy-principle-text">When a paper enters eaiou (the CAUGHT event), the exact receipt timestamp is recorded in the immutable hash chain and never exposed through any public interface. The timestamp is available to editors for administration but cannot be queried, exported, or inferred through any public API. This seal is permanent and irrevocable.</div>
+      </div>
+    </div>
+
+    <div class="policy-principle">
+      <div class="policy-num">02</div>
+      <div>
+        <div class="policy-principle-title">Discovery sort order is q_signal DESC only</div>
+        <div class="policy-principle-text">All public paper listings — browse, search, gap maps, trending — sort exclusively by q_signal (provenance quality score, 0–10). No date-based sort is exposed to readers, and no interface element reveals relative recency. Papers from one year ago and ten years ago appear equally, ordered by demonstrable quality of investigation and gap coverage.</div>
+      </div>
+    </div>
+
+    <div class="policy-principle">
+      <div class="policy-num">03</div>
+      <div>
+        <div class="policy-principle-title">Gap age amplifies — recency does not</div>
+        <div class="policy-principle-text">The one temporal factor that does affect scores is gap age: a gap that has been unaddressed for longer amplifies the gap_coverage dimension score via the age amplifier function <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--paper2);padding:2px 6px;border-radius:2px;">age_amp = 1.0 + min(age_years/15, 0.8)</code>, capping at ×1.80. This rewards researchers who address longstanding open problems, not those who publish fastest.</div>
+      </div>
+    </div>
+
+    <div class="policy-principle">
+      <div class="policy-num">04</div>
+      <div>
+        <div class="policy-principle-title">The Status Tracker shows process, not time</div>
+        <div class="policy-principle-text">The public-facing <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--paper2);padding:2px 6px;border-radius:2px;">/papers/status/{id}</code> page shows workflow state (NAUGHT · CAUGHT · TRIAGE · REVIEW · DECISION · FOUND) without any timestamps. Authors receive private confirmation of each transition; the public sees only the current stage.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ds-footer">
+  <div class="ds-footer-brand">e<span>ai</span>ou design system</div>
+  <div class="ds-footer-meta">
+    DS File 04 of 06 · Article &amp; Paper Views<br>
+    Spectral · JetBrains Mono · 0.5px borders · light mode
+  </div>
+</div>
+
+<script>
+// Layout toggle
+function toggleLayout() {
+  const b = document.body;
+  const isWide = b.classList.contains('layout-wide');
+  b.classList.toggle('layout-fixed', isWide);
+  b.classList.toggle('layout-wide', !isWide);
+  localStorage.setItem('eaiou_layout', isWide ? 'fixed' : 'wide');
+  document.getElementById('layout-btn').textContent = isWide ? '⊞ Wide' : '⊟ Fixed';
+}
+// Theme toggle
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  localStorage.setItem('eaiou_theme', isDark ? 'light' : 'dark');
+  document.getElementById('theme-btn').textContent = isDark ? '◑ Dark' : '◐ Light';
+}
+// Restore on load
+(function() {
+  const layout = localStorage.getItem('eaiou_layout') || 'layout-fixed';
+  document.body.classList.add(layout);
+  document.getElementById('layout-btn').textContent = layout === 'layout-wide' ? '⊟ Fixed' : '⊞ Wide';
+  const theme = localStorage.getItem('eaiou_theme') || 'light';
+  document.documentElement.setAttribute('data-theme', theme);
+  document.getElementById('theme-btn').textContent = theme === 'dark' ? '◐ Light' : '◑ Dark';
+})();
+</script>
+</body>
+</html>

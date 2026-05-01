@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eaiou DS · 03 · Menus & Navigation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+[data-theme="light"]{--ink:#0e0d0b;--ink2:#3a3832;--ink3:#7a7670;--paper:#f7f4ef;--paper2:#ede9e1;--paper3:#e0dbd0;--surface:#ffffff;--river:#1a4a6b;--river-l:#2d6e9e;--river-ll:#e8f1f7;--amber:#c47c0a;--amber-l:#fdf0d0;--sage:#3a6b4a;--sage-l:#e8f2ec;--coral:#b84832;--coral-l:#faeae6;--violet:#4a3278;--violet-l:#ede8f7;--orcid:#a6ce39;--accent:#8ab4d4;--nav-bg:#0e0d0b;--nav-text:rgba(255,255,255,0.55);--nav-active:#ffffff;}
+[data-theme="dark"]{--ink:#f2efe8;--ink2:#c8c4bb;--ink3:#7a7670;--paper:#141210;--paper2:#1e1c1a;--paper3:#2e2b28;--surface:#1e1c1a;--river:#4a8abf;--river-l:#6aaad8;--river-ll:#1a3550;--amber:#d4920e;--amber-l:#2a2010;--sage:#4a8a5e;--sage-l:#1a2a1e;--coral:#d45a40;--coral-l:#2a1510;--violet:#7060b0;--violet-l:#1e1830;--orcid:#a6ce39;--accent:#8ab4d4;--nav-bg:#0a0908;--nav-text:rgba(255,255,255,0.45);--nav-active:#ffffff;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Spectral',Georgia,serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.6;transition:background 0.25s,color 0.25s;}
+.atlas-bar{position:sticky;top:0;z-index:100;background:var(--paper2);border-bottom:0.5px solid var(--paper3);display:flex;align-items:center;height:36px;overflow-x:auto;scrollbar-width:none;}
+.atlas-bar::-webkit-scrollbar{display:none;}
+.atlas-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);padding:0 14px;white-space:nowrap;border-right:0.5px solid var(--paper3);height:100%;display:flex;align-items:center;}
+.atlas-link{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);text-decoration:none;padding:0 14px;height:100%;display:flex;align-items:center;white-space:nowrap;border-right:0.5px solid var(--paper3);transition:color 0.15s,background 0.15s;}
+.atlas-link:hover{color:var(--ink);background:var(--paper3);}
+.atlas-link.current{color:var(--river-l);background:var(--river-ll);}
+.atlas-controls{margin-left:auto;display:flex;align-items:center;height:100%;border-left:0.5px solid var(--paper3);}
+.atlas-btn{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);padding:0 14px;height:100%;display:flex;align-items:center;cursor:pointer;border:none;background:none;border-right:0.5px solid var(--paper3);transition:color 0.15s,background 0.15s;white-space:nowrap;}
+.atlas-btn:hover{color:var(--ink);background:var(--paper3);}
+.section-divider{background:var(--paper2);border-top:0.5px solid var(--paper3);border-bottom:0.5px solid var(--paper3);padding:10px 32px;display:flex;align-items:center;gap:16px;}
+.divider-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);white-space:nowrap;}
+.divider-rule{flex:1;height:0.5px;background:var(--paper3);}
+.divider-anchor{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;color:var(--river-l);text-transform:uppercase;}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);padding:0 0 8px;border-bottom:0.5px solid var(--paper3);margin-bottom:20px;}
+.badge{display:inline-flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;padding:3px 7px;border-radius:2px;text-transform:uppercase;font-weight:500;white-space:nowrap;}
+.badge-transparency{background:var(--river-ll);color:var(--river);}
+.badge-ai{background:var(--violet-l);color:var(--violet);}
+.badge-collab{background:var(--sage-l);color:var(--sage);}
+.due-pill{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;border-radius:2px;white-space:nowrap;}
+.due-ok{background:var(--sage-l);color:var(--sage);}
+.due-warn{background:var(--amber-l);color:var(--amber);}
+.due-late{background:var(--coral-l);color:var(--coral);}
+.btn{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;padding:9px 20px;border-radius:3px;cursor:pointer;border:0.5px solid;transition:all 0.15s;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+.btn-primary{background:var(--river-l);border-color:var(--river-l);color:#fff;}
+.btn-secondary{background:transparent;border-color:var(--paper3);color:var(--ink2);}
+.btn-sm{font-size:10px;padding:5px 12px;}
+.btn-ghost{background:transparent;border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.8);}
+.tab-bar{display:flex;border-bottom:0.5px solid var(--paper3);margin-bottom:20px;}
+.tab{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;padding:10px 16px;color:var(--ink3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all 0.15s;}
+.tab:hover{color:var(--ink);}
+.tab.active{color:var(--river);border-bottom-color:var(--river-l);}
+.filter-chip{font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 10px;border:0.5px solid var(--paper3);border-radius:2px;color:var(--ink3);background:var(--surface);cursor:pointer;letter-spacing:0.05em;text-transform:uppercase;transition:all 0.15s;}
+.filter-chip:hover{border-color:var(--ink3);color:var(--ink);}
+.filter-chip.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.orcid-badge{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#a6ce39;background:rgba(166,206,57,0.1);border:0.5px solid rgba(166,206,57,0.3);padding:3px 8px;border-radius:2px;}
+.orcid-dot{width:14px;height:14px;border-radius:50%;background:#a6ce39;display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:700;flex-shrink:0;}
+.wizard-steps{display:flex;align-items:center;margin-bottom:24px;}
+.wizard-step{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;}
+.wizard-num{width:28px;height:28px;border-radius:50%;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;background:var(--paper3);color:var(--ink3);border:0.5px solid var(--ink3);transition:all 0.2s;}
+.wizard-num.active{background:var(--river);border-color:var(--river);color:#fff;}
+.wizard-num.done{background:var(--sage);border-color:var(--sage);color:#fff;}
+.wizard-connector{flex:1;height:0.5px;background:var(--paper3);margin-top:-19px;}
+.wizard-connector.done{background:var(--sage);}
+.wizard-step-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;color:var(--ink3);letter-spacing:0.06em;text-align:center;}
+.wizard-step-label.active{color:var(--river);}
+.wizard-step-label.done{color:var(--sage);}
+.pad{padding:24px 32px;}
+.mb-16{margin-bottom:16px;}
+.mb-24{margin-bottom:24px;}
+.ds-footer{background:var(--paper2);border-top:0.5px solid var(--paper3);padding:20px 32px;display:flex;align-items:center;justify-content:space-between;margin-top:48px;}
+.ds-footer-brand{font-family:'Spectral',serif;font-size:18px;font-weight:300;color:var(--ink);}
+.ds-footer-brand span{color:var(--river-l);}
+.ds-footer-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:0.06em;text-align:right;line-height:1.8;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.animate-in{animation:fadeIn 0.4s ease both;}
+
+/* ====== NAV VARIANTS ====== */
+/* Reused nav base */
+.eaiou-nav{background:var(--nav-bg);color:#fff;padding:0 32px;display:flex;align-items:center;height:52px;gap:28px;border-radius:4px;}
+.nav-brand{font-family:'Spectral',serif;font-size:22px;font-weight:300;letter-spacing:-0.02em;color:#fff;flex-shrink:0;text-decoration:none;}
+.nav-brand span{color:var(--accent);}
+.nav-links{display:flex;gap:20px;flex:1;}
+.nav-link{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--nav-text);text-decoration:none;cursor:pointer;transition:color 0.15s;text-transform:uppercase;white-space:nowrap;}
+.nav-link:hover,.nav-link.active{color:var(--nav-active);}
+.nav-right{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.nav-badge{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border:0.5px solid rgba(255,255,255,0.2);border-radius:3px;color:rgba(255,255,255,0.7);cursor:pointer;text-decoration:none;white-space:nowrap;}
+.nav-badge.primary{background:var(--river-l);border-color:var(--river-l);color:#fff;}
+.nav-badge.notify{background:rgba(200,70,50,0.2);border-color:var(--coral);color:var(--coral);}
+.nav-role-chip{font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 7px;border-radius:2px;letter-spacing:0.08em;text-transform:uppercase;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);}
+
+/* Left sidebar shell */
+.sidebar-shell{display:flex;height:400px;border:0.5px solid var(--paper3);border-radius:4px;overflow:hidden;}
+.sidebar-left{width:220px;flex-shrink:0;background:var(--paper2);border-right:0.5px solid var(--paper3);padding:16px;display:flex;flex-direction:column;gap:4px;}
+.sidebar-content{flex:1;padding:20px;background:var(--paper);}
+.sidebar-brand{font-family:'Spectral',serif;font-size:18px;font-weight:300;color:var(--ink);margin-bottom:20px;padding-bottom:12px;border-bottom:0.5px solid var(--paper3);}
+.sidebar-brand em{font-style:normal;color:var(--river-l);}
+.sidebar-group-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);padding:8px 0 4px;margin-top:4px;}
+.sidebar-nav-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:3px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink3);transition:all 0.15s;text-decoration:none;}
+.sidebar-nav-item:hover{background:var(--paper3);color:var(--ink);}
+.sidebar-nav-item.active{background:var(--river-ll);color:var(--river);}
+.sidebar-nav-icon{width:14px;font-size:10px;text-align:center;flex-shrink:0;}
+.nav-badge-count{font-family:'JetBrains Mono',monospace;font-size:9px;padding:1px 5px;border-radius:2px;background:var(--coral);color:#fff;margin-left:auto;}
+
+/* Breadcrumb */
+.breadcrumb{display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;}
+.breadcrumb a{color:var(--river-l);text-decoration:none;}
+.breadcrumb a:hover{text-decoration:underline;}
+.breadcrumb-sep{color:var(--ink3);font-size:10px;}
+.breadcrumb-current{color:var(--ink2);}
+
+/* Context menu / dropdown */
+.ctx-menu{background:var(--surface);border:0.5px solid var(--paper3);border-radius:4px;overflow:hidden;min-width:200px;box-shadow:0 4px 16px rgba(0,0,0,0.08);}
+.ctx-item{padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink2);cursor:pointer;display:flex;align-items:center;gap:10px;transition:background 0.12s;}
+.ctx-item:hover{background:var(--paper);}
+.ctx-item.danger{color:var(--coral);}
+.ctx-item.danger:hover{background:var(--coral-l);}
+.ctx-divider{height:0.5px;background:var(--paper3);margin:4px 0;}
+</style>
+</head>
+<body class="layout-fixed" data-theme="light">
+
+<!-- ATLAS NAV -->
+<div class="atlas-bar">
+  <span class="atlas-label">eaiou ds</span>
+  <a class="atlas-link" href="eaiou_ds_01_typography.html">01 · Tokens</a>
+  <a class="atlas-link" href="eaiou_ds_02_modules.html">02 · Modules</a>
+  <a class="atlas-link current" href="eaiou_ds_03_menus.html">03 · Menus</a>
+  <a class="atlas-link" href="eaiou_ds_04_article.html">04 · Article</a>
+  <a class="atlas-link" href="eaiou_ds_05_authoring.html">05 · Authoring</a>
+  <a class="atlas-link" href="eaiou_ds_06_admin.html">06 · Admin</a>
+  <div class="atlas-controls">
+    <button class="atlas-btn" onclick="toggleLayout()" id="layout-btn">⇔ Wide</button>
+    <button class="atlas-btn" onclick="toggleTheme()" id="theme-btn">◐ Dark</button>
+  </div>
+</div>
+
+<!-- TOP NAVBARS BY ROLE -->
+<div class="section-divider animate-in" id="navbars">
+  <div class="divider-title">01 · Top Navigation — All Roles</div>
+  <div class="divider-rule"></div>
+</div>
+
+<div class="pad">
+
+  <!-- Public / Guest -->
+  <div class="section-label">Public / Guest</div>
+  <nav class="eaiou-nav mb-24">
+    <a class="nav-brand" href="#">e<span>a</span>iou</a>
+    <div class="nav-links">
+      <a class="nav-link active" href="#">Discover</a>
+      <a class="nav-link" href="#">Submit</a>
+      <a class="nav-link" href="#">Review</a>
+      <a class="nav-link" href="#">Ideas</a>
+      <a class="nav-link" href="#">Gaps</a>
+    </div>
+    <div class="nav-right">
+      <a class="nav-badge" href="#">Log in</a>
+      <a class="nav-badge primary" href="#">Submit Paper</a>
+    </div>
+  </nav>
+
+  <!-- Author -->
+  <div class="section-label">Author (logged in)</div>
+  <nav class="eaiou-nav mb-24">
+    <a class="nav-brand" href="#">e<span>a</span>iou</a>
+    <div class="nav-links">
+      <a class="nav-link" href="#">Discover</a>
+      <a class="nav-link active" href="#">My Papers</a>
+      <a class="nav-link" href="#">Submit</a>
+      <a class="nav-link" href="#">Messages</a>
+      <a class="nav-link" href="#">Ideas</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-role-chip">Author</span>
+      <a class="nav-badge notify" href="#">3 Notifs</a>
+      <div class="orcid-badge" style="padding:2px 6px;font-size:10px;"><span class="orcid-dot">iD</span>EDM</div>
+    </div>
+  </nav>
+
+  <!-- Reviewer -->
+  <div class="section-label">Reviewer (logged in)</div>
+  <nav class="eaiou-nav mb-24">
+    <a class="nav-brand" href="#">e<span>a</span>iou</a>
+    <div class="nav-links">
+      <a class="nav-link" href="#">Discover</a>
+      <a class="nav-link active" href="#">Queue</a>
+      <a class="nav-link" href="#">Console</a>
+      <a class="nav-link" href="#">My Reviews</a>
+      <a class="nav-link" href="#">Messages</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-role-chip">Reviewer</span>
+      <span class="due-pill due-warn" style="background:rgba(196,124,10,0.2);border:0.5px solid var(--amber);color:var(--amber)">3 active</span>
+      <div class="orcid-badge" style="padding:2px 6px;font-size:10px;"><span class="orcid-dot">iD</span>JW</div>
+    </div>
+  </nav>
+
+  <!-- Editor -->
+  <div class="section-label">Editor (logged in)</div>
+  <nav class="eaiou-nav mb-24">
+    <a class="nav-brand" href="#">e<span>a</span>iou</a>
+    <div class="nav-links">
+      <a class="nav-link active" href="#">Papers</a>
+      <a class="nav-link" href="#">Queue</a>
+      <a class="nav-link" href="#">Decisions</a>
+      <a class="nav-link" href="#">Reviewers</a>
+      <a class="nav-link" href="#">Reports</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-role-chip">Editor</span>
+      <a class="nav-badge notify" href="#">12 overdue</a>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.5)">Ed. Board</span>
+    </div>
+  </nav>
+
+  <!-- Admin -->
+  <div class="section-label">Admin (logged in)</div>
+  <nav class="eaiou-nav mb-24">
+    <a class="nav-brand" href="#">e<span>a</span>iou</a>
+    <div class="nav-links">
+      <a class="nav-link active" href="#">Dashboard</a>
+      <a class="nav-link" href="#">Users</a>
+      <a class="nav-link" href="#">API Keys</a>
+      <a class="nav-link" href="#">API Logs</a>
+      <a class="nav-link" href="#">System</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-role-chip" style="background:rgba(184,72,50,0.3);border-color:rgba(184,72,50,0.4);color:rgba(255,160,140,0.9)">Admin</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.5)">eaiou.org</span>
+    </div>
+  </nav>
+
+</div>
+
+<!-- LEFT SIDEBAR SHELLS -->
+<div class="section-divider" id="sidebars">
+  <div class="divider-title">02 · Left Sidebar Navigation Shells (Wide Mode)</div>
+  <div class="divider-rule"></div>
+</div>
+
+<div class="pad">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+
+    <!-- Author sidebar -->
+    <div>
+      <div class="section-label">Author Left Panel</div>
+      <div class="sidebar-shell">
+        <div class="sidebar-left">
+          <div class="sidebar-brand">e<em>a</em>iou</div>
+          <div class="sidebar-group-label">Main</div>
+          <a class="sidebar-nav-item active" href="#"><span class="sidebar-nav-icon">⊙</span>Dashboard</a>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">◻</span>My Papers<span class="nav-badge-count">4</span></a>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">+</span>Submit</a>
+          <div class="sidebar-group-label">Tools</div>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">⎘</span>File Drawer</a>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">◈</span>Coverage</a>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">✉</span>Messages</a>
+          <div class="sidebar-group-label">Account</div>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">◎</span>ORCID Profile</a>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">⏻</span>Log out</a>
+        </div>
+        <div class="sidebar-content">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);text-transform:uppercase;letter-spacing:0.08em">← Author workspace content area</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Editor sidebar -->
+    <div>
+      <div class="section-label">Editor Left Panel</div>
+      <div class="sidebar-shell">
+        <div class="sidebar-left">
+          <div class="sidebar-brand">e<em>a</em>iou</div>
+          <div class="sidebar-group-label">Editorial</div>
+          <a class="sidebar-nav-item active" href="#"><span class="sidebar-nav-icon">⊙</span>Dashboard</a>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">≡</span>All Papers<span class="nav-badge-count">47</span></a>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">▷</span>Queue<span class="nav-badge-count" style="background:var(--amber)">21</span></a>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">✓</span>Decisions</a>
+          <div class="sidebar-group-label">Filter by Status</div>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">·</span>Submitted</a>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">·</span>Under Review</a>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">·</span>Revision Req.</a>
+          <div class="sidebar-group-label">Reviewers</div>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">◎</span>Reviewer DB</a>
+          <a class="sidebar-nav-item" href="#"><span class="sidebar-nav-icon">⚠</span>Conflicts</a>
+        </div>
+        <div class="sidebar-content">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);text-transform:uppercase;letter-spacing:0.08em">← Editorial content area</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TABS, CHIPS, SEARCH -->
+<div class="section-divider" id="components">
+  <div class="divider-title">03 · Tab Bars, Filter Chips, Breadcrumbs</div>
+  <div class="divider-rule"></div>
+</div>
+
+<div class="pad">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+
+    <div>
+      <div class="section-label">Tab Bars</div>
+
+      <!-- Author My Papers tabs -->
+      <div style="margin-bottom:24px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">My Papers view</div>
+        <div class="tab-bar">
+          <div class="tab active">All (7)</div>
+          <div class="tab">Draft (2)</div>
+          <div class="tab">Under Review (3)</div>
+          <div class="tab">Published (2)</div>
+        </div>
+      </div>
+
+      <!-- Reviewer tabs -->
+      <div style="margin-bottom:24px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Reviewer queue</div>
+        <div class="tab-bar">
+          <div class="tab active">Active (3)</div>
+          <div class="tab">Pending (2)</div>
+          <div class="tab">Completed (18)</div>
+        </div>
+      </div>
+
+      <!-- Editor dashboard tabs -->
+      <div style="margin-bottom:24px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Editor KPI module</div>
+        <div class="tab-bar">
+          <div class="tab active">Overview</div>
+          <div class="tab">Overdue</div>
+          <div class="tab">Reviewers</div>
+          <div class="tab">Flags</div>
+        </div>
+      </div>
+
+      <!-- Breadcrumbs -->
+      <div class="section-label">Breadcrumbs</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="breadcrumb">
+          <a href="#">Papers</a>
+          <span class="breadcrumb-sep">›</span>
+          <span class="breadcrumb-current">Hubble Tension as Measurement Artifact</span>
+        </div>
+        <div class="breadcrumb">
+          <a href="#">Author</a>
+          <span class="breadcrumb-sep">›</span>
+          <a href="#">My Papers</a>
+          <span class="breadcrumb-sep">›</span>
+          <span class="breadcrumb-current">Workspace — Paper #3</span>
+        </div>
+        <div class="breadcrumb">
+          <a href="#">Admin</a>
+          <span class="breadcrumb-sep">›</span>
+          <a href="#">Users</a>
+          <span class="breadcrumb-sep">›</span>
+          <span class="breadcrumb-current">Edit — E. Martin</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <!-- Discovery filter chips -->
+      <div class="section-label">Discovery Filter Chips</div>
+      <div style="margin-bottom:16px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Public papers list</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span class="filter-chip active">All Papers</span>
+          <span class="filter-chip">AI-Logged</span>
+          <span class="filter-chip">Open Collab</span>
+          <span class="filter-chip">Null Result</span>
+          <span class="filter-chip">Cross-Domain</span>
+          <span class="filter-chip">rs:Stalled</span>
+          <span class="filter-chip">Include Un-Space</span>
+        </div>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">By domain</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span class="filter-chip active">All Domains</span>
+          <span class="filter-chip">Cosmology</span>
+          <span class="filter-chip">Computing</span>
+          <span class="filter-chip">Mathematics</span>
+          <span class="filter-chip">Biophysics</span>
+          <span class="filter-chip">Statistics</span>
+          <span class="filter-chip">Physics</span>
+        </div>
+      </div>
+      <div style="margin-bottom:24px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Editor paper queue</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span class="filter-chip active">All</span>
+          <span class="filter-chip">Submitted</span>
+          <span class="filter-chip">Under Review</span>
+          <span class="filter-chip">Revision</span>
+          <span class="filter-chip">Overdue ×12</span>
+        </div>
+      </div>
+
+      <!-- Context / dropdown menu -->
+      <div class="section-label">Context Menus & Dropdowns</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Paper actions (author)</div>
+          <div class="ctx-menu">
+            <div class="ctx-item">⎘ View Workspace</div>
+            <div class="ctx-item">◈ Transparency</div>
+            <div class="ctx-item">⬡ AI Usage Log</div>
+            <div class="ctx-item">⊙ Version History</div>
+            <div class="ctx-divider"></div>
+            <div class="ctx-item danger">✕ Withdraw</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Paper actions (editor)</div>
+          <div class="ctx-menu">
+            <div class="ctx-item">▶ Accept</div>
+            <div class="ctx-item">↩ Request Revision</div>
+            <div class="ctx-item">✗ Reject</div>
+            <div class="ctx-item">⎘ Assign Reviewer</div>
+            <div class="ctx-divider"></div>
+            <div class="ctx-item">◎ Override Q Score</div>
+            <div class="ctx-item danger">✕ Desk Reject</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WIZARD STEP BARS -->
+<div class="section-divider" id="wizard">
+  <div class="divider-title">04 · Wizard Step Bars</div>
+  <div class="divider-rule"></div>
+</div>
+
+<div class="pad">
+  <div style="display:grid;grid-template-columns:1fr;gap:24px">
+
+    <div>
+      <div class="section-label">Submission Wizard — Step 3 of 6 (AI Usage)</div>
+      <div style="background:var(--surface);border:0.5px solid var(--paper3);border-radius:4px;padding:20px">
+        <div class="wizard-steps">
+          <div class="wizard-step"><div class="wizard-num done">✓</div><div class="wizard-step-label done">Metadata</div></div>
+          <div class="wizard-connector done"></div>
+          <div class="wizard-step"><div class="wizard-num done">✓</div><div class="wizard-step-label done">Bundle</div></div>
+          <div class="wizard-connector done"></div>
+          <div class="wizard-step"><div class="wizard-num active">3</div><div class="wizard-step-label active">AI Usage</div></div>
+          <div class="wizard-connector"></div>
+          <div class="wizard-step"><div class="wizard-num">4</div><div class="wizard-step-label">Triage</div></div>
+          <div class="wizard-connector"></div>
+          <div class="wizard-step"><div class="wizard-num">5</div><div class="wizard-step-label">Declarations</div></div>
+          <div class="wizard-connector"></div>
+          <div class="wizard-step"><div class="wizard-num">6</div><div class="wizard-step-label">Confirm</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Submission Wizard — Step 6 of 6 (Confirm + Seal)</div>
+      <div style="background:var(--surface);border:0.5px solid var(--paper3);border-radius:4px;padding:20px">
+        <div class="wizard-steps">
+          <div class="wizard-step"><div class="wizard-num done">✓</div><div class="wizard-step-label done">Metadata</div></div>
+          <div class="wizard-connector done"></div>
+          <div class="wizard-step"><div class="wizard-num done">✓</div><div class="wizard-step-label done">Bundle</div></div>
+          <div class="wizard-connector done"></div>
+          <div class="wizard-step"><div class="wizard-num done">✓</div><div class="wizard-step-label done">AI Usage</div></div>
+          <div class="wizard-connector done"></div>
+          <div class="wizard-step"><div class="wizard-num done">✓</div><div class="wizard-step-label done">Triage</div></div>
+          <div class="wizard-connector done"></div>
+          <div class="wizard-step"><div class="wizard-num done">✓</div><div class="wizard-step-label done">Declarations</div></div>
+          <div class="wizard-connector done"></div>
+          <div class="wizard-step"><div class="wizard-num active">6</div><div class="wizard-step-label active">Confirm</div></div>
+        </div>
+        <div style="background:var(--sage-l);border:0.5px solid var(--sage);border-radius:3px;padding:12px 16px;margin-top:4px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sage);text-transform:uppercase;letter-spacing:0.08em">Ready to seal · submission sealed at receipt — date not displayed publicly</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="ds-footer">
+  <div class="ds-footer-brand">e<span>a</span>iou design system</div>
+  <div class="ds-footer-meta">03 · Menus & Navigation · v1.0<br>ORCID 0009-0006-5944-1742 · eaiou.org</div>
+</div>
+
+<script>
+const savedLayout = localStorage.getItem('eaiou_layout') || 'layout-fixed';
+document.body.classList.add(savedLayout);
+document.getElementById('layout-btn').textContent = savedLayout === 'layout-wide' ? '⇔ Fixed' : '⇔ Wide';
+const savedTheme = localStorage.getItem('eaiou_theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? '◑ Light' : '◐ Dark';
+function toggleLayout(){const isWide=document.body.classList.contains('layout-wide');document.body.classList.remove('layout-fixed','layout-wide');const next=isWide?'layout-fixed':'layout-wide';document.body.classList.add(next);localStorage.setItem('eaiou_layout',next);document.getElementById('layout-btn').textContent=next==='layout-wide'?'⇔ Fixed':'⇔ Wide';}
+function toggleTheme(){const current=document.documentElement.getAttribute('data-theme');const next=current==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',next);localStorage.setItem('eaiou_theme',next);document.getElementById('theme-btn').textContent=next==='dark'?'◑ Light':'◐ Dark';}
+</script>
+</body>
+</html>
