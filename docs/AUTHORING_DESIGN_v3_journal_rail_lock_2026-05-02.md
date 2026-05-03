@@ -12,7 +12,52 @@
 3. The journal is the rail. The desktop locks to the journal.
 4. The author writes INTO the journal — not toward it. No formatting step.
 5. Two intake paths only: FRESH or RESTRUCTURED. No "upload-and-submit-as-is" path exists.
+6. Switching journals outside the original candidate array forces RESTRUCTURED intake.
+   No simple format-flip exists. Different journal = different rails = different work.
+7. Refusal of RESTRUCTURED intake is decline-of-service. 100% absolute, no exceptions,
+   no premium tier that bypasses, no negotiation. The policy IS the product.
 ```
+
+## Principle #7 — refusal is the architecture's signature
+
+If the author refuses RESTRUCTURED intake (manuscript exists, but they want
+polish-not-restructure), EAIOU declines service. Not blocks-with-warning. Not
+soft-redirects. Declines.
+
+There is no third path. Ever. No exception tier. The 100% policy IS the
+product. A 95% policy with 5% exceptions becomes 50% in practice via slippage,
+and slippage destroys the SLA guarantees, the journal partnerships, and the
+brand position. All three are downstream of intake-shape control.
+
+The decline moment in UX:
+
+> EAIOU does not offer manuscript submission without restructure.
+>
+> You have two options:
+>
+>   [Begin RESTRUCTURED intake]   [Begin FRESH intake (discard upload)]
+>
+> If neither path works for you, EAIOU is not the right tool for this
+> manuscript. We are not a submission service. We are an authoring system,
+> and our service-level guarantees and journal partnerships require that
+> we control the intake shape.
+>
+>   [Close — return manuscript to me]
+
+The exit is the integrity move. EAIOU lets the author walk away clean. Doesn't
+accept the work in any compromised form. Doesn't retain them with a downgraded
+service.
+
+Brand position:
+
+> EAIOU is not for everyone. EAIOU is for authors willing to do the discipline
+> that lets us guarantee outcomes and partner with journals on their behalf.
+> If that's not what you want, you are correctly excluded.
+
+The exclusion is the signal. Orchestras hold auditions. You don't get into the
+orchestra by refusing the audition. That's not gatekeeping — it's the condition
+under which the orchestra can promise the audience a concert. EAIOU's intake
+discipline is the audition.
 
 ## Two intake paths, no third
 
@@ -22,6 +67,186 @@
 | **RESTRUCTURED** | Existing manuscript (any state) | Q1–Q5 → validity route → journal → rails → manuscript dismantled into evidence + claims, rebuilt INTO the journal's locked form |
 
 The discarded path — "street-wise paper" / "upload my polished manuscript and just submit it" — is structurally rejected. The UI does not expose this affordance. MCP rejects any API call shaped like this path. Accepting it would force EAIOU to accept the author's scope, journal choice, and validity standard at face value — losing the three controls that make the architecture defensible.
+
+## Layout architecture — dual-sidebar on wide, inline on narrow
+
+The visual surface that makes everything above feel like a single tool, not a
+gauntlet of gates.
+
+**Wide screens (≥1280px) — every tier, no upcharge:**
+
+```
+┌──────────────────┬───────────────────────────────────┬──────────────────┐
+│ LEFT TOOLBAR     │ MAIN CANVAS (write into journal)  │ RIGHT TOOLBAR    │
+│                  │                                   │                  │
+│ Sections req.    │ [Article in journal layout]       │ IID assistants   │
+│ - Methods   1/1  │                                   │ Drift indicator  │
+│ - Results   2/3  │                                   │ Rails compliance │
+│ Figures   2 / 3  │                                   │ Submission ready │
+│ Tables    1 / 4  │                                   │ Drawer (uploads) │
+│ Required stmts   │                                   │ Version history  │
+│ Refs    34 / 80  │                                   │                  │
+│ [drag to insert] │                                   │                  │
+└──────────────────┴───────────────────────────────────┴──────────────────┘
+```
+
+The **left toolbar is the journal's required-element inventory.** Each row
+shows a scarcity counter (`Figures 2/3` = need 3, have 2). Author drags items
+from toolbar to canvas:
+
+- Figure shells with journal-formatted caption template pre-applied
+- Table shells with header-row + averages-row pre-built per journal convention
+- Required statement cards (data availability, COI, AI disclosure, author
+  contributions) drop into their conventionally-correct positions
+- Section headers from the locked template
+- Citation entries from the locked citation manager (with margin numbers
+  for Nature, inline `[N]` for IEEE, `(Author Year)` for PLOS, etc.)
+
+The **right toolbar is the work surface.** IID assistants (Claude, OpenAI,
+others — BYOK), drift indicator (semantic + structural), rails-compliance
+light, submission-readiness gauge, drawer for uploaded reference manuscripts,
+version timeline.
+
+The scarcity counters turn the toolbar into a diagnostic-and-affordance
+dashboard. Author sees what's needed, what's done, grabs the next thing — all
+without leaving the canvas.
+
+**Drag-from-toolbar = the primary mechanic.** Author needs another figure →
+drag from `Figures 2/3` slot → caption shell appears at cursor with the
+journal's exact format (e.g. `**Fig. 3.** *Title sentence.* Caption body.` for
+Nature; auto-assigned margin reference). The author doesn't construct from
+scratch; they fill known slots dragged from a known palette. This is the
+"write INTO the journal" principle made mechanical.
+
+**Inner rails (right toolbar) are author-customizable and persistent.** The
+left toolbar contents are defined by the journal rails and locked. The right
+toolbar contents are defined by the author and follow them across every
+section of the manuscript:
+
+- Pin a Claude IID assistant with a personal prompt that travels with them
+- Pin the drift indicator at the top, bottom, or middle of the right rail
+- Pin a personal scratchpad for notes that don't enter the manuscript
+- Pin reference-search shortcuts scoped to a specific corpus
+- Pin a comment thread with a co-author
+
+Whatever the author pins persists across every page within that manuscript.
+This expresses the doctrine cleanly: rigidity where it must be (left, journal)
+and flexibility where it should be (right, author). Carrier vs. agent.
+
+**Narrow screens — rails go inline.** On tablet/phone the dual sidebar
+collapses; the rails become inline elements within the editing flow:
+
+| Width | Layout |
+|---|---|
+| ≥ 1280px | Dual sidebar (default for wide, every tier) |
+| 768–1279px | Single right sidebar; left toolbar as collapsible drawer |
+| 480–767px | Both sidebars become bottom drawer + inline checkpoint cards between sections |
+| < 480px | Inline-only with floating IID action button |
+
+Functionality identical at every viewport. Rail integrity preserved. The
+"write into the journal" mechanic survives — drag becomes tap on touch
+devices, but the slots and conventions are the same.
+
+## Interactive journal and scope finder
+
+The intake flow is **live-reactive**, not a static fill-out-and-submit form.
+Every author answer reshapes the next set of options visibly:
+
+- After Q1 (question): the analyzer extracts a normalized form; author confirms
+  or revises; the candidate journal pool starts as ~1500 journals
+- After Q2 (claim type): validity route options narrow; pool shrinks visibly
+  ("from 1500 to 380 candidates")
+- After Q3 (audience): tier filter applies; pool shrinks again
+- After Q4 (provenance): related-work weighting applied
+- After Q5 (falsifiability): validity-rigor filter; pool reaches a workable size
+  (typically 15–50 candidates)
+
+The shrinking pool is a **live progress signal** the author sees. They can
+trace cause and effect — "my Q3 answer just dropped my favorite journal off
+the list, let me reconsider Q3 or accept that the journal isn't a good fit."
+
+Pool shrink is visualized as a count + a delta animation + a "what just got
+filtered out, and why" expandable trace. This catches misalignment early and
+turns intake into guided exploration rather than survey-completion.
+
+## Live evidence with every journal judgment
+
+Every judgment EAIOU emits about journals (suggester ranking, fit score,
+drift assessment, restructure recommendation, falsifiability score against
+journal norms) is accompanied by the **live evidence set used to make the
+judgment** — actual recent articles, clickable to inspect.
+
+If the author wants to disagree, they must engage with the cited articles.
+Abstract complaints fail because the evidence is on the table. Informed
+disagreements are honored — authors who read the cited articles and produce a
+counter-argument can override the recommendation, with the override and its
+rationale logged via `intellid.log` for editorial review later.
+
+This holds EAIOU to its own standard: show your work, cite your sources,
+reason from evidence. Same discipline the system asks of authors elsewhere.
+
+Every judgment-emitting service (`journal.family_suggest`,
+`journal.candidates_filter`, `falsifiability.score`, `scope.reconciliation`,
+`manuscript.intent_compare`) returns an `evidence[]` array with source
+pointers, retrieval-time metadata, and per-source contribution weights:
+
+```json
+{
+  "score": "low",
+  "evidence": [
+    {
+      "source": "doi:10.1371/example.1",
+      "title": "...",
+      "weight": 0.34,
+      "retrieved": "2026-05-02T20:15:00Z",
+      "citation_used_in_reasoning": "Methods section, paragraph 2"
+    }
+  ],
+  "reasoning_trace": "..."
+}
+```
+
+## Service-level guarantees enabled by the rigidity
+
+Because intake is forced through one of two paths (FRESH | RESTRUCTURED), and
+rails are locked at journal selection, EAIOU can sell **outcomes, not effort**:
+
+| Tier | Guarantee |
+|---|---|
+| Fit Guarantee | If a manuscript exits EAIOU's submission-readiness check and the chosen journal desk-rejects on *format* grounds, EAIOU refunds and restructures into a sibling journal at no cost |
+| Restructure Guarantee | RESTRUCTURED intake completes within N business days or refund |
+| Time-to-Submission | FRESH path → first-draft in N weeks for a given paper type |
+| Match Guarantee | If the journal-family suggester's top-1 has measurably below-cohort acceptance rate, suggester re-runs for free |
+
+These guarantees are only possible because the architecture is rigid. Loose
+tools can't sell outcomes; only EAIOU can, because intake shape is controlled.
+
+## Journal partnership — the upstream-filter pivot
+
+EAIOU is not a competitor to journals. EAIOU is an **upstream filter** that
+benefits journals by reducing their format-burden, desk-reject rate, and
+scope-mismatch rate. This makes journal partnerships a natural B2B revenue
+layer in addition to author-side authoring fees:
+
+| For the journal | For EAIOU |
+|---|---|
+| Manuscripts arrive structurally pre-conformant → lower copy-edit burden | Authoring fees + subscription |
+| Lower desk-reject rate → better author experience metric | Higher fit-rate → SLA guarantees deliverable |
+| Better scope-fit (validity-route filter) → higher relevance per submission | Lower restructure refunds |
+| Editorial priorities surfaced *before* submission → opportunity to shape pipeline | Premium signal source for the suggester |
+
+Once journals see this, partnership opportunities open private signal channels
+to EAIOU:
+
+- Current editorial priorities (what topics the journal is actively seeking)
+- Section-format preferences not in public guidelines
+- Topic priority weights and real-time hotness signals
+- Reviewer-pool preferences ("this kind of work goes to pool A in form B")
+- Pre-screening lanes ("we'd like to see manuscripts on topic X before public submission")
+- Beyond-public acceptance trend data
+
+The rigidity that looks like friction to the author is the *exact same*
+property that earns SLAs and partnerships. A loose tool can sell neither.
 
 ## Commercial moat: four-way intersection
 
