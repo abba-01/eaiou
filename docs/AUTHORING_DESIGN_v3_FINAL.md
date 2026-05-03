@@ -346,7 +346,32 @@ Once journals see this, partnership opens private signal channels:
 
 The rigidity that looks like friction to authors is the same property that earns SLAs and partnerships. A loose tool can sell neither.
 
-# Commercial moat — the four-way intersection
+# Market position
+
+EAIOU is the **first and only AI-integrated full-service manuscript authoring
+system for independent researchers operating under SAID protocols.**
+
+| Component | What it asserts |
+|---|---|
+| First AI-integrated | Existing tools avoid AI or bolt it on; EAIOU is built around IID dispatch from line zero |
+| Full-service manuscript | Intake to submission readiness, not editing-only or formatting-only |
+| Independent researchers | Target market: researchers without institutional infrastructure (no university press office, no editorial assistant, no junior coauthors). EAIOU replaces what institutions provide. |
+| SAID protocols | Strong AI Information Disclosure — every IID interaction logged, no chaining, per-provider credential isolation, author-owned text. ToS Compliance Doctrine §1 enforced. |
+
+The independent-researcher target is non-obvious. Existing tools assume a user
+with institutional support. EAIOU is built for the researcher who does not
+have that, and SAID compliance is what gives them institutional-grade
+trustworthiness markers without the institution.
+
+# Workflow is a no-exception process
+
+A clarifying frame for principle #10 (conform-or-leave): a *workflow* is, by
+definition, a no-exception process. The moment an exception is granted, the
+artifact is no longer a workflow but a suggestion. EAIOU's rigidity is
+legitimate not because of authority but because of category. Calling EAIOU
+a "workflow" commits to the no-exception property.
+
+# Commercial moat — the five-way intersection
 
 | Capability | Without it | With it |
 |---|---|---|
@@ -354,8 +379,9 @@ The rigidity that looks like friction to authors is the same property that earns
 | Two-paths-only intake | Anyone uploads anything; EAIOU = portal | EAIOU controls intake shape; EAIOU = authoring system |
 | MCP enforcement layer | App rules bypassable via direct API | Gates enforced at protocol layer |
 | Locked app surface | Generic editor with sidebars | Workspace IS the journal layout |
+| SAID protocol compliance | AI integration opaque; no provable authorship; institutional credibility required to be trusted | Every IID action logged; author-owned-text + audit trail = provable authorship; institutional-grade trust without an institution |
 
-These four are only deliverable jointly. A competitor copying any one is still inferior. The four-way intersection is the moat.
+These five are only deliverable jointly. A competitor copying any one — or even any four — is still inferior. The five-way intersection is the moat. SAID compliance is the leg that converts "control of intake shape" into "institutional-grade authorship guarantee" — without it, the architecture works but doesn't earn the independent-researcher market.
 
 # Schema additions
 
