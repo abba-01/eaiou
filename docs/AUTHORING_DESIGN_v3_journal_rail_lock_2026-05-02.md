@@ -16,7 +16,57 @@
    No simple format-flip exists. Different journal = different rails = different work.
 7. Refusal of RESTRUCTURED intake is decline-of-service. 100% absolute, no exceptions,
    no premium tier that bypasses, no negotiation. The policy IS the product.
+8. Custom-by-chat is the differentiator. Author choices happen through conversation,
+   not static forms. Without chat-driven customization, we are everyone else.
+9. Override of evidence-backed recommendations (journal, scope, validity route,
+   falsifiability) moves the manuscript OUT OF SLA. Author can still use the tool;
+   author forfeits service-level guarantees until returning to a recommended envelope.
 ```
+
+## Principle #8 — custom-by-chat is the differentiator
+
+Every author choice that customizes the workspace flows through chat, not
+through a static dropdown form. The chat is the meta-layer over every
+structural rail. The rigidity is the floor; the chat is the texture that
+makes the rigidity feel humane.
+
+Without chat-driven customization, the system becomes a compliance gauntlet
+indistinguishable from existing submission portals. With it, the same gates
+feel like a guided audition — personalized, evidence-backed, conversational.
+
+## Principle #9 — out-of-SLA when author overrides analyzer
+
+When the author makes a choice (journal, scope, validity route, falsifiability
+disposition) that contradicts EAIOU's evidence-backed recommendation, the
+manuscript moves OUT OF SLA. Service continues; service-level guarantees
+forfeit until the author returns to a recommended envelope.
+
+SLA status is persistent and visible at all times. Override events are logged
+with timestamp, dimension, the recommendation that was overridden, the
+evidence cited, and the author's rationale. The audit trail is append-only
+— returns to in-SLA add new entries; existing entries never get edited.
+
+This is the carrier theorem at the commercial layer: the carrier carries any
+value, but only specific values are guaranteed by the structure. Author owns
+the outcome of every commit. SLA forfeit is the financial expression of the
+author-owned text doctrine.
+
+```
+┌─────────────────────────────────────┐
+│ Status: ⚠ OUT OF SLA                │
+│ Reason: You chose [J] over our top  │
+│   recommendation [K] on 2026-05-02. │
+│ Evidence we cited: [12 articles]    │
+│ Your override reason: "..."          │
+│ Effects:                            │
+│   Fit Guarantee:        ✗ inactive  │
+│   Restructure Guarantee: ✗ inactive │
+│   Time Guarantee:       ✓ active    │
+│   Match Guarantee:      ✗ inactive  │
+│ [Return to recommendation envelope] │
+└─────────────────────────────────────┘
+```
+
 
 ## Principle #7 — refusal is the architecture's signature
 
