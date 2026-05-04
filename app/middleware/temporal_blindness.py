@@ -30,14 +30,44 @@ _FORBIDDEN_SORT_KEYS = frozenset({
 
 
 def _is_governance(request: Request) -> bool:
-    """Return True if the session user belongs to the 'governance' group."""
+    """
+    Return True if the session user belongs to the 'governance' group.
+
+    H-1 fix (CWO audit 2026-05-02): session stores username as a STRING, not
+    a dict. The previous code returned False for every logged-in user — the
+    governance unlock was effectively dead. This version does a DB lookup
+    when the session has just the username, so governance members actually
+    get the unlock.
+    """
     user = request.session.get("user")
     if not user:
         return False
-    # Phase 1: session stores username as string; Phase 2 will store dict
+
+    # If session somehow stores a dict (future Phase 2), use it directly.
+    if isinstance(user, dict):
+        return "governance" in (user.get("groups") or [])
+
+    # Session stores a username string — look up groups in DB.
     if isinstance(user, str):
-        return False
-    return "governance" in (user.get("groups") or [])
+        try:
+            from sqlalchemy import text
+            from ..database import SessionLocal
+            with SessionLocal() as db:
+                rows = db.execute(text("""
+                    SELECT g.name FROM `#__eaiou_groups` g
+                    JOIN `#__eaiou_user_groups` ug ON ug.group_id = g.id
+                    JOIN `#__eaiou_users` u ON u.id = ug.user_id
+                    WHERE u.username = :u AND u.active = 1
+                """), {"u": user}).mappings().all()
+                groups = [r["name"] for r in rows]
+                return "governance" in groups
+        except Exception:
+            # Fail closed: any error in lookup → no governance privilege.
+            # This is intentional — an exception here MUST NOT leak sealed
+            # fields by accident.
+            return False
+
+    return False
 
 
 def _strip_sealed(obj):
