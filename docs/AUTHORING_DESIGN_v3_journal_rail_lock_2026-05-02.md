@@ -21,7 +21,37 @@
 9. Override of evidence-backed recommendations (journal, scope, validity route,
    falsifiability) moves the manuscript OUT OF SLA. Author can still use the tool;
    author forfeits service-level guarantees until returning to a recommended envelope.
+10. The method is the system. Conform, or use a different tool. Authors stay in the
+    system and answer the system's questions in the form the system asks them. No
+    rephrasing, no skipping, no outside-tool bypass, no street-wise-paper path. EAIOU
+    is correctly unsuitable for authors who want a different method.
 ```
+
+## Principle #10 — the consolidating frame
+
+The method is the system. The method is not negotiable. This is the user-facing
+terms-of-service version of every prior principle. Each prior principle defends
+against one failure mode; this one defends against the
+**erosion-by-individual-exception** mode that would dissolve all of them.
+
+The "use a different tool" exit is not abandonment — it is integrity. The right
+authors stay because the method serves them. The wrong authors leave because
+they want something EAIOU does not sell. Both outcomes are correct.
+
+Self-selection as a feature:
+
+- Authors who want a method, trust rigidity, prefer guided structure → stay
+- Authors who want freedom-as-blank-canvas → leave, find a different tool
+- Authors who want to game the system → bounce off the gates and leave
+- Authors who are partway-formed and can be guided → the chat-driven layer (#8)
+  helps them across the threshold
+
+By being unsuitable for some authors, EAIOU becomes maximally valuable to the
+rest. Niche-by-design, not by accident. Same shape as journal partnerships:
+the value is in the constraint, not in spite of it.
+
+#10 is the floor. The other nine principles stand on it. Without #10, the
+principle stack is opinion. With #10, it is policy.
 
 ## Principle #8 — custom-by-chat is the differentiator
 
