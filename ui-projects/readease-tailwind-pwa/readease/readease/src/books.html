@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Books - ReadEase PWA HTML Template</title>
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+    <link
+      rel="shortcut icon"
+      href="./assets/images/logo.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./assets/css/swiper.min.css" />
+  </head>
+  <body class="">
+    <!-- Splash Screen Start -->
+    <div class="preloader inset-0 z-50 fixed">
+      <div
+        class="h-full bg-y50 flex flex-col justify-center items-center text-center container"
+      >
+        <div class="zoomInOut">
+          <div class="flex justify-center items-center">
+            <img src="./assets/images/logo.png" alt="" />
+          </div>
+          <p class="pt-6 text-4xl font-bold text-y300">ReadEase</p>
+        </div>
+      </div>
+    </div>
+    <!-- Splash Screen End -->
+    <main
+      class="container py-6 min-h-dvh text-b300 bg-y50 pb-28 dark:bg-darkY50 dark:text-white"
+    >
+      <div class="px-6">
+        <h1 class="text-3xl font-bold">Books</h1>
+        <p class="text-n500 dark:text-darkN500 pt-3 text-sm">
+          Discover wisdom, solace, and joy within the pages.
+        </p>
+      </div>
+
+      <div class="pt-8">
+        <div class="flex justify-between items-center px-6">
+          <p class="text-xl font-semibold">Popular Books</p>
+        </div>
+
+        <div class="swiper featured-books-slider pt-5 pl-6">
+          <div class="swiper-wrapper">
+            <a href="./book-details.html" class="swiper-slide relative">
+              <div class="rounded-md overflow-hidden relative">
+                <div
+                  class="size-7 flex justify-center items-center bg-white rounded-full absolute top-2 right-2"
+                >
+                  <i class="ph-fill ph-heart-straight text-y300"></i>
+                </div>
+                <img
+                  src="./assets/images/book-1.jpg"
+                  alt=""
+                  class="h-[216px] object-cover w-full"
+                />
+                <div
+                  class="flex justify-center items-center gap-1 absolute left-0 right-0 bottom-3"
+                >
+                  <i class="ph-fill ph-star text-y200"></i>
+                  <p class="text-white">(4.7K)</p>
+                </div>
+              </div>
+              <div class="">
+                <p class="font-medium pt-2">The Lord of the..</p>
+                <p class="pt-0.5 text-n500 dark:text-darkN500 text-xs">
+                  by J.R.R. Tolkien
+                </p>
+              </div>
+            </a>
+            <a href="./book-details.html" class="swiper-slide relative">
+              <div class="rounded-md overflow-hidden relative">
+                <div
+                  class="size-7 flex justify-center items-center bg-white rounded-full absolute top-2 right-2"
+                >
+                  <i class="ph-fill ph-heart-straight text-y300"></i>
+                </div>
+                <img
+                  src="./assets/images/book-2.jpg"
+                  alt=""
+                  class="h-[216px] object-cover w-full"
+                />
+                <div
+                  class="flex justify-center items-center gap-1 absolute left-0 right-0 bottom-3"
+                >
+                  <i class="ph-fill ph-star text-y200"></i>
+                  <p class="text-white">(4.5K)</p>
+                </div>
+              </div>
+              <div class="">
+                <p class="font-medium pt-2">To Kill a..</p>
+                <p class="pt-0.5 text-n500 dark:text-darkN500 text-xs">
+                  by Harper Lee
+                </p>
+              </div>
+            </a>
+            <a href="./book-details.html" class="swiper-slide relative">
+              <div class="rounded-md overflow-hidden relative">
+                <div
+                  class="size-7 flex justify-center items-center bg-white rounded-full absolute top-2 right-2"
+                >
+                  <i class="ph-fill ph-heart-straight text-y300"></i>
+                </div>
+                <img
+                  src="./assets/images/book-3.jpg"
+                  alt=""
+                  class="h-[216px] object-cover w-full"
+                />
+                <div
+                  class="flex justify-center items-center gap-1 absolute left-0 right-0 bottom-3"
+                >
+                  <i class="ph-fill ph-star text-y200"></i>
+                  <p class="text-white">(4.4K)</p>
+                </div>
+              </div>
+              <div class="">
+                <p class="font-medium pt-2">The Sun Also..</p>
+                <p class="pt-0.5 text-n500 dark:text-darkN500 text-xs">
+                  by Ernest Hemingway
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="continue-reading-tab pt-8">
+        <ul class="px-6 flex justify-between items-center tab-button">
+          <li
+            class="flex-1 text-center font-semibold pb-1 border-b-2 border-y300 text-y300 tab-item cursor-pointer"
+          >
+            All Books
+          </li>
+          <li
+            class="flex-1 text-center font-semibold pb-1 border-b-2 border-n40 dark:border-darkN40 tab-item cursor-pointer"
+          >
+            Featured
+          </li>
+          <li
+            class="flex-1 text-center font-semibold pb-1 border-b-2 border-n40 dark:border-darkN40 tab-item cursor-pointer"
+          >
+            Popular
+          </li>
+        </ul>
+
+        <div class="animationOne content flex-1" id="all-books">
+          <div class="pt-5 flex flex-col gap-4 px-6">
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-2.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-1.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-24.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-23.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-22.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-21.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-20.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-19.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-18.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-17.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="animationTwo content hidden flex-1" id="featured">
+          <div class="pt-5 flex flex-col gap-4 px-6">
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-16.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-15.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-14.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-13.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-12.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-11.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="animationTwo content hidden flex-1" id="popular">
+          <div class="pt-5 flex flex-col gap-4 px-6">
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-10.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-9.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-8.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-7.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-6.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-5.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-4.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-3.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-2.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+            <a
+              href="./book-details.html"
+              class="bg-white border border-n40 dark:bg-darkN0 dark:border-darkN40 p-3 rounded-xl flex justify-start items-center gap-3"
+            >
+              <div class="w-20 h-28 rounded-xl overflow-hidden">
+                <img
+                  src="./assets/images/book-1.jpg"
+                  alt=""
+                  class="object-cover h-full w-full"
+                />
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold">A Court of Mist and Fury</p>
+                <p class="text-xs font-semibold pt-1 text-y300">Romance</p>
+                <div
+                  class="pt-2 flex justify-start items-center gap-1 text-y200"
+                >
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph ph-star"></i>
+                  <span class="text-xs text-n500 dark:text-darkN500"
+                    >(4.7)</span
+                  >
+                </div>
+                <p class="pt-2 text-xs text-n500 dark:text-darkN500">
+                  Feyre has undergone more trials than one human woman can carry
+                  in her heart
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="fixed bottom-0 left-0 right-0 container z-30">
+        <div
+          class="p-6 bg-b300 rounded-t-3xl flex justify-between items-center"
+        >
+          <a
+            href="./home.html"
+            class="flex flex-col gap-1 justify-center items-center"
+          >
+            <i class="ph ph-house text-3xl !leading-none text-white"></i>
+            <p class="text-xs font-semibold text-white">Home</p>
+          </a>
+          <a
+            href="./books.html"
+            class="flex flex-col gap-1 justify-center items-center"
+          >
+            <i
+              class="ph-fill ph-book-open text-3xl !leading-none text-y200"
+            ></i>
+            <p class="text-xs font-semibold text-white">Books</p>
+          </a>
+          <a
+            href="./audiobooks.html"
+            class="flex flex-col gap-1 justify-center items-center"
+          >
+            <i class="ph ph-headphones text-3xl !leading-none text-white"></i>
+            <p class="text-xs font-semibold text-white">Audiobooks</p>
+          </a>
+          <a
+            href="./library.html"
+            class="flex flex-col gap-1 justify-center items-center"
+          >
+            <i class="ph ph-book text-3xl !leading-none text-white"></i>
+            <p class="text-xs font-semibold text-white">Library</p>
+          </a>
+          <a
+            href="./settings.html"
+            class="flex flex-col gap-1 justify-center items-center"
+          >
+            <i class="ph ph-gear-six text-3xl !leading-none text-white"></i>
+            <p class="text-xs font-semibold text-white">Settings</p>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- ======Javascript Dependencies -->
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="./assets/js/plugins/plugin-custom.js"></script>
+  </body>
+</html>
