@@ -1,0 +1,74 @@
+{# ============================================================================
+   author/manuscript_edit.html — Phase A stub of the manuscript editor surface
+   ============================================================================
+   Extends layout/base.html (Metronic three-zone shell). Phase A version is
+   stubbed — has the structure but the editor body is markdown-backed-stub.
+   Phase B wires real DB-backed manuscript blocks, autosave, version timeline.
+   Phase C adds the IID dispatcher + output cards + selection action bar.
+
+   Backend supplies: manuscript, sections, active_section, recent_iid_outputs.
+   ============================================================================ #}
+{% extends 'layout/base.html' %}
+{% block title %}{{ manuscript.title|default('Manuscript') }} — eaiou{% endblock %}
+
+{% block main %}
+<div class="max-w-3xl mx-auto px-6 py-8">
+
+  {# Section breadcrumb #}
+  {% if active_section %}
+  <div class="flex items-center gap-2 mb-2 text-xs text-muted-foreground">
+    <span>Sections</span><span>›</span>
+    <span class="text-primary font-medium">{{ active_section.title }}</span>
+  </div>
+  {% endif %}
+
+  {# Editor body — Phase A stub (contenteditable shell; Phase B wires autosave) #}
+  <article class="kt-manuscript-body space-y-4"
+           data-manuscript-editor
+           data-manuscript-id="{{ manuscript.id|default('') }}"
+           contenteditable="true">
+    {% if manuscript and manuscript.blocks %}
+      {% for block in manuscript.blocks %}
+        {% if block.type == 'heading_2' %}
+          <h2 class="text-2xl font-semibold tracking-tight" id="section-{{ block.anchor }}">{{ block.text }}</h2>
+        {% elif block.type == 'heading_3' %}
+          <h3 class="text-lg font-semibold mt-6">{{ block.text }}</h3>
+        {% elif block.type == 'paragraph' %}
+          <p>{{ block.html|safe }}</p>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {# Phase A stub: empty editor with a placeholder #}
+      <h2 class="text-2xl font-semibold tracking-tight">Untitled section</h2>
+      <p class="text-muted-foreground">Begin typing your manuscript here. Save state syncs automatically when Phase B ships.</p>
+    {% endif %}
+  </article>
+
+  {# Selection action bar — Phase C: wired with iid_dispatch.js + selection_actions.js #}
+  {% include 'author/_selection_action_bar.html' %}
+
+  {# Quick Reviews sidebar — Phase E checksubmit storefront integration #}
+  {% if products %}
+  <aside class="mt-8">
+    {% include 'author/_quick_reviews_sidebar.html' %}
+  </aside>
+  {% endif %}
+
+  {# Recent IID outputs stream — Phase C populates with real cards on dispatch #}
+  <section class="mt-10">
+    <h3 class="text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wider">IID Outputs</h3>
+    <div class="space-y-3" data-iid-output-stream>
+      {% if recent_iid_outputs %}
+        {% for output in recent_iid_outputs %}
+          {% include 'author/_iid_output_card.html' %}
+        {% endfor %}
+      {% else %}
+        <div class="kt-module text-center text-sm text-muted-foreground italic py-6">
+          No IID outputs yet. Select text and invoke an action from the right sidebar.
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+</div>
+{% endblock %}

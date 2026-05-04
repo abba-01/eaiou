@@ -1,0 +1,119 @@
+{# ============================================================================
+   account/api_keys.html — IID provider API key configuration
+   ============================================================================
+   Adapted from Metronic demo1/account/api-keys.html into eaiou Jinja shell.
+   Provider isolation per ToS Compliance Doctrine §1 Rule 3:
+     * Each provider has its own row + own encrypted key
+     * Raw keys never appear in templates (only api_key_prefix)
+     * Mint / rotate via POST /api/iid/providers/{id}/key
+
+   Backend: app/routers/api_iid_providers.py
+   ============================================================================ #}
+{% extends 'layout/base.html' %}
+{% block title %}IID Provider API Keys — eaiou{% endblock %}
+
+{% block main %}
+<div class="max-w-4xl mx-auto px-6 py-8">
+
+  <header class="mb-6 flex items-start justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold tracking-tight">IID Provider API Keys</h1>
+      <p class="mt-1 text-sm text-muted-foreground max-w-2xl">
+        Configure one API key per IID provider. Each key is encrypted at rest with AES-128-GCM
+        (Fernet); the raw value never leaves the secret store. Per-provider isolation:
+        no provider can see another provider's credentials.
+      </p>
+    </div>
+    <button class="kt-btn kt-btn-primary" data-kt-modal-open="#add_provider_modal">
+      <i class="ki-filled ki-plus"></i> Add Provider
+    </button>
+  </header>
+
+  {# ── Provider list ───────────────────────────────────────────────────────── #}
+  <section class="space-y-3" data-iid-provider-list>
+    {% if providers %}
+      {% for p in providers %}
+      <div class="kt-module flex items-center justify-between gap-4 flex-wrap"
+           data-provider-id="{{ p.id }}">
+        <div class="flex items-center gap-3 flex-wrap">
+          <span class="iid-chip iid-chip-{{ p.name }}">{{ p.display_name }}</span>
+          <span class="text-xs text-muted-foreground font-mono">{{ p.default_model }}</span>
+          {% if p.api_key_prefix %}
+            <span class="text-xs text-muted-foreground font-mono">key: {{ p.api_key_prefix }}</span>
+          {% else %}
+            <span class="text-xs text-acad-red font-mono">no key</span>
+          {% endif %}
+          {% if p.active %}
+            <span class="kt-chip" style="background:rgba(39,174,96,0.14); color:#1B6B3D; border:1px solid rgba(39,174,96,0.4);">active</span>
+          {% else %}
+            <span class="kt-chip" style="background:rgba(192,57,43,0.10); color:#7A2622;">disabled</span>
+          {% endif %}
+        </div>
+        <div class="flex gap-1.5">
+          <button class="kt-btn kt-btn-outline kt-btn-sm" data-rotate-key data-provider-id="{{ p.id }}">Rotate key</button>
+          <button class="kt-btn kt-btn-ghost kt-btn-sm" data-test-provider data-provider-id="{{ p.id }}">Test</button>
+          <button class="kt-btn kt-btn-ghost kt-btn-sm text-acad-red" data-delete-provider data-provider-id="{{ p.id }}">Disable</button>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="kt-module text-center text-sm text-muted-foreground italic py-10">
+        No IID providers configured yet.<br>
+        <button class="kt-btn kt-btn-primary mt-3" data-kt-modal-open="#add_provider_modal">Add your first provider</button>
+      </div>
+    {% endif %}
+  </section>
+
+  {# ── Doctrine reminder ──────────────────────────────────────────────────── #}
+  <aside class="kt-module mt-8 text-sm">
+    <div class="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">ToS Compliance</div>
+    <ul class="space-y-1 text-muted-foreground">
+      <li>• <strong class="text-foreground">No chaining:</strong> one provider's output is never input to another.</li>
+      <li>• <strong class="text-foreground">Per-provider isolation:</strong> credentials never shared across providers.</li>
+      <li>• <strong class="text-foreground">Mandatory disclosure:</strong> every output emits provider + model_family + instance_hash.</li>
+      <li>• See full doctrine: <a href="/docs/tos-compliance" class="text-acad-blue underline">TOS_COMPLIANCE_DOCTRINE.md</a></li>
+    </ul>
+  </aside>
+</div>
+
+{# Add-provider modal — minimal; full validation handled by api_iid_providers.py #}
+<div class="kt-modal" data-kt-modal="true" id="add_provider_modal">
+  <div class="kt-modal-content max-w-[500px]">
+    <div class="kt-modal-header"><h3>Add IID Provider</h3></div>
+    <form class="kt-modal-body" data-create-provider-form>
+      <div class="space-y-3">
+        <label class="block">
+          <span class="text-xs uppercase tracking-wider text-muted-foreground">Provider</span>
+          <select name="name" required class="kt-input w-full mt-1">
+            <option value="mae">Mae (Anthropic)</option>
+            <option value="openai">OpenAI</option>
+            <option value="gemini">Gemini (Google)</option>
+            <option value="llama">Llama (Meta)</option>
+            <option value="custom_">Custom (HTTP endpoint)</option>
+          </select>
+        </label>
+        <label class="block">
+          <span class="text-xs uppercase tracking-wider text-muted-foreground">Display name</span>
+          <input name="display_name" type="text" required class="kt-input w-full mt-1" placeholder="My Mae key">
+        </label>
+        <label class="block">
+          <span class="text-xs uppercase tracking-wider text-muted-foreground">Default model</span>
+          <input name="default_model" type="text" required class="kt-input w-full mt-1" placeholder="claude-opus-4-7">
+        </label>
+        <label class="block">
+          <span class="text-xs uppercase tracking-wider text-muted-foreground">API key</span>
+          <input name="api_key" type="password" required class="kt-input w-full mt-1" placeholder="sk-ant-... / sk-... / etc">
+        </label>
+        <label class="block">
+          <span class="text-xs uppercase tracking-wider text-muted-foreground">Monthly cost cap (cents, optional)</span>
+          <input name="cost_cap_cents" type="number" min="0" class="kt-input w-full mt-1" placeholder="10000 = $100/mo">
+        </label>
+      </div>
+    </form>
+    <div class="kt-modal-footer">
+      <button class="kt-btn kt-btn-outline" data-kt-modal-dismiss>Cancel</button>
+      <button class="kt-btn kt-btn-primary" data-create-provider-submit>Add provider</button>
+    </div>
+  </div>
+</div>
+{% endblock %}

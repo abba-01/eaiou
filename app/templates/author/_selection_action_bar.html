@@ -1,0 +1,44 @@
+{# ============================================================================
+   _selection_action_bar.html — Floating action bar above text selection.
+   ============================================================================
+   Activated when the author selects text inside [data-manuscript-editor].
+   Shows one button per (provider × action) pair from current_user.iid_providers.
+   Each button is keyed with provider chip color + short action label.
+
+   Requires:
+     current_user.iid_providers — array with provider.{id,name,short_letter},
+                                  provider.enabled_actions[{name,short_label}]
+
+   Wiring: app/static/eaiou/js/selection_actions.js positions and shows the bar
+   based on window.getSelection() events; iid_dispatch.js handles button clicks.
+   ============================================================================ #}
+<div class="kt-module fixed z-30 hidden flex-wrap gap-1.5 max-w-md shadow-md
+            border border-border rounded-md p-2 bg-background"
+     id="selection_action_bar"
+     data-iid-selection-bar
+     role="toolbar"
+     aria-label="IID actions on selected text">
+
+  {% if current_user and current_user.iid_providers %}
+    {% for provider in current_user.iid_providers %}
+      {% for action in provider.enabled_actions %}
+      <button class="kt-btn kt-btn-outline kt-btn-sm"
+              data-iid-action
+              data-provider-id="{{ provider.id }}"
+              data-action-name="{{ action.name }}"
+              type="button"
+              title="{{ provider.display_name }} · {{ action.label|default(action.name) }}">
+        <span class="iid-chip iid-chip-{{ provider.name }}"
+              style="padding:0 4px; font-size:10px; line-height:1;">
+          {{ provider.short_letter|default(provider.name[0]|upper) }}
+        </span>
+        {{ action.short_label|default(action.label|default(action.name)) }}
+      </button>
+      {% endfor %}
+    {% endfor %}
+  {% else %}
+    <span class="text-xs text-muted-foreground italic px-2 py-1">
+      Configure an IID provider in <a href="/account/integrations" class="underline">Account → Integrations</a> to enable actions.
+    </span>
+  {% endif %}
+</div>

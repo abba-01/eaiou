@@ -1,0 +1,79 @@
+{# ============================================================================
+   account/integrations.html — IID provider list + per-provider action toggles
+   ============================================================================
+   Adapted from Metronic demo1/account/integrations.html. While api_keys.html
+   manages credentials, this page manages WHICH actions each provider exposes
+   (e.g. enable scope_check + clarity_check on Mae but not methods_check).
+
+   Backend: PATCH /api/iid/providers/{id} with { enabled_actions: [...] }
+   ============================================================================ #}
+{% extends 'layout/base.html' %}
+{% block title %}IID Provider Integrations — eaiou{% endblock %}
+
+{% block main %}
+<div class="max-w-4xl mx-auto px-6 py-8">
+
+  <header class="mb-6">
+    <h1 class="text-2xl font-semibold tracking-tight">IID Provider Integrations</h1>
+    <p class="mt-1 text-sm text-muted-foreground max-w-2xl">
+      For each configured provider, choose which actions appear in your authoring sidebar.
+      Enable only the actions a provider does well — for example, Mae might handle scope_check
+      and clarity_check while Gemini covers reference_audit.
+    </p>
+  </header>
+
+  {% if providers %}
+  <div class="space-y-4" data-iid-integrations-list>
+    {% for p in providers %}
+    <div class="kt-module" data-provider-id="{{ p.id }}">
+      <header class="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <div class="flex items-center gap-3">
+          <span class="iid-chip iid-chip-{{ p.name }}">{{ p.display_name }}</span>
+          <span class="text-xs text-muted-foreground font-mono">{{ p.default_model }}</span>
+        </div>
+        <a href="/account/api-keys" class="kt-btn kt-btn-ghost kt-btn-sm">Manage key →</a>
+      </header>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" data-action-toggles>
+        {% for action in available_actions %}
+        <label class="flex items-center gap-2 text-sm cursor-pointer">
+          <input type="checkbox"
+                 name="action_{{ action }}"
+                 data-action-name="{{ action }}"
+                 {% if p.enabled_actions and action in p.enabled_actions %}checked{% endif %}>
+          <span class="text-foreground">{{ action }}</span>
+        </label>
+        {% endfor %}
+      </div>
+
+      <div class="mt-3 flex items-center justify-between flex-wrap gap-2 text-xs text-muted-foreground">
+        <span>Cost cap: {% if p.cost_cap_cents %}${{ '%.2f'|format(p.cost_cap_cents / 100.0) }}/mo{% else %}unlimited{% endif %}</span>
+        <button class="kt-btn kt-btn-outline kt-btn-sm" data-save-actions data-provider-id="{{ p.id }}">Save changes</button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="kt-module text-center text-sm text-muted-foreground italic py-10">
+    No IID providers configured yet. Visit
+    <a href="/account/api-keys" class="text-acad-blue underline">API Keys</a>
+    to add one.
+  </div>
+  {% endif %}
+
+  {# ── Available action reference ─────────────────────────────────────────── #}
+  <aside class="kt-module mt-8 text-sm">
+    <div class="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Available actions (Phase 0)</div>
+    <ul class="space-y-1 text-muted-foreground">
+      <li><code>scope_check</code> — Verify scope-fit with target venue</li>
+      <li><code>journal_select</code> — Top-3 venue recommendations</li>
+      <li><code>outline_check</code> — Structure-of-argument review</li>
+      <li><code>clarity_check</code> — Plain-English readability pass</li>
+      <li><code>methods_check</code> — Methods adequacy / reproducibility</li>
+      <li><code>reference_audit</code> — Cite-check via Crossref + corpus</li>
+      <li><code>full_review</code> — Composed review (3 components in parallel; no chaining)</li>
+      <li><code>premium_review</code> — Full IID + human-in-loop pass</li>
+    </ul>
+  </aside>
+</div>
+{% endblock %}

@@ -1,0 +1,142 @@
+{# ============================================================================
+   _quick_reviews_sidebar.html — checksubmit storefront sidebar (Phase E)
+   ============================================================================
+   Embedded widget on manuscript_edit.html offering one-click pre-submission
+   reviews from the checksubmit marketplace. Each button creates an order via
+   POST /api/v1/orders against the marketplace router.
+
+   Distinct from the IID action bar (which invokes individual IID providers
+   via /api/iid/invoke). Quick Reviews invokes the checksubmit composed
+   review service — same backend, different commerce surface, different
+   billing path (Stripe-metered or subscription credit, not direct provider
+   billing).
+
+   Backend supplies: products (from GET /api/v1/products),
+                     subscription_credits (per-SKU remaining counts).
+
+   Wiring: client-side JS in iid_dispatch.js handles the order POST and
+   inserts the resulting card into [data-iid-output-stream]. Same disclosure
+   block applies (per Rule 4) since checksubmit handlers are IID handlers.
+   ============================================================================ #}
+<aside class="kt-module" data-quick-reviews-widget>
+  <header class="flex items-center justify-between mb-3">
+    <h3 class="text-sm font-semibold text-foreground">Quick Reviews</h3>
+    <a href="https://checksubmit.org" class="text-xs text-muted-foreground hover:text-primary">checksubmit.org →</a>
+  </header>
+
+  <p class="text-xs text-muted-foreground mb-3">
+    Pre-submission reviews via checksubmit. One-click runs the action against your manuscript;
+    receipt + disclosure block lands in the Outputs stream.
+  </p>
+
+  {% if products %}
+  <div class="space-y-1.5">
+    {% for product in products %}
+    {% set credit = subscription_credits.get(product.sku) if subscription_credits else None %}
+    <button class="kt-btn kt-btn-outline kt-btn-sm w-full justify-between"
+            data-quick-review
+            data-sku="{{ product.sku }}"
+            data-cost-cents="{{ product.retail_price_cents }}"
+            type="button"
+            title="{{ product.description|default('') }}">
+      <span class="flex items-center gap-2">
+        <span class="text-foreground">{{ product.display_name }}</span>
+        {% if credit and credit > 0 %}
+          <span class="kt-chip" style="background:rgba(39,174,96,0.14); color:#1B6B3D; font-size:10px; padding: 0 5px;">{{ credit }} left</span>
+        {% endif %}
+      </span>
+      <span class="text-xs text-muted-foreground">
+        {% if credit and credit > 0 %}1 credit{% else %}${{ '%.2f'|format(product.retail_price_cents / 100.0) }}{% endif %}
+      </span>
+    </button>
+    {% endfor %}
+  </div>
+
+  <footer class="mt-3 pt-3 border-t border-border text-[10.5px] text-muted-foreground">
+    Charges fire on completion. Disclosure blocks emit on every output (ToS Rule 4).
+    <a href="/account/billing" class="text-acad-blue underline">Billing →</a>
+  </footer>
+
+  {% else %}
+  <div class="text-xs text-muted-foreground text-center py-4 italic">
+    Catalog unavailable. <a href="/account/billing" class="text-acad-blue underline">Configure billing →</a>
+  </div>
+  {% endif %}
+</aside>
+
+<script>
+  // Inline wiring — keeps the widget self-contained.
+  // Full handler integration sits in iid_dispatch.js for the unified flow.
+  (function () {
+    document.querySelectorAll('[data-quick-review]').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const sku = btn.dataset.sku;
+        const costCents = parseInt(btn.dataset.costCents, 10);
+        const editor = document.querySelector('[data-manuscript-editor]');
+        const manuscriptId = editor && editor.dataset.manuscriptId;
+
+        if (!confirm(`Run ${sku}? This will charge $${(costCents / 100).toFixed(2)} or deduct 1 credit.`)) {
+          return;
+        }
+
+        const stream = document.querySelector('[data-iid-output-stream]');
+        const placeholder = document.createElement('article');
+        placeholder.className = 'kt-module animate-pulse';
+        placeholder.innerHTML = `<div class="text-xs" data-iid-status>Running ${sku}...</div>`;
+        if (stream) stream.prepend(placeholder);
+
+        try {
+          const idemKey = (window.crypto && window.crypto.randomUUID)
+            ? window.crypto.randomUUID()
+            : `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+          const res = await fetch('/api/v1/orders', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Idempotency-Key': idemKey,
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+              sku: sku,
+              inputs: { manuscript_id: manuscriptId },
+              manuscript_id: manuscriptId ? parseInt(manuscriptId, 10) : null,
+              source: 'manuscript_editor',
+            }),
+          });
+          if (!res.ok) {
+            const err = await res.text();
+            throw new Error(`HTTP ${res.status}: ${err.slice(0, 200)}`);
+          }
+          const order = await res.json();
+          // Order-result rendering lands here; for Phase A scaffolding,
+          // surface the result_text and remind operator to refresh once
+          // Phase 1 ships real handler.
+          if (placeholder.parentNode) {
+            const card = document.createElement('article');
+            card.className = 'kt-module';
+            card.innerHTML = `
+              <header class="flex items-center justify-between mb-2">
+                <span class="kt-chip">${sku}</span>
+                <span class="text-xs text-muted-foreground">order ${order.order_id.slice(0, 8)}</span>
+              </header>
+              <div class="text-sm">${(order.result && order.result.reasoning) || '(no result body)'}</div>
+              ${order.result && order.result.iid ? `
+                <footer class="iid-disclosure mt-3">
+                  provider=${order.result.iid.provider} ·
+                  model_family=${order.result.iid.model_family} ·
+                  instance_hash=${order.result.iid.instance_hash}
+                </footer>` : ''}
+            `;
+            placeholder.replaceWith(card);
+          }
+        } catch (err) {
+          console.error('Quick review failed', err);
+          if (placeholder.parentNode) {
+            placeholder.querySelector('[data-iid-status]').textContent = `Failed: ${err.message}`;
+            placeholder.classList.remove('animate-pulse');
+          }
+        }
+      });
+    });
+  })();
+</script>

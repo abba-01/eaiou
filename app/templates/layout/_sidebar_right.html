@@ -1,0 +1,70 @@
+{# Right sidebar — IID provider modules + activity summary + add-IID action.
+   eaiou-specific addition (Metronic ships only the left sidebar; we mirror it).
+   Backend supplies: current_user.iid_providers, session_iid_count, session_iid_cost. #}
+<aside class="kt-sidebar kt-sidebar-right bg-background border-s border-s-border fixed top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0 [--kt-drawer-enable:true] lg:[--kt-drawer-enable:false]"
+       data-kt-drawer="true"
+       data-kt-drawer-class="kt-drawer kt-drawer-end top-0 bottom-0"
+       id="sidebar_right">
+
+  {# Sidebar header — title + collapse toggle (mirror of left) #}
+  <div class="hidden lg:flex items-center justify-between px-4 h-[60px] shrink-0 border-b border-border">
+    <span class="kt-sidebar-not-collapsed:inline hidden font-semibold text-foreground text-sm">IID Providers</span>
+    <button class="kt-btn kt-btn-outline kt-btn-icon size-[30px]"
+            data-kt-toggle="body"
+            data-kt-toggle-class="kt-sidebar-right-collapse"
+            title="Collapse right sidebar">
+      <i class="ki-filled ki-black-right-line kt-toggle-active:rotate-180 transition-all duration-300"></i>
+    </button>
+  </div>
+
+  <div class="flex grow shrink-0 py-3 px-3 flex-col gap-3 overflow-y-auto kt-scrollable-y-hover">
+    {% if current_user and current_user.iid_providers %}
+
+      {# Per-provider module cards #}
+      {% for provider in current_user.iid_providers %}
+      <div class="kt-module" data-provider-id="{{ provider.id }}">
+        <div class="flex items-center justify-between mb-2">
+          <span class="iid-chip iid-chip-{{ provider.name }}">{{ provider.display_name }}</span>
+          <span class="text-acad-green text-[10px]">●  ready</span>
+        </div>
+        <div class="text-xs text-muted-foreground mb-3 font-mono">{{ provider.default_model }}</div>
+        <div class="grid grid-cols-2 gap-1.5">
+          {% for action in provider.enabled_actions %}
+          <button class="kt-btn kt-btn-outline kt-btn-sm"
+                  data-iid-action
+                  data-provider-id="{{ provider.id }}"
+                  data-action-name="{{ action.name }}">
+            {{ action.label }}{% if action.cost_display %} {{ action.cost_display }}{% endif %}
+          </button>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+
+      {# Add-IID action #}
+      <button class="kt-btn kt-btn-ghost w-full justify-center text-muted-foreground border border-dashed border-border"
+              data-kt-modal-open="#add_iid_modal">
+        + Add IID Module
+      </button>
+
+      {# Activity summary #}
+      <div class="kt-module">
+        <div class="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Session Activity</div>
+        <div class="flex items-center justify-between text-xs">
+          <span>Outputs</span><span class="font-semibold">{{ session_iid_count|default(0) }}</span>
+        </div>
+        <div class="flex items-center justify-between text-xs mt-1">
+          <span>Cost</span><span class="font-semibold">${{ '%.2f'|format(session_iid_cost|default(0.0)) }}</span>
+        </div>
+        <a href="/account/activity" class="kt-btn kt-btn-ghost kt-btn-sm w-full mt-2 text-acad-blue justify-center">View roster →</a>
+      </div>
+
+    {% else %}
+      <div class="text-sm text-muted-foreground text-center py-4 kt-sidebar-not-collapsed:block hidden">
+        No IID providers configured.
+        <br>
+        <a href="/account/integrations" class="text-acad-blue underline mt-2 inline-block">Add one →</a>
+      </div>
+    {% endif %}
+  </div>
+</aside>

@@ -1,0 +1,79 @@
+{# ============================================================================
+   layout/base.html — Authoring-surface root template (Metronic v9.4.10 layout-1)
+   ============================================================================
+   Three-zone shell for the eaiou manuscript editor:
+     [ Left sidebar (kt-sidebar) ] [ Wrapper: header + main + footer ] [ Right sidebar (kt-sidebar-right) ]
+
+   Used by app/templates/author/manuscript_edit.html and other authoring pages.
+   The existing eaiou app's base.html (at /templates/base.html) is unaffected —
+   this template lives at /templates/layout/base.html and is referenced as
+   `{% extends 'layout/base.html' %}` by authoring templates only.
+
+   Right sidebar is added as a Metronic-compatible mirror of left (eaiou.css
+   provides the kt-sidebar-right-fixed rules). Both sidebars are independently
+   collapsible (icon rail) and independently dismissible (ajax-removable).
+   ============================================================================ #}
+<!DOCTYPE html>
+<html class="h-full" data-kt-theme="true" data-kt-theme-mode="light" dir="ltr" lang="en">
+<head>
+  <title>{% block title %}eaiou{% endblock %}</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <link rel="icon" href="{{ url_for('static', path='metronic/media/app/favicon.ico') }}"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', path='metronic/media/app/apple-touch-icon.png') }}"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Charter:ital@0;1&display=swap"/>
+  <link rel="stylesheet" href="{{ url_for('static', path='metronic/vendors/keenicons/styles.bundle.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', path='metronic/vendors/apexcharts/apexcharts.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', path='metronic/css/styles.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', path='eaiou/css/eaiou.css') }}"/>
+  {% block head_extra %}{% endblock %}
+</head>
+<body class="antialiased flex h-full text-base text-foreground bg-background pin-stripe demo1
+             kt-sidebar-fixed kt-sidebar-right-fixed kt-header-fixed"
+      {% if current_user %}data-user-id="{{ current_user.id }}"{% endif %}
+      {% if manuscript %}data-manuscript-id="{{ manuscript.id }}"{% endif %}>
+  <script>
+    // Theme-mode bootstrap (Metronic's pattern, retained as-is)
+    (function () {
+      const defaultThemeMode = 'light';
+      let themeMode = localStorage.getItem('kt-theme') || defaultThemeMode;
+      if (themeMode === 'system') {
+        themeMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.classList.add(themeMode);
+
+      // Restore eaiou per-user-per-manuscript sidebar state
+      {% if current_user and manuscript %}
+      const sidebarKey = 'eaiou-sidebar-{{ current_user.id }}-{{ manuscript.id }}';
+      const state = JSON.parse(localStorage.getItem(sidebarKey) || '{}');
+      if (state.leftCollapsed)  document.body.classList.add('kt-sidebar-collapse');
+      if (state.leftHidden)     document.body.classList.add('kt-sidebar-hidden');
+      if (state.rightCollapsed) document.body.classList.add('kt-sidebar-right-collapse');
+      if (state.rightHidden)    document.body.classList.add('kt-sidebar-right-hidden');
+      {% endif %}
+    })();
+  </script>
+
+  {# ── Three-zone shell ────────────────────────────────────────────────── #}
+  <div class="flex grow">
+    {% include 'layout/_sidebar_left.html' %}
+    <div class="kt-wrapper flex grow flex-col">
+      {% include 'layout/_header.html' %}
+      <main class="grow pt-[60px]" id="content" role="content">
+        {% block main %}{% endblock %}
+      </main>
+      {% include 'layout/_footer.html' %}
+    </div>
+    {% include 'layout/_sidebar_right.html' %}
+  </div>
+
+  {# ── Scripts (deferred so DOM is ready) ───────────────────────────────── #}
+  <script src="{{ url_for('static', path='metronic/vendors/apexcharts/apexcharts.min.js') }}" defer></script>
+  <script src="{{ url_for('static', path='metronic/js/scripts.js') }}" defer></script>
+  <script src="{{ url_for('static', path='eaiou/js/sidebar.js') }}" defer></script>
+  <script src="{{ url_for('static', path='eaiou/js/iid_dispatch.js') }}" defer></script>
+  <script src="{{ url_for('static', path='eaiou/js/selection_actions.js') }}" defer></script>
+  <script src="{{ url_for('static', path='eaiou/js/manuscript_autosave.js') }}" defer></script>
+  {% block body_extra %}{% endblock %}
+</body>
+</html>

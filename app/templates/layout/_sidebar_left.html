@@ -1,0 +1,72 @@
+{# Left sidebar — section navigator + manuscript meta + tag panel + version timeline.
+   Provides per-manuscript navigation. Hidden at <1024px (kt-drawer slides in on toggle).
+   Backend supplies: manuscript, sections, versions, active_section_id. #}
+<aside class="kt-sidebar bg-background border-e border-e-border fixed top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0 [--kt-drawer-enable:true] lg:[--kt-drawer-enable:false]"
+       data-kt-drawer="true"
+       data-kt-drawer-class="kt-drawer kt-drawer-start top-0 bottom-0"
+       id="sidebar">
+
+  {# Sidebar header — eaiou logo + collapse toggle #}
+  <div class="kt-sidebar-header hidden lg:flex items-center justify-between px-3 lg:px-6 shrink-0 h-[60px]">
+    <a href="/" class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded bg-primary text-primary-foreground grid place-items-center font-bold text-sm">e</div>
+      <span class="kt-sidebar-not-collapsed:inline hidden font-semibold text-foreground">eaiou</span>
+    </a>
+    <button class="kt-btn kt-btn-outline kt-btn-icon size-[30px]"
+            data-kt-toggle="body"
+            data-kt-toggle-class="kt-sidebar-collapse"
+            title="Collapse sidebar to icon rail">
+      <i class="ki-filled ki-black-left-line kt-toggle-active:rotate-180 transition-all duration-300"></i>
+    </button>
+  </div>
+
+  <div class="kt-sidebar-content flex grow shrink-0 py-3 px-3 overflow-y-auto kt-scrollable-y-hover flex-col">
+    {% if manuscript %}
+
+      {# Manuscript meta #}
+      <div class="kt-module mb-3 w-full">
+        <div class="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 kt-sidebar-not-collapsed:block hidden">Manuscript</div>
+        <div class="font-semibold text-foreground leading-snug kt-sidebar-not-collapsed:block hidden">{{ manuscript.title }}</div>
+        <div class="flex flex-wrap gap-1 mt-2 kt-sidebar-not-collapsed:flex hidden">
+          <span class="kt-chip">{{ manuscript.status }}</span>
+          {% if manuscript.target_venue %}
+            <span class="kt-chip iid-chip-gemini">{{ manuscript.target_venue }}</span>
+          {% endif %}
+        </div>
+      </div>
+
+      {# Section navigator #}
+      <div class="text-[10px] uppercase tracking-wider text-muted-foreground px-2 mb-1 kt-sidebar-not-collapsed:block hidden">Sections</div>
+      <nav class="flex flex-col gap-0.5 w-full kt-sidebar-not-collapsed:flex hidden">
+        {% for section in sections|default([]) %}
+        <a class="px-2 py-1.5 rounded hover:bg-accent flex items-center justify-between text-sm
+                  {% if section.id == active_section_id %}bg-accent text-accent-foreground font-medium{% endif %}"
+           href="#section-{{ section.anchor }}">
+          <span>{{ section.title }}</span>
+          {% if section.iid_output_count %}
+            <span class="section-badge">{{ section.iid_output_count }}</span>
+          {% endif %}
+        </a>
+        {% endfor %}
+      </nav>
+
+      {# Version timeline (compact) #}
+      {% if versions %}
+      <div class="text-[10px] uppercase tracking-wider text-muted-foreground px-2 mt-4 mb-1 kt-sidebar-not-collapsed:block hidden">Versions</div>
+      <ul class="text-xs text-muted-foreground px-2 space-y-1 kt-sidebar-not-collapsed:block hidden">
+        {% for v in versions[:5] %}
+          <li>
+            {{ v.label }} — {{ v.created_at_display }}
+            {% if v.is_current %} <span class="text-acad-green">●</span>{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+    {% else %}
+      <div class="text-sm text-muted-foreground px-2 kt-sidebar-not-collapsed:block hidden">
+        No manuscript loaded
+      </div>
+    {% endif %}
+  </div>
+</aside>

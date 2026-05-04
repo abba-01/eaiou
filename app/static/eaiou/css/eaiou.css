@@ -1,0 +1,201 @@
+/* ============================================================================
+   eaiou.css — ReadEase color-token overlay on Metronic v9.4.10's CSS variables
+   ============================================================================
+   Loaded AFTER metronic/css/styles.css in the base template. Re-binds Metronic's
+   semantic tokens (--color-background, --color-primary, etc.) to ReadEase's
+   amber/cream palette, then layers eaiou-specific additions:
+     - Pin-stripe academic page texture
+     - IID provider chip color classes (Mae, OpenAI, Gemini, Llama, Custom)
+     - Mandatory IID disclosure block styling
+     - Right-sidebar mirror rules (Metronic only ships left-sidebar layout-1)
+   ============================================================================ */
+
+:root {
+  /* ── ReadEase amber/cream palette → Metronic semantic tokens ─────────────── */
+  --color-background: #FAF3EA;          /* y50 — body background */
+  --color-foreground: #090909;          /* n900 — primary text */
+  --color-muted: #F5EAD8;
+  --color-muted-foreground: #898989;    /* n90 */
+  --color-accent: #ECCFA9;              /* y75 — sidebar active item bg */
+  --color-accent-foreground: #5A3301;   /* b300 */
+  --color-primary: #D0892D;             /* y300 — primary brand */
+  --color-primary-foreground: #FAF3EA;
+  --color-border: #DFDFDF;              /* n40 */
+  --color-input: #DFDFDF;
+  --color-secondary: #ECCFA9;
+  --color-secondary-foreground: #5A3301;
+
+  /* ── ReadEase token roster (kept available as raw vars) ──────────────────── */
+  --y50:  #FAF3EA;
+  --y75:  #ECCFA9;
+  --y100: #E4BB85;
+  --y200: #FFB323;
+  --y300: #D0892D;
+  --b300: #5A3301;
+  --n40:  #DFDFDF;
+  --n70:  #A6A6A6;
+  --n90:  #898989;
+  --n500: #424242;
+  --n900: #090909;
+
+  /* ── eaiou academic accents — used for state, never surface ──────────────── */
+  --color-acad-red:    #C0392B;
+  --color-acad-yellow: #F1C40F;
+  --color-acad-green:  #27AE60;
+  --color-acad-blue:   #2E86C1;
+
+  /* ── IID provider chip colors (mandatory per ToS doctrine §1) ────────────── */
+  --color-iid-mae:    #D0892D;
+  --color-iid-openai: #27AE60;
+  --color-iid-gemini: #2E86C1;
+  --color-iid-llama:  #8E44AD;
+  --color-iid-custom: #7F8C8D;
+
+  /* ── Right-sidebar width (Metronic only defines --sidebar-width for left) ── */
+  --sidebar-right-width: 260px;
+}
+
+.dark {
+  --color-background: #090909;
+  --color-foreground: #FAF3EA;
+  --color-muted: #242424;
+  --color-muted-foreground: #B3B3B3;
+  --color-accent: #353535;
+  --color-accent-foreground: #ECCFA9;
+  --color-primary: #D0892D;
+  --color-primary-foreground: #090909;
+  --color-border: #353535;
+}
+
+/* ─── eaiou-specific additions ─────────────────────────────────────────────── */
+
+/* Pin-stripe academic page texture (Eric's spec, faint amber grid) */
+.pin-stripe {
+  background-image:
+    linear-gradient(to right, rgba(208, 137, 45, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(208, 137, 45, 0.02) 1px, transparent 1px);
+  background-size: 4px 4px, 4px 4px;
+}
+
+/* IID provider chips */
+.iid-chip-mae    { background: rgba(208, 137, 45, 0.18); color: #5A3301; border: 1px solid rgba(208, 137, 45, 0.4); }
+.iid-chip-openai { background: rgba(39, 174, 96, 0.14);  color: #1B6B3D; border: 1px solid rgba(39, 174, 96, 0.4); }
+.iid-chip-gemini { background: rgba(46, 134, 193, 0.14); color: #1B5A82; border: 1px solid rgba(46, 134, 193, 0.4); }
+.iid-chip-llama  { background: rgba(142, 68, 173, 0.14); color: #5E2D74; border: 1px solid rgba(142, 68, 173, 0.4); }
+.iid-chip-custom { background: rgba(127, 140, 141, 0.14); color: #4A5354; border: 1px solid rgba(127, 140, 141, 0.4); }
+
+.iid-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 5px;
+  font-family: inherit;
+}
+
+/* Mandatory IID disclosure block (per ToS Compliance Doctrine §1 Rule 4 — never collapsible) */
+.iid-disclosure {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  color: var(--color-muted-foreground);
+  background: var(--color-background);
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px dashed var(--color-border);
+  line-height: 1.4;
+}
+
+/* Right-sidebar mirror — Metronic ships left-sidebar layout-1; we add the right */
+@media (min-width: 1024px) {
+  body.kt-sidebar-right-fixed .kt-sidebar-right {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: var(--sidebar-right-width);
+    border-left: 1px solid var(--color-border);
+    background: var(--color-background);
+    z-index: 20;
+    transition: width 220ms ease, transform 220ms ease;
+  }
+  body.kt-sidebar-right-fixed.kt-sidebar-right-collapse .kt-sidebar-right {
+    width: 64px;
+  }
+  body.kt-sidebar-right-fixed.kt-sidebar-right-hidden .kt-sidebar-right {
+    transform: translateX(100%);
+  }
+  body.kt-sidebar-right-collapse .kt-sidebar-right .label-full {
+    display: none;
+  }
+
+  /* Adjust header + main wrapper to clear right sidebar */
+  body.kt-sidebar-right-fixed .kt-header { right: var(--sidebar-right-width); }
+  body.kt-sidebar-right-fixed.kt-sidebar-right-collapse .kt-header { right: 64px; }
+  body.kt-sidebar-right-fixed.kt-sidebar-right-hidden .kt-header { right: 0; }
+
+  body.kt-sidebar-right-fixed .kt-wrapper { margin-right: var(--sidebar-right-width); }
+  body.kt-sidebar-right-fixed.kt-sidebar-right-collapse .kt-wrapper { margin-right: 64px; }
+  body.kt-sidebar-right-fixed.kt-sidebar-right-hidden .kt-wrapper { margin-right: 0; }
+}
+
+/* eaiou module / card with inner-shadow (Eric's spec — let-in feel, not lifted) */
+.kt-module {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 1px 2px rgba(90, 51, 1, 0.06),
+    inset 0 0 0 1px rgba(223, 223, 223, 0.4);
+  padding: 14px;
+}
+
+.dark .kt-module {
+  background: #1A1A1A;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(53, 53, 53, 0.5);
+}
+
+/* Section badge (e.g. count of IID outputs per manuscript section) */
+.section-badge {
+  display: inline-flex;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 9px;
+  background: var(--color-accent);
+  color: var(--color-accent-foreground);
+}
+
+/* Small-chip variant */
+.kt-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 5px;
+  background: var(--color-accent);
+  color: var(--color-accent-foreground);
+}
+
+/* Manuscript editor body (academic serif, generous line-height per AUTHORING_FRONTEND_IMPL §7) */
+.kt-manuscript-body {
+  font-family: 'Charter', 'Source Serif Pro', 'Georgia', serif;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--color-foreground);
+}
+
+/* Academic accent utility classes (red/yellow/green/blue for state) */
+.text-acad-red    { color: var(--color-acad-red); }
+.text-acad-yellow { color: var(--color-acad-yellow); }
+.text-acad-green  { color: var(--color-acad-green); }
+.text-acad-blue   { color: var(--color-acad-blue); }

@@ -1,0 +1,116 @@
+{# ============================================================================
+   account/activity.html — IID activity roster (per-output audit trail)
+   ============================================================================
+   Adapted from Metronic demo1/account/activity.html. Per ToS Compliance
+   Doctrine §1 Rule 4: every IID action is permanently auditable. This page
+   surfaces the roster — date, provider, action, manuscript, instance_hash,
+   cost. Export-as-CSV-or-JSON button per Rule 4 audit-log export requirement.
+
+   Backend supplies: actions (paginated query result with newest first).
+   ============================================================================ #}
+{% extends 'layout/base.html' %}
+{% block title %}IID Activity Roster — eaiou{% endblock %}
+
+{% block main %}
+<div class="max-w-5xl mx-auto px-6 py-8">
+
+  <header class="mb-6 flex items-start justify-between flex-wrap gap-3">
+    <div>
+      <h1 class="text-2xl font-semibold tracking-tight">IID Activity</h1>
+      <p class="mt-1 text-sm text-muted-foreground max-w-2xl">
+        Every IID action is logged here permanently. The disclosure block (provider, model_family,
+        instance_hash, timestamp) accompanies every output card and survives in this audit trail
+        even after the output is dismissed. Required for journal-submission cover letters and any
+        academic-integrity inquiry.
+      </p>
+    </div>
+    <div class="flex gap-2">
+      <a href="/api/iid/actions/export?format=csv" class="kt-btn kt-btn-outline kt-btn-sm">Export CSV</a>
+      <a href="/api/iid/actions/export?format=json" class="kt-btn kt-btn-outline kt-btn-sm">Export JSON</a>
+    </div>
+  </header>
+
+  {# Summary tiles #}
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+    <div class="kt-module text-center">
+      <div class="text-[10px] uppercase tracking-wider text-muted-foreground">All-time</div>
+      <div class="text-2xl font-semibold mt-1">{{ summary.total_actions|default(0) }}</div>
+      <div class="text-xs text-muted-foreground">actions</div>
+    </div>
+    <div class="kt-module text-center">
+      <div class="text-[10px] uppercase tracking-wider text-muted-foreground">This month</div>
+      <div class="text-2xl font-semibold mt-1">{{ summary.month_actions|default(0) }}</div>
+      <div class="text-xs text-muted-foreground">actions</div>
+    </div>
+    <div class="kt-module text-center">
+      <div class="text-[10px] uppercase tracking-wider text-muted-foreground">Total cost</div>
+      <div class="text-2xl font-semibold mt-1">${{ '%.2f'|format(summary.total_cost_cents|default(0) / 100.0) }}</div>
+      <div class="text-xs text-muted-foreground">USD</div>
+    </div>
+    <div class="kt-module text-center">
+      <div class="text-[10px] uppercase tracking-wider text-muted-foreground">Failure rate</div>
+      <div class="text-2xl font-semibold mt-1">{{ '%.1f'|format(summary.failure_rate|default(0) * 100) }}%</div>
+      <div class="text-xs text-muted-foreground">last 30d</div>
+    </div>
+  </div>
+
+  {# Action roster #}
+  <div class="kt-module p-0 overflow-hidden">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="text-[10px] uppercase tracking-wider text-muted-foreground bg-muted">
+          <th class="text-left px-3 py-2">Date</th>
+          <th class="text-left px-3 py-2">Provider</th>
+          <th class="text-left px-3 py-2">Action</th>
+          <th class="text-left px-3 py-2">Manuscript</th>
+          <th class="text-left px-3 py-2 font-mono">instance_hash</th>
+          <th class="text-right px-3 py-2">Cost</th>
+          <th class="text-left px-3 py-2">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if actions %}
+          {% for a in actions %}
+          <tr class="border-t border-border hover:bg-accent/40">
+            <td class="px-3 py-2 text-muted-foreground whitespace-nowrap">{{ a.created_at_display }}</td>
+            <td class="px-3 py-2">
+              <span class="iid-chip iid-chip-{{ a.provider.name }}">{{ a.provider.display_name }}</span>
+            </td>
+            <td class="px-3 py-2 font-mono text-xs">{{ a.action.name }}</td>
+            <td class="px-3 py-2">
+              {% if a.manuscript %}<a href="/manuscripts/{{ a.manuscript.id }}/edit" class="text-acad-blue underline">{{ a.manuscript.title|truncate(40) }}</a>{% else %}—{% endif %}
+            </td>
+            <td class="px-3 py-2 font-mono text-xs text-muted-foreground">{{ a.instance_hash }}</td>
+            <td class="px-3 py-2 text-right">{{ a.cost_display|default('—') }}</td>
+            <td class="px-3 py-2">
+              {% if a.status == 'completed' %}<span class="text-acad-green">●</span> completed
+              {% elif a.status == 'failed' %}<span class="text-acad-red">●</span> failed
+              {% elif a.status == 'pending' %}<span class="text-acad-yellow">●</span> pending
+              {% else %}<span class="text-muted-foreground">●</span> {{ a.status }}{% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr><td colspan="7" class="text-center text-sm text-muted-foreground italic py-10">
+            No IID actions yet. Run a scope_check or clarity_check from the manuscript editor.
+          </td></tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  {# Pagination #}
+  {% if pagination and pagination.total_pages > 1 %}
+  <nav class="mt-4 flex items-center justify-between text-sm">
+    <div class="text-muted-foreground">
+      Page {{ pagination.page }} of {{ pagination.total_pages }} · {{ pagination.total_actions }} total
+    </div>
+    <div class="flex gap-2">
+      {% if pagination.has_prev %}<a href="?page={{ pagination.page - 1 }}" class="kt-btn kt-btn-outline kt-btn-sm">← Prev</a>{% endif %}
+      {% if pagination.has_next %}<a href="?page={{ pagination.page + 1 }}" class="kt-btn kt-btn-outline kt-btn-sm">Next →</a>{% endif %}
+    </div>
+  </nav>
+  {% endif %}
+
+</div>
+{% endblock %}

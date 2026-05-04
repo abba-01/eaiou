@@ -1,0 +1,92 @@
+{# ============================================================================
+   _iid_output_card.html — One IID action result, with MANDATORY disclosure
+   ============================================================================
+   Per ToS Compliance Doctrine §1 Rule 4 (`/scratch/repos/eaiou/docs/TOS_COMPLIANCE_DOCTRINE.md`):
+   the disclosure block is NEVER COLLAPSIBLE, NEVER HIDDEN, NEVER OPTIONAL.
+
+   Template variables expected:
+     output.id                  — eaiou_iid_actions.id
+     output.intellid            — UUID
+     output.provider.name       — mae | openai | gemini | llama | custom
+     output.provider.display_name
+     output.provider.legal_name — Anthropic | OpenAI | Google | Meta
+     output.action.name         — scope_check | clarity_check | methods_check | ...
+     output.created_at          — datetime
+     output.created_at_display  — naturaltime ('just now', '5 min ago')
+     output.cost_display        — '$0.10' or '1 credit'
+     output.body_html           — rendered output body
+     output.model_family        — claude-opus-4-7 | gpt-5 | ...
+     output.instance_hash       — 16-hex
+     output.input_tokens / output.output_tokens (optional)
+
+   Used by:
+     author/manuscript_edit.html (in {data-iid-output-stream})
+     api_iid.py POST /api/iid/invoke (returns this fragment as html_fragment)
+   ============================================================================ #}
+<article class="kt-module"
+         data-iid-output-id="{{ output.id }}"
+         data-iid-intellid="{{ output.intellid }}"
+         data-provider="{{ output.provider.name }}">
+
+  {# ── Header: provider chip + timing + actions ───────────────────────────── #}
+  <header class="flex items-center justify-between mb-2 flex-wrap gap-2">
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="iid-chip iid-chip-{{ output.provider.name }}">
+        {{ output.provider.display_name }} · {{ output.action.name }}
+      </span>
+      <span class="text-xs text-muted-foreground">
+        {{ output.created_at_display|default('just now') }}
+        {% if output.cost_display %}· {{ output.cost_display }}{% endif %}
+      </span>
+      {% if output.stub %}
+        <span class="iid-chip" style="background: #FEF3C7; color: #92400E; border: 1px solid #F59E0B;">
+          ⚠ STUB — Phase 1 ships real handler
+        </span>
+      {% endif %}
+    </div>
+    <div class="flex gap-1.5">
+      <button class="kt-btn kt-btn-ghost kt-btn-sm" data-iid-insert-comment data-output-id="{{ output.id }}">
+        Insert as comment
+      </button>
+      <button class="kt-btn kt-btn-ghost kt-btn-sm" data-iid-dismiss data-output-id="{{ output.id }}">
+        Dismiss
+      </button>
+    </div>
+  </header>
+
+  {# ── Body: rendered output text ──────────────────────────────────────────── #}
+  <div class="kt-manuscript-body text-[14px] leading-[1.6] space-y-2">
+    {% if output.body_html %}
+      {{ output.body_html|safe }}
+    {% elif output.result_text %}
+      <p>{{ output.result_text }}</p>
+    {% else %}
+      <p class="text-muted-foreground italic">(no result body)</p>
+    {% endif %}
+  </div>
+
+  {# ── Structured result (per-SKU JSON; render compactly if present) ────────── #}
+  {% if output.structured %}
+  <details class="mt-3 text-xs">
+    <summary class="cursor-pointer text-muted-foreground hover:text-foreground">Structured result</summary>
+    <pre class="mt-2 p-2 bg-muted rounded text-[10.5px] font-mono overflow-x-auto">{{ output.structured|tojson(indent=2) }}</pre>
+  </details>
+  {% endif %}
+
+  {# ════════════════════════════════════════════════════════════════════════
+     MANDATORY DISCLOSURE BLOCK — Rule 4 of ToS Compliance Doctrine.
+     NEVER COLLAPSIBLE. NEVER HIDDEN. NEVER OPTIONAL.
+     This block is rendered server-side in the same JSON payload as the result,
+     not as a separate optional field. The audit-log export includes this
+     verbatim per output. Removing or hiding it is a doctrine violation.
+     ════════════════════════════════════════════════════════════════════════ #}
+  <footer class="iid-disclosure mt-3" data-iid-disclosure>
+    provider={{ output.provider.legal_name|default(output.provider.display_name) }} ·
+    model_family={{ output.model_family }} ·
+    instance_hash={{ output.instance_hash }}<br>
+    action={{ output.action.name }} ·
+    timestamp={{ output.created_at.isoformat() if output.created_at.isoformat is defined else output.created_at }}Z{% if output.input_tokens is defined and output.input_tokens %} ·
+    input_tokens={{ output.input_tokens }}{% endif %}{% if output.output_tokens is defined and output.output_tokens %} ·
+    output_tokens={{ output.output_tokens }}{% endif %}
+  </footer>
+</article>
