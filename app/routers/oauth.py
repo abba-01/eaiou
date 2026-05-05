@@ -199,7 +199,7 @@ async def callback_google(request: Request, db: Session = Depends(get_db)):
 # ── ORCID ─────────────────────────────────────────────────────────────────────
 
 ORCID_AUTH_URL  = "https://orcid.org/oauth/authorize"
-ORCID_TOKEN_URL = "https://api.orcid.org/oauth/token"
+ORCID_TOKEN_URL = "https://orcid.org/oauth/token"
 
 
 @router.get("/login/orcid")
