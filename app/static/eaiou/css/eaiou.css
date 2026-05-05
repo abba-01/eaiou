@@ -199,3 +199,30 @@
 .text-acad-yellow { color: var(--color-acad-yellow); }
 .text-acad-green  { color: var(--color-acad-green); }
 .text-acad-blue   { color: var(--color-acad-blue); }
+
+/* ─── Bridge: --ds-* design-system token aliases ──────────────────────────── */
+/* Existing author-side templates use var(--ds-bg) / var(--ds-ink-*) / --primary-*
+   inline. When those templates extend layout/base.html (Metronic shell),
+   they need these vars resolvable. Aliases map to Metronic semantic tokens
+   already redefined to ReadEase palette above, so the visual treatment
+   stays academic-cream rather than Metronic-blue. */
+:root {
+  --ds-bg:      var(--color-background);
+  --ds-surface: var(--color-muted);
+  --ds-border:  var(--color-border);
+  --ds-ink-1:   var(--color-foreground);
+  --ds-ink-2:   var(--n500);
+  --ds-ink-3:   var(--n90);
+  --ds-accent:  var(--color-primary);
+
+  /* primary-* alphabet used in templates */
+  --primary-50:  var(--y50);
+  --primary-100: #F5EAD8;
+  --primary-200: #ECCFA9;
+  --primary-300: #E4BB85;
+  --primary-400: #D0892D;
+  --primary-500: #5A3301;
+  --primary-600: var(--color-foreground);
+  --primary-700: var(--color-foreground);
+  --primary-900: #090909;
+}

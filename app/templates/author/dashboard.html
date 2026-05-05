@@ -1,10 +1,22 @@
-{% extends "author/base_author.html" %}
+{% extends "layout/base.html" %}
 {% block title %}Dashboard — eaiou{% endblock %}
-{% block page_title %}Author Dashboard{% endblock %}
-{% block nav_dashboard %}eaiou-nav-active{% endblock %}
 
-{# ── Left column widgets ─────────────────────────────────────────────────── #}
-{% block left_widgets %}
+{# ============================================================================
+   Metronic migration (2026-05-04 SLOG #71): this template now extends the
+   Metronic three-zone shell (layout/base.html). Left + right sidebars come
+   from layout/_sidebar_left.html + layout/_sidebar_right.html. Header from
+   layout/_header.html. Author-specific widgets render inside `block main`.
+   --ds-* / --primary-* CSS-var aliases in eaiou.css map to ReadEase tokens
+   so existing inline styles continue to resolve under Metronic shell.
+   ============================================================================ #}
+
+{% block main %}
+<div class="container-fixed py-6">
+
+{# Original `left_widgets` block — surfaced inline at the top of main on Metronic
+   shell (no per-template left-column anymore; that's now layout/_sidebar_left). #}
+<div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-5 mb-5">
+<div class="space-y-3">
 
 {# Notifications widget #}
 {% if notifications %}
@@ -95,10 +107,11 @@
 </div>
 {% endif %}
 
-{% endblock %}
+{# end left_widgets cluster #}
+</div>
 
-{# ── Right column widgets ─────────────────────────────────────────────────── #}
-{% block author_sidebar %}
+{# ── Right column widgets — surfaced inline next to left cluster ────────── #}
+<div class="space-y-3">
 
 {# Stats summary widget #}
 <div class="eaiou-widget" data-widget-id="author-stats">
@@ -141,11 +154,12 @@
         A permanent context fingerprint issued at paper creation. Persists through all state changes.
     </p>
 </div>
-{% endblock %}
+{# end right_widgets cluster #}
+</div>
+</div>{# end widget grid #}
 
-{# ── Main content ────────────────────────────────────────────────────────── #}
-{% block author_content %}
-<div class="max-w-screen-2xl mx-auto">
+{# ── Main content (papers table + intake prompt + stats) ───────────────── #}
+<div class="max-w-screen-2xl">
 
     {# Intake prompt #}
     {% if author_orcid and not intake_complete %}
@@ -277,7 +291,9 @@
         </div>
         {% endif %}
     </div>
-</div>
+</div>{# /max-w-screen-2xl #}
+
+</div>{# /container-fixed py-6 #}
 
 <script>
 async function dismissMatch(matchId) {
